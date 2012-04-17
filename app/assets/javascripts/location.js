@@ -4,6 +4,7 @@ function locationModel(data) {
 	this.address = ko.observable('')
 	this.map = ko.observable('')
 	this.geocoder = ko.observable('')
+	this.geocoded = ko.observable(false)
 
 
 	// Used for bindings in the document
@@ -21,9 +22,10 @@ function locationModel(data) {
 	this.locater = ko.computed( function() {
 		var address = this.address(),
 			geocoder = this.geocoder(),
-			latlng = this.latlng
+			latlng = this.latlng,
+			geocoded = this.geocoded()
 
-		if( address.length > 0 ) {
+		if( address.length > 0 && !geocoded ) { // If address is located and not previously geocoded
 			geocoder.geocode( {address: address}, function(results, status) { 
 				if (status == google.maps.GeocoderStatus.OK) {
 					var first = results[0].geometry.location;
@@ -40,11 +42,15 @@ function locationModel(data) {
 
 		if( geolocated && typeof map == 'object' ) {
 			
+			var content = document.createElement("div");
+			content.innerHTML = '<strong>You vote here!</strong><br /><span data-bind="text: yourLocation.address "></span>';
 			var infowindow = new google.maps.InfoWindow({
 				map: map,
 				position: latlng,
-				content: 'You vote here?',
+				content: content
 			});
+
+				ko.applyBindings(yourLocation, content);
 
 			map.setCenter(latlng),
 			map.setZoom(14)

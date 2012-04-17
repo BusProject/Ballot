@@ -16,6 +16,12 @@ function initialize() {
 		function(position) {
 			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			yourLocation.latlng(pos);
+			geocoder.geocode({'latLng': pos}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					yourLocation.geocoded( true )
+					yourLocation.address( results[0].formatted_address )
+				}
+			});
 		}, 
 		function() {
 		});
