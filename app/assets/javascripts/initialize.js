@@ -1,7 +1,8 @@
 function initialize() {
   var myOptions = {
     zoom: 2,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+	disableDefaultUI: true
   };
   var map = new google.maps.Map(document.getElementById('map_canvas'),myOptions),
 	geocoder = new google.maps.Geocoder()
