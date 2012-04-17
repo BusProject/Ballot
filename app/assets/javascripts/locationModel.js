@@ -5,14 +5,20 @@ function locationModel(data) {
 	this.map = ko.observable('')
 	this.geocoder = ko.observable('')
 	this.geocoded = ko.observable(false)
+	this.geocoded.address = ''
+	this.infowindow
 
+	this.round = function(number,decimal) {
+		if( typeof decimal == 'undefined' ) decimal = 2
+		return Math.round(number*Math.pow(10,decimal))/Math.pow(10,decimal)
+	}
 
 	// Used for bindings in the document
 	this.position = ko.computed( function() {
 		if( typeof this.latlng().Ya == 'number' )
-			return this.latlng().Ya+', '+this.latlng().Za;
+			return this.round(this.latlng().Ya)+', '+this.round(this.latlng().Za);
 		else 
-			return 'Can\'t find where you at';
+			return 'Hey where you at?';
 	}, this)
 
 	this.geolocated = ko.computed( function() {
@@ -25,7 +31,7 @@ function locationModel(data) {
 			latlng = this.latlng,
 			geocoded = this.geocoded()
 
-		if( address.length > 0 && !geocoded ) { // If address is located and not previously geocoded
+		if( address.length > 0 && !geocoded && address != this.geocoded.address ) { // If address is located and not previously geocoded
 			geocoder.geocode( {address: address}, function(results, status) { 
 				if (status == google.maps.GeocoderStatus.OK) {
 					var first = results[0].geometry.location;
@@ -42,15 +48,24 @@ function locationModel(data) {
 
 		if( geolocated && typeof map == 'object' ) {
 			
+			// Defining the content or the box
 			var content = document.createElement("div");
-			content.innerHTML = '<strong>You vote here!</strong><br /><span data-bind="text: yourLocation.address "></span>';
-			var infowindow = new google.maps.InfoWindow({
+			content.innerHTML += '<strong>You vote here!</strong><br />'
+			content.innerHTML += '<span data-bind="text: yourLocation.address "></span><br />'
+			content.innerHTML += '<span class="cancel">NO THAT\'S NOT RIGHT<span>'
+
+			// Clears info window if aleray open
+			if( typeof this.infowindow != 'undefined' ) this.infowindow.close()
+
+			// Adding an info window
+			this.infowindow = new google.maps.InfoWindow({
 				map: map,
 				position: latlng,
 				content: content
 			});
 
-				ko.applyBindings(yourLocation, content);
+			// So we can use knockout bindings for the innner contnent
+			ko.applyBindings(yourLocation, content);
 
 			map.setCenter(latlng),
 			map.setZoom(14)

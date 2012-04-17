@@ -7,29 +7,44 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
+  background: #efefef;
 }
+
 #content {
+	font-family: 'Exo';
 	height: 600px;
-	width: 300;
-	margin: 0 auto;
+	width: 300px;
+	margin: -10px auto;
+	padding: 10px 30px;
+	border-left: 4px solid #ddd;
+	border-right: 4px solid #ddd;
+	background: #fff;
 }
 #map_canvas {
   width: 300px;
   height: 400px;
 }
-#location, h1 {
-	width: 300px;
+h1 {
+	font-size: 28px;
+	color: #555;
 }
-#map_canvas, #location, h1 {
-  margin: 0 auto;
+#location { 
+	margin-top: 20px;
+	text-align: center;
 }
-
-@media print {
-  html, body {
-    height: auto;
-  }
-
-  #map_canvas {
-    height: 650px;
-  }
+#location input {
+	font-size: 23px;
+	text-align: center;
+	width: 100%;
+}
+.cancel {
+	font-size: 9px;
+	color: 	red;
+	font-weight: bold;
+	position: absolute;
+	bottom: -13px;
+	right: -14px;
+}
+.cancel:hover {
+	text-decoration: underline;
 }
