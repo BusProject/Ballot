@@ -1,10 +1,4 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-html, body {
-  height: 100%;
-  width: 100%;
+body {
   margin: 0;
   padding: 0;
   background: #efefef;
@@ -12,12 +6,12 @@ html, body {
 
 #content {
 	font-family: 'Exo';
-	height: 600px;
 	width: 300px;
-	margin: -10px auto;
+	margin: auto;
 	padding: 10px 30px;
 	border-left: 4px solid #ddd;
 	border-right: 4px solid #ddd;
+	border-bottom: 4px solid #ddd;
 	background: #fff;
 }
 #map_canvas {
