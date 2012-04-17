@@ -1,6 +1,8 @@
 <div id="content">
+	<h1>The Ballot Begins</h1>
 	<div id="map_canvas"></div>
 	<div id="location" data-bind="with: yourLocation">
 		<span data-bind="text: position"></span>
+		<input data-bind="value: address, visible: !geolocated()" placeholder="enter your address">
 	</div>
 </div>

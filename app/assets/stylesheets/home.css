@@ -17,11 +17,10 @@ html, body {
   width: 300px;
   height: 400px;
 }
-#location {
+#location, h1 {
 	width: 300px;
-	height: 100px;
 }
-#map_canvas, #location {
+#map_canvas, #location, h1 {
   margin: 0 auto;
 }
 
