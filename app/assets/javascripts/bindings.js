@@ -7,3 +7,8 @@ $(document).on({
 		$('#location input').select()
 	}
 },'.cancel');
+ko.bindingHandlers.fixImage = {
+	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		$(element).error( function() { $(this).hide() });
+	}
+};

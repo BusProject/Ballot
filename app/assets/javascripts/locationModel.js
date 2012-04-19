@@ -1,17 +1,21 @@
 function locationModel(data) {
-	// Google objects
+	// Map Objects
 	this.latlng = ko.observable('')
 	this.address = ko.observable('')
-	this.map = ko.observable('')
 	this.geocoder = ko.observable('')
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ''
 	this.infowindow
+	this.map = ko.observable('')
+
+	// Representative objects
+	this.reps = ko.observableArray([])
 
 	this.round = function(number,decimal) {
 		if( typeof decimal == 'undefined' ) decimal = 2
 		return Math.round(number*Math.pow(10,decimal))/Math.pow(10,decimal)
 	}
+
 	// Have noticed the Google lat/long variables have shifted.
 	// These comptued variables are meant to always accurartely the correct lat / longs
 	this.lat = ko.computed( function() {
@@ -24,7 +28,6 @@ function locationModel(data) {
 		return typeof this.lat() == 'number' && typeof this.lng() == 'number';
 	}, this)
 
-
 	// Used for bindings in the document
 	this.position = ko.computed( function() {
 		if( this.geolocated() )
@@ -34,10 +37,11 @@ function locationModel(data) {
 	}, this)
 
 
-	this.locater = ko.computed( function() {
+	this.locater = ko.computed( function() { // This is the function that's called when the location is reset
 		var address = this.address(),
 			geocoder = this.geocoder(),
 			latlng = this.latlng,
+			reps = this.reps,
 			geocoded = this.geocoded()
 
 		if( address.length > 0 && !geocoded && address != this.geocoded.address ) { // If address is located and not previously geocoded
@@ -45,6 +49,7 @@ function locationModel(data) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					var first = results[0].geometry.location;
 					latlng( first )
+					reps([])
 				}
 			});
 		}
@@ -75,9 +80,33 @@ function locationModel(data) {
 
 			// So we can use knockout bindings for the innner contnent
 			ko.applyBindings(yourLocation, content);
-
+			
 			map.setCenter(latlng),
 			map.setZoom(14)
+		}
+
+	}, this)
+
+	this.grabreps = ko.computed( function() {
+		var lat = this.lat(),
+			lng = this.lng(),
+			reps = this.reps,
+			geolocated = this.geolocated()
+
+		if( geolocated && reps().length == 0 ) {
+			// Doing the openState call, will probably want to build this into something else
+			$.getJSON(
+				'http://openstates.org/api/v1/legislators/geo/?callback=?',
+				{
+					apikey: '8fb5671bbea849e0b8f34d622a93b05a', 
+					long: yourLocation.lng(), 
+					lat: yourLocation.lat()
+				},
+				function(data) { 
+					for( var i=0 ; i < data.length; i++) {
+						reps.push( new openStateRep(data[i]) )
+					}
+				})
 		}
 
 	}, this)
