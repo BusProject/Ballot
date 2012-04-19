@@ -47,6 +47,7 @@ h1 {
 	position: absolute;
 	top: -4px;
 	margin-left: 360px;
+	width: 412px;
 }
 .rep {
 	background: #fff;
@@ -67,4 +68,7 @@ h1 {
 }
 .rep.no-photo img {
 	display: none;
+}
+.rep:nth-child(even) {
+	float: right;
 }

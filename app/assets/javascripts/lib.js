@@ -1,6 +1,4 @@
 String.prototype.capitalize = function(){
-   return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
-  };
 	return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
 }
 // from http://lummie.co.uk/javascript-%E2%80%93-rails-like-pluralize-function/
@@ -17,3 +15,4 @@ String.prototype.ordinalize = function() {
 		}
 	}
 }
+

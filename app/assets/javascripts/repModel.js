@@ -7,6 +7,8 @@ function repModel(args) {
 	this.photo = args.photo
 	this.website = args.website
 	this.office = args.office
+	this.title = args.title
+	this.rank = locationModel.prototype.order.indexOf(this.title) === -1 ? 999 : locationModel.prototype.order.indexOf(this.title)
 
 	return this
 }
@@ -26,6 +28,7 @@ function openStateRep(args) {
 		title = args.roles[0].chamber == 'lower' ? 'Representative' : 'Senator'
 		dist = args.roles[0].chamber == 'lower' ? 'HD' : 'SD'
 
+	newRep.title = 'State '+title
 	newRep.office = [level,title,'for',dist,args.roles[0].district].join(' ')
 
 	
@@ -42,7 +45,9 @@ function congressRep(args) {
 	
 	var title = args.chamber != 'senate' ? 'Representative' : 'Senator',
 		dist = args.chamber != 'senate' ? yourLocation.abvToState(args.state)+'\'s  '+args.district.ordinalize()+' District': yourLocation.abvToState(args.state)
+		rank = args.chamber != 'senate' ? '' : args.district.split(' ')[0].capitalize()+' '
 	
+	newRep.title = rank+title
 	newRep.office = [title,'from',dist].join(' ')
 	
 	

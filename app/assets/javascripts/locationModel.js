@@ -113,6 +113,7 @@ function locationModel(data) {
 				for( var i=0 ; i < data.length; i++) {
 					reps.push( new openStateRep(data[i]) )
 				}
+				yourLocation.quicksort()
 			})
 	}
 
@@ -127,8 +128,10 @@ function locationModel(data) {
 			},
 			function(data) { 
 				for( var i=0 ; i < data.response.legislators.length; i++) {
+					console.log ( data.response.legislators[i].legislator)
 					reps.push( new congressRep(data.response.legislators[i].legislator) )
 				}
+				yourLocation.quicksort()
 			})
 	}
 
@@ -137,9 +140,14 @@ function locationModel(data) {
 
 locationModel.prototype.states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
 locationModel.prototype.abvs = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
+locationModel.prototype.order = ["Senior Senator", "Junior Senator","Representative","Governor","State Senator","State Representative"]
+locationModel.prototype.quicksort = function() {
+	this.reps( this.reps().sort( function(a,b) { return a.rank > b.rank; }) )
+}
 locationModel.prototype.abvToState = function(abv) {
 	var indx = locationModel.prototype.abvs.indexOf(abv)
 	return indx === -1 ? false : locationModel.prototype.states[indx]
 }
+
 
 var yourLocation = new locationModel();
