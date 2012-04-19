@@ -9,6 +9,6 @@ $(document).on({
 },'.cancel');
 ko.bindingHandlers.fixImage = {
 	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
-		$(element).error( function() { $(this).hide() });
+		$(element).error( function() { $(this).hide().parent().addClass('no-photo') });
 	}
 };

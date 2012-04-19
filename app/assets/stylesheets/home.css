@@ -52,6 +52,19 @@ h1 {
 	background: #fff;
 	border: 4px solid #ddd;
 	padding: 2px 8px 14px;
-	margin: 0 0 18px;
+	margin: 0 6px 18px;
 	width: 170px;
+	float: left;
+	height: 240px;
+}
+.rep img {
+	height: 138px;
+	display: block;
+	margin: 0 auto;
+}
+.rep.no-photo {
+	height: auto;
+}
+.rep.no-photo img {
+	display: none;
 }

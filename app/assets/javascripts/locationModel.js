@@ -94,24 +94,52 @@ function locationModel(data) {
 			geolocated = this.geolocated()
 
 		if( geolocated && reps().length == 0 ) {
-			// Doing the openState call, will probably want to build this into something else
-			$.getJSON(
-				'http://openstates.org/api/v1/legislators/geo/?callback=?',
-				{
-					apikey: '8fb5671bbea849e0b8f34d622a93b05a', 
-					long: yourLocation.lng(), 
-					lat: yourLocation.lat()
-				},
-				function(data) { 
-					for( var i=0 ; i < data.length; i++) {
-						reps.push( new openStateRep(data[i]) )
-					}
-				})
+			this.getStateReps(lat,lng,reps)
+			this.getNatReps(lat,lng,reps)
 		}
 
 	}, this)
+	
+	this.getStateReps = function(lat,lng,reps) {
+		// Doing the openState call, will probably want to build this into something else
+		$.getJSON(
+			'http://openstates.org/api/v1/legislators/geo/?callback=?',
+			{
+				apikey: '8fb5671bbea849e0b8f34d622a93b05a', 
+				long: yourLocation.lng(), 
+				lat: yourLocation.lat()
+			},
+			function(data) { 
+				for( var i=0 ; i < data.length; i++) {
+					reps.push( new openStateRep(data[i]) )
+				}
+			})
+	}
+
+	this.getNatReps = function(lat,lng,reps) {
+		// Doing the openState call, will probably want to build this into something else
+		$.getJSON(
+			'http://services.sunlightlabs.com/api/legislators.allForLatLong.json?jsonp=?',
+			{
+				apikey: '8fb5671bbea849e0b8f34d622a93b05a', 
+				longitude: yourLocation.lng(), 
+				latitude: yourLocation.lat()
+			},
+			function(data) { 
+				for( var i=0 ; i < data.response.legislators.length; i++) {
+					reps.push( new congressRep(data.response.legislators[i].legislator) )
+				}
+			})
+	}
 
 	return this;
+}
+
+locationModel.prototype.states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+locationModel.prototype.abvs = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
+locationModel.prototype.abvToState = function(abv) {
+	var indx = locationModel.prototype.abvs.indexOf(abv)
+	return indx === -1 ? false : locationModel.prototype.states[indx]
 }
 
 var yourLocation = new locationModel();

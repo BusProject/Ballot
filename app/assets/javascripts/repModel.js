@@ -11,6 +11,7 @@ function repModel(args) {
 	return this
 }
 
+
 function openStateRep(args) {
 	if( typeof args == 'undefined' ) return false;
 	var newRep = {}
@@ -27,6 +28,23 @@ function openStateRep(args) {
 
 	newRep.office = [level,title,'for',dist,args.roles[0].district].join(' ')
 
+	
+	return new repModel(newRep)
+}
+
+function congressRep(args) {
+	if( typeof args == 'undefined' ) return false;
+	var newRep = {}
+	
+	newRep.firstName = args.firstname
+	newRep.lastName = args.lastname
+	newRep.website = args.website
+	
+	var title = args.chamber != 'senate' ? 'Representative' : 'Senator',
+		dist = args.chamber != 'senate' ? yourLocation.abvToState(args.state)+'\'s  '+args.district+' District': yourLocation.abvToState(args.state)
+	
+	newRep.office = [title,'from',dist].join(' ')
+	
 	
 	return new repModel(newRep)
 }
