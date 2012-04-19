@@ -1,4 +1,4 @@
-== Welcome to Rails
+== Welcome to the new The Ballo
 
 Hey this is the ballot. It's a work in progress. So piss off
 
