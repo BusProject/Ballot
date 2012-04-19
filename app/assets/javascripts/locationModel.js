@@ -12,18 +12,27 @@ function locationModel(data) {
 		if( typeof decimal == 'undefined' ) decimal = 2
 		return Math.round(number*Math.pow(10,decimal))/Math.pow(10,decimal)
 	}
+	// Have noticed the Google lat/long variables have shifted.
+	// These comptued variables are meant to always accurartely the correct lat / longs
+	this.lat = ko.computed( function() {
+		return this.latlng().Za;
+	},this);
+	this.lng = ko.computed( function() {
+		return this.latlng().Ya || this.latlng().$a;
+	},this);
+	this.geolocated = ko.computed( function() {
+		return typeof this.lat() == 'number' && typeof this.lng() == 'number';
+	}, this)
+
 
 	// Used for bindings in the document
 	this.position = ko.computed( function() {
-		if( typeof this.latlng().Ya == 'number' )
-			return this.round(this.latlng().Ya)+', '+this.round(this.latlng().Za);
+		if( this.geolocated() )
+			return this.round( this.lng() )+', '+this.round( this.lat() );
 		else 
 			return 'Hey where you at?';
 	}, this)
 
-	this.geolocated = ko.computed( function() {
-		return typeof this.latlng().Ya == 'number';
-	}, this)
 
 	this.locater = ko.computed( function() {
 		var address = this.address(),
@@ -39,7 +48,7 @@ function locationModel(data) {
 				}
 			});
 		}
-	}, this).extend({ throttle: 500 });
+	}, this).extend({ throttle: 250 });
 
 	this.centerlocation = ko.computed( function() {
 		var latlng = this.latlng(),
