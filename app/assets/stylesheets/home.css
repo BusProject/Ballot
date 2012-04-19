@@ -13,6 +13,7 @@ body {
 	border-right: 4px solid #ddd;
 	border-bottom: 4px solid #ddd;
 	background: #fff;
+	height: 100%;
 }
 #map_canvas {
   width: 300px;
