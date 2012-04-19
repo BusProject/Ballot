@@ -41,7 +41,7 @@ function congressRep(args) {
 	newRep.website = args.website
 	
 	var title = args.chamber != 'senate' ? 'Representative' : 'Senator',
-		dist = args.chamber != 'senate' ? yourLocation.abvToState(args.state)+'\'s  '+args.district+' District': yourLocation.abvToState(args.state)
+		dist = args.chamber != 'senate' ? yourLocation.abvToState(args.state)+'\'s  '+args.district.ordinalize()+' District': yourLocation.abvToState(args.state)
 	
 	newRep.office = [title,'from',dist].join(' ')
 	
