@@ -1,4 +1,4 @@
-== Welcome to the new The Ballo
+== Welcome to the new The Ballot
 
 Hey this is the ballot. It's a work in progress. So piss off
 
