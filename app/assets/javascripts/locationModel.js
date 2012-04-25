@@ -18,11 +18,18 @@ function locationModel(data) {
 
 	// Have noticed the Google lat/long variables have shifted.
 	// These comptued variables are meant to always accurartely the correct lat / longs
+	this.latlng.filtered = ko.computed( function() {
+		var latlng = []; 
+		for( var i in this.latlng() ) { 
+			if( typeof this.latlng()[i] == 'number' ) latlng.push(this.latlng()[i] )
+		}
+		return latlng.sort()
+	},this)
 	this.lat = ko.computed( function() {
-		return this.latlng().Za;
+		return this.latlng.filtered()[1]
 	},this);
 	this.lng = ko.computed( function() {
-		return this.latlng().Ya || this.latlng().$a;
+		return this.latlng.filtered()[0]
 	},this);
 	this.geolocated = ko.computed( function() {
 		return typeof this.lat() == 'number' && typeof this.lng() == 'number';
