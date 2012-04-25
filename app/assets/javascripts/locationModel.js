@@ -135,7 +135,6 @@ function locationModel(data) {
 			},
 			function(data) { 
 				for( var i=0 ; i < data.response.legislators.length; i++) {
-					console.log ( data.response.legislators[i].legislator)
 					reps.push( new congressRep(data.response.legislators[i].legislator) )
 				}
 				yourLocation.quicksort()
