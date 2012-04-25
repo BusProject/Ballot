@@ -81,6 +81,7 @@ function locationModel(data) {
 			// Adding an info window
 			this.infowindow = new google.maps.InfoWindow({
 				map: map,
+				maxWidth: 200,
 				position: latlng,
 				content: content
 			});
