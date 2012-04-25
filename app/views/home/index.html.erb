@@ -1,16 +1,18 @@
 <div id="content">
-	<h1>The Ballotman Begins</h1>
-	<div id="map_canvas"></div>
-	<div id="location" data-bind="with: yourLocation">
-		<span data-bind="text: position"></span>
-		<input data-bind="value: address, visible: !geolocated(), valudeUpdate: 'keyup'" placeholder="enter your address">
-		<button data-bind="visible: !geolocated()" >go</button>
-		<div id="reps" data-bind="foreach: reps">
-			<div class="rep" data-bind="css: {'no-photo': photo == undefined}">
-				<h3 data-bind="text: fullName"></h3>
-				<img data-bind="attr:{src: photo}, fixImage: true" >
-				<span data-bind="text: office"></span>
-			</div>
+	<div id="finder" data-bind="css: {'reps': reps().length > 0 }">
+		<h1>The Ballotman Begins</h1>
+		<div id="map_canvas"></div>
+		<div id="location" data-bind="with: yourLocation">
+			<span data-bind="text: position"></span>
+			<input data-bind="value: address, visible: !geolocated(), valudeUpdate: 'keyup'" placeholder="enter your address">
+			<button data-bind="visible: !geolocated()" >go</button>
+		</div>
+	</div>
+	<div id="reps" data-bind="foreach: reps">
+		<div class="rep" data-bind="css: {'no-photo': photo == undefined}">
+			<h3 data-bind="text: fullName"></h3>
+			<img data-bind="attr:{src: photo}, fixImage: true" >
+			<span data-bind="text: office"></span>
 		</div>
 	</div>
 </div>

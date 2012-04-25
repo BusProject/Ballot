@@ -2,10 +2,14 @@ body {
   margin: 0;
   padding: 0;
   background: #efefef;
+  font-family: 'Exo';
 }
 
 #content {
-	font-family: 'Exo';
+	width: 790px;
+	margin: auto;
+}
+#finder {
 	width: 300px;
 	margin: auto;
 	padding: 10px 30px;
@@ -14,6 +18,9 @@ body {
 	border-bottom: 4px solid #ddd;
 	background: #fff;
 	height: 100%;
+}
+#finder.reps {
+	float: left;
 }
 #map_canvas {
   width: 300px;
@@ -44,9 +51,8 @@ h1 {
 	text-decoration: underline;
 }
 #reps {
-	position: absolute;
-	top: -4px;
-	margin-left: 360px;
+	margin-top: -4px;
+	float: right;
 	width: 412px;
 }
 .rep {
