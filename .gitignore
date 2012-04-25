@@ -6,3 +6,4 @@ tmp/
 *.DS_Store*
 .*jhw-*
 public/assets*
+public/public*
