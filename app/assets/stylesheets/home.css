@@ -6,7 +6,8 @@ body {
 }
 
 #content {
-	width: 790px;
+	max-width: 800px;
+	min-width: 412px;
 	margin: auto;
 }
 #finder {
@@ -21,6 +22,7 @@ body {
 }
 #finder.reps {
 	float: left;
+	margin: 0 25px 10px;
 }
 #map_canvas {
   width: 300px;
@@ -52,7 +54,7 @@ h1 {
 }
 #reps {
 	margin-top: -4px;
-	float: right;
+	float: left;
 	width: 412px;
 }
 .rep {
