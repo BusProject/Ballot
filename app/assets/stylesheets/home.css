@@ -65,6 +65,7 @@ h1 {
 	width: 170px;
 	float: left;
 	height: 240px;
+	min-height: 104px;
 }
 .rep img {
 	height: 138px;
