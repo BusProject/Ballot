@@ -14,6 +14,8 @@ group :development, :test do
 end
 
 gem 'devise', '~> 2.0.0'
+gem "omniauth"
+gem "omniauth-facebook"
 
 # Gems used only for assets and not required
 # in production environments by default.
