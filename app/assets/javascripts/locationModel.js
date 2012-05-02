@@ -72,7 +72,7 @@ function locationModel(data) {
 			// Defining the content or the box
 			var content = document.createElement("div");
 			content.innerHTML += '<strong>You vote here!</strong><br />'
-			content.innerHTML += '<span data-bind="text: yourLocation.address "></span><br />'
+			content.innerHTML += '<span data-bind="text: yourLocation.address" ></span><br /><br/ >'
 			content.innerHTML += '<span class="cancel">NO THAT\'S NOT RIGHT<span>'
 
 			// Clears info window if aleray open
