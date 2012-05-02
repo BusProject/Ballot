@@ -81,3 +81,15 @@ h1 {
 .rep:nth-child(even) {
 	float: right;
 }
+
+/** Footer / account info **/
+.account {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	border-top: 4px solid #ddd;
+	border-left: 4px solid #ddd;
+	background: #fff;
+	padding: 10px;
+	font-size: 12px;
+}

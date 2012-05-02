@@ -1,0 +1,12 @@
+<%- if controller_name != 'sessions' %>
+	<div class="account">
+		<%- if current_user.nil? %>
+			<%= link_to "Sign in with Facebook", omniauth_authorize_path('user', :facebook) %><br />
+		<% else %>
+			You are 
+			<%= current_user.email %>
+			<%= link_to 'Sing out', destroy_user_session_path %>
+		<% end -%>
+	</div>
+	
+<% end -%>

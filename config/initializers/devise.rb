@@ -205,6 +205,7 @@ Devise.setup do |config|
   # config.navigational_formats = ["*/*", :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
+  config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
@@ -219,4 +220,8 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+  #facebook
+  
+  config.omniauth :facebook, "348686001852732", "0cecad60b275b9e6e3bf3ff4e3000911",   {:scope => 'email, offline_access, friends_activities, user_location, friends_location, user_activities', :display => 'popup' }
+  
 end
