@@ -7,7 +7,7 @@ Ballot::Application.routes.draw do
   match '/auth/:provider/callback' => 'authentications#create'
   
   match '/feedback/show' => 'feedback#show'
-  match '/feedbac/save' => 'feedback#save'
+  match '/feedback/save' => 'feedback#update'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
