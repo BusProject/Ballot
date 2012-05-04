@@ -5,7 +5,7 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.integer :support, :default => 0
       t.boolean :approved, :default => true
       t.text :comment
-      t.references :user_id 
+      t.references :user 
 
       t.timestamps
     end
