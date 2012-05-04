@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502001918) do
+ActiveRecord::Schema.define(:version => 20120504194245) do
+
+  create_table "feedbacks", :force => true do |t|
+    t.string   "choice_key"
+    t.integer  "support",    :default => 0
+    t.boolean  "approved",   :default => true
+    t.text     "comment"
+    t.integer  "user_id_id"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "feedbacks", ["choice_key"], :name => "index_feedbacks_on_choice_key"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

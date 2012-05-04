@@ -5,6 +5,9 @@ Ballot::Application.routes.draw do
   root :to => "home#index"
 
   match '/auth/:provider/callback' => 'authentications#create'
+  
+  match '/feedback/show' => 'feedback#show'
+  match '/feedbac/save' => 'feedback#save'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
