@@ -1,13 +1,12 @@
 class FeedbackController < ApplicationController
   def show
-      feedback = params['name'].nil? ? Feedback.all : Feedback.find_all_by_choice_key(params['name'].split(','))
-
-      render :json => feedback.to_json, :callback => params['callback']
+      feedback = params['name'].nil? ? Feedback.all : Feedback.find_all_by_choice_key(params['name'].split(',')) # Shows all if no names posted
+      render :json => feedback.to_json, :callback => params['callback'] # Shoiws
   end
 
   def update
       
-      feedback = params['feedback'] || []
+      feedback = params['feedback'] || [] # The feedback as posted in seralize fashion
       @json = []
       
       if user_signed_in?

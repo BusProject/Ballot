@@ -36,4 +36,26 @@ describe FeedbackController do
     end
   end
 
+  describe 'SHOW' do
+    before :each do
+      ['Bob','Jim','Frank'].each do |name|
+        FactoryGirl.create(:feedback, choice_key: name )
+      end
+    end
+    
+    it 'shows all the of the feedback if no names are posted' do
+      get 'show'
+      response.body.should == Feedback.all.to_json
+    end
+    it 'filters names if name is posted' do
+      get 'show', :name => 'Bob'
+      response.body.should == Feedback.find_all_by_choice_key('Bob').to_json
+    end
+    it 'filters by many names if comma listed is posted' do
+      get 'show', :name => 'Bob,Frank'
+      response.body.should == Feedback.find_all_by_choice_key(['Bob','Frank']).to_json
+    end
+  end
+
+  
 end
