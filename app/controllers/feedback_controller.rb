@@ -1,6 +1,6 @@
 class FeedbackController < ApplicationController
   def show
-      feedback = params['name'].nil? ? Feedback.all : Feedback.find_all_by_choice_key(params['name'])
+      feedback = params['name'].nil? ? Feedback.all : Feedback.find_all_by_choice_key(params['name'].split(','))
 
       render :json => feedback.to_json, :callback => params['callback']
   end
