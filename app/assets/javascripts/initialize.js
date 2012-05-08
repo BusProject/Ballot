@@ -18,6 +18,7 @@ function initialize() {
 			geocoder.geocode({'latLng': pos}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					yourLocation.geocoded( true )
+					yourLocation.googleLocation(results[0])
 					yourLocation.geocoded.address = results[0].formatted_address
 					yourLocation.address( results[0].formatted_address )
 				}

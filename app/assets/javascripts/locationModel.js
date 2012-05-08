@@ -1,6 +1,7 @@
 function locationModel(data) {
 	// Map Objects
 	this.latlng = ko.observable('')
+	this.googleLocation = ko.observable({})
 	this.address = ko.observable('')
 	this.geocoder = ko.observable('')
 	this.geocoded = ko.observable(false)
@@ -47,6 +48,7 @@ function locationModel(data) {
 	this.locater = ko.computed( function() { // This is the function that's called when the location is reset
 		var address = this.address(),
 			geocoder = this.geocoder(),
+			googleLocation = this.googleLocation,
 			latlng = this.latlng,
 			reps = this.reps,
 			geocoded = this.geocoded()
@@ -54,7 +56,8 @@ function locationModel(data) {
 		if( address.length > 0 && !geocoded && address != this.geocoded.address ) { // If address is located and not previously geocoded
 			geocoder.geocode( {address: address}, function(results, status) { 
 				if (status == google.maps.GeocoderStatus.OK) {
-					var first = results[0].geometry.location;
+					var first = results[0].geometry.location
+					googleLocation(results[0])
 					latlng( first )
 					reps([])
 				}
