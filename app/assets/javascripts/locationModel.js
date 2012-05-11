@@ -33,7 +33,30 @@ function locationModel(data) {
 		return this.latlng.filtered()[0]
 	},this);
 	this.geolocated = ko.computed( function() {
-		return typeof this.lat() == 'number' && typeof this.lng() == 'number';
+		return typeof this.lat() == 'number' && typeof this.lng() == 'number'
+	}, this)
+
+	// Useful for saving dirty ballot data
+	this.address.city = ko.computed( function() { 
+		var g = this.googleLocation(), components = g.address_components
+		if( typeof components == 'undefined' ) return false
+		for( var i = 0; i < components.length; i ++ ) { 
+			if( components[i].types[0] == 'locality' ) return components[i].long_name
+		} 
+	}, this)
+	this.address.state = ko.computed( function() { 
+		var g = this.googleLocation(), components = g.address_components
+		if( typeof components == 'undefined' ) return false
+		for( var i = 0; i < components.length; i ++ ) { 
+			if( components[i].types[0] == "administrative_area_level_1" ) return components[i].short_name
+		} 
+	}, this)
+	this.address.county = ko.computed( function() { 
+		var g = this.googleLocation(), components = g.address_components
+		if( typeof components == 'undefined' ) return false
+		for( var i = 0; i < components.length; i ++ ) { 
+			if( components[i].types[0] == "administrative_area_level_2" ) return components[i].long_name
+		} 
 	}, this)
 
 	// Used for bindings in the document
@@ -63,7 +86,7 @@ function locationModel(data) {
 				}
 			});
 		}
-	}, this).extend({ throttle: 250 });
+	}, this).extend({ throttle: 250 })
 
 	this.centerlocation = ko.computed( function() {
 		var latlng = this.latlng(),
@@ -144,6 +167,39 @@ function locationModel(data) {
 				yourLocation.quicksort()
 			})
 	}
+	
+	// Used for sending to dirty ballot
+	this.sendReps = ko.computed( function() {
+		var address = this.address, 
+			lat = this.lat(), lng = this.lng(),
+			reps = ko.utils.arrayMap( this.reps(), function(rep) { 
+				rep.matcher = { 
+					city: address.city(),
+					state: address.state(),
+					county: address.county(),
+					from: { 
+						lat: lat, 
+						lng: lng
+					} 
+				}
+				rep._id = rep.district
+				return rep 
+			})
+		if( reps.length < 1 ) return false
+		$.ajax({
+			url: 'http://localhost:3000/dirtydb/save',
+			type: "POST",
+			data: {data: reps },
+			dataType: "json",
+			beforeSend: function(x) {
+				if (x && x.overrideMimeType) {
+					x.overrideMimeType("application/j-son;charset=UTF-8");
+		  		}
+			},
+			success: function(result) {
+			}
+		})
+	},this).extend({ throttle: 500 })
 
 	return this;
 }

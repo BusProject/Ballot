@@ -9,6 +9,8 @@ function repModel(args) {
 	this.office = args.office
 	this.title = args.title
 	this.rank = locationModel.prototype.order.indexOf(this.title) === -1 ? 999 : locationModel.prototype.order.indexOf(this.title)
+	this.choice_key = [this.fullName,this.office].join(' ')
+	this.district = args.district
 
 	return this
 }
@@ -29,7 +31,8 @@ function openStateRep(args) {
 		dist = args.roles[0].chamber == 'lower' ? 'HD' : 'SD'
 
 	newRep.title = 'State '+title
-	newRep.office = [level,title,'for',dist,args.roles[0].district].join(' ')
+	newRep.office = [level,title,'for',args.state.toUpperCase(),dist,args.roles[0].district].join(' ')
+	newRep.district = args.state.toUpperCase()+dist+args.roles[0].district
 
 	
 	return new repModel(newRep)
@@ -44,12 +47,13 @@ function congressRep(args) {
 	newRep.website = args.website
 	
 	var title = args.chamber != 'senate' ? 'Representative' : 'Senator',
-		dist = args.chamber != 'senate' ? yourLocation.abvToState(args.state)+'\'s  '+args.district.ordinalize()+' District': yourLocation.abvToState(args.state)
+		dist = args.chamber != 'senate' ? yourLocation.abvToState(args.state)+'\'s '+args.district.ordinalize()+' District': yourLocation.abvToState(args.state)
 		rank = args.chamber != 'senate' ? '' : args.district.split(' ')[0].capitalize()+' '
+ 		district_label = args.chamber != 'senate' ? 'CD'+args.district : rank.trim()+'S'
 	
 	newRep.title = rank+title
 	newRep.office = [title,'from',dist].join(' ')
-	
+	newRep.district = args.state+district_label
 	
 	return new repModel(newRep)
 }
