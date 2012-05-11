@@ -13,6 +13,8 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+gem 'rest-client'
+
 gem 'devise', '~> 2.0.0'
 gem "omniauth"
 gem "omniauth-facebook"
