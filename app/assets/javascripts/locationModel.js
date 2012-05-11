@@ -187,7 +187,7 @@ function locationModel(data) {
 			})
 		if( reps.length < 1 ) return false
 		$.ajax({
-			url: document.location.href+'/dirtydb/save',
+			url: document.location.href+'dirtydb/save',
 			type: "POST",
 			data: {data: reps },
 			dataType: "json",
