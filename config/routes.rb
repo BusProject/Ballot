@@ -8,6 +8,8 @@ Ballot::Application.routes.draw do
   
   match '/feedback/show' => 'feedback#show'
   match '/feedback/save' => 'feedback#update'
+  
+  match '/dirtydb/save' => 'dirty#update'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
