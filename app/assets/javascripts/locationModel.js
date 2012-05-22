@@ -55,8 +55,29 @@ function locationModel(data) {
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
 		for( var i = 0; i < components.length; i ++ ) { 
+			if( components[i].types[0] == "route" ) return components[i].long_name
+		} 
+	}, this)
+	this.address.route = ko.computed( function() { 
+		var g = this.googleLocation(), components = g.address_components
+		if( typeof components == 'undefined' ) return false
+		for( var i = 0; i < components.length; i ++ ) { 
+			if( components[i].types[0] == "neighborhood" ) return components[i].long_name
+		} 
+	}, this)
+	this.address.neighborhood = ko.computed( function() { 
+		var g = this.googleLocation(), components = g.address_components
+		if( typeof components == 'undefined' ) return false
+		for( var i = 0; i < components.length; i ++ ) { 
 			if( components[i].types[0] == "administrative_area_level_2" ) return components[i].long_name
 		} 
+	}, this)
+	this.address.street_number = ko.computed( function() { 
+		var g = this.googleLocation(), components = g.address_components
+		if( typeof components == 'undefined' ) return false
+		for( var i = 0; i < components.length; i ++ ) { 
+			if( components[i].types[0] == "street_number" ) return components[i].long_name
+		}
 	}, this)
 
 	// Used for bindings in the document
@@ -172,15 +193,18 @@ function locationModel(data) {
 	this.sendReps = ko.computed( function() {
 		var address = this.address, 
 			lat = this.lat(), lng = this.lng(),
+			// Need to rewrite this section
 			reps = ko.utils.arrayMap( this.reps(), function(rep) { 
 				rep.matcher = { 
-					city: address.city(),
-					state: address.state(),
-					county: address.county(),
-					from: { 
+					city: [address.city()],
+					state: [address.state()],
+					county: [address.county()],
+					neighborhood: [address.neighborhood()],
+					from: [{ 
 						lat: lat, 
-						lng: lng
-					} 
+						lng: lng,
+						time: new Date()
+					}]
 				}
 				rep._id = rep.district
 				return rep 
