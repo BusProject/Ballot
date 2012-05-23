@@ -3,17 +3,9 @@ FactoryGirl.define do
   sequence :email do |n|
     "user#{n}@example.com"
   end  
-  
-
   factory :user do
       email
       password "testactular"
-  end
-  factory :feedback do
-    option
-    comment 'Yo this dude SUCKS'
-    support true
-    user_id { 1 + rand(100) }
   end
 
   sequence :geography do |n|
@@ -49,6 +41,13 @@ FactoryGirl.define do
         FactoryGirl.create_list(:feedback, evaluator.feedback_count, :option => option )
       end
     end
+  end
+
+  factory :feedback do
+    option
+    comment 'Yo this dude SUCKS'
+    support true
+    user
   end
 
 
