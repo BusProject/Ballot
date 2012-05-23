@@ -36,12 +36,34 @@ describe ChoiceController do
         end
       end
       
-      it 'responds with the option data for the queried geographies' do
+      it 'responds with the options for the queried geographies' do
         get 'show', :q => @choices[4].geography+'|'+@choices[2].geography
         json = JSON::parse(response.body)
 
         json[0]['options'].should.to_json == Choice.find(@choices[2].id).options.to_json
         json[1]['options'].should.to_json == Choice.find(@choices[4].id).options.to_json
+      end
+      
+    end
+
+    describe 'query of choices with options with feedback' do
+      before :each do
+        @choices = []
+
+        5.times do
+          choice = FactoryGirl.create(:choice)
+          2.times do
+            FactoryGirl.create(:option_with_feedback, :choice => choice)
+          end
+          @choices.push(choice)
+        end
+      end
+      
+      it 'responds with the options for the queried geographies' do
+        get 'show', :q => @choices[4].geography+'|'+@choices[2].geography
+        json = JSON::parse(response.body)
+
+        json[0]['options'][0]['feedback'].count.should == 3 # Makes sure it's returning the results
       end
       
     end
