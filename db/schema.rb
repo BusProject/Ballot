@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522230842) do
+ActiveRecord::Schema.define(:version => 20120524232152) do
 
   create_table "choices", :force => true do |t|
     t.string   "contest"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(:version => 20120522230842) do
 
   add_index "feedback", ["option_id"], :name => "index_feedback_on_option_id"
   add_index "feedback", ["user_id"], :name => "index_feedback_on_user_id"
+
+  create_table "matches", :force => true do |t|
+    t.string   "latlng"
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "matches", ["latlng"], :name => "index_matches_on_latlng", :unique => true
 
   create_table "options", :force => true do |t|
     t.integer  "choice_id"
