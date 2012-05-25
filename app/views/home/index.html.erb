@@ -1,18 +1,125 @@
-<div id="content">
-	<div id="finder" data-bind="css: {'reps': reps().length > 0 }">
-		<h1>The Ballot Begins</h1>
-		<div id="map_canvas"></div>
-		<div id="location" data-bind="with: yourLocation">
-			<span data-bind="text: position"></span>
-			<input data-bind="value: address, visible: !geolocated(), valudeUpdate: 'keyup'" placeholder="enter your address">
-			<button data-bind="visible: !geolocated()" >go</button>
-		</div>
-	</div>
-	<div id="reps" data-bind="foreach: reps">
-		<div class="rep" data-bind="css: {'no-photo': photo == undefined}">
-			<h3 data-bind="text: fullName"></h3>
-			<img data-bind="attr:{src: photo}, fixImage: true" >
-			<span data-bind="text: office"></span>
-		</div>
-	</div>
-</div>
+<div id="page">
+	<div id="header" class="clearfix">
+		<img src="<%= asset_path 'theballotlogo.gif' %>" id="logo">
+		<div id="tagline">GET A SNEAK PEEK AT YOUR BALLOT FOR THE UPCOMING ELECTION</div> <!-- tagline -->			
+		</div> <!-- header -->
+		
+	<div id="instructions-box">
+		<div id="instructions">
+		<ul>
+			<li><a href="#1">1. Find Your Ballot</a></li>
+			<li><a href="#2">2. Read Your Ballot</a></li>
+			<li><a href="#3">3. Share Your Ballot</a></li>
+		</ul>
+		</div><!-- instructions -->
+	</div><!-- instructions-box -->
+	
+	<div id="main">
+		<div id="find-ballot" class="ballot-section">
+			<h1 class="sectionheading"> <span class="stars">&#9733; &#9733; &#9733;</span><a name="1"> Where Do You Vote?</a> <span class="stars">&#9733; &#9733; &#9733;</span></h1>
+			<div id="enter-address">
+			
+				<div class="pointer">
+					<img class="pointer-image" src="<%= asset_path 'pointer-full.gif' %>">
+					<span class="pointer-text">Where You're Voting</span>
+					<div class="pointer-arrow"> &nbsp </div>
+				</div><!-- pointer -->
+				<input id="address-input" type="text" placeholder="enter your address"></input>
+				</div><!-- enter address -->
+				
+			<div id="map">
+				<div class="pointer">
+					<img class="pointer-image" src="<%= asset_path 'pointer-full.gif' %>">
+					<span class="pointer-text">Look familiar?</span>
+					<div class="pointer-arrow"> &nbsp </div>
+				</div><!-- pointer -->
+				
+				<div id="map-embed">
+					<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Portland,+OR&amp;aq=0&amp;oq=portland&amp;sll=45.523452,-122.676207&amp;sspn=0.744703,1.241455&amp;ie=UTF8&amp;hq=&amp;hnear=Portland,+Multnomah,+Oregon&amp;t=m&amp;ll=45.554929,-122.749557&amp;spn=0.168282,0.291824&amp;z=11&amp;iwloc=A&amp;output=embed"></iframe>
+				</div> <!-- map embed -->
+
+			</div><!-- map -->
+			
+			<div id="address-submit">
+				<button>Show My Ballot</button>
+			</div><!-- address-submit -->	
+				
+			
+			
+	
+		</div><!-- find-ballot -->
+	
+	
+	
+	
+	
+	
+		<div role="read-ballot" class="ballot-section">
+			<h1 class="sectionheading"> <span class="stars">&#9733; &#9733; &#9733;</span> <a name="2">Here's Your Ballot</a> <span class="stars">&#9733; &#9733; &#9733;</span></h1>
+			<div class="ballot-category clearfix" role="federal races">
+				<h2 class="category-heading">Federal Races</h2>
+				<div class="race-menu">
+					<ul>
+						<li>President</li>
+						<li>Senate</li>
+						<li>Congress</li>
+					</ul>
+				</div><!-- race-menu -->
+				<div class="candidates">
+					<div class="candidate-row">
+						<img class="candidate-photo">
+						<img class="candidate-photo">
+						<span class="candidate-info">Barack Obama and Joe Biden</span>
+					</div><!-- candidate-row -->
+				</div><!-- candidates-->
+			</div><!-- ballot-category -->
+			
+			<div class="ballot-category clearfix" role="ballot measures">
+				<h2 class="category-heading ballot-measure">Ballot Measures</h2>
+				<div class="race-menu ballot-measure-box">
+					<ul>
+						<li>President</li>
+						<li>Senate</li>
+						<li>Congress</li>
+					</ul>
+				</div><!-- race-menu -->
+				<div class="ballot-measure-expanded">
+					<div class="ballot-measure-row">
+							<div class="ballot-measure-explanation">
+							Measure 66 would Etiam porta sem malesuada magna mollis eui mod. Sed posuere consectetur est at lobortis.
+							</div><!-- ballot-measure-explanation -->
+							<div class="yes-no">
+								<h1 class="yes-no">YES ON MEASURE 66</h1>
+								<p>A yes vote on Measure 66 means Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+								<input type="text" class="comment" />
+							</div><!-- yes-no -->
+							<div class="yes-no">
+								<h1 class="yes-no">NO ON MEASURE 66</h1>
+								<p>A no vote on Measure 66 means Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+								<input type="textarea" class="comment" />
+
+							</div><!-- yes-no -->
+							
+					</div><!-- ballot-measure-row -->
+				</div><!-- ballot-measure-expanded-->
+			</div><!-- ballot-category -->
+		
+		
+		
+		
+		
+		</div><!-- read-ballot -->
+
+		<div role="share-ballot" class="ballot-section">
+			<h1 class="sectionheading"> <span class="stars">&#9733; &#9733; &#9733;</span> <a name="3">Share Your Ballot</a> <span class="stars">&#9733; &#9733; &#9733;</span></h1>
+		</div><!-- share-ballot -->
+	
+	
+	
+	</div><!-- main -->
+
+</div><!-- page -->
+
+<div id="footer">
+<img id="ballot-box" src="<%=asset_path 'ballotbox.png' %>">
+</div><!-- footer -->
