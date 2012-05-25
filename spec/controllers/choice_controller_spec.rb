@@ -6,7 +6,7 @@ describe ChoiceController do
     it 'responds with JSON error if nothing posted' do
       get 'show'
       json = JSON::parse(response.body)
-      json.should == {'error' => true, 'message' => 'No geometry posted'}
+      json.should == {'error' => true, 'message' => 'Nothing useful was posted'}
     end
     
     describe 'basic query of choices' do
