@@ -24,10 +24,11 @@ class Cicero
       legislative = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/legislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json' )
       leg_districts = legislative['response']['results']['districts']
     
-      school = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/nonlegislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json&type=SCHOOL' )
-      school_dist = school['response']['results']['districts']
+      #school = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/nonlegislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json&type=SCHOOL' )
+      #school_dist = school['response']['results']['districts']
+      # Deactivate for now
 
-      all_districts = fix_districts leg_districts+school_dist
+      all_districts = fix_districts leg_districts #+school_dist
       Match.new(:latlng => lat+lng, :data =>  all_districts).save
 
       return all_districts
