@@ -15,4 +15,9 @@ String.prototype.ordinalize = function() {
 		}
 	}
 }
-
+jQuery.fn.flash = function( opacity, duration ) {
+    var opacity = opacity || 0.3, duration = duration / 2 || 'slow', $this = this
+	$this.fadeTo(duration, opacity, function() {
+		$this.fadeTo(duration, 1)
+	})
+}

@@ -24,7 +24,12 @@
 					<span class="pointer-text">Where You're Voting</span>
 					<div class="pointer-arrow"> &nbsp </div>
 				</div><!-- pointer -->
-				<input id="address-input" type="text" placeholder="enter your address"></input>
+					<input id="address-input" type="text" placeholder="enter your address" data-bind="value: address">
+					<div data-bind="visible: geocoded" id="address-tooltip">
+						We found this address using your browser<br />
+						<span class="cancel">clear your position</span>
+					</div>
+			
 				</div><!-- enter address -->
 				
 			<div id="map">
@@ -35,14 +40,11 @@
 				</div><!-- pointer -->
 				
 				<div id="map-embed">
-					<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Portland,+OR&amp;aq=0&amp;oq=portland&amp;sll=45.523452,-122.676207&amp;sspn=0.744703,1.241455&amp;ie=UTF8&amp;hq=&amp;hnear=Portland,+Multnomah,+Oregon&amp;t=m&amp;ll=45.554929,-122.749557&amp;spn=0.168282,0.291824&amp;z=11&amp;iwloc=A&amp;output=embed"></iframe>
+					<img data-bind="attr: { 'src' : map }">
 				</div> <!-- map embed -->
 
 			</div><!-- map -->
 			
-			<div id="address-submit">
-				<button>Show My Ballot</button>
-			</div><!-- address-submit -->	
 				
 			
 			

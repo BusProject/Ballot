@@ -1,13 +1,11 @@
 function locationModel(data) {
 	// Map Objects
-	this.latlng = ko.observable('')
+	this.latlng = ko.observable('38.7, -95.7')
 	this.googleLocation = ko.observable({})
 	this.address = ko.observable('')
 	this.geocoder = ko.observable('')
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ''
-	this.infowindow
-	this.map = ko.observable('')
 
 	// Representative objects
 	this.reps = ko.observableArray([])
@@ -80,14 +78,6 @@ function locationModel(data) {
 		}
 	}, this)
 
-	// Used for bindings in the document
-	this.position = ko.computed( function() {
-		if( this.geolocated() )
-			return this.round( this.lng() )+', '+this.round( this.lat() );
-		else 
-			return 'Hey where you at?';
-	}, this)
-
 
 	this.locater = ko.computed( function() { // This is the function that's called when the location is reset
 		var address = this.address(),
@@ -109,37 +99,14 @@ function locationModel(data) {
 		}
 	}, this).extend({ throttle: 250 })
 
-	this.centerlocation = ko.computed( function() {
+	this.map = ko.computed( function() {
 		var latlng = this.latlng(),
-			map = this.map(),
 			geolocated = this.geolocated()
-
-		if( geolocated && typeof map == 'object' ) {
-			
-			// Defining the content or the box
-			var content = document.createElement("div");
-			content.innerHTML += '<strong>You vote here!</strong><br />'
-			content.innerHTML += '<span data-bind="text: yourLocation.address" ></span><br /><br/ >'
-			content.innerHTML += '<span class="cancel">NO THAT\'S NOT RIGHT<span>'
-
-			// Clears info window if aleray open
-			if( typeof this.infowindow != 'undefined' ) this.infowindow.close()
-
-			// Adding an info window
-			this.infowindow = new google.maps.InfoWindow({
-				map: map,
-				maxWidth: 200,
-				position: latlng,
-				content: content
-			});
-
-			// So we can use knockout bindings for the innner contnent
-			ko.applyBindings(yourLocation, content);
-			
-			map.setCenter(latlng),
-			map.setZoom(14)
-		}
-
+			zoom = geolocated ? '13' : '3',
+			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
+		// When map updates - flash the thing
+		if( geolocated ) $('#map .pointer, #map-embed img').flash(.5, 1000)
+		return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=450x375&sensor=true'+marker
 	}, this)
 
 	this.grabreps = ko.computed( function() {
@@ -149,12 +116,28 @@ function locationModel(data) {
 			geolocated = this.geolocated()
 
 		if( geolocated && reps().length == 0 ) {
-			this.getStateReps(lat,lng,reps)
-			this.getNatReps(lat,lng,reps)
+			//this.getMyReps(lat,lng,reps)
 		}
 
 	}, this)
-	
+
+	this.getStateReps = function(lat,lng,reps) {
+		// Doing the openState call, will probably want to build this into something else
+		$.getJSON(
+			'http://openstates.org/api/v1/legislators/geo/?callback=?',
+			{
+				apikey: '8fb5671bbea849e0b8f34d622a93b05a', 
+				long: yourLocation.lng(), 
+				lat: yourLocation.lat()
+			},
+			function(data) { 
+				for( var i=0 ; i < data.length; i++) {
+					reps.push( new openStateRep(data[i]) )
+				}
+				yourLocation.quicksort()
+			})
+	}
+
 	this.getStateReps = function(lat,lng,reps) {
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(
@@ -183,50 +166,13 @@ function locationModel(data) {
 			},
 			function(data) { 
 				for( var i=0 ; i < data.response.legislators.length; i++) {
-					reps.push( new congressRep(data.response.legislators[i].legislator) )
+					reps.push( new openCongressRep(data.response.legislators[i].legislator) )
 				}
 				yourLocation.quicksort()
 			})
 	}
-	
-	// Used for sending to dirty ballot
-	this.sendReps = ko.computed( function() {
-		var address = this.address, 
-			lat = this.lat(), lng = this.lng(),
-			// Need to rewrite this section
-			reps = ko.utils.arrayMap( this.reps(), function(rep) { 
-				rep.matcher = { 
-					city: [address.city()],
-					state: [address.state()],
-					county: [address.county()],
-					neighborhood: [address.neighborhood()],
-					from: [{ 
-						lat: lat, 
-						lng: lng,
-						time: new Date()
-					}]
-				}
-				rep._id = rep.district
-				return rep 
-			})
-		if( reps.length < 1 ) return false
-		$.ajax({
-			url: document.location.href+'dirtydb/save',
-			type: "POST",
-			data: {data: reps },
-			dataType: "json",
-			beforeSend: function(x) {
-				if (x && x.overrideMimeType) {
-					x.overrideMimeType("application/j-son;charset=UTF-8");
-		  		}
-			},
-			success: function(result) {
-			}
-		})
-	},this).extend({ throttle: 500 })
-
-	return this;
 }
+
 
 locationModel.prototype.states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
 locationModel.prototype.abvs = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]

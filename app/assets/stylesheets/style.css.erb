@@ -62,8 +62,8 @@ body {
 
 #ballot-box {
 	max-width:100%;
-	position:fixed;
-	bottom:-20%;
+	position:absolute;
+	margin-top: -54px;
 	left:12%;
 }
  
@@ -102,6 +102,15 @@ h2 {
 	vertical-align:middle;
 	margin:0 10px;
 }
+
+.cancel {
+	color: #D37A3C;
+	cursor: pointer;
+}
+.cancel:hover {
+	font-weight: bold;
+}
+
 /********* Header *********/
 
 #header {
@@ -137,9 +146,8 @@ h2 {
 
 #instructions-box {
 	background-image: url(<%= asset_path 'instructions-arrow.gif'%>); 
-	background-position: 100% 10;
+	background-position: 100% 10%;
 	background-repeat:no-repeat;
-	background-max-width:20px;
 	width: 14.5833333%;
 	max-width:140px;
 	position:fixed;
@@ -161,7 +169,6 @@ h2 {
 
 #instructions ul {
 	list-style-type:none;
-	margin-left:-50px;
 }
 
 #instructions a, a:link, a:visited {
@@ -185,7 +192,7 @@ h2 {
 
 .ballot-section {
 	width: 91.6666667%;
-	margin: 0 auto;
+	margin: 0 auto 30px;
 }
 
 /******** Pointer *********/
@@ -227,7 +234,7 @@ input, textarea, select {
 	width:55%;
 	font-family:'Waiting for the sunrise', 'Rokkit', serif;
 	color:#99C337;
-	font-size:2em;
+	font-size:1.4em;
 }
 
 input:focus, textarea:focus, select:focus {
@@ -253,18 +260,25 @@ button {
 }
 
 #enter-address {
-	margin-bottom:50px;
+	margin: 30px 0 50px
 }
 
 #address-input {
 	margin: 0 3.030303%;
 }
 
+#address-tooltip {
+	width: 55%;
+	float: right;
+	margin: 0 6.030303%;
+}
+
+
 #map-embed {
 	margin-left:10%;
 }
 
-#map-embed iframe {
+#map-embed img {
 	width:60%;
 	margin-left: 3.030303%;
 	border:1px solid #99C337;

@@ -1,13 +1,6 @@
 function initialize() {
-  var myOptions = {
-    zoom: 2,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-	disableDefaultUI: true
-  };
-  var map = new google.maps.Map(document.getElementById('map_canvas'),myOptions),
-	geocoder = new google.maps.Geocoder()
 
-	setMap(map);
+	var geocoder = new google.maps.Geocoder()
 
   // Try HTML5 geolocation
   if(navigator.geolocation) {
@@ -24,10 +17,14 @@ function initialize() {
 				}
 			});
 		}, 
-		function() {
-		});
-	} 
-	yourLocation.map(map);
+		function(error) {
+			console.log(error)
+		},
+		{maximumAge: 0, enableHighAccuracy: true }
+		);
+	} else {
+		
+	}
 	yourLocation.geocoder( geocoder );
 }
 

@@ -33,12 +33,10 @@ function openStateRep(args) {
 	newRep.title = 'State '+title
 	newRep.office = [level,title,'for',args.state.toUpperCase(),dist,args.roles[0].district].join(' ')
 	newRep.district = args.state.toUpperCase()+dist+args.roles[0].district
-
-	
 	return new repModel(newRep)
 }
 
-function congressRep(args) {
+function openCongressRep(args) {
 	if( typeof args == 'undefined' ) return false;
 	var newRep = {}
 	
