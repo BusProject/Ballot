@@ -4,4 +4,5 @@ class Choice < ActiveRecord::Base
   validates_uniqueness_of :contest, :scope => :geography
   
   has_many :options
+  
 end
