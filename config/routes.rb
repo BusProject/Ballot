@@ -10,6 +10,7 @@ Ballot::Application.routes.draw do
   match '/feedback/save' => 'feedback#update'
   
   match '/lookup' => 'choice#show'
+  match '/fetch' => 'choice#retrieve'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
