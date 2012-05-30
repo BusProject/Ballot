@@ -6,9 +6,7 @@ function locationModel(data) {
 	this.geocoder = ko.observable('')
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ''
-
-	// Representative objects
-	this.reps = ko.observableArray([])
+	this.choices = ko.observableArray([])
 
 	this.round = function(number,decimal) {
 		if( typeof decimal == 'undefined' ) decimal = 2
