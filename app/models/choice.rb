@@ -3,6 +3,7 @@ class Choice < ActiveRecord::Base
   validates_presence_of :contest, :geography
   validates_uniqueness_of :contest, :scope => :geography
   
-  has_many :options
+  has_many :options, :dependent => :destroy
+  
   
 end
