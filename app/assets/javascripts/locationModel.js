@@ -135,38 +135,31 @@ function locationModel(data) {
 	}
 
 	this.getStateReps = function(lat,lng,reps) {
+	this.getBallotChoices = function(lat,lng,array) { // Useful function for 
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(
-			'http://openstates.org/api/v1/legislators/geo/?callback=?',
+			document.location.href+'lookup',
 			{
-				apikey: '8fb5671bbea849e0b8f34d622a93b05a', 
-				long: yourLocation.lng(), 
-				lat: yourLocation.lat()
+				l: yourLocation.lat()+','+yourLocation.lng()
 			},
 			function(data) { 
 				for( var i=0 ; i < data.length; i++) {
-					reps.push( new openStateRep(data[i]) )
+					array.push( Choice(data[i]) )
 				}
-				yourLocation.quicksort()
 			})
 	}
-
-	this.getNatReps = function(lat,lng,reps) {
-		// Doing the openState call, will probably want to build this into something else
-		$.getJSON(
-			'http://services.sunlightlabs.com/api/legislators.allForLatLong.json?jsonp=?',
-			{
-				apikey: '8fb5671bbea849e0b8f34d622a93b05a', 
-				longitude: yourLocation.lng(), 
-				latitude: yourLocation.lat()
-			},
-			function(data) { 
-				for( var i=0 ; i < data.response.legislators.length; i++) {
-					reps.push( new openCongressRep(data.response.legislators[i].legislator) )
-				}
-				yourLocation.quicksort()
-			})
+	var sections = [ 
+		{title: 'Ballot Measures', types: ['Ballot_Statewide'], label: 'ballotMeasures' }, 
+		{title: 'Federal Races', types: ['Federal'], label: 'federalOffices' },
+		{title: 'State Races', types: ['State'], label: 'stateOffices' }
+	]
+	for (var i=0; i < sections.length; i++) {
+		var title = sections[i].title,
+			types = sections[i].types,
+			label = sections[i].label
+		
 	}
+	
 }
 
 
