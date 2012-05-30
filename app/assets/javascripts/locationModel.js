@@ -8,27 +8,25 @@ function locationModel(data) {
 	this.geocoded.address = ''
 	this.choices = ko.observableArray([])
 
-	this.round = function(number,decimal) {
+	this.round = function(number,decimal) { // Useful 
 		if( typeof decimal == 'undefined' ) decimal = 2
 		return Math.round(number*Math.pow(10,decimal))/Math.pow(10,decimal)
 	}
 
-	// Have noticed the Google lat/long variables have shifted.
-	// These comptued variables are meant to always accurartely the correct lat / longs
-	this.latlng.filtered = ko.computed( function() {
+	this.latlng.filtered = ko.computed( function() { // Have noticed the Google lat/long variables have shifted. These comptued variables are meant to always accurartely the correct lat / longs 
 		var latlng = []; 
 		for( var i in this.latlng() ) { 
 			if( typeof this.latlng()[i] == 'number' ) latlng.push(this.latlng()[i] )
 		}
 		return latlng.sort()
 	},this)
-	this.lat = ko.computed( function() {
+	this.lat = ko.computed( function() { // Lat from LatLng.fitlered 
 		return this.latlng.filtered()[1]
 	},this);
-	this.lng = ko.computed( function() {
+	this.lng = ko.computed( function() { // Lng from LatLng.filtered 
 		return this.latlng.filtered()[0]
 	},this);
-	this.geolocated = ko.computed( function() {
+	this.geolocated = ko.computed( function() { // TRUE when lat/lng are set
 		return typeof this.lat() == 'number' && typeof this.lng() == 'number'
 	}, this)
 
