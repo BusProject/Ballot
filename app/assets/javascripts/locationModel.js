@@ -95,7 +95,7 @@ function locationModel(data) {
 		}
 	}, this).extend({ throttle: 250 })
 
-	this.map = ko.computed( function() {
+	this.map = ko.computed( function() { // Used for confirming map location
 		var latlng = this.latlng(),
 			geolocated = this.geolocated()
 			zoom = geolocated ? '13' : '3',
@@ -105,36 +105,18 @@ function locationModel(data) {
 		return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=450x375&sensor=true'+marker
 	}, this)
 
-	this.grabreps = ko.computed( function() {
+	this.grabChoices = ko.computed( function() { // Retrieve choices
 		var lat = this.lat(),
 			lng = this.lng(),
-			reps = this.reps,
+			choices = this.choices,
 			geolocated = this.geolocated()
 
-		if( geolocated && reps().length == 0 ) {
-			//this.getMyReps(lat,lng,reps)
+		if( geolocated && choices().length == 0 ) {
+			this.getBallotChoices(lat,lng,choices)
 		}
 
 	}, this)
 
-	this.getStateReps = function(lat,lng,reps) {
-		// Doing the openState call, will probably want to build this into something else
-		$.getJSON(
-			'http://openstates.org/api/v1/legislators/geo/?callback=?',
-			{
-				apikey: '8fb5671bbea849e0b8f34d622a93b05a', 
-				long: yourLocation.lng(), 
-				lat: yourLocation.lat()
-			},
-			function(data) { 
-				for( var i=0 ; i < data.length; i++) {
-					reps.push( new openStateRep(data[i]) )
-				}
-				yourLocation.quicksort()
-			})
-	}
-
-	this.getStateReps = function(lat,lng,reps) {
 	this.getBallotChoices = function(lat,lng,array) { // Useful function for 
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(
@@ -148,17 +130,14 @@ function locationModel(data) {
 				}
 			})
 	}
-	var sections = [ 
-		{title: 'Ballot Measures', types: ['Ballot_Statewide'], label: 'ballotMeasures' }, 
-		{title: 'Federal Races', types: ['Federal'], label: 'federalOffices' },
-		{title: 'State Races', types: ['State'], label: 'stateOffices' }
-	]
-	for (var i=0; i < sections.length; i++) {
-		var title = sections[i].title,
-			types = sections[i].types,
-			label = sections[i].label
-		
-	}
+
+	this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures',this)
+	this.federalOffices = Grouping(['Federal'],'Federal Races',this)
+	this.stateOffices = Grouping(['State'],'State Races',this)
+	this.localOffices = Grouping(['Local'],'Local Races',this)
+
+
+	
 	
 }
 
