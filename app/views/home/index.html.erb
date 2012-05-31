@@ -4,13 +4,12 @@
 		<div id="tagline">GET A SNEAK PEEK AT YOUR BALLOT FOR THE UPCOMING ELECTION</div> <!-- tagline -->			
 		</div> <!-- header -->
 		
-	<div id="instructions-box">
+	<div id="instructions-box" data-bind="css: { top: top() < 50 }" >
 		<div id="instructions">
-		<ul>
-			<li><a href="#1">1. Find Your Ballot</a></li>
-			<li><a href="#2">2. Read Your Ballot</a></li>
-			<li><a href="#3">3. Share Your Ballot</a></li>
+		<ul data-bind="foreach: menuItems">
+			<li><a data-bind="css: { active: false }, text: ($index()+1)+' '+$data.name, attr: {href: $data.id }"></a></li>
 		</ul>
+		<%=  render 'devise/account' %>
 		</div><!-- instructions -->
 	</div><!-- instructions-box -->
 	
@@ -44,75 +43,30 @@
 				</div> <!-- map embed -->
 
 			</div><!-- map -->
-			
-				
-			
-			
 	
 		</div><!-- find-ballot -->
 	
-	
-	
-	
-	
-	
-		<div role="read-ballot" class="ballot-section">
-			<h1 class="sectionheading"> <span class="stars">&#9733; &#9733; &#9733;</span> <a name="2">Here's Your Ballot</a> <span class="stars">&#9733; &#9733; &#9733;</span></h1>
-			<div class="ballot-category clearfix" role="federal races">
-				<h2 class="category-heading">Federal Races</h2>
-				<div class="race-menu">
-					<ul>
-						<li>President</li>
-						<li>Senate</li>
-						<li>Congress</li>
-					</ul>
-				</div><!-- race-menu -->
-				<div class="candidates">
-					<div class="candidate-row">
-						<img class="candidate-photo">
-						<img class="candidate-photo">
-						<span class="candidate-info">Barack Obama and Joe Biden</span>
-					</div><!-- candidate-row -->
-				</div><!-- candidates-->
-			</div><!-- ballot-category -->
-			
-			<div class="ballot-category clearfix" role="ballot measures">
-				<h2 class="category-heading ballot-measure">Ballot Measures</h2>
-				<div class="race-menu ballot-measure-box">
-					<ul>
-						<li>President</li>
-						<li>Senate</li>
-						<li>Congress</li>
-					</ul>
-				</div><!-- race-menu -->
-				<div class="ballot-measure-expanded">
-					<div class="ballot-measure-row">
-							<div class="ballot-measure-explanation">
-							Measure 66 would Etiam porta sem malesuada magna mollis eui mod. Sed posuere consectetur est at lobortis.
-							</div><!-- ballot-measure-explanation -->
-							<div class="yes-no">
-								<h1 class="yes-no">YES ON MEASURE 66</h1>
-								<p>A yes vote on Measure 66 means Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-								<input type="text" class="comment" />
-							</div><!-- yes-no -->
-							<div class="yes-no">
-								<h1 class="yes-no">NO ON MEASURE 66</h1>
-								<p>A no vote on Measure 66 means Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-								<input type="textarea" class="comment" />
+		
+		<div id="read-ballot" class="ballot-section" data-bind="visible: choices.notEmpty()">
+			<h1 class="sectionheading"> <span class="stars">&#9733; &#9733; &#9733;</span> <a name="ballot">Here's Your Ballot</a> <span class="stars">&#9733; &#9733; &#9733;</span></h1>
 
-							</div><!-- yes-no -->
-							
-					</div><!-- ballot-measure-row -->
-				</div><!-- ballot-measure-expanded-->
-			</div><!-- ballot-category -->
-		
-		
-		
-		
+
+			<!-- ko foreach: [ballotMeasures, federalOffices,stateOffices,localOffices] -->
+				<div data-bind="visible: $data.visible, attr: {'class' : $data.class }">
+					<h2 class="category-heading" data-bind="text: $data.title"></h2>
+					<div class="race-menu">
+						<ul data-bind="foreach: $data.contests">
+							<li data-bind="text: $data.contest, css: { 'selected': $parent.selected() == $data }">
+						</ul>
+					</div><!-- race-menu -->
+					<div class="candidates" data-bind="template: { name: 'choice', foreach: $data.contests }"></div><!-- candidates-->
+				</div>
+			<!-- /ko -->
+
 		
 		</div><!-- read-ballot -->
 
-		<div role="share-ballot" class="ballot-section">
+		<div id="share-ballot" class="ballot-section" data-bind="visible: false">
 			<h1 class="sectionheading"> <span class="stars">&#9733; &#9733; &#9733;</span> <a name="3">Share Your Ballot</a> <span class="stars">&#9733; &#9733; &#9733;</span></h1>
 		</div><!-- share-ballot -->
 	
@@ -125,3 +79,19 @@
 <div id="footer">
 <img id="ballot-box" src="<%=asset_path 'ballotbox.png' %>">
 </div><!-- footer -->
+
+<script id="choice" type="text/html">
+	<div class="row" data-bind="visible: $parent.selected() == $data">
+		<div class="explanation" data-bind="text: $data.description"></div>
+		<div data-bind="foreach: $data.options">
+			<div class="option">
+				<h1 class="yes-no" data-bind="text: $data.name"></h1>
+				<img data-bind="src: $data.photo">
+				<p data-bind="text: $data.blurb"></p>
+				<div class="feedback" data-bind="visible: $parent.commentable">
+					<input type="text" class="comment" />
+				</div>
+			</div>
+		</div>
+	</div>
+</script>

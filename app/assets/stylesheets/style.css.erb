@@ -323,71 +323,44 @@ button {
 	padding:4%;
 }
 
-
-	/******** Candidates ********/
-	.candidates {
-		background-color:#C2DC84;
+	/******** Generic Choice ********/
+	.row {
 		color:white;
 		width: 59%;
 		float:left;
-		margin:5% 3.030303%;
+		margin: 2.5% 3.030303%;
 		padding: 2%;
 	}
-
-	.candidate-photo {
-		float:left;
-		margin-right:4%;
-		max-width: 16.6666667%;
-	}
-
-	.candidate-info {
-		float:right;
-		color:gray;
-		max-width:64%;
-	}
-
-	/******** Ballot Measures ********/
-	.ballot-measure {
-		color:#D37A3C;
-	}
-	
-	.ballot-measure-expanded {
-		background-color:#e4bc9e;
-		color:white;
-		width: 59%;
-		float:left;
-		margin:5% 3.030303%;
-		padding: 2%;
-	}
-	
-	.ballot-measure-box li {
-		background-color:#e4bc9e;
-	}
-
-	.ballot-measure-explanation {
+	.explanation {
 		width:90%;
 		padding:3%;
-		background-color: #D37A3C; 
 		color:white;
+		margin: 0 0 10px;
 	}
-	
-	.yes-no {
+	.option {
 		width:45%;
 		margin-right:5%;
 		float:left;
 	}
-	
-	.yes-no p {
+	.option img {
+		float:left;
+		margin: 0 4% 4% 0;
+		max-width: 36.6666667%;
+	}
+	.option p {
 		color:white;
 		text-align:left;
 		}
 	
-	.yes-no h1 {
+	.option h1 {
 		font-family:'Rokkitt', serif;
 		color:white;
-		font-size:1em;
+		font-size:1.2em;
+		line-height: 1.4em;
 		float:none;
 		width:auto;
+		text-align: left;
+		font-weight: bold;
 		}
 	
 	.comment, .comment:focus {
@@ -397,5 +370,30 @@ button {
 		color: gray;
 		padding:0 5px;
 	}
+
+	.race-menu ul li {
+		cursor: pointer;
+		opacity: 0.5;
+	}
+	.race-menu ul li:hover {
+		opacity: 0.2;
+	}
+	.race-menu ul li.selected, .race-menu ul li.selected:hover { opacity: 1 }
+	
+	/******** Candidates ********/
+	.candidates .row { background-color:#C2DC84; }
+	.candidates .row .explanation { background-color: #99C337 }
+
+	.candidate-info {
+		float:right;
+		color:gray;
+		max-width:64%;
+	}
+
+	/******** Ballot Measures ********/
+	.ballot-measures { color:#D37A3C }
+	.ballot-measures .row { background-color:#e4bc9e }
+	.ballot-measures li { background-color:#e4bc9e }
+	.ballot-measures .row .explanation { background-color: #D37A3C }
 
 	

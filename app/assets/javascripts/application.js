@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require knockout-latest.debug
+//= require models
 //= require_tree .
 
 window.onload=function() {

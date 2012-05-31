@@ -51,7 +51,6 @@ function Feedback(data) {
 	if( typeof data == 'undefined' ) throw "No Data for the Option - can't do it"
 
 	return new ballotFeedback(data) 
-	
 	function ballotFeedback(data) {
 		return data
 	}
@@ -80,5 +79,6 @@ function Grouping(keys,title,locationModel) {
 	grouping.class += ' ballot-category clearfix'
 
 	return grouping
+}
 
 }
