@@ -3,9 +3,9 @@
 		<%- if current_user.nil? %>
 			<%= link_to "Sign in with Facebook", omniauth_authorize_path('user', :facebook) %><br />
 		<% else %>
-			You are 
-			<%= current_user.email %>
-			<%= link_to 'Sing out', destroy_user_session_path %>
+			<%= link_to image_tag(current_user.image)+'Hey '+current_user.first_name, current_user.url, :target => '_blank' %>
+
+			<%= link_to 'Sign out', destroy_user_session_path %>
 		<% end -%>
 	</div>
 	
