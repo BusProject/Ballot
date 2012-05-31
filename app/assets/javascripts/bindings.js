@@ -1,4 +1,3 @@
-$(document).on({
 $(document).on({ // binding clearing a location
 	click: function(e) {
 		var $this = $(this),
@@ -14,12 +13,17 @@ $(document).on({ // binding clearing a location
 		var ctx = ko.contextFor(this),
 			$parent = ctx.$parent,
 			$data = ctx.$data
+		$parent.current($data)
 	}
 },'.race-menu ul li')
 .on('click','#instructions ul li a',function(e){
 	e.preventDefault()
 	$this = $(this)
 	$(document).scrollTop( $($this.attr('href')).position().top )
+})
+.scroll(function(e){ // Binding the scroll
+		$this = $(this)
+		yourLocation.top( $this.scrollTop() )
 })
 
 ko.bindingHandlers.src = {

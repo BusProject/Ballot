@@ -7,6 +7,7 @@ function locationModel(data) {
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ''
 	this.choices = ko.observableArray([])
+	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
 
 	this.round = function(number,decimal) { // Useful 
 		if( typeof decimal == 'undefined' ) decimal = 2
@@ -120,7 +121,7 @@ function locationModel(data) {
 	this.getBallotChoices = function(lat,lng,array) { // Useful function for 
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(
-			document.location.href+'lookup',
+			document.location.href.split('#')[0]+'lookup',
 			{
 				l: yourLocation.lat()+','+yourLocation.lng()
 			},
@@ -137,8 +138,15 @@ function locationModel(data) {
 	this.localOffices = Grouping(['Local'],'Local Races',this)
 
 
-	
-	
+	// Style elements
+	this.top = ko.observable(0)
+
+	this.menuItems = [
+		MenuItem('#find-ballot','Find Your Ballot',true,this),
+		MenuItem('#read-ballot','Read Your Ballot',true,this),
+		//MenuItem('#find-ballot','Find Your Ballot'),
+		
+	]
 }
 
 

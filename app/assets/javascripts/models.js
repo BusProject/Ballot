@@ -81,4 +81,8 @@ function Grouping(keys,title,locationModel) {
 	return grouping
 }
 
+function MenuItem(id,name,disabled,locationModel) {
+	var menuItem = { id: id, name: name }
+
+	return menuItem
 }
