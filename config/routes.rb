@@ -6,8 +6,8 @@ Ballot::Application.routes.draw do
 
   match '/auth/:provider/callback' => 'authentications#create'
   
-  match '/feedback/show' => 'feedback#show'
   match '/feedback/save' => 'feedback#update'
+  match '/feedback/:id' => 'feedback#delete', :via => :post
   
   match '/lookup' => 'choice#show'
   match '/fetch' => 'choice#retrieve'

@@ -55,6 +55,16 @@ $(document).on({ // binding clearing a location
 		})
 	}
 })
+.on('click','.feedback .remove',function(e) {
+	var $ctx = ko.contextFor(this),
+		$data = $ctx.$data
+	$.post(
+		'http://localhost:3000/feedback/'+$data.id,
+		function(response){
+			$ctx.$parent.feedback.remove( $data)
+		}
+	)
+})
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
 		yourLocation.top( $this.scrollTop() )

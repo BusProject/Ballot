@@ -29,5 +29,9 @@ class FeedbackController < ApplicationController
       render :json => @json, :callback => params['callback']
   end
 
+  def delete
+    feedback = User.find(current_user).feedback.find(params[:id])
+    render :json => feedback.delete, :callback  => params['callback']
+  end
 
 end
