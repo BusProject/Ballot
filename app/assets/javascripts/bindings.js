@@ -90,6 +90,7 @@ ko.bindingHandlers.readmore = {
 		var all = allBindingsAccessor(),
 			ctx = ko.dataFor(element)
 		
+		if( all.text == null ) return false
 		if( all.text.length > 300 && ctx.readmore() ) {
 			all.html = all.text.slice(0, all.text.slice(290).search(' ')+290 )+' ... <span class="more link">Read More</span>'
 		}
