@@ -23,8 +23,8 @@ $(document).on({ // binding clearing a location
 })
 .on('click','.more',function(e){
 	e.preventDefault()
-	ctx = ko.dataFor(this)
-	ctx.readmore(false)
+	ctx = ko.contextFor(this)
+	ctx.$parent.readmore(true)
 	$(this).hide()
 })
 .on('click','.submitFeedback',function(e){
@@ -88,19 +88,28 @@ ko.bindingHandlers.elastic = {
 ko.bindingHandlers.readmore = {
 	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		var all = allBindingsAccessor(),
-			ctx = ko.dataFor(element)
+			ctx = ko.contextFor(element),
+			$parent = ctx.$parent
 		
 		if( all.text == null ) return false
-		if( all.text.length > 300 && ctx.readmore() ) {
+		if( all.text.length > 300 ) {
 			all.html = all.text.slice(0, all.text.slice(290).search(' ')+290 )+' ... <span class="more link">Read More</span>'
+			if( typeof $parent.readmore == 'undefined' ) $parent.readmore = ko.observable(false)
 		}
+		if( typeof $parent.readmore != 'undefined' ) $(element).addClass('readMored')
 	},
 	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
 		var all = allBindingsAccessor(),
-			ctx = ko.dataFor(element)
+			ctx = ko.contextFor(element)
+			$parent = ctx.$parent
 
-		if( !ctx.readmore() ) {
+		if( typeof $parent.readmore != 'undefined'  && $parent.readmore() ) {
 			all.text = all.text
+			var height = $(element).height()
+			if( height > $parent.readmore() ) {
+				$parent.readmore(height)
+			}
+			$(element).height($parent.readmore() )
 		}
 	}
 };

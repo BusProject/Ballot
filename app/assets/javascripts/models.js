@@ -34,7 +34,6 @@ function Option(data,args) {
 		this.name = data.name
 		this.blurb = data.blurb
 		this.blurb
-		this.readmore = ko.observable(true)
 		this.id = data.id
 		this.photo = data.photo
 		this.feedback = ko.observableArray([])
