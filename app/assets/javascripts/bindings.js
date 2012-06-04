@@ -40,3 +40,21 @@ ko.bindingHandlers.src = {
 		$(element).attr('src',src).error( function() { $(this).remove().parent().addClass('no-photo') });
 	}
 };
+ko.bindingHandlers.readmore = {
+	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		var all = allBindingsAccessor(),
+			ctx = ko.dataFor(element)
+		
+		if( all.text.length > 300 && ctx.readmore() ) {
+			all.html = all.text.slice(0, all.text.slice(290).search(' ')+290 )+' ... <span class="more link">Read More</span>'
+		}
+	},
+	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
+		var all = allBindingsAccessor(),
+			ctx = ko.dataFor(element)
+
+		if( !ctx.readmore() ) {
+			all.text = all.text
+		}
+	}
+};

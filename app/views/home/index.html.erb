@@ -88,8 +88,8 @@
 				<h1 class="yes-no" data-bind="text: $data.name"></h1>
 				<img data-bind="src: $data.photo">
 				<div class="blurb" data-bind="text: $data.blurb, readmore: $data.readmore()"></div>
-				<div class="feedback" data-bind="visible: $parent.commentable, with: $data.yourComment">
-					<textarea type="text" class="comment" placeholder="What do you think?" data-bind="value: $data.comment,elastic: true" /></textarea>
+				<div class="feedback" data-bind="visible: $parent.commentable ">
+					<textarea type="text" class="comment" placeholder="What do you think?" data-bind="elastic: true" /></textarea>
 					<button data-bind="text: $data.actionButton">Share</button>
 				</div>
 			</div>
