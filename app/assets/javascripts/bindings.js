@@ -27,6 +27,34 @@ $(document).on({ // binding clearing a location
 	ctx.readmore(false)
 	$(this).hide()
 })
+.on('click','.submitFeedback',function(e){
+	if( current_user.id == 'unauthenticated' ) {
+		document.location = $('.account a').attr('href')
+	} else {
+		var $ctx = ko.contextFor(this),
+			$comment = $(this).prev('textarea')
+			option = $ctx.$data,
+			id = option.id,
+			comment = $comment.val()
+		
+		if( comment.length > 1 ) $.ajax({
+			url: document.location.href.split('#')[0]+'feedback/save',
+			data: { feedback: [ 
+					{
+						option_id: parseInt(id),
+						comment: comment,
+					}
+				]
+			},
+			success: function(response) {
+				if( response.success ) {
+					option.feedback.push( Feedback( { comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj } ) )
+					$comment.val('')
+				}
+			}
+		})
+	}
+})
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
 		yourLocation.top( $this.scrollTop() )

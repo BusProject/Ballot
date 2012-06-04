@@ -91,6 +91,9 @@
 				<div class="feedback" data-bind="visible: $parent.commentable ">
 					<textarea type="text" class="comment" placeholder="What do you think?" data-bind="elastic: true" /></textarea>
 					<button data-bind="text: $data.actionButton">Share</button>
+				<div class="yourFeedback" data-bind="visible: $parent.commentable ">
+					<textarea type="text" class="comment" data-bind="elastic: true, attr: {disabled: current_user.id == 'unauthenticated', placeholder: current_user.id == 'unauthenticated' ? 'Log in to comment' : 'What do you think?'}" /></textarea>
+					<button class="submitFeedback" data-bind="text: current_user.id == 'unauthenticated' ? 'Log In' : 'Share' "></button>
 				</div>
 			</div>
 		</div>

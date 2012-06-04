@@ -1,25 +1,32 @@
 class FeedbackController < ApplicationController
 
   def update
-      feedback = params['feedback'] || [] # The feedback as posted in seralize fashion
-      @json = []
-      
+      feedbacks = params['feedback'] || [] # The feedback as posted in seralize fashion
+      errors = []
+      successes = []
+      success = true
       if user_signed_in?
-        feedback.each do |f|
-          feedback = Feedback.find_or_create_by_option_id_and_user_id(f['option_id'],f['user_id'])
-          feedback.comment = f['comment']
-          feedback.support = f['support']
+        feedbacks.each do |f|
+          feedback = Option.find(f[1]['option_id']).feedback.new(
+            :user => current_user,
+            :comment => f[1]['comment'],
+            :support => f[1]['support'] 
+          )
           if feedback.save
-            @json.push({:obj => feedback.id, :success => true })
+            sucess = success && true
+            successes.push({:obj => feedback.id })
           else
-            @json.push({:obj => feedback.id, :success => false, :error => feedback.errors })
+            sucess = success && false
+            errors.push({:obj => feedback.id, :success => false, :error => feedback.errors })
           end
+          @json = {'success' => success, 'errors' => errors, 'successes' => successes }
         end
+        @json = {'success'=>false, 'message'=>'Are you trying to tell me something user #'+current_user.id.to_s+'?'} if feedbacks.empty?
       else
         @json = {'success'=>false, 'message'=>'You must sign in to save feedback'}
       end
       
-      render :json => @json.to_json, :callback => params['callback']
+      render :json => @json, :callback => params['callback']
   end
 
 
