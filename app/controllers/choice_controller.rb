@@ -16,7 +16,20 @@ class ChoiceController < ApplicationController
         results = choices
       end
 
-      query = results.to_json(:include => [:options => {:include => :feedback}] )
+      query = results.to_json( 
+        :include => [ 
+          :options => { 
+            :include => [ 
+              :feedback => {
+                :include => [ 
+                  :user => { 
+                    :only => [ :url, :first_name, :last_name, :url, :location, :image ] 
+                    } 
+                  ] 
+                } 
+              ] 
+            }
+          ])
 
     else
       query = {'error' => true, 'message' => 'Nothing useful was posted'}.to_json

@@ -88,13 +88,17 @@
 				<h1 class="yes-no" data-bind="text: $data.name"></h1>
 				<img data-bind="src: $data.photo">
 				<div class="blurb" data-bind="text: $data.blurb, readmore: $data.readmore()"></div>
-				<div class="feedback" data-bind="visible: $parent.commentable ">
-					<textarea type="text" class="comment" placeholder="What do you think?" data-bind="elastic: true" /></textarea>
-					<button data-bind="text: $data.actionButton">Share</button>
 				<div class="yourFeedback" data-bind="visible: $parent.commentable ">
 					<textarea type="text" class="comment" data-bind="elastic: true, attr: {disabled: current_user.id == 'unauthenticated', placeholder: current_user.id == 'unauthenticated' ? 'Log in to comment' : 'What do you think?'}" /></textarea>
 					<button class="submitFeedback" data-bind="text: current_user.id == 'unauthenticated' ? 'Log In' : 'Share' "></button>
 				</div>
+				<ul data-bind="visible: $parent.commentable, foreach: feedback" class="feedback">
+					<li>
+						<img data-bind="src: $data.image">
+						<a data-bind="text: $data.name, attr: {href: $data.url }"></a><span class="helper">said</span><span class="remove link" data-bind="visible: $data.yourFeedback">x</span>
+						<p data-bind="text: $data.comment"></p>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>

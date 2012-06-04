@@ -45,19 +45,6 @@ function Option(data,args) {
 			};
 		}
 
-		this.yourComment = ko.computed( function() {
-			var yourFeedback = this.feedback().filter( function(feedback) { 
-				return feedback.yourFeedback
-			})
-			if( yourFeedback.length == 0 ) {
-				this.feedback.push( Feedback({option_id: this.id, user_id: current_user.id }) )
-			}
-			yourFeedback = this.feedback().filter( function(feedback) { 
-				return feedback.yourFeedback
-			})
-			return yourFeedback[0] 
-		}, this)
-
 		return this;
 	}
 }
@@ -69,11 +56,13 @@ function Feedback(data) {
 	function ballotFeedback(data) {
 		this.option_id = data.option_id
 		this.user_id = data.user_id
-		this.support = ko.observable(data.support)
-		this.actionButton = 'Share'
-		this.comment = ko.observable(data.comment)
+		this.id = data.id
+		this.support = data.support
+		this.comment = data.comment
 		this.yourFeedback = data.user_id == current_user.id
-		
+		this.image = data.user.image
+		this.url = data.user.url
+		this.name = this.yourFeedback ? 'You' : data.user.first_name
 
 		return this
 	}
