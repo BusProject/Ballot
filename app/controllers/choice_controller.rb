@@ -39,7 +39,7 @@ class ChoiceController < ApplicationController
   end
   
   def retrieve
-    if user_signed_in? && current_user.id == 1
+    if user_signed_in? && current_user.admin
     
       choice_sheet = 'https://spreadsheets.google.com/feeds/list/0AnnQYxO_nUTWdDU2RHFZS3BMTDAzZmFNTXhGRFBReWc/1/public/basic'
       option_sheet = 'https://spreadsheets.google.com/feeds/list/0AnnQYxO_nUTWdDU2RHFZS3BMTDAzZmFNTXhGRFBReWc/2/public/basic'
