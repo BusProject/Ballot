@@ -349,11 +349,12 @@ button {
 		margin: 0 4% 4% 0;
 		max-width: 36.6666667%;
 	}
-	.option p {
+	.option div.blurb {
 		color:white;
 		text-align:left;
+		margin: 0 0 10px;
 		}
-	
+
 	.option h1 {
 		font-family:'Rokkitt', serif;
 		color:white;
@@ -366,11 +367,40 @@ button {
 		}
 	
 	.comment, .comment:focus {
-		width:100%;
+		width: 100%;
 		font-size:1em;
 		border:none;
 		color: gray;
 		padding:0 5px;
+		resize: none;
+		border: none;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+	}
+	.feedback {
+		border: 2px solid #999;
+		background: #efefef;
+		text-align: right;
+		margin: -2px 0 0;
+	}
+	.feedback button {
+		font-size: 14px;
+		cursor: pointer;
+		width: 40%;
+		margin: 0 4px 4px 0;
+		background: #D37A3C;
+	}
+	.feedback button:hover {
+		opacity: 0.6;
+	}
+	
+
+	.link {
+		cursor: pointer;
+		font-size: 90%;
+	}
+	.link:hover {
+		text-decoration: underline;
 	}
 
 	.race-menu ul li {
@@ -391,11 +421,12 @@ button {
 		color:gray;
 		max-width:64%;
 	}
+	.candidates .link {color: #99C337 }
 
 	/******** Ballot Measures ********/
 	.ballot-measures { color:#D37A3C }
 	.ballot-measures .row { background-color:#e4bc9e }
 	.ballot-measures li { background-color:#e4bc9e }
 	.ballot-measures .row .explanation { background-color: #D37A3C }
-
+	.ballot-measures .link { color: #D37A3C  }
 	

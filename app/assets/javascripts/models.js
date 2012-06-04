@@ -33,6 +33,8 @@ function Option(data,args) {
 	function ballotOption(data) {
 		this.name = data.name
 		this.blurb = data.blurb
+		this.blurb
+		this.readmore = ko.observable(true)
 		this.id = data.id
 		this.photo = data.photo
 		this.feedback = ko.observableArray([])
@@ -43,6 +45,19 @@ function Option(data,args) {
 			};
 		}
 
+		this.yourComment = ko.computed( function() {
+			var yourFeedback = this.feedback().filter( function(feedback) { 
+				return feedback.yourFeedback
+			})
+			if( yourFeedback.length == 0 ) {
+				this.feedback.push( Feedback({option_id: this.id, user_id: current_user.id }) )
+			}
+			yourFeedback = this.feedback().filter( function(feedback) { 
+				return feedback.yourFeedback
+			})
+			return yourFeedback[0] 
+		}, this)
+
 		return this;
 	}
 }
@@ -52,7 +67,15 @@ function Feedback(data) {
 
 	return new ballotFeedback(data) 
 	function ballotFeedback(data) {
-		return data
+		this.option_id = data.option_id
+		this.user_id = data.user_id
+		this.support = ko.observable(data.support)
+		this.actionButton = 'Share'
+		this.comment = ko.observable(data.comment)
+		this.yourFeedback = data.user_id == current_user.id
+		
+
+		return this
 	}
 }
 

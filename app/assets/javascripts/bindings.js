@@ -21,6 +21,12 @@ $(document).on({ // binding clearing a location
 	$this = $(this)
 	$(document).scrollTop( $($this.attr('href')).position().top )
 })
+.on('click','.more',function(e){
+	e.preventDefault()
+	ctx = ko.dataFor(this)
+	ctx.readmore(false)
+	$(this).hide()
+})
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
 		yourLocation.top( $this.scrollTop() )

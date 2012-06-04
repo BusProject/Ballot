@@ -81,7 +81,7 @@ function locationModel(data) {
 			geocoder = this.geocoder(),
 			googleLocation = this.googleLocation,
 			latlng = this.latlng,
-			reps = this.reps,
+			choices = this.choices,
 			geocoded = this.geocoded()
 
 		if( address.length > 0 && !geocoded && address != this.geocoded.address ) { // If address is located and not previously geocoded
@@ -90,7 +90,7 @@ function locationModel(data) {
 					var first = results[0].geometry.location
 					googleLocation(results[0])
 					latlng( first )
-					reps([])
+					choices([])
 				}
 			});
 		}
