@@ -67,7 +67,14 @@ ko.bindingHandlers.src = {
 		if( src == null ) $(element).remove()
 		$(element).attr('src',src).error( function() { $(this).remove().parent().addClass('no-photo') });
 	}
-};
+}
+
+ko.bindingHandlers.elastic = {
+	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		$(element).elastic()
+	}
+}
+
 ko.bindingHandlers.readmore = {
 	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		var all = allBindingsAccessor(),
