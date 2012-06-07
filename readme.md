@@ -18,7 +18,7 @@ Ah a wise guy eh? Alright, here's how you get this baby started on your machine:
 
 3. Update the installation and the data base `bundle install` then `rake db:migrate` to update your bundle and database.
 
-4. Start the rails server `rails s` this will start up rails but you wont have anything in your DB. BUT to download the latest data from [our spreadsheets](https://docs.google.com/spreadsheet/pub?key=0AnnQYxO_nUTWdDU2RHFZS3BMTDAzZmFNTXhGRFBReWc&output=html) so you'll need to...
+4. Start the rails server `rails s` this will start up rails but you wont have anything in your DB. SO to download the latest data from [our spreadsheets](https://docs.google.com/spreadsheet/pub?key=0AnnQYxO_nUTWdDU2RHFZS3BMTDAzZmFNTXhGRFBReWc&output=html) so you'll need to...
 
 5. Create a new user account. [Navigate to new user sign up](http://localhost:3000/users/sign_up) and create the first account.
 
