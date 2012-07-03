@@ -156,6 +156,7 @@ GEM
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rmagick (2.13.1)
     rspec (2.9.0)
       rspec-core (~> 2.9.0)
       rspec-expectations (~> 2.9.0)
@@ -224,6 +225,7 @@ DEPENDENCIES
   pg
   rails (= 3.2.3)
   rest-client
+  rmagick
   rspec-rails
   sass-rails
   sqlite3

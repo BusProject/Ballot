@@ -12,6 +12,8 @@ Ballot::Application.routes.draw do
   match '/lookup' => 'choice#show'
   match '/fetch' => 'choice#retrieve'
 
+  match '/image' => 'draw#make'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

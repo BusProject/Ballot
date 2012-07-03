@@ -19,6 +19,8 @@ gem 'devise', '~> 2.0.0'
 gem "omniauth"
 gem "omniauth-facebook"
 
+gem 'rmagick'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
