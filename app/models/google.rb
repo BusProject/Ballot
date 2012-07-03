@@ -7,6 +7,7 @@ class Google
       key = keys[i]
       start_chop = content.index(key+': ')+key.length+2
       finish_chop = keys[i+1].nil? ? content.length : content.index(', '+keys[i+1])
+      finish_chop = content.length if finish_chop.nil?
 
       value = content.slice(start_chop,finish_chop - start_chop)
       key = 'contest_type' if key == 'contesttype'
