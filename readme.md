@@ -22,9 +22,9 @@ Ah a wise guy eh? Alright, here's how you get this baby started on your machine:
 
 5. Create a new user account. [Navigate to new user sign up](http://localhost:3000/users/sign_up) and create the first account.
 
-6. Download the latest by [visiting this page](http://localhost:3000/fetch). 
+6. Download the latest by [visiting this page](http://localhost:3000/fetch).
 
-7. Now this only works if you're signed in AND you're an admin OR you're the first user. If you're not the first user, you'll need to upgrade yourself using the rails console. Get back to that installed directory (see step 2) and type `rails c` this will start the rails console.
+7. Now this only works if you're in development environment OR signed in AND you're an admin OR you're the first user. If you're not the first user, you'll need to upgrade yourself using the rails console. Get back to that installed directory (see step 2) and type `rails c` this will start the rails console.
 
 8. Then you'll need to find the user you want to upgrade and flip them to an admin, just do `User.find_by_email('coolguy@aol.az').update_attributes(:admin => true)` and it should work
 
