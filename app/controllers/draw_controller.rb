@@ -10,13 +10,14 @@ class DrawController < ApplicationController
     # file_path = file_name
     # File.delete file_path if File.exists? file_path
     
+    msg = Magick::Draw.new
+    msg.font_size(24).font('lib/assets/gothic.ttf').fill('white')
+    msg.text(30, 100, params[:message])
+    
     if params[:message] == 'png'
-      img = Magick::Image.read("Done.png").first
+      img = Magick::Image.read("lib/assets/Done.png").first
       thumb = img.scale(0.25)
     
-      msg = Magick::Draw.new
-      msg.font_size(24).font('gothic.ttf').fill('white')
-      msg.text(60, 35, params[:message])
       msg.draw thumb
 
       # For storing the file
@@ -26,26 +27,20 @@ class DrawController < ApplicationController
 
     else
 
-
       anim = Magick::ImageList.new
-      anim.read("lib/assets/portraits/busfed-portraits-bygarrettdownen-03958.jpg")
-      # anim1 =  Magick::ImageList.new("lib/assets/portraits/busfed-portraits-bygarrettdownen-03958.jpg")
-      anim.read("lib/assets/portraits/busfed-portraits-bygarrettdownen-03960.jpg")
-      # anim2 = Magick::ImageList.new("lib/assets/portraits/busfed-portraits-bygarrettdownen-03960.jpg")
-      
-      # anim = anim1.composite_layers(anim2)
-      anim.delay = 10
-      anim.format = 'gif'
-      anim.iterations = 0
-      anim.montage
-      
-      anim.optimize_layers(Magick::CoalesceLayer)
 
+      files = Dir["lib/assets/portraits/*.jpg"]
 
-      
+      files.each do |file|
+        frame =  Magick::ImageList.new(file)
+        frame.scale!(200,100)
+        anim.new_image(200, 100) { self.format = 'gif'; self.background_color = 'red' }
+        anim.last.composite!( frame,0,0, Magick::OverCompositeOp)
+        msg.draw anim.last
+      end
 
+      anim.delay = 5
   end
-
 
     respond_to do |format|
       format.png { render :text =>  thumb.to_blob }
