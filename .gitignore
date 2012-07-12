@@ -7,3 +7,4 @@ tmp/
 .*jhw-*
 public/assets*
 public/public*
+**.env

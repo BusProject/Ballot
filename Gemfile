@@ -13,6 +13,9 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+gem 'foreman'
+
+
 gem 'rest-client'
 
 gem 'devise', '~> 2.0.0'
