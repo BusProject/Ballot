@@ -12,12 +12,12 @@ class DrawController < ApplicationController
     
     msg = Magick::Draw.new
     msg.font_size(24).font('lib/assets/gothic.ttf').fill('white')
-    msg.text(30, 100, params[:message])
     
-    if params[:message] == 'png'
-      img = Magick::Image.read("lib/assets/Done.png").first
+    if params[:format] == 'png'
+      img = Magick::Image.read("lib/assets/done.png").first
       thumb = img.scale(0.25)
-    
+      
+      msg.text(50, 160, params[:message])
       msg.draw thumb
 
       # For storing the file
@@ -36,6 +36,8 @@ class DrawController < ApplicationController
         frame.scale!(200,100)
         anim.new_image(200, 100) { self.format = 'gif'; self.background_color = 'red' }
         anim.last.composite!( frame,0,0, Magick::OverCompositeOp)
+
+        msg.text(30, 100, params[:message])
         msg.draw anim.last
       end
 
