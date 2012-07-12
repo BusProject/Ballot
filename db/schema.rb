@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604220436) do
+ActiveRecord::Schema.define(:version => 20120711200249) do
 
   create_table "choices", :force => true do |t|
     t.string   "contest"
@@ -81,6 +81,9 @@ ActiveRecord::Schema.define(:version => 20120604220436) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "admin",                  :default => false
+    t.string   "authentication_token"
+    t.string   "guide_name"
+    t.string   "base_address"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
