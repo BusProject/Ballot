@@ -1,11 +1,11 @@
 $(document).on({ // binding clearing a location
 	click: function(e) {
+		e.preventDefault();
 		var $this = $(this),
 			location = yourLocation
 		location.latlng('38.7, -95.7')
 		location.geocoded(false)
-		location.address('')
-		$('#address-input').select()
+		location.choices([])
 	}
 },'.cancel')
 .on({ // Binding the click-to-change issue
