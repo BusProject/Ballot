@@ -9,6 +9,8 @@ Ballot::Application.routes.draw do
   match '/feedback/save' => 'feedback#update'
   match '/feedback/:id' => 'feedback#delete', :via => :post
   
+  match '/feedback/:id/:flavor' => 'feedback#rate'
+  
   match '/lookup' => 'choice#show'
   match '/fetch' => 'choice#retrieve'
 

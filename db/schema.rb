@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120711200249) do
+ActiveRecord::Schema.define(:version => 20120718235327) do
 
   create_table "choices", :force => true do |t|
     t.string   "contest"
@@ -26,18 +26,8 @@ ActiveRecord::Schema.define(:version => 20120711200249) do
 
   add_index "choices", ["geography", "contest"], :name => "index_choices_on_geography_and_contest", :unique => true
 
-  create_table "feedback", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "option_id"
-    t.boolean  "support",    :default => false
-    t.boolean  "approved",   :default => true
-    t.text     "comment"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
-  add_index "feedback", ["option_id"], :name => "index_feedback_on_option_id"
-  add_index "feedback", ["user_id"], :name => "index_feedback_on_user_id"
+# Could not dump table "feedback" because of following StandardError
+#   Unknown type '' for column 'choice_id'
 
   create_table "matches", :force => true do |t|
     t.string   "latlng"
@@ -48,14 +38,30 @@ ActiveRecord::Schema.define(:version => 20120711200249) do
 
   add_index "matches", ["latlng"], :name => "index_matches_on_latlng", :unique => true
 
+  create_table "memes", :force => true do |t|
+    t.string   "image"
+    t.text     "quote"
+    t.integer  "feedback_id"
+    t.string   "theme"
+    t.boolean  "anomyous",    :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
   create_table "options", :force => true do |t|
     t.integer  "choice_id"
     t.integer  "position"
     t.string   "photo"
     t.text     "blurb"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "twitter"
+    t.string   "facebook"
+    t.string   "website"
+    t.string   "blurb_source"
+    t.string   "party"
+    t.boolean  "incumbant",    :default => false
   end
 
   add_index "options", ["choice_id"], :name => "index_options_on_choice_id"
@@ -84,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20120711200249) do
     t.string   "authentication_token"
     t.string   "guide_name"
     t.string   "base_address"
+    t.string   "fb"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

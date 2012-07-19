@@ -7,10 +7,11 @@ class FeedbackController < ApplicationController
       success = true
       if user_signed_in?
         feedbacks.each do |f|
-          feedback = Option.find(f[1]['option_id']).feedback.new(
+          option = Option.find(f[1]['option_id'])
+          feedback = option.feedback.new(
             :user => current_user,
             :comment => f[1]['comment'],
-            :support => f[1]['support'] 
+            :choice => option.choice
           )
           if feedback.save
             sucess = success && true
@@ -32,6 +33,56 @@ class FeedbackController < ApplicationController
   def delete
     feedback = User.find(current_user).feedback.find(params[:id])
     render :json => feedback.delete, :callback  => params['callback']
+  end
+
+
+
+  def rate
+
+    feedback = Feedback.find( params[:id] )
+    flag = feedback[ params[:flavor] ]
+
+    if flag.nil?
+      render :json => {:success => false, :message => 'that is not a thing'  }, :callback  => params['callback']
+    else
+    
+      flag = flag.split(',')
+        
+          verb = 'mark as '+params[:flavor]
+          verb = 'flag' if params[:flavor] == 'flag'
+
+          if flag.length == 0
+            msg = ''
+          else
+            noun = flag.length  == 1 ? 'person' : 'people'
+            plural = flag.length == 1 ? 's' : ''
+            msg = ', '+flag.length.to_s+' '+noun+' agree'+plural
+          end
+        
+        
+        
+          if user_signed_in?
+            if current_user.id == feedback.user_id
+              render :json => {:success => false, :message => 'You can\'t '+verb+' your own thing and there isn\'t a UI so you\'re trying to backdoor this - just stop it' }, :callback  => params['callback']
+            else
+              if flag.index( current_user.id.to_s ).nil?
+                flag.push(current_user.id)
+                feedback.flag = flag.join(',')
+
+                if feedback.save
+                  render :json => {:success => true, :message => 'Thanks'+msg }, :callback  => params['callback']
+                else
+                  render :json => {:success => false, :message => 'Something went wrong' }, :callback  => params['callback']
+                end
+
+              else
+                render :json => {:success => false, :message => 'You can\'t '+verb+' something twice' }, :callback  => params['callback']
+              end
+            end
+          else
+            render :json => {:success => false, :message => '<a href="'+omniauth_authorize_path('user', :facebook)+'">You need to sign in</a> to '+verb }, :callback  => params['callback']
+          end
+    end  
   end
 
 end
