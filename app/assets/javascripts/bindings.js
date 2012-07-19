@@ -72,7 +72,31 @@ $(document).on({ // binding clearing a location
 		})
 	}
 })
-.on('click','.feedback .remove',function(e) {
+.on('click','body.not_logged_in .yourFeedback',function(e) {
+	
+	window.location = $('.account a').attr('href')
+})
+.on('click','.yourFeedback .remove',function(e) {
+	var $data = ko.dataFor(this),
+		option = $data.options.filter( function(el) { return el.feedback().indexOf( $data.feedback.you() ) !== -1 } )[0],
+		$this = $(this)
+
+	if( $this.hasClass('edit') ) {
+		$this.parents('.row').find('.pick.'+$data.feedback.you().type).addClass('picked')
+		$this.parents('.row').find('textarea.comment').val( $data.feedback.you().comment )
+	}
+
+	if( $data.feedback.you().id != 'undefined' ) $.post(
+		document.location.href.split('#')[0]+'feedback/'+$data.feedback.you().id,
+		function(response){
+			
+			option.feedback.remove( $data.feedback.you() )
+		}
+	)
+})
+.on('click','.feedback .link',function(e) {
+	e.preventDefault()
+
 	var $ctx = ko.contextFor(this),
 		$data = $ctx.$data
 	$.post(
