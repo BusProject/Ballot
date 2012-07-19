@@ -10,7 +10,10 @@ $(document).on({ // binding clearing a location
 },'.cancel')
 .on('click','.clear',function(e) {
 	yourLocation.address('')
-	$('input.find-ballot').select()
+	$('#enter-address input').select()
+})
+.on('keypress','#enter-address input',function(e) {
+	if( e.keyCode == 13 ) $(this).next('a').click()
 })
 .on({ // Binding the click-to-change issue
 	click: function(e) {
