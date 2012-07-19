@@ -14,12 +14,23 @@ function Choice(data,args) {
 		this.type = data.contest_type
 		this.description = data.description
 		this.commentable = data.commentable
+		this.mode = ko.observable('normal')
+		this.all = ko.observable(false)
 
 		if( typeof data.options != 'undefined' ) {
 			for (var i=0; i < data.options.length; i++) {
 				this.options.push( Option(data.options[i]) )
 			};
 		}
+
+		this.yes = ko.computed( function() { 
+			return this.options.filter( function(el) { return el.type == 'yes' })[0] || null  
+		},this)
+		this.no = ko.computed( function() { 
+			return this.options.filter( function(el) { return el.type == 'no' })[0] || null  
+		},this)
+
+
 		return this;
 	}
 }
@@ -37,10 +48,16 @@ function Option(data,args) {
 		this.id = data.id
 		this.photo = data.photo
 		this.feedback = ko.observableArray([])
+		var type = ''
+
+		if( ['support','yes','for'].indexOf(this.name.toLowerCase()) !== -1 )  type = 'yes'
+		if( ['oppose','no','against'].indexOf(this.name.toLowerCase()) !== -1 ) type = 'no'
+		this.type = type
 
 		if( typeof data.feedback != 'undefined' ) {
 			for (var i=0; i < data.feedback.length; i++) {
-				this.feedback.push( Feedback(data.feedback[i]) )
+				data.feedback[i].type = type
+				this.feedback.push( Feedback( data.feedback[i] ) )
 			};
 		}
 
