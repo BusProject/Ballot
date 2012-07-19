@@ -37,9 +37,13 @@ $(document).on({ // binding clearing a location
 	}
 },'h1.title')
 .on('click','#instructions ul li a, .fixed-link',function(e){
-	e.preventDefault()
 	$this = $(this)
 	$(document).scrollTop( $($this.attr('href')).position().top )
+	var href = $this.attr('href')
+	if( href[0] == '#' ) {
+		e.preventDefault()
+		$(document).scrollTop( $(href).position().top )
+	}
 })
 .on('click','.more',function(e){
 	e.preventDefault()
