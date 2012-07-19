@@ -33,6 +33,7 @@ $(document).on({ // binding clearing a location
 		}).parents(document) 
 	}
 },'h1.title')
+.on('click','#instructions ul li a, .fixed-link',function(e){
 	e.preventDefault()
 	$this = $(this)
 	$(document).scrollTop( $($this.attr('href')).position().top )
@@ -127,5 +128,24 @@ ko.bindingHandlers.readmore = {
 			}
 			$(element).height($parent.readmore() )
 		}
+	}
+};
+ko.bindingHandlers.slide = {
+	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
+		if( valueAccessor() ) $(element).slideDown()
+		else $(element).slideUp()
+	}
+};
+ko.bindingHandlers.overwrite = {
+	init: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
+		var val = valueAccessor()
+		if( val ) {
+			element.innerHTML = val
+		}
+	}
+};
+ko.bindingHandlers.addClass = {
+	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
+		element.className += ' '+valueAccessor()
 	}
 };
