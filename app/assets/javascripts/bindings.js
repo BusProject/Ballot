@@ -44,29 +44,55 @@ $(document).on({ // binding clearing a location
 	ctx.$parent.readmore(true)
 	$(this).hide()
 })
+.on('click','.pick',function(e) {
+	e.preventDefault()
+	$('.picked').removeClass('picked')
+	$(this).addClass('picked')
+})
 .on('click','.submitFeedback',function(e){
+	e.preventDefault()
+	var $this = $(this), $parent = $this.parents('.yourFeedback') 
 	if( current_user.id == 'unauthenticated' ) {
 		document.location = $('.account a').attr('href')
 	} else {
-		var $ctx = ko.contextFor(this),
-			$comment = $(this).prev('textarea')
+		var $picked = $('.picked', $parent )
+
+		if( $picked.length == 0 ) {
+			$('.buttons p',$parent).css({'text-decoration':'underline','font-weight':'bold','color':'red'})
+			setTimeout( function() { $('.buttons p',$parent).css({'text-decoration':'none', 'font-weight':'normal','color':'#D37A3C'}) },800)
+			return false;
+		}
+
+
+		var $ctx = ko.contextFor( $picked[0] ),
+			$comment = $('.comment', $parent),
 			option = $ctx.$data,
-			id = option.id,
+			option_id = option.id,
+			choice_id = option.choice_id,
 			comment = $comment.val()
-		
-		if( comment.length > 1 ) $.ajax({
+
+		if( comment.length < 1 ) {
+			$('.comment',$parent).css({'border-color':'red','border-width':'3px'})
+			setTimeout( function() { $('.comment',$parent).css({'border-color':'rgb(215, 122, 60)','border-width':'1px'}) },800)
+			return false;
+		}
+
+		$.ajax({
 			url: document.location.href.split('#')[0]+'feedback/save',
 			data: { feedback: [ 
 					{
-						option_id: parseInt(id),
+						option_id: parseInt(option_id),
+						choice_id: parseInt(choice_id),
 						comment: comment,
+						
 					}
 				]
 			},
 			success: function(response) {
 				if( response.success ) {
-					option.feedback.push( Feedback( { comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj } ) )
+					option.feedback.push( Feedback( { comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type } ) )
 					$comment.val('')
+					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
 				}
 			}
 		})
