@@ -31,6 +31,36 @@ function Choice(data,args) {
 		},this)
 
 
+		this.feedback = ko.computed( function() { 
+			var feedback = [], mode = this.mode(), options = this.options
+
+			if( mode == 'yes' ) feedback = this.yes().feedback();
+			else if( mode == 'no' ) feedback = this.no().feedback();
+			else for (var i=0; i < options.length; i++) {
+				feedback = feedback.concat( this.options[i].feedback() )
+			};
+
+			if( mode == 'friends' ) feedback = feedback.filter( function(el) { return el.friend() })
+
+
+			feedback.sort( function(a,b) {
+				if( mode != 'best' ) {
+					var af = a.friend(), 
+						bf = b.friend()
+					if( af && !bf ) return 1; 
+					if ( !bf && af ) return -1;
+				}
+				return a.usefulness() > b.usefulness() ? 1 : -1 
+			})
+			return feedback
+		},this)
+
+		this.feedback.you = ko.computed(function() { return this.feedback().filter( function(el) { return el.yourFeedback })[0] || null  },this)
+		this.feedback.everyone = ko.computed(function() { 
+			var feedback = this.feedback().filter( function(el) { return !el.yourFeedback }) || [] 
+			return this.all() ? feedback : feedback.slice(0,5)
+		},this)
+
 		return this;
 	}
 }
@@ -46,6 +76,7 @@ function Option(data,args) {
 		this.blurb = data.blurb
 		this.blurb
 		this.id = data.id
+		this.choice_id = data.choice_id
 		this.photo = data.photo
 		this.feedback = ko.observableArray([])
 		var type = ''
@@ -60,6 +91,17 @@ function Option(data,args) {
 				this.feedback.push( Feedback( data.feedback[i] ) )
 			};
 		}
+
+		this.feedback.five = ko.computed(function() {
+			var feedback = this.feedback(),
+				friends = yourLocation.friends(),
+				find_friends = feedback.filter( function(el) { return friends.indexOf(el.fb) !== -1; } )
+
+				if( find_friends.length < 5 ) find_friends = find_friends.concat( feedback.sort(function() {return 0.5 - Math.random()}).slice(0, 5 - find_friends.length  ) )
+
+				return find_friends
+			
+		},this)
 
 		return this;
 	}
