@@ -4,6 +4,7 @@ function locationModel(data) {
 	this.googleLocation = ko.observable({})
 	this.address = ko.observable('')
 	this.geocoder = ko.observable('')
+	this.selected = ko.observable()
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ''
 	this.choices = ko.observableArray([])
@@ -103,8 +104,16 @@ function locationModel(data) {
 			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
 		// When map updates - flash the thing
 		if( geolocated ) $('#map .pointer, #map-embed img').flash(.5, 1000)
-		return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=450x375&sensor=true'+marker
+		return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=500x375&sensor=true'+marker
 	}, this)
+
+	this.map.confirm = ko.computed( function() {
+		ko.toJS(this.map)
+		if( this.geocoded() ) { 
+			$('.confirmation').fadeIn('fast')
+			$('#locationNotice').remove()
+		}
+	},this)
 
 	this.grabChoices = ko.computed( function() { // Retrieve choices
 		var lat = this.lat(),
@@ -113,12 +122,12 @@ function locationModel(data) {
 			geolocated = this.geolocated()
 
 		if( geolocated && choices().length == 0 ) {
-			this.getBallotChoices(lat,lng,choices)
+			this.getBallotChoices(lat,lng,choices,function() { $('.row:not(.complete):first .title').click() })
 		}
 
 	}, this)
 
-	this.getBallotChoices = function(lat,lng,array) { // Useful function for 
+	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for 
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(
 			document.location.href.split('#')[0]+'lookup',
@@ -142,11 +151,23 @@ function locationModel(data) {
 	this.top = ko.observable(0)
 
 	this.menuItems = [
-		MenuItem('#find-ballot','Find Your Ballot',true,this),
-		MenuItem('#read-ballot','Read Your Ballot',true,this),
-		//MenuItem('#find-ballot','Find Your Ballot'),
+		MenuItem('#find-ballot','Find Your Ballot'),
+		MenuItem('#read-ballot','Read Your Ballot'),
+		// MenuItem(null,'Share Your Ballot','<a href="">3 Share Your Ballot</a>'),
+		MenuItem(null,'Other Options','<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>'),
 		
 	]
+
+	this.active = ko.computed(function() {
+		var top = this.top()-window.innerHeight/6, items = this.menuItems.filter(function(el) { return el.id != null })
+		for (var i=0; i < items.length; i++) {
+			var elem = $( items[i].id)
+			if( elem.length > 0 && top < elem.position().top ) return items[i].id
+		};
+		if( top < 10 ) return items[0].id
+		else return items[ items.length - 1].id
+	},this)
+
 }
 
 
