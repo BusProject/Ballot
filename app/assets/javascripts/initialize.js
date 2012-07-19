@@ -4,6 +4,7 @@ function initialize() {
 
   // Try HTML5 geolocation
   if(navigator.geolocation) {
+
     navigator.geolocation.getCurrentPosition(
 		function(position) {
 			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -16,9 +17,11 @@ function initialize() {
 					yourLocation.address( results[0].formatted_address )
 				}
 			});
+			$('#locationNotice').slideUp('slow',function(){$(this).remove()})
 		}, 
 		function(error) {
 			console.log(error)
+			$('#locationNotice').slideUp('slow',function(){$(this).remove()})
 		},
 		{maximumAge: 0, enableHighAccuracy: true }
 		);
