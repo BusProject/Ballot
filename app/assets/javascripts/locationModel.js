@@ -10,6 +10,8 @@ function locationModel(data) {
 	this.choices = ko.observableArray([])
 	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
 
+	this.friends = ko.observableArray([])
+
 	this.round = function(number,decimal) { // Useful 
 		if( typeof decimal == 'undefined' ) decimal = 2
 		return Math.round(number*Math.pow(10,decimal))/Math.pow(10,decimal)
