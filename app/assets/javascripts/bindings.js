@@ -78,11 +78,12 @@ $(document).on({ // binding clearing a location
 			choice_id = option.choice_id,
 			comment = $comment.val()
 
-		if( comment.length < 1 ) {
-			$('.comment',$parent).css({'border-color':'red','border-width':'3px'})
-			setTimeout( function() { $('.comment',$parent).css({'border-color':'rgb(215, 122, 60)','border-width':'1px'}) },800)
-			return false;
 		}
+		// if( comment.length < 1 ) {
+		// 	$('.comment',$parent).css({'border-color':'red','border-width':'3px'})
+		// 	setTimeout( function() { $('.comment',$parent).css({'border-color':'rgb(215, 122, 60)','border-width':'1px'}) },800)
+		// 	return false;
+		// }
 
 		$.ajax({
 			url: inits.root+'feedback/save',
