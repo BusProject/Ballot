@@ -96,11 +96,6 @@ function Grouping(keys,title,locationModel) {
 		return this.contests().length > 0
 	},grouping)
 
-	grouping.current = ko.observable(null)
-	grouping.selected = ko.computed( function() {
-		if( this.current() != null ) return this.current()
-		else return this.contests()[0]
-	},grouping)
 
 	grouping.title = title
 	grouping.class = title != 'Ballot Measures' ? 'candidates' : 'ballot-measures'
@@ -109,8 +104,8 @@ function Grouping(keys,title,locationModel) {
 	return grouping
 }
 
-function MenuItem(id,name,disabled,locationModel) {
-	var menuItem = { id: id, name: name }
+function MenuItem(id,name,html) {
+	var menuItem = { id: id, name: name, html: html }
 
 	return menuItem
 }
