@@ -8,6 +8,10 @@ $(document).on({ // binding clearing a location
 		location.choices([])
 	}
 },'.cancel')
+.on('click','.clear',function(e) {
+	yourLocation.address('')
+	$('input.find-ballot').select()
+})
 .on({ // Binding the click-to-change issue
 	click: function(e) {
 		var ctx = ko.contextFor(this),
