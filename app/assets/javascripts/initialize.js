@@ -43,7 +43,27 @@ function initialize() {
 			setTimeout(function(){ $('#locationNotice').slideUp('slow',function(){$(this).remove()}) },5000)
 		}
 	}, 750)
+
+	if( FB ) {
+		FB.getLoginStatus(function(response) {
+			if( response.status == 'connected' ) {
+				FB.api(
+					{
+						method: 'fql.query',
+						query: 'SELECT uid FROM user WHERE is_app_user = 348686001852732 AND uid IN (SELECT uid2 FROM friend WHERE uid1 =me() );'
+					},
+				  	function(response) { yourLocation.friends( response.map( function(el) { return el.uid } ) ) }
+				)
+			} else if (response.status === 'not_authorized')  {
+			} else {
+			}
+		})
+	}
+
+
+
 	yourLocation.geocoder( geocoder );
+
 }
 
 

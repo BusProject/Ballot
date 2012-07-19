@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
-    :image, :location, :name, :url, :first_name, :last_name, :feedback, :admin, :authentication_token, :guide_name
+    :image, :location, :name, :url, :first_name, :last_name, :feedback, :admin, :authentication_token, :guide_name, :fb
 
   # attr_accessible :title, :body
   has_many :feedback
@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
         :name => data.name,
         :first_name => data.first_name,
         :last_name => data.last_name,
-        :authentication_token => access_token.credentials.token
+        :authentication_token => access_token.credentials.token,
+        :fb => data.id
       }
     if user = self.find_by_email(data.email)
       user.update_attributes( attributes)

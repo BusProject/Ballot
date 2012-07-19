@@ -21,9 +21,9 @@ class ChoiceController < ApplicationController
           :options => { 
             :include => [ 
               :feedback => {
-                :include => [ 
+                :include => [
                   :user => { 
-                    :only => [ :url, :first_name, :last_name, :url, :location, :image ] 
+                    :only => [ :url, :first_name, :last_name, :url, :location, :image, :fb ] 
                     } 
                   ] 
                 } 
