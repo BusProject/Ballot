@@ -15,12 +15,24 @@ $(document).on({ // binding clearing a location
 .on({ // Binding the click-to-change issue
 	click: function(e) {
 		var ctx = ko.contextFor(this),
-			$parent = ctx.$parent,
-			$data = ctx.$data
-		$parent.current($data)
+			$root = ctx.$root,
+			$data = ctx.$data,
+			selected = $root.selected()
+
+		if( selected == $data ) return false
+		$('.selected .body').find('.overlayText, .overlayBg').hide()
+		$('.selected .body').slideUp()
+
+		
+		$root.selected($data)
+		$(this).next('.body').slideDown('fast',function() { 
+			var $this = $(this).parent()
+			$('.overlayText, .overlayBg',$this).hide().fadeIn()
+			// For scrolling to the top after it's done
+			// setTimeout( function() { $(document).scrollTop( $this.position().top ) }, 500)
+		}).parents(document) 
 	}
-},'.race-menu ul li')
-.on('click','#instructions ul li a',function(e){
+},'h1.title')
 	e.preventDefault()
 	$this = $(this)
 	$(document).scrollTop( $($this.attr('href')).position().top )
