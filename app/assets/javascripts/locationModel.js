@@ -140,6 +140,7 @@ function locationModel(data) {
 				for( var i=0 ; i < data.length; i++) {
 					array.push( Choice(data[i]) )
 				}
+				callback()
 			})
 	}
 
