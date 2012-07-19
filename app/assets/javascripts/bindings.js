@@ -124,13 +124,27 @@ $(document).on({ // binding clearing a location
 	e.preventDefault()
 
 	var $ctx = ko.contextFor(this),
-		$data = $ctx.$data
+		$data = $ctx.$data,
+		$this = $(this),
+		action = 'useless'
+
+	if( $this.hasClass('helpful') ) {
+		action = 'useful'
+		$data.usefulness( $data.usefulness() + 1 )
+	} else {
+		$data.usefulness( $data.usefulness() - 1 )
+	}
+
+	if( $this.hasClass('flag') ) action = 'flag'
+
 	$.post(
-		'http://localhost:3000/feedback/'+$data.id,
+		document.location.href.split('#')[0]+'feedback/'+$data.id+'/'+action,
 		function(response){
-			$ctx.$parent.feedback.remove( $data)
+			$this.parents('.ask').html( response.message )
+			if( $this.hasClass('flag') ) setTimeout( function() { $this.parent('.feedback').remove() }, 300 )
 		}
 	)
+
 })
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
