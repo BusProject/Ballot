@@ -7,7 +7,11 @@
 
   <script type="text/javascript" src='https://maps.googleapis.com/maps/api/js?sensor=true'></script>
   <script type="text/javascript">
-	var current_user = <%= raw current_user.to_json %> || {id: 'unauthenticated'}
+	var current_user = <%= raw current_user.to_json %> || {id: 'unauthenticated'},
+		inits = <%= raw @config || '{}' %>
+
+	current_user.url = "<%= profile_path( current_user.to_url ) || root_path %>"
+	inits.root = "<%= root_path %>"
   </script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>

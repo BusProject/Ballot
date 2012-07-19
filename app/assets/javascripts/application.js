@@ -10,6 +10,13 @@
 //= require models
 //= require_tree .
 
-window.onload=function() {
+
+
+var yourLocation = new locationModel(inits);
+
+window.onload = function() {
+	document.body.className = document.body.className.replace('no-script','').trim()
+	initialize()
+	$('.clean').remove()
 	ko.applyBindings(yourLocation);
 }

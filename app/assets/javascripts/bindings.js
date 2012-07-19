@@ -78,7 +78,7 @@ $(document).on({ // binding clearing a location
 		}
 
 		$.ajax({
-			url: document.location.href.split('#')[0]+'feedback/save',
+			url: inits.root+'feedback/save',
 			data: { feedback: [ 
 					{
 						option_id: parseInt(option_id),
@@ -138,7 +138,7 @@ $(document).on({ // binding clearing a location
 	if( $this.hasClass('flag') ) action = 'flag'
 
 	$.post(
-		document.location.href.split('#')[0]+'feedback/'+$data.id+'/'+action,
+		inits.root+'feedback/'+$data.id+'/'+action,
 		function(response){
 			$this.parents('.ask').html( response.message )
 			if( $this.hasClass('flag') ) setTimeout( function() { $this.parent('.feedback').remove() }, 300 )

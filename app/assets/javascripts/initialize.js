@@ -3,7 +3,7 @@ function initialize() {
 	var geocoder = new google.maps.Geocoder()
 
   // Try HTML5 geolocation
-  if(navigator.geolocation) {
+  if(navigator.geolocation && yourLocation.state == 'front' ) {
 
     navigator.geolocation.getCurrentPosition(
 		function(position) {
@@ -31,7 +31,7 @@ function initialize() {
 
 	// Adding the prompt for Geolocation - sometimes there's a bit of a lag for the browsers API to fire up
 	setTimeout( function() { 
-		if( !yourLocation.geocoded() && navigator.geolocation ) {
+		if( !yourLocation.geocoded() && navigator.geolocation && yourLocation.state == 'front' ) {
 			var position = 'left: 40%; top: 200px;', verb = 'Allow'
 			if( navigator.userAgent.toLowerCase().search('chrome') !== -1  ) position = 'right: 20px;top: 20px;'
 			if( $.browser.mozilla  ) position = 'left: 500px;top: 20px;', verb = 'Share Location'
@@ -53,7 +53,7 @@ function initialize() {
 				FB.api(
 					{
 						method: 'fql.query',
-						query: 'SELECT uid FROM user WHERE is_app_user = 348686001852732 AND uid IN (SELECT uid2 FROM friend WHERE uid1 =me() );'
+						query: 'SELECT uid FROM user WHERE is_app_user = '+FB.__appid+' AND uid IN (SELECT uid2 FROM friend WHERE uid1 =me() );'
 					},
 				  	function(response) { yourLocation.friends( response.map( function(el) { return el.uid } ) ) }
 				)
@@ -68,6 +68,3 @@ function initialize() {
 	yourLocation.geocoder( geocoder );
 
 }
-
-
-google.maps.event.addDomListener(window, 'load', initialize);
