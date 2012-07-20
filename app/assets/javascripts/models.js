@@ -46,7 +46,7 @@ function Choice(data,args) {
 					if( af && !bf ) return 1; 
 					if ( !bf && af ) return -1;
 				}
-				return a.usefulness() > b.usefulness() ? 1 : -1 
+				return a.usefulness() > b.usefulness() ? -1 : 1 
 			})
 
 			return feedback
@@ -134,7 +134,9 @@ function Feedback(data) {
 		this.type = data.type
 		this.updated = data.updated_at != data.created_at
 		var useless = data.useless || '', useful = data.useful || ''
-		this.usefulness = ko.observable( useful.split(',').length - useless.split(',').length )
+		useless = useless.split(',').length + ( data.useless.length > 0 ? 0 : 1 )
+		useful = useful.split(',').length +  ( data.useful.length > 0 ? 0 : 1 )
+		this.usefulness = ko.observable( useful - useless )
 
 		var date = new Date(data.updated_at),
 			time = date.toLocaleTimeString().slice(0,5)+'am',
