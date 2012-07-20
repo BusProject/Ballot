@@ -56,7 +56,7 @@ function Choice(data,args) {
 		this.feedback.everyone = ko.computed(function() {
 			var mode = this.mode()
 			var feedback = this.feedback().filter( function(el) { 
-				var condition = !el.yourFeedback 
+				var condition = !el.yourFeedback && el.comment.length > 0
 				if( mode == 'yes' || mode == 'no' ) condition = condition && el.type == mode
 				if( mode == 'friends' ) condition = condition && el.friend()
 
