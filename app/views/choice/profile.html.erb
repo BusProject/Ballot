@@ -1,0 +1,14 @@
+<h1><%= @user.guide_name || @user.first_name + ' '+@user.last_name + '\'s Voter Guide' %></h1>
+
+<% n = 0 %>
+<% @choices.each do |choice| %>
+	<div class="<%= 'clean-no-script' if n != 0 %>" data-bind="foreach: choices" >
+		<%=  render 'choice/single', :choice => choice, :user => @user %>
+	</div>
+<% n+=1%>
+<% end %>
+<% if @choices.length == 0 %>
+	<p></p>
+	<p><%= @user.first_name %> hasn't left any sort of feedback.<p>
+	<p><em>Redirecting you to the home page in 2.012 seconds</em></p>
+<% end %>

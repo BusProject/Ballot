@@ -154,25 +154,55 @@ function locationModel(data) {
 
 	this.menuItems = []
 
+	this.share = function(url,name,msg) {
+		var url = url || document.location.host, msg = msg || '', name = name || 'The Ballot | Your Social Voter Guide'
+		url = document.location.protocol+'//'+url
+		string = '<input class="lil" value="'+url+'" readonly="true" onclick="$(this).select()">'
+		string += '<div class="icons">'
+		string += '<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='+url+'" class="fbook"><div></div></a>'
+		string += '<a arget="_blank" href="https://twitter.com/intent/tweet?original_referer=yi_care&source=tweetbutton&text='+msg+'&url='+url+'" class="twitter"><div></div></a>'
+		// More twitter terms &hashtags=&via=&related=
+		string += '<a arget="_blank" href="http://www.tumblr.com/share/link?url='+url+'&name='+name+'&description='+msg+'" class="tumblr"><div></div></a>'
+		string += '</div>'
+		return string
+	}
 
 	if( this.state == 'front' ) {
 		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures',this)
 		this.federalOffices = Grouping(['Federal'],'Federal Races',this)
 		this.stateOffices = Grouping(['State'],'State Races',this)
 		this.localOffices = Grouping(['Local'],'Local Races',this)
-		
+
+		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.profile,
+			owner = current_user.id == 'unauthenticated' ? 'the' : 'Your',
+			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || [current_user.first_name,current_user.last_name+'\'s','Voter Guide'].join(' '),
+			msg = current_user.id == 'unauthenticated' ? undefined : 'Check out my voter guide on The Ballot'
+			
+
 		this.menuItems.push( 
 			MenuItem('#find-ballot','Find Your Ballot'),
 			MenuItem('#read-ballot','Read Your Ballot'),
-			// MenuItem(null,'Share Your Ballot','<a href="">3 Share Your Ballot</a>'),
+			MenuItem(null,'Share the Ballot','<div class="container share-container">Share '+owner+' Ballot<br>'+this.share(url,name)+'</div>'),
 			MenuItem(null,'Other Options','<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>')
 		)
 	}
 	if( this.state == 'single' ) {
+		var url = document.location
 		this.menuItems.push( 
 			MenuItem(inits.root,'Find Your Ballot'),
 			MenuItem(current_user.url,'Return to Your Ballot'),
-			// MenuItem(null,'Share Your Ballot','<a href="">3 Share Your Ballot</a>'),
+			MenuItem(null,'Share This Ballot','<div class="container share-container">Share this Page<br>'+this.share(url)+'</div>'),
+			MenuItem(null,'Other Options','<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>')
+		)
+	}
+	if( this.state == 'profile' ) {
+		setTimeout( function() { document.location = document.location.protocol+'//'+document.location.host }, 2012 )
+		var url = document.location.host+inits.user.profile, 
+			name = inits.user.guide_name || [inits.user.first_name,inits.user.last_name+'\'s','Voter Guide'].join(' ')
+		this.menuItems.push( 
+			MenuItem(inits.root,'Find Your Ballot'),
+			MenuItem(current_user.url,'Return to Your Ballot'),
+			MenuItem(null,'Share This Ballot','<div class="container share-container">Share this Guide<br>'+this.share(url,name)+'</div>'),
 			MenuItem(null,'Other Options','<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>')
 		)
 	}
