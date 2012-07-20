@@ -40,8 +40,9 @@ input[type=text].link {
 	float: left;
 	margin: 0;
 	padding: 0;
-
 }
+.icons a:hover div { background-color: rgba(0,0,0,.1); box-shadow: inset 0px 0px 2px #999 }
+
 .fbook div { background: transparent url(<%= asset_path 'fbook.png'%>) center no-repeat; }
 .fbook  {
 	/* for W3C-compliant browsers */
@@ -54,7 +55,6 @@ input[type=text].link {
 	background-image: -o-linear-gradient(top, rgba(134,163,201,255) 0%, rgba(104,140,186,255) 7%, rgba(75,117,171,255) 51%);
 	/* for IE */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#86a3c9', endColorstr='#688cba'endColorstr='#4b75ab');
-
 }
 .twitter div { background: transparent url(<%= asset_path 'twitter.png'%>) center no-repeat; }
 .twitter {
