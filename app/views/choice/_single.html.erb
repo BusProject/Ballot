@@ -87,7 +87,7 @@
 			</div>
 
 
-			<div class="commentTitle" data-bind="visible: $data.commentable && feedback.everyone().length > 0  ">
+			<div class="commentTitle" data-bind="visible: $data.commentable && feedback.realLength() > 0  ">
 				What Others Are Saying
 				<select data-bind="value: $data.mode">
 					<option value="normal">Sort By...</option>

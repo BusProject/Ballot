@@ -54,6 +54,9 @@ function Choice(data,args) {
 
 		this.you = ko.computed(function() { return this.feedback().filter( function(el) { return el.yourFeedback })[0] || null  },this)
 
+		this.feedback.realLength = ko.computed(function() {
+			return this.feedback().length - ( this.you() == null ? 0 : 1)
+		},this)
 		this.feedback.everyone = ko.computed(function() {
 			var mode = this.mode()
 			var feedback = this.feedback().filter( function(el) { 
