@@ -56,6 +56,7 @@ function Choice(data,args) {
 		this.feedback.everyone = ko.computed(function() {
 			var mode = this.mode()
 			var feedback = this.feedback().filter( function(el) { 
+				var condition = !el.yourFeedback 
 				if( mode == 'yes' || mode == 'no' ) condition = condition && el.type == mode
 				if( mode == 'friends' ) condition = condition && el.friend()
 
@@ -97,7 +98,7 @@ function Option(data,args) {
 
 		this.feedback.five = ko.computed(function() {
 			var feedback = this.feedback(),
-				friends = yourLocation.friends(),
+				friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : [],
 				find_friends = feedback.filter( function(el) { return friends.indexOf(el.fb) !== -1; } )
 
 				if( find_friends.length < 5 ) find_friends = find_friends.concat( feedback.sort(function() {return 0.5 - Math.random()}).slice(0, 5 - find_friends.length  ) )
@@ -127,7 +128,8 @@ function Feedback(data) {
 		this.name =  data.user.first_name+' '+data.user.last_name
 		this.type = data.type
 		this.updated = data.updated_at != data.created_at
-		this.usefulness = ko.observable( data.useful.split(',').length - data.useless.split(',').length )
+		var useless = data.useless || '', useful = data.useful || ''
+		this.usefulness = ko.observable( useful.split(',').length - useless.split(',').length )
 
 		var date = new Date(data.updated_at),
 			time = date.toLocaleTimeString().slice(0,5)+'am',
@@ -141,7 +143,10 @@ function Feedback(data) {
 
 		this.time =  day+' '+time
 
-		this.friend = ko.computed( function() { return yourLocation.friends().indexOf( this.user.fb ) !== -1 },data)
+		this.friend = ko.computed( function() { 
+			var friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : []
+			return friends.indexOf( this.user.fb ) !== -1
+		},data)
 		return this
 	}
 }
