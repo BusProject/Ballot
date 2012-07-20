@@ -11,10 +11,14 @@ Ballot::Application.routes.draw do
   
   match '/feedback/:id/:flavor' => 'feedback#rate'
   
-  match '/lookup' => 'choice#show'
+  match '/lookup' => 'choice#index'
   match '/fetch' => 'choice#retrieve'
 
-  match '/image' => 'draw#make'
+  # match '/image' => 'draw#make'
+  
+  match '/:geography/:contest' => 'choice#show'
+  
+  match '/:id' => 'user#show', :as => 'profile'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
