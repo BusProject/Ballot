@@ -1,4 +1,6 @@
 function locationModel(data) {
+	this.state = data.state || 'front'
+
 	// Map Objects
 	this.latlng = ko.observable('38.7, -95.7')
 	this.googleLocation = ko.observable({})
@@ -147,25 +149,41 @@ function locationModel(data) {
 			})
 	}
 
-	this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures',this)
-	this.federalOffices = Grouping(['Federal'],'Federal Races',this)
-	this.stateOffices = Grouping(['State'],'State Races',this)
-	this.localOffices = Grouping(['Local'],'Local Races',this)
+	this.menuItems = []
+
+
+	if( this.state == 'front' ) {
+		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures',this)
+		this.federalOffices = Grouping(['Federal'],'Federal Races',this)
+		this.stateOffices = Grouping(['State'],'State Races',this)
+		this.localOffices = Grouping(['Local'],'Local Races',this)
+		
+		this.menuItems.push( 
+			MenuItem('#find-ballot','Find Your Ballot'),
+			MenuItem('#read-ballot','Read Your Ballot'),
+			// MenuItem(null,'Share Your Ballot','<a href="">3 Share Your Ballot</a>'),
+			MenuItem(null,'Other Options','<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>')
+		)
+	}
+	if( this.state == 'single' ) {
+		this.menuItems.push( 
+			MenuItem(inits.root,'Find Your Ballot'),
+			MenuItem(current_user.url,'Return to Your Ballot'),
+			// MenuItem(null,'Share Your Ballot','<a href="">3 Share Your Ballot</a>'),
+			MenuItem(null,'Other Options','<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>')
+		)
+	}
 
 
 	// Style elements
 	this.top = ko.observable(0)
 
 	this.menuItems = [
-		MenuItem('#find-ballot','Find Your Ballot'),
-		MenuItem('#read-ballot','Read Your Ballot'),
-		// MenuItem(null,'Share Your Ballot','<a href="">3 Share Your Ballot</a>'),
-		MenuItem(null,'Other Options','<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>'),
-		
 	]
 
 	this.active = ko.computed(function() {
-		var top = this.top()-window.innerHeight/6, items = this.menuItems.filter(function(el) { return el.id != null })
+		var top = this.top()-window.innerHeight/6, items = this.menuItems.filter(function(el) { return el.id != null && el.id[0] == '#' })
+		if( items.length < 1 ) return ''
 		for (var i=0; i < items.length; i++) {
 			var elem = $( items[i].id)
 			if( elem.length > 0 && top < elem.position().top ) return items[i].id
@@ -184,6 +202,3 @@ locationModel.prototype.abvToState = function(abv) {
 	var indx = locationModel.prototype.abvs.indexOf(abv)
 	return indx === -1 ? false : locationModel.prototype.states[indx]
 }
-
-
-var yourLocation = new locationModel();
