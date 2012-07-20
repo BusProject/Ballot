@@ -129,6 +129,6 @@
 
 		<% end %>
 		<div style="clear:both;"></div>
-
+		<a href="<%= choice.to_url %>" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') },visible: !$data.all() && $data.feedback.everyone().length > 5 ">Read More</a>
 	</div>
 </div>

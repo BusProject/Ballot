@@ -13,6 +13,7 @@ function Choice(data,args) {
 		this.contest = data.contest,
 		this.type = data.contest_type
 		this.description = data.description
+		this.geography = data.geography
 		this.commentable = data.commentable
 		this.mode = ko.observable('normal')
 		this.all = ko.observable( inits.state == 'single' )

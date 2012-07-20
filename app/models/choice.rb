@@ -6,7 +6,8 @@ class Choice < ActiveRecord::Base
   has_many :options, :dependent => :destroy
   
   def to_url
-    return self.geography+'/'+self.contest.gsub(' ','_')
+    return self.geography+'/'+self.contest.gsub(' ','_') unless self.geography.nil? || self.contest.nil?
+    return ''
   end
 
 end
