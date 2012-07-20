@@ -34,14 +34,9 @@ function Choice(data,args) {
 		this.feedback = ko.computed( function() { 
 			var feedback = [], mode = this.mode(), options = this.options
 
-			if( mode == 'yes' ) feedback = this.yes().feedback();
-			else if( mode == 'no' ) feedback = this.no().feedback();
-			else for (var i=0; i < options.length; i++) {
+			for (var i=0; i < options.length; i++) {
 				feedback = feedback.concat( this.options[i].feedback() )
 			};
-
-			if( mode == 'friends' ) feedback = feedback.filter( function(el) { return el.friend() })
-
 
 			feedback.sort( function(a,b) {
 				if( mode != 'best' ) {
@@ -52,12 +47,20 @@ function Choice(data,args) {
 				}
 				return a.usefulness() > b.usefulness() ? 1 : -1 
 			})
+
 			return feedback
 		},this)
 
-		this.feedback.you = ko.computed(function() { return this.feedback().filter( function(el) { return el.yourFeedback })[0] || null  },this)
-		this.feedback.everyone = ko.computed(function() { 
-			var feedback = this.feedback().filter( function(el) { return !el.yourFeedback }) || [] 
+		this.you = ko.computed(function() { return this.feedback().filter( function(el) { return el.yourFeedback })[0] || null  },this)
+
+		this.feedback.everyone = ko.computed(function() {
+			var mode = this.mode()
+			var feedback = this.feedback().filter( function(el) { 
+				if( mode == 'yes' || mode == 'no' ) condition = condition && el.type == mode
+				if( mode == 'friends' ) condition = condition && el.friend()
+
+				return condition
+			}) || [] 
 			return this.all() ? feedback : feedback.slice(0,5)
 		},this)
 
