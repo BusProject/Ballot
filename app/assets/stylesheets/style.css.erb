@@ -511,14 +511,18 @@ a.find-ballot-submit {
 	.body .option:first-child {
 		border-right: #e5a87f 1px solid;
 		margin-left: 34px;
-		padding-left: 4px;
+		padding-left: 8px;
+		padding-right: 20px;
 	}
-	.optionholder {
+	.body .optionholder {
 		position: relative;
-		width: 620px;
+		width: 600px;
 	}
+
 	.option {
-		width: 270px;
+		width: 47%;
+		box-sizing: border-box;
+        -moz-box-sizing: border-box;
 		padding: 0 0 60px 34px;
 		float:left;
 	}
@@ -599,7 +603,7 @@ a.find-ballot-submit {
 		width: 100%;
 	}
 	.comment, .comment:focus {
-		width:378px;
+		width:350px;
 		height:115px;
 		-webkit-appearance:none;
 		font-family:'PT Sans', sans-serif;
@@ -624,14 +628,16 @@ a.find-ballot-submit {
 		cursor: pointer;
 	}
 	.yourFeedback {
+        width: 590px;
 		text-align: right;
 		clear: both;
 		border-top: #e5a87f 1px solid;
 		border-bottom: #e5a87f 1px solid;
 		margin: 0 34px;
-		padding: 10px 0;
+		padding: 20px 0 10px;
 	}
 	.yourFeedback .head {
+	    padding: 20px 0 10px;
 		width: 50px;
 		margin: 0 auto;
 	}
@@ -710,7 +716,8 @@ a.find-ballot-submit {
 
 	ul.feedback li .foot { float: right; text-align: right; width: 300px; font-size: 90%; color: #fff; }
 	ul.feedback li .foot .ask { padding-right: 4px }
-
+	div.no-comment { display:none }
+	.commentable div.no-comment { display:block }
 
 	
 	
