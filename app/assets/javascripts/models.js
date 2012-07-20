@@ -15,7 +15,7 @@ function Choice(data,args) {
 		this.description = data.description
 		this.commentable = data.commentable
 		this.mode = ko.observable('normal')
-		this.all = ko.observable(false)
+		this.all = ko.observable( inits.state == 'single' )
 
 		if( typeof data.options != 'undefined' ) {
 			for (var i=0; i < data.options.length; i++) {
