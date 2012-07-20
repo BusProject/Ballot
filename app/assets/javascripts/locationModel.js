@@ -6,11 +6,14 @@ function locationModel(data) {
 	this.googleLocation = ko.observable({})
 	this.address = ko.observable('')
 	this.geocoder = ko.observable('')
-	this.selected = ko.observable()
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ''
-	this.choices = ko.observableArray([])
 	this.fetch = ko.observable(true)
+
+	var choices = data.choices || []
+	this.choices = ko.observableArray( choices.map( function(el) { return Choice(el) } ) )
+	this.selected = ko.observable( this.choices()[0] )
+
 	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
 
 	this.friends = ko.observableArray([])
@@ -178,8 +181,6 @@ function locationModel(data) {
 	// Style elements
 	this.top = ko.observable(0)
 
-	this.menuItems = [
-	]
 
 	this.active = ko.computed(function() {
 		var top = this.top()-window.innerHeight/6, items = this.menuItems.filter(function(el) { return el.id != null && el.id[0] == '#' })
