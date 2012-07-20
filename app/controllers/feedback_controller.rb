@@ -67,12 +67,12 @@ class FeedbackController < ApplicationController
             else
               if flag.index( current_user.id.to_s ).nil?
                 flag.push(current_user.id)
-                feedback.flag = flag.join(',')
+                feedback[params[:flavor] ] = flag.join(',')
 
                 if feedback.save
                   render :json => {:success => true, :message => 'Thanks'+msg, :feedback => feedback }, :callback  => params['callback']
                 else
-                  render :json => {:success => false, :message => 'Something went wrong', :feedback => feedback }, :callback  => params['callback']
+                  render :json => {:success => false, :message => 'Something went wrong', :feedback => feedbacks }, :callback  => params['callback']
                 end
 
               else
