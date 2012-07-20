@@ -1,4 +1,20 @@
 class ChoiceController < ApplicationController
+  def json_include
+    return :include => [ 
+    :options => { 
+      :include => [ 
+        :feedback => {
+          :include => [
+            :user => { 
+              :only => [ :url, :first_name, :last_name, :url, :location, :image, :fb, :profile ] 
+              } 
+            ] 
+          } 
+        ] 
+      }
+    ]
+  end
+
   def show
     @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' '))
 
@@ -28,20 +44,7 @@ class ChoiceController < ApplicationController
         results = choices
       end
 
-      query = results.to_json( 
-        :include => [ 
-          :options => { 
-            :include => [ 
-              :feedback => {
-                :include => [
-                  :user => { 
-                    :only => [ :url, :first_name, :last_name, :url, :location, :image, :fb ] 
-                    } 
-                  ] 
-                } 
-              ] 
-            }
-          ])
+      query = results.to_json( json_include )
 
     else
       query = {'error' => true, 'message' => 'Nothing useful was posted'}.to_json
