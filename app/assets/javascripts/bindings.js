@@ -17,6 +17,8 @@ $(document).on({ // binding clearing a location
 })
 .on({ // Binding the click-to-change issue
 	click: function(e) {
+		if( inits.state == 'profile' || inits.state == 'single' ) return false
+
 		var ctx = ko.contextFor(this),
 			$root = ctx.$root,
 			$data = ctx.$data,
