@@ -38,7 +38,6 @@ $(document).on({ // binding clearing a location
 },'h1.title')
 .on('click','#instructions ul li a, .fixed-link',function(e){
 	$this = $(this)
-	$(document).scrollTop( $($this.attr('href')).position().top )
 	var href = $this.attr('href')
 	if( href[0] == '#' ) {
 		e.preventDefault()
@@ -78,7 +77,6 @@ $(document).on({ // binding clearing a location
 			choice_id = option.choice_id,
 			comment = $comment.val()
 
-		}
 		// if( comment.length < 1 ) {
 		// 	$('.comment',$parent).css({'border-color':'red','border-width':'3px'})
 		// 	setTimeout( function() { $('.comment',$parent).css({'border-color':'rgb(215, 122, 60)','border-width':'1px'}) },800)
@@ -112,23 +110,24 @@ $(document).on({ // binding clearing a location
 })
 .on('click','.yourFeedback .remove',function(e) {
 	var $data = ko.dataFor(this),
-		option = $data.options.filter( function(el) { return el.feedback().indexOf( $data.feedback.you() ) !== -1 } )[0],
+		option = $data.options.filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],
 		$this = $(this)
 
 	if( $this.hasClass('edit') ) {
-		$this.parents('.row').find('.pick.'+$data.feedback.you().type).addClass('picked')
-		$this.parents('.row').find('textarea.comment').val( $data.feedback.you().comment )
+		$this.parents('.row').find('.pick.'+$data.you().type).addClass('picked')
+		$this.parents('.row').find('textarea.comment').val( $data.you().comment )
 	}
 
-	if( $data.feedback.you().id != 'undefined' ) $.post(
-		document.location.href.split('#')[0]+'feedback/'+$data.feedback.you().id,
+	if( $data.you().id != 'undefined' ) $.post(
+		inits.root+'feedback/'+$data.you().id,
 		function(response){
 			
-			option.feedback.remove( $data.feedback.you() )
+			option.feedback.remove( $data.you() )
 		}
 	)
 })
 .on('click','.feedback .link',function(e) {
+
 	e.preventDefault()
 
 	var $ctx = ko.contextFor(this),
