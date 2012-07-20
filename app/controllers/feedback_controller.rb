@@ -69,7 +69,7 @@ class FeedbackController < ApplicationController
                 flag.push(current_user.id)
                 feedback.flag = flag.join(',')
 
-                if feedback.save
+                if feedback.save?
                   render :json => {:success => true, :message => 'Thanks'+msg }, :callback  => params['callback']
                 else
                   render :json => {:success => false, :message => 'Something went wrong' }, :callback  => params['callback']
