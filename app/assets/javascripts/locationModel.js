@@ -157,12 +157,12 @@ function locationModel(data) {
 	this.share = function(url,name,msg) {
 		var url = url || document.location.host, msg = msg || '', name = name || 'The Ballot | Your Social Voter Guide'
 		url = document.location.protocol+'//'+url
-		string = '<input class="lil" value="'+url+'" readonly="true" onclick="$(this).select()">'
+		string = '<input class="link" value="'+url+'" type="text" >'
 		string += '<div class="icons">'
-		string += '<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='+url+'" class="fbook"><div></div></a>'
-		string += '<a arget="_blank" href="https://twitter.com/intent/tweet?original_referer=yi_care&source=tweetbutton&text='+msg+'&url='+url+'" class="twitter"><div></div></a>'
+		string += '<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='+escape(url)+'" class="fbook"><div></div></a>'
+		string += '<a arget="_blank" href="https://twitter.com/intent/tweet?original_referer=yi_care&source=tweetbutton&text='+msg+'&url='+escape(url)+'" class="twitter"><div></div></a>'
 		// More twitter terms &hashtags=&via=&related=
-		string += '<a arget="_blank" href="http://www.tumblr.com/share/link?url='+url+'&name='+name+'&description='+msg+'" class="tumblr"><div></div></a>'
+		string += '<a target="_blank" href="http://www.tumblr.com/share/link?url='+escape(url)+'&name='+name+'&description='+msg+'" class="tumblr"><div></div></a>'
 		string += '</div>'
 		return string
 	}
@@ -196,7 +196,7 @@ function locationModel(data) {
 		)
 	}
 	if( this.state == 'profile' ) {
-		setTimeout( function() { document.location = document.location.protocol+'//'+document.location.host }, 2012 )
+		if( this.choices().length < 1 ) setTimeout( function() { document.location = document.location.protocol+'//'+document.location.host }, 2012 )
 		var url = document.location.host+inits.user.profile, 
 			name = inits.user.guide_name || [inits.user.first_name,inits.user.last_name+'\'s','Voter Guide'].join(' ')
 		this.menuItems.push( 
