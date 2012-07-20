@@ -15,6 +15,59 @@
   </script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMNyNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                                      `````````````````````                            
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMMyyMMMMMMMhNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                                `````````````````````````````````                      
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMMNoyMMMMMmsNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                             ```````````````````````````````````````                   
+	 MMMMMMMMMMMMMMMMMMMNNNMMMMMMNhohNMMNysNMMMMMNNNMMMMMMMMMMMMMMMMMMMMMMMMMMM/                          ``````````````````````````````````````````````               
+	 MMMy/.`              .+ho-`  .o+. `:s-    `::`                 `-omMMMMMMM/                       ```````````````````````````````````````````````````             
+	 MMs                    `+hh+-:oo/-./+.  `:+:                      .NMMMMMM/                     ```````````````````````````````````````````````````````           
+	 MM+                      `+s//:-:--:-.`-+o.                       `mMMMMMM/                   ```````````````````````````````````````````````````````````         
+	 MM+               ```````.+/+oo+/:.....-:.                        `mMMMMMM/                  ```````````````-/+++++++++++++++++++++++++++/:````````````````       
+	 MM+             `.:/+syhddssyyy+++/:-......`                      `mMMMMMM/                ``````````````:ymNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNh/``````````````      
+	 MM+                    ``+hhdso++o//+//-...--                     `mMMMMMM/               `````````````.hNMMh+++++++++++++++++++++++++++++sNMMm:`````````````     
+	 MM+                      +hds/oo/-...-:---../`                    `mMMMMMM/              `````````````-mMMMN.``````````````````````````````hMMMN/``````````````   
+	 MM+                      :hy:oss:....:/:/-...`                    `mMMMMMM/             ``````````````hMMMMMdssssssssssssssssssssssssssssshMMMMMN.``````````````  
+	 MM+                     :hs+yyy+-.....-/o:.....                   `mMMMMMM/            ``````````````.MMMMmhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhdMMMM+`````````````.  
+	 MM+          ````     `:/. `oh+/::.-/-.:/+:-...`  .//-`           `mMMMMMM/           ```````````````-MMM+.``````````````````````````````````:NMMo``````````````. 
+	 MM+ -hs-.`.odhh+so.   ``   `oyssssoo+-..-://:..` `omdss+:.        `mMMMMMM/           .``````````````-MMM`````````````````````````````````````hMMo````````````````
+	 MM+ shsyhhdyooo/oh/oo+///:/so:/oyhhyo:.-//ossssoosdmysssss+.````` `mMMMMMM/          ````````````````-MMM`````````````````````````````````````hMMo```````````````.
+	 MM+ .:.  -yo//+osd::://++oossyyhdmhssoosssosds++shddyossssymmmmmddhNNNNNNN/          .```````````````-MMM`````````````````````````````````````hMMo````````````````
+	 MM+      :mmdymmy-           `-/osssyssssydosssshmh+/:-osshmNNNNNNNNNNNNNN/          ````````````````-MMM`````````````````````````````````````hMMo````````````````
+	 MM+      .hmNds+`          ./snnnnnnnsssssssssssssso+:--/sssyyyyyhhhhdddddd:        `````````````````-MMM`````````````````````````````````````hMMo````````````````
+	 MM+      `hmNmy`            http://youngvoter.org                `mMMMMMM/          `````````````````-MMMyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyymMMo````````````````
+	 MM+      `dNNd+       -onnnnnnnnnnnsssssssssssmmh+::++/..-:+:.    `mMMMMMM/          ````````````````-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo````````````````
+	 MM+      .dNNd/     .shhhhyhdhddsossssss++yh/+dm+::/+/.....:+/-.  `mMMMMMM/          ````````````````-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo````````````````
+	 MM+      :mNNd+   -smhhyhhydhsyyysssssss+/sdsoshmh++sso+:.../o/+o:`mMMMMMM/          .```````````````-MMMMMMMNNMMMMMMMMMMMMMMMMMMMMMMMMMMNNMMMMMMo````````````````
+	 MM+      /NNNms.-ymmhhydhyhdsossyhyssssso/shhshhmms/:+ss+/-/ss/-:+oNMMMMMM/          .```````````````-MMMMMy:--+NMMMMMMMMMMMMMMMMMMMMMMs:-:oNMMMMo```````````````.
+	 MM+      +NNNmd+dNmdhymdyymNmh++syhysssyyoohmhhmNds/..-:+sssssss+/+dMMMMMM/          ````````````````-MMMMm`````http://busfedcivic.org/`````sMMMMo```````````````.
+	 MM+      +mNNNmyhNdyymmyhmNNmh:ssssyyysydy+ymmhmmhs:..../ssssssossomMMMMMM/           .``````````````-MMMMM+...:dMMMMMMMMMMMMMMMMMMMMMN+...:mMMMMo``````````````` 
+	 MM+      .dNNNNhhmyhmmhdNNNNmo+hsssssyhyhdsyNmdmmys+-..--:+++o+:+ssmMMMMMM/           ```````````````-MMMMMMNmmMMMMMMMMMMMMMMMMMMMMMMMMMNmmMMMMMMo``````````````` 
+	 MM+      `ymNNmhdhdmmddNNNNms/yhsssssdmyhdhdNNNNdssso-./+-......+ssNMMMMMM/            ``````````````-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo`````````````.  
+	 MM+       +dmmmddhNNddmNmmyoodmhssssyysssosdNNNmhsss+-.:s+-....-+somMMMMMM/             `````````````.+++oMMMMMMMd+++++++++++++++++++sMMMMMMMs+++-````````````.   
+	 MM+       `/++/sdmNmhmmdyshydNmysssso/ooo/+dNmdhssss/..-oo-...-:ooomMMMMMM/              `````````````````NMMMMMMy```````````````````:MMMMMMM:````````````````    
+	 MM+            +mNNdmmyodmhhmNmyssssso+ossshhyo--:+s:..-+o+:-:/+sooNMMMMMM/               ````````````````mMMMMMMs```````````````````:NMMMMMN:```````````````     
+	 MM+            /mNNmNdomNmydNNmysssssssssssssssso:--..../o+/+++ssssmMMMMMM/                 ``````````````.//////`````````````````````://///:``````````````       
+	 MM+            +NNNNNNmNNmdmNNNhssssssssssssssssso/+:...-+oo+osssoodMMMMMM/                  ```````````````````````````````````````````````````````````.         
+	 MM+            sNNNNNNNNNNNNNNNdssssssssssssssssssoos/..-+//:/ss/+/dMMMMMM/                     ````````````````````````````````````````````````````````          
+	 MMy`          `sNNNNNNNNNNNNNNNdyssssssssssssssssssoss:.-/+/+ss++/sNMMMMMM/                       ````````````````````````````````````````````````````            
+	 MMMd+-........-hNNNNNNNNNNNNNNNmyyyyyyyyyyyyyyyyyyyssyo::://+oooydNMMMMMMM/                         ```````````````````````````````````````````````               
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                            `````````````````````````````````````````                  
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                              `````````````````````````````````                      
+	                                                                                                                 `````````````````````
+	                                                                                            
+
+
+	                                Images created via http://www.text-image.com/convert/ascii.html and merged via http://jsfiddle.net/mojowen/9cAV9/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+
 </head>
 <body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= @classes %>" >
 
