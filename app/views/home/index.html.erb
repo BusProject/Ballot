@@ -1,148 +1,40 @@
 
-	<div id="main">
-		<div id="find-ballot" class="ballot-section">
-			<h1 class="sectionheading">Find Your Ballot</h1>
-			<div id="enter-address">
-			
-					<div><input data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="enter your address here"><a href="#" class="cancel find-ballot-submit">Submit</a></div>
-			
-			</div><!-- enter address -->
-				
-			<div id="map">
-				<div class="wrapper">
-					<img data-bind="attr: { 'src' : map }">
-				</div>
-				<div style="display:none;" class="confirmation" >
-					Is this right?<br />
-					<a href="#read-ballot" class="fixed-link confirm">Yes</a> |  <a href="" class="cancel clear">No</a>
-				</div>
-			</div><!-- map -->
-			<!-- <a href="#read-ballot" class="fixed-link submit confirm generate">Generate Your Ballot</a> -->
-	
-		</div><!-- find-ballot -->
-	
-		
-		<div id="read-ballot" class="ballot-section" data-bind="visible: choices.notEmpty()">
-			<h1 class="sectionheading">Here's Your Ballot</h1>
-			<br />
 
-			<!-- ko foreach: [ballotMeasures, federalOffices,stateOffices,localOffices] -->
-				<div data-bind="visible: $data.visible, attr: {'class' : $data.class }">
-					<div class="candidates" data-bind="template: { name: 'choice', foreach: $data.contests }"></div><!-- candidates-->
-				</div>
-			<!-- /ko -->
-
+	<div id="find-ballot" class="ballot-section">
+		<h1 class="sectionheading">Find Your Ballot</h1>
+		<div id="enter-address">
 		
-		</div><!-- read-ballot -->
+				<div><input data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="enter your address here"><a href="#" class="cancel find-ballot-submit">Submit</a></div>
+		
+		</div><!-- enter address -->
+			
+		<div id="map">
+			<div class="wrapper">
+				<img data-bind="attr: { 'src' : map }">
+			</div>
+			<div style="display:none;" class="confirmation" >
+				Is this right?<br />
+				<a href="#read-ballot" class="fixed-link confirm">Yes</a> |  <a href="" class="cancel clear">No</a>
+			</div>
+		</div><!-- map -->
+		<!-- <a href="#read-ballot" class="fixed-link submit confirm generate">Generate Your Ballot</a> -->
+
+	</div><!-- find-ballot -->
+
 	
-	
-	
-	</div><!-- main -->
+	<div id="read-ballot"  style="display:none;" class="ballot-section" data-bind="visible: choices.notEmpty()">
+		<h1 class="sectionheading">Here's Your Ballot</h1>
+		<br />
+
+		<!-- ko foreach: [ballotMeasures, federalOffices,stateOffices,localOffices] -->
+			<div data-bind="visible: $data.visible, attr: {'class' : $data.class }">
+				<div class="candidates" data-bind="template: { name: 'choice', foreach: $data.contests }"></div><!-- candidates-->
+			</div>
+		<!-- /ko -->
+		
+	</div><!-- read-ballot -->
+	<h1 class="sectionheading" style="display:none;" data-bind="visible: !fetch() ">Loading...</h1>
 
 <script id="choice" type="text/html">
-	<div class="row" data-bind="css: { selected: $root.selected() == $data, complete: $data.feedback.you(), commentable: $data.commentable }">
-		<div data-bind="visible: $data.commentable, if:  $data.commentable" class="counter">
-			<span data-bind="text: yes().feedback().length"></span>
-			<div >&#11014;</div>
-			<div style="line-height: 1px">&#11015</div>
-			<span data-bind="text: no().feedback().length"></span>
-		</div>
-
-		<h1 class="title" data-bind="text: $data.contest"></h1>
-		<div class="body">
-			<div class="explanation" data-bind="text: $data.description"></div>
-			<div class="optionholder">
-				<!-- ko foreach: $data.options -->
-				<div class="option">
-					<h1 class="yes-no" data-bind="text: $data.name"></h1>
-					<img data-bind="src: $data.photo">
-					<div class="blurb" data-bind="text: $data.blurb "></div>
-
-					<div class="faces">
-						<div class="minicounter" data-bind="visible: $parent.commentable">
-							<div data-bind="html: $data.feedback().length+' '+( $data.feedback().length == 1 ? 'person' : 'people' )+' '+($data.type == 'yes' ? 'support' : 'oppose')+( $data.feedback().length == 1 ? 's' : '' )+'<br />'+$parent.contest"></div>
-						</div>
-						<!-- ko foreach: $data.feedback.five -->
-							<img class="miniimage" data-bind="src: $data.image">
-						<!-- /ko -->
-					</div>
-				</div>
-				<!-- /ko -->
-				<div style="clear: both;"></div>
-			</div>
-
-			<div class="yourFeedback" data-bind="visible: $data.commentable && ! feedback.you() ">
-				<div class="buttons" >
-					<p>How will you be voting?</p>
-					<!-- ko foreach: $data.options -->
-						<a href="" class="pick" data-bind="text: $data.name, addClass: $data.type "></a>
-					<!-- /ko -->
-					<br/>
-					<a href="#" class="submitFeedback submit">SUBMIT</a>
-				</div>
-				<textarea type="text" class="comment" data-bind="elastic: true, attr: {disabled: current_user.id == 'unauthenticated', placeholder: current_user.id == 'unauthenticated' ? 'Log in to comment' : 'What do you think?'}" /></textarea>
-			</div>
-			<div class="yourFeedback" data-bind="if: $data.commentable && feedback.you() != null, visible: $data.commentable && feedback.you() != null ">
-				<h1 data-bind="text: '&ldquo;'+feedback.you().comment+'&rdquo;' " ></h1>
-				<div class="head" data-bind="addClass: feedback.you().type">
-					<div class="overlayBg"></div>
-					<div class="overlayText" data-bind="text: feedback.you().type"></div>
-					<img data-bind="src: feedback.you().image">
-				</div>
-				<h3 data-bind="text: '-'+feedback.you().name"></h3>
-				<span class="remove edit link" >Edit</span>
-					<span style="color:white">&nbsp;|&nbsp;</span>
-				<span class="remove link" >Remove</span>
-				
-			</div>
-
-
-			<div class="commentTitle" data-bind="visible: $data.commentable ">
-				What Others Are Saying
-				<select data-bind="value: $data.mode">
-					<option value="normal">Sort By...</option>
-					<option value="best">Most Helpful</option>
-					<option value="friends">Your Friends</option>
-					<option value="yes" >In Support</option>
-					<option value="no" >In Opposition</option>
-				</select>
-				<div class="helper" data-bind="visible: $data.mode() == 'friends' && current_user.id == 'unauthenticated' ">
-					<%= link_to "Sign in with Facebook", omniauth_authorize_path('user', :facebook) %><br />to see your friends
-				</div>
-			</div>
-
-			<ul data-bind="visible: $data.commentable, foreach: feedback.everyone" class="feedback">
-				<li data-bind="addClass: $data.type ">
-
-					<div class="head">
-						<div class="overlayBg"></div>
-						<div class="overlayText" data-bind="text: $data.type"></div>
-						<img data-bind="src: $data.image">
-					</div>
-					<div class="message" data-bind="text: $data.comment">
-					</div>
-					<div class="foot">
-							<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
-						<br />
-							<div class="ask">
-								Was this helpful?
-								<span class="helpful link" >Yes</span>
-									&nbsp;|&nbsp;
-								<span class="not link">No</span>
-									&nbsp;|&nbsp;
-								<span class="flag link">Flag</span>
-							</div>
-					</div>
-
-				</li>
-			</ul>
-
-			<div data-bind="visible: feedback.everyone().length < 1">
-				...
-			</div>
-
-			<div style="clear:both;"></div>
-
-		</div>
-	</div>
+	<%=  render 'choice/single' %>
 </script>
