@@ -16,7 +16,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body class="<%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> " >
+<body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= @classes %>" >
 
 	<div id="container">
 		<div id="page">
