@@ -1,0 +1,5 @@
+body.no-script .faces, body.no-script .yourFeedback, body.no-script .feedback, body.no-script .commentTitle, body.no-script .no-comment {
+	display: none;
+}
+body.no-script .account { margin-top: 56px; }
+body.no-script .row .body { display: block }
