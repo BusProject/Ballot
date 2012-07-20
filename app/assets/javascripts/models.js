@@ -122,7 +122,7 @@ function Feedback(data) {
 		this.comment = data.comment
 		this.yourFeedback = data.user_id == current_user.id
 		this.image = data.user.image
-		this.url = data.user.url
+		this.url = data.user.profile
 		this.fb = data.user.fb
 		this.name =  data.user.first_name+' '+data.user.last_name
 		this.type = data.type
