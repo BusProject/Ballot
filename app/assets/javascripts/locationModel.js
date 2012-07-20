@@ -8,6 +8,7 @@ function locationModel(data) {
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ''
 	this.choices = ko.observableArray([])
+	this.fetch = ko.observable(true)
 	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
 
 	this.friends = ko.observableArray([])
@@ -121,10 +122,12 @@ function locationModel(data) {
 		var lat = this.lat(),
 			lng = this.lng(),
 			choices = this.choices,
-			geolocated = this.geolocated()
+			geolocated = this.geolocated(),
+			fetch = this.fetch
 
-		if( geolocated && choices().length == 0 ) {
-			this.getBallotChoices(lat,lng,choices,function() { $('.row:not(.complete):first .title').click() })
+		if( geolocated && choices().length < 1 && fetch() ) {
+			fetch(false)
+			this.getBallotChoices(lat,lng,choices,function() { fetch(true); $('.row:not(.complete):first .title').click() })
 		}
 
 	}, this)
