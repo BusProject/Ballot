@@ -1,5 +1,17 @@
 class ChoiceController < ApplicationController
   def show
+    @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' '))
+
+    raise ActionController::RoutingError.new('Not Found') if @choice.nil?
+
+    @classes = 'single'
+    result = {:state => 'single', :choices => [@choice]}
+
+    @config = result.to_json( json_include )
+
+  end
+
+  def index
     
     districts = params['q'].nil? ? Cicero.find(params['l']) : params['q'].split('|')
     
