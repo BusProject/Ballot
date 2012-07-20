@@ -11,6 +11,12 @@ class User < ActiveRecord::Base
 
   # attr_accessible :title, :body
   has_many :feedback
+
+  after_initialize :set_url
+  
+  def set_url
+    self[:profile] = '/'+self.to_url
+  end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token.extra.raw_info
@@ -40,6 +46,12 @@ class User < ActiveRecord::Base
         user.email = data["email"]
       end
     end
-  end  
+  end
+  
+  def to_url
+    return self.id.to_s(2).to_i.to_s(16) unless self.new_record? # A simple way of creating funky looking URLs out of User IDs
+    return nil
+  end
+  
 
 end
