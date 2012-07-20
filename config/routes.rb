@@ -16,7 +16,7 @@ Ballot::Application.routes.draw do
 
   # match '/image' => 'draw#make'
   
-  match '/:geography/:contest' => 'choice#show'
+  match '/:geography/:contest' => 'choice#show', :as => 'contest'
   
   match '/:id' => 'user#show', :as => 'profile'
 
