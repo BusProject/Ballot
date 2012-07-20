@@ -18,7 +18,7 @@ Ballot::Application.routes.draw do
   
   match '/:geography/:contest' => 'choice#show', :as => 'contest'
   
-  match '/:id' => 'user#show', :as => 'profile'
+  match '/:id' => 'choice#profile', :as => 'profile'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

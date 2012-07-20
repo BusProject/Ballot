@@ -83,7 +83,7 @@
 				<img src="<%= asset_path 'menutop.png' %>" class="menutop">
 					<ul data-bind="foreach: menuItems">
 						<li data-bind="overwrite: $data.html ">
-							<a data-bind="css: { active: false }, text: ($index()+1)+' '+$data.name, attr: {href: $data.id }"></a>
+							<a data-bind="css: { active: false }, text: ( inits.state ? '' : ($index()+1) )+' '+$data.name, attr: {href: $data.id }"></a>
 							<div style="display:none;" data-bind="slide: $parent.active() == $data.id " class="menu-inner">
 								<div class="arrow"></div>
 								<p>Get the low down on everything on your ballot for the upcoming election.</p>

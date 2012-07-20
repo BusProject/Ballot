@@ -121,7 +121,8 @@ function Feedback(data) {
 		this.id = data.id
 		this.support = data.support
 		this.comment = data.comment
-		this.yourFeedback = data.user_id == current_user.id
+		var user = typeof inits.user != 'undefined' ? inits.user.id : current_user.id
+		this.yourFeedback = data.user_id == user
 		this.image = data.user.image
 		this.url = data.user.profile
 		this.fb = data.user.fb

@@ -37,6 +37,7 @@ html {
 }
 
 body {
+	height: 100%;
 	padding: 40px 0 0;
 	margin:0;
 	background: rgba(76,76,76,1);
@@ -52,6 +53,7 @@ body {
 }
 
 #container {
+	height: 100%;
 	width:90%;
 	max-width:960px;
 	clear:both;
@@ -64,7 +66,7 @@ body {
 	background:white;
 	width:936px;
 	border: 2px solid #c1c1c1;
-	height:auto;
+	height:100%;
 }
 
 .clearfix:after {
@@ -149,7 +151,7 @@ h2 {
 	margin-top:5%;
 	margin-left: 16.6666667%;
 	padding-bottom:100px;
-	height:auto;
+	height:100%;
 }
 
 /******** Instructions *******/
@@ -239,6 +241,19 @@ a, a:link, a:visited, a:active {
 	padding: 0;
 	line-height: 16px;
 }
+.share-container {
+	border-bottom: 1px solid #706868;
+}
+input.lil {
+	font-family: 'Rokkit', sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	color: #747474;
+	border-bottom: 0;
+	border: none;
+	width: 90%;
+	padding: 2px 4px;
+}
 
 /******** Ballot Sections *******/
 
@@ -253,7 +268,6 @@ input {
 	border-top: none;
 	border-left:none;
 	border-right:none;
-	border-bottom:1px dotted #99C337;
 	width:55%;
 	font-family:'Waiting for the sunrise', 'Rokkit', serif;
 	color:#99C337;
@@ -262,7 +276,6 @@ input {
 
 input:focus {
 	outline:none;
-	border-bottom:1px dotted #99C337;
 }	
 
 button {
@@ -513,6 +526,7 @@ a.find-ballot-submit {
 		margin-left: 34px;
 		padding-left: 8px;
 		padding-right: 20px;
+		width: 49%;
 	}
 	.body .optionholder {
 		position: relative;
@@ -520,7 +534,7 @@ a.find-ballot-submit {
 	}
 
 	.option {
-		width: 47%;
+		width: 44%;
 		box-sizing: border-box;
         -moz-box-sizing: border-box;
 		padding: 0 0 60px 34px;
@@ -635,6 +649,10 @@ a.find-ballot-submit {
 		border-bottom: #e5a87f 1px solid;
 		margin: 0 34px;
 		padding: 20px 0 10px;
+	}
+	.yourFeedback .head img {
+		width: 50px;
+		height: 50px;
 	}
 	.yourFeedback .head {
 	    padding: 20px 0 10px;

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   # attr_accessible :title, :body
   has_many :feedback
+  has_many :options, :through => :feedback
+  has_many :choices, :through => :options
 
   after_initialize :set_url
   

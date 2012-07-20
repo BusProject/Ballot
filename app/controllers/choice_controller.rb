@@ -14,6 +14,19 @@ class ChoiceController < ApplicationController
       }
     ]
   end
+  
+  def profile
+    @user = User.find( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
+
+    @choices = @user.choices
+    @classes = 'profile'
+
+    result = {:state => @classes, :choices => @choices, :user => @user }
+
+    @config = result.to_json( json_include )
+    
+  end
+  
 
   def show
     @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' '))
@@ -21,7 +34,7 @@ class ChoiceController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') if @choice.nil?
 
     @classes = 'single'
-    result = {:state => 'single', :choices => [@choice]}
+    result = {:state => @classes, :choices => [@choice]}
 
     @config = result.to_json( json_include )
 

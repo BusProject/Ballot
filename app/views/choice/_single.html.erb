@@ -1,4 +1,5 @@
 <% choice = choice || Choice.new %>
+<% user = user || nil %>
 <% choice.options.new if choice.new_record?  %>
 
 
@@ -63,22 +64,30 @@
 				</div>
 				<textarea type="text" class="comment" data-bind="elastic: true, attr: {disabled: current_user.id == 'unauthenticated', placeholder: current_user.id == 'unauthenticated' ? 'Log in to comment' : 'What do you think?'}" /></textarea>
 			</div>
-			<div class="yourFeedback" data-bind="if: $data.commentable && you() != null, visible: $data.commentable && you() != null ">
-				<h1 data-bind="text: '&ldquo;'+you().comment+'&rdquo;', visible: you().comment.length > 0 " ></h1>
+			<div class="yourFeedback <%= 'has_user' unless user.nil? %>" data-bind="if: $data.commentable && you() != null, visible: $data.commentable && you() != null">
+				<h1 data-bind="text: '&ldquo;'+you().comment+'&rdquo;', visible: you().comment.length > 0 " >
+					<% unless user.nil? %>
+						<% feedback = choice.options.map{ |o| o.feedback }.flatten.select{ |f| f.user_id == user.id }.first  %>
+						<%= '"'+feedback.comment+'"' unless feedback.nil? %>
+					<% end %>
+				</h1>
 				<div class="head" data-bind="addClass: you().type">
 					<div class="overlayBg"></div>
 					<div class="overlayText" data-bind="text: you().type"></div>
-					<img data-bind="src: you().image">
+					<img data-bind="src: you().image" src="<%= user.image unless user.nil? %>">
 				</div>
-				<h3 data-bind="text: '-'+you().name"></h3>
-				<span class="remove edit link" >Edit</span>
-					<span style="color:white">&nbsp;|&nbsp;</span>
-				<span class="remove link" >Remove</span>
-			
+				<h3 data-bind="text: '-'+you().name">
+					<%= '-'+user.first_name+' '+user.last_name unless user.nil? %>
+				</h3>
+				<div class="controls" data-bind="visible: !inits.user || current_user.id == inits.user.id ">
+					<span class="remove edit link"  >Edit</span>
+						<span style="color:white">&nbsp;|&nbsp;</span>
+					<span class="remove link" >Remove</span>
+				</div>
 			</div>
 
 
-			<div class="commentTitle" data-bind="visible: $data.commentable ">
+			<div class="commentTitle" data-bind="visible: $data.commentable && feedback.everyone().length > 0  ">
 				What Others Are Saying
 				<select data-bind="value: $data.mode">
 					<option value="normal">Sort By...</option>
@@ -118,9 +127,6 @@
 				</li>
 			</ul>
 
-			<div class="no-comment" data-bind="visible: feedback.everyone().length < 1">
-				...
-			</div>
 		<% end %>
 		<div style="clear:both;"></div>
 
