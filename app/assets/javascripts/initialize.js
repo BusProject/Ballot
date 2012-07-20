@@ -9,12 +9,12 @@ function initialize() {
 			$('body').append('<div id="locationNotice" style="opacity: .9; font-size: 50px;'+display+position+'z-index: 1; position: fixed; background: #333;  color: white; border: 4px solid black; padding: 10px;"><a onclick="$(this).parent().slideUp(\'slow\',function(){ $(this).remove() } ); return false;" style="cursor: pointer; float: right; margin: -10px; font-size: 12px; font-family: sans-serif;">close</a>Click '+verb+'<p style="font-size: 14px; color: #fff;">Your location will not be stored - we\'re<br />just going to use it to build your ballot</p></div>').find('#locationNotice').slideDown('slow')
 			fired = true
 
-			// $('body').bind('click.location-notice', function() { 
-			// 	$('#locationNotice').slideUp('slow',function(){$(this).remove()})
-			// 	$(this).unbind('click.location-notice')
-			// })
+			$('body').bind('click.location-notice touchstart.location-notice', function() { 
+				$('#locationNotice').slideUp('slow',function(){$(this).remove()})
+				$(this).unbind('click.location-notice touchstart.location-notice')
+			})
 
-			//setTimeout(function(){ $('#locationNotice').slideUp('slow',function(){$(this).remove()}) },timeout)
+			setTimeout(function(){ $('#locationNotice').slideUp('slow',function(){$(this).remove()}) },timeout)
 		}
 		
 	}

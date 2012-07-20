@@ -1,22 +1,19 @@
-$(document).on({ // binding clearing a location
-	click: function(e) {
+$(document).on('click touchend','.cancel',function(e) { // binding clearing a location
 		e.preventDefault();
 		var $this = $(this),
 			location = yourLocation
 		location.latlng('38.7, -95.7')
 		location.geocoded(false)
 		location.choices([])
-	}
-},'.cancel')
-.on('click','.clear',function(e) {
+})
+.on('click touchend','.clear',function(e) {
 	yourLocation.address('')
 	$('#enter-address input').select()
 })
 .on('keypress','#enter-address input',function(e) {
 	if( e.keyCode == 13 ) $(this).next('a').click()
 })
-.on({ // Binding the click-to-change issue
-	click: function(e) {
+.on('click touchend', 'h1.title', function(e) {
 		if( inits.state == 'profile' || inits.state == 'single' ) return false
 
 		var ctx = ko.contextFor(this),
@@ -36,28 +33,29 @@ $(document).on({ // binding clearing a location
 			// For scrolling to the top after it's done
 			// setTimeout( function() { $(document).scrollTop( $this.position().top ) }, 500)
 		}).parents(document) 
-	}
-},'h1.title')
-.on('click','#instructions ul li a, .fixed-link',function(e){
+})
+.on('click touchend','#instructions ul li a, .fixed-link',function(e){
 	$this = $(this)
 	var href = $this.attr('href')
 	if( href[0] == '#' ) {
+		var top = $(href).position().top
 		e.preventDefault()
-		$(document).scrollTop( $(href).position().top )
+
+		$(document).scrollTop( top ).trigger('scroll')
 	}
 })
-.on('click','.more',function(e){
+.on('click touchend','.more',function(e){
 	e.preventDefault()
 	ctx = ko.contextFor(this)
 	ctx.$parent.readmore(true)
 	$(this).hide()
 })
-.on('click','.pick',function(e) {
+.on('click touchend','.pick',function(e) {
 	e.preventDefault()
 	$('.picked').removeClass('picked')
 	$(this).addClass('picked')
 })
-.on('click','.submitFeedback',function(e){
+.on('click ','.submitFeedback',function(e){
 	e.preventDefault()
 	var $this = $(this), $parent = $this.parents('.yourFeedback') 
 	if( current_user.id == 'unauthenticated' ) {
@@ -106,11 +104,10 @@ $(document).on({ // binding clearing a location
 		})
 	}
 })
-.on('click','body.not_logged_in .yourFeedback',function(e) {
-	
+.on('click ','body.not_logged_in .yourFeedback',function(e) {
 	window.location = $('.account a').attr('href')
 })
-.on('click','.yourFeedback .remove',function(e) {
+.on('click touchend','.yourFeedback .remove',function(e) {
 	var $data = ko.dataFor(this),
 		option = $data.options.filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],
 		$this = $(this)
@@ -128,7 +125,11 @@ $(document).on({ // binding clearing a location
 		}
 	)
 })
-.on('click','.feedback .link',function(e) {
+.on({
+	click: function(e) { $(this).select() },
+	keypress: function(e) { e.preventDefault() }
+}, 'input.link')
+.on('click touchend','.feedback .link',function(e) {
 
 	e.preventDefault()
 
