@@ -105,7 +105,7 @@ function Option(data,args) {
 				friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : [],
 				find_friends = feedback.filter( function(el) { return friends.indexOf(el.fb) !== -1; } )
 
-				if( find_friends.length < 5 ) find_friends = find_friends.concat( feedback.sort(function() {return 0.5 - Math.random()}).slice(0, 5 - find_friends.length  ) )
+				if( find_friends.length < 5 ) find_friends = find_friends.concat( feedback.filter( function(el) { return friends.indexOf(el.fb) === -1; } ).sort(function() {return 0.5 - Math.random()}).slice(0, 5 - find_friends.length  ) )
 
 				return find_friends
 			
