@@ -4,5 +4,5 @@ body.single .row.commentable h1.title::before, body.single .row.commentable h1.t
 body.profile .row.commentable h1.title::before, body.profile .row.commentable h1.title::after { content: ''; width: 0; height: 0; border: 0; }
 body.single .row h1.title, body.single .row.commentable h1.title,
 body.profile .row h1.title, body.profile .row.commentable h1.title { text-indent: 0; background: none; font-size: 60px; color: #d37a3c; text-align: center; cursor: default; }
-body.single div.explanation, body.single .option div.blurb, body.single .option h1,
-body.profile div.explanation, body.profile .option div.blurb, body.profile .option h1 { color: #d37a3c }
+body.single div.explanation, body.single .option div.blurb, body.single .option h1, body.single .foot,
+body.profile div.explanation, body.profile .option div.blurb, body.profile .option h1, body.profile .foot { color: #d37a3c }
