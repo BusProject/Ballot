@@ -134,8 +134,8 @@ function Feedback(data) {
 		this.type = data.type
 		this.updated = data.updated_at != data.created_at
 		var useless = data.useless || '', useful = data.useful || ''
-		useless = useless.split(',').length + ( data.useless.length > 0 ? 1 : 0 )
-		useful = useful.split(',').length +  ( data.useful.length > 0 ? 1 : 0 )
+		useless = useless.split(',').length + ( useless.length > 0 ? 1 : 0 )
+		useful = useful.split(',').length +  ( useful.length > 0 ? 1 : 0 )
 		this.usefulness = ko.observable( useful - useless )
 
 		var date = new Date(data.updated_at),
