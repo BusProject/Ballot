@@ -83,9 +83,9 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 		// 	return false;
 		// }
 
-		$.ajax({
-			url: inits.root+'feedback/save',
-			data: { feedback: [ 
+		$.post(
+			inits.root+'feedback/save',
+			{ feedback: [ 
 					{
 						option_id: parseInt(option_id),
 						choice_id: parseInt(choice_id),
@@ -94,14 +94,14 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 					}
 				]
 			},
-			success: function(response) {
+			function(response) {
 				if( response.success ) {
 					option.feedback.push( Feedback( { comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type } ) )
 					$comment.val('')
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
 				}
 			}
-		})
+		)
 	}
 })
 .on('click ','body.not_logged_in .yourFeedback',function(e) {
@@ -118,9 +118,8 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 	}
 
 	if( $data.you().id != 'undefined' ) $.post(
-		inits.root+'feedback/'+$data.you().id,
+		inits.root+'feedback/'+$data.you().id+'/remove',
 		function(response){
-			
 			option.feedback.remove( $data.you() )
 		}
 	)
