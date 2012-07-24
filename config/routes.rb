@@ -13,7 +13,7 @@ Ballot::Application.routes.draw do
   match '/lookup' => 'choice#index'
   match '/fetch' => 'choice#retrieve'
 
-  match '/image' => 'draw#make'
+  match '/image' => 'draw#make', :as => 'draw'
   
   match '/:geography/:contest' => 'choice#show', :as => 'contest'
   
