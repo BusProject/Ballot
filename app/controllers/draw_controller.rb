@@ -1,8 +1,11 @@
 
 class DrawController < ApplicationController
+
+  
   def make
     require 'RMagick'
 
+    # allow_forgery_protection
 
     # For storing the file
     # If we're storing the file
@@ -12,12 +15,13 @@ class DrawController < ApplicationController
     
     msg = Magick::Draw.new
     msg.font_size(24).font('lib/assets/gothic.ttf').fill('white')
+    text = params[:message] || ' '
     
     if params[:format] == 'png'
       img = Magick::Image.read("lib/assets/done.png").first
       thumb = img.scale(0.25)
       
-      msg.text(50, 160, params[:message])
+      msg.text(50, 160, text)
       msg.draw thumb
 
       # For storing the file
@@ -37,7 +41,7 @@ class DrawController < ApplicationController
         anim.new_image(200, 100) { self.format = 'gif'; self.background_color = 'red' }
         anim.last.composite!( frame,0,0, Magick::OverCompositeOp)
 
-        msg.text(30, 100, params[:message])
+        msg.text(30, 100, text )
         msg.draw anim.last
       end
 
@@ -47,6 +51,7 @@ class DrawController < ApplicationController
     respond_to do |format|
       format.png { render :text =>  thumb.to_blob }
       format.gif { render :text =>  anim.to_blob }
+      format.all { render :text =>  request.env['HTTP_REFERER'] }
       #format.png { render :text => open(@path, "rb").read }
     end
   end
