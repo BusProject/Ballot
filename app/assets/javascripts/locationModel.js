@@ -190,7 +190,7 @@ function locationModel(data) {
 		var url = document.location
 		this.menuItems.push( 
 			MenuItem(inits.root,'Find Your Ballot'),
-			MenuItem(current_user.url,'Return to Your Ballot'),
+			MenuItem(current_user.url,'Your Voter Guide'),
 			MenuItem(null,'Share This Ballot','<div class="container share-container">Share this Page<br>'+this.share(url)+'</div>'),
 			MenuItem(null,'Other Options','<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>')
 		)
@@ -201,7 +201,7 @@ function locationModel(data) {
 			name = inits.user.guide_name || [inits.user.first_name,inits.user.last_name+'\'s','Voter Guide'].join(' ')
 		this.menuItems.push( 
 			MenuItem(inits.root,'Find Your Ballot'),
-			MenuItem(current_user.url,'Return to Your Ballot'),
+			MenuItem(current_user.url,'Your Voter Guide'),
 			MenuItem(null,'Share This Ballot','<div class="container share-container">Share this Guide<br>'+this.share(url,name)+'</div>'),
 			MenuItem(null,'Other Options','<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>')
 		)
