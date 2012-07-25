@@ -103,11 +103,11 @@ function Option(data,args) {
 		this.feedback.five = ko.computed(function() {
 			var feedback = this.feedback(),
 				friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : [],
-				find_friends = feedback.filter( function(el) { return friends.indexOf(el.fb) !== -1 || el.yourFeedback } ).sort(function() {return 0.5 - Math.random()}).slice(0, 5 ) )
+				find_friends = feedback.filter( function(el) { return friends.indexOf(el.fb) !== -1 || el.yourFeedback } ).sort(function() {return 0.5 - Math.random()}).slice(0, 5 );
 
 				if( find_friends.length < 5 ) find_friends = find_friends.concat( feedback.filter( function(el) { return friends.indexOf(el.fb) === -1 } ).sort(function() {return 0.5 - Math.random()}).slice(0, 5 - find_friends.length  ) )
 
-				return find_friends.slice(0,5)
+				return find_friends
 			
 		},this)
 
