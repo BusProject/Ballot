@@ -6,14 +6,14 @@ Ballot::Application.routes.draw do
 
   match '/auth/:provider/callback' => 'authentications#create'
   
-  match '/feedback/save' => 'feedback#update', :via => :post
-  match '/feedback/:id/remove' => 'feedback#delete', :via => :post
-  match '/feedback/:id/:flavor' => 'feedback#rate', :via => :post
+  match '/feedback/save' => 'feedback#update', :via => :post, :as => 'save_feedback'
+  match '/feedback/:id/remove' => 'feedback#delete', :via => :post, :as => 'remove_feedback'
+  match '/feedback/:id/:flavor' => 'feedback#rate', :via => :post, :as => 'rate_feedback'
   
   match '/lookup' => 'choice#index'
   match '/fetch' => 'choice#retrieve'
 
-  match '/image' => 'draw#make', :as => 'draw'
+  match '/better-image' => 'draw#make', :as => 'draw'
   
   match '/:geography/:contest' => 'choice#show', :as => 'contest'
   
