@@ -156,7 +156,7 @@ function locationModel(data) {
 
 	this.share = function(url,name,msg) {
 		var url = url || document.location.host, msg = msg || '', name = name || 'The Ballot | Your Social Voter Guide'
-		url = document.location.protocol+'//'+url
+		url = document.location.protocol+'//'+url.replace(/http:\/\//g,'')
 		string = '<input class="link" value="'+url+'" type="text" >'
 		string += '<div class="icons">'
 		string += '<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u='+escape(url)+'" class="fbook"><div></div></a>'
