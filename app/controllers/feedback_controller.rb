@@ -48,22 +48,23 @@ class FeedbackController < ApplicationController
     
       flag = flag.split(',')
         
-          verb = 'mark as '+params[:flavor]
-          verb = 'flag' if params[:flavor] == 'flag'
+      verb = 'mark something as '+params[:flavor]
+      verb = 'flag' if params[:flavor] == 'flag'
 
-          if flag.length == 0
-            msg = ''
-          else
-            noun = flag.length  == 1 ? 'person' : 'people'
-            plural = flag.length == 1 ? 's' : ''
-            msg = ', '+flag.length.to_s+' '+noun+' agree'+plural
-          end
-        
+      if flag.length == 0
+        msg = ''
+      else
+        noun = flag.length  == 1 ? 'person' : 'people'
+        plural = flag.length == 1 ? 's' : ''
+        msg = ', '+flag.length.to_s+' '+noun+' agree'+plural
+      end
+      msg = ', we\'ll review soon' if params[:flavor] == 'flag'
+          
         
         
           if user_signed_in?
             if current_user.id == feedback.user_id
-              render :json => {:success => false, :message => 'You can\'t '+verb+' your own thing and there isn\'t a UI so you\'re trying to backdoor this - just stop it' }, :callback  => params['callback']
+              render :json => {:success => false, :message => 'You can\'t '+verb+' your own thing' }, :callback  => params['callback']
             else
               if flag.index( current_user.id.to_s ).nil?
                 flag.push(current_user.id)
