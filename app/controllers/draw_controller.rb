@@ -18,7 +18,7 @@ class DrawController < ApplicationController
     text = params[:message] || ' '
     
     if params[:format] == 'png'
-      img = Magick::Image.read("lib/assets/done.png").first
+      img = Magick::Image.read("lib/assets/Done.png").first
       thumb = img.scale(0.25)
       
       msg.text(50, 160, text)
