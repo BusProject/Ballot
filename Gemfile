@@ -15,6 +15,7 @@ end
 
 gem 'foreman'
 
+gem 'aws-s3'
 
 gem 'rest-client'
 
