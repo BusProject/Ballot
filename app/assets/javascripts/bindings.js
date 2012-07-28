@@ -124,10 +124,6 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 		}
 	)
 })
-.on({
-	click: function(e) { $(this).select() },
-	keypress: function(e) { e.preventDefault() }
-}, 'input.link')
 .on('click touchend','.feedback .link',function(e) {
 
 	e.preventDefault()
