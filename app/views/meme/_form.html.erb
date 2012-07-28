@@ -1,0 +1,42 @@
+<%= javascript_include_tag "meme" %>
+<script type="text/javascript" charset="utf-8">
+	makeMeme( 
+		<%= raw @meme.to_json(:include => [:option, :feedback] ) %>,
+		'<%= asset_path( 'yes/1.jpg' ).gsub('yes/1.jpg','') %>', 
+		'<%= ['no','against','opposed'].index( @meme.option.name.downcase ) ? 'no' : 'yes' %>'
+	)
+</script>
+
+<div id="meme" class="<%= ['no','against','opposed'].index( @meme.option.name.downcase ) ? 'no' : 'yes' %>">
+	<h1>Meme Your Vote</h1>
+
+
+	<textarea data-bind="value: quote, valueUpdate: 'afterkeydown'"></textarea>
+
+
+	<div class="choose">
+		<h2>Choose Your Text</h2>
+		<p>Characters Remaining: <span data-bind="text: limit-quote().length"></span> <span style="color: red; display: none" data-bind="visible: limit < quote().length">Too Many!</span></p>
+		<p><em style="font-size: 10px">I promise that my comments don’t advocate<br />for any party or candidate.</em></p>
+	</div>
+
+	<div class="matt" >
+		<div class="preview"></div>
+		<div class="preview-load" data-bind="visible: loading">Loading...</div>
+	</div>
+
+
+	<div class="theme">
+		<h2>Choose Your Theme</h2>
+	    <div class="pick" data-bind="foreach: choices">
+	        <div data-bind="css: { selected: $parent.theme() == $data }, style: { backgroundImage: 'url('+$data+')' } " ></div>
+	    </div>
+	</div>
+
+	<div class="share">
+		<h2>Share Your Vote</h2>
+		<div class="share-inner"></div>
+	</div>
+
+
+</div>
