@@ -11,5 +11,5 @@ class Feedback < ActiveRecord::Base
   belongs_to :user
   belongs_to :option
   belongs_to :choice
-  
+  has_many :memes
 end
