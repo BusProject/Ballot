@@ -4,9 +4,10 @@
 <%= javascript_include_tag "meme" %>
 <%= javascript_include_tag "makeShare" %>
 <script type="text/javascript" charset="utf-8">
+	<% path = asset_path( 'yes/1.jpg' ) %>
 	makeMeme( 
 		<%= raw @meme.to_json(:include => [:option, :feedback] ) %>,
-		'<%= asset_path( 'yes/1.jpg' ).gsub('yes/1.jpg','') %>', 
+		'<%= path.slice(0, path.index('yes/1.jpg') )%>', 
 		'<%= ['no','against','opposed'].index( @meme.option.name.downcase ) ? 'no' : 'yes' %>'
 	)
 </script>
