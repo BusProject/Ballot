@@ -5,16 +5,18 @@ Ballot::Application.routes.draw do
   root :to => "home#index"
 
   match '/auth/:provider/callback' => 'authentications#create'
+  match '/lookup' => 'choice#index'
+  match '/fetch' => 'choice#retrieve'
   
   match '/feedback/save' => 'feedback#update', :via => :post, :as => 'save_feedback'
   match '/feedback/:id/remove' => 'feedback#delete', :via => :post, :as => 'remove_feedback'
   match '/feedback/:id/:flavor' => 'feedback#rate', :via => :post, :as => 'rate_feedback'
-  
-  match '/lookup' => 'choice#index'
-  match '/fetch' => 'choice#retrieve'
 
-  match '/image' => 'draw#make', :as => 'draw'
-  
+  match '/m/:id/new' => 'meme#new', :via => :get, :as => 'meme_new'
+  match '/m/:id/new' => 'meme#new', :via => :post, :as => 'meme_create'
+  match '/m/:id/preview' => 'meme#show', :via => :post, :as => 'meme_preview'
+  match '/m/:id' => 'meme#show', :via => :get, :as => 'meme_show'
+
   match '/:geography/:contest' => 'choice#show', :as => 'contest'
   
   match '/:id' => 'choice#profile', :as => 'profile'
