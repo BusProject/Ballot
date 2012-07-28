@@ -365,7 +365,7 @@ class Meme < ActiveRecord::Base
           :chars => 18,
           :fill => 'white',
           :shadow => true,
-          :text => text.gsub(/is too damn high/i,'')
+          :text => text.gsub(/is too damn high/i,'').gsub(/too damn high/i,'')
         },
         'vote' => {
           :font => 'lib/assets/ONRAMP.ttf',
@@ -411,7 +411,7 @@ class Meme < ActiveRecord::Base
         shadow.font_size( section[:size]  ).font( section[:font] ).fill('#747474').text_align( align )
       end
 
-      text = section[:text].strip()
+      text = section[:text].strip().gsub("''''","")
       
       unless text.empty?
         row = 0

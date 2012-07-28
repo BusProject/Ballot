@@ -107,6 +107,17 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 .on('click ','body.not_logged_in .yourFeedback',function(e) {
 	window.location = $('.account a').attr('href')
 })
+.on('click touchend','.yourFeedback .meme',function(e) {
+	var $data = ko.dataFor(this), memetainer = $('#meme-tainer')
+	memetainer.show().html('<iframe src="'+inits.root+'m/'+$data.you().id+'/new">Frames needed</iframe>')
+	$(document.body).bind('click.meme',function(e) {
+		if( $(e.target).parents( memetainer ).length > 0  ) {
+			memetainer.hide().html('')
+			$(this).unbind('click.meme')
+		}
+		
+	})
+})
 .on('click touchend','.yourFeedback .remove',function(e) {
 	var $data = ko.dataFor(this),
 		option = $data.options.filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],

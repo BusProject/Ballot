@@ -30,7 +30,7 @@ function makeMeme(memeRaw,path,flavor) {
 					this.choices.push(path+'special/gosling.jpg')
 					this.theme( path+'special/gosling.jpg' )
 				}
-			} else if( quote.search('is too damn high') === quote.length - 16 ) {
+			} else if( quote.search('too damn high') === quote.length - 16 ) {
 				if( choices.length == 4 ) {
 					this.choices.push(path+'special/high.jpg')
 					this.theme( path+'special/high.jpg' )
@@ -51,38 +51,18 @@ function makeMeme(memeRaw,path,flavor) {
 				document.location.toString().replace('new','preview'),
 				{ quote: this.quote.fixed(), theme: this.theme() }, 
 				function(response) { 
-					$('.preview').html('<a href="data:image/png;base64,' + response + '" target="_blank"><img src="data:image/png;base64,' + response + '" /></a>')
+					$('.preview',document.body).html('<a href="data:image/png;base64,' + response + '" target="_blank"><img src="data:image/png;base64,' + response + '" /></a>')
 					loading(false)
 				}
 			)
 		},this).extend({throttle: 500})
-
-
 
 		return this;
 	}
 
 	window.onload = function() { 
 
-		if( !ko && window.parent.ko ) {  // Function loads KO if it's standalone HTML, grabs parent KO if in frame
-			window.ko = window.parent.ko;
-			ko.applyBindings( memeRaw, document.body )
-		} else if ( !ko ) {
-			var add_ko = document.createElement('script')
-			add_ko.src = '<%= asset_path "knockout-latest.debug.js" %>'
-			add_ko.onload = function() { memeRaw = new memeModel(memeRaw); ko.applyBindings( memeRaw = new memeModel(memeRaw), document.body ) }
-			document.body.appendChild(add_ko)
-		} else {
-			ko.applyBindings( memeRaw = new memeModel(memeRaw), document.body )
-		}
-
-		function applyBindings() {
-			$(document.body).
-				on('click','.pick div',function() { ctx = ko.contextFor(this); ctx.$parent.theme( ctx.$data ) } )
-		
-			$('.share-inner',document.body).html( makeShare() )
-		}
-		if( !jQuery && window.parent.jQuery ) { // Loads jQuery if necessary and jQuery UJS
+		if( typeof jQuery == 'undefined' && window.parent.jQuery ) { // Loads jQuery if necessary and jQuery UJS
 			window.jQuery = window.parent.jQuery;
 			window.$ = window.parent.jQuery;
 			applyBindings()
@@ -99,6 +79,27 @@ function makeMeme(memeRaw,path,flavor) {
 		} else {
 			applyBindings()
 		}
+
+		function applyBindings() {
+			$(document.body).
+				on('click','.pick div',function() { ctx = ko.contextFor(this); ctx.$parent.theme( ctx.$data ) } )
+
+
+			if( typeof ko == 'undefined' && window.parent.ko ) {  // Function loads KO if it's standalone HTML, grabs parent KO if in frame
+				window.ko = window.parent.ko;
+				ko.applyBindings( new memeModel(memeRaw), document.body )
+			} else if ( !ko ) {
+				var add_ko = document.createElement('script')
+				add_ko.src = '<%= asset_path "knockout-latest.debug.js" %>'
+				add_ko.onload = function() { ko.applyBindings( new memeModel(memeRaw), document.body ) }
+				document.body.appendChild(add_ko)
+			} else {
+				ko.applyBindings( new memeModel(memeRaw), document.body )
+			}
+
+			$('.share-inner',document.body).html( makeShare() )
+		}
+
 
 	}
 }

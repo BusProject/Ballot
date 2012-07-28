@@ -3,8 +3,8 @@ class MemeController < ApplicationController
   def new
     @meme = Feedback.find( params[:id] ).memes.new
     respond_to do |format|
-      format.all {render :layout => false}
-      # format.html {render :layout => false, :template => 'meme/_form.html.erb'}
+      # format.all {render :layout => false}
+      format.html {render :layout => false, :template => 'meme/_form.html.erb'}
     end
     
   end
