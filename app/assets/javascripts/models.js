@@ -53,6 +53,9 @@ function Choice(data,args) {
 		},this)
 
 		this.you = ko.computed(function() { return this.feedback().filter( function(el) { return el.yourFeedback })[0] || null  },this)
+		this.notAnswered = ko.computed( function() { 
+			return this.feedback().filter( function(el) { return el.user_id == current_user.id } ).length < 1
+		},this)
 
 		this.feedback.realLength = ko.computed(function() {
 			return this.feedback().length - ( this.you() == null ? 0 : 1)
