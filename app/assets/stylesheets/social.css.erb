@@ -1,9 +1,18 @@
-input[type=text].link:focus::after {
+#share-box.on::before {
+	content: 'Ctrl+C to Copy';
 	position: absolute;
-	content: 'copy me!';
-	margin-left: -30px;
+	font-size: 9px;
+	color: black;
+	width: 40px;
+	margin: -4px 0 0 140px;
+	border: 1px solid #999;
+	text-align: center;
+	padding: 1px;
+	background: #fff;
 }
-
+#share-box.osx.on::before {
+	content: 'Cmd+C to Copy';
+}
 input[type=text].link {
 	font-family: 'Rokkit', sans-serif;
 	font-size: 10px;
@@ -11,12 +20,14 @@ input[type=text].link {
 	color: #747474;
 	border-bottom: 0;
 	border: none;
-	width: 90%;
+	width: 168px;
+	display: block;
+	margin: 0 auto;
 	padding: 2px 4px;
 }
 
 .icons {
-	width: 182px;
+	width: 168px;
 	padding: 10px 0 0;
 	margin: 0 auto 10px;
 	box-sizing: border-box;
@@ -34,7 +45,6 @@ input[type=text].link {
 	padding: 0 !important;
 }
 .icons a div {
-	border: 1px solid #426a84;
 	width: 56px;
 	height: 26px;
 	float: left;
