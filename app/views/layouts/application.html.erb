@@ -90,8 +90,7 @@
 							<a data-bind="css: { active: false }, text: ( inits.state ? '' : ($index()+1) )+' '+$data.name, attr: {href: $data.id }"></a>
 							<div style="display:none;" data-bind="slide: $parent.active() == $data.id " class="menu-inner">
 								<div class="arrow"></div>
-								<p>Get the low down on everything on your ballot for the upcoming election.</p>
-								<p>Comment away to tell your friends how you’re going to vote.</p>
+								<div data-bind="html: $data.description"></div>
 							</div>
 						</li>
 					</ul>

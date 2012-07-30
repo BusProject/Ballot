@@ -181,8 +181,8 @@ function Grouping(keys,title,locationModel) {
 	return grouping
 }
 
-function MenuItem(id,name,html) {
-	var menuItem = { id: id, name: name, html: html }
+function MenuItem(id,name,description,html) {
+	var menuItem = { id: id, name: name, html: html, description: description }
 
 	return menuItem
 }
