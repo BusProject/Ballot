@@ -9,15 +9,17 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
     :image, :location, :name, :url, :first_name, :last_name, :feedback, :admin, :authentication_token, :guide_name, :fb
 
+  
   # attr_accessible :title, :body
   has_many :feedback
   has_many :options, :through => :feedback
   has_many :choices, :through => :options
 
-  after_initialize :set_url
   
-  def set_url
-    self[:profile] = '/'+self.to_url
+  attr_writer :profile
+  
+  def profile
+    return '/'+self.to_url
   end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)

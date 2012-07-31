@@ -160,7 +160,7 @@ function locationModel(data) {
 		this.stateOffices = Grouping(['State'],'State Races',this)
 		this.localOffices = Grouping(['Local'],'Local Races',this)
 
-		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.profile,
+		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
 			owner = current_user.id == 'unauthenticated' ? 'the' : 'Your',
 			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || [current_user.first_name,current_user.last_name+'\'s','Voter Guide'].join(' '),
 			msg = current_user.id == 'unauthenticated' ? undefined : 'Check out my voter guide on The Ballot'
