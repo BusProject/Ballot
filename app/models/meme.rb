@@ -18,9 +18,11 @@ class Meme < ActiveRecord::Base
     theme = theme.gsub('/assets/','')
     text.slice(0,140)
     flavor = ['no','against','opposed'].index( self.option.name.downcase ) ? 'no' : 'yes'
+    contest = self.option.choice.contest.split(' ')[0]
+    number = self.option.choice.contest.split(' ')[1]
     
     themes = {
-      'yes/1.jpg' => { 
+      'yes/1.jpg' => {
         'quote' => {
           :font => 'lib/assets/Museo_Slab_500.otf',
           :size => 35,
@@ -45,7 +47,7 @@ class Meme < ActiveRecord::Base
           :size => 44,
           :left => 40,
           :top => 444,
-          :text => ('On Measure '+self.option.choice.contest.gsub('Measure','').strip() ).upcase(),
+          :text => ['On',contest,number].join(' ').upcase,
           :fill => 'transparent',
           :stroke => 'white',
           :weight => Magick::NormalWeight
@@ -76,7 +78,7 @@ class Meme < ActiveRecord::Base
           :size => 36,
           :left => 250,
           :top => 120,
-          :text => 'On Measure',
+          :text => 'On '+contest.capitalize,
           :fill => 'black',
           :align => Magick::CenterAlign,
         },
@@ -85,7 +87,7 @@ class Meme < ActiveRecord::Base
           :size => 80,
           :left => 244,
           :top => 150,
-          :text => self.option.choice.contest.gsub('Measure','').strip().upcase(),
+          :text => number,
           :fill => 'black',
           :align => Magick::CenterAlign,
         }
@@ -113,7 +115,7 @@ class Meme < ActiveRecord::Base
           :size => 50,
           :left => 24,
           :top => 68,
-          :text => ('On Measure '+self.option.choice.contest.gsub('Measure','').strip() ).upcase(),
+          :text => ['On',contest,number].join(' ').upcase,
           :fill => '#d37a3c',
         }
       },
@@ -141,7 +143,7 @@ class Meme < ActiveRecord::Base
           :size => 28,
           :left => 310,
           :top => 40,
-          :text => 'on measure',
+          :text => 'on '+contest.downcase,
           :fill => 'white',
           :shadow => true
         },
@@ -189,7 +191,7 @@ class Meme < ActiveRecord::Base
           :size => 44,
           :left => 40,
           :top => 444,
-          :text => ('On Measure '+self.option.choice.contest.gsub('Measure','').strip() ).upcase(),
+          :text => ['On',contest,number].join(' ').upcase,
           :fill => 'transparent',
           :stroke => 'white',
           :weight => Magick::NormalWeight
@@ -220,7 +222,7 @@ class Meme < ActiveRecord::Base
           :size => 36,
           :left => 250,
           :top => 120,
-          :text => 'On Measure',
+          :text => 'On '+contest.capitalize,
           :fill => 'black',
           :align => Magick::CenterAlign,
         },
@@ -229,7 +231,7 @@ class Meme < ActiveRecord::Base
           :size => 80,
           :left => 244,
           :top => 150,
-          :text => self.option.choice.contest.gsub('Measure','').strip().upcase(),
+          :text => number,
           :fill => 'black',
           :align => Magick::CenterAlign,
         }
@@ -257,7 +259,7 @@ class Meme < ActiveRecord::Base
           :size => 50,
           :left => 24,
           :top => 68,
-          :text => ('On Measure '+self.option.choice.contest.gsub('Measure','').strip() ).upcase(),
+          :text => ['On',contest,number].join(' ').upcase,
           :fill => 'white',
         }
       },
@@ -285,7 +287,7 @@ class Meme < ActiveRecord::Base
           :size => 28,
           :left => 310,
           :top => 40,
-          :text => 'on measure',
+          :text => 'on '+contest.downcase,
           :fill => 'white',
           :shadow => true
         },
@@ -342,7 +344,7 @@ class Meme < ActiveRecord::Base
           :left => 496,
           :top => 420,
           :fill => flavor === 'no' ? 'red' : '#5a663e',
-          :text => ('Measure '+self.option.choice.contest.gsub('Measure','').strip() ).upcase(),
+          :text => [contest,number].join(' ').upcase,
         },
       },
       'special/high.jpg' => {
@@ -385,7 +387,7 @@ class Meme < ActiveRecord::Base
           :top => 420,
           :stroke => 'white',
           :fill => flavor === 'no' ? 'red' : '#5a663e',
-          :text => ('Measure '+self.option.choice.contest.gsub('Measure','').strip() ).upcase(),
+          :text => [contest,number].join(' ').upcase,
         },
       }
     }
