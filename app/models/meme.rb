@@ -23,12 +23,12 @@ class Meme < ActiveRecord::Base
       'yes/1.jpg' => { 
         'quote' => {
           :font => 'lib/assets/Museo_Slab_500.otf',
-          :size => 38,
+          :size => 35,
           :align => Magick::CenterAlign,
           :left => 250,
           :shadow => true,
           :top => 10+( ( text.length/28 > 3 ? 0 : 3 - text.length/28 ) )*38,
-          :chars => 28,
+          :chars => 27,
           :text => "''"+text+"''",
         },
         'name' => {
@@ -67,7 +67,7 @@ class Meme < ActiveRecord::Base
           :size => 20,
           :align => Magick::CenterAlign,
           :left => 250,
-          :top => 400,
+          :top => 410,
           :text => '- '+self.user.first_name+' '+self.user.last_name,
           :fill => 'black'
         },
@@ -93,10 +93,10 @@ class Meme < ActiveRecord::Base
       'yes/3.jpg' => {
         'quote' => {
           :font => 'lib/assets/ONRAMP.ttf',
-          :size => 44,
+          :size => 40,
           :left => 20,
           :top => 120+( ( text.length/28 > 2.5 ? 0 : 2.5 - text.length/28 ) )*44,
-          :chars => 28,
+          :chars => 27,
           :text => "''"+text+"''",
           :fill => '#5a663e'
         },
@@ -120,11 +120,11 @@ class Meme < ActiveRecord::Base
       'yes/4.jpg' => {
         'quote' => {
           :font => 'lib/assets/Museo_Slab_500.otf',
-          :size => 30,
+          :size => 26,
           :left => 16,
           :shadow => true,
           :top => 200+( ( text.length/28 > 2 ? 0 : 2 - text.length/28 ) )*38,
-          :chars => 28,
+          :chars => 27,
           :text => "''"+text+"''"
         },
         'name' => {
@@ -167,12 +167,12 @@ class Meme < ActiveRecord::Base
       'no/1.jpg' => { 
         'quote' => {
           :font => 'lib/assets/Museo_Slab_500.otf',
-          :size => 38,
+          :size => 35,
           :align => Magick::CenterAlign,
           :left => 250,
           :shadow => true,
           :top => 10+( ( text.length/28 > 3 ? 0 : 3 - text.length/28 ) )*38,
-          :chars => 28,
+          :chars => 27,
           :text => "''"+text+"''",
         },
         'name' => {
@@ -211,7 +211,7 @@ class Meme < ActiveRecord::Base
           :size => 20,
           :align => Magick::CenterAlign,
           :left => 250,
-          :top => 400,
+          :top => 410,
           :text => '- '+self.user.first_name+' '+self.user.last_name,
           :fill => 'black'
         },
@@ -237,10 +237,10 @@ class Meme < ActiveRecord::Base
       'no/3.jpg' => {
         'quote' => {
           :font => 'lib/assets/ONRAMP.ttf',
-          :size => 44,
+          :size => 40,
           :left => 20,
           :top => 120+( ( text.length/28 > 2.5 ? 0 : 2.5 - text.length/28 ) )*44,
-          :chars => 28,
+          :chars => 27,
           :text => "''"+text+"''",
           :fill => '#ffbabc'
         },
@@ -264,11 +264,11 @@ class Meme < ActiveRecord::Base
       'no/4.jpg' => {
         'quote' => {
           :font => 'lib/assets/Museo_Slab_500.otf',
-          :size => 30,
+          :size => 26,
           :left => 16,
           :shadow => true,
           :top => 200+( ( text.length/28 > 2 ? 0 : 2 - text.length/28 ) )*38,
-          :chars => 28,
+          :chars => 27,
           :text => "''"+text+"''"
         },
         'name' => {
