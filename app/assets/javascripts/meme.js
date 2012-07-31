@@ -19,7 +19,7 @@ function makeMeme(memeRaw,path,flavor) {
 				length = copy.length
 			if( length > limit ) {
 				var space = copy.slice(limit-5,length).search(' ')
-				return copy.slice(0,limit+space-1)+'...'
+				return copy.slice(0,limit+space-1)
 			} else return copy;
 		}, this)
 		
@@ -29,15 +29,17 @@ function makeMeme(memeRaw,path,flavor) {
 				if( choices.length == 4 ) {
 					this.choices.push(path+'special/gosling.jpg')
 					this.theme( path+'special/gosling.jpg' )
+					return true;
 				}
-			} else if( quote.search('too damn high') === quote.length - 16 ) {
-				if( choices.length == 4 ) {
+			} else if( quote.search('is too damn high') === quote.length - 'is too damn high'.length ) {
+				if( quote.search('is too damn high') !== -1 && choices.length == 4  quote.length != 0  ) {
 					this.choices.push(path+'special/high.jpg')
 					this.theme( path+'special/high.jpg' )
+					return true;
 				}
-			} else {
-				if( choices[4] )this.choices.remove( choices[4] )
 			}
+			if( choices[4] )this.choices.remove( choices[4] )
+
 		},this)
 
 		this.previewChange = ko.computed(function() {
