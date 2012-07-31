@@ -1,10 +1,19 @@
 class MemeController < ApplicationController
 
   def new
-    @meme = Feedback.find( params[:id] ).memes.new
-    respond_to do |format|
-      # format.all {render :layout => false}
-      format.html {render :layout => false, :template => 'meme/_form.html.erb'}
+    feedback = Feedback.find( params[:id] )
+
+    if current_user != feedback.user
+      render :json => 'You no can meme someone else\'s comment'
+    
+    else
+      @meme = feedback.memes.new
+      
+      if params[:frame]
+        render :layout => false, :template => 'meme/_form.html.erb'
+      else
+        render :layout => false
+      end
     end
     
   end
@@ -17,7 +26,7 @@ class MemeController < ApplicationController
     m = feedback.memes.new( :quote => params[:quote], :theme => params[:theme] )
 
     respond_to do |format|
-      format.all { render :text =>  ActiveSupport::Base64.encode64( m.makeMeme ) }
+      format.all { render :text =>  Base64.encode64( m.makeMeme ) }
     end
   end
 end

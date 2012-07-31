@@ -4,4 +4,7 @@
 <%= javascript_include_tag "makeShare" %>
 <%= stylesheet_link_tag asset_path "meme" %>
 <%= stylesheet_link_tag asset_path "social" %>
-<%= render :partial => 'form' %>
+<%= csrf_meta_tags %>
+<div style="width: 800px">
+	<%= render :partial => 'form' %>
+</div>

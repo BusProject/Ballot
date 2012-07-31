@@ -8,12 +8,32 @@
 #meme-tainer {
 	display: none;
 	position: fixed;
-	width: 788px;
+	width: 796px;
+	z-index: 100;
 	height: 640px;
-	top: 30px;
+	top: 120px;
 	padding: 0;
-	margin: 0 0 0 200px;
+	margin: 0 0 0 162px;
 	overflow: hidden;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+#meme-tainer .close {
+	position: absolute;
+	right: 6px;
+	color: white;
+	background: black;
+	width: 26px;
+	padding: 6px 0 4px;
+	border-radius: 4px;
+	font-family: Rokkitt, serif;
+	top: 0;
+	cursor: pointer;
+	font-size: 14px;
+}
+#meme-tainer .close:hover {
+	color: #222;
+	background: #999;
 }
 #meme-tainer iframe {
 	width: 788px;
@@ -129,6 +149,7 @@
 	border: 2px solid #ddd
 }
 #meme .share {
+	clear: left;
 	width: 170px;
 	height: 140px;
 	margin-bottom: 30px;
