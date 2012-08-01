@@ -18,15 +18,65 @@ class MemeController < ApplicationController
     
   end
   
-  def create
+  def update
+    if params[:meme] != 'null'
+      m = Meme.find(params[:meme])
+      m[:quote] = params[:quote]
+      m[:theme] = params[:theme]
+    else
+      feedback = Feedback.find( params[:id] )
+      m = feedback.memes.new( :quote => params[:quote], :theme => params[:theme] )
+    end
+
+    if m.user.id == current_user.id
+      if m.save
+        render :json => { :success => true, :url => meme_show_path( m.id )+'.png', :id => m.id }
+      else
+        render :json => { :success => false }
+      end
+
+    else
+      render :json => { :success => false, :message => 'You cannot do that' } 
+    end
+
   end
   
-  def show
-    feedback = Feedback.find( params[:id] )
-    m = feedback.memes.new( :quote => params[:quote], :theme => params[:theme] )
+  def preview
+    if params[:meme] != 'null'
+      m = Meme.find(params[:meme])
+      m[:quote] = params[:quote]
+      m[:theme] = params[:theme]
+      m.save
+    else
+      feedback = Feedback.find( params[:id] )
+      m = feedback.memes.new( :quote => params[:quote], :theme => params[:theme] )
+    end
 
     respond_to do |format|
       format.all { render :text =>  Base64.encode64( m.makeMeme ) }
     end
   end
+  
+  def show
+    @meme = Meme.find( params[:id] )
+    respond_to do |format|
+      format.png { render :text =>  @meme.makeMeme }
+      format.jpeg { render :text =>  @meme.makeMeme }
+      format.gif { render :text =>  @meme.makeMeme }
+      format.html { render :layout => false, :template => 'meme/_img.html.erb' }
+    end
+  end
+
+  def destroy
+    m = Meme.find(params[:id])
+
+    if m.user.id == current_user.id
+      m.delete
+      render :json => { :success => true, :message => 'Meme deleted' } 
+    else
+      render :json => { :success => false, :message => 'You cannot do that' } 
+    end
+  end
+
+
 end

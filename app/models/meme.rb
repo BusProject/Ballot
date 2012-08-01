@@ -5,9 +5,13 @@ class Meme < ActiveRecord::Base
   has_one :user, :through => :feedback
   has_one :option, :through => :feedback
 
+
+  before_create :matchMeme
+  # before_save :saveMeme
+  # before_destroy :destroyMeme
   
-  before_save :saveMeme
-  before_destroy :destroyMeme
+  def matchMeme
+  end
   
   def makeMeme 
     require 'RMagick'
@@ -468,12 +472,27 @@ class Meme < ActiveRecord::Base
   #     anim.delay = 5
 
   end
-  
-  def save_meme
+
+  def awsStart
     require 'aws/s3'
     
-    # AWS::S3::S3Object.store('myfile.png', open('https://a248.e.akamai.net/assets.github.com/images/modules/about_page/octocat.png?1315937721'), 'the-ballot')
-    # self.image = AWS::S3::S3Object.url_for('myfile.png','the-ballot')
+    AWS::S3::Base.establish_connection!( :access_key_id     =>  ENV['AWS3'], :secret_access_key => ENV['AWS3_SECRET'] ) unless AWS::S3::Base.connected?
+    
+    return AWS::S3::S3Object
+    
+  end
+  
+  def getUrl
+    aws = awsStart
+    
+    aws.url_for( self.image, 'the-ballot', :expires_in => 10.seconds)
+  end
+
+  def saveMeme
+    aws = awsStart
+    filename = self.feedback_id.to_s+(Time.now.nsec/100000).to_s+'.png'
+    aws.store( filename, self.makeMeme, 'the-ballot')
+    self.image = filename
   end
   
   def destroy_meme
