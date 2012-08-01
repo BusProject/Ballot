@@ -6,7 +6,7 @@
 <script type="text/javascript" charset="utf-8">
 	<% path = asset_path( 'yes/1.jpg' ) %>
 	makeMeme( 
-		<%= raw @meme.to_json(:include => [:option, :feedback] ) %>,
+		<%= raw @meme.to_json(:include => [ :option, :feedback] ) %>,
 		'<%= path.slice(0, path.index('yes/1') ) %>', 
 		'<%= ['no','against','opposed'].index( @meme.option.name.downcase ) ? 'no' : 'yes' %>'
 	)
@@ -28,7 +28,10 @@
 	<div class="matt" >
 		<div class="preview"></div>
 		<div class="preview-load" data-bind="visible: loading">Loading...</div>
+		<div class="kill" style="display:none" data-bind="visible: id  ">Delete forever</div>
+	 	
 	</div>
+
 
 
 	<div class="theme">
@@ -38,7 +41,7 @@
 	    </div>
 	</div>
 
-	<div class="share">
+	<div class="share unsaved">
 		<h2>Share Your Vote</h2>
 		<div class="share-inner"></div>
 	</div>

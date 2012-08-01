@@ -5,6 +5,9 @@
 <%= stylesheet_link_tag asset_path "meme" %>
 <%= stylesheet_link_tag asset_path "social" %>
 <%= csrf_meta_tags %>
+<script type="text/javascript" charset="utf-8">
+	var current_user  = <%= raw current_user.to_json %>
+</script>
 <div style="width: 800px">
 	<%= render :partial => 'form' %>
 </div>

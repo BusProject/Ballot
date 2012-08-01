@@ -45,8 +45,8 @@
 	font-family: 'Rokkitt';
 	background-color: #e5e5e5;
 	font-family: Helvetica; 
-	padding: 20px 30px;
-	height: 520px;
+	padding: 20px 30px 20px;
+	height: 540px;
 	border: 4px solid green;
 }
 #meme.no {
@@ -154,4 +154,27 @@
 	height: 140px;
 	margin-bottom: 30px;
 	float: left;
+}
+#meme .share.unsaved .icons a div, #meme .share.unsaved .icons a:hover div {
+	background-color: rgba(0,0,0,.1); 
+	opacity: 0.5;
+	box-shadow: inset 0px 0px 2px #999
+}
+#meme .share em {
+	position: absolute;
+	font-size: 10px;
+	margin-top: -4px;
+	width: 160px;
+	text-align: center;
+}
+#meme .kill {
+	float: right;
+	font-weight: bold;
+	cursor: pointer;
+	background: none;
+	padding: 2px;
+}
+#meme .kill:hover {
+	text-decoration: underline;
+	color: red;
 }

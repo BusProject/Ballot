@@ -13,9 +13,11 @@ Ballot::Application.routes.draw do
   match '/feedback/:id/:flavor' => 'feedback#rate', :via => :post, :as => 'rate_feedback'
 
   match '/m/:id/new' => 'meme#new', :via => :get, :as => 'meme_new'
-  match '/m/:id/new' => 'meme#new', :via => :post, :as => 'meme_create'
-  match '/m/:id/preview' => 'meme#show', :via => :post, :as => 'meme_preview'
-  match '/m/:id' => 'meme#show', :via => :get, :as => 'meme_show'
+  match '/m/:id/new' => 'meme#update', :via => :post, :as => 'meme_create'
+  match '/m/:id/preview' => 'meme#preview', :via => :post, :as => 'meme_preview'
+  match '/m/:id' => 'meme#show', :via => :get, :as => 'meme_show_image'
+  match '/m/:id' => 'meme#destroy', :via => :post, :as => 'meme_show_image'
+
 
   match '/:geography/:contest' => 'choice#show', :as => 'contest'
   
