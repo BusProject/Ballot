@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
-    :image, :location, :name, :url, :first_name, :last_name, :feedback, :admin, :authentication_token, :guide_name, :fb
+    :image, :location, :name, :url, :first_name, :last_name, :feedback, :admin, :authentication_token, :guide_name, :fb, :profile
 
   
   # attr_accessible :title, :body
@@ -16,10 +16,10 @@ class User < ActiveRecord::Base
   has_many :choices, :through => :options
 
   
-  attr_writer :profile
+  after_initialize :profile
   
   def profile
-    return '/'+self.to_url
+    self[:profile] = '/'+self.to_url
   end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
