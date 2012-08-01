@@ -6,6 +6,9 @@ function makeMeme(memeRaw,path,flavor) {
 		this.choices = ko.observableArray([])
 		this.limit = 140
 		this.loading = ko.observable(false)
+		this.unsaved = true
+		this.title = 'Powered by theballot.org See all my recommendations at '+document.location.host+current_user.profile
+		this.id = ko.observable(null)
 
 		for (var i=1; i < 5; i++) {
 			this.choices.push( path+flavor+'/'+i+'.jpg' )
@@ -51,7 +54,7 @@ function makeMeme(memeRaw,path,flavor) {
 			var loading = this.loading
 			$.post( 
 				document.location.toString().replace('new','preview'),
-				{ quote: this.quote.fixed(), theme: this.theme() }, 
+				{ quote: this.quote.fixed(), theme: this.theme(), meme: this.id() }, 
 				function(response) { 
 					$('.preview',document.body).html('<a href="data:image/png;base64,' + response + '" target="_blank"><img src="data:image/png;base64,' + response + '" /></a>')
 					loading(false)
@@ -63,6 +66,8 @@ function makeMeme(memeRaw,path,flavor) {
 	}
 
 	window.onload = function() { 
+
+		if( typeof current_user == 'undefined' ) window.current_user = window.parent.current_user
 
 		if( typeof jQuery == 'undefined' && window.parent.jQuery ) { // Loads jQuery if necessary and jQuery UJS
 			window.jQuery = window.parent.jQuery;
@@ -83,8 +88,50 @@ function makeMeme(memeRaw,path,flavor) {
 		}
 
 		function applyBindings() {
-			$(document.body).
-				on('click','.pick div',function() { ctx = ko.contextFor(this); ctx.$parent.theme( ctx.$data ) } )
+			$(document.body)
+				.on('click touchend','.pick div',function() { var ctx = ko.contextFor(this); ctx.$parent.theme( ctx.$data ) } )
+				.on('click touchend','.share',function() {
+					var data = ko.dataFor(this)
+					if( data.unsaved ) {
+						$('.share #share-box input').val('http://saving-one-sec').select()
+						$.post(
+							document.location.toString(),
+							{ quote: data.quote.fixed(), theme: data.theme(), meme: data.id() }, 
+							function(response) {
+								if( response.success ) {
+									data.id( response.id )
+									$('.share-inner',document.body).html( 
+										makeShare(
+											document.location.host+response.url,
+											data.title,
+											data.quote.fixed(),
+											true
+										)
+									).parent().removeClass('unsaved')
+									$('.share #share-box input').select()
+									data.unsaved = false
+									$( data.calls ).after('<em>Click again to share</em>')
+								}
+							}
+						)
+					}
+				} )
+				.on('click touchend','.icons a',function(e) {
+					var data = ko.dataFor(this)
+					if( data.unsaved ) { 
+						data.calls = '.icons'
+						$('.share').click()
+						return false
+					}
+				})
+				.on('click touchend','.kill',function(e) {
+					var data = ko.dataFor(this)
+					$.post( 
+						'http://'+document.location.host+'/m/'+data.id(),
+						function(response) {
+							if( window.parent != window ) $(window.parent.document.body).trigger('click')
+						})
+				})
 
 
 			if( typeof ko == 'undefined' && window.parent.ko ) {  // Function loads KO if it's standalone HTML, grabs parent KO if in frame
@@ -99,7 +146,7 @@ function makeMeme(memeRaw,path,flavor) {
 				ko.applyBindings( new memeModel(memeRaw), document.body )
 			}
 
-			$('.share-inner',document.body).html( makeShare() )
+			$('.share-inner',document.body).html( makeShare('click-to-save-meme') )
 		}
 
 
