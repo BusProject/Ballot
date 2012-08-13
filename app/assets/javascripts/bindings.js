@@ -109,10 +109,10 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 })
 .on('click touchend','.yourFeedback .meme',function(e) {
 	var $data = ko.dataFor(this), memetainer = $('#meme-tainer')
-	$('iframe',memetainer.show()).attr('src',inits.root+'m/'+$data.you().id+'/new?frame=true' )
+	$('iframe',memetainer.show() ).attr('src',inits.root+'m/'+$data.you().id+'/new?frame=true' ).parent().prev('#meme-cova').show() 
 	$(document.body).bind('click.meme touchstart.meme',function(e) {
 		if( $(e.target).parents( memetainer ).length > 0  ) {
-			$('iframe',memetainer.hide()).attr('src','')
+			$('iframe',memetainer.hide() ).attr('src','').parent().prev('#meme-cova').hide()
 			$(this).unbind('click.meme touchstart.meme')
 		}
 		
