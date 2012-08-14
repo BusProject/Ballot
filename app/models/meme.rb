@@ -352,9 +352,9 @@ class Meme < ActiveRecord::Base
         },
       },
       'special/high.jpg' => {
-        'hey girl' => {
+        'catchphrase' => {
           :font => 'lib/assets/League_Gothic.otf',
-          :size => 74,
+          :size => 80,
           :left => 250,
           :align => Magick::CenterAlign,
           :top => 300,
@@ -364,11 +364,11 @@ class Meme < ActiveRecord::Base
         },
         'message' => {
           :font => 'lib/assets/League_Gothic.otf',
-          :size => 60,
+          :size => 56,
           :left => 250,
           :align => Magick::CenterAlign,
-          :top => 20,
-          :chars => 18,
+          :top => 16,
+          :chars => 30,
           :fill => 'white',
           :shadow => true,
           :text => text.gsub(/is too damn high/i,'').gsub(/too damn high/i,'')
