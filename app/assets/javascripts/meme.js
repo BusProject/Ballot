@@ -40,7 +40,10 @@ function makeMeme(memeRaw,path,flavor) {
 					this.theme( path+'special/high.jpg' )
 				}
 				return true
+			}
+			if( choices[4] ) {
 				this.choices.remove( choices[4] )
+				this.theme( this.choices()[ Math.floor( Math.random() * 4 ) ] )
 			}
 
 		},this)
@@ -131,6 +134,8 @@ function makeMeme(memeRaw,path,flavor) {
 						function(response) {
 							if( window.parent != window ) $(window.parent.document.body).trigger('click')
 						})
+				}).on('keydown','textarea',function(e){
+					if( e.keyCode === 13 ) return false;
 				})
 
 
