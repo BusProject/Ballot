@@ -417,7 +417,7 @@ class Meme < ActiveRecord::Base
         shadow.font_size( section[:size]  ).font( section[:font] ).fill('#747474').text_align( align )
       end
 
-      text = section[:text].strip().gsub("''''","")
+      text = section[:text].strip().gsub("''''","").gsub(/\n/,'')
       
       unless text.empty?
         row = 0
@@ -429,7 +429,7 @@ class Meme < ActiveRecord::Base
             line_end = chars
           end
 
-          line = text.slice(0,line_end).strip()
+          line = text.slice(0,line_end).strip() || ''
           text = text.strip().slice(line_end,140)
 
 
