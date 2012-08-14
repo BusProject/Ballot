@@ -30,7 +30,7 @@ class MemeController < ApplicationController
 
     if m.user.id == current_user.id
       if m.save
-        render :json => { :success => true, :url => meme_show_path( m.id )+'.png', :id => m.id }
+        render :json => { :success => true, :url => meme_show_image_path( m.id )+'.png', :id => m.id }
       else
         render :json => { :success => false }
       end
