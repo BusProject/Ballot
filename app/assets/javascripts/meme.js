@@ -34,10 +34,28 @@ function makeMeme(memeRaw,path,flavor) {
 					this.theme( path+'special/gosling.jpg' )
 				}
 				return true
+			} else if( quote.search('what if i told you') === 0 ) {
+				if( choices.length == 4 ) {
+					this.choices.push(path+'special/morpheus.jpg')
+					this.theme( path+'special/morpheus.jpg' )
+				}
+				return true
+			} else if( quote.search('one does not simply') === 0 ) {
+				if( choices.length == 4 ) {
+					this.choices.push(path+'special/boromir.jpg')
+					this.theme( path+'special/boromir.jpg' )
+				}
+				return true
 			} else if( quote.search('is too damn high') === quote.length - 'is too damn high'.length ) {
-				if( quote.search('is too damn high') !== -1 && choices.length == 4 && quote.length != 0  ) {
-					this.choices.push(path+'special/high.jpg')
-					this.theme( path+'special/high.jpg' )
+							if( quote.search('is too damn high') !== -1 && choices.length == 4 && quote.length != 0  ) {
+								this.choices.push(path+'special/high.jpg')
+								this.theme( path+'special/high.jpg' )
+							}
+							return true
+			} else if( quote.replace("'",'').search('i dont always') === 0 && quote.search('but when i do') !== -1 ) {
+				if( choices.length == 4 && quote.length != 0  ) {
+					this.choices.push(path+'special/interesting.jpg')
+					this.theme( path+'special/interesting.jpg' )
 				}
 				return true
 			}

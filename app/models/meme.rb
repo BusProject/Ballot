@@ -393,7 +393,149 @@ class Meme < ActiveRecord::Base
           :fill => flavor === 'no' ? 'red' : '#5a663e',
           :text => [contest,number].join(' ').upcase,
         },
-      }
+      }, 
+            'special/interesting.jpg' => {
+              'catchphrase' => {
+                :font => 'lib/assets/League_Gothic.otf',
+                :size => 46,
+                :left => 250,
+                :align => Magick::CenterAlign,
+                :top => 8,
+                :fill => 'white',
+                :shadow => false,
+                :text => ('I don\'t always '+(text.split(/but when i do/i)[0].nil? ? '' : text.gsub(/I don\'t always/i,'').gsub(/I dont always/i,'').split(/but when i do/i)[0])+'but when I do').upcase(),
+                :chars => 28,
+                :stroke => '#333333',
+                :strokeWidth => 1
+              },
+              'message' => {
+                :font => 'lib/assets/League_Gothic.otf',
+                :size => 50,
+                :left => 250,
+                :align => Magick::CenterAlign,
+                :top => 280,
+                :chars => 28,
+                :fill => 'white',
+                :stroke => '#333333',
+                :strokeWidth => 1,
+                :text => text.split(/but when i do/i)[1].nil? ? '' : text.split(/but when i do/i)[1].upcase()
+              },
+              'vote' => {
+                :font => 'lib/assets/ONRAMP.ttf',
+                :size => 50,
+                :align => Magick::RightAlign,
+                :left => 498,
+                :top => 380,
+                :stroke => 'white',
+                :fill => flavor === 'no' ? 'red' : '#5a663e',
+                :text => 'Vote '+flavor.capitalize
+              },
+              'measure' => {
+                :font => 'lib/assets/ONRAMP.ttf',
+                :size => 30,
+                :align => Magick::RightAlign,
+                :left => 496,
+                :top => 420,
+                :stroke => 'white',
+                :fill => flavor === 'no' ? 'red' : '#5a663e',
+                :text => [contest,number].join(' ').upcase,
+              },
+            }, 
+            'special/boromir.jpg' => {
+              'catchphrase' => {
+                :font => 'lib/assets/League_Gothic.otf',
+                :size => 80,
+                :left => 250,
+                :align => Magick::CenterAlign,
+                :top => 8,
+                :fill => 'white',
+                :shadow => false,
+                :text => ('one does not simply').upcase(),
+                :chars => 28,
+                :stroke => '#333333',
+                :strokeWidth => 1
+              },
+              'message' => {
+                :font => 'lib/assets/League_Gothic.otf',
+                :size => 46,
+                :left => 250,
+                :align => Magick::CenterAlign,
+                :top => 320,
+                :chars => 28,
+                :fill => 'white',
+                :stroke => '#333333',
+                :strokeWidth => 1,
+                :text => text.gsub(/one does not simply/i,'').upcase()
+              },
+              'vote' => {
+                :font => 'lib/assets/ONRAMP.ttf',
+                :size => 70,
+                :align => Magick::RightAlign,
+                :left => 498,
+                :top => 360,
+                :stroke => 'white',
+                :fill => flavor === 'no' ? 'red' : '#5a663e',
+                :text => 'Vote '+flavor.capitalize
+              },
+              'measure' => {
+                :font => 'lib/assets/ONRAMP.ttf',
+                :size => 30,
+                :align => Magick::RightAlign,
+                :left => 496,
+                :top => 416,
+                :stroke => 'white',
+                :fill => flavor === 'no' ? 'red' : '#5a663e',
+                :text => [contest,number].join(' ').upcase,
+              },
+            },
+            'special/morpheus.jpg' => {
+              'catchphrase' => {
+                :font => 'lib/assets/League_Gothic.otf',
+                :size => 80,
+                :left => 250,
+                :align => Magick::CenterAlign,
+                :top => 8,
+                :fill => 'white',
+                :shadow => false,
+                :text => ('What if I told you').upcase(),
+                :chars => 28,
+                :stroke => '#333333',
+                :strokeWidth => 1
+              },
+              'message' => {
+                :font => 'lib/assets/League_Gothic.otf',
+                :size => 40,
+                :left => 164,
+                :align => Magick::CenterAlign,
+                :top => 330,
+                :chars => 26,
+                :fill => 'white',
+                :stroke => '#333333',
+                :strokeWidth => 1,
+                :text => text.gsub(/What if I told you/i,'').upcase()
+              },
+              'vote' => {
+                :font => 'lib/assets/ONRAMP.ttf',
+                :size => 50,
+                :align => Magick::RightAlign,
+                :left => 498,
+                :top => 370,
+                :stroke => 'white',
+                :fill => flavor === 'no' ? 'red' : '#5a663e',
+                :text => 'Vote '+flavor.capitalize
+              },
+              'measure' => {
+                :font => 'lib/assets/ONRAMP.ttf',
+                :size => 30,
+                :align => Magick::RightAlign,
+                :left => 496,
+                :top => 410,
+                :stroke => 'white',
+                :fill => flavor === 'no' ? 'red' : '#5a663e',
+                :text => [contest,number].join(' ').upcase,
+              },
+            }
+            
     }
 
 
@@ -405,12 +547,13 @@ class Meme < ActiveRecord::Base
       weight = section[:weight] || Magick::NormalWeight
       fill = section[:fill] || 'white'
       stroke = section[:stroke] || 'transparent'
+      strokeWidth = section[:strokeWidth] || 1
       shadow = section[:shadow]
       chars = section[:chars] || 1000
       align = section[:align] || Magick::LeftAlign
       
       msg = Magick::Draw.new
-      msg.font_size( section[:size] ).font( section[:font] ).fill( fill ).font_weight( weight ).stroke( stroke ).text_align( align )
+      msg.font_size( section[:size] ).font( section[:font] ).fill( fill ).font_weight( weight ).stroke( stroke ).stroke_width( strokeWidth ).text_align( align )
 
       if shadow
         shadow = Magick::Draw.new
@@ -448,10 +591,6 @@ class Meme < ActiveRecord::Base
       end
     end
     
-
-
-
-
 
 
     return img.to_blob
