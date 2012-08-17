@@ -1,78 +1,7 @@
-@font-face {
-  font-family: 'Exo';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Exo Regular'), local('Exo-Regular'), url(<%= asset_path 'type/ZcGd2dvMSgl3mHN3lKAjNw.woff'%>) format('woff');
-}
-@font-face {
-    font-family: 'LeagueGothicRegular';
-    src: url(<%= asset_path 'type/League_Gothic-webfont.eot'%>);
-    src: url(<%= asset_path 'type/League_Gothic-webfont.eot?#iefix'%>) format('embedded-opentype'),
-         url(<%= asset_path 'type/League_Gothic-webfont.woff'%>) format('woff'),
-         url(<%= asset_path 'type/League_Gothic-webfont.ttf'%>) format('truetype'),
-         url(<%= asset_path 'type/League_Gothic-webfont.svg#LeagueGothicRegular'%>) format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-  font-family: 'Rokkitt';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Rokkitt'), url(<%= asset_path 'type/RcB7dRNAX_8JE8zinU47YALUuEpTyoUstqEm5AMlJo4.woff'%>) format('woff');
-}
-@font-face {
-  font-family: 'Rokkitt';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Rokkitt Bold'), local('Rokkitt-Bold'), url(<%= asset_path 'type/Mef17w3J4CtS0lw4Wa_8r73hpw3pgy2gAi-Ip7WPMi0.woff' %>) format('woff');
-}
-@font-face {
-  font-family: 'Waiting for the Sunrise';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Waiting for the Sunrise'), local('WaitingfortheSunrise'), url(<%= asset_path 'type/eNfH7kLpF1PZWpsetF-ha8dedCtmJg55pF6dIGeWor0C1LhKU8qFLLahJuQDJSaO.woff' %>) format('woff');
-}
-
 
 /********* Structure *********/
-html {
-	padding:0;
-	/* for W3C-compliant browsers */
-	margin: 0;
-}
-
-body {
-	height: 100%;
-	padding: 40px 0 0;
-	margin:0;
-	background: rgba(76,76,76,1);
-	background-image: linear-gradient(top, rgba(193,193,193,1) 0%, rgba(134,134,134,1) 12%, rgba(76,76,76,1) 54%);
-	/* for Safari 5.03+ and Chrome 7+ */
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(193,193,193,1)), color-stop(0.1243055, rgba(134,134,134,1)), color-stop(0.53556920449405, rgba(76,76,76,1)));
-	/* for Firefox 3.6+ */
-	background-image: -moz-linear-gradient(top, rgba(193,193,193,1) 0%, rgba(134,134,134,1) 12%, rgba(76,76,76,1) 54%);
-	/* for Opera 11.1+ */
-	background-image: -o-linear-gradient(top, rgba(193,193,193,1) 0%, rgba(134,134,134,1) 12%, rgba(76,76,76,1) 54%);
-	/* for IE */
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c1c1c1', endColorstr='#868686'endColorstr='#4c4c4c');
-}
-
-#container {
-	height: 100%;
-	width:90%;
-	max-width:960px;
-	clear:both;
-	margin:0 auto;
-}
 
 
-#page {
-	padding: 10px;
-	background:white;
-	width:936px;
-	border: 2px solid #c1c1c1;
-	height:100%;
-}
 
 .clearfix:after {
 	content: ".";
@@ -161,17 +90,8 @@ h2 {
 
 /******** Instructions *******/
 
-#instructions-box {
-	width: 206px;
-	position:fixed;
-	left:auto;
-	top:10px;
-	margin-left: -54px;
-}
-#instructions-box.top {
-	top: 80px;
-	position: absolute;
-}
+
+
 #instructions {
 	background: #636363 url(<%= asset_path 'menu-bg.gif'%>) top left repeat;
 	color:white;
