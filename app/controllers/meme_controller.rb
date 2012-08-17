@@ -69,13 +69,34 @@ class MemeController < ApplicationController
 
   def destroy
     m = Meme.find(params[:id])
-
+    
     if m.user.id == current_user.id
       m.delete
       render :json => { :success => true, :message => 'Meme deleted' } 
     else
       render :json => { :success => false, :message => 'You cannot do that' } 
     end
+  end
+  
+  def fb
+    m = Meme.find(params[:id])
+    
+    if m.fb.nil?
+      go = m.fbMeme current_user
+    else
+      permission = RestClient.get 'https://graph.facebook.com/'+m.fb+'?acess_token='+current_user.authentication_token # Seeing if the user can see the photo
+
+      unless permission == 'false'
+        go = 'http://facebook.com/sharer/sharer.php?u='+m.fb 
+      else
+        go = m.fbMeme current_user
+      end
+
+    end
+
+    render :json => go
+#    redirect_to go
+
   end
 
 

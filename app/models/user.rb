@@ -52,9 +52,22 @@ class User < ActiveRecord::Base
     end
   end
   
-  def to_url
-    return self.id.to_s(2).to_i.to_s(16) unless self.new_record? # A simple way of creating funky looking URLs out of User IDs
-    return nil
+  def refresh_token
+    auth = FbGraph::Auth.new( ENV['FACEBOOK'], ENV['FACEBOOK_SECRET']) # attempting to deal with expired FB cookies
+    auth.exchange_token! self.authentication_token
+    self.authentication_token = auth.access_token
+    self.save
+  end
+  
+  def to_url ( full = false)
+    unless self.new_record? # A simple way of creating funky looking URLs out of User IDs
+      url = self.id.to_s(2).to_i.to_s(16)
+      url = ENV['BASE']+'/'+url if full && !ENV['BASE'].nil?
+    else
+      url = nil
+    end
+
+    return url
   end
   
 

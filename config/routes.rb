@@ -15,6 +15,7 @@ Ballot::Application.routes.draw do
   match '/m/:id/new' => 'meme#new', :via => :get, :as => 'meme_new'
   match '/m/:id/new' => 'meme#update', :via => :post, :as => 'meme_create'
   match '/m/:id/preview' => 'meme#preview', :via => :post, :as => 'meme_preview'
+  match '/m/:id/fb' => 'meme#fb', :via => :get, :as => 'meme_fb_image'
   match '/m/:id' => 'meme#show', :via => :get, :as => 'meme_show_image'
   match '/m/:id' => 'meme#destroy', :via => :post, :as => 'meme_show_image'
 

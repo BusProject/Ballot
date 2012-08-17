@@ -13,7 +13,30 @@ class Meme < ActiveRecord::Base
   def matchMeme
   end
   
-  def makeMeme 
+  def shareText
+    return ['"'+self.quote+'" - ',self.user.name,self.user.to_url(true)].join(' ')
+  end
+  
+  def fbMeme user = self.user
+    
+    me = FbGraph::User.me( user.authentication_token )
+    src = 'http://politicalwire.com/images/pwlogo.jpg', #meme_show_image_path( self.id )
+    message = self.shareText
+    begin
+      photo = me.photo!( :url => src, :message => message )
+    rescue => exception
+      user.refresh_token
+      me = FbGraph::User.me( user.authentication_token )
+      photo = me.photo!( :url => src, :message => message )      
+    end
+    
+    self.fb = 'https://www.facebook.com/photo.php?fbid='+photo.identifier
+    self.save if user == self.user
+
+    return self.fb
+  end
+  
+  def makeMeme
     require 'RMagick'
 
 
