@@ -26,10 +26,12 @@ gem "omniauth-facebook"
 gem 'rmagick'
 gem 'fb_graph'
 
+gem 'therubyracer'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
+  gem 'less-rails'
   gem 'coffee-rails'
   gem 'uglifier'
 end
