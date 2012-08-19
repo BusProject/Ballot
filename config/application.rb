@@ -42,9 +42,11 @@ module Ballot
     # Enable the asset pipeline
     config.assets.enabled = true
     config.assets.precompile = ['application.js', 'application.css', 'all-ie.css']
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.app_generators.stylesheet_engine :less
+
     
   end
 end
