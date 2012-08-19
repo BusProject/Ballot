@@ -13,7 +13,7 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 .on('keypress','#enter-address input',function(e) {
 	if( e.keyCode == 13 ) $(this).next('a').click()
 })
-.on('click touchend', 'h1.title', function(e) {
+.on('click touchend', '.row button.open', function(e) {
 		if( inits.state == 'profile' || inits.state == 'single' ) return false
 
 		var ctx = ko.contextFor(this),
@@ -23,16 +23,17 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 
 		if( selected == $data ) return false
 		$('.selected .body').find('.overlayText, .overlayBg').hide()
-		$('.selected .body').slideUp()
+		$('.selected .body').slideUp( function() { $('button.open', this.parentElement).fadeIn() })
 
 		
-		$root.selected($data)
-		$(this).next('.body').slideDown('fast',function() { 
+
+		$(this).fadeOut( function() { $root.selected($data) }).nextAll('.body').slideDown('fast',function() { 
 			var $this = $(this).parent()
 			$('.overlayText, .overlayBg',$this).hide().fadeIn()
 			// For scrolling to the top after it's done
 			// setTimeout( function() { $(document).scrollTop( $this.position().top ) }, 500)
-		}).parents(document) 
+		})
+		
 })
 .on('click touchend','#instructions ul li a, .fixed-link',function(e){
 	$this = $(this)
@@ -50,38 +51,28 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 	ctx.$parent.readmore(true)
 	$(this).hide()
 })
-.on('click touchend','.pick',function(e) {
+.on('click touchend','.toggle',function(e) {
 	e.preventDefault()
-	$('.picked').removeClass('picked')
-	$(this).addClass('picked')
+	$('.toggle').toggleClass('right')
 })
-.on('click ','.submitFeedback',function(e){
+.on('click touchend','.next',function(e) {
+	$(this).parents('.row').next('.row').find('button.open').click()
+})
+.on('click ','button.submit',function(e){
 	e.preventDefault()
 	var $this = $(this), $parent = $this.parents('.yourFeedback') 
 	if( current_user.id == 'unauthenticated' ) {
 		document.location = $('.account a').attr('href')
 	} else {
-		var $picked = $('.picked', $parent )
-
-		if( $picked.length == 0 ) {
-			$('.buttons p',$parent).css({'text-decoration':'underline','font-weight':'bold','color':'red'})
-			setTimeout( function() { $('.buttons p',$parent).css({'text-decoration':'none', 'font-weight':'normal','color':'#D37A3C'}) },800)
-			return false;
-		}
+		var $toggle = $('.toggle', $parent )
 
 
-		var $ctx = ko.contextFor( $picked[0] ),
+		var $ctx = ko.contextFor( $toggle[0] ),
 			$comment = $('.comment', $parent),
-			option = $ctx.$data,
+			choice_id = $ctx.$data.id,
+			option = $toggle.hasClass('right') ? $ctx.$data.no() : $ctx.$data.yes(),
 			option_id = option.id,
-			choice_id = option.choice_id,
 			comment = $comment.val()
-
-		// if( comment.length < 1 ) {
-		// 	$('.comment',$parent).css({'border-color':'red','border-width':'3px'})
-		// 	setTimeout( function() { $('.comment',$parent).css({'border-color':'rgb(215, 122, 60)','border-width':'1px'}) },800)
-		// 	return false;
-		// }
 
 		$.post(
 			inits.root+'feedback/save',
@@ -226,6 +217,7 @@ ko.bindingHandlers.overwrite = {
 };
 ko.bindingHandlers.addClass = {
 	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
-		element.className += ' '+valueAccessor()
+		value = valueAccessor()
+		element.className = element.className.replace(valueAccessor(),'').trim()+' '+value
 	}
 };

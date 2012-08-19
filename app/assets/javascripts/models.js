@@ -162,7 +162,7 @@ function Feedback(data) {
 	}
 }
 
-function Grouping(keys,title,locationModel) {
+function Grouping(keys,title,locationModel,description) {
 	var grouping = {}
 
 	grouping.contests = ko.computed( function() {
@@ -176,6 +176,7 @@ function Grouping(keys,title,locationModel) {
 
 
 	grouping.title = title
+	grouping.description = description
 	grouping.class = title != 'Ballot Measures' ? 'candidates' : 'ballot-measures'
 	grouping.class += ' ballot-category clearfix'
 

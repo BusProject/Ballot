@@ -1,4 +1,5 @@
 @import 'less/mixins.less';
+@import 'less/vars.less';
 
 
 html, body, h1, h2, h3, h4 {
@@ -16,4 +17,16 @@ h1 {
 h2 {
 	text-transform:uppercase;
 	font-size:1.8em;
+}
+div {
+	.border-box;
+}
+
+a {
+	&:link, &:active, &:visited { color: @grey; }
+	&:hover { color: @orange; }
+}
+span.link {
+	cursor: pointer;
+	&:hover { text-decoration: underline; }
 }

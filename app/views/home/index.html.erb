@@ -1,7 +1,10 @@
 
 
 	<div id="find-ballot" class="ballot-section">
-		<h1 class="sectionheading">Find Your Ballot</h1>
+		<div class="stars"><h2>&#9733;</h2><h1>&#9733;</h1></div>
+			<h1 class="sectionheading">Look Up What’s On Your Ballot</h1>
+		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
+
 		<div id="enter-address">
 		
 			<div><input data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="enter your address here"><a href="#" class="cancel find-ballot-submit">Submit</a></div>
@@ -9,12 +12,10 @@
 		</div><!-- enter address -->
 			
 		<div id="map">
-			<div class="wrapper">
-				<img data-bind="attr: { 'src' : map }">
-			</div>
+			<img data-bind="attr: { 'src' : map }">
 			<div style="display:none;" class="confirmation" >
 				Is this right?<br />
-				<a href="#read-ballot" class="fixed-link confirm">Yes</a> |  <a href="" class="cancel clear">No</a>
+				<a href="#read-ballot" class="fixed-link confirm">Yes</a><a href="" class="cancel clear">No</a>
 			</div>
 		</div><!-- map -->
 		<!-- <a href="#read-ballot" class="fixed-link submit confirm generate">Generate Your Ballot</a> -->
@@ -23,11 +24,16 @@
 
 	
 	<div id="read-ballot"  style="display:none;" class="ballot-section" data-bind="visible: choices.notEmpty()">
-		<h1 class="sectionheading">Here's Your Ballot</h1>
-		<br />
+		<div class="stars"><h2>&#9733;</h2><h1>&#9733;</h1></div>
+		<h1 class="sectionheading">Here’s What Will Be On Your Ballot</h1>
+		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
 
-		<!-- ko foreach: [ballotMeasures, federalOffices,stateOffices,localOffices] -->
+		<!-- ko foreach: [ballotMeasures] -->
 			<div data-bind="visible: $data.visible, attr: {'class' : $data.class }">
+				<div class="category-heading">
+					<h2 data-bind="text: title"></h2>
+					<p data-bind="text: description"></p>
+				</div>
 				<div class="candidates" data-bind="template: { name: 'choice', foreach: $data.contests }"></div><!-- candidates-->
 			</div>
 		<!-- /ko -->

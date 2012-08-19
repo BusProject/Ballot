@@ -112,7 +112,7 @@ function locationModel(data) {
 			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
 		// When map updates - flash the thing
 		if( geolocated ) $('#map .pointer, #map-embed img').flash(.5, 1000)
-		return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=500x375&sensor=true'+marker
+		return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=620x340&sensor=true'+marker
 	}, this)
 
 	this.map.confirm = ko.computed( function() {
@@ -155,7 +155,7 @@ function locationModel(data) {
 	this.menuItems = []
 
 	if( this.state == 'front' ) {
-		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures',this)
+		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
 		this.federalOffices = Grouping(['Federal'],'Federal Races',this)
 		this.stateOffices = Grouping(['State'],'State Races',this)
 		this.localOffices = Grouping(['Local'],'Local Races',this)

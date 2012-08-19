@@ -3,11 +3,25 @@
   -moz-box-shadow: @arguments;
   -webkit-box-shadow: @arguments;
 }
+.text-shadow( @x:1px, @y:1px, @blur:1px, @color:#637c2a ) {
+	text-shadow: @arguments;
+	filter: dropshadow(color=@color, offx=@x, offy=@y)
+}
 .border-box() {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 }
+.no-select() {
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	-o-user-select: none;
+	user-select: none;
+}
+
+
+
 
 // From CSS-Tricks
 // src: http://css-tricks.com/snippets/css/useful-css3-less-mixins/
@@ -21,6 +35,53 @@
 	background-clip:         padding-box;
 }
 
+.rotate (@deg) {
+	-webkit-transform: rotate(@deg);
+	-moz-transform: 	 rotate(@deg);
+	-ms-transform: 		 rotate(@deg);
+	-o-transform: 		 rotate(@deg);
+}
+.opacity (@opacity: 0.5) {
+	-webkit-opacity: 	@opacity;
+	-moz-opacity: 		@opacity;
+	opacity: 		@opacity;
+}
+
+.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:		@x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+
+.gradient (@startColor: #eee, @endColor: white) {
+	background-color: @startColor;
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background: -webkit-linear-gradient(top, @startColor, @endColor);
+	background: -moz-linear-gradient(top, @startColor, @endColor);
+	background: -ms-linear-gradient(top, @startColor, @endColor);
+	background: -o-linear-gradient(top, @startColor, @endColor);
+}
+.horizontal-gradient (@startColor: #eee, @endColor: white) {
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+.three-horizontal-gradient (@startColor: #eee, @endColor: white, @lastColor: #eee) {
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor,@lastColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor,@lastColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor,@lastColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor,@lastColor);
+}
 
 
 // From Twitter Bootstrap
@@ -35,6 +96,18 @@
   }
   &::-webkit-input-placeholder {
     color: @color;
+  }
+}
+// For clearing floats like a boss h5bp.com/q
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
   }
 }
 
@@ -82,4 +155,32 @@
 	.right(@arrowWidth,@color);
 	content: ' ';
 	position: absolute;
+}
+
+
+
+/*** Ballot Specific ***/
+
+.head-image(@width: 70px ) {
+	width: @width;
+	height: @width;
+	img { width: @width; height: @width; }
+	&::after {
+		width: @width;
+		margin: -7px 0 0;
+		padding: 2px 0 0;
+		height: 18px;
+		color: white;
+		display: block;
+		text-align: center;
+		font-size: 20px;
+	}
+	&&.no::after {
+		content: 'NO';
+		background: #bd393d;
+	}
+	&&.yes::after {
+		content: 'YES';
+		background: #8eb337;
+	}
 }
