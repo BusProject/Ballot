@@ -63,7 +63,7 @@ class ChoiceController < ApplicationController
       query = {'error' => true, 'message' => 'Nothing useful was posted'}.to_json
     end
     
-    render :json => choices, :callback => params['callback']
+    render :json => query, :callback => params['callback']
   end
   
   def retrieve
