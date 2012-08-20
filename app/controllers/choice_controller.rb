@@ -42,7 +42,7 @@ class ChoiceController < ApplicationController
 
   def index
     
-    districts = params['q'].nil? ? Cicero.find(params['l']) : params['q'].split('|')
+    districts = params['q'].nil? ? Cicero.find(params['l'], params[:address] ) : params['q'].split('|')
     
     unless districts.nil?
       
@@ -63,7 +63,7 @@ class ChoiceController < ApplicationController
       query = {'error' => true, 'message' => 'Nothing useful was posted'}.to_json
     end
     
-    render :json => query, :callback => params['callback']
+    render :json => choices, :callback => params['callback']
   end
   
   def retrieve

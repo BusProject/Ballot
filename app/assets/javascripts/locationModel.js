@@ -59,21 +59,21 @@ function locationModel(data) {
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
 		for( var i = 0; i < components.length; i ++ ) { 
-			if( components[i].types[0] == "route" ) return components[i].long_name
+			if( components[i].types[0] == "administrative_area_level_2" ) return components[i].long_name
 		} 
 	}, this)
 	this.address.route = ko.computed( function() { 
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
 		for( var i = 0; i < components.length; i ++ ) { 
-			if( components[i].types[0] == "neighborhood" ) return components[i].long_name
+			if( components[i].types[0] == "route" ) return components[i].long_name
 		} 
 	}, this)
 	this.address.neighborhood = ko.computed( function() { 
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
 		for( var i = 0; i < components.length; i ++ ) { 
-			if( components[i].types[0] == "administrative_area_level_2" ) return components[i].long_name
+			if( components[i].types[0] == "neighborhood" ) return components[i].long_name
 		} 
 	}, this)
 	this.address.street_number = ko.computed( function() { 
@@ -138,11 +138,15 @@ function locationModel(data) {
 	}, this)
 
 	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for 
+		var state = yourLocation.address.state(), 
+			address = state ? [ (state+yourLocation.address.city()).toUpperCase(), state, (state+yourLocation.address.county()).toUpperCase() ] : []
+
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(
 			document.location.href.split('#')[0]+'lookup',
 			{
-				l: yourLocation.lat()+','+yourLocation.lng()
+				l: yourLocation.lat()+','+yourLocation.lng(),
+				address: address
 			},
 			function(data) { 
 				for( var i=0 ; i < data.length; i++) {

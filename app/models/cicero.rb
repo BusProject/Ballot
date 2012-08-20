@@ -1,12 +1,12 @@
 class Cicero
-  def self.find(lat, lng = nil )
+  def self.find(lat, addresses = [] )
     return lat if lat.nil? 
 
-    if lng.nil?
-      split = lat.split(',')
-      lat = split[0]
-      lng = split[1]
-    end
+
+    split = lat.split(',')
+    lat = split[0]
+    lng = split[1]
+
 
     lat = lat.is_a?(Float) ? lat.round(3).to_s : lat.to_f.round(3).to_s
     lng = lng.is_a?(Float) ? lng.round(3).to_s : lng.to_f.round(3).to_s
@@ -15,21 +15,25 @@ class Cicero
     
     if match.nil?
       cicero = Rails.cache.read('cicero')
+      
+      begin
+        if cicero.nil? # no cached token
+          cicero = JSON.parse(RestClient.post 'http://cicero.azavea.com/v3.0/token/new.json', {:username => 'ballot', :password => ENV['CICERO']})
+          Rails.cache.write('cicero',cicero,:expires_in => 24.hours)
+        end
     
-      if cicero.nil? # no cached token
-        cicero = JSON.parse(RestClient.post 'http://cicero.azavea.com/v3.0/token/new.json', {:username => 'ballot', :password => ENV['CICERO']})
-        Rails.cache.write('cicero',cicero,:expires_in => 24.hours)
-      end
+        legislative = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/legislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json' )
+        leg_districts = legislative['response']['results']['districts']
     
-      legislative = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/legislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json' )
-      leg_districts = legislative['response']['results']['districts']
-    
-      #school = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/nonlegislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json&type=SCHOOL' )
-      #school_dist = school['response']['results']['districts']
-      # Deactivate for now
+        #school = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/nonlegislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json&type=SCHOOL' )
+        #school_dist = school['response']['results']['districts']
+        # Deactivate for now
 
-      all_districts = fix_districts leg_districts #+school_dist
-      Match.new(:latlng => lat+','+lng, :data =>  all_districts).save
+        all_districts = fix_districts leg_districts #+school_dist
+        Match.new(:latlng => lat+','+lng, :data =>  all_districts).save
+      rescue
+        all_districts = addresses
+      end
 
       return all_districts
     else
