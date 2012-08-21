@@ -53,16 +53,16 @@ class MemeController < ApplicationController
     end
 
     respond_to do |format|
-      format.all { render :text =>  Base64.encode64( m.makeMeme ) }
+      format.all { render :text =>  Base64.encode64( m.makeMeme.to_blob ) }
     end
   end
   
   def show
     @meme = Meme.find( params[:id] )
     respond_to do |format|
-      format.png { render :text =>  @meme.makeMeme }
-      format.jpeg { render :text =>  @meme.makeMeme }
-      format.gif { render :text =>  @meme.makeMeme }
+      format.png { render :text =>  @meme.makeMeme.to_blob }
+      format.jpeg { render :text =>  @meme.makeMeme.to_blob }
+      format.gif { render :text =>  @meme.makeMeme.to_blob }
       format.html { render :layout => false, :template => 'meme/_img.html.erb' }
     end
   end
