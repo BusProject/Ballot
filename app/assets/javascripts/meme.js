@@ -111,7 +111,7 @@ function makeMeme(memeRaw,path,flavor) {
 		function applyBindings() {
 			$(document.body)
 				.on('click touchend','.pick div',function() { var ctx = ko.contextFor(this); ctx.$parent.theme( ctx.$data ) } )
-				.on('click touchend','.share',function() {
+				.on('click touchend','button.share',function() {
 					var data = ko.dataFor(this)
 					if( data.unsaved ) {
 						$('.share #share-box input').val('http://saving-one-sec').select()
@@ -120,8 +120,27 @@ function makeMeme(memeRaw,path,flavor) {
 							{ quote: data.quote.fixed(), theme: data.theme(), meme: data.id() }, 
 							function(response) {
 								if( response.success ) {
+
+									var img = document.location.protocol+'//'+document.location.host+response.url, // Le image you're linking to 
+										link = document.location.protocol+'//'+document.location.host+current_user.profile, // Le page you're linkg to
+										message = data.quote.fixed() // Le message you want to share ( Twitter / Tumblr only )
+
+									$('.facebook').attr('href',img.replace('.png','')+'/fb?auth_token='+current_user.auth_token);
+
+									var referr = '', via = '', hashtags = ''
+									var twitter = 'https://twitter.com/intent/tweet?original_referer='+referr+
+										'&source=tweetbutton&hashtags='+hashtags+
+										'&via='+via+
+										'&text='+message+
+										'&url='+img.replace(/ /g,'-').replace(/\&/g,'%26');
+									$('.twitter').attr('href',twitter);
+
+									var tumblr = 'http://www.tumblr.com/share/photo?source='+escape(img)+
+										'&caption='+escape( message )+
+										'&click_thru='+escape(link);
+									$('.tumblr').attr('href',tumblr);
+
 									data.id( response.id )
-										)
 									data.unsaved = false
 								}
 							}
@@ -142,6 +161,10 @@ function makeMeme(memeRaw,path,flavor) {
 						'http://'+document.location.host+'/m/'+data.id(),
 						function(response) {
 							if( window.parent != window ) $(window.parent.document.body).trigger('click')
+							else {
+								data.id( null );
+								data.unsaved = true;
+							}
 						})
 				}).on('keydown','textarea',function(e){
 					if( e.keyCode === 13 ) return false;
@@ -160,7 +183,7 @@ function makeMeme(memeRaw,path,flavor) {
 				ko.applyBindings( new memeModel(memeRaw), document.body )
 			}
 
-			$('.share-inner',document.body).html( makeShare('click-to-save-meme') )
+			$('.share-inner',document.body).html(  )
 		}
 
 

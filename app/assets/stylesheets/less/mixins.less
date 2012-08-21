@@ -66,6 +66,14 @@
 	background: -ms-linear-gradient(top, @startColor, @endColor);
 	background: -o-linear-gradient(top, @startColor, @endColor);
 }
+.gradient-image (@img, @startColor: #eee, @endColor: white) {
+	background-color: @startColor;
+	background-image: @img, -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background-image: @img, -webkit-linear-gradient(top, @startColor, @endColor);
+	background-image: @img, -moz-linear-gradient(top, @startColor, @endColor);
+	background-image: @img, -ms-linear-gradient(top, @startColor, @endColor);
+	background-image: @img, -o-linear-gradient(top, @startColor, @endColor);
+}
 .horizontal-gradient (@startColor: #eee, @endColor: white) {
  	background-color: @startColor;
 	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
