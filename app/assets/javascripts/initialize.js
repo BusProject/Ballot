@@ -81,8 +81,9 @@ function initialize() {
 			} else if (response.status === 'not_authorized')  {
 			} else {
 			}
+			current_user.auth_token = FB.getAccessToken();
 		})
-		current_user.auth_token = FB.getAccessToken();
+		
 	}
 
 

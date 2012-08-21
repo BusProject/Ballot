@@ -1,4 +1,6 @@
 class Meme < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+  
   attr_accessible :image, :quote, :feedback, :theme
   
   belongs_to :feedback
@@ -18,9 +20,10 @@ class Meme < ActiveRecord::Base
   end
   
   def fbMeme user = self.user, current_token
+
     
     me = FbGraph::User.me( user.authentication_token )
-    src = 'http://politicalwire.com/images/pwlogo.jpg' #meme_show_image_path( self.id )
+    src = ENV['BASE']+meme_show_image_path( self.id )
     message = self.shareText
 
     begin

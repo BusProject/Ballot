@@ -125,7 +125,7 @@ function makeMeme(memeRaw,path,flavor) {
 										link = document.location.protocol+'//'+document.location.host+current_user.profile, // Le page you're linkg to
 										message = data.quote.fixed() // Le message you want to share ( Twitter / Tumblr only )
 
-									$('.facebook').attr('href',img.replace('.png','')+'/fb?auth_token='+current_user.auth_token);
+									$('a.facebook',document.body).attr('href',img.replace('.png','')+'/fb?auth_token='+current_user.auth_token);
 
 									var referr = '', via = '', hashtags = ''
 									var twitter = 'https://twitter.com/intent/tweet?original_referer='+referr+
@@ -133,12 +133,12 @@ function makeMeme(memeRaw,path,flavor) {
 										'&via='+via+
 										'&text='+message+
 										'&url='+img.replace(/ /g,'-').replace(/\&/g,'%26');
-									$('.twitter').attr('href',twitter);
+									$('a.twitter',document.body).attr('href',twitter);
 
 									var tumblr = 'http://www.tumblr.com/share/photo?source='+escape(img)+
 										'&caption='+escape( message )+
 										'&click_thru='+escape(link);
-									$('.tumblr').attr('href',tumblr);
+									$('a.tumblr',document.body).attr('href',tumblr);
 
 									data.id( response.id )
 									data.unsaved = false
