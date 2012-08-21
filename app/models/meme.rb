@@ -23,7 +23,7 @@ class Meme < ActiveRecord::Base
 
     
     me = FbGraph::User.me( current_token )
-    src = ENV['BASE']+meme_show_image_path( self.id )
+    src = ENV['BASE']+meme_show_image_path( self.id )+'.png'
     message = self.shareText
 
 
