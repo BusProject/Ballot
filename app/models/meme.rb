@@ -8,10 +8,6 @@ class Meme < ActiveRecord::Base
   has_one :option, :through => :feedback
 
 
-  before_create :matchMeme
-  # before_save :saveMeme
-  # before_destroy :destroyMeme
-  
   def matchMeme
   end
   
@@ -25,8 +21,7 @@ class Meme < ActiveRecord::Base
     me = FbGraph::User.me( current_token )
     src = ENV['BASE']+meme_show_image_path( self.id )+'.png'
     message = self.shareText
-
-
+    puts src
     photo = me.photo!( :url => src, :message => message )
 
     
