@@ -17,15 +17,16 @@ class Meme < ActiveRecord::Base
     return ['"'+self.quote+'" - ',self.user.name,self.user.to_url(true)].join(' ')
   end
   
-  def fbMeme user = self.user
+  def fbMeme user = self.user, current_token
     
     me = FbGraph::User.me( user.authentication_token )
-    src = 'http://politicalwire.com/images/pwlogo.jpg', #meme_show_image_path( self.id )
+    src = 'http://politicalwire.com/images/pwlogo.jpg' #meme_show_image_path( self.id )
     message = self.shareText
+
     begin
       photo = me.photo!( :url => src, :message => message )
     rescue => exception
-      user.refresh_token
+      user.refresh_token( current_token )
       me = FbGraph::User.me( user.authentication_token )
       photo = me.photo!( :url => src, :message => message )      
     end

@@ -82,9 +82,9 @@ class MemeController < ApplicationController
     m = Meme.find(params[:id])
     
     if m.fb.nil?
-      go = m.fbMeme current_user
+      go = m.fbMeme( current_user, params[:auth_token] )
     else
-      permission = RestClient.get 'https://graph.facebook.com/'+m.fb+'?acess_token='+current_user.authentication_token # Seeing if the user can see the photo
+      permission = RestClient.get 'https://graph.facebook.com/'+m.fb+'?acess_token='+params[:auth_token] # Seeing if the user can see the photo
 
       unless permission == 'false'
         go = 'http://facebook.com/sharer/sharer.php?u='+m.fb 
@@ -94,8 +94,8 @@ class MemeController < ApplicationController
 
     end
 
-    render :json => go
-#    redirect_to go
+    # render :json => go
+   redirect_to go
 
   end
 

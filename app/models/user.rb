@@ -52,9 +52,9 @@ class User < ActiveRecord::Base
     end
   end
   
-  def refresh_token
+  def refresh_token( current_token )
     auth = FbGraph::Auth.new( ENV['FACEBOOK'], ENV['FACEBOOK_SECRET']) # attempting to deal with expired FB cookies
-    auth.exchange_token! self.authentication_token
+    auth.exchange_token! current_token
     self.authentication_token = auth.access_token
     self.save
   end
