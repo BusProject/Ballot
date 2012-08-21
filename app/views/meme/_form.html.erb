@@ -1,8 +1,8 @@
-<%= stylesheet_link_tag    "application" %>
-
-
+<head>
+	<%= stylesheet_link_tag    "application" %>
+</head>
+<body style="padding: 0;">
 <%= javascript_include_tag "meme" %>
-
 <script type="text/javascript" charset="utf-8">
 	<% path = asset_path( 'yes/1.jpg' ) %>
 	makeMeme( 
@@ -53,3 +53,4 @@
 
 
 </div>
+</body>
