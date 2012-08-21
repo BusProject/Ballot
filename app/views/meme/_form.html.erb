@@ -2,7 +2,7 @@
 <%= stylesheet_link_tag asset_path "social" %>
 
 <%= javascript_include_tag "meme" %>
-<%= javascript_include_tag "makeShare" %>
+
 <script type="text/javascript" charset="utf-8">
 	<% path = asset_path( 'yes/1.jpg' ) %>
 	makeMeme( 
@@ -13,37 +13,42 @@
 </script>
 
 <div id="meme" class="<%= ['no','against','opposed'].index( @meme.option.name.downcase ) ? 'no' : 'yes' %>">
-	<h1>Meme Your Vote</h1>
-
-
-	<textarea data-bind="value: quote, valueUpdate: 'afterkeydown'"></textarea>
+	<h1>Share Your Comments Like a Champ</h1>
 
 
 	<div class="choose">
-		<h2>Choose Your Text</h2>
-		<p>Characters Remaining: <span data-bind="text: limit-quote().length"></span> <span style="color: red; display: none" data-bind="visible: limit < quote().length">Too Many!</span></p>
-		<p><em style="font-size: 10px">I promise that my comments don’t advocate<br />for any party or candidate.</em></p>
+		<h2>Step 1: Choose Your Text</h2>
+		<p>What do you want to say on your image? If your comment is too long you can edit it so it fits better.</p>
+		<textarea data-bind="value: quote, valueUpdate: 'afterkeydown'"></textarea>
+		<p class="up">Characters Remaining: <span data-bind="text: limit-quote().length"></span> <span style="color: red; display: none" data-bind="visible: limit < quote().length">Too Many!</span></p>
 	</div>
-
-	<div class="matt" >
-		<div class="preview"></div>
-		<div class="preview-load" data-bind="visible: loading">Loading...</div>
-		<div class="kill" style="display:none" data-bind="visible: id  ">Delete forever</div>
-	 	
-	</div>
-
-
 
 	<div class="theme">
-		<h2>Choose Your Theme</h2>
+		<h2>Step 2: Choose a Background</h2>
+		<p>Express yourself. Choose a background image for your comment so people notice it on their feed.</p>
 	    <div class="pick" data-bind="foreach: choices">
 	        <div data-bind="css: { selected: $parent.theme() == $data }, style: { backgroundImage: 'url('+$data+')' } " ></div>
 	    </div>
 	</div>
 
-	<div class="share unsaved">
-		<h2>Share Your Vote</h2>
-		<div class="share-inner"></div>
+
+	<div class="matt" >
+		<div class="preview"></div>
+		<div class="preview-load" data-bind="visible: loading">Loading...</div>
+		<div class="kill" style="display:none" data-bind="visible: id  ">Delete</div>
+	 	
+	</div>
+
+
+
+	<div class="sharea" data-bind="css: {unsaved: id() == null } ">
+		<h2>Step 3: Share Your Image</h2>
+		<div class="share-inner">
+			<a target="_blank" class="twitter"><%= image_tag 'twitter-icon.png' %></a>
+			<a target="_blank" class="facebook"><%= image_tag 'facebook-icon.png' %></a>
+			<a target="_blank" class="tumblr"><%= image_tag 'tumblr-icon.png' %></a>
+		</div>
+		<button class="share">SHARE</button>
 	</div>
 
 

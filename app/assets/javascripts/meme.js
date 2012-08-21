@@ -121,17 +121,8 @@ function makeMeme(memeRaw,path,flavor) {
 							function(response) {
 								if( response.success ) {
 									data.id( response.id )
-									$('.share-inner',document.body).html( 
-										makeShare(
-											document.location.host+response.url,
-											data.title,
-											data.quote.fixed(),
-											true
 										)
-									).parent().removeClass('unsaved')
-									$('.share #share-box input').select()
 									data.unsaved = false
-									$( data.calls ).after('<em>Click again to share</em>')
 								}
 							}
 						)
