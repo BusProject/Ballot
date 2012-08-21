@@ -134,7 +134,7 @@ function locationModel(data) {
 
 		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng ) {
 			fetch(false)
-			this.getBallotChoices(lat,lng,choices,function() { fetch(true); $('.row:not(.complete):first .title').click() })
+			this.getBallotChoices(lat,lng,choices,function() { fetch(true); })
 		}
 
 	}, this)
