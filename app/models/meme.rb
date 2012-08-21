@@ -31,7 +31,7 @@ class Meme < ActiveRecord::Base
   
   def makeMeme
     
-    if self.new_record? || !File.exists?( Rails.root.join('tmp/memes',self.id.to_s+'.png') )
+    if self.new_record? || !File.exists?( 'tmp/memes'+self.id.to_s+'.png' )
       require 'RMagick'
 
 
@@ -608,9 +608,9 @@ class Meme < ActiveRecord::Base
 
         end
       end
-      img.write Rails.root.join('tmp/memes',self.id.to_s+'.png').to_s
+      img.write 'tmp/memes'+self.id.to_s+'.png'
     else
-      img = File.open( Rails.root.join('tmp/memes',self.id.to_s+'.png') )
+      img = File.open( 'tmp/memes'+self.id.to_s+'.png' )
     end
 
 
@@ -644,7 +644,7 @@ class Meme < ActiveRecord::Base
   
   def getTMP
     self.makeMeme
-    return Rails.root.join('tmp/memes',self.id.to_s+'.png')
+    return 'tmp/memes'+self.id.to_s+'.png'
     # aws = awsStart
     # aws.url_for( self.image, 'the-ballot', :expires_in => 10.seconds)
   end
