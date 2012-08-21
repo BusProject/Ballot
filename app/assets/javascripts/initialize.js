@@ -82,6 +82,7 @@ function initialize() {
 			} else {
 			}
 		})
+		current_user.auth_token = FB.getAccessToken();
 	}
 
 

@@ -2,12 +2,25 @@
 <%= javascript_include_tag "jquery" %>
 <%= javascript_include_tag "jquery_ujs" %>
 <%= javascript_include_tag "makeShare" %>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
 <%= stylesheet_link_tag asset_path "meme" %>
 <%= stylesheet_link_tag asset_path "social" %>
 <%= csrf_meta_tags %>
 <script type="text/javascript" charset="utf-8">
 	var current_user  = <%= raw current_user.to_json %>
 </script>
+
 <div style="width: 800px">
 	<%= render :partial => 'form' %>
 </div>
+<div id="fb-root"></div>
+<script type="text/javascript" charset="utf-8">
+	FB.__appid = <%= ENV['FACEBOOK'] %>;
+	FB.init({
+		appId: FB.__appid,
+		cookie: true,
+		xfbml: true,
+		oauth: true
+	});
+	setTimeout(function() { current_user.auth_token = FB.getAccessToken(); },1000)
+</script>
