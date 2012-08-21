@@ -1,1 +1,1 @@
-web:    rails s -p $PORT
+web:    rails s thin -p $PORT
