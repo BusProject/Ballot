@@ -22,17 +22,13 @@ class Meme < ActiveRecord::Base
   def fbMeme user = self.user, current_token
 
     
-    me = FbGraph::User.me( user.authentication_token )
+    me = FbGraph::User.me( current_token )
     src = ENV['BASE']+meme_show_image_path( self.id )
     message = self.shareText
 
-    begin
-      photo = me.photo!( :url => src, :message => message )
-    rescue => exception
-      user.refresh_token( current_token )
-      me = FbGraph::User.me( user.authentication_token )
-      photo = me.photo!( :url => src, :message => message )      
-    end
+
+    photo = me.photo!( :url => src, :message => message )
+
     
     self.fb = 'https://www.facebook.com/photo.php?fbid='+photo.identifier
     self.save if user == self.user
