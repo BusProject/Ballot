@@ -53,7 +53,7 @@ class MemeController < ApplicationController
     end
 
     respond_to do |format|
-      format.all { render :text =>  Base64.encode64( m.makeBlob ) }
+      format.all { render :text =>  Base64.encode64( m.makeBlob ( true ) ) }
     end
   end
   

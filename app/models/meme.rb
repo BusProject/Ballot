@@ -29,9 +29,9 @@ class Meme < ActiveRecord::Base
     return self.fb
   end
   
-  def makeBlob
+  def makeBlob reset = false
     require 'RMagick'
-    if self.new_record? || !File.exists?( self.getTMP )
+    if self.new_record? || !File.exists?( self.getTMP ) || reset
       img = self.generate
       img.write self.getTMP
     else
