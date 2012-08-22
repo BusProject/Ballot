@@ -110,7 +110,10 @@ function makeMeme(memeRaw,path,flavor) {
 
 		function applyBindings() {
 			$(document.body)
-				.on('click touchend','.pick div',function() { var ctx = ko.contextFor(this); ctx.$parent.theme( ctx.$data ) } )
+				.on('click touchend','.pick div',function() { 
+					var ctx = ko.contextFor(this); ctx.$parent.theme( ctx.$data ) 
+					console.log('firing .pick div')
+				})
 				.on('click touchend','button.share',function() {
 					var data = ko.dataFor(this)
 					if( data.unsaved ) {

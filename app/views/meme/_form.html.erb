@@ -27,7 +27,8 @@
 		<h2>Step 2: Choose a Background</h2>
 		<p>Express yourself. Choose a background image for your comment so people notice it on their feed.</p>
 	    <div class="pick" data-bind="foreach: choices">
-	        <div data-bind="css: { selected: $parent.theme() == $data }, style: { backgroundImage: 'url('+$data+')' } " ></div>
+			<!-- ko if: console.log('running #'+$index()) --><!-- /ko -->
+	        <div data-bind="css: { selected: $parent.theme() == $data }, style: { backgroundImage: 'url('+$data+')'} " ></div>
 	    </div>
 	</div>
 
