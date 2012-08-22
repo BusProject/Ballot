@@ -72,12 +72,14 @@ function makeMeme(memeRaw,path,flavor) {
 		},this)
 
 		this.preview = ko.computed( function() {
-			var loading = this.loading
+			var loading = this.loading, id = this.id(), url = this.url
 			$.post( 
 				document.location.toString().replace('new','preview'),
 				{ quote: this.quote.fixed(), theme: this.theme(), meme: this.id() }, 
 				function(response) { 
-					$('.preview',document.body).html('<a href="data:image/png;base64,' + response + '" target="_blank"><img src="data:image/png;base64,' + response + '" /></a>')
+					console.log( id );
+					var url = typeof id == undefined ? 'data:image/png;base64,' + response : document.location.protocol+'//'+document.location.host+'/m/'+id+'.png';
+					$('.preview',document.body).html('<a href="'+url+'" target="_blank"><img src="data:image/png;base64,' + response + '" /></a>')
 					loading(false)
 				}
 			)
@@ -112,7 +114,6 @@ function makeMeme(memeRaw,path,flavor) {
 			$(document.body)
 				.on('click touchend','.pick div',function() { 
 					var ctx = ko.contextFor(this); ctx.$parent.theme( ctx.$data ) 
-					console.log('firing .pick div')
 				})
 				.on('click touchend','button.share',function() {
 					var data = ko.dataFor(this)
