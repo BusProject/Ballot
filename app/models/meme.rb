@@ -41,12 +41,12 @@ class Meme < ActiveRecord::Base
   end
   
   def makeFile
-    if self.new_record? || !File.exists?( 'tmp/memes/'+self.id.to_s+'.png' )
+    if self.new_record? || !File.exists?( self.getTMP )
       img = self.generate
-      img.write 'tmp/memes/'+self.id.to_s+'.png'
-      img = File.open( 'tmp/memes/'+self.id.to_s+'.png' )
+      img.write self.getTMP
+      img = File.open( self.getTMP )
     else
-      img = File.open( 'tmp/memes/'+self.id.to_s+'.png' )
+      img = File.open( self.getTMP )
     end
     return img
   end
@@ -207,7 +207,7 @@ class Meme < ActiveRecord::Base
   end
   
   def getTMP
-    return 'tmp/memes/'+self.id.to_s+'.png'
+    return 'tmp/memes-'+self.id.to_s+'.png'
     # aws = awsStart
     # aws.url_for( self.image, 'the-ballot', :expires_in => 10.seconds)
   end
