@@ -152,18 +152,11 @@ a {
 			position: relative;
 			a {
 				text-decoration: none;
-				font-size: 20px;
 				margin: 2px 10px 0;
-				padding: 4px 8px;
-				.gradient(#666,#4b4b4b);
-				.drop-shadow();
-				border: 1px solid #3f3f3f;
-				color: white;
 				display: inline-block;
-				&:hover {
-					color:white;
-					.gradient(#4b4b4b,#666);
-				}
+				font-size: 20px;
+				padding: 4px 8px;
+				.greyButton();
 			}
 		}
 		img {
@@ -208,8 +201,10 @@ a {
 			color: @darkGrey;
 			padding: @bisect-border 0 10px;
 		}
-		@button-height: 42px;
-		&.selected .explanation { margin-bottom: @button-height; }
+
+		&.selected button.open {
+			.greyButton();
+		}
 
 		button.open {
 			.gradient(#d2793b,#be5e29);
@@ -217,7 +212,7 @@ a {
 			font-family: Rokkitt, serif;
 			padding: 10px 20px;
 			color: white;
-			height: @button-height;
+			height: 42px;
 			border: 1px solid @darkOrange;
 			position: relative;
 			font-size: 16px;
@@ -235,10 +230,10 @@ a {
 			height: 2px;
 			border: 0;
 			width: 100%;
-			margin-top: -20px;
+			margin: -20px 0 0;
 			position: relative;
 			z-index: 1;
-			&.lower { margin-top: 20px; }
+			&.lower { margin: 20px 0 0; }
 		}
 		
 		.body {

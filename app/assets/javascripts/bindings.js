@@ -21,17 +21,19 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 			$data = ctx.$data,
 			selected = $root.selected()
 
-		if( selected == $data ) return false
-		$('.selected .body').find('.overlayText, .overlayBg').hide()
-		$('.selected .body').slideUp( function() { $('button.open', this.parentElement).fadeIn() })
+		$('.selected .body').slideUp( function() { $('button.open', this.parentElement).text("Learn More and Comment") })
 
+		if( selected == $data ) {
+			$root.selected(null);
+			return false
+		}
 		
-
-		$(this).fadeOut( function() { $root.selected($data) }).nextAll('.body').slideDown('fast',function() { 
+		$(this).text('Close').nextAll('.body').slideDown('fast',function() { 
+			$root.selected($data)
 			var $this = $(this).parent()
 			$('.overlayText, .overlayBg',$this).hide().fadeIn()
 			// For scrolling to the top after it's done
-			// setTimeout( function() { $(document).scrollTop( $this.position().top ) }, 500)
+			setTimeout( function() { $(document).scrollTop( $this.position().top ) }, 1)
 		})
 		
 })
