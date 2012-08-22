@@ -1,0 +1,52 @@
+@import 'less/vars.less';
+@import 'less/mixins.less';
+
+body.splash {
+	.account { display: none; }
+	#header #logo { padding-left: 0; }
+	#main { margin: 0; width: 100% }
+	.ballot-section {
+		width: 100%;
+		.sectionheading { border: none; font-size: 40px; font-family: Rokkitt, serif;}
+		.stars { .move-stars(220px, 1.5em, -5em) }
+		.directions {
+			width: 640px;
+			margin: 30px auto;
+			p {
+				text-indent: -10px;
+				font-weight: normal;
+				font-family:  Rokkitt, serif;
+				font-size: 24px;
+				color: @darkGrey;
+				text-align: left;
+				line-height: 1.4em;
+				margin-bottom: 20px;
+			}
+		}
+		.login {
+			background: @bgGreen;
+			width: 400px;
+			height: 160px;
+			border: 1px solid @darkGreen;
+			padding: 10px 50px;
+			margin: 0 auto;
+			.border-box();
+			p,a {
+				font-size: 18px;
+				color: white;
+				font-family: Rokkitt, serif;
+			}
+			a {
+				text-decoration: none;
+				&:visited, &:link { color: white; }
+				&:hover { text-decoration: underline; }
+			}
+			h1 {
+				font-family: Rokkitt, serif;
+				font-size: 36px;
+				color: #333;
+				.text-shadow(1px, 1px, 5px, #fff);
+			}
+		}
+	}
+}

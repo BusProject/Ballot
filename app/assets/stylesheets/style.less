@@ -42,16 +42,7 @@ a {
 
 /***** Page ****/
 
-/* Used for position stars for large titles */
-.move-stars( @over: 50px ) { 
-	margin-left: -@over;
-	margin-right: @over;
-	&:first-child { 
-		margin-left: @over;
-		margin-right: -@over;
-		float: left;
-	}
-}
+
 
 .ballot-section {
 	width: 720px;
@@ -62,10 +53,8 @@ a {
 		float: right;
 		padding-top: 10px;
 		color: @orange;
-		margin-top: -4em;
 		.move-stars();
 		&:first-child { 
-			margin-top: 4px;
 			float: left;
 		}
 
@@ -549,6 +538,9 @@ a {
 
 /** Meme Styling **/
 @import 'less/meme.less';
+
+/** Meme Styling **/
+@import 'less/splash.less';
 
 @import 'less/not_logged_in.less';
 @import 'less/single.less';
