@@ -18,7 +18,7 @@ class Cicero
       
       begin
         if cicero.nil? # no cached token
-          cicero = JSON.parse(RestClient.post 'http://cicero.azavea.com/v3.0/token/new.json', {:username => 'ballot', :password => ENV['CICERO']})
+          cicero = JSON.parse(RestClient.post 'http://cicero.azavea.com/v3.0/token/new.json', {:username => ENV['CICERO'], :password => ENV['CICERO_PASSWORD']})
           Rails.cache.write('cicero',cicero,:expires_in => 24.hours)
         end
     
