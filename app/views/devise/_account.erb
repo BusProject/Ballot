@@ -1,6 +1,7 @@
 <%- if controller_name != 'sessions' %>
 	<div class="account">
 		<%- if current_user.nil? %>
+			<h1>Get Started</h1>
 			<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %><br />
 		<% else %>
 			<%= link_to image_tag(current_user.image || asset_path('alincoln.gif') ), profile_path(current_user.to_url) %>

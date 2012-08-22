@@ -1,11 +1,35 @@
-@darkGrey: #5b5b5b;
+@import 'less/vars.less';
+@import 'less/mixins.less';
+
 
 body.not_logged_in {
 	.body div.commentTitle { border-top: @darkGrey 1px solid; }
-	#header .account a img {
-		width: 147px;
+	#header .account {
+		width: 160px;
+		background: @bgGreen;
+		border: 1px solid @darkGreen;
+		margin: 14px 0 0;
 		height: auto;
-		border: none;
-		margin-top: 30px;
+		.border-box();
+		h1 {
+			font-family: Rokkitt, serif;
+			font-size: 20px;
+			color: #333;
+			.text-shadow(1px, 1px, 5px, #fff);
+		}
+		a {
+			img {
+				width: 140px;
+				height: auto;
+				border: none;
+				display: block;
+				margin: 0;
+			}
+			.opacity(.9); 
+			&:hover { .opacity(1); img {.box-shadow(0, 1px, 15px,#fff); }}
+			display: block;
+			margin: 0 auto 30px;
+			width: 140px
+		}
 	}
 }
