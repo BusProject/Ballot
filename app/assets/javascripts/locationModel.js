@@ -176,10 +176,10 @@ function locationModel(data) {
 			
 			
 		this.menuItems.push( 
-			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your address to lookup what you can vote on this November</p>'),
-			MenuItem('#read-ballot','Read Your Ballot','<p>Get the low down on everything on your ballot for the upcoming election.</p><p>Comments are a away to tell share how and why you\'re going to vote.</p>'),
+			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your ballot this election.</p>'),
+			MenuItem('#read-ballot','Read Your Ballot','<p>Get the lowdown on everything on your ballot for the upcoming election.</p><p>Read what others have to say about ballot measures and share your own views.</p>'),
 			MenuItem(null,'Share the Ballot',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+'</div>'),
-			MenuItem(null,'Other Options',null,'<div class="container"><a class="small" href="">Find Your Polling Place</a><a class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>')
+			MenuItem(null,'Other Options',null,'<div class="container"><a href="https://widget-theleague.turbovote.org/?r=ballot" target="_blank" class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>')
 		)
 	}
 	if( this.state == 'single' ) {
