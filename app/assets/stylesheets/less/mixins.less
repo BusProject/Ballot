@@ -192,3 +192,16 @@
 		background: #8eb337;
 	}
 }
+
+/* Used for position stars for large titles */
+.move-stars( @over: 50px, @firstH: 4px, @secondH: -4em ) { 
+	margin-left: -@over;
+	margin-right: @over;
+	margin-top: @secondH;
+	&:first-child { 
+		margin-top: @firstH;
+		margin-left: @over;
+		margin-right: -@over;
+		float: left;
+	}
+}
