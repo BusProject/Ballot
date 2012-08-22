@@ -19,9 +19,9 @@ class ChoiceController < ApplicationController
     @user = User.find( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
 
     @choices = @user.choices
-    @classes = 'profile'
+    @classes = 'profile home'
 
-    result = {:state => @classes, :choices => @choices, :user => @user }
+    result = {:state => 'profile', :choices => @choices, :user => @user }
 
     @config = result.to_json( json_include )
     
@@ -33,8 +33,8 @@ class ChoiceController < ApplicationController
 
     raise ActionController::RoutingError.new('Not Found') if @choice.nil?
 
-    @classes = 'single'
-    result = {:state => @classes, :choices => [@choice]}
+    @classes = 'home single'
+    result = {:state => 'single', :choices => [@choice]}
 
     @config = result.to_json( json_include )
 

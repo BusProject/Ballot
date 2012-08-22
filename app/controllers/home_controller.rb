@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @classes = 'home '
     if current_user.nil? && !cookies['new_ballot_visitor']
 
       cookies['new_ballot_visitor'] = {
@@ -7,7 +8,7 @@ class HomeController < ApplicationController
         :expires => 2.weeks.from_now
       }      
       @config = { :state => 'splash' }.to_json
-      @classes = 'splash'
+      @classes += 'splash'
 
       render :template => 'home/splash.html.erb'
     else
