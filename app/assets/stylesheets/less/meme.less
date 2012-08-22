@@ -50,7 +50,7 @@
 		margin: -8px 0 0 -8px;
 	}
 }
-#meme { 
+#meme {
 	strong { font-weight: bold;}
 	font-size: 16px;
 	text-align: left;
@@ -122,6 +122,8 @@
 			span { width: 60px; }
 		}
 	}
+	&.no .theme .pick div { background-image: image-url('no/thumbs.jpg'); }
+	&.yes .theme .pick div { background-image: image-url('yes/thumbs.jpg'); }
 	.theme {
 		float: right;
 		width: 330px;
@@ -129,18 +131,24 @@
 		.pick  { 
 			width: 330px;
 			margin-top: 10px;
-			div { 
+			div {
+				background-color: transparent;
+				background-repeat: no-repeat;
 				width:70px; 
 				margin: 0 8px 8px 0; 
 				float: left; 
 				height: 70px; 
-				background-size: cover; 
 				cursor: pointer;
 				.drop-shadow(0px, 1px, 5px, 0, .5);
 				&:hover { opacity: 0.7 }
 				&.selected {  .box-shadow(0px,1px,15px,#fff) }
+				&:nth-child(1) { background-position: 0 0; }
+				&:nth-child(2) { background-position: -70px 0; }
+				&:nth-child(3) { background-position: -140px 0; }
+				&:nth-child(4) { background-position: -210px 0; }
 				&:nth-child(5) {
 					position: absolute;
+					background-size: cover;
 					margin: 80px 0 0 234px;
 				}
 			}
