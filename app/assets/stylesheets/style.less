@@ -163,14 +163,17 @@ a {
 		margin: 20px auto 60px;
 		padding: 0;
 		
-		@bisect-border: 30px;
+		@bisect-border: 60px;
 		h1.title {
-			margin-bottom: -@bisect-border;
+			margin: 0 auto -@bisect-border;
 			font-family: Rokkitt, serif;
 			padding: 10px;
 			text-align: center;
 			color: @darkGreen;
 			text-transform: uppercase;
+			height: @bisect-border;
+			width: 40%;
+			overflow: hidden;
 		}
 		hr { 
 			color: @darkGrey;
@@ -189,7 +192,7 @@ a {
 		}
 		.explanation {
 			color: @darkGrey;
-			padding: @bisect-border 0 10px;
+			padding: @bisect-border+10px 0 10px;
 		}
 
 		&.selected button.open {
@@ -299,6 +302,7 @@ a {
 						div {
 							width: 120px;
 							overflow: hidden;
+							height: 31px;
 							position: relative;
 						}
 					}
