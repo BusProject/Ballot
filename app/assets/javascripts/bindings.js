@@ -144,7 +144,20 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 		var change = -1;
 	}
 
-	if( $this.hasClass('flag') ) action = 'flag'
+	if( $this.hasClass('flag') ) {
+		$this.parent().html('Are you sure you want to flag? <span class="confirm-flag link">Yes</span> / <span class="stop-flag link">No</span>');
+		return false;
+	}
+	if( $this.hasClass('confirm-flag') ) {
+		var option = $ctx.$parent.options.filter( function(el) { return el.id == $data.option_id  })[0]
+		option.feedback.remove( $data )
+		$ctx.$parent.feedback()
+		action = 'flag'
+	}
+	if( $this.hasClass('stop-flag') ) {
+		$this.parent().html('Was this helpful?<span class="helpful link">Yes</span>&nbsp;|&nbsp;<span class="not link">No</span>&nbsp;|&nbsp;<span class="flag link">Flag</span></div>')
+		return false;
+	}
 
 	$.post(
 		inits.root+'feedback/'+$data.id+'/'+action,
