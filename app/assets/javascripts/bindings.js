@@ -139,9 +139,9 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 
 	if( $this.hasClass('helpful') ) {
 		action = 'useful'
-		$data.usefulness( $data.usefulness() + 1 )
+		var change = 1;
 	} else {
-		$data.usefulness( $data.usefulness() - 1 )
+		var change = -1;
 	}
 
 	if( $this.hasClass('flag') ) action = 'flag'
@@ -151,6 +151,7 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 		function(response){
 			$this.parents('.ask').html( response.message )
 			if( $this.hasClass('flag') ) setTimeout( function() { $this.parent('.feedback').remove() }, 300 )
+			if( response.success ) $data.usefulness( $data.usefulness() + change )
 		}
 	)
 

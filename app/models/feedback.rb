@@ -12,4 +12,13 @@ class Feedback < ActiveRecord::Base
   belongs_to :option
   belongs_to :choice
   has_many :memes
+  
+  after_initialize :count_responses
+  
+  def count_responses
+    self[:usefulVal] = self.useful.split(',').length + ( self.useful.split(',').empty? ? 0 : 1 )
+    self[:uselessVal] = self.useless.split(',').length + ( self.useless.split(',').empty? ? 0 : 1 )
+  end
+  
+  
 end

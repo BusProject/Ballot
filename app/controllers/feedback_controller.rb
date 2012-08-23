@@ -77,7 +77,7 @@ class FeedbackController < ApplicationController
                 end
 
               else
-                render :json => {:success => false, :message => 'You can\'t '+verb+' something twice' }, :callback  => params['callback']
+                render :json => {:success => false, :message => 'You can\'t '+verb+' twice' }, :callback  => params['callback']
               end
             end
           else

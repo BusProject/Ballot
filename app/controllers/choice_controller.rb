@@ -4,11 +4,8 @@ class ChoiceController < ApplicationController
     :options => { 
       :include => [ 
         :feedback => {
-          :include => [
-            :user => { 
-              :only => [ :url, :first_name, :last_name, :url, :location, :image, :fb, :profile ] 
-              } 
-            ] 
+          :include => [ :user => {  :only => [ :url, :first_name, :last_name, :url, :location, :image, :fb, :profile ] } ],
+          :except => [ :useless, :useful ]
           } 
         ] 
       }
@@ -27,7 +24,6 @@ class ChoiceController < ApplicationController
     
   end
   
-
   def show
     @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' '))
 

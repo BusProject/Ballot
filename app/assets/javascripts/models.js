@@ -69,7 +69,7 @@ function Choice(data,args) {
 
 				return condition
 			}) || [] 
-			return this.all() ? feedback : feedback.slice(0,5)
+			return this.all() ? feedback : feedback.slice(0,3)
 		},this)
 
 		return this;
@@ -137,9 +137,7 @@ function Feedback(data) {
 		this.name =  data.user.first_name+' '+data.user.last_name
 		this.type = data.type
 		this.updated = data.updated_at != data.created_at
-		var useless = data.useless || '', useful = data.useful || ''
-		useless = useless.split(',').length + ( useless.length > 0 ? 1 : 0 )
-		useful = useful.split(',').length +  ( useful.length > 0 ? 1 : 0 )
+		var useless = data.uselessVal || 0, useful = data.usefulVal || 0
 		this.usefulness = ko.observable( useful - useless )
 
 		var date = new Date(data.updated_at),
