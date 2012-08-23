@@ -55,7 +55,13 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 })
 .on('click touchend','.toggle',function(e) {
 	e.preventDefault()
-	$('.toggle').toggleClass('right')
+	$this = $(this);
+	if( $this.attr('disabled') ) return false
+	$this.attr('disabled',true)
+	var animate = $this.hasClass('right') ? { left: '+=135' } : { right: '+=135' }
+	$('.cover',$this).animate(animate, 200, function() {
+		$this.toggleClass('right').attr('disabled',false).find('.cover').css({left: '', right: ''})
+	});
 })
 .on('click touchend','.next',function(e) {
 	$(this).parents('.row').next('.row').find('button.open').click()

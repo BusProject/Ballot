@@ -386,7 +386,7 @@ a {
 								float: right;
 								padding: .6em 0 0 @coverWidth;
 								text-align: center;
-								width: @width;
+								width: @width - 2px;
 								height: @height;
 								display: none;
 								&:first-child { float: left; display: block; padding-left: 0; padding-right: @coverWidth; }
@@ -412,7 +412,7 @@ a {
 						&.right {
 							.cover { left: -4px; }
 							&:hover { .cover { left: -2px; .gradient(#bd5d28,#d37a3c); }}
-							.inner { left: -2px; div { display: block; &:first-child { display:none; } } }
+							.inner { left: 0px; div { display: block; &:first-child { display:none; } } }
 						}
 						&:hover { .cover { right: -2px; .gradient(#bd5d28,#d37a3c); } }
 					}
