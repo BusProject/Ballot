@@ -131,10 +131,10 @@ function Feedback(data) {
 		this.comment = data.comment
 		var user = typeof inits.user != 'undefined' ? inits.user.id : current_user.id
 		this.yourFeedback = data.user_id == user
-		this.image = data.user.image
-		this.url = data.user.profile
-		this.fb = data.user.fb
-		this.name =  data.user.first_name+' '+data.user.last_name
+		this.image = typeof data.user != 'undefined' ? data.user.image : 'http://localhost:3000/assets/alincoln.gif'
+		this.url = typeof data.user != 'undefined' ? data.user.profile : ''
+		this.fb = typeof data.user != 'undefined' ? data.user.fb : ''
+		this.name =  typeof data.user != 'undefined' ?  data.user.first_name+' '+data.user.last_name : '[deleted]'
 		this.type = data.type
 		this.updated = data.updated_at != data.created_at
 		var useless = data.uselessVal || 0, useful = data.usefulVal || 0
@@ -154,7 +154,7 @@ function Feedback(data) {
 
 		this.friend = ko.computed( function() { 
 			var friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : []
-			return friends.indexOf( this.user.fb ) !== -1
+			return friends.indexOf( this.fb ) !== -1
 		},data)
 		return this
 	}

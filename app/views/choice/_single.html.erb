@@ -70,7 +70,7 @@
 				</div>
 			</div>
 
-			<%- if !current_user.nil? %>
+			<%- if !current_user.nil? && current_user.commentable? %>
 				<div class="yourFeedback" data-bind="visible: $data.commentable && ! you() ">
 					<%= raw @how %>
 					<textarea type="text" class="comment" data-bind="elastic: true, attr: {disabled: current_user.id == 'unauthenticated', placeholder: current_user.id == 'unauthenticated' ? 'Log in to comment' : 'What do you think?'}" /></textarea>
@@ -115,14 +115,16 @@
 					<div class="foot">
 							<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
 						<br />
-							<div class="ask">
-								Was this helpful?
-								<span class="helpful link" >Yes</span>
-									&nbsp;|&nbsp;
-								<span class="not link">No</span>
-									&nbsp;|&nbsp;
-								<span class="flag link">Flag</span>
-							</div>
+							<%- if !current_user.nil? && current_user.commentable? %>
+								<div class="ask">
+									Was this helpful?
+									<span class="helpful link" >Yes</span>
+										&nbsp;|&nbsp;
+									<span class="not link">No</span>
+										&nbsp;|&nbsp;
+									<span class="flag link">Flag</span>
+								</div>
+							<% end -%>
 					</div>
 
 				</li>

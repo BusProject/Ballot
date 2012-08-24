@@ -13,6 +13,9 @@
 			<br />
 			<br />
 			[<%= link_to 'Log out', destroy_user_session_path %>]
+			<br />
+			<br />
+			<strong><%= link_to 'ACCOUNT DEACTIVATED',profile_path(current_user.to_url) if current_user.deactivated? %><%= link_to 'ACCOUNT BANNED', profile_path(current_user.to_url) if current_user.banned? %></strong>
 		<% end -%>
 	</div>
 	

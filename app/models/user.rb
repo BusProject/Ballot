@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
+  devise :database_authenticatable,
+         :rememberable, :trackable, :validatable,
          :omniauthable
 
   # Setup accessible (or protected) attributes for your model
@@ -14,13 +14,29 @@ class User < ActiveRecord::Base
   has_many :feedback
   has_many :options, :through => :feedback
   has_many :choices, :through => :options
-
+  
   
   after_initialize :profile
   
   def profile
-    self[:profile] = '/'+self.to_url
+    self[:profile] = '/'+self.to_url unless self.to_url.nil?
   end
+  
+  def deactivate mode = false
+    success = true
+    self.feedback.each do |feedback|
+      feedback.approved = mode
+      success = feedback.save && success
+    end
+    success = self.save && success
+    return success
+  end
+  
+  def commentable?
+    return !self.banned? && !self.deactivated?
+  end
+  
+
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token.extra.raw_info

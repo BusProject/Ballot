@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817173704) do
+ActiveRecord::Schema.define(:version => 20120823223624) do
 
   create_table "choices", :force => true do |t|
     t.string    "contest"
@@ -65,18 +65,18 @@ ActiveRecord::Schema.define(:version => 20120817173704) do
   add_index "matches", ["latlng"], :name => "index_matches_on_latlng", :unique => true
 
   create_table "memes", :force => true do |t|
-    t.string    "image"
-    t.text      "quote"
-    t.integer   "feedback_id"
-    t.string    "theme"
-    t.boolean   "anomyous",    :default => false
-    t.timestamp "created_at",                     :null => false
-    t.timestamp "updated_at",                     :null => false
-    t.string    "fb"
-    t.string    "twitter"
-    t.string    "tumblr"
-    t.string    "imgur"
-    t.string    "pintrest"
+    t.string   "image"
+    t.text     "quote"
+    t.integer  "feedback_id"
+    t.string   "theme"
+    t.boolean  "anomyous",    :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "fb"
+    t.string   "twitter"
+    t.string   "tumblr"
+    t.string   "imgur"
+    t.string   "pintrest"
   end
 
   create_table "options", :force => true do |t|
@@ -99,29 +99,31 @@ ActiveRecord::Schema.define(:version => 20120817173704) do
   add_index "options", ["name"], :name => "index_options_on_name"
 
   create_table "users", :force => true do |t|
-    t.string    "email",                  :default => "",    :null => false
-    t.string    "encrypted_password",     :default => "",    :null => false
-    t.string    "reset_password_token"
-    t.timestamp "reset_password_sent_at"
-    t.timestamp "remember_created_at"
-    t.integer   "sign_in_count",          :default => 0
-    t.timestamp "current_sign_in_at"
-    t.timestamp "last_sign_in_at"
-    t.string    "current_sign_in_ip"
-    t.string    "last_sign_in_ip"
-    t.timestamp "created_at",                                :null => false
-    t.timestamp "updated_at",                                :null => false
-    t.string    "image"
-    t.string    "name"
-    t.string    "location"
-    t.string    "url"
-    t.string    "first_name"
-    t.string    "last_name"
-    t.boolean   "admin",                  :default => false
-    t.string    "authentication_token"
-    t.string    "guide_name"
-    t.string    "base_address"
-    t.string    "fb"
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "image"
+    t.string   "name"
+    t.string   "location"
+    t.string   "url"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.boolean  "admin",                  :default => false
+    t.string   "authentication_token"
+    t.string   "guide_name"
+    t.string   "base_address"
+    t.string   "fb"
+    t.boolean  "banned",                 :default => false
+    t.boolean  "deactivated",            :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

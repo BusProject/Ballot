@@ -1,5 +1,8 @@
 <h1><%= @user.guide_name || @user.first_name + ' '+@user.last_name + '\'s Voter Guide' %></h1>
 
+<strong><%= 'Your account has been deactivated - all of your comments and votes are hidden'  if current_user.deactivated? %></strong>
+<strong><%= 'Your account has been banned - all of your comments and votes are hidden'  if current_user.banned? %></strong>
+
 <% n = 0 %>
 <div id="read-ballot">
 	<% @choices.each do |choice| %>
