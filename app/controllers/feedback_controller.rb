@@ -5,7 +5,7 @@ class FeedbackController < ApplicationController
       errors = []
       successes = []
       success = true
-      if user_signed_in?
+      if user_signed_in? && current_user.commentable?
         feedbacks.each do |f|
           option = Option.find(f[1]['option_id'])
           feedback = option.feedback.new(
@@ -15,7 +15,7 @@ class FeedbackController < ApplicationController
           )
           if feedback.save
             sucess = success && true
-            successes.push({:obj => feedback.id })
+            successes.push({:obj => feedback.id, :updated_at => feedback.updated_at })
           else
             sucess = success && false
             errors.push({:obj => feedback.id, :success => false, :error => feedback.errors })
@@ -31,8 +31,12 @@ class FeedbackController < ApplicationController
   end
 
   def delete
-    feedback = User.find(current_user).feedback.find(params[:id])
-    render :json => feedback.delete, :callback  => params['callback']
+    if current_user.admin?
+      feedback = Feedback.find(params[:id])
+    else
+      feedback = User.find(current_user).feedback.find(params[:id])
+    end
+    render :json => { :feedback => feedback.delete, :success => true }, :callback  => params['callback']
   end
 
 
@@ -62,7 +66,7 @@ class FeedbackController < ApplicationController
           
         
         
-          if user_signed_in?
+          if user_signed_in? && current_user.commentable?
             if current_user.id == feedback.user_id
               render :json => {:success => false, :message => 'You can\'t '+verb+' your own thing' }, :callback  => params['callback']
             else

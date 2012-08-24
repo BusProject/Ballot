@@ -1,6 +1,6 @@
 class Option < ActiveRecord::Base
   belongs_to :choice
-  attr_accessible :blurb, :name, :photo, :position
+  attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbant
 
   has_many :feedback, :conditions => [ "length(flag)- length(replace( flag,',','') ) < ? AND approved = ?", 2, true]
   # Don't show anyone with two flags or isn't approved

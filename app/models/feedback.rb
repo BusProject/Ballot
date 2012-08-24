@@ -20,5 +20,14 @@ class Feedback < ActiveRecord::Base
     self[:uselessVal] = self.useless.split(',').length + ( self.useless.split(',').empty? ? 0 : 1 )
   end
   
+  def flaggers
+    flaggers = self.flag.split(',')
+    return flaggers.map { |flagger| User.find_by_id(flagger) }.select{ |flagger| ! flagger.nil? }
+  end
+  
+  def off?
+    return !self.approved || self.flag.split(',').length > 2
+  end
+  
   
 end

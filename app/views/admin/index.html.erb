@@ -1,0 +1,151 @@
+<script type="text/javascript">
+	$(document).ready( function() {
+		$('#admin_users').betterAutocomplete(
+			"<%= admin_find_path ('users') %>",
+			function( event, ui ) {
+				$.post( ui.item.admin_url, function(response) {
+					if( response.success ) {
+						var clone = $('.admin li:last').clone();
+						if( clone.length == 0 ) {
+							clone = document.createElement('li');
+							clone.innerHTML = '<img><a class="profile"></a><br/><a class="email"></a>';
+						}
+						$('img',clone).attr('src',response.user.image); 
+						$('a.profile',clone).attr('href',response.user.profile).text(response.user.name);
+						$('a.email',clone).attr('href','mailto:'+response.user.email).text(response.user.email);
+						$('.admin').append(clone)
+						$('#admin_users').val('')
+					} else {
+						$('#admin_users').val('')
+					}
+				})
+			}
+		)
+		$('#ban_users').betterAutocomplete(
+			"<%= admin_find_path ('users') %>",
+			function( event, ui ) {
+				$.post( ui.item.ban_url, function(response) {
+					if( response.success ) {
+						var clone = $('.banned li:last').clone();
+						if( clone.length == 0 ) {
+							clone = document.createElement('li');
+							clone.innerHTML = '<img><a class="profile"></a><br/><a class="email"></a><a class="unban side">unban</a>';
+						}
+						$('img',clone).attr('src',response.user.image); 
+						$('a.profile',clone).attr('href',response.user.profile).text(response.user.name);
+						$('a.email',clone).attr('href','mailto:'+response.user.email).text(response.user.email);
+						$('a.unban',clone).attr('href',ui.item.ban_url);
+						$('.banned').append(clone)
+						$('#admin_users').val('')
+					} else {
+						$('#admin_users').val('')
+					}
+				})
+			}
+		)
+		$('#unapprove_feedback').betterAutocomplete(
+			"<%= admin_find_path ('feedback') %>",
+			function( event, ui ) {
+				$.post( ui.item.approval_url, function(response) {
+					if( response.success ) {
+						var clone = $('.flagged li:last').clone();
+						if( clone.length == 0 ) {
+							clone = document.createElement('li');
+							clone.innerHTML = '<div class="comment"></div><div class="info"></div><div class="side"><a class="remove_feedback">remove</a><a class="approval_comment">unapprove</a></div>';
+						}
+						$('.comment',clone).text(response.feedback.comment);
+						$('.info',clone).html('by <a class="profile" href="'+response.user.profile+'">'+response.user.name+'</a> on '+response.feedback.created_at)
+						$('a.approval_comment',clone).attr('href',ui.item.approval_url)
+						$('a.remove_feedback',clone).attr('href',response.delete_url)
+						$('.flagged').append(clone)
+						$('#unapprove_feedback').val('')
+					} else {
+						$('#unapprove_feedback').val('')
+					}
+				})
+			}
+		)
+		$('#find_choice').betterAutocomplete(
+			"<%= admin_find_path ('choice') %>",
+			function( event, ui ) {
+				$.get( ui.item.edit_url, function(response) {
+					$('.choice_form').html(response)
+				})
+			}
+		)
+	})
+	.on('click','.unban, .remove_feedback, .approval_comment',function(e) {
+		e.preventDefault();
+		var $this = $(this)
+		$.post($this.attr('href'), function(response) { if( response.success) $this.parents('li').remove() })
+	})
+	.on('submit','.choice_form form',function(e) {
+		var $this = $(this)
+		$.post($this.attr('action'),$this.serialize(),function(response) { $this.parents('div.choice_form').html(''); $('#find_choice').val('') })
+		e.preventDefault();
+	})
+	.on('click','.choice_form button',function(e) {
+		$(this).parents('div.choice_form').html('')
+		$('#find_choice').val('')
+		e.preventDefault();
+	})
+	.on('click','.fetch',function(e) {
+		var $this = $(this)
+		$.getJSON("<%= choices_fetch_path %>",function(r) { $this.hide() })
+		e.preventDefault();
+	})
+</script>
+<h1>Admin Section</h1>
+
+<h2>Admins</h2>
+<ul class="users admin">
+	<%- @admins.each do |user| %>
+		<li><%= link_to image_tag(user.image), user.to_url %>
+			<%= link_to user.name, user.to_url %><br />
+			<%= link_to user.email, 'mailto:'+user.email %>
+		</li>
+	<% end -%>
+</ul>
+<p><input id="admin_users" placeholder="Admin Someone: Search by name, email, profile url" ></p>
+
+
+<h2>Banned Users</h2>
+<ul class="users banned">
+<%- @bans.each do |user| %>
+	<li><%= image_tag(user.image) %>
+		<%= link_to user.name, user.to_url, :class => 'profile' %><br />
+		<%= link_to user.email, 'mailto:'+user.email, :class => 'email' %><br />
+		<%= link_to 'unban', user_ban_path( user.id ), :class => 'unban side' %>
+	</li>
+<% end -%>
+</ul>
+<p><input id="ban_users" placeholder="Ban Someone: Search by name, email, profile url" ></p>
+
+<h2>Flagged Comments</h2>
+<p>All comments with over three flags or that are unapproved from active users</p>
+<ul class="flagged">
+	<%- @flagged.each do |flagged| %>
+		<li>
+			<div class="comment"><%= flagged.comment %></div>
+			<div class="info">By <%= link_to flagged.user.name, flagged.user.profile, :class=>'profile' unless flagged.user.nil? %> on <%= flagged.updated_at %></div>
+			<%- if flagged.flaggers.length > 0 %>
+				<div class="flaggers">Flagged by
+					<%- flagged.flaggers.each do |flagger| %>
+						<%= link_to flagger.name, flagger.profile %>
+					<% end -%>
+				</div>
+			<% end -%>
+			<div class="side">
+				<%= link_to flagged.off? ? 'rescue' : 'unapprove', approval_feedback_path(flagged.id), :class=>'approval_comment ' +(flagged.off? ?  'rescue' : 'unapprove' )  %>
+				<%= link_to 'remove', remove_feedback_path(flagged.id), :class=>'remove_feedback' %>
+			</div>
+		</li>
+	<% end -%>
+</ul>
+<p><input id="unapprove_feedback" placeholder="Unapprove Something: Search by comment or user" ></p>
+
+<h2>Fetch Data</h2>
+<a class="fetch" href="#">Retrieve Data</a>
+<h2>Edit Choices / Options</h2>
+<p><input id="find_choice" placeholder="Edit Something: Search by contest name or option name" ></p>
+<div class="choice_form"></div>

@@ -7,12 +7,20 @@ Ballot::Application.routes.draw do
   
   match '/users/cancel' => 'home#cancel', :as => 'user_cancel'
 
+  match '/admin' => 'admin#index', :as => 'admin'
+  match '/admin/find/:object/' => 'admin#find', :as => 'admin_find' #, :via => :post
+  match '/admin/:id' => 'admin#admin', :as => 'user_admin', :via => :post
+  match '/admin/ban/:id' => 'admin#ban', :as => 'user_ban', :via => :post
+  match '/admin/choice/:id' => 'admin#choice_edit', :as => 'choice_edit', :via => :get
+  match '/admin/choice/:id' => 'admin#choice_update', :as => 'choice_update', :via => :post
+  match '/admin/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
+
   
   root :to => "home#index"
 
   match '/auth/:provider/callback' => 'authentications#create'
   match '/lookup' => 'choice#index'
-  match '/fetch' => 'choice#retrieve'
+  match '/fetch' => 'choice#retrieve', :as => 'choices_fetch'
   
   match '/feedback/save' => 'feedback#update', :via => :post, :as => 'save_feedback'
   match '/feedback/:id/remove' => 'feedback#delete', :via => :post, :as => 'remove_feedback'
