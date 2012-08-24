@@ -145,7 +145,7 @@ function locationModel(data) {
 
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(
-			document.location.href.split('#')[0]+'lookup',
+			inits.root+'lookup',
 			{
 				l: yourLocation.lat()+','+yourLocation.lng(),
 				address: address
