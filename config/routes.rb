@@ -4,6 +4,8 @@ Ballot::Application.routes.draw do
     resource :registration,
       only: [:new, :create ], path: 'users', path_names: { new: 'sign_up' }, controller: 'devise/registrations'
   end
+  
+  match '/users/cancel' => 'home#cancel', :as => 'user_cancel'
 
   
   root :to => "home#index"
