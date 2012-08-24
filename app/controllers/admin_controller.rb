@@ -6,7 +6,7 @@ class AdminController < ApplicationController
     @admins = User.find_all_by_admin(true)
     @bans = User.find_all_by_banned(true)
     @flagged = Feedback.where( "length(flag)- length(replace( flag,',','') ) >= ? AND approved = ?", 2, true )
-    @flagged.concat( Feedback.where('approved IS ?',false).joins(:user).where('banned IS ? AND deactivated IS ? AND admin IS ?',false,false,false) )
+    @flagged.concat( Feedback.where('approved = ?',false).joins(:user).where('banned = ? AND deactivated = ? AND admin = ?',false,false,false) )
     @config = {:state => 'off'}.to_json
   end
   
@@ -16,7 +16,7 @@ class AdminController < ApplicationController
       users = User.where( "name LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR email LIKE ? OR id LIKE ?", prepped, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) )      
       results = users.map{ |user| {:label => user.name, :id => user.id, :ban_url => user_ban_path( user.id ) , :admin_url => user_admin_path( user.id ) } }
     elsif params[:object] == 'feedback'
-      feedback = Feedback.where( "comment LIKE ? AND approved IS ?", '%'+params[:term]+'%',true)
+      feedback = Feedback.where( "comment LIKE ? AND approved = ?", '%'+params[:term]+'%',true)
       feedback.concat( User.where( "name LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR email LIKE ? OR id LIKE ?", prepped, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) ).map{ |user| user.feedback.select{ |feedback| feedback.approved? } }.flatten )
       results = feedback.map{ |feedback| {:label => ['"'+feedback.comment+'"',' - ',feedback.user.name,'on',feedback.choice.contest].join(' '), :id => feedback.id, :approval_url => approval_feedback_path( feedback.id ) } }
     elsif params[:object] == 'choice'
