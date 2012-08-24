@@ -13,10 +13,10 @@ class AdminController < ApplicationController
   def find
     prepped = '%'+params[:term].split(' ').each{ |word| word.capitalize }.join(' ')+'%'
     if params[:object] == 'users'
-      users = User.where( "name LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR email LIKE ? OR id LIKE ?", prepped, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) )      
+      users = User.where( "name LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR email LIKE ? OR id = ?", prepped, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) )      
       results = users.map{ |user| {:label => user.name, :id => user.id, :ban_url => user_ban_path( user.id ) , :admin_url => user_admin_path( user.id ) } }
     elsif params[:object] == 'feedback'
-      feedback = Feedback.where( "comment LIKE ? AND approved = ?", '%'+params[:term]+'%',true)
+      feedback = Feedback.where( "comment LIKE ? AND approved IS ?", '%'+params[:term]+'%',true)
       feedback.concat( User.where( "name LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR email LIKE ? OR id LIKE ?", prepped, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) ).map{ |user| user.feedback.select{ |feedback| feedback.approved? } }.flatten )
       results = feedback.map{ |feedback| {:label => ['"'+feedback.comment+'"',' - ',feedback.user.name,'on',feedback.choice.contest].join(' '), :id => feedback.id, :approval_url => approval_feedback_path( feedback.id ) } }
     elsif params[:object] == 'choice'
