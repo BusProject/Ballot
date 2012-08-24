@@ -137,7 +137,7 @@
 				</div>
 			<% end -%>
 
-			<div class="footer" data-bind=" visible: !$data.all() && $data.feedback().length > 3 && notAnswered ">
+			<div class="footer" data-bind=" visible: !$data.all() && $data.feedback().length > 3  ">
 				<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Read All Comments</a>
 			</div>
 
