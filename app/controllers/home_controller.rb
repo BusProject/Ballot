@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     @classes = 'home '
-    if current_user.nil? && !cookies['new_ballot_visitor']
+    if current_user.nil? && !cookies['new_ballot_visitor'] && params['q'].nil?
 
       cookies['new_ballot_visitor'] = {
         :value => true,
