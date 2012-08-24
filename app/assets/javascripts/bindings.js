@@ -77,7 +77,7 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 
 		var $ctx = ko.contextFor( $toggle[0] ),
 			$comment = $('.comment', $parent),
-			choice_id = $ctx.$data.id,
+			//choice_id = $ctx.$data.id,
 			option = $toggle.hasClass('right') ? $ctx.$data.no() : $ctx.$data.yes(),
 			option_id = option.id,
 			comment = $comment.val()
@@ -87,7 +87,7 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 			{ feedback: [ 
 					{
 						option_id: parseInt(option_id),
-						choice_id: parseInt(choice_id),
+						//choice_id: parseInt(choice_id),
 						comment: comment,
 						
 					}
@@ -95,7 +95,7 @@ $(document).on('click touchend','.cancel',function(e) { // binding clearing a lo
 			},
 			function(response) {
 				if( response.success ) {
-					option.feedback.push( Feedback( { comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type } ) )
+					option.feedback.push( Feedback( { comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type, updated_at:  response.successes[0].updated_at } ) )
 					$comment.val('')
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
 				}
