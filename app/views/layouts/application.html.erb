@@ -74,7 +74,6 @@
 
 </head>
 <body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= !current_user.nil? && current_user.commentable? ? '' : 'no_comment' %> <%= @classes %>" >
-
 	<div id="container">
 		<div id="page">
 			<div id="header" class="clearfix">
