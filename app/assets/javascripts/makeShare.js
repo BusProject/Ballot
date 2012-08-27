@@ -8,6 +8,7 @@ function makeShare(url,name,msg,image) {
 	// More twitter terms &hashtags=&via=&related=
 	if( image ) string += '<a target="_blank" href="http://www.tumblr.com/share/photo?url='+escape(url)+'&caption='+escape(name)+'" class="tumblr"><div></div></a>'
 	else string += '<a target="_blank" href="http://www.tumblr.com/share/link?url='+escape(url)+'&name='+name+'&description='+msg+'" class="tumblr"><div></div></a>'
+	string += '<a target="_blank" href="https://plus.google.com/share?url='+url+'" class="googleplus"><div></div></a>'
 	string += '</div></div>'
 	return string
 }
