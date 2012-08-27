@@ -6,4 +6,5 @@ task :deploy do
   sh 'curl -f "http://the-ballot.herokuapp.com"'
   sh 'curl -f "http://the-ballot.herokuapp.com?q=true"'
   sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://the-ballot.herokuapp.com"'
+  sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://the-ballot.herokuapp.com/admin"'
 end
