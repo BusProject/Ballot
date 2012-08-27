@@ -78,7 +78,7 @@ function makeMeme(memeRaw,path,flavor) {
 				{ quote: this.quote.fixed(), theme: this.theme(), meme: this.id() }, 
 				function(response) { 
 					console.log( id );
-					var url = typeof id == undefined ? 'data:image/png;base64,' + response : document.location.protocol+'//'+document.location.host+'/m/'+id+'.png';
+					var url = typeof id == 'undefined' && id != null ? 'data:image/png;base64,' + response : document.location.protocol+'//'+document.location.host+'/m/'+id+'.png';
 					$('.preview',document.body).html('<a href="'+url+'" target="_blank"><img src="data:image/png;base64,' + response + '" /></a>')
 					loading(false)
 				}
@@ -130,6 +130,8 @@ function makeMeme(memeRaw,path,flavor) {
 										message = data.quote.fixed() // Le message you want to share ( Twitter / Tumblr only )
 
 									$('a.facebook',document.body).attr('href',img.replace('.png','')+'/fb?auth_token='+current_user.auth_token);
+									$('a.googleplus',document.body).attr('href','https://plus.google.com/share?url='+link);
+									$('a.pintrest',document.body).attr('href','http://pinterest.com/pin/create/button/?url='+escape(link)+'&media='+escape(img)+'&description='+escape(message));
 
 									var referr = '', via = '', hashtags = ''
 									var twitter = 'https://twitter.com/intent/tweet?original_referer='+referr+
