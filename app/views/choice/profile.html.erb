@@ -51,11 +51,13 @@
 			</script>
 
 		<% else %>
-			<span class="link flag" onclick="$(this).hide().next().show()">Flag this User</span>
-			<p style="display: none;" class="flag">Are you sure? <span class="link" onclick=" 
-				$(this).parent().text('Flagged - thanks');
-				yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.you().id+'/flag',function(response){}) } )
-			">Yes</span> </p>
+			<%- unless current_user.nil? %>
+				<span class="link flag" onclick="$(this).hide().next().show()">Flag this User</span>
+				<p style="display: none;" class="flag">Are you sure? <span class="link" onclick=" 
+					$(this).parent().text('Flagged - thanks');
+					yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.you().id+'/flag',function(response){}) } )
+				">Yes</span> </p>
+			<% end -%>
 		<% end -%>
 	</div>
 <!-- /ko -->

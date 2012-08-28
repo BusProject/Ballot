@@ -4,7 +4,7 @@
 
 
 <div class="row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
-	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }">
+	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable, emptyFeedback: feedback.everyone().filter( function(el){ return el.comment.length > 1 }).length < 1 }">
 
 	<hr><h1 class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
@@ -44,51 +44,9 @@
 		<% end %>
 		<% if choice.new_record? || choice.commentable %>
 
-			<% @how = '<h2>How will you vote on this measure?</h2>
-			<p>Let the world know how you’re voting on <span data-bind="text: $data.contest"></span>. Your comment will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.</p>' %>
-
-
-			<div class="yourFeedback <%= 'has_user' unless user.nil? %>" data-bind="if: $data.commentable && you() != null, visible: $data.commentable && you() != null">
-				<h1 data-bind="text: '&ldquo;'+you().comment+'&rdquo;', visible: you().comment.length > 0,addClass: you().type" >
-					<% unless user.nil? %>
-						<% feedback = choice.options.map{ |o| o.feedback }.flatten.select{ |f| f.user_id == user.id }.first  %>
-						<%= '"'+feedback.comment+'"' unless feedback.nil? %>
-					<% end %>
-				</h1>
-				<div class="head" data-bind="addClass: you().type, visible: you().comment.length < 1 ">
-					<img data-bind="src: you().image" src="<%= user.image unless user.nil? %>">
-				</div>
-				<h3 data-bind="text: '-'+you().name+( you().comment.length > 1 ? ' '+you().time : '' ), addClass: you().type">
-					<%= '-'+user.first_name+' '+user.last_name unless user.nil? %>
-				</h3>
-				<div class="controls" data-bind="visible: !inits.user || current_user.id == inits.user.id ">
-					<button class="meme">Share Your Comment</button>
-					<button class="next" >Next Measure</button>
-					<span class="remove edit link"  >Edit</span>
-						<span >&nbsp;|&nbsp;</span>
-					<span class="remove link" >Remove</span>
-				</div>
-			</div>
-
-			<%- if !current_user.nil? && current_user.commentable? %>
-				<div class="yourFeedback" data-bind="visible: $data.commentable && ! you() ">
-					<%= raw @how %>
-					<textarea type="text" class="comment" data-bind="elastic: true, attr: {disabled: current_user.id == 'unauthenticated', placeholder: current_user.id == 'unauthenticated' ? 'Log in to comment' : 'What do you think?'}" /></textarea>
-
-					<div class="buttons">
-						<div class="toggle" data-bind="addClass: $data.you() != null && $data.you().type == 'no' ? 'right' : '' ">
-							<div class="inner">
-								<div class="yes">I'm Voting Yes</div>
-								<div class="no">I'm Voting No</div>
-							</div>
-							<div class="cover">|||</div>
-						</div>
-						<button class="submit">Submit</button>
-					</div>
-				</div>
-			<% end %>
-
-
+			<%- if current_user != user || !current_user.nil? %>
+				<%= render 'choice/feedback', :user => user, :feedback => choice.options.map{ |o| o.feedback }.flatten.select{ |f| f.user_id == user.id }.first %>
+			<%- end %>
 			<div class="commentTitle" data-bind="visible: $data.commentable && feedback.realLength() > 0  ">
 				What Others Are Saying
 				<select data-bind="value: $data.mode">
@@ -98,8 +56,8 @@
 					<option value="yes" >In Support</option>
 					<option value="no" >In Opposition</option>
 				</select>
-
 			</div>
+			
 
 			<ul data-bind="visible: $data.commentable, foreach: feedback.everyone" class="feedback">
 				<li data-bind="addClass: $data.type ">
@@ -129,12 +87,8 @@
 
 				</li>
 			</ul>
-			<%- if current_user.nil? %>
-				<div class="yourFeedback login">
-					<%= raw @how %>
-					<p>You must be logged in through Facebook to use this feature</p>
-					<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook)  %>
-				</div>
+			<%- if current_user.nil? || (current_user != user && !user.nil? )%>
+				<%= render 'choice/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.feedback }.flatten.select{ |f| f.user_id == current_user.id }.first %>
 			<% end -%>
 
 			<div class="footer" data-bind=" visible: !$data.all() && $data.feedback().length > 3  ">

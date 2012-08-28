@@ -219,7 +219,7 @@ a {
 			margin: -20px 0 0;
 			position: relative;
 			z-index: 1;
-			&.lower { margin: 20px 0 0; }
+			&.lower { margin: 0 0 0; }
 		}
 		
 		.body {
@@ -530,7 +530,10 @@ a {
 			}
 		}
 
-		
+		&.emptyFeedback {
+			.yourFeedback { border-bottom: none; }
+			ul.feedback, .commentTitle { display: none }
+		}
 	}
 	.ballot-measures .row:last-child button.next { display: none }
 }

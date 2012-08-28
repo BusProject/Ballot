@@ -16,7 +16,6 @@
 				<a href="#read-ballot" class="fixed-link confirm">Yes</a><a href="" class="cancel clear">No</a>
 			</div>
 		</div><!-- map -->
-		<!-- <a href="#read-ballot" class="fixed-link submit confirm generate">Generate Your Ballot</a> -->
 
 	</div><!-- find-ballot -->
 
@@ -49,13 +48,13 @@
 				<p>Log in through Facebook to get an email when we've added more.</p>
 				<br />
 				<a href="" data-bind="attr: {href:  '<%= omniauth_authorize_path('user', :facebook) %>?state='+address.state() }">
-					<%= image_tag 'fb-login.png'  %>
+					<%= image_tag 'fb-login.png', :style => 'width:120px'  %>
 				</a>
 			<% else %>
 				<button style="display:none;" class="alerts" 
 					data-bind="visible: (current_user.alerts == null ? '' : current_user.alerts).search( address.state() ) === -1"
 					onclick="$(this).hide().next().show(); current_user.alerts += yourLocation.address.state()+','; $.post(inits.root+'users/update',{alerts: yourLocation.address.state() } ); ">Update Me When There's More Data</button>
-				<strong style="display:none;" data-bind="visible: current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong
+				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong
 			<% end -%>
 		</div>
 	</div>

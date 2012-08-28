@@ -53,6 +53,11 @@ function Choice(data,args) {
 		},this)
 
 		this.you = ko.computed(function() { return this.feedback().filter( function(el) { return el.yourFeedback })[0] || null  },this)
+		this.featured = ko.computed(function() { 
+			if( typeof inits.user == 'undefined' || inits.user.id == current_user.id ) return this.you();
+			else return this.feedback().filter( function(el) { return el.ftFeedback })[0] || null
+		},this)
+
 		this.notAnswered = ko.computed( function() { 
 			return this.feedback().filter( function(el) { return el.user_id == current_user.id } ).length < 1
 		},this)
@@ -130,7 +135,8 @@ function Feedback(data) {
 		this.support = data.support
 		this.comment = data.comment
 		var user = typeof inits.user != 'undefined' ? inits.user.id : current_user.id
-		this.yourFeedback = data.user_id == user
+		this.yourFeedback = data.user_id == current_user.id
+		this.ftFeedback = data.user_id == user
 		this.image = typeof data.user != 'undefined' ? data.user.image : 'http://localhost:3000/assets/alincoln.gif'
 		this.url = typeof data.user != 'undefined' ? data.user.profile : ''
 		this.fb = typeof data.user != 'undefined' ? data.user.fb : ''
