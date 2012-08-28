@@ -17,6 +17,7 @@ class ChoiceController < ApplicationController
 
     @choices = @user.choices
     @classes = 'profile home'
+    @title = @user.guide_name || @user.name+'\'s Voter Guide'
 
     result = {:state => 'profile', :choices => @choices, :user => @user }
 
@@ -30,6 +31,8 @@ class ChoiceController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') if @choice.nil?
 
     @classes = 'home single'
+    @title = @choice.contest
+
     result = {:state => 'single', :choices => [@choice]}
 
     @config = result.to_json( json_include )
