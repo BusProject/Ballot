@@ -6,7 +6,7 @@
 
 <%= csrf_meta_tags %>
 <script type="text/javascript" charset="utf-8">
-	var current_user  = <%= raw current_user.to_json %>
+	var current_user  = <%= raw current_user.to_public %>
 </script>
 
 <div style="width: 800px">
