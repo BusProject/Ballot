@@ -130,7 +130,7 @@ function makeMeme(memeRaw,path,flavor) {
 										message = data.quote.fixed() // Le message you want to share ( Twitter / Tumblr only )
 
 									$('a.facebook',document.body).attr('href',img.replace('.png','')+'/fb?auth_token='+current_user.auth_token);
-									$('a.googleplus',document.body).attr('href','https://plus.google.com/share?url='+link);
+									$('a.googleplus',document.body).attr('href','https://plus.google.com/share?url='+img);
 									$('a.pintrest',document.body).attr('href','http://pinterest.com/pin/create/button/?url='+escape(link)+'&media='+escape(img)+'&description='+escape(message));
 
 									var referr = '', via = '', hashtags = ''
