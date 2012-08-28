@@ -7,7 +7,7 @@
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }">
 
 	<hr><h1 class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
-	<div class="explanation" data-bind="text: $data.description"><%= choice.description %></div>
+	<div class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
 	<button class="open">Learn More and Comment</button>
 	<hr class="button">
 
