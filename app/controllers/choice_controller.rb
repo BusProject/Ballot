@@ -17,7 +17,7 @@ class ChoiceController < ApplicationController
 
     @choices = @user.choices
     @classes = 'profile home'
-    @title = @user.guide_name || @user.name+'\'s Voter Guide'
+    @title = @user.guide_name.nil?  ? @user.name+'\'s Voter Guide' : @user.guide_name
 
     result = {:state => 'profile', :choices => @choices, :user => @user }
 
