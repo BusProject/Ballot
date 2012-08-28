@@ -7,8 +7,13 @@
 
 <div class="yourFeedback <%= user.nil?  ? 'no-user' : 'has_user' %>" data-bind="visible: <%= userObj %> != null, if: <%= userObj %> != null ">
 	<h1 data-bind="text: '&ldquo;'+<%= userObj %>.comment+'&rdquo;', visible: <%= userObj %>.comment.length > 0,addClass: <%= userObj %>.type" >
-		<%= '"'+feedback.comment+'"' if !feedback.nil? && feedback.comment.length > 0 %>
-		<%= feedback.option.name+' on '+feedback.choice.contest if feedback.comment.empty? && !feedback.nil? %>
+		<%- unless feedback.nil? %>
+			<%- if feedback.comment.length > 0 %>
+				<%= '"'+feedback.comment+'"'  %>
+			<% else %>
+				<%= feedback.option.name+' on '+feedback.choice.contest %>
+			<% end -%>
+		<% end -%>
 	</h1>
 	<div class="head" data-bind="addClass: <%= userObj %>.type, visible: <%= userObj %>.comment.length < 1 ">
 		<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
