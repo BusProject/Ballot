@@ -1,4 +1,5 @@
 @import 'less/vars.less';
+@import 'less/mixins.less';
 
 html, body, h1, h2, h3, h4 {
 	font-family: 'LeagueGothicRegular', sans-serif;
@@ -7,6 +8,7 @@ html, body, h1, h2, h3, h4 {
 p, div {
 	font-family: 'Rokkitt', serif;
 }
+div { .border-box(); }
 
 h1 {
 	font-size:2em;
@@ -19,7 +21,7 @@ h2 {
 
 a:link, a:active, a:visited, span.link {
 	cursor: pointer;
-	color: @grey;
+	color: @darkGrey;
 	text-decoration: underline;
 	&:hover { color: @orange; }
 }
