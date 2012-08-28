@@ -21,3 +21,50 @@
 	border: 1px solid #3f3f3f;
 	color: white;
 }
+.orangeButton() {
+	.gradient(#d2793b,#be5e29);
+	.drop-shadow();
+	cursor: pointer;
+	color: white;
+	border: 1px solid @darkOrange;
+	&:hover {
+		.gradient(#be5e29,#d2793b);
+	}
+}
+
+.head-image(@width: 70px ) {
+	width: @width;
+	height: @width;
+	img { width: @width; height: @width; }
+	&::after {
+		width: @width;
+		margin: -7px 0 0;
+		padding: 2px 0 0;
+		height: 18px;
+		color: white;
+		display: block;
+		text-align: center;
+		font-size: 20px;
+	}
+	&&.no::after {
+		content: 'NO';
+		background: #bd393d;
+	}
+	&&.yes::after {
+		content: 'YES';
+		background: #8eb337;
+	}
+}
+
+/* Used for position stars for large titles */
+.move-stars( @over: 50px, @firstH: 4px, @secondH: -4em ) { 
+	margin-left: -@over;
+	margin-right: @over;
+	margin-top: @secondH;
+	&:first-child { 
+		margin-top: @firstH;
+		margin-left: @over;
+		margin-right: -@over;
+		float: left;
+	}
+}
