@@ -1,4 +1,4 @@
-$(document).on('click touchend','.cancel',function(e) { // binding clearing a location
+$(document).on('click touchend','#find-location .cancel',function(e) { // binding clearing a location
 		e.preventDefault();
 		var $this = $(this),
 			location = yourLocation
