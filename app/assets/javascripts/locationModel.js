@@ -17,7 +17,7 @@ function locationModel(data) {
 
 	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
 
-	this.friends = ko.observableArray( typeof current_user.fb_friends != 'undefined' ? current_user.fb_friends.split(',') : [] )
+	this.friends = ko.observableArray( typeof current_user.fb_friends != 'undefined' && current_user.fb_friends != null ? current_user.fb_friends.split(',') : [] )
 
 	this.round = function(number,decimal) { // Useful 
 		if( typeof decimal == 'undefined' ) decimal = 2
