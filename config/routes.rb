@@ -5,7 +5,8 @@ Ballot::Application.routes.draw do
       only: [:new, :create ], path: 'users', path_names: { new: 'sign_up' }, controller: 'devise/registrations'
   end
   
-  match '/users/cancel' => 'home#cancel', :as => 'user_cancel'
+  match '/users/cancel' => 'user#cancel', :as => 'user_cancel'
+  match '/users/update' => 'user#update', :as => 'user_update', :via => :post
 
   match '/admin' => 'admin#index', :as => 'admin'
   match '/admin/find/:object/' => 'admin#find', :as => 'admin_find' #, :via => :post

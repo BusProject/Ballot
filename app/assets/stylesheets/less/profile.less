@@ -1,0 +1,34 @@
+@import 'less/vars.less';
+@import 'less/mixins.less';
+
+#profile {
+	position: relative;
+	input, textarea {
+		width: 400px;
+		display: block;
+		margin: 10px auto;
+	}
+	input { font-size: 24px; color: @orange; font-weight: bold; }
+	textarea { font-size: 16px; color: @grey; height: 60px; }
+	a.cancel {
+		font-size: 10px;
+		width: 100%	
+	}
+	.status {
+		margin: 30px 0;
+	}
+	.stars {
+		position: absolute;
+		top: 0;
+		right: 10px;
+		float: none;
+		margin: 0;
+		width: 60px;
+		&:first-child { left: 0; }
+	}
+	.flag {
+		float: right;
+		margin: -40px 10px 0 0;
+		font-size: 10px;
+	}
+}

@@ -1,3 +1,5 @@
+@import 'less/vars.less';
+
 html, body, h1, h2, h3, h4 {
 	font-family: 'LeagueGothicRegular', sans-serif;
 	text-align:center;
@@ -15,9 +17,11 @@ h2 {
 	font-size:1.8em;
 }
 
-span.link {
+a:link, a:active, a:visited, span.link {
 	cursor: pointer;
-	&:hover { text-decoration: underline; }
+	color: @grey;
+	text-decoration: underline;
+	&:hover { color: @orange; }
 }
 
 strong { font-weight: bold; }

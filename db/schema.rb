@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120823223624) do
+ActiveRecord::Schema.define(:version => 20120827160614) do
 
   create_table "choices", :force => true do |t|
     t.string    "contest"
@@ -120,10 +120,12 @@ ActiveRecord::Schema.define(:version => 20120823223624) do
     t.boolean  "admin",                  :default => false
     t.string   "authentication_token"
     t.string   "guide_name"
-    t.string   "base_address"
     t.string   "fb"
     t.boolean  "banned",                 :default => false
     t.boolean  "deactivated",            :default => false
+    t.text     "description"
+    t.text     "fb_friends"
+    t.text     "alerts"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

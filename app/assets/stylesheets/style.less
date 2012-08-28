@@ -200,20 +200,13 @@ a {
 		}
 
 		button.open {
-			.gradient(#d2793b,#be5e29);
-			.drop-shadow();
 			font-family: Rokkitt, serif;
 			padding: 10px 20px;
-			color: white;
 			height: 42px;
-			border: 1px solid @darkOrange;
+			.orangeButton();
 			position: relative;
 			font-size: 16px;
 			z-index: 2;
-			cursor: pointer;
-			&:hover {
-				.gradient(#be5e29,#d2793b);
-			}
 		}
 
 		hr.button {
@@ -542,12 +535,24 @@ a {
 	.ballot-measures .row:last-child button.next { display: none }
 }
 
+#more-coming {
+	.stars { .move-stars(100px) }
+	button { 
+		.orangeButton();
+		font-size: 16px;
+		padding: 10px 20px;
+		font-family: Rokkitt, serif;
+	}
+}
+
+/** Profile Styling **/
+@import 'less/profile.less';
 
 /** Meme Styling **/
 @import 'less/meme.less';
-
-/** Meme Styling **/
+/** Splash Styling **/
 @import 'less/splash.less';
+/** Nonsplash Styling **/
 @import 'less/message.less';
 
 @import 'less/not_logged_in.less';

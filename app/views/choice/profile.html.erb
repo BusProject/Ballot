@@ -1,7 +1,64 @@
-<h1><%= @user.guide_name || @user.first_name + ' '+@user.last_name + '\'s Voter Guide' %></h1>
+<!-- ko stopBinding: true -->
+	<div id="profile" data-bind="with: current_user " class="ballot-section">
+		<div class="stars"><h2>&#9733;</h2><h1>&#9733;</h1></div>
+		<h1 class="sectionheading" data-bind="text: guide_name() != null && guide_name() != '' ? guide_name : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
+		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
+		<div class="category-heading">
+			<p class="description" data-bind=" text: description"><%= @user.description %></p>
+		</div>
 
-<strong><%= 'Your account has been deactivated - all of your comments and votes are hidden'  if current_user.deactivated? %></strong>
-<strong><%= 'Your account has been banned - all of your comments and votes are hidden'  if current_user.banned? %></strong>
+		<%- if current_user == @user %>
+			<p data-bind="visible: !edit() "><span class="link" data-bind="click: function() {open() }">Edit Your Voter Guide</span></p>
+
+			<div style="display: none" class="editor" data-bind="visible: edit ">
+				<input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
+				<textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
+				<p><span class="link" data-bind="click: function() { save() } ">Save</span> | <span class="link" data-bind="click: function() { discard() }">Close</span></p>
+			</div>
+			<div class="status">
+				<p><strong><%= 'Your account has been deactivated - all of your comments and votes are hidden'  if current_user.deactivated? %></strong></p>
+				<p><strong><%= 'Your account has been banned - all of your comments and votes are hidden'  if current_user.banned? %></strong></p>
+				<p><%= link_to 'Reactivated it now', user_cancel_path  if current_user.deactivated? %></p>
+				<p><%= link_to 'Deactivate Your Account', user_cancel_path, :class =>'cancel'  if !current_user.deactivated? %></p>
+			</div>
+			<script type="text/javascript">
+				current_user.guide_name = ko.observable(current_user.guide_name )
+				current_user.description = ko.observable(current_user.description)
+				current_user.edit = ko.observable(false)
+				current_user.open = function() { 
+					current_user.edit(true);
+					current_user.__guide_name = current_user.guide_name();
+					current_user.__description = current_user.description();
+				}
+				current_user.discard = function() {
+					current_user.edit(false);
+					current_user.guide_name( current_user.__guide_name );
+					current_user.__guide_name = null;
+					current_user.description( current_user.__description );
+					current_user.__description = null;
+				}
+				current_user.save = function() { 
+					current_user.edit(false);
+					current_user.__guide_name = null;
+					current_user.__description = null;
+					$.post( inits.root+'users/update', { guide_name:  current_user.guide_name(), description:  current_user.description() } )
+				}
+				current_user.__titleFix = ko.computed( function() {
+					var title = this.guide_name()
+					document.title = 'The Ballot | '+title
+				},current_user)
+				$(document).ready( function() { ko.applyBindings( current_user, document.getElementById("profile")); })
+			</script>
+
+		<% else %>
+			<span class="link flag" onclick="$(this).hide().next().show()">Flag this User</span>
+			<p style="display: none;" class="flag">Are you sure? <span class="link" onclick=" 
+				$(this).parent().text('Flagged - thanks');
+				yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.you().id+'/flag',function(response){}) } )
+			">Yes</span> </p>
+		<% end -%>
+	</div>
+<!-- /ko -->
 
 <% n = 0 %>
 <div id="read-ballot">
@@ -11,7 +68,7 @@
 		</div>
 	<% n+=1%>
 	<% end %>
-	<% if @choices.length == 0 %>
+	<% if @choices.length == 0 && @user != current_user %>
 		<p></p>
 		<p><%= @user.first_name %> hasn't left any sort of feedback.</p>
 		<p><em>Redirecting you to the home page in 2.012 seconds</em></p>
