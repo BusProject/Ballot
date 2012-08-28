@@ -76,7 +76,13 @@ function initialize() {
 						method: 'fql.query',
 						query: 'SELECT uid FROM user WHERE is_app_user = '+FB.__appid+' AND uid IN (SELECT uid2 FROM friend WHERE uid1 =me() );'
 					},
-				  	function(response) { yourLocation.friends( response.map( function(el) { return el.uid } ) ) }
+				  	function(response) { 
+						var friends = response.map( function(el) { return el.uid } )
+						if( yourLocation.friends().join('') != friends.join('') ) {
+							yourLocation.friends( friends )
+							$.post( inits.root+'users/update', { fb_friends:  friends.join(',') } )
+						}
+					}
 				)
 			} else if (response.status === 'not_authorized')  {
 			} else {
