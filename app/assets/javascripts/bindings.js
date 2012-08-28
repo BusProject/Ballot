@@ -243,3 +243,11 @@ ko.bindingHandlers.addClass = {
 		element.className = element.className.replace(valueAccessor(),'').trim()+' '+value
 	}
 };
+
+ko.bindingHandlers.stopBinding = {
+    init: function() {
+        return { controlsDescendantBindings: true };
+    }
+};
+
+ko.virtualElements.allowedBindings.stopBinding = true;
