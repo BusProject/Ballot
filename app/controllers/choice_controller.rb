@@ -59,7 +59,7 @@ class ChoiceController < ApplicationController
       query = results.to_json( json_include )
 
     else
-      query = {'error' => true, 'message' => 'Nothing useful was posted'}.to_json
+      query = {'success' => false, 'message' => 'Nothing useful was posted'}.to_json
     end
     
     render :json => query, :callback => params['callback']
