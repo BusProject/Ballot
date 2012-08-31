@@ -157,6 +157,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	if( $this.hasClass('confirm-flag') ) {
 		var option = $ctx.$parent.options.filter( function(el) { return el.id == $data.option_id  })[0]
 		option.feedback.remove( $data )
+		$ctx.parent.comments -= 1;
 		$ctx.$parent.feedback()
 		action = 'flag'
 	}
