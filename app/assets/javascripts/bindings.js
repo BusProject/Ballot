@@ -191,7 +191,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					options[i].feedback.push( Feedback( matches[ii] ) )
 				};
 			};
-			$data.feedback.page +=1;
+			$data.feedback.page( $data.feedback.page() +1 )
 	})
 })
 .scroll(function(e){ // Binding the scroll

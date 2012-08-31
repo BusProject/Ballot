@@ -55,6 +55,8 @@ function Choice(data,args) {
 		},this)
 
 		this.you = ko.computed(function() { return this.feedback().filter( function(el) { return el.yourFeedback })[0] || null  },this)
+		if( this.you() != null ) this.comments -= 1;
+
 		this.featured = ko.computed(function() { 
 			if( typeof inits.user == 'undefined' || inits.user.id == current_user.id ) return this.you();
 			else return this.feedback().filter( function(el) { return el.ftFeedback })[0] || null
@@ -79,10 +81,10 @@ function Choice(data,args) {
 			return this.all() ? feedback : feedback.slice(0,3)
 		},this)
 
-		this.feedback.page = 0;
+		this.feedback.page= ko.observable( 0);
 		this.feedback.more = ko.computed( function() {
 			var comments = this.comments - this.feedback().length
-			return comments > 0 ? 3+this.feedback.page*10 : false
+			return comments > 0 ? 3+this.feedback.page()*10 : false
 		},this)
 
 		return this;
