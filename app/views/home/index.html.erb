@@ -31,7 +31,7 @@
 					<h2 data-bind="text: title"></h2>
 					<p data-bind="text: description"></p>
 				</div>
-				<div class="candidates" data-bind="template: { name: 'choice', foreach: $data.contests }"></div><!-- candidates-->
+				<div class="candidates" data-bind="template: { name: 'measure', foreach: $data.contests }"></div><!-- candidates-->
 			</div>
 		<!-- /ko -->
 		
@@ -60,6 +60,6 @@
 	</div>
 
 
-<script id="choice" type="text/html">
-	<%=  render 'choice/single' %>
+<script id="measure" type="text/html">
+	<%=  render 'choice/measure' %>
 </script>

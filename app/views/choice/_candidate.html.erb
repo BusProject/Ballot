@@ -1,0 +1,105 @@
+<% choice = choice || Choice.new %>
+<% user = user || nil %>
+<% choice.options.new if choice.new_record?  %>
+
+
+<div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
+	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }">
+
+	<hr><h1 class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
+	<div class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	<button class="open">Learn More and Comment</button>
+	<hr class="button">
+
+	<div class="body">
+
+		<% n = 0 %>
+		<% choice.options.each do |option| %>
+		<div class="optionholder <%= 'clean-no-script' if n != 0 %>" >
+			<!-- ko foreach: $data.options -->
+				<div class="option">
+					<h1 data-bind="text: $data.name, addClass: $data.name.toLowerCase()">
+						<%= option.name %>
+					</h1>
+					<img data-bind="src: $data.photo" src="<%= option.photo %>">
+					<div class="blurb" data-bind="text: $data.blurb "><%= option.blurb %></div>
+
+					<% if choice.new_record? || choice.commentable? %>
+						<div class="faces">
+							<div class="minicounter" data-bind="visible: $parent.commentable">
+								<div data-bind="html: $data.support+' '+( $data.support == 1 ? 'person' : 'people' )+' '+($data.type == 'yes' ? 'support' : 'oppose')+( $data.support == 1 ? 's' : '' )+'<br />'+$parent.contest"></div>
+							</div>
+							<!-- ko foreach: $data.feedback.five -->
+								<a target="_blank" data-bind="attr: {href: $data.url }">
+									<img class="miniimage" data-bind="src: $data.image">
+								</a>
+							<!-- /ko -->
+						</div>
+					<% end %>
+				</div>
+			<!-- /ko -->
+			<div style="clear: both;"></div>
+		</div>
+		<% n+=1 %>
+		<% end %>
+		<% if choice.new_record? || choice.commentable %>
+
+			<%- if current_user != user || !current_user.nil? %>
+				<%= render 'choice/feedback', :user => user, :feedback => choice.options.map{ |o| o.feedback }.flatten.first %>
+			<%- end %>
+			<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
+				What Others Are Saying
+				<select data-bind="value: $data.mode">
+					<option value="normal">Sort By...</option>
+					<option value="best">Most Helpful</option>
+					<option value="friends">Your Friends</option>
+					<option value="yes" >In Support</option>
+					<option value="no" >In Opposition</option>
+				</select>
+			</div>
+			
+
+			<ul data-bind="visible: $data.commentable, foreach: feedback.everyone" class="feedback">
+				<li data-bind="addClass: $data.type ">
+
+					<div class="head" data-bind="addClass: $data.type ">
+						<a data-bind="attr: {href: $data.url }" >
+							<img data-bind="src: $data.image" >
+						</a>
+					</div>
+
+					<div class="message" data-bind="text: $data.comment"></div>
+
+					<div class="foot">
+							<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
+						<br />
+							<%- if !current_user.nil? && current_user.commentable? %>
+								<div class="ask">
+									Was this helpful?
+									<span class="helpful link" >Yes</span>
+										&nbsp;|&nbsp;
+									<span class="not link">No</span>
+										&nbsp;|&nbsp;
+									<span class="flag link">Flag</span>
+								</div>
+							<% end -%>
+					</div>
+
+				</li>
+			</ul>
+			<%- if current_user.nil? || (current_user != user && !user.nil? )%>
+				<%= render 'choice/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.feedback }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+			<% end -%>
+
+			<div class="footer" >
+				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Read All Comments</a>
+				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() ">Load More Comments</a>
+			</div>
+
+			<hr class="button lower">
+
+
+		<% end %>
+
+	</div>
+</div>

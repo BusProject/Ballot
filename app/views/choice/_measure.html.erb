@@ -3,7 +3,7 @@
 <% choice.options.new if choice.new_record?  %>
 
 
-<div class="row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
+<div class="measure row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }">
 
 	<hr><h1 class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
@@ -29,7 +29,7 @@
 							<div class="minicounter" data-bind="visible: $parent.commentable">
 								<div data-bind="html: $data.support+' '+( $data.support == 1 ? 'person' : 'people' )+' '+($data.type == 'yes' ? 'support' : 'oppose')+( $data.support == 1 ? 's' : '' )+'<br />'+$parent.contest"></div>
 							</div>
-							<!-- ko foreach: $data.feedback.five -->
+							<!-- ko foreach: $data.faces -->
 								<a target="_blank" data-bind="attr: {href: $data.url }">
 									<img class="miniimage" data-bind="src: $data.image">
 								</a>
