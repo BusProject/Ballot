@@ -118,17 +118,7 @@ function Option(data,args) {
 			};
 		}
 
-		this.feedback.five = ko.computed(function() {
-			var limit = 4,
-				feedback = this.feedback(),
-				friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : [],
-				find_friends = feedback.filter( function(el) { return friends.indexOf(el.fb) !== -1 || el.yourFeedback } ).sort(function() {return 0.5 - Math.random()}).slice(0, limit )
-
-				if( find_friends.length < limit ) find_friends = find_friends.concat( feedback.filter( function(el) { return friends.indexOf(el.fb) === -1 && !el.yourFeedback } ).sort(function() {return 0.5 - Math.random()}).slice(0, limit - find_friends.length  ) )
-
-				return find_friends
-			
-		},this)
+		this.faces = data.faces
 
 		return this;
 	}

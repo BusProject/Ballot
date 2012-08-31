@@ -2,16 +2,26 @@ class Option < ActiveRecord::Base
   belongs_to :choice
   attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbant, :feedback
 
-  has_many :feedback, :conditions => [ "length(comment) > 1 AND length(flag)- length(replace( flag,',','') ) < ? AND approved = ?", 2, true ], :order => ['cached_votes_up - cached_votes_down DESC'], :limit => 3, :readonly => false do
+  has_many :feedback, :conditions => [ "length(flag)- length(replace( flag,',','') ) < ? AND approved = ?", 2, true ], :order => ['cached_votes_up - cached_votes_down DESC'], :limit => 3, :readonly => false do
     def page(offset = 0, limit = 10, current_user=nil)
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :readonly => false, :joins => :user, :offset => offset, :limit => limit, :conditions => ["fb NOT IN(?)",  fb_friends ] )
+      all( :readonly => false, :joins => :user, :offset => offset, :limit => limit, :conditions => ["length(comment) > 1 AND fb NOT IN(?)",  fb_friends ] )
     end
     def friends current_user
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :readonly => false, :joins => :user, :conditions => ["fb IN(?)", fb_friends ], :limit => nil, :order => "RANDOM()" ) # Returns ALL of your FB friends who've commented on a measure
+      all( :readonly => false, :joins => :user, :conditions => ["length(comment) > 1 AND fb IN(?)", fb_friends ], :limit => nil, :order => "RANDOM()" ) # Returns ALL of your FB friends who've commented on a measure
+    end
+    def friends_faces current_user
+      fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
+      fb_friends = '' if fb_friends.empty? || fb_friends.nil?
+      all( :readonly => false, :joins => :user, :conditions => ["fb IN(?)", fb_friends ], :order => "RANDOM()" , :limit => 10 )
+    end
+    def other_faces current_user
+      fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
+      fb_friends = '' if fb_friends.empty? || fb_friends.nil?
+      all( :readonly => false, :joins => :user, :conditions => ["fb NOT IN(?)", fb_friends ], :order => "RANDOM()", :limit => 10 )
     end
     def mine me
       all( :readonly => false, :conditions => ['user_id = ?', me.id ], :limit => 1 )
