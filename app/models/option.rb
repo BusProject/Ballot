@@ -6,15 +6,15 @@ class Option < ActiveRecord::Base
     def page(offset = 0, limit = 10, current_user=nil)
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :joins => :user, :offset => offset, :limit => limit, :conditions => ["fb NOT IN(?)",  fb_friends ] )
+      all( :readonly => false, :joins => :user, :offset => offset, :limit => limit, :conditions => ["fb NOT IN(?)",  fb_friends ] )
     end
     def friends current_user
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :joins => :user, :conditions => ["fb IN(?)", fb_friends ], :limit => nil, :order => "RANDOM()" ) # Returns ALL of your FB friends who've commented on a measure
+      all( :readonly => false, :joins => :user, :conditions => ["fb IN(?)", fb_friends ], :limit => nil, :order => "RANDOM()" ) # Returns ALL of your FB friends who've commented on a measure
     end
     def mine me
-      all( :conditions => ['user_id = ?', me.id ], :limit => 1 )
+      all( :readonly => false, :conditions => ['user_id = ?', me.id ], :limit => 1 )
     end
     def count_support
       all( :limit => nil ).count
