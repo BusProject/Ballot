@@ -39,12 +39,30 @@ class FeedbackController < ApplicationController
     render :json => { :feedback => feedback.delete, :success => true }, :callback  => params['callback']
   end
 
+  def vote
+    feedback = Feedback.find( params[:id] )
+    noun = 'people'
+    
+    if  params[:flavor] == 'useful'
+      amount = feedback.upvotes.size
+      noun = noun.singularize if amount = 1
+      feedback.liked_by current_user
+    else
+      amount = feedback.upvotes.size
+      noun = noun.singularize if amount = 1
+      feedback.disliked_by current_user
+    end
+    
+    render :json => {:success => true, :message => amount.to_s+' '+noun+' agree it\'s '+params[:flavor] }, :callback  => params['callback']
+    
+  end
 
-
-  def rate
+  def flag
 
     feedback = Feedback.find( params[:id] )
-    flag = feedback[ params[:flavor] ]
+    flag = feedback.flag
+    
+    params[:flavor] = 'flag'
 
     if flag.nil?
       render :json => {:success => false, :message => 'that is not a thing'  }, :callback  => params['callback']
@@ -75,9 +93,9 @@ class FeedbackController < ApplicationController
                 feedback[params[:flavor] ] = flag.join(',')
 
                 if feedback.save
-                  render :json => {:success => true, :message => 'Thanks'+msg, :feedback => feedback }, :callback  => params['callback']
+                  render :json => {:success => true, :message => 'Thanks'+msg }, :callback  => params['callback']
                 else
-                  render :json => {:success => false, :message => 'Something went wrong', :feedback => feedbacks }, :callback  => params['callback']
+                  render :json => {:success => false, :message => 'Something went wrong' }, :callback  => params['callback']
                 end
 
               else
