@@ -2,11 +2,8 @@ class ChoiceController < ApplicationController
   def json_include
     return :include => [ 
     :options => { 
-      :include => [ 
-        :feedback => {
-          :include => [ :user => {  :only => [ :url, :first_name, :last_name, :url, :location, :image, :fb, :profile ] } ],
-          :except => [ :useless, :useful ]
-          } 
+      :include => [
+        :feedback 
         ] 
       }
     ]
@@ -15,14 +12,14 @@ class ChoiceController < ApplicationController
   def profile
     @user = User.find( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
 
-    @choices = @user.choices
+    @choices = @user.choices.each{ |c| c.prep current_user }
     @classes = 'profile home'
     @title = @user.guide_name.nil?  ? @user.name+'\'s Voter Guide' : @user.guide_name
 
     result = {:state => 'profile', :choices => @choices, :user => @user }
 
     @config = result.to_json( json_include )
-    
+
   end
   
   def show
@@ -33,7 +30,7 @@ class ChoiceController < ApplicationController
     @classes = 'home single'
     @title = @choice.contest
 
-    result = {:state => 'single', :choices => [@choice]}
+    result = {:state => 'single', :choices => [ @choice ].each{ |c| c.prep current_user } }
 
     @config = result.to_json( json_include )
 
@@ -44,25 +41,12 @@ class ChoiceController < ApplicationController
     districts = params['q'].nil? ? Cicero.find(params['l'], params[:address] ) : params['q'].split('|')
     
     unless districts.nil?
-      
-      choices = Choice.find_all_by_geography( districts )
-      
-      unless params['group'].nil?
-        results = []
-        districts.each do |district|
-         results.push( { 'geography' => district, 'choices' => choices.select{ |choice| choice.geography == district } } )
-        end
-      else
-        results = choices
-      end
-
-      query = results.to_json( json_include )
-
+      @choices = Choice.find_all_by_geography( districts ).each{ |c| c.prep current_user }
     else
       query = {'success' => false, 'message' => 'Nothing useful was posted'}.to_json
     end
     
-    render :json => query, :callback => params['callback']
+    render :json => @choices.to_json( json_include )
   end
   
   def retrieve
@@ -98,4 +82,9 @@ class ChoiceController < ApplicationController
   
   end
 
+  def more
+    choice = Choice.find_by_id(params[:id])
+    @feedback = choice.more( params[:page], current_user )
+    render :json => @feedback
+  end
 end

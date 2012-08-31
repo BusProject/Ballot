@@ -169,11 +169,29 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		inits.root+'feedback/'+$data.id+'/'+action,
 		function(response){
 			$this.parents('.ask').html( response.message )
-			if( $this.hasClass('flag') ) setTimeout( function() { $this.parent('.feedback').remove() }, 300 )
+			if( $this.hasClass('conf-flag') ) setTimeout( function() { $this.parent('.feedback').remove() }, 300 )
 			if( response.success ) $data.usefulness( $data.usefulness() + change )
 		}
 	)
 
+})
+.on('click touchend','.body a.get-more',function(e) {
+	e.preventDefault();
+	var $data = ko.dataFor(this), options = $data.options
+	$.get( 
+		inits.root+'lookup/'+$data.id+'/more', {page: $data.feedback.more() },
+		function(response) {
+			var feedback = response
+			for (var i=0; i < options.length; i++) {
+				var option_id = options[i].id,
+					matches = feedback.filter( function(el) { return el.option_id == option_id })
+				for (var ii=0; ii < matches.length; ii++) {
+					matches[ii].type = options[i].type
+					options[i].feedback.push( Feedback( matches[ii] ) )
+				};
+			};
+			$data.feedback.page +=1;
+	})
 })
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)

@@ -25,6 +25,12 @@ class Feedback < ActiveRecord::Base
     return flaggers.map { |flagger| User.find_by_id(flagger) }.select{ |flagger| ! flagger.nil? }
   end
   
+  def user_flatten 
+    ['name', 'url', 'location', 'image', 'fb', 'profile' ].each do |k|
+      self['user_'+k] = self.user[k]
+    end
+  end
+  
   def off?
     return !self.approved || self.flag.split(',').length > 2
   end

@@ -21,6 +21,7 @@ Ballot::Application.routes.draw do
 
   match '/auth/:provider/callback' => 'authentications#create'
   match '/lookup' => 'choice#index'
+  match '/lookup/:id/more' => 'choice#more'
   match '/fetch' => 'choice#retrieve', :as => 'choices_fetch'
   
   match '/feedback/save' => 'feedback#update', :via => :post, :as => 'save_feedback'

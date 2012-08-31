@@ -10,17 +10,20 @@ function Choice(data,args) {
 	
 	function ballotChoice(data) {
 		this.options = []
+		this.id = data.id
 		this.contest = data.contest,
 		this.type = data.contest_type
 		this.description = data.description
 		this.geography = data.geography
 		this.commentable = data.commentable
+		this.comments = 0;
 		this.mode = ko.observable('normal')
 		this.all = ko.observable( inits.state == 'single' )
 
 		if( typeof data.options != 'undefined' ) {
 			for (var i=0; i < data.options.length; i++) {
 				this.options.push( Option(data.options[i]) )
+				this.comments += data.options[i].comments
 			};
 		}
 
@@ -48,7 +51,6 @@ function Choice(data,args) {
 				}
 				return a.usefulness() > b.usefulness() ? -1 : 1 
 			})
-
 			return feedback
 		},this)
 
@@ -77,6 +79,12 @@ function Choice(data,args) {
 			return this.all() ? feedback : feedback.slice(0,3)
 		},this)
 
+		this.feedback.page = 0;
+		this.feedback.more = ko.computed( function() {
+			var comments = this.comments - this.feedback().length
+			return comments > 0 ? 3+this.feedback.page*10 : false
+		},this)
+
 		return this;
 	}
 }
@@ -92,6 +100,8 @@ function Option(data,args) {
 		this.blurb = data.blurb
 		this.blurb
 		this.id = data.id
+		this.support = data.support
+		this.comments = data.comments
 		this.choice_id = data.choice_id
 		this.photo = data.photo
 		this.feedback = ko.observableArray([])
@@ -137,13 +147,13 @@ function Feedback(data) {
 		var user = typeof inits.user != 'undefined' ? inits.user.id : current_user.id
 		this.yourFeedback = data.user_id == current_user.id
 		this.ftFeedback = data.user_id == user
-		this.image = typeof data.user != 'undefined' ? data.user.image : 'http://localhost:3000/assets/alincoln.gif'
-		this.url = typeof data.user != 'undefined' ? data.user.profile : ''
-		this.fb = typeof data.user != 'undefined' ? data.user.fb : ''
-		this.name =  typeof data.user != 'undefined' ?  data.user.first_name+' '+data.user.last_name : '[deleted]'
+		this.image = data.user_image || 'http://localhost:3000/assets/alincoln.gif'
+		this.url = data.user_profile || ''
+		this.fb = data.user_fb || ''
+		this.name =  data.user_name || '[deleted]'
 		this.type = data.type
 		this.updated = data.updated_at != data.created_at
-		var useless = data.uselessVal || 0, useful = data.usefulVal || 0
+		var useless = data.cached_votes_down || 0, useful = data.cached_votes_up || 0
 		this.usefulness = ko.observable( useful - useless )
 
 		var date = new Date(data.updated_at),
