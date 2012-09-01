@@ -11,7 +11,10 @@
 		inits = <%= raw @config || '{}' %>
 
 	current_user.url = "<%= current_user.nil? ? root_path : profile_path( current_user.to_url )  %>"
-	inits.root = "<%= root_path %>"
+	inits.root = "<%= root_path %>";
+	<%- unless @choices_json.nil? %>
+	inits.choices = <%= raw @choices_json %>;
+	<% end -%>
   </script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>

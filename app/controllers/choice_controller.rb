@@ -3,7 +3,9 @@ class ChoiceController < ApplicationController
     return :include => [ 
     :options => { 
       :include => [
-        :feedback 
+        :feedbacks => {
+            :include => [ :user => { :except => [ :banned, :admin, :deactivated, :alerts, :created_at, :last_name, :modified_at, :fb_friends, :first_name, :guide_name, :description  ] } ]
+          }
         ] 
       }
     ]
@@ -16,9 +18,10 @@ class ChoiceController < ApplicationController
     @classes = 'profile home'
     @title = @user.guide_name.nil?  ? @user.name+'\'s Voter Guide' : @user.guide_name
 
-    result = {:state => 'profile', :choices => @choices, :user => @user }
+    result = {:state => 'profile', :user => @user }
 
-    @config = result.to_json( json_include )
+    @config = result.to_json
+    @choices_json = @choices.to_json( json_include )
 
   end
   

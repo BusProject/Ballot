@@ -3,7 +3,7 @@ class Choice < ActiveRecord::Base
   validates_presence_of :contest, :geography
   validates_uniqueness_of :contest, :scope => :geography
   
-  has_many :options, :dependent => :destroy, :readonly => false
+  has_many :options, :dependent => :destroy, :readonly => true
   accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbant'] == '0' && false  }
   
   def to_url
@@ -20,7 +20,7 @@ class Choice < ActiveRecord::Base
       option[:faces] += option.feedback.other_faces( current_user ) if option[:faces].length < 4
       option[:faces] = option[:faces].map{ |f| {:image => f.user.image, :url => f.user.profile } }.shuffle().slice(0,4)
       
-      option.feedback = option.all_feedback(current_user)
+      option[:feedbacks] = option.all_feedback(current_user) || []
       
       if self.contest_type.downcase.index('ballot').nil?
         if self.options.select{ |o| o.incumbant? }.length > 0

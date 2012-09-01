@@ -2,35 +2,35 @@ class Option < ActiveRecord::Base
   belongs_to :choice
   attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbant, :feedback
 
-  has_many :feedback, :conditions => [ "length(flag)- length(replace( flag,',','') ) < ? AND approved = ?", 2, true ], :order => ['cached_votes_up - cached_votes_down DESC'], :limit => 3, :readonly => false do
+  has_many :feedback, :conditions => [ "length(flag)- length(replace( flag,',','') ) < ? AND approved = ?", 2, true ], :order => ['cached_votes_up - cached_votes_down DESC'], :limit => 3, :readonly => true do
     def page(offset = 0, limit = 10, current_user=nil)
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :readonly => false, :joins => :user, :offset => offset, :limit => limit, :conditions => ["length(comment) > 1 AND fb NOT IN(?)",  fb_friends ] )
+      all( :readonly => true, :joins => :user, :offset => offset, :limit => limit, :conditions => ["length(feedback.comment) > 1 AND fb NOT IN(?)",  fb_friends ] )
     end
     def friends current_user
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :readonly => false, :joins => :user, :conditions => ["length(comment) > 1 AND fb IN(?)", fb_friends ], :limit => nil, :order => "RANDOM()" ) # Returns ALL of your FB friends who've commented on a measure
+      all( :readonly => true, :joins => :user, :conditions => ["length(comment) > 1 AND fb IN(?)", fb_friends ], :limit => nil, :order => "RANDOM()" ) # Returns ALL of your FB friends who've commented on a measure
     end
     def friends_faces current_user
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :readonly => false, :joins => :user, :conditions => ["fb IN(?)", fb_friends ], :order => "RANDOM()" , :limit => 10 )
+      all( :readonly => true, :joins => :user, :conditions => ["fb IN(?)", fb_friends ], :order => "RANDOM()" , :limit => 10 )
     end
     def other_faces current_user
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :readonly => false, :joins => :user, :conditions => ["fb NOT IN(?)", fb_friends ], :order => "RANDOM()", :limit => 10 )
+      all( :readonly => true, :joins => :user, :conditions => ["fb NOT IN(?)", fb_friends ], :order => "RANDOM()", :limit => 10 )
     end
     def mine me
-      all( :readonly => false, :conditions => ['user_id = ?', me.id ], :limit => 1 )
+      all( :readonly => true, :conditions => ['user_id = ?', me.id ], :limit => 1 )
     end
     def count_support
-      all( :limit => nil ).count
+      all( :limit => nil, :conditions => nil ).count
     end
     def count_comments
-      all(:limit => nil, :conditions => nil ).count
+      all(:limit => nil, :conditions => 'length(comment) > 1' ).count
     end
   end
   
@@ -39,12 +39,12 @@ class Option < ActiveRecord::Base
   end
 
   def all_feedback current_user
-    feedback = self.feedback
+    feedback = self.feedback.page(0,5)
     unless current_user.nil?
       feedback += self.feedback.friends( current_user )
       feedback += self.feedback.mine( current_user )
     end
-    return feedback.uniq.each{ |feedback| feedback.user_flatten }
+    return feedback.uniq
   end
   
 
@@ -55,7 +55,6 @@ class Option < ActiveRecord::Base
   end
 
   
-  # Don't show anyone with two flags or isn't approved
   validates_uniqueness_of :name, :scope => :choice_id
   
 end

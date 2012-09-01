@@ -141,7 +141,7 @@ function locationModel(data) {
 
 	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for 
 		var state = yourLocation.address.state(), 
-			address = state ? [ (state+yourLocation.address.city()).toUpperCase(), state, (state+yourLocation.address.county()).toUpperCase() ] : []
+			address = state ? ['Prez',(state+yourLocation.address.city()).toUpperCase(), state, (state+yourLocation.address.county()).toUpperCase() ] : []
 
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(

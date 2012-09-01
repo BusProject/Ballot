@@ -1,8 +1,6 @@
 class Feedback < ActiveRecord::Base
   self.table_name = 'feedback'
 
-  
-
   attr_accessible :option, :comment, :support, :user, :choice, :flag
   validates_presence_of :user_id, :message => 'Requires a user'
   validates_presence_of :option_id, :message => 'Requires an option'
