@@ -134,7 +134,7 @@ function locationModel(data) {
 
 		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng ) {
 			fetch(false)
-			this.getBallotChoices(lat,lng,choices,function() { fetch(true); })
+			this.getBallotChoices(lat,lng,choices,function() { fetch(true);  $('.candidate.row:last .next').text('Next Measure'); })
 		}
 
 	}, this)
@@ -173,9 +173,8 @@ function locationModel(data) {
 			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || [current_user.first_name,current_user.last_name+'\'s','Voter Guide'].join(' '),
 			msg = current_user.id == 'unauthenticated' ? undefined : 'Check out my voter guide on The Ballot'
 			
-			
 		this.menuItems.push( 
-			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your ballot this election.</p>'),
+			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your on your ballot, see what other people are saying about them, and share your own opinion.</p>'),
 			MenuItem('#read-ballot','Read Your Ballot','<p>Get the lowdown on everything on your ballot for the upcoming election.</p><p>Read what others have to say about ballot measures and share your own views.</p>'),
 			MenuItem(null,'Share the Ballot',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+'</div>'),
 			smalls

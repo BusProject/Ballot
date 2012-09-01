@@ -2,7 +2,6 @@
 <% user = user || nil %>
 <% choice.options.new if choice.new_record?  %>
 
-
 <div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }">
 
