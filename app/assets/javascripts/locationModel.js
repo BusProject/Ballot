@@ -165,10 +165,8 @@ function locationModel(data) {
 	var smalls = MenuItem(null,'Other Options',null,'<div class="container"><a href="https://theleague.turbovote.org/?r=ballot" target="_blank" class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>');
 
 	if( this.state == 'front' ) {
-		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
-		this.federalOffices = Grouping(['Federal'],'Federal Races',this)
-		this.stateOffices = Grouping(['State'],'State Races',this)
-		this.localOffices = Grouping(['Local'],'Local Races',this)
+		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
+		this.candidates = Grouping(['Federal','State','County','Local','Other'],'Candidates','candidate',this,'Take a peak at the candidates that you’ll have the chance to vote on.')
 
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
 			owner = current_user.id == 'unauthenticated' ? 'the' : 'Your',
