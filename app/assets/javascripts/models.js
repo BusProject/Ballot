@@ -14,9 +14,19 @@ function Choice(data,args) {
 		this.contest = data.contest,
 		this.type = data.contest_type
 		this.description = data.description
+		this.selected = ko.observable( null )
+		this.selected.label = ko.computed( function() { 
+			var selected = this.selected();
+			return selected == null ? '[ please select a candidate ]' : selected.name+' for '+this.contest
+		},this)
 		this.geography = data.geography
 		this.commentable = data.commentable
 		this.comments = 0;
+		this.sortOptions = [
+			{value: 'normal', label: 'Sort by...' },
+			{value: 'best', label: 'Most Helpful' },
+			{value: 'friends', label: 'Your Friends' }
+		]
 		this.mode = ko.observable('normal')
 		this.all = ko.observable( inits.state == 'single' )
 
@@ -24,6 +34,7 @@ function Choice(data,args) {
 			for (var i=0; i < data.options.length; i++) {
 				this.options.push( Option(data.options[i]) )
 				this.comments += data.options[i].comments
+				this.sortOptions.push( {value: data.options[i].name, label: 'Supporting '+data.options[i].name } )
 			};
 		}
 
@@ -62,9 +73,10 @@ function Choice(data,args) {
 			else return this.feedback().filter( function(el) { return el.ftFeedback })[0] || null
 		},this)
 
-		this.notAnswered = ko.computed( function() { 
-			return this.feedback().filter( function(el) { return el.user_id == current_user.id } ).length < 1
-		},this)
+		// this.selected.active = ko.computed( function() {
+		// 	if( this.featured() == null )
+		// },this)
+
 
 		this.feedback.realLength = ko.computed(function() {
 			return this.feedback().length - ( this.you() == null ? 0 : 1)
@@ -72,10 +84,11 @@ function Choice(data,args) {
 		this.feedback.everyone = ko.computed(function() {
 			var mode = this.mode()
 			var feedback = this.feedback().filter( function(el) { 
-				var condition = !el.yourFeedback && el.comment.length > 0
+				var condition = !el.yourFeedback && el.comment != null && el.comment.length > 0
 				if( mode == 'yes' || mode == 'no' ) condition = condition && el.type == mode
-				if( mode == 'friends' ) condition = condition && el.friend()
-
+				else if( mode == 'friends' ) condition = condition && el.friend()
+				else if( mode != '' && mode != 'best' && mode != 'normal' ) condition = el.option_name == mode && !el.yourFeedback
+				
 				return condition
 			}) || [] 
 			return this.all() ? feedback : feedback.slice(0,3)
@@ -106,16 +119,20 @@ function Option(data,args) {
 		this.comments = data.comments
 		this.choice_id = data.choice_id
 		this.photo = data.photo
+		this.party = data.party
+		this.incumbant = data.incumbant
+		this.twitter = data.twitter
+		this.facebook = data.facebook
+		this.website = data.website
+		
 		this.feedback = ko.observableArray([])
-		var type = ''
-
-		if( ['support','yes','for'].indexOf(this.name.toLowerCase()) !== -1 )  type = 'yes'
-		if( ['oppose','no','against'].indexOf(this.name.toLowerCase()) !== -1 ) type = 'no'
-		this.type = type
-
+		
+		this.type = data.option_type
+		data.feedback = data.feedbacks
 		if( typeof data.feedback != 'undefined' ) {
 			for (var i=0; i < data.feedback.length; i++) {
-				data.feedback[i].type = type
+				data.feedback[i].option_name = this.name
+				data.feedback[i].type = this.type
 				this.feedback.push( Feedback( data.feedback[i] ) )
 			};
 		}
@@ -132,6 +149,7 @@ function Feedback(data) {
 	return new ballotFeedback(data) 
 	function ballotFeedback(data) {
 		this.option_id = data.option_id
+		this.option_name = data.option_name
 		this.user_id = data.user_id
 		this.id = data.id
 		this.support = data.support
@@ -139,10 +157,18 @@ function Feedback(data) {
 		var user = typeof inits.user != 'undefined' ? inits.user.id : current_user.id
 		this.yourFeedback = data.user_id == current_user.id
 		this.ftFeedback = data.user_id == user
-		this.image = data.user_image || 'http://localhost:3000/assets/alincoln.gif'
-		this.url = data.user_profile || ''
-		this.fb = data.user_fb || ''
-		this.name =  data.user_name || '[deleted]'
+		if( typeof data.user == 'undefined' ) {
+			this.image = data.user_image || 'http://localhost:3000/assets/alincoln.gif'
+			this.url = data.user_profile || ''
+			this.fb = data.user_fb || ''
+			this.name =  data.user_name || '[deleted]'
+		} else {
+			this.image = data.user.image || 'http://localhost:3000/assets/alincoln.gif'
+			this.url = data.user.profile || ''
+			this.fb = data.user.fb || ''
+			this.name =  data.user.name || '[deleted]'
+			
+		}
 		this.type = data.type
 		this.updated = data.updated_at != data.created_at
 		var useless = data.cached_votes_down || 0, useful = data.cached_votes_up || 0

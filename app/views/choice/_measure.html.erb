@@ -18,7 +18,7 @@
 		<div class="optionholder <%= 'clean-no-script' if n != 0 %>" >
 			<!-- ko foreach: $data.options -->
 				<div class="option">
-					<h1 data-bind="text: $data.name, addClass: $data.name.toLowerCase()">
+					<h1 data-bind="text: $data.name, stripClass: true, addClass: $data.name.toLowerCase()" class="<%= option.option_type unless option.new_record? %> ">
 						<%= option.name %>
 					</h1>
 					<img data-bind="src: $data.photo" src="<%= option.photo %>">
@@ -45,7 +45,7 @@
 		<% if choice.new_record? || choice.commentable %>
 
 			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/feedback', :user => user, :feedback => choice.options.map{ |o| o.feedback }.flatten.first %>
+				<%= render 'choice/feedback', :user => user, :feedback => choice.options.map{ |o| o.feedbacks }.flatten.first %>
 			<%- end %>
 			<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
 				What Others Are Saying
@@ -88,7 +88,7 @@
 				</li>
 			</ul>
 			<%- if current_user.nil? || (current_user != user && !user.nil? )%>
-				<%= render 'choice/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.feedback }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+				<%= render 'choice/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
 			<% end -%>
 
 			<div class="footer" >

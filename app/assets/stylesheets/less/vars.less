@@ -18,6 +18,13 @@
 		color:white;
 		.gradient(#4b4b4b,#666);
 	}
+	&:disabled {
+		.gradient(#666,#4b4b4b);
+		.opacity(.5);
+		color: @grey;
+		cursor: default;
+		&:hover { .gradient(#666,#4b4b4b); }
+	}
 	border: 1px solid #3f3f3f;
 	color: white;
 }
@@ -29,6 +36,12 @@
 	border: 1px solid @darkOrange;
 	&:hover {
 		.gradient(#be5e29,#d2793b);
+	}
+	&:disabled {
+		.opacity(.5);
+		color: #d2793b;
+		cursor: default;
+		&:hover { .gradient(#d2793b,#be5e29); }
 	}
 }
 

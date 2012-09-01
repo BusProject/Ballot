@@ -18,18 +18,19 @@
 		<div class="optionholder <%= 'clean-no-script' if n != 0 %>" >
 			<!-- ko foreach: $data.options -->
 				<div class="option">
+					<div class="select" data-bind="css:{selected: $parent.selected() == $data }"></div>
 					<h1 data-bind="text: $data.name, addClass: $data.name.toLowerCase()">
 						<%= option.name %>
 					</h1>
-					<img data-bind="src: $data.photo" src="<%= option.photo %>">
-					<div class="blurb" data-bind="text: $data.blurb "><%= option.blurb %></div>
+					<p class="bigger"><span data-bind="text: $data.party"><%= option.party %></span> | <span data-bind="text: $data.type"><%= option.option_type unless choice.new_record? %></span>
+					<p class="smaller"><a data-bind="href: $data.twitter " href="<%= option.party %>" >Twitter</a><a data-bind="href: $data.twitter " href="<%= option.facebook %>" >Facebook</a><a data-bind="href: $data.twitter " href="<%= option.website %>" >Website</a></p>
 
-					<% if choice.new_record? || choice.commentable? %>
+					<% if choice.new_record? || choice.commentable? || true %>
 						<div class="faces">
-							<div class="minicounter" data-bind="visible: $parent.commentable">
-								<div data-bind="html: $data.support+' '+( $data.support == 1 ? 'person' : 'people' )+' '+($data.type == 'yes' ? 'support' : 'oppose')+( $data.support == 1 ? 's' : '' )+'<br />'+$parent.contest"></div>
+							<div class="minicounter" >
+								<div data-bind="html: $data.support+' '+( $data.support == 1 ? 'person' : 'people' )+' support '+( $data.support == 1 ? 's' : '' )+'<br />'+$data.name"></div>
 							</div>
-							<!-- ko foreach: $data.feedback.five -->
+							<!-- ko foreach: $data.faces -->
 								<a target="_blank" data-bind="attr: {href: $data.url }">
 									<img class="miniimage" data-bind="src: $data.image">
 								</a>
@@ -42,24 +43,27 @@
 		</div>
 		<% n+=1 %>
 		<% end %>
-		<% if choice.new_record? || choice.commentable %>
+		<% if choice.new_record? || choice.commentable || true %>
+			<hr class="button lower middle">
 
 			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/feedback', :user => user, :feedback => choice.options.map{ |o| o.feedback }.flatten.first %>
+				<%= render 'choice/candidateFeedback', :user => user, :feedback => choice.options.map{ |o| o.feedbacks }.flatten.first %>
 			<%- end %>
+
 			<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
 				What Others Are Saying
-				<select data-bind="value: $data.mode">
+				<select data-bind="value: $data.mode, options: $data.sortOptions, optionsValue: 'value', optionsText: 'label'">
 					<option value="normal">Sort By...</option>
 					<option value="best">Most Helpful</option>
 					<option value="friends">Your Friends</option>
-					<option value="yes" >In Support</option>
-					<option value="no" >In Opposition</option>
+					<%- choice.options.each do |option| %>
+						<option value="<%= option.name %>" >Supporting <%= option.name %></option>
+					<% end -%>
 				</select>
 			</div>
 			
 
-			<ul data-bind="visible: $data.commentable, foreach: feedback.everyone" class="feedback">
+			<ul data-bind="foreach: feedback.everyone" class="feedback">
 				<li data-bind="addClass: $data.type ">
 
 					<div class="head" data-bind="addClass: $data.type ">
@@ -68,6 +72,7 @@
 						</a>
 					</div>
 
+					<strong data-bind="text: 'Supporting '+$data.option_name+':'"></strong>
 					<div class="message" data-bind="text: $data.comment"></div>
 
 					<div class="foot">
@@ -88,7 +93,7 @@
 				</li>
 			</ul>
 			<%- if current_user.nil? || (current_user != user && !user.nil? )%>
-				<%= render 'choice/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.feedback }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+				<%= render 'choice/candidateFeedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
 			<% end -%>
 
 			<div class="footer" >

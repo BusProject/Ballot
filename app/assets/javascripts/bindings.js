@@ -63,6 +63,13 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		$this.toggleClass('right').attr('disabled',false).find('.cover').css({left: '', right: ''})
 	});
 })
+.on('click touchend','.option .select',function(e) {
+	e.preventDefault();
+	var $ctx = ko.contextFor(this),
+		$parent = $ctx.$parent,
+		$data = $ctx.$data
+		$parent.selected( $data )
+})
 .on('click touchend','.next',function(e) {
 	$(this).parents('.row').next('.row').find('button.open').click()
 })
@@ -72,15 +79,25 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	if( current_user.id == 'unauthenticated' ) {
 		document.location = $('.account a').attr('href')
 	} else {
-		var $toggle = $('.toggle', $parent )
+		
+		if( $parent.hasClass('candidate') ) {
+			var $ctx = ko.contextFor( $parent[0] ),
+				$comment = $('.comment', $parent),
+				choice_id = $ctx.$data.id,
+				option = $ctx.$data.selected(),
+				option_id = option.id,
+				comment = $comment.val()
 
+		} else {
+			var $toggle = $('.toggle', $parent ),
+				$ctx = ko.contextFor( $toggle[0] ),
+				$comment = $('.comment', $parent),
+				choice_id = $ctx.$data.id,
+				option = $toggle.hasClass('right') ? $ctx.$data.no() : $ctx.$data.yes(),
+				option_id = option.id,
+				comment = $comment.val()
+		}
 
-		var $ctx = ko.contextFor( $toggle[0] ),
-			$comment = $('.comment', $parent),
-			//choice_id = $ctx.$data.id,
-			option = $toggle.hasClass('right') ? $ctx.$data.no() : $ctx.$data.yes(),
-			option_id = option.id,
-			comment = $comment.val()
 
 		$.post(
 			inits.root+'feedback/save',
@@ -95,16 +112,13 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			},
 			function(response) {
 				if( response.success ) {
-					option.feedback.push( Feedback( { comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type, updated_at:  response.successes[0].updated_at } ) )
+					option.feedback.push( Feedback( { option_id: option.id, option_name: option.name, comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type, updated_at:  response.successes[0].updated_at } ) )
 					$comment.val('')
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
 				}
 			}
 		)
 	}
-})
-.on('click ','body.not_logged_in .yourFeedback',function(e) {
-	window.location = $('.account a').attr('href')
 })
 .on('click touchend','.yourFeedback .meme',function(e) {
 	var $data = ko.dataFor(this), memetainer = $('#meme-tainer')
@@ -118,12 +132,18 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	})
 })
 .on('click touchend','.yourFeedback .remove',function(e) {
-	var $data = ko.dataFor(this),
+	var $ctx = ko.contextFor(this),
+		$data = $ctx.$data,
 		option = $data.options.filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],
 		$this = $(this)
 
 	if( $this.hasClass('edit') ) {
-		$this.parents('.row').find('.pick.'+$data.you().type).addClass('picked')
+		var $row = $this.parents('.row')
+		if( $row.hasClass('candidate') ) {
+			$data.selected( $data.options.filter( function(el) { return el.id == $data.you().option_id })[0] )
+		} else {
+			$row.find('.pick.'+$data.you().type).addClass('picked')
+		}
 		$this.parents('.row').find('textarea.comment').val( $data.you().comment )
 	}
 
@@ -207,6 +227,14 @@ ko.bindingHandlers.src = {
 		$(element).attr('src',src).error( function() { $(this).remove().parent().addClass('no-photo') });
 	}
 }
+ko.bindingHandlers.href = {
+	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		var all = allBindingsAccessor(),
+			href = all.href
+		if( href == null ) $(element).remove()
+		$(element).attr('href',href)
+	}
+}
 
 ko.bindingHandlers.elastic = {
 	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
@@ -256,6 +284,11 @@ ko.bindingHandlers.overwrite = {
 		}
 	}
 };
+ko.bindingHandlers.stripClass = {
+	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
+		element.className =''
+	}
+}
 ko.bindingHandlers.addClass = {
 	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
 		value = valueAccessor()

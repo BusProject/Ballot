@@ -221,23 +221,16 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			background: transparent image-url('ballot-bg.png') top left repeat;
 			margin-top: -18px;
 			display: none;
-
 			.optionholder {
 				position: relative;
 				width: 680px;
-				
 				.option {
-					width: 46%;
 					.border-box;
-					margin-top: 40px;
-					padding: 0 0 0 34px;
-					float:left;
 					color: @darkGrey;
 					.blurb { text-align: left; }
+					text-align: left;
 					h1 {
-						font-family:'Rokkitt', serif;
-						color: @red;
-						&.yes { color: @green; }
+						font-family: Rokkitt, serif;
 						font-size:1.2em;
 						line-height: 1.4em;
 						float:none;
@@ -245,22 +238,11 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 						text-align: left;
 						font-weight: bold;
 					}
-
 					img {
 						float:left;
 						margin: 0 4% 4% 0;
 						max-width: 36.6666667%;
 					}
-
-					&:first-child {
-						border-right: 1px solid @darkGrey;
-						margin-left: 34px;
-						padding-left: 8px;
-						padding-right: 20px;
-						padding-bottom: 120px;
-						width: 46%;
-					}
-
 					.minicounter {
 							float: left;
 							position: relative;
@@ -272,21 +254,15 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							padding: 3px 4px;
 						  	margin: 4px 30px 10px 0;
 							width: 130px;
-							background-color: white;
-							color: @grey;
-
 						&::after {
 								content: '';
 								float: right;
 								margin: -2.50em -2.85em 0 0;
 								width: 0;
 								height: 0;
-								border-color: transparent transparent transparent white;
 								border-width: 18px;
 								border-style: solid;
 						}
-
-
 						div {
 							width: 120px;
 							overflow: hidden;
@@ -296,7 +272,6 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					}
 	 				.faces {
 						position: absolute;
-						bottom: 30px;
 						img {
 							width: 28px;
 							height: 28px;
@@ -304,10 +279,8 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							margin: 8px 0 0 2px;
 						}
 					}
-
 				}
 			}
-
 			.yourFeedback {
 				width: 500px;
 				text-align: left;
@@ -348,10 +321,219 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					height: 40px;
 					cursor: pointer;
 					&:hover { .gradient(#bd5d28,#d37a3c); }
+					&:disabled {
+						.opacity(.7);
+						color: #d37a3c;
+						cursor: default;
+						&:hover { .gradient(#d37a3c,#bd5d28); }
+					}
 				}
+				.clearfix();
+				display: block;
 				.buttons {
 					width: 350px;
 					margin: 0 auto;
+				}
+
+				h2, p {
+					text-align: left;
+					font-family: Rokkitt, serif;
+					text-transform: normal;
+				}
+				h2 { font-size: 1.6em; margin: 10px 0 4px; }
+				p { color: @grey; }
+				h1, h3 {
+					text-align: center;
+					width: 400px;
+					margin: 20px auto;
+					font-family:'League Gothic', serif;
+					text-shadow: 0 2px 2px #fff;
+					&.yes { color: @green; }
+					&.no { color: @red; }
+				}
+				.head { display: block; margin: 20px auto 22px; .head-image(); }
+				.meme {
+					display: block;
+					font-size: 1.5em;
+					width: 280px;
+					height: 48px;
+					text-transform: uppercase;
+				}
+				.next {
+					display: block;
+					.gradient(#454443,#3f3630);
+					border-color: #3f3630;
+					font-size: 1.3em;
+					&:hover { .gradient(#3f3630,#454443); }
+					&.last-child { display: none; }
+				}
+				.controls { text-align: right; color: @grey; span.link { color: @darkGrey }  }
+
+				&.login {
+					border-bottom: none;
+					width: 620px;
+					img {
+						width: 254px;
+						margin: 4px auto;
+						display: block;
+						&:hover { .opacity(.8) }
+					}
+					p { margin: 10px 0; }
+				}
+			}
+			
+					.commentTitle {
+						text-align: left;
+						color: @darkGreen;
+						font-size: 130%;
+						margin: 0 45px 10px;
+						padding: 40px 0 0;
+						select {
+							float: right;
+						}
+					}
+
+
+					ul.feedback {
+						li {
+							margin: 10px 60px;
+							text-align: left;
+							clear: both;
+							a:hover { text-decoration: underline; }
+						}
+						.head {
+							float: left;
+							.head-image(50px);
+							margin: 0 30px 50px 0;
+						}
+						.message { 
+							width: 480px;
+							height: auto;
+							display: inline-block;
+							vertical-align: top;
+							color: #464646;
+							padding: 4px 0;
+						}
+						.foot { 
+							float: right;
+							text-align: right;
+							width: 300px;
+							font-size: 90%;
+							margin-top: 10px;
+							color: @grey;
+							.ask { 
+								padding-right: 4px; 
+								width: 190px;
+								margin-left: 110px;
+								text-align: center;
+							}
+							a, .link { 
+								color: @brightOrange;
+								&:hover { color: @darkOrange; }
+							}
+						}
+						.clearfix();
+					}
+					.footer {
+						margin: 50px 60px 0;
+						padding-bottom: 4px;
+						text-align: center;
+						a {
+							text-decoration: none;
+							padding: 4px 10px;
+							color: white;
+							.gradient(#454443,#3f3630);
+							&:hover { .gradient(#3f3630,#454443); }
+							border-color: #3f3630;
+						}
+
+					}
+				}
+
+				&.emptyFeedback {
+					.yourFeedback { border-bottom: none; }
+					ul.feedback, .commentTitle { display: none }
+				}
+			}
+			.ballot-measures .row:last-child button.next { display: none }
+		}
+		&.candidate.row .body {
+			@optionHeight: 80px;
+			.optionholder {
+				max-height: @optionHeight*2.5;
+				overflow-y: auto;
+				.option {
+					padding: 20px;
+					.select {
+						cursor: pointer;
+						float: left;
+						margin:10px 20px 0 -40px;
+						width: 20px;
+						height: 20px;
+						background: white;
+						border: 2px solid @grey;
+						.inner-shadow();
+						&:hover, &.selected {
+						}
+
+					}
+					height: @optionHeight;
+					margin: 0 auto;
+					width: 600px;
+					.border-box();
+					position: relative;
+					.bigger { font-size: 1.25em; }
+					.minicounter {
+						background-color: @grey;
+						color: white;
+						&::after { border-color: transparent transparent transparent @grey; }
+					}
+					.faces { right: -30px; bottom: (@optionHeight - 36px)/2; width: 280px;}
+				}
+			}
+			.selected {
+				width: 350px;
+				padding: 40px 0;
+				text-align: center;
+				background-color: white;
+				color: @green;
+				font-size: 1.7em;
+				margin: 20px auto;
+			}
+			.buttons { text-align: center }
+			.yourFeedback {
+				h1, h3 { color: @green; }
+			}
+		}
+		&.measure .body {
+			.optionholder {
+				.option {
+					width: 46%;
+					margin-top: 40px;
+					padding: 0 0 0 34px;
+					float:left;
+					h1 { color: @red; &.yes { color: @green; } }
+
+					&:first-child {
+						border-right: 1px solid @darkGrey;
+						margin-left: 34px;
+						padding-left: 8px;
+						padding-right: 20px;
+						padding-bottom: 120px;
+						width: 46%;
+					}
+					.minicounter {
+						background-color: white;
+						color: @grey;
+						&::after { border-color: transparent transparent transparent white; }
+					}
+					.faces { bottom: 30px; }
+				}
+			}
+
+			.yourFeedback {
+				.buttons {
+					button { float: right; }
 					.toggle {
 						.no-select();
 						float: left;
@@ -404,134 +586,14 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 						}
 						&:hover { .cover { right: -2px; .gradient(#bd5d28,#d37a3c); } }
 					}
-					button { float: right; }
-					.clearfix();
-					display: block;
 				}
 
-
-				h2, p {
-					text-align: left;
-					font-family: Rokkitt, serif;
-					text-transform: normal;
-				}
-				h2 { font-size: 1.6em; margin: 10px 0 4px; }
-				p { color: @grey; }
 				h1, h3 {
-					text-align: center;
-					width: 400px;
-					margin: 20px auto;
-					font-family:'League Gothic', serif;
-					text-shadow: 0 2px 2px #fff;
 					&.yes { color: @green; }
 					&.no { color: @red; }
 				}
-				.head { display: block; margin: 20px auto 22px; .head-image(); }
-				.meme {
-					display: block;
-					font-size: 1.5em;
-					width: 280px;
-					height: 48px;
-					text-transform: uppercase;
-				}
-				.next {
-					display: block;
-					.gradient(#454443,#3f3630);
-					border-color: #3f3630;
-					font-size: 1.3em;
-					&:hover { .gradient(#3f3630,#454443); }
-					&.last-child { display: none; }
-				}
-				.controls { text-align: right; color: @grey; span.link { color: @darkGrey }  }
-
-				&.login {
-					border-bottom: none;
-					width: 620px;
-					img {
-						width: 254px;
-						margin: 4px auto;
-						display: block;
-						&:hover { .opacity(.8) }
-					}
-					p { margin: 10px 0; }
-				} 
 
 			}
-
-			.commentTitle {
-				text-align: left;
-				color: @darkGreen;
-				font-size: 130%;
-				margin: 0 45px 10px;
-				padding: 40px 0 0;
-				select {
-					float: right;
-				}
-			}
-
-
-			ul.feedback {
-				li {
-					margin: 10px 60px;
-					text-align: left;
-					clear: both;
-					a:hover { text-decoration: underline; }
-				}
-				.head {
-					float: left;
-					.head-image(50px);
-					margin: 0 30px 50px 0;
-				}
-				.message { 
-					width: 480px;
-					height: auto;
-					display: inline-block;
-					vertical-align: top;
-					color: #464646;
-					padding: 4px 0;
-				}
-				.foot { 
-					float: right;
-					text-align: right;
-					width: 300px;
-					font-size: 90%;
-					margin-top: 10px;
-					color: @grey;
-					.ask { 
-						padding-right: 4px; 
-						width: 190px;
-						margin-left: 110px;
-						text-align: center;
-					}
-					a, .link { 
-						color: @brightOrange;
-						&:hover { color: @darkOrange; }
-					}
-				}
-				.clearfix();
-			}
-			.footer {
-				margin: 50px 60px 0;
-				padding-bottom: 4px;
-				text-align: center;
-				a {
-					text-decoration: none;
-					padding: 4px 10px;
-					color: white;
-					.gradient(#454443,#3f3630);
-					&:hover { .gradient(#3f3630,#454443); }
-					border-color: #3f3630;
-				}
-				
-			}
-		}
-
-		&.emptyFeedback {
-			.yourFeedback { border-bottom: none; }
-			ul.feedback, .commentTitle { display: none }
-		}
-	}
-	.ballot-measures .row:last-child button.next { display: none }
 }
 
 #more-coming {
