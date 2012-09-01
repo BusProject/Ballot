@@ -65,7 +65,7 @@
 <% n = 0 %>
 <div id="read-ballot">
 	<% @choices.each do |choice| %>
-		<div class="<%= 'clean-no-script' if n != 0 %>" data-bind="foreach: choices" >
+		<div data-bind="with: choices()[<%= n %>]" >
 			<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidate' : 'measure' %>
 			<%=  render 'choice/'+type, :choice => choice, :user => @user %>
 		</div>

@@ -25,13 +25,13 @@
 		<h1 class="sectionheading">Here’s What Will Be On Your Ballot</h1>
 		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
 
-		<!-- ko foreach: [ballotMeasures] -->
+		<!-- ko foreach: [candidates,ballotMeasures] -->
 			<div data-bind="visible: $data.visible, attr: {'class' : $data.class }">
 				<div class="category-heading">
 					<h2 data-bind="text: title"></h2>
 					<p data-bind="text: description"></p>
 				</div>
-				<div class="candidates" data-bind="template: { name: 'measure', foreach: $data.contests }"></div><!-- candidates-->
+				<div class="candidates" data-bind="template: { name: $data.template, foreach: $data.contests }"></div><!-- candidates-->
 			</div>
 		<!-- /ko -->
 		
@@ -62,4 +62,7 @@
 
 <script id="measure" type="text/html">
 	<%=  render 'choice/measure' %>
+</script>
+<script id="candidate" type="text/html">
+	<%=  render 'choice/candidate' %>
 </script>
