@@ -47,7 +47,7 @@
 			<hr class="button lower middle">
 
 			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/candidateFeedback', :user => user, :feedback => choice.options.map{ |o| o.feedbacks }.flatten.first %>
+				<%= render 'choice/candidateFeedback', :user => user, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
 			<%- end %>
 
 			<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
@@ -93,7 +93,7 @@
 				</li>
 			</ul>
 			<%- if current_user.nil? || (current_user != user && !user.nil? )%>
-				<%= render 'choice/candidateFeedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+				<%= render 'choice/candidateFeedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
 			<% end -%>
 
 			<div class="footer" >
