@@ -1,6 +1,7 @@
 <% choice = choice || Choice.new %>
 <% user = user || nil %>
 <% choice.options.new if choice.new_record?  %>
+<% you = user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == user.id }.first %>
 
 <div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }">
@@ -13,7 +14,7 @@
 	<div class="body">
 
 		<% n = 0 %>
-		<% choice.options.each do |option| %>
+		<% choice.options.sort_by{ |o| o.id == you.option_id ? -1 : 1 unless you.nil? }.each do |option| %>
 		<div class="optionholder <%= 'clean-no-script' if n != 0 %>" >
 			<!-- ko foreach: $data.options -->
 				<div class="option">
@@ -46,7 +47,7 @@
 			<hr class="button lower middle">
 
 			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/candidateFeedback', :user => user, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
+				<%= render 'choice/candidateFeedback', :user => user, :feedback => you %>
 			<%- end %>
 
 			<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
