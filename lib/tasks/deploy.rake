@@ -1,4 +1,5 @@
 task :deploy do
+  sh 'bundle exec rake assets:clean'
   sh 'bundle exec rake assets:precompile'
   sh 'git add public/assets/'
   sh "git commit -am 'Precompiling assets'"
