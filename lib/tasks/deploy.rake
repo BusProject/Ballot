@@ -1,6 +1,6 @@
 task :deploy do
   sh "git checkout compiled"
-  sh "git merge --no-ff -s recursive -Xtheirs master"
+  sh "git merge -s recursive -Xtheirs master"
   sh 'bundle exec rake assets:clean'
   sh 'bundle exec rake assets:precompile'
   sh 'git add public/assets/'
