@@ -2,7 +2,7 @@ class Option < ActiveRecord::Base
   belongs_to :choice
   attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbant, :feedback
 
-  has_many :feedback, :conditions => [ "length(flag)- length(replace( flag,',','') ) < ? AND approved = ?", 2, true ], :order => ['cached_votes_up - cached_votes_down DESC'], :limit => 3, :readonly => true do
+  has_many :feedback, :conditions => [ "length(flag)- length(replace( flag,',','') ) < ? AND approved = ?", 2, true ], :order => ['cached_votes_up - cached_votes_down DESC'], :limit => 4, :readonly => true do
     def page(offset = 0, limit = 10, current_user=nil)
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?

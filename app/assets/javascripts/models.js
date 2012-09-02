@@ -84,15 +84,15 @@ function Choice(data,args) {
 
 
 		this.feedback.realLength = ko.computed(function() {
-			return this.feedback().length - ( this.you() == null ? 0 : 1)
+			return this.feedback().length - ( this.you() == null ? 0 : 1) - ( this.featured() == null ? 0 : 1)
 		},this)
 		this.feedback.everyone = ko.computed(function() {
 			var mode = this.mode()
 			var feedback = this.feedback().filter( function(el) { 
-				var condition = !el.yourFeedback && el.comment != null && el.comment.length > 0
+				var condition = !el.ftFeedback && !el.yourFeedback && el.comment != null && el.comment.length > 0
 				if( mode == 'yes' || mode == 'no' ) condition = condition && el.type == mode
 				else if( mode == 'friends' ) condition = condition && el.friend()
-				else if( mode != '' && mode != 'best' && mode != 'normal' ) condition = el.option_name == mode && !el.yourFeedback
+				else if( mode != '' && mode != 'best' && mode != 'normal' ) condition = el.option_name == mode && condition
 				
 				return condition
 			}) || [] 
