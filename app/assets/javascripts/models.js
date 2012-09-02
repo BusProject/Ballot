@@ -14,11 +14,7 @@ function Choice(data,args) {
 		this.contest = data.contest,
 		this.type = data.contest_type
 		this.description = data.description
-		this.selected = ko.observable( null )
-		this.selected.label = ko.computed( function() { 
-			var selected = this.selected();
-			return selected == null ? '[ please select a candidate ]' : selected.name+' for '+this.contest
-		},this)
+		this.chosen = ko.observable( null )
 		this.geography = data.geography
 		this.commentable = data.commentable
 		this.comments = 0;
@@ -74,8 +70,10 @@ function Choice(data,args) {
 			var ft = null
 			if( typeof inits.user == 'undefined' || inits.user.id == current_user.id ) ft = this.you();
 			else ft = this.feedback().filter( function(el) { return el.ftFeedback })[0]
-
-			if( ft != null ) this.options( this.options().sort(function(a,b) {  return a.id == ft.option_id ? -1 : 1 }) )
+			if( ft != null ) {
+				this.options( this.options().sort(function(a,b) {  return a.id == ft.option_id ? -1 : 1 }) )
+				//this.chosen( this.options().filter(function(a) {  return a.id == ft.option_id ? -1 : 1 })[0] )
+			}
 
 			return ft
 		},this)
@@ -122,7 +120,7 @@ function Option(data,args) {
 		this.blurb = data.blurb
 		this.blurb
 		this.id = data.id
-		this.support = data.support
+		this.support = ko.observable(data.support)
 		this.comments = data.comments
 		this.choice_id = data.choice_id
 		this.photo = data.photo
@@ -145,6 +143,15 @@ function Option(data,args) {
 		}
 
 		this.faces = data.faces
+		this.faces.show = ko.computed( function() { 
+			var you = this.feedback().filter( function(el) { return el.yourFeedback })[0]
+			if( typeof you == 'undefined' ) return this.faces
+			else {
+				var faces = this.faces.slice(0,3)
+				faces.unshift( { image: current_user.image, url: current_user.profile })
+				return faces
+			}
+		},this) 
 
 		return this;
 	}

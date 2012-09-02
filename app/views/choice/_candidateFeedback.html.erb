@@ -6,7 +6,7 @@
 
 
 <div class="yourFeedback <%= user.nil?  ? 'no-user' : 'has_user' %>" data-bind="visible: <%= userObj %> != null, if: <%= userObj %> != null ">
-	<h1 data-bind="text: [$data.you().option_name,'for',$data.contest].join(' ') " >
+	<h1 data-bind="text: [$data.<%= userObj %>.option_name,'for',$data.contest].join(' ') " >
 		<%= [feedback.option.name,'for',feedback.choice.contest].join(' ')  unless feedback.nil? %>
 	</h1>
 	<h1 data-bind="text: '&ldquo;'+<%= userObj %>.comment+'&rdquo;', visible: <%= userObj %>.comment.length > 0,addClass: <%= userObj %>.type" >
@@ -35,11 +35,11 @@
 <%- if !current_user.nil? && true && current_user == user %>
 	<div class="yourFeedback candidate" data-bind="visible: ! you() ">
 		<%= raw @how %>
-		<div class="selected" data-bind="text: $data.selected.label() ">[ please select a candidate ]</div>
+		<select class="chosen" data-bind="value: $data.chosen, options: options, optionsCaption:'[ please select a candidate ]', optionsText: 'name'"></select><div class="arrows">&#x25B2;<br />&#x25BC;</div>
 		
 		<textarea type="text" class="comment" data-bind="elastic: true" placeholder='(Leave a comment if you wanna)' /></textarea>
 		<div class="buttons">
-			<button class="submit" data-bind="attr: { disabled: selected() == null }">Submit</button>
+			<button class="submit" data-bind="attr: { disabled: chosen() == null }">Submit</button>
 		</div>
 	</div>
 <% end %>

@@ -27,9 +27,9 @@
 					<% if choice.new_record? || choice.commentable? %>
 						<div class="faces">
 							<div class="minicounter" data-bind="visible: $parent.commentable">
-								<div data-bind="html: $data.support+' '+( $data.support == 1 ? 'person' : 'people' )+' '+($data.type == 'yes' ? 'support' : 'oppose')+( $data.support == 1 ? 's' : '' )+'<br />'+$parent.contest"></div>
+								<div data-bind="html: $data.support()+' '+( $data.support() == 1 ? 'person' : 'people' )+' '+($data.type == 'yes' ? 'support' : 'oppose')+( $data.support() == 1 ? 's' : '' )+'<br />'+$parent.contest"></div>
 							</div>
-							<!-- ko foreach: $data.faces -->
+							<!-- ko foreach: $data.faces.show -->
 								<a target="_blank" data-bind="attr: {href: $data.url }">
 									<img class="miniimage" data-bind="src: $data.image">
 								</a>

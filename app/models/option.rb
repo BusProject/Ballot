@@ -16,12 +16,14 @@ class Option < ActiveRecord::Base
     def friends_faces current_user
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :readonly => true, :joins => :user, :conditions => ["fb IN(?)", fb_friends ], :order => "RANDOM()" , :limit => 10 )
+      id = current_user.nil? ? '' : current_user.fb
+      all( :readonly => true, :joins => :user, :conditions => ["fb IN(?) AND fb != ?", fb_friends, id ], :order => "RANDOM()" , :limit => 10 )
     end
     def other_faces current_user
       fb_friends = current_user.nil? ? '' : current_user.fb_friends.split(',')
       fb_friends = '' if fb_friends.empty? || fb_friends.nil?
-      all( :readonly => true, :joins => :user, :conditions => ["fb NOT IN(?)", fb_friends ], :order => "RANDOM()", :limit => 10 )
+      id = current_user.nil? ? '' : current_user.fb
+      all( :readonly => true, :joins => :user, :conditions => ["fb NOT IN(?) AND fb != ?", fb_friends,id ], :order => "RANDOM()", :limit => 10 )
     end
     def mine me
       all( :readonly => true, :conditions => ['user_id = ?', me.id ], :limit => 1 )

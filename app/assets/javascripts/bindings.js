@@ -63,12 +63,14 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		$this.toggleClass('right').attr('disabled',false).find('.cover').css({left: '', right: ''})
 	});
 })
-.on('click touchend','.option .select',function(e) {
-	e.preventDefault();
-	var $ctx = ko.contextFor(this),
-		$parent = $ctx.$parent,
-		$data = $ctx.$data
-		$parent.selected( $data )
+.on('click touchend','.chooseable .option',function(e) {
+	if( ['A','SPAN'].indexOf(e.target.tagName) === -1 ) {
+		e.preventDefault();
+		var $ctx = ko.contextFor(this),
+			$parent = $ctx.$parent,
+			$data = $ctx.$data
+			$parent.chosen( $data )
+	}
 })
 .on('click touchend','.next',function(e) {
 	$(this).parents('.row').next('.row').find('button.open').click()
@@ -84,7 +86,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			var $ctx = ko.contextFor( $parent[0] ),
 				$comment = $('.comment', $parent),
 				choice_id = $ctx.$data.id,
-				option = $ctx.$data.selected(),
+				option = $ctx.$data.chosen(),
 				option_id = option.id,
 				comment = $comment.val()
 
@@ -97,7 +99,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				option_id = option.id,
 				comment = $comment.val()
 		}
-
 
 		$.post(
 			inits.root+'feedback/save',
@@ -112,6 +113,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			},
 			function(response) {
 				if( response.success ) {
+					option.support( option.support() +1 )
 					option.feedback.push( Feedback( { option_id: option.id, option_name: option.name, comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type, updated_at:  response.successes[0].updated_at } ) )
 					$comment.val('')
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
@@ -137,10 +139,11 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		option = $data.options().filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],
 		$this = $(this)
 
+	option.support( option.support() -1 )
 	if( $this.hasClass('edit') ) {
 		var $row = $this.parents('.row')
 		if( $row.hasClass('candidate') ) {
-			$data.selected( $data.options().filter( function(el) { return el.id == $data.you().option_id })[0] )
+			//$data.chosen( $data.options().filter( function(el) { return el.id == $data.you().option_id })[0] )
 		} else {
 			$row.find('.pick.'+$data.you().type).addClass('picked')
 		}

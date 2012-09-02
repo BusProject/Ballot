@@ -458,31 +458,46 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			.ballot-measures .row:last-child button.next { display: none }
 		}
 		&.candidate.row .body {
-			@optionHeight: 80px;
+			@optionHeight: 100px;
+			.checkBox() {
+				margin: 10px 0 0 -38px;
+				font-size: 40px;
+				color: @green;
+				position: absolute;
+			}
 			.optionholder {
 				max-height: @optionHeight*2.5;
 				overflow-y: auto;
 				.option {
-					padding: 20px;
-					.select {
-						cursor: pointer;
-						float: left;
-						margin:10px 20px 0 -40px;
-						width: 20px;
-						height: 20px;
-						background: white;
-						border: 2px solid @grey;
-						.inner-shadow();
-						&:hover, &.selected {
+					padding: 20px 20px 20px 50px;
+					&.chosen::before, &.confirmed::before {
+							content: "\2713";
+							.checkBox()
+					}
+					&.confirmed { 
+						cursor: default;
+						background-color: @green;
+						&::before {
+							content: "\2713";
+							color: white;
 						}
-
 					}
 					height: @optionHeight;
 					margin: 0 auto;
-					width: 600px;
+					width: 520px;
 					.border-box();
 					position: relative;
 					.bigger { font-size: 1.25em; }
+					.smaller a {
+						&:link, &:hover, &:active, &:visited {
+							margin: 0 5px 0 0;
+							font-size: 0.9em;
+							text-decoration: none;
+							&:first-child::before { content: ''; margin-right: 0; }
+							&::before { content: '|'; margin-right: 5px; color: @darkGrey !important; }
+							span { text-decoration: underline; }
+						}
+					}
 					.minicounter {
 						background-color: @grey;
 						color: white;
@@ -490,15 +505,37 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					}
 					.faces { right: -30px; bottom: (@optionHeight - 36px)/2; width: 280px;}
 				}
+				&.chooseable {
+					.option {
+						&:hover::before { content: "\2713"; .checkBox()}
+						cursor: pointer;
+					}
+				}
 			}
-			.selected {
-				width: 350px;
-				padding: 40px 0;
+			select.chosen {
+				.appearance();
+				width: 360px;
+				padding: 40px 10px 40px 0;
+				border: none;
+				display: block;
 				text-align: center;
+				text-align: -webkit-center;
+				cursor: pointer;
+				option { text-align:  -webkit-center; }
+				&:focus {outline: none; }
+				&:hover { }
 				background-color: white;
 				color: @green;
-				font-size: 1.7em;
+				font-size: 1.35em;
+				.border-radius(0);
 				margin: 20px auto;
+			}
+			.arrows {
+				float: right;
+				margin: -86px 80px 0 -400px;
+				pointer-events: none;
+				cursor: pointer;
+				color: @green;
 			}
 			.buttons { text-align: center }
 			.yourFeedback {
