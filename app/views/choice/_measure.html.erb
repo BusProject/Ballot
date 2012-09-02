@@ -18,7 +18,7 @@
 		<div class="optionholder <%= 'clean-no-script' if n != 0 %>" >
 			<!-- ko foreach: $data.options -->
 				<div class="option">
-					<h1 data-bind="text: $data.name, stripClass: true, addClass: $data.name.toLowerCase()" class="<%= option.option_type unless option.new_record? %> ">
+					<h1 data-bind="text: $data.name, stripClass: true, addClass: $data.type" class="<%= option.option_type unless option.new_record? %> ">
 						<%= option.name %>
 					</h1>
 					<img data-bind="src: $data.photo" src="<%= option.photo %>">
