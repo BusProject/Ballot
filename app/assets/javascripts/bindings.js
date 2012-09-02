@@ -134,13 +134,13 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 .on('click touchend','.yourFeedback .remove',function(e) {
 	var $ctx = ko.contextFor(this),
 		$data = $ctx.$data,
-		option = $data.options.filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],
+		option = $data.options().filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],
 		$this = $(this)
 
 	if( $this.hasClass('edit') ) {
 		var $row = $this.parents('.row')
 		if( $row.hasClass('candidate') ) {
-			$data.selected( $data.options.filter( function(el) { return el.id == $data.you().option_id })[0] )
+			$data.selected( $data.options().filter( function(el) { return el.id == $data.you().option_id })[0] )
 		} else {
 			$row.find('.pick.'+$data.you().type).addClass('picked')
 		}
@@ -175,7 +175,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		return false;
 	}
 	if( $this.hasClass('confirm-flag') ) {
-		var option = $ctx.$parent.options.filter( function(el) { return el.id == $data.option_id  })[0]
+		var option = $ctx.$parent.options().filter( function(el) { return el.id == $data.option_id  })[0]
 		option.feedback.remove( $data )
 		$ctx.parent.comments -= 1;
 		$ctx.$parent.feedback()
@@ -198,7 +198,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 })
 .on('click touchend','.body a.get-more',function(e) {
 	e.preventDefault();
-	var $data = ko.dataFor(this), options = $data.options
+	var $data = ko.dataFor(this), options = $data.options()
 	$.get( 
 		inits.root+'lookup/'+$data.id+'/more', {page: $data.feedback.more() },
 		function(response) {

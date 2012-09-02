@@ -9,7 +9,7 @@ function Choice(data,args) {
 	}
 	
 	function ballotChoice(data) {
-		this.options = []
+		this.options = ko.observableArray([])
 		this.id = data.id
 		this.contest = data.contest,
 		this.type = data.contest_type
@@ -31,26 +31,28 @@ function Choice(data,args) {
 		this.all = ko.observable( inits.state == 'single' )
 
 		if( typeof data.options != 'undefined' ) {
+			var tmp = []
 			for (var i=0; i < data.options.length; i++) {
-				this.options.push( Option(data.options[i]) )
+				tmp.push( Option(data.options[i]) )
 				this.comments += data.options[i].comments
 				this.sortOptions.push( {value: data.options[i].name, label: 'Supporting '+data.options[i].name } )
 			};
+			this.options(tmp)
 		}
 
 		this.yes = ko.computed( function() { 
-			return this.options.filter( function(el) { return el.type == 'yes' })[0] || null  
+			return this.options().filter( function(el) { return el.type == 'yes' })[0] || null  
 		},this)
 		this.no = ko.computed( function() { 
-			return this.options.filter( function(el) { return el.type == 'no' })[0] || null  
+			return this.options().filter( function(el) { return el.type == 'no' })[0] || null  
 		},this)
 
 
 		this.feedback = ko.computed( function() { 
-			var feedback = [], mode = this.mode(), options = this.options
+			var feedback = [], mode = this.mode(), options = this.options()
 
 			for (var i=0; i < options.length; i++) {
-				feedback = feedback.concat( this.options[i].feedback() )
+				feedback = feedback.concat( options[i].feedback() )
 			};
 
 			feedback.sort( function(a,b) {
@@ -69,8 +71,13 @@ function Choice(data,args) {
 		if( this.you() != null ) this.comments -= 1;
 
 		this.featured = ko.computed(function() { 
-			if( typeof inits.user == 'undefined' || inits.user.id == current_user.id ) return this.you();
-			else return this.feedback().filter( function(el) { return el.ftFeedback })[0] || null
+			var ft = null
+			if( typeof inits.user == 'undefined' || inits.user.id == current_user.id ) ft = this.you();
+			else ft = this.feedback().filter( function(el) { return el.ftFeedback })[0]
+
+			if( ft != null ) this.options( this.options().sort(function(a,b) {  return a.id == ft.option_id ? -1 : 1 }) )
+
+			return ft
 		},this)
 
 		// this.selected.active = ko.computed( function() {
