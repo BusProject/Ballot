@@ -242,63 +242,6 @@ body.splash .ballot-section .login a:hover{text-decoration:underline;}
 body.splash .ballot-section .login h1{font-family:Rokkitt, serif;font-size:36px;color:#333;text-shadow:1px 1px 5px #ffffff;filter:dropshadow(color=#637c2a, offx=0px -1px 1px #637c2a, offy=1px);}
 body.msg #instructions-box{display:none;}
 body.msg #main{min-height:500px;padding:200px 100px;font-size:40px;width:100%;margin:0;}
-body.admin{}body.admin #main{width:600px;margin:0 auto;}
-body.admin h1,body.admin h2{color:#9e5320;margin:1em 0;}
-body.admin h1{font-size:4em;}
-body.admin p,body.admin h2{text-align:left;}
-body.admin #instructions{display:none;}
-body.admin ul{text-align:left;width:400px;}body.admin ul.flagged{list-style:disc;}body.admin ul.flagged li{margin-left:30px;}
-body.admin ul li{margin:30px 0;}body.admin ul li img{width:50px;height:50px;float:left;margin:-10px 8px 8px;}
-body.admin ul li .side{float:right;margin-top:-30px;color:red;font-size:12px;}body.admin ul li .side:hover:after,body.admin ul li .side a:hover:after{color:grey;margin-left:80px;text-decoration:none !important;position:absolute;}
-body.admin ul li .side.unban:hover:after{content:'You Sure? Will restore all of their comments';}
-body.admin ul li .side a.rescue:hover:after{content:'You Sure? Will approve the comment and clear all of it\'s flags';}
-body.admin ul li .side a.unapprove:hover:after{content:'You Sure? Will unapprove the comment';}
-body.admin ul li .side a.remove_feedback:hover:after{content:'You Sure? Will permenently delete the comment';}
-body.admin input{font-size:1.1em;width:500px;}
-body.admin div.choice_form{width:470px;min-height:500px;padding:20px 30px;font-size:10px;}body.admin div.choice_form input{width:120px;}
-body.admin div.choice_form .option{border:1px solid #5a663e;padding:20px;margin:10px 0;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box;}
-body.admin .ui-helper-hidden{display:none;}
-body.admin .ui-helper-hidden-accessible{position:absolute !important;clip:rect(1px 1px 1px 1px);clip:rect(1px, 1px, 1px, 1px);}
-body.admin .ui-helper-reset{margin:0;padding:0;border:0;outline:0;line-height:1.3;text-decoration:none;font-size:100%;list-style:none;}
-body.admin .ui-helper-clearfix:before,body.admin .ui-helper-clearfix:after{content:"";display:table;}
-body.admin .ui-helper-clearfix:after{clear:both;}
-body.admin .ui-helper-clearfix{zoom:1;}
-body.admin .ui-helper-zfix{width:100%;height:100%;top:0;left:0;position:absolute;opacity:0;filter:alpha(opacity=0);}
-body.admin .ui-widget{font-family:Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;font-size:1.1em;}
-body.admin .ui-widget .ui-widget{font-size:1em;}
-body.admin .ui-widget input,body.admin .ui-widget select,body.admin .ui-widget textarea,body.admin .ui-widget button{font-family:Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;font-size:1em;}
-body.admin .ui-widget-content{border:1px solid #dddddd;background:#eeeeee;color:#333333;}
-body.admin .ui-widget-content a{color:#333333;}
-body.admin .ui-widget-header{border:1px solid #e78f08;background:#f6a828;color:#ffffff;font-weight:bold;}
-body.admin .ui-widget-header a{color:#ffffff;}
-body.admin .ui-state-default,body.admin .ui-widget-content .ui-state-default,body.admin .ui-widget-header .ui-state-default{border:1px solid #cccccc;background:#f6f6f6;font-weight:bold;color:#1c94c4;}
-body.admin .ui-state-default a,body.admin .ui-state-default a:link,body.admin .ui-state-default a:visited{color:#1c94c4;text-decoration:none;}
-body.admin .ui-state-hover,body.admin .ui-widget-content .ui-state-hover,body.admin .ui-widget-header .ui-state-hover,body.admin .ui-state-focus,body.admin .ui-widget-content .ui-state-focus,body.admin .ui-widget-header .ui-state-focus{border:1px solid #fbcb09;background:#fdf5ce;font-weight:bold;color:#c77405;}
-body.admin .ui-state-hover a,body.admin .ui-state-hover a:hover{color:#c77405;text-decoration:none;}
-body.admin .ui-state-active,body.admin .ui-widget-content .ui-state-active,body.admin .ui-widget-header .ui-state-active{border:1px solid #fbd850;background:#ffffff;font-weight:bold;color:#eb8f00;}
-body.admin .ui-state-active a,body.admin .ui-state-active a:link,body.admin .ui-state-active a:visited{color:#eb8f00;text-decoration:none;}
-body.admin .ui-widget :active{outline:none;}
-body.admin .ui-state-highlight,body.admin .ui-widget-content .ui-state-highlight,body.admin .ui-widget-header .ui-state-highlight{border:1px solid #fed22f;background:#ffe45c;color:#363636;}
-body.admin .ui-state-highlight a,body.admin .ui-widget-content .ui-state-highlight a,body.admin .ui-widget-header .ui-state-highlight a{color:#363636;}
-body.admin .ui-state-error,body.admin .ui-widget-content .ui-state-error,body.admin .ui-widget-header .ui-state-error{border:1px solid #cd0a0a;background:#b81900;color:#ffffff;}
-body.admin .ui-state-error a,body.admin .ui-widget-content .ui-state-error a,body.admin .ui-widget-header .ui-state-error a{color:#ffffff;}
-body.admin .ui-state-error-text,body.admin .ui-widget-content .ui-state-error-text,body.admin .ui-widget-header .ui-state-error-text{color:#ffffff;}
-body.admin .ui-priority-primary,body.admin .ui-widget-content .ui-priority-primary,body.admin .ui-widget-header .ui-priority-primary{font-weight:bold;}
-body.admin .ui-priority-secondary,body.admin .ui-widget-content .ui-priority-secondary,body.admin .ui-widget-header .ui-priority-secondary{opacity:.7;filter:alpha(opacity=70);font-weight:normal;}
-body.admin .ui-state-disabled,body.admin .ui-widget-content .ui-state-disabled,body.admin .ui-widget-header .ui-state-disabled{opacity:.35;filter:alpha(opacity=35);background-image:none;}
-body.admin .ui-corner-all,body.admin .ui-corner-top,body.admin .ui-corner-left,body.admin .ui-corner-tl{-moz-border-radius-topleft:4px;-webkit-border-top-left-radius:4px;-khtml-border-top-left-radius:4px;border-top-left-radius:4px;}
-body.admin .ui-corner-all,body.admin .ui-corner-top,body.admin .ui-corner-right,body.admin .ui-corner-tr{-moz-border-radius-topright:4px;-webkit-border-top-right-radius:4px;-khtml-border-top-right-radius:4px;border-top-right-radius:4px;}
-body.admin .ui-corner-all,body.admin .ui-corner-bottom,body.admin .ui-corner-left,body.admin .ui-corner-bl{-moz-border-radius-bottomleft:4px;-webkit-border-bottom-left-radius:4px;-khtml-border-bottom-left-radius:4px;border-bottom-left-radius:4px;}
-body.admin .ui-corner-all,body.admin .ui-corner-bottom,body.admin .ui-corner-right,body.admin .ui-corner-br{-moz-border-radius-bottomright:4px;-webkit-border-bottom-right-radius:4px;-khtml-border-bottom-right-radius:4px;border-bottom-right-radius:4px;}
-body.admin .ui-widget-overlay{background:#666666;opacity:.50;filter:alpha(opacity=50);}
-body.admin .ui-widget-shadow{margin:-5px 0 0 -5px;padding:5px;background:#000000;opacity:.20;filter:alpha(opacity=20);-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
-body.admin .ui-autocomplete{position:absolute;cursor:default;}
-body.admin * html .ui-autocomplete{width:1px;}
-body.admin .ui-menu{list-style:none;padding:2px;margin:0;display:block;float:left;}
-body.admin .ui-menu .ui-menu{margin-top:-3px;}
-body.admin .ui-menu .ui-menu-item{margin:0;padding:0;zoom:1;float:left;clear:left;width:100%;}
-body.admin .ui-menu .ui-menu-item a{text-decoration:none;display:block;padding:.2em .4em;line-height:1.5;zoom:1;cursor:pointer;}
-body.admin .ui-menu .ui-menu-item a.ui-state-hover,body.admin .ui-menu .ui-menu-item a.ui-state-active{font-weight:normal;margin:-1px;}
 body.not_logged_in .row .body div.commentTitle{border-top:#5b5b5b 1px solid;}
 body.not_logged_in .row .body div.yourFeedback{border-bottom:none !important;}
 body.not_logged_in #header .account{width:160px;background:#98b84a;border:1px solid #5a663e;margin:14px 0 0;height:auto;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}body.not_logged_in #header .account h1{font-family:Rokkitt, serif;font-size:20px;color:#333;text-shadow:1px 1px 5px #ffffff;filter:dropshadow(color=#637c2a, offx=0px -1px 1px #637c2a, offy=1px);}
