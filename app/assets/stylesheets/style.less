@@ -159,12 +159,13 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 		padding: 0;
 		position: relative;
 		h1.title {
+			margin: 0 auto;
 			font-family: Rokkitt, serif;
 			padding: 10px;
 			text-align: center;
 			color: @darkGreen;
 			text-transform: uppercase;
-			height: @bisect-border;
+			width: 38%;
 			overflow: hidden;
 		}
 		hr { 
@@ -175,9 +176,9 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			padding: 0;
 			border: 0;
 			width: @width;
-			float: right;
-			margin: -6px 0 0 -@width;
+			position: absolute;
 			right: 0;
+			top: 10px;
 			&:first-child {
 				left: 0;
 				right: 100%;
