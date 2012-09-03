@@ -10,10 +10,15 @@
 		<%= form.number_field :order, :style => 'width:30px;' %>
 	</p>
 	<p>
+		<label>Geography</label>:
+		<%= @choice.geography %>
+	</p>
+	<p>
 		<label>Description</label><br />
-		<%= form.text_area :description, :size => "30x10" %>
+		<%= form.text_area :description, :size => "30x4" %>
 	</p>
 
+	<%= link_to 'See the full page', ENV['BASE']+'/'+@choice.to_url %>
 	<h2>Options</h2>
 	<%= form.fields_for :options do |options_form| %>
 	
