@@ -157,17 +157,14 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 		width: 680px;
 		margin: 20px auto 60px;
 		padding: 0;
-		
-		@bisect-border: 60px;
+		position: relative;
 		h1.title {
-			margin: 0 auto -@bisect-border;
 			font-family: Rokkitt, serif;
 			padding: 10px;
 			text-align: center;
 			color: @darkGreen;
 			text-transform: uppercase;
 			height: @bisect-border;
-			width: 40%;
 			overflow: hidden;
 		}
 		hr { 
@@ -180,14 +177,15 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			width: @width;
 			float: right;
 			margin: -6px 0 0 -@width;
+			right: 0;
 			&:first-child {
-				margin: 1em -@width 0 0;
-				float: left;
+				left: 0;
+				right: 100%;
 			}
 		}
 		.explanation {
 			color: @darkGrey;
-			padding: @bisect-border+10px 0 10px;
+			padding: 10px 0 10px;
 		}
 
 		&.selected button.open {
