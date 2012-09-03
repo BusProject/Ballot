@@ -129,6 +129,7 @@ function Option(data,args) {
 		this.twitter = data.twitter
 		this.facebook = data.facebook
 		this.website = data.website
+		this.blurb_source = data.blurb_source
 		
 		this.feedback = ko.observableArray([])
 		
