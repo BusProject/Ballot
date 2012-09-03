@@ -137,7 +137,7 @@ function locationModel(data) {
 
 		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng ) {
 			fetch(false)
-			this.getBallotChoices(lat,lng,choices,function() { fetch(true);  $('.candidate.row:last .next').text('Next Measure'); })
+			this.getBallotChoices(lat,lng,choices,function() { fetch(true);  setTimeout( function() {$('.candidate.row:last .next').text('Next Measure').bind('click touchend',function() { $('.ballot-measures button.open:first').click() }); },100) })
 		}
 
 	}, this)
