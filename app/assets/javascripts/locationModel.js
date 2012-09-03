@@ -112,8 +112,11 @@ function locationModel(data) {
 			zoom = geolocated ? '13' : '3',
 			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
 		// When map updates - flash the thing
-		if( geolocated ) $('#map .pointer, #map-embed img').flash(.5, 1000)
-		return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=620x340&sensor=true'+marker
+		if( geolocated ) {
+			$('#map img').flash(.5, 1000)
+			return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=620x340&sensor=true'+marker
+		}
+		else return '/assets/staticmap.png'
 	}, this)
 
 	this.map.confirm = ko.computed( function() {
