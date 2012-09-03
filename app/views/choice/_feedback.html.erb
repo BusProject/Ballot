@@ -32,8 +32,8 @@
 </div>
 
 
-<%- if !current_user.nil? && current_user.commentable? && current_user == user %>
-	<div class="yourFeedback" data-bind="visible: $data.commentable && ! you() ">
+<%- if !current_user.nil? && current_user == user %>
+	<div class="yourFeedback" data-bind="visible:  ! you() ">
 		<%= raw @how %>
 		<textarea type="text" class="comment" data-bind="elastic: true" placeholder='What do you think?' /></textarea>
 
