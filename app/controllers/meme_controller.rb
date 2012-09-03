@@ -59,6 +59,10 @@ class MemeController < ApplicationController
   
   def show
     @meme = Meme.find( params[:id] )
+    @image = ENV['BASE']+meme_show_image_path(@meme.id)+'.png'
+    @message = @meme.quote
+    @title = @meme.user.guide_name.nil? || @meme.user.guide_name.empty? ? @meme.option.name+' on '+@meme.option.choice.contest : @meme.user.guide_name
+    
     respond_to do |format|
       format.png { render :text =>  @meme.makeBlob }
       format.jpeg { render :text =>  @meme.makeBlob }

@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<% title = @title || 'Your Social Voting Guide' %>
-  <title>The Ballot | <%= title %></title>
-  <%= stylesheet_link_tag    "application" %>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<meta name="viewport" content="width=device-width">
+
+	<% title = @title || 'Your Social Voting Guide' %>
+
+	<title>The Ballot | <%= title %></title>
+
+	<%= render :partial => 'home/meta' %>
+
+	<%= stylesheet_link_tag    "application" %>
 
   <script type="text/javascript" src='https://maps.googleapis.com/maps/api/js?sensor=true'></script>
   <script type="text/javascript">
@@ -18,8 +27,7 @@
   </script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <meta property="og:image" content="<%= asset_path 'share.png'%>" />
-  <meta property="og:title" content="<%= title %>" />
+
   <link rel="shortcut icon" href="<%= asset_path 'favicon.jpg'%>" />
 
 
@@ -77,6 +85,9 @@
 
 </head>
 <body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= !current_user.nil? && current_user.commentable? ? '' : 'no_comment' %> <%= @classes %>" >
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
 	<div id="container">
 		<div id="page">
 			<div id="header" class="clearfix">
@@ -124,6 +135,13 @@
 				oauth: true
 			});
 		</script>
+		<script>
+            var _gaq=[['_setAccount','UA-34530134-1'],['_trackPageview']];
+            _gaq.push(['._setCustomVar', 1,'user-type','<%= current_user.nil? ? "visitor" : "authenticated-user" %>',2]);
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
 	</div>
 </body>
 </html>

@@ -1,0 +1,32 @@
+
+<% title = @title || 'The Ballot - Your Social Voting Guide' %>
+<% message = @message || 'Your Social Voting Guide' %>
+<% image = @image || asset_path('ballot.png') %>
+<% url = @url || "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>
+<% photo = photo || nil %>
+<% object = @object || 'website' %>
+
+<meta property="og:image" content="<%= image %>" />
+<meta property="og:title" content="<%= title %>" />
+<meta property="og:url" content="<%= url %>">
+<meta property="og:description" content="<%= message %>">
+<meta property="og:site_name" content="The Ballot">
+<meta property="fb:app_id" content="<%= ENV['FACEBOOK'] %>">
+
+<meta property="og:determiner" content="">
+<meta property="og:type" content="<%= object %>">
+
+
+<% if photo.nil? %>
+	<meta name="twitter:card" content="summary">
+<% else %>
+	<meta name="twitter:card" content="photo">
+	<meta name="twitter:image:width" content="500">
+	<meta name="twitter:image:height" content="500">
+<% end %>
+
+	<meta name="twitter:site" content="@theleague99">
+	<meta name="twitter:url" content="<%= url %>">
+	<meta name="twitter:title" content="<%= title %>">
+	<meta name="twitter:description" content="<%= message %>">
+	<meta name="twitter:image" content="<%= image %>">

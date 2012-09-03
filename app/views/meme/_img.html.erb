@@ -1,1 +1,14 @@
-<%= link_to image_tag(meme_show_image_path ( @meme.id)), meme_show_image_path( @meme.id)+'.png'  %>
+<title><%= @title %></title>
+<link rel="shortcut icon" href="<%= meme_show_image_path ( @meme.id)%>.png" />
+<%= render :partial => 'home/meta', :photo => true %>
+<div itemscope itemtype="http://schema.org/ImageObject">
+	<a itemprop="url" rel="more" href="<%= ENV['BASE']+@meme.user.profile %>">
+		<img src="<%= meme_show_image_path ( @meme.id)%>.png" itemprop="contentURL" >
+	</a><br />
+	<a href="<%= ENV['BASE']+@meme.user.profile %>" style="color: #333; text-underline: none; font-family: sans-serif;">
+		See <%= @meme.user.guide_name.nil? || @meme.user.guide_name.empty? ? @meme.user.first_name+"'s Voter Guide" : @meme.user.guide_name %> on The Ballot
+	</a>
+	<meta itemprop="author" content="<%= @meme.user.name %>">
+	<meta itemprop="datePublished" content="<%= @meme.created_at %>">
+	<meta itemprop="description" content="<%= @meme.quote %>">
+</div>

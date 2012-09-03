@@ -4,10 +4,11 @@
 
 
 <div class="measure row <%= 'selected' unless choice.new_record? %> commentable" 
-	data-bind="css: { selected: $root.selected() == $data, complete: $data.you() }">
+	data-bind="css: { selected: $root.selected() == $data, complete: $data.you() }"
+	itemscope itemtype="http://data-vocabulary.org/Thing" >
 
-	<hr><h1 class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
-	<div class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
+	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
 	<button class="open">Learn More and Comment</button>
 	<hr class="button">
 
@@ -92,6 +93,7 @@
 			<% end -%>
 
 			<div class="footer" >
+				<meta itemprop="url" content="<%= choice.to_url%>" />
 				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Read All Comments</a>
 				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() ">Load More Comments</a>
 			</div>

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   
   # attr_accessible :title, :body
   has_many :feedback
+  has_many :memes, :through => :feedback
   has_many :options, :through => :feedback
   has_many :choices, :through => :options
   
