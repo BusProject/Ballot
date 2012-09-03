@@ -78,6 +78,18 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 	.stars { .move-stars(100px) }
 	h1.sectionheading { border-bottom:4px double @lightGreen; }
 	#enter-address {
+		.place-holder {
+			position: absolute;
+			margin: 45px 0 0 -513px;
+			.no-select();
+			pointer-events: none;
+			color: #8eb636;
+		}
+		.find-ballot, .place-holder {
+			font-family:'Rokkitt', serif;
+			font-size:1.45em;
+			font-weight: bold;
+		}
 		.find-ballot {
 			&:focus { padding: 19px 10px 14px; }
 			width:520px;
