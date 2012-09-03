@@ -220,6 +220,11 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 })
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
+		if( window.innerWidth < 1029 ) {
+			var left = $this.scrollLeft()
+			if( left < 120 ) $('#instructions-box').css({'marginLeft':(-54-left)+'px','left':'auto'})
+			else $('#instructions-box').css('left','-180px')
+		}
 		yourLocation.top( $this.scrollTop() )
 		clearTimeout(scroller)
 })
