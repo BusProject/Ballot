@@ -22,23 +22,28 @@ class Cicero
           Rails.cache.write('cicero',cicero,:expires_in => 24.hours)
         end
     
-        legislative = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/legislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json' )
+        legislative = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/legislative_district?type=ALL_2010&lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json' )
         leg_districts = legislative['response']['results']['districts']
     
-        #school = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/nonlegislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json&type=SCHOOL' )
-        #school_dist = school['response']['results']['districts']
+        # school = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/nonlegislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json&type=SCHOOL' )
+        # school_dist = school['response']['results']['districts']
         # Deactivate for now
 
-        all_districts = fix_districts leg_districts #+school_dist
+        all_districts = fix_districts leg_districts # + school_dist
+        all_districts+=addresses
         Match.new(:latlng => lat+','+lng, :data =>  all_districts).save
       rescue
         all_districts = addresses
       end
 
-      return all_districts
+      return all_districts.uniq
     else
       return match.data
     end
+  end
+  
+  def self.district_number district
+    return district.length == 1 ? '0'+district : district
   end
   
   def self.fix_districts districts
@@ -48,12 +53,12 @@ class Cicero
       name = ''
       state = district['state'].nil? ? '' : district['state']
       case district['district_type']
-      when 'STATE_LOWER'
-        name = 'HD'+district['district_id']
-      when 'STATE_UPPER'
-        name = 'SD'+district['district_id']
-      when 'NATIONAL_LOWER'
-        name = district['district_id'] == state ? '' : 'CD'+district['district_id']
+      when 'STATE_LOWER_2010'
+        name = 'HD'+district_number(district['district_id'])
+      when 'STATE_UPPER_2010'
+        name = 'SD'+district_number(district['district_id'])
+      when 'NATIONAL_LOWER_2010'
+        name = district['district_id'] == state ? '' : 'CD'+district_number(district['district_id'])
       when 'NATIONAL_EXEC'
         name = 'Prez'
       when 'NATIONAL_UPPER'
