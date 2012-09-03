@@ -6,8 +6,9 @@ task :deploy do
   sh 'git add public/assets/'
   sh "git commit -am 'Precompiling assets'"
   sh "git push heroku compiled:master"
-  sh 'curl -f "http://the-ballot.herokuapp.com"'
-  sh 'curl -f "http://the-ballot.herokuapp.com?q=true"'
-  sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://the-ballot.herokuapp.com"'
-  sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://the-ballot.herokuapp.com/admin"'
+  sh 'curl -f "http://theballot.org/"'
+  sh 'curl -f "http://theballot.org/?q=true"'
+  sh "git checkout master"
+  sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://theballot.org/"'
+  sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://theballot.org/"'
 end
