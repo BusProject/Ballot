@@ -3,8 +3,8 @@
 <% choice.options.new if choice.new_record?  %>
 
 
-<div class="measure row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
-	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }">
+<div class="measure row <%= 'selected' unless choice.new_record? %> commentable" 
+	data-bind="css: { selected: $root.selected() == $data, complete: $data.you() }">
 
 	<hr><h1 class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
@@ -24,25 +24,24 @@
 					<img data-bind="src: $data.photo" src="<%= option.photo %>">
 					<div class="blurb" data-bind="text: $data.blurb "><%= option.blurb %></div>
 
-					<% if choice.new_record? || choice.commentable? %>
-						<div class="faces">
-							<div class="minicounter" data-bind="visible: $parent.commentable">
-								<div data-bind="html: $data.support()+' '+( $data.support() == 1 ? 'person' : 'people' )+' '+($data.type == 'yes' ? 'support' : 'oppose')+( $data.support() == 1 ? 's' : '' )+'<br />'+$parent.contest"></div>
-							</div>
-							<!-- ko foreach: $data.faces.show -->
-								<a target="_blank" data-bind="attr: {href: $data.url }">
-									<img class="miniimage" data-bind="src: $data.image">
-								</a>
-							<!-- /ko -->
+					<div class="faces">
+						<div class="minicounter" data-bind="">
+							<div data-bind="html: $data.support()+' '+( $data.support() == 1 ? 'person' : 'people' )+' '+($data.type == 'yes' ? 'support' : 'oppose')+( $data.support() == 1 ? 's' : '' )+'<br />'+$parent.contest"></div>
 						</div>
-					<% end %>
+						<!-- ko foreach: $data.faces.show -->
+							<a target="_blank" data-bind="attr: {href: $data.url }">
+								<img class="miniimage" data-bind="src: $data.image">
+							</a>
+						<!-- /ko -->
+					</div>
 				</div>
 			<!-- /ko -->
-			<div style="clear: both;"></div>
+			<div class="full-text">
+				<a target="_blank" href="<%= option.blurb_source if n == 0 %>" data-bind="href: $data.options()[0].blurb_source" >Full Text</a>
+			</div>
 		</div>
 		<% n+=1 %>
 		<% end %>
-		<% if choice.new_record? || choice.commentable %>
 
 			<%- if current_user != user || !current_user.nil? %>
 				<%= render 'choice/feedback', :user => user, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
@@ -59,7 +58,7 @@
 			</div>
 			
 
-			<ul data-bind="visible: $data.commentable, foreach: feedback.everyone" class="feedback">
+			<ul data-bind="foreach: feedback.everyone" class="feedback">
 				<li data-bind="addClass: $data.type ">
 
 					<div class="head" data-bind="addClass: $data.type ">
@@ -74,7 +73,7 @@
 					<div class="foot">
 							<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
 						<br />
-							<%- if !current_user.nil? && current_user.commentable? %>
+							<%- if !current_user.nil? %>
 								<div class="ask">
 									Was this helpful?
 									<span class="helpful link" >Yes</span>
@@ -100,7 +99,6 @@
 			<hr class="button lower">
 
 
-		<% end %>
 
 	</div>
 </div>

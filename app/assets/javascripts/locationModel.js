@@ -108,19 +108,21 @@ function locationModel(data) {
 
 	this.map = ko.computed( function() { // Used for confirming map location
 		var latlng = this.latlng(),
-			geolocated = this.geolocated()
+			geolocated = this.geolocated(),
 			zoom = geolocated ? '13' : '3',
 			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
 		// When map updates - flash the thing
-		if( geolocated ) $('#map .pointer, #map-embed img').flash(.5, 1000)
-		return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=620x340&sensor=true'+marker
+		if( geolocated ) {
+			$('#map img').flash(.5, 1000)
+			return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=620x340&sensor=true'+marker
+		}
+		else return '/assets/staticmap.png'
 	}, this)
 
 	this.map.confirm = ko.computed( function() {
 		ko.toJS(this.map)
 		if( this.geocoded() ) { 
 			$('.confirmation').fadeIn('fast')
-			$('#locationNotice').remove()
 		}
 	},this)
 
@@ -134,14 +136,14 @@ function locationModel(data) {
 
 		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng ) {
 			fetch(false)
-			this.getBallotChoices(lat,lng,choices,function() { fetch(true);  $('.candidate.row:last .next').text('Next Measure'); })
+			this.getBallotChoices(lat,lng,choices,function() { fetch(true);  setTimeout( function() {$('.candidate.row:last .next').text('Next Measure').bind('click touchend',function() { $('.ballot-measures button.open:first').click() }); },100) })
 		}
 
 	}, this)
 
 	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for 
 		var state = yourLocation.address.state(), 
-			address = state ? ['Prez',(state+yourLocation.address.city()).toUpperCase(), state, (state+yourLocation.address.county()).toUpperCase() ] : []
+			address = state ? ['Prez',(state+yourLocation.address.city()), state, (state+yourLocation.address.county()) ] : []
 
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(

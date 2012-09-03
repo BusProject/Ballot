@@ -1,6 +1,6 @@
 class Option < ActiveRecord::Base
   belongs_to :choice
-  attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbant, :feedback
+  attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbant, :feedback, :blurb_source
 
   has_many :feedback, :conditions => [ "length(flag)- length(replace( flag,',','') ) < ? AND approved = ?", 2, true ], :order => ['cached_votes_up - cached_votes_down DESC'], :limit => 4, :readonly => true do
     def page(offset = 0, limit = 10, current_user=nil)
@@ -37,7 +37,7 @@ class Option < ActiveRecord::Base
   end
   
   def type
-    return ['yes','support','affirm','for'].index( self.name.downcase).nil? ? 'no' : 'yes'
+    return ['yes','support','affirm','for','maintained'].index( self.name.downcase).nil? ? 'no' : 'yes'
   end
 
   def all_feedback current_user

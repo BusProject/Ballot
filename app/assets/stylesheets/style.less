@@ -157,17 +157,15 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 		width: 680px;
 		margin: 20px auto 60px;
 		padding: 0;
-		
-		@bisect-border: 60px;
+		position: relative;
 		h1.title {
-			margin: 0 auto -@bisect-border;
+			margin: 0 auto;
 			font-family: Rokkitt, serif;
 			padding: 10px;
 			text-align: center;
 			color: @darkGreen;
 			text-transform: uppercase;
-			height: @bisect-border;
-			width: 40%;
+			width: 38%;
 			overflow: hidden;
 		}
 		hr { 
@@ -178,16 +176,17 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			padding: 0;
 			border: 0;
 			width: @width;
-			float: right;
-			margin: -6px 0 0 -@width;
+			position: absolute;
+			right: 0;
+			top: 10px;
 			&:first-child {
-				margin: 1em -@width 0 0;
-				float: left;
+				left: 0;
+				right: 100%;
 			}
 		}
 		.explanation {
 			color: @darkGrey;
-			padding: @bisect-border+10px 0 10px;
+			padding: 10px 0 10px;
 		}
 
 		&.selected button.open {
@@ -211,7 +210,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			height: 2px;
 			border: 0;
 			width: 100%;
-			margin: -20px 0 0;
+			margin: -30px 0 0;
 			position: relative;
 			z-index: 1;
 			&.lower { margin: 0 0 0; }
@@ -219,7 +218,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 		
 		.body {
 			background: transparent image-url('ballot-bg.png') top left repeat;
-			margin-top: -18px;
+			margin-top: 10px;
 			display: none;
 			.optionholder {
 				position: relative;
@@ -277,6 +276,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							height: 28px;
 							float: left;
 							margin: 8px 0 0 2px;
+							&:hover { .opacity(.8); }
 						}
 					}
 				}
@@ -435,7 +435,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 						.clearfix();
 					}
 					.footer {
-						margin: 50px 60px 0;
+						margin: 20px 60px 0;
 						padding-bottom: 4px;
 						text-align: center;
 						a {
@@ -503,7 +503,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 						color: white;
 						&::after { border-color: transparent transparent transparent @grey; }
 					}
-					.faces { right: -30px; bottom: (@optionHeight - 36px)/2; width: 280px;}
+					.faces { right: 10px; bottom: (@optionHeight - 36px)/4; width: 280px;}
 				}
 				&.chooseable {
 					.option {
@@ -539,7 +539,9 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			}
 			.buttons { text-align: center }
 			.yourFeedback {
+				border-top: none !important;
 				h1, h3 { color: @green; }
+				.meme { display: none !important }
 			}
 		}
 		&.measure .body {
@@ -557,7 +559,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 						padding-left: 8px;
 						padding-right: 20px;
 						padding-bottom: 120px;
-						width: 46%;
+						width: 45%;
 					}
 					.minicounter {
 						background-color: white;
@@ -566,6 +568,14 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					}
 					.faces { bottom: 30px; }
 				}
+				.full-text {
+					color: @grey;
+					clear: both;
+					text-align: center;
+					font-size: 1.2em;
+					padding: 20px 0 0;
+				}
+				
 			}
 
 			.yourFeedback {

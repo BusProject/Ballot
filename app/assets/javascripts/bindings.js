@@ -1,3 +1,4 @@
+var scroller = {}
 $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding clearing a location
 		e.preventDefault();
 		var $this = $(this),
@@ -31,9 +32,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		$(this).text('Close').nextAll('.body').slideDown('fast',function() { 
 			$root.selected($data)
 			var $this = $(this).parent()
-			$('.overlayText, .overlayBg',$this).hide().fadeIn()
-			// For scrolling to the top after it's done
-			setTimeout( function() { $(document).scrollTop( $this.position().top ) }, 1)
+			scroller = setTimeout( function() {  $(document).scrollTop( $this.position().top ) }, 200)
 		})
 		
 })
@@ -220,6 +219,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
 		yourLocation.top( $this.scrollTop() )
+		clearTimeout(scroller)
 })
 
 ko.bindingHandlers.src = {

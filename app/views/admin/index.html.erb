@@ -89,11 +89,6 @@
 		$('#find_choice').val('')
 		e.preventDefault();
 	})
-	.on('click','.fetch',function(e) {
-		var $this = $(this)
-		$.getJSON("<%= choices_fetch_path %>",function(r) { $this.hide() })
-		e.preventDefault();
-	})
 </script>
 <h1>Admin Section</h1>
 
@@ -143,9 +138,6 @@
 	<% end -%>
 </ul>
 <p><input id="unapprove_feedback" placeholder="Unapprove Something: Search by comment or user" ></p>
-
-<h2>Fetch Data</h2>
-<a class="fetch" href="#">Retrieve Data</a>
 <h2>Edit Choices / Options</h2>
 <p><input id="find_choice" placeholder="Edit Something: Search by contest name or option name" ></p>
 <div class="choice_form"></div>
