@@ -8,7 +8,7 @@
 	makeMeme( 
 		<%= raw @meme.to_json(:include => [ :option, :feedback] ) %>,
 		'<%= path.slice(0, path.index('yes/1') ) %>', 
-		'<%= ['no','against','opposed'].index( @meme.option.name.downcase ) ? 'no' : 'yes' %>'
+		'<%= ['no','against','opposed','reject'].index( @meme.option.name.downcase ) ? 'no' : 'yes' %>'
 	)
 </script>
 
@@ -33,15 +33,19 @@
 
 
 	<div class="matt" >
-		<div class="preview"></div>
+		<div class="preview">
+			<% encoded = Base64.encode64( @meme.makeBlob ( true ) ) %>
+			<a href="data:image/png;base64,<%= encoded %>" target="_blank">
+				<img class="original" src="data:image/png;base64,<%= encoded %>">
+			</a>
+		</div>
 		<div class="preview-load" data-bind="visible: loading">Loading...</div>
 		<div class="kill" style="display:none" data-bind="visible: id  ">Delete</div>
-	 	
 	</div>
 
 
 
-	<div class="sharea" data-bind="css: {unsaved: id() == null } ">
+	<div class="sharea unsaved" data-bind="css: {unsaved: id() == null } ">
 		<h2>Step 3: Share Your Image</h2>
 		<div class="share-inner">
 			<a target="_blank" class="googleplus"><%= image_tag 'googleplus-icon.png' %></a>
