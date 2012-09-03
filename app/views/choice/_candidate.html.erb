@@ -4,10 +4,11 @@
 <% you = user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == user.id }.first %>
 
 <div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
-	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }">
+	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }"
+	itemscope itemtype="http://data-vocabulary.org/Thing" >
 
-	<hr><h1 class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
-	<div class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
+	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
 	<button class="open">Learn More and Comment</button>
 	<hr class="button">
 
@@ -15,14 +16,15 @@
 
 		<% n = 0 %>
 		<% choice.options.sort_by{ |o| o.id == you.option_id ? -1 : 1 unless you.nil? }.each do |option| %>
-		<div class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" data-bind="css: {chooseable: $data.featured() == null && current_user.id != 'unauthenticated' }">
+		<div itemscope itemtype="http://data-vocabulary.org/Person" class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" data-bind="css: {chooseable: $data.featured() == null && current_user.id != 'unauthenticated' }">
 			<!-- ko foreach: $data.options -->
 				<div class="<%= 'chosen confirmed' if you == option %> option " data-bind="css:{ chosen: $parent.featured() == null && $parent.chosen() == $data, confirmed: $parent.featured() != null && $parent.featured().option_id == $data.id }" >
-					<h1 data-bind="text: $data.name, addClass: $data.name.toLowerCase()">
+					<h1 itemprop="name" data-bind="text: $data.name, addClass: $data.name.toLowerCase()">
 						<%= option.name %>
 					</h1>
-					<p class="bigger"><span data-bind="text: $data.party"><%= option.party %></span> <!-- | <span data-bind="text: $data.type"><%= option.option_type unless choice.new_record? %></span>--></p>
-					<p class="smaller"><a target="_blank" data-bind="href: $data.twitter " href="<%= option.twitter %>" ><span>Twitter</span></a><a target="_blank" data-bind="href: $data.facebook " target="_blank" href="<%= option.facebook %>" ><span>Facebook</span></a><a data-bind="href: $data.website " href="<%= option.website %>" ><span>Website</span></a></p>
+					<meta itemprop="title" content="<%= choice.contest %>">
+					<p class="bigger"><span itemprop="affiliation" data-bind="text: $data.party"><%= option.party %></span> <!-- | <span data-bind="text: $data.type"><%= option.option_type unless choice.new_record? %></span>--></p>
+					<p class="smaller"><a target="_blank" data-bind="href: $data.twitter " href="<%= option.twitter %>" ><span>Twitter</span></a><a target="_blank" data-bind="href: $data.facebook " target="_blank" href="<%= option.facebook %>" ><span>Facebook</span></a><a itemprop="url" data-bind="href: $data.website " href="<%= option.website %>" ><span>Website</span></a></p>
 
 					<% if choice.new_record? || choice.commentable? || true %>
 						<div class="faces">
@@ -96,6 +98,7 @@
 			<% end -%>
 
 			<div class="footer" >
+				<meta itemprop="url" content="<%= choice.to_url%>" />
 				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Read All Comments</a>
 				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() ">Load More Comments</a>
 			</div>

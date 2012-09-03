@@ -4,14 +4,18 @@
 
 
 <div class="measure row <%= 'selected' unless choice.new_record? %> commentable" 
-	data-bind="css: { selected: $root.selected() == $data, complete: $data.you() }">
+	data-bind="css: { selected: $root.selected() == $data, complete: $data.you() }"
+	itemscope itemtype="http://data-vocabulary.org/Thing" >
 
-	<hr><h1 class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
-	<div class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
+	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
 	<button class="open">Learn More and Comment</button>
 	<hr class="button">
 
 	<div class="body">
+		<div class="full-text">
+			<a target="_blank" href="<%= choice.options.first.blurb_source %>" data-bind="visible: $data == $root.selected(), href: $data.options()[0].blurb_source" >Full Text</a>
+		</div>
 
 		<% n = 0 %>
 		<% choice.options.each do |option| %>
@@ -36,15 +40,12 @@
 					</div>
 				</div>
 			<!-- /ko -->
-			<div class="full-text">
-				<a target="_blank" href="<%= option.blurb_source if n == 0 %>" data-bind="href: $data.options()[0].blurb_source" >Full Text</a>
-			</div>
 		</div>
 		<% n+=1 %>
 		<% end %>
 
 			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/feedback', :user => user, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
+				<%= render 'choice/measureFeedback', :user => user, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
 			<%- end %>
 			<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
 				What Others Are Saying
@@ -88,10 +89,11 @@
 				</li>
 			</ul>
 			<%- if current_user.nil? || (current_user != user && !user.nil? )%>
-				<%= render 'choice/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+				<%= render 'choice/measureFeedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
 			<% end -%>
 
 			<div class="footer" >
+				<meta itemprop="url" content="<%= choice.to_url%>" />
 				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Read All Comments</a>
 				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() ">Load More Comments</a>
 			</div>

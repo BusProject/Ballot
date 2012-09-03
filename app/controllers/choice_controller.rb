@@ -16,7 +16,10 @@ class ChoiceController < ApplicationController
 
     @choices = @user.choices.each{ |c| c.prep current_user }
     @classes = 'profile home'
-    @title = @user.guide_name.nil?  ? @user.name+'\'s Voter Guide' : @user.guide_name
+    @title = @user.guide_name.nil? || @user.guide_name.empty? ? @user.name+'\'s Voter Guide' : @user.guide_name
+    @type = 'Voter Guide'
+    @message = @user.description.nil? ? 'A Voter Guide by '+@user.first_name+', powered by The Ballot'  : @user.description
+    @image = @user.memes.last.nil? ? nil : meme_show_image_path( @user.memes.last.id )+'.png'
 
     result = {:state => 'profile', :user => @user }
 
@@ -32,6 +35,9 @@ class ChoiceController < ApplicationController
 
     @classes = 'home single'
     @title = @choice.contest
+    @partial = @choice.contest_type.downcase.index('ballot').nil? ? 'candidate' : 'measure'
+    @type = @partial == 'candidate' ? 'Elected Office' : 'Ballot Measure'
+    @message = @type == 'measure' ? @choice.contest.description : 'An election for '+@choice.contest+' between '+@choice.options.map{|o| o.name+'('+o.party+')' }.join(', ')
 
     result = {:state => 'single', :choices => [ @choice ].each{ |c| c.prep current_user } }
 
@@ -50,39 +56,6 @@ class ChoiceController < ApplicationController
     end
     
     render :json => @choices.to_json( json_include )
-  end
-  
-  def retrieve
-    if user_signed_in? && ( current_user.admin || current_user.id == 1) || Rails.env.development?
-    
-      choice_sheet = 'https://spreadsheets.google.com/feeds/list/0AnnQYxO_nUTWdDU2RHFZS3BMTDAzZmFNTXhGRFBReWc/1/public/basic'
-      option_sheet = 'https://spreadsheets.google.com/feeds/list/0AnnQYxO_nUTWdDU2RHFZS3BMTDAzZmFNTXhGRFBReWc/2/public/basic'
-
-      raw_choices = Google.getFeed(choice_sheet)
-      raw_options = Google.getFeed(option_sheet)
-      choices = []
-
-      raw_choices.each do |raw_choice|
-        shell_choice = Google.extractContent(raw_choice['content'])
-        choice = Choice.find_or_create_by_geography_and_contest(shell_choice['geography'], shell_choice['contest'],shell_choice)
-        choice.update_attributes(shell_choice)
-        choices.push(choice)
-        choices.last['options'] = []
-
-        raw_options.select{ |option| option['title'] == raw_choice['title'] }.each do |raw_option|
-          shell_option = Google.extractContent(raw_option['content'])
-
-          option = choice.options.find_or_create_by_name(shell_option['name'], shell_option)
-          option.update_attributes(shell_option)
-        end
-      end
-
-    else
-      choices = {'error' => true, 'message' => 'Yeah you can\'t just DO that'} 
-    end
-    
-    render :json => choices, :callback => params['callback']
-  
   end
 
   def more

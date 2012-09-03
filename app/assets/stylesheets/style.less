@@ -78,14 +78,24 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 	.stars { .move-stars(100px) }
 	h1.sectionheading { border-bottom:4px double @lightGreen; }
 	#enter-address {
+		.place-holder {
+			position: absolute;
+			margin: 45px 0 0 -513px;
+			.no-select();
+			pointer-events: none;
+			color: #8eb636;
+		}
+		.find-ballot, .place-holder {
+			font-family:'Rokkitt', serif;
+			font-size:1.45em;
+			font-weight: bold;
+		}
 		.find-ballot {
 			&:focus { padding: 19px 10px 14px; }
 			width:520px;
 		 	margin: 25px auto 15px;
 			-webkit-appearance:none;
 			border-radius:4px 0px 0px 4px;
-			font-family:'Rokkitt', serif;
-			font-size:1.45em;
 			padding: 19px 10px 15px;
 			background-color: #ceea8e;
 			.box-shadow(inset 0px 1px 1px 0px rgba(0,0,0,.3) );
@@ -503,7 +513,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 						color: white;
 						&::after { border-color: transparent transparent transparent @grey; }
 					}
-					.faces { right: 10px; bottom: (@optionHeight - 36px)/4; width: 280px;}
+					.faces { right: -10px; bottom: (@optionHeight - 20px)/4; width: 240px;}
 				}
 				&.chooseable {
 					.option {
@@ -568,14 +578,17 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					}
 					.faces { bottom: 30px; }
 				}
-				.full-text {
-					color: @grey;
-					clear: both;
-					text-align: center;
-					font-size: 1.2em;
-					padding: 20px 0 0;
-				}
+				.clearfix();
 				
+			}
+			.full-text {
+				color: @grey;
+				text-align: center;
+				font-size: 1.2em;
+				margin: 0 0 -40px;
+				padding: 30px 0 0;
+				position: relative;
+				z-index: 10;
 			}
 
 			.yourFeedback {

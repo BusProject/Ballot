@@ -1,6 +1,5 @@
 <div id="read-ballot">
 <!-- ko foreach: choices -->
-	<% type = @choice.contest_type.downcase.index('ballot').nil? ? 'candidate' : 'measure' %>
-	<%=  render 'choice/'+type, :choice => @choice %>
+	<%=  render 'choice/'+@partial, :choice => @choice %>
 <!-- /ko -->
 </div>

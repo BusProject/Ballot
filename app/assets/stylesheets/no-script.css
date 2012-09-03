@@ -34,8 +34,10 @@ body.no-script .account { margin-top: 56px; }
 body.no-script .yourFeedback.has_user, body.no-script .row .body { display: block }
 body.no-script .row .optionholder { float: left; width: 300px !important; }
 body.no-script .row .optionholder:first-child { float: left; width: 300px !important; }
-body.no-script .row .optionholder:first-child .option { border-right: 1px solid #5B5B5B !important; }
-body.no-script .row .optionholder .option { border: 0; width: 100% !important; border-right: none !important; }
+body.no-script div.row.measure .body .optionholder .option { border-right: 1px solid #5B5B5B; }
+
+body.no-script .row .optionholder .option { border: 0; width: 100% !important; border-right: none; }
+body.no-script .row .optionholder.clean-no-script .option { border: 0; width: 100% !important; border-right: none  !important; }
 
 body.no-script .row.candidate .optionholder { float: none; width: 600px !important; overflow-y: visible !important; margin: 0 auto; }
 body.no-script .row.candidate .optionholder:first-child .option { float: left; border-right: none !important; }

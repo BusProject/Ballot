@@ -11,8 +11,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	yourLocation.address('')
 	$('#enter-address input').select()
 })
-.on('keypress','#enter-address input',function(e) {
-	if( e.keyCode == 13 ) $(this).next('a').click()
+.on('keydown','#enter-address input',function(e) {
+	if( e.keyCode == 13 ) { $(this).blur().nextAll('a.find-ballot-submit').click(); }
 })
 .on('click touchend', '.row button.open', function(e) {
 		if( inits.state == 'profile' || inits.state == 'single' ) return false
@@ -123,6 +123,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 })
 .on('click touchend','.yourFeedback .meme',function(e) {
 	var $data = ko.dataFor(this), memetainer = $('#meme-tainer')
+	if( window.innerHeight < 980 ) memetainer.css('top', Math.floor(120-window.innerHeight/780*120)+'px')
+	if( window.innerWidth < 1100 ) memetainer.css('marginLeft', (( window.innerWidth < 890 ? 780 : window.innerWidth ) -766-162 ) / 2+'px')
 	$('iframe',memetainer.show() ).attr('src',inits.root+'m/'+$data.you().id+'/new?frame=true' ).parent().prev('#meme-cova').show() 
 	$(document.body).bind('click.meme touchstart.meme',function(e) {
 		if( $(e.target).parents( memetainer ).length > 0  ) {
@@ -218,6 +220,11 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 })
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
+		if( window.innerWidth < 1029 ) {
+			var left = $this.scrollLeft()
+			if( left < 120 ) $('#instructions-box').css({'marginLeft':(-54-left)+'px','left':'auto'})
+			else $('#instructions-box').css('left','-180px')
+		}
 		yourLocation.top( $this.scrollTop() )
 		clearTimeout(scroller)
 })

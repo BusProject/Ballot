@@ -77,7 +77,6 @@ function makeMeme(memeRaw,path,flavor) {
 				document.location.toString().replace('new','preview'),
 				{ quote: this.quote.fixed(), theme: this.theme(), meme: this.id() }, 
 				function(response) { 
-					console.log( id );
 					var url = typeof id == 'undefined' && id != null ? 'data:image/png;base64,' + response : document.location.protocol+'//'+document.location.host+'/m/'+id+'.png';
 					$('.preview',document.body).html('<a href="'+url+'" target="_blank"><img src="data:image/png;base64,' + response + '" /></a>')
 					loading(false)
@@ -125,20 +124,21 @@ function makeMeme(memeRaw,path,flavor) {
 							function(response) {
 								if( response.success ) {
 
-									var img = document.location.protocol+'//'+document.location.host+response.url, // Le image you're linking to 
+									var guide_name = current_user.guide_name == '' ? current_user.name+"'s Voter Guide" : current_user.guide_name
+										img = document.location.protocol+'//'+document.location.host+response.url, // Le image you're linking to 
 										link = document.location.protocol+'//'+document.location.host+current_user.profile, // Le page you're linkg to
-										message = data.quote.fixed() // Le message you want to share ( Twitter / Tumblr only )
+										message = 'Check out '+guide_name
 
 									$('a.facebook',document.body).attr('href',img.replace('.png','')+'/fb?auth_token='+current_user.auth_token);
-									$('a.googleplus',document.body).attr('href','https://plus.google.com/share?url='+img);
+									$('a.googleplus',document.body).attr('href','https://plus.google.com/share?url='+img.slice(0,-4) );
 									$('a.pintrest',document.body).attr('href','http://pinterest.com/pin/create/button/?url='+escape(link)+'&media='+escape(img)+'&description='+escape(message));
 
-									var referr = '', via = '', hashtags = ''
+									var referr = 'theleague99', via = '', hashtags = 'TheBallot'
 									var twitter = 'https://twitter.com/intent/tweet?original_referer='+referr+
 										'&source=tweetbutton&hashtags='+hashtags+
-										'&via='+via+
+										//'&via='+via+
 										'&text='+message+
-										'&url='+img.replace(/ /g,'-').replace(/\&/g,'%26');
+										'&url='+img.replace(/ /g,'-').replace(/\&/g,'%26').slice(0,-4);
 									$('a.twitter',document.body).attr('href',twitter);
 
 									var tumblr = 'http://www.tumblr.com/share/photo?source='+escape(img)+

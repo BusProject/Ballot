@@ -153,12 +153,12 @@ function locationModel(data) {
 				address: address
 			},
 			function(data) { 
-				if( data != null && data.constructor.name == 'Array') {
+				if( data != null && data.constructor == Array ) {
 					for( var i=0 ; i < data.length; i++) {
 						array.push( Choice(data[i]) )
 					}
-					empty = yourLocation.lat()+','+yourLocation.lng();
 				}
+				empty = yourLocation.lat()+','+yourLocation.lng();
 				callback()
 			})
 	}
