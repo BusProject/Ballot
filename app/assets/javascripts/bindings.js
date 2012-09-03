@@ -241,7 +241,7 @@ ko.bindingHandlers.href = {
 	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		var all = allBindingsAccessor(),
 			href = all.href
-		if( href == null ) $(element).remove()
+		if( href == null || href == '' ) $(element).remove()
 		$(element).attr('href',href)
 	}
 }
