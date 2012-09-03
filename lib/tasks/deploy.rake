@@ -5,7 +5,7 @@ task :deploy do
   sh 'bundle exec rake assets:precompile'
   sh 'git add public/assets/'
   sh "git commit -am 'Precompiling assets'"
-  sh "git push heroku compiled"
+  sh "git push heroku compiled:master"
   sh 'curl -f "http://the-ballot.herokuapp.com"'
   sh 'curl -f "http://the-ballot.herokuapp.com?q=true"'
   sh "git checkout master"
