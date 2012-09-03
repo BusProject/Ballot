@@ -12,6 +12,9 @@
 	<hr class="button">
 
 	<div class="body">
+		<div class="full-text">
+			<a target="_blank" href="<%= choice.options.first.blurb_source %>" data-bind="visible: $data == $root.selected(), href: $data.options()[0].blurb_source" >Full Text</a>
+		</div>
 
 		<% n = 0 %>
 		<% choice.options.each do |option| %>
@@ -36,9 +39,6 @@
 					</div>
 				</div>
 			<!-- /ko -->
-			<div class="full-text">
-				<a target="_blank" href="<%= option.blurb_source if n == 0 %>" data-bind="href: $data.options()[0].blurb_source" >Full Text</a>
-			</div>
 		</div>
 		<% n+=1 %>
 		<% end %>
