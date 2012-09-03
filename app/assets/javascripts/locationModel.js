@@ -108,7 +108,7 @@ function locationModel(data) {
 
 	this.map = ko.computed( function() { // Used for confirming map location
 		var latlng = this.latlng(),
-			geolocated = this.geolocated()
+			geolocated = this.geolocated(),
 			zoom = geolocated ? '13' : '3',
 			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
 		// When map updates - flash the thing
@@ -123,7 +123,6 @@ function locationModel(data) {
 		ko.toJS(this.map)
 		if( this.geocoded() ) { 
 			$('.confirmation').fadeIn('fast')
-			$('#locationNotice').remove()
 		}
 	},this)
 
