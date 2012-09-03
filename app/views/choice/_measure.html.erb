@@ -38,7 +38,9 @@
 					<% end %>
 				</div>
 			<!-- /ko -->
-			<div style="clear: both;"></div>
+			<div class="full-text">
+				<a href="<%= option.blurb_source if n == 0 %>" data-bind="href: $data.options()[0].blurb_source" >Full Text</a>
+			</div>
 		</div>
 		<% n+=1 %>
 		<% end %>
