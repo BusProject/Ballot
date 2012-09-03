@@ -24,7 +24,7 @@ CSV.foreach(file) do |data|
 
       data.each do |d|
         unless d.nil?
-          obj[ key[ii] ] = d# ActiveSupport::Inflector.transliterate(d)
+          obj[ key[ii] ] = ActiveSupport::Inflector.transliterate(d)
         end
         ii+=1
       end
