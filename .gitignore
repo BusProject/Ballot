@@ -9,3 +9,4 @@ tmp/
 public/public*
 **.env
 pg/
+activesupport/
