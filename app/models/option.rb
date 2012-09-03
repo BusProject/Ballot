@@ -37,7 +37,7 @@ class Option < ActiveRecord::Base
   end
   
   def type
-    return ['yes','support','affirm','for'].index( self.name.downcase).nil? ? 'no' : 'yes'
+    return ['yes','support','affirm','for','maintained'].index( self.name.downcase).nil? ? 'no' : 'yes'
   end
 
   def all_feedback current_user
