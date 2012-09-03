@@ -10,5 +10,5 @@ task :deploy do
   sh 'curl -f "http://theballot.org/?q=true"'
   sh "git checkout master"
   sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://theballot.org/"'
-  sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://theballot.org/"'
+  sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://theballot.org/admin"'
 end
