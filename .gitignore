@@ -10,3 +10,4 @@ public/public*
 **.env
 pg/
 activesupport/
+*.dat
