@@ -6,6 +6,9 @@
 <% photo = photo || nil %>
 <% object = @object || 'website' %>
 
+<link rel="image_src" href="<% image %>" />
+
+
 <meta property="og:image" content="<%= image %>" />
 <meta property="og:title" content="<%= title %>" />
 <meta property="og:url" content="<%= url %>">
@@ -13,7 +16,7 @@
 <meta property="og:site_name" content="The Ballot">
 <meta property="fb:app_id" content="<%= ENV['FACEBOOK'] %>">
 
-<meta property="og:determiner" content="">
+<meta property="og:determiner" content='""'>
 <meta property="og:type" content="<%= object %>">
 
 
