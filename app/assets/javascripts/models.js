@@ -16,7 +16,7 @@ function Choice(data,args) {
 		this.description = data.description
 		this.chosen = ko.observable( null )
 		this.geography = data.geography
-		this.commentable = data.commentable
+		this.commentable = true
 		this.comments = 0;
 		this.sortOptions = [
 			{value: 'normal', label: 'Sort by...' },
