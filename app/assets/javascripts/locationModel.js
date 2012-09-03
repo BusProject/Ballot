@@ -164,7 +164,7 @@ function locationModel(data) {
 	}
 
 	this.menuItems = []
-	var smalls = MenuItem(null,'Other Options',null,'<div class="container"><a href="https://theleague.turbovote.org/?r=ballot" target="_blank" class="small" href="">Register to Vote</a><a class="small" href="">Contact Us</a></div>');
+	var smalls = MenuItem(null,'Other Options',null,'<div class="container"><a href="https://theleague.turbovote.org/?r=ballot" target="_blank" class="small" >Register to Vote</a><a class="small" href="mailto:info@theballot.org">Contact Us</a></div>');
 
 	if( this.state == 'front' ) {
 		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
@@ -173,12 +173,13 @@ function locationModel(data) {
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
 			owner = current_user.id == 'unauthenticated' ? 'the' : 'Your',
 			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || [current_user.first_name,current_user.last_name+'\'s','Voter Guide'].join(' '),
-			msg = current_user.id == 'unauthenticated' ? undefined : 'Check out my voter guide on The Ballot'
+			msg = current_user.id == 'unauthenticated' ? undefined : 'Check out my voter guide on The Ballot',
+			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">Your Voter Guide</a>'
 			
 		this.menuItems.push( 
 			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your on your ballot, see what other people are saying about them, and share your own opinion.</p>'),
 			MenuItem('#read-ballot','Read Your Ballot','<p>Get the lowdown on everything on your ballot for the upcoming election.</p><p>Read what others have to say about ballot measures and share your own views.</p>'),
-			MenuItem(null,'Share the Ballot',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+'</div>'),
+			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra),
 			smalls
 		)
 	}

@@ -36,7 +36,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		})
 		
 })
-.on('click touchend','#instructions ul li a, .fixed-link',function(e){
+.on('click touchend','#instructions ul li a:not(".small"), .fixed-link',function(e){
 	$this = $(this)
 	var href = $this.attr('href')
 	if( href[0] == '#' ) {
