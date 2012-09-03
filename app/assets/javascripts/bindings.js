@@ -11,8 +11,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	yourLocation.address('')
 	$('#enter-address input').select()
 })
-.on('keypress','#enter-address input',function(e) {
-	if( e.keyCode == 13 ) $(this).next('a').click()
+.on('keydown','#enter-address input',function(e) {
+	if( e.keyCode == 13 ) { $(this).blur().nextAll('a.find-ballot-submit').click(); }
 })
 .on('click touchend', '.row button.open', function(e) {
 		if( inits.state == 'profile' || inits.state == 'single' ) return false
