@@ -1,4 +1,3 @@
-var scroller = {}
 $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding clearing a location
 		e.preventDefault();
 		var $this = $(this),
@@ -22,17 +21,21 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			$data = ctx.$data,
 			selected = $root.selected()
 
-		$('.selected .body').slideUp( function() { $('button.open', this.parentElement).text("Learn More and Comment") })
+		$('.selected .body').slideUp(400, function() { $('button.open', this.parentElement).text("Learn More and Comment"); })
 
 		if( selected == $data ) {
 			$root.selected(null);
 			return false
 		}
-		
-		$(this).text('Close').nextAll('.body').slideDown('fast',function() { 
+		var $this = $(this).parent()
+		scrollUp = setInterval( function() { 
+			var top = $this.position().top
+			if( top < $(document).scrollTop()  ) $(document).scrollTop( top - 1 );
+		}, 10)
+
+		$(this).text('Close').nextAll('.body').slideDown(400,function() { 
 			$root.selected($data)
-			var $this = $(this).parent()
-			scroller = setTimeout( function() {  $(document).scrollTop( $this.position().top ) }, 200)
+			clearInterval(scrollUp);
 		})
 		
 })
@@ -42,7 +45,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	if( href[0] == '#' ) {
 		var top = $(href).position().top
 		e.preventDefault()
-
 		$(document).scrollTop( top ).trigger('scroll')
 	}
 })
@@ -226,7 +228,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			else $('#instructions-box').css('left','-180px')
 		}
 		yourLocation.top( $this.scrollTop() )
-		clearTimeout(scroller)
 })
 
 ko.bindingHandlers.src = {
