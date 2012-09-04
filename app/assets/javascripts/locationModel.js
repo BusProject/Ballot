@@ -164,7 +164,7 @@ function locationModel(data) {
 	}
 
 	this.menuItems = []
-	var smalls = MenuItem(null,'Other Options',null,'<div class="container"><a href="https://theleague.turbovote.org/?r=ballot" target="_blank" class="small" >Register to Vote</a><a class="small" href="mailto:info@theballot.org">Contact Us</a></div>');
+	var smalls = MenuItem(null,'Other Options',null,'<div class="container"><a href="https://theleague.turbovote.org/?r=ballot" target="_blank" class="small" >Register to Vote</a><a class="small" href="mailto:info@theballot.org">Contact Us</a><a class="small" href="/about">About the Ballot</a></div>');
 
 	if( this.state == 'front' ) {
 		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
