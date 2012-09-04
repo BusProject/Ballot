@@ -11,7 +11,7 @@ class AdminController < ApplicationController
   end
   
   def find
-    prepped = '%'+params[:term].split(' ').each{ |word| word.downcase }.join(' ')+'%'
+    prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'
     if params[:object] == 'users'
       users = User.where( "lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR lower(email) LIKE ? OR id = ?", prepped, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) )      
       results = users.map{ |user| {:label => user.name, :id => user.id, :ban_url => user_ban_path( user.id ) , :admin_url => user_admin_path( user.id ) } }
