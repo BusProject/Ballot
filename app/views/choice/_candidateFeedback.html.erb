@@ -9,15 +9,15 @@
 	<h1 data-bind="text: [$data.<%= userObj %>.option_name,'for',$data.contest].join(' ') " >
 		<%= [feedback.option.name,'for',feedback.choice.contest].join(' ')  unless feedback.nil? %>
 	</h1>
-	<h1 data-bind="text: '&ldquo;'+<%= userObj %>.comment+'&rdquo;', visible: <%= userObj %>.comment.length > 0,addClass: <%= userObj %>.type" >
+	<h1 data-bind="text: '&ldquo;'+<%= userObj %>.comment+'&rdquo;', visible: <%= userObj %>.comment != null && <%= userObj %>.comment.length > 0,addClass: <%= userObj %>.type" >
 		<%- if !feedback.nil? && feedback.comment.length > 0 %>
 			<%= '"'+feedback.comment+'"' %>
 		<% end -%>
 	</h1>
-	<div class="head" data-bind="addClass: <%= userObj %>.type, visible: <%= userObj %>.comment.length < 1 ">
+	<div class="head" data-bind="addClass: <%= userObj %>.type, visible:<%= userObj %>.comment != null && <%= userObj %>.comment.length < 1 ">
 		<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
 	</div>
-	<h3 data-bind="text: '-'+<%= userObj %>.name+( <%= userObj %>.comment.length > 1 ? ' '+<%= userObj %>.time : '' ), addClass: <%= userObj %>.type">
+	<h3 data-bind="text: '-'+<%= userObj %>.name+( <%= userObj %>.comment != null && <%= userObj %>.comment.length > 1 ? ' '+<%= userObj %>.time : '' ), addClass: <%= userObj %>.type">
 		<%= '-'+user.first_name+' '+user.last_name unless user.nil? %>
 	</h3>
 	<%- if user == current_user %>
