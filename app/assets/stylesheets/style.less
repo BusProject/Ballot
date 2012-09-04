@@ -95,13 +95,10 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			width:520px;
 		 	margin: 25px auto 15px;
 			-webkit-appearance:none;
-			border-radius:4px 0px 0px 4px;
 			padding: 19px 10px 15px;
-			background-color: #ceea8e;
+			border: 1px solid @green;
 			.box-shadow(inset 0px 1px 1px 0px rgba(0,0,0,.3) );
-			border:none;
-			color:#fff;
-			text-shadow:0px 1px 1px #999;
+			color: @green;
 			outline:none;
 			.border-box;
 			.placeholder(#8eb636);
@@ -118,9 +115,9 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			font-family:'Rokkitt', serif;
 			font-size:20px;
 			font-weight:bold;
-			padding:20px 10px 16px 10px;
+			padding:23px 10px 17px 10px;
 			text-decoration:none;
-			margin:0px 0px 0px 0;
+			margin:1px 0px 0px -3px;
 			width:80px;
 			text-align:center;
 			.text-shadow(0px -1px 1px #637c2a);
@@ -146,8 +143,9 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			z-index: 2;
 			position: relative;
 			a {
+				width: 40px;
 				text-decoration: none;
-				margin: 2px 10px 0;
+				margin: 2px 0 0;
 				display: inline-block;
 				font-size: 20px;
 				padding: 4px 8px;
@@ -298,7 +296,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 				border-top: @darkGrey 1px solid;
 				border-bottom: @darkGrey 1px solid;
 				margin: 0 auto;
-				padding: 0 0 10px;
+				padding: 20px 0 10px;
 
 				.comment, .comment:focus {
 					width:350px;
@@ -511,9 +509,11 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					.minicounter {
 						background-color: @grey;
 						color: white;
+						margin-top:23px !important;
 						&::after { border-color: transparent transparent transparent @grey; }
 					}
-					.faces { right: -10px; bottom: (@optionHeight - 20px)/4; width: 240px;}
+					.faces { right: -10px; bottom: (@optionHeight - 20px)/4; width: 240px; height: 72px; }
+					.faces.lessHeads { a img { margin-top: 26px !important; }}
 				}
 				&.chooseable {
 					.option {
