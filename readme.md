@@ -18,6 +18,11 @@ Ah a wise guy eh? Alright, here's how you get this baby started on your machine:
 
 3. Update the installation and the data base `bundle install` then `rake db:migrate` to update your bundle and database.
 
+*Note: Bundle Install might fail. There are two gems that seem to give people a lot of trouble: [EventMachine](http://rubyeventmachine.com/) and [RMagick](http://rmagick.rubyforge.org/).*
+
+*EventMachine - on a mac - should work if you have XCode 4.4 + the Command Line Tools*
+*RMagick will need to have ImageMagick installed - do this with Homebrew `brew install imagemagick`*
+
 4. Rename `.env-sample` to `.env`. This controls some of the configuration variables for the app. To get this to work with Facebook - you'll need to register a new [facebook application](developers.facebook.com) and for district placement you'll need to register an [account with Cicero](http://cicero.azavea.com)
 
 5. Start the rails server `foreman start` this will start up rails but you wont have anything in your DB. SO to download the latest data from [our spreadsheets](https://docs.google.com/spreadsheet/pub?key=0AnnQYxO_nUTWdDU2RHFZS3BMTDAzZmFNTXhGRFBReWc&output=html) so you'll need to...
