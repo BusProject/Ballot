@@ -102,12 +102,13 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			outline:none;
 			.border-box;
 			.placeholder(#8eb636);
+			.inner-shadow();
+			
 		}
 		a.find-ballot-submit {
-			background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ceea8e), color-stop(1, #8db237) );
+			background:@green;
 			background:-moz-linear-gradient( center top, #ceea8e 5%, #8db237 100% );
 			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ceea8e', endColorstr='#8db237');
-			background-color:#ceea8e;
 			.border-radius(0px 2px 2px 0px);
 			border:1px solid #8db237;
 			display:inline-block;
