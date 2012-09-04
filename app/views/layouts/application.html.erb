@@ -103,7 +103,7 @@
 				<img src="<%= asset_path 'menutop.png' %>" class="menutop">
 					<ul data-bind="foreach: menuItems">
 						<li data-bind="overwrite: $data.html ">
-							<a class="main" data-bind="css: { active: false }, text: ( inits.state ? '' : ($index()+1) )+' '+$data.name, attr: {href: $data.id }"></a>
+							<a class="main" data-bind="css: { active: false }, text: $data.name, attr: {href: $data.id }"></a>
 							<div style="display:none;" data-bind="slide: $parent.active() == $data.id " class="menu-inner">
 								<div class="arrow"></div>
 								<div data-bind="html: $data.description"></div>
