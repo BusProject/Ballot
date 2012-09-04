@@ -3,14 +3,19 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'envi
 require 'csv'
 require 'active_support/all'
 
-files = Dir["/Users/scott/Dropbox/Bus Project/ballot css/bip/*.csv"]
+files = ARGV.empty? ? Dir["/Users/scott/Dropbox/Bus Project/ballot css/bip/*.csv"] : ARGV
+
+
+
 i = 0
+
 collect = []
+newFile = []
+key = ''
 
 choices = Choice.all.count
 options = Option.all.count
 
-puts 'start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
 
 files.each do |file|
 
@@ -30,8 +35,8 @@ files.each do |file|
           ii+=1
         end
 
-        obj['Electoral District'] = obj['State']+obj['Electoral District'] if obj['Electoral District'].index(obj['State']) != 0
-obj['Electoral District'] = obj['Electoral District'][2] == ' ' ? obj['Electoral District'].slice(0,2)+obj['Electoral District'].slice(3,obj['Electoral District'].length) : obj['Electoral District']
+        obj['Electoral District'] = obj['State']+obj['Electoral District'] if obj['Electoral District'].index(obj['State']) != 0 
+        obj['Electoral District'] = obj['Electoral District'][2] == ' ' ? obj['Electoral District'].slice(0,2)+obj['Electoral District'].slice(3,obj['Electoral District'].length) : obj['Electoral District']
 
         unless obj['Electoral District'].match(/Congressional|State Senate|State House|State Representative|Legislative District/).nil?
           
@@ -93,6 +98,7 @@ obj['Electoral District'] = obj['Electoral District'][2] == ' ' ? obj['Electoral
         option.update_attributes(row_option)
         option.save
         
+        newFile.push( obj.map{|k,v| v }.to_csv ) if obj['Electoral District'].length == 2
       else
         data.each{ |k|  key.push( k ) }
       end
@@ -106,9 +112,18 @@ obj['Electoral District'] = obj['Electoral District'][2] == ' ' ? obj['Electoral
     puts i if (i % 100 == 0)
     
   end
-
+  key = key.to_csv
 end
 
 puts collect
-puts 'done!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-puts i.to_s' total rows, adding '+(Choice.all.count-choices).to_s+' Choices and '+(Option.all.count-options).to_s+' options'
+
+puts i.to_s+' total rows, adding '+(Choice.all.count-choices).to_s+' Choices and '+(Option.all.count-options).to_s+' options'
+
+if ARGV.empty?
+  puts 'Saved to /lib/candidates.csv'
+
+  File.open('lib/candidates.csv', "w+") do |f|
+    f.puts key
+    f.puts newFile
+  end
+end
