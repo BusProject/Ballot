@@ -59,7 +59,7 @@ CSV.foreach(file) do |data|
   end
   row+=1
   i+=1
-  puts i if (i % 100 == 0)
+  puts i if (i % 10 == 0)
   
 end
 
