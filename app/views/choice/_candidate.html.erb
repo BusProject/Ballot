@@ -27,7 +27,7 @@
 					<p class="smaller"><a target="_blank" data-bind="href: $data.twitter " href="<%= option.twitter %>" ><span>Twitter</span></a><a target="_blank" data-bind="href: $data.facebook " target="_blank" href="<%= option.facebook %>" ><span>Facebook</span></a><a itemprop="url" data-bind="href: $data.website " href="<%= option.website %>" ><span>Website</span></a></p>
 
 					<% if choice.new_record? || choice.commentable? || true %>
-						<div class="faces">
+						<div class="faces" data-bind="css: { lessHeads: $data.support() < 3 }">
 							<div class="minicounter" >
 								<div data-bind="html: $data.support()+' '+( $data.support() == 1 ? 'person' : 'people' )+' support '+( $data.support() == 1 ? 's' : '' )+'<br />'+$data.name"></div>
 							</div>
