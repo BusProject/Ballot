@@ -58,7 +58,10 @@ class MemeController < ApplicationController
   end
   
   def show
-    @meme = Meme.find( params[:id] )
+    @meme = Meme.find_by_id( params[:id] )
+
+    raise ActionController::RoutingError.new('Could not find that meme') if @meme.nil? 
+
     @image = ENV['BASE']+meme_show_image_path(@meme.id)+'.png'
     @message = @meme.quote
     @title = @meme.user.guide_name.nil? || @meme.user.guide_name.empty? ? @meme.option.name+' on '+@meme.option.choice.contest : @meme.user.guide_name
@@ -72,7 +75,9 @@ class MemeController < ApplicationController
   end
 
   def destroy
-    m = Meme.find(params[:id])
+    m = Meme.find_by_id(params[:id])
+    
+    raise ActionController::RoutingError.new('Could not find that meme') if m.nil? 
     
     if m.user.id == current_user.id
       m.delete
@@ -85,7 +90,7 @@ class MemeController < ApplicationController
   def fb
     m = Meme.find(params[:id])
     
-    if m.fb.nil?
+    if m.fb.nil? && m.user != current_user
       go = m.fbMeme( current_user, params[:auth_token] )
     else
       permission = RestClient.get 'https://graph.facebook.com/'+m.fb+'?acess_token='+params[:auth_token] # Seeing if the user can see the photo
