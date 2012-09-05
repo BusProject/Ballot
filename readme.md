@@ -25,6 +25,7 @@ Here's how you get this baby started on your machine:
 
 6. User accounts are handled exclusively through Facebook (for now), to use: [Register a new application](developers.facebook.com) and move the Facebook API ID and Facebook SECRET into your .env file. You'll need to point the Facebook app back at your local machine by setting the App Domain and Site URL to http://localhost:3000;
 
+7. Users with `:admin => true` will have access to an admin panel at the /admin address. From there you an block / unblock users, flag/unflag comments, edit Choices / Options (the objects that make up Ballot Measures / Canddiates). To elevate a user start the Rails console `rails c` then update the user ` User.find_by_email('cooldude@aol.com').update_attributes(:admin=>true) `.
 
 Deploying to Heroku
 ====
