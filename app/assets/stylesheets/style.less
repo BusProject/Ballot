@@ -110,8 +110,8 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			.greenButton();
 			.border-radius(0px 2px 2px 0px);
 			display:inline-block;
-			padding:23px 10px 17px 10px;
-			margin:1px 0px 0px -3px;
+			padding:24px 10px 16px 10px;
+			margin:0px 0px 0px -3px;
 			width:80px;
 		}
 	}
@@ -186,7 +186,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			font-family: Rokkitt, serif;
 			padding: 10px 20px;
 			height: 42px;
-			.orangeButton();
+			.greyButton();
 			position: relative;
 			font-size: 16px;
 			z-index: 2;
@@ -297,25 +297,13 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					padding:5px;
 				}
 				button {
-					border: 1px solid #bf4e00;
-					.drop-shadow();
-					.gradient(#d37a3c,#bd5d28);
-					color: white;
+					.orangeButton();
 					width: 140px;
 					margin: 11px auto 0;
 					font-size: 20px;
 					font-family: Rokkitt, serif;
 					padding: 9px 0;
-					font-weight: normal;
 					height: 40px;
-					cursor: pointer;
-					&:hover { .gradient(#bd5d28,#d37a3c); }
-					&:disabled {
-						.opacity(.7);
-						color: #d37a3c;
-						cursor: default;
-						&:hover { .gradient(#d37a3c,#bd5d28); }
-					}
 				}
 				.clearfix();
 				display: block;
@@ -506,7 +494,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			select.chosen {
 				.appearance();
 				width: 360px;
-				padding: 40px 10px 40px 0;
+				padding: 20px 10px 20px 0;
 				border: none;
 				display: block;
 				text-align: center;
@@ -523,7 +511,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			}
 			.arrows {
 				float: right;
-				margin: -86px 80px 0 -400px;
+				margin: -67px 80px 0 -400px;
 				pointer-events: none;
 				cursor: pointer;
 				color: @green;
