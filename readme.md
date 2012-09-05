@@ -17,6 +17,7 @@ Here's how you get this baby started on your machine:
 *Note: Bundle Install might fail. There are two gems that seem to give people a lot of trouble: [EventMachine](http://rubyeventmachine.com/) and [RMagick](http://rmagick.rubyforge.org/).*
 
 *EventMachine - on a mac - should work if you have XCode 4.4 + the Command Line Tools*
+
 *RMagick will need to have ImageMagick installed - do this with Homebrew `brew install imagemagick` from a mac with homebrew - other [machines here](http://www.imagemagick.org/script/binary-releases.php)*
 
 4. I've created a single command that will: Create your database schema via `rake db:migrate`, load data from `lib/candidates.csv` and `lib/meaasures.csv` into the database, create a .env file for [Foreman](https://github.com/ddollar/foreman) that's used to start Rails
