@@ -19,6 +19,7 @@ Ballot::Application.routes.draw do
   
   root :to => "home#index"
   match '/about' => "home#about"
+  match '/search' => "home#search"
 
   match '/auth/:provider/callback' => 'authentications#create'
   match '/lookup' => 'choice#index'
