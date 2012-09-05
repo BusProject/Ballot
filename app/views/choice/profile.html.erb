@@ -45,7 +45,7 @@
 				}
 				current_user.__titleFix = ko.computed( function() {
 					var title = this.guide_name()
-					document.title = 'The Ballot | '+title
+					if( title != null && title.trim().length > 0 )document.title = 'The Ballot | '+title
 				},current_user)
 				$(document).ready( function() { ko.applyBindings( current_user, document.getElementById("profile")); })
 			</script>
