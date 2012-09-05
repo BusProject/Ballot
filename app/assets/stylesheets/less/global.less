@@ -1,19 +1,42 @@
-html, body, h1, h2, h3, h4 {
-	font-family: 'LeagueGothicRegular', Tahoma, sans-serif;
+html, body, h1 {
+	font-family: 'LeagueGothic', Tahoma, sans-serif;
 	text-align:center;
 }
-p, div {
-	font-family: 'Lato', sans-serif;
+p, div, h2, h3, h4 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight:400;
+	
 }
-div { .border-box(); }
+
+div { 
+	.border-box();
+	color:@darkGrey;
+	font-size:16px
+}
 
 h1 {
-	font-size:2em;
+	font-size:1.8em;
 }
 
 h2 {
-	text-transform:uppercase;
-	font-size:1.8em;
+	font-size:40px;
+	font-family:'Open Sans', sans-serif;
+	text-transform: uppercase;
+	letter-spacing:4px;
+	font-weight:800;
+}
+
+h3 {
+	font-size:16px;
+	font-weight: 600;
+}
+
+p {
+	font-size:13px;
+	font-weight:400;
+	line-height:18px;
+	font-family:'Open Sans', sans-serif;
+	color:@darkGrey;
 }
 
 a:link, a:active, a:visited, span.link {
@@ -25,3 +48,11 @@ a:link, a:active, a:visited, span.link {
 
 strong { font-weight: bold; }
 em { font-style: italic; }
+
+
+/*** More typographic styles ***/
+
+.bigText() {
+	font-size:18px;
+	font-weight: 600;
+}
