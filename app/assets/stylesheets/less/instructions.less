@@ -1,5 +1,4 @@
 #instructions-box {
-	font-family: 'Rokkitt', serif;
 	width: 206px;
 	position:fixed;
 	left:auto;
@@ -16,13 +15,13 @@
 		padding:0px;
 		height:auto;
 		text-align:left;
-		font-size: 1.44em;
 		border-color: #727270;
 		border-width: 1px;
 		border-style: solid;
 		border-radius: 2px;
 		img.menutop {
 			margin: -64px 0 0.72em -1px;
+			display:none;
 		}
 		ul li:first-child a { border-top: none; }
 		ul li:last-child a { border-bottom: none; }
@@ -33,40 +32,38 @@
 		}
 		ul {
 			list-style-type:none;
-			margin-top: -24px;
 		}
 		a {
 			display:block;
 			text-decoration: none;
-			color: #3C3A3A;
+			color: @darkerGrey;
 			padding:11px;
 			&:hover {
 				.inner-shadow();
 			}
 		}
 		li {
-			div.container { padding: 12px; }
+			div.container { 
+				padding: 12px;
+				color:@darkerGrey; 
+			}
 			 a.small {
 				border: none;
-				font-size: 14px;
+				font-size: 16px;
 				padding: 0;
-				line-height: 16px;
+				line-height: 20px;
 				
 				&:hover {
 					box-shadow:none;
-					background-color:#3C3A3A;
 					color:white;
 				}
 			}
 			div.menu-inner { 
 				color: #303030;
-				font-size: 15px;
 				background: #dadada; 
 				border-bottom:1px solid #8c8282;
 				p:last-child, div:last-child { margin-bottom: 0;}
 				p {
-					font-family:'Open Sans', sans-serif;
-					font-size:.9em;
 					padding: 10px;
 					margin-bottom: .6em;
 				}
