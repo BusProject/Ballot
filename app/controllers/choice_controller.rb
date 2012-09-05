@@ -12,11 +12,14 @@ class ChoiceController < ApplicationController
   end
   
   def profile
-    @user = User.find( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
+    @user = User.find_by_id( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
+
+
+    raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
 
     @choices = @user.choices.each{ |c| c.prep current_user }
     @classes = 'profile home'
-    @title = @user.guide_name.nil? || @user.guide_name.empty? ? @user.name+'\'s Voter Guide' : @user.guide_name
+    @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide'
     @type = 'Voter Guide'
     @message = @user.description.nil? ? 'A Voter Guide by '+@user.first_name+', powered by The Ballot'  : @user.description
     @image = @user.memes.last.nil? ? nil : meme_show_image_path( @user.memes.last.id )+'.png'
@@ -31,7 +34,7 @@ class ChoiceController < ApplicationController
   def show
     @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' '))
 
-    raise ActionController::RoutingError.new('Not Found') if @choice.nil?
+    raise ActionController::RoutingError.new('Could not find '+params[:contest].gsub('_',' ') ) if @choice.nil?
 
     @classes = 'home single'
     @title = @choice.contest
