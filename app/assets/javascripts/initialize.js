@@ -29,7 +29,7 @@ function initialize() {
 
 
 
-	if( FB ) {
+	if( typeof FB != 'undefined' ) {
 		FB.getLoginStatus(function(response) {
 			if( response.status == 'connected' ) {
 				FB.api(
