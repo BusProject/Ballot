@@ -4,34 +4,35 @@
 	position:fixed;
 	left:auto;
 	top: 10px;
-	margin-left: -54px;
+	margin-left: -111px;
 	z-index: 50;
 	&.top {
 		top: 200px;
 		position: absolute;
 	}
 	#instructions {
-		background: #636363 image-url('menu-bg.gif') top left repeat;
+		background: #979795;
 		color:white;
 		padding:0px;
 		height:auto;
 		text-align:left;
 		font-size: 1.44em;
-		border-color: transparent #000 #000;
+		border-color: #727270;
 		border-width: 1px;
 		border-style: solid;
+		border-radius: 2px;
 		img.menutop {
 			margin: -64px 0 0.72em -1px;
 		}
 		ul li:first-child a { border-top: none; }
 		ul li:last-child a { border-bottom: none; }
 		ul li a { 
-			border-top: 1px solid #272727;
-			border-bottom: 1px solid #706868;
+			border-top: 1px solid #bebebe;
+			border-bottom: 1px solid #8c8282;
 		}
 		ul {
 			list-style-type:none;
-			margin-top: -26px;
+			margin-top: -24px;
 		}
 		a {
 			display:block;
@@ -39,8 +40,7 @@
 			color: white;
 			padding:11px;
 			&:hover {
-				background-color:white;
-				color:#636363;
+				.inner-shadow();
 			}
 		}
 		li {
@@ -55,6 +55,7 @@
 				color: #303030;
 				font-size: 15px;
 				background: #dadada; 
+				.inner-shadow();
 				p:last-child, div:last-child { margin-bottom: 0;}
 				p {
 					font-family:'Open Sans', sans-serif;
@@ -64,10 +65,11 @@
 					margin-bottom: .6em;
 				}
 				.arrow { 
+					display:none;
 					margin: 0 auto -13px;
 					height: 0;
 					width: 0;
-					border-color: #303030 transparent transparent;
+					border-color: #727270 transparent transparent;
 					border-style: solid;
 					border-width: 8px;
 					padding: 0;
@@ -75,9 +77,8 @@
 				
 			}
 			&:hover {
-				a.main { background: #fff; color: #000;  }
 				div.menu-inner {
-					.arrow { border-color: #fff transparent transparent; }
+					.arrow { border-color: #727270 transparent transparent; }
 				}
 			}
 			.share-container {
