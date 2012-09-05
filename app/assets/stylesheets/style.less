@@ -103,7 +103,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			width:520px;
 		 	margin: 25px auto 15px;
 			-webkit-appearance:none;
-			padding: 19px 10px 15px;
+			padding: 13px 10px;
 			border: 1px solid @green;
 			.box-shadow(inset 0px 1px 1px 0px rgba(0,0,0,.3) );
 			color: @green;
@@ -117,9 +117,11 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			.greenButton();
 			.border-radius(0px 2px 2px 0px);
 			display:inline-block;
-			padding:24px 10px 16px 10px;
-			margin:0px 0px 0px -3px;
+			margin:1px 0px 0px -4px;
 			width:80px;
+			padding: 20px 10px;
+			position: relative;
+			top: -3px;
 		}
 	}
 
@@ -194,12 +196,8 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 		}
 
 		button.open {
-			font-family: Rokkitt, serif;
-			padding: 10px 20px;
-			height: 42px;
 			.orangeButton();
 			position: relative;
-			font-size: 16px;
 			z-index: 2;
 		}
 
@@ -229,19 +227,20 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			.optionholder {
 				position: relative;
 				width: 100%;
+				margin-top:25px;
 				.option {
 					.border-box;
 					color: @darkGrey;
 					.blurb { text-align: left; }
 					text-align: left;
 					h1 {
-						font-family: Rokkitt, serif;
-						font-size:1.2em;
+						font-family: 'Open Sans';
+						font-size: 20px;
 						line-height: 1.4em;
-						float:none;
-						width:auto;
+						float: none;
+						width: auto;
 						text-align: left;
-						font-weight: bold;
+						font-weight: 600;
 					}
 					img {
 						float:left;
@@ -251,18 +250,19 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					.minicounter {
 							float: left;
 							position: relative;
-							line-height: 1.2em;
+							line-height: 16px;
 							overflow: visible;
-							height: 36px;
+							height: 35px;
 							font-size: 14px;
 							text-align: left;
 							padding: 3px 4px;
 						  	margin: 4px 30px 10px 0;
-							width: 130px;
+							width: 150px;
+							background-color:white;
 						&::after {
 								content: '';
 								float: right;
-								margin: -2.50em -2.85em 0 0;
+								margin: -2.45em -2.85em 0 0;
 								width: 0;
 								height: 0;
 								border-width: 18px;
@@ -273,6 +273,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							overflow: hidden;
 							height: 31px;
 							position: relative;
+							font-size:12px;
 						}
 					}
 	 				.faces {
@@ -288,38 +289,33 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 				}
 			}
 			.yourFeedback {
-				width: 500px;
+				width: 90%;
 				text-align: left;
 				clear: both;
-				border-top: @darkGrey 1px solid;
-				border-bottom: @darkGrey 1px solid;
+				border-top: @grey 1px solid;
+				border-bottom: @grey 1px solid;
 				margin: 0 auto;
 				padding: 20px 0 10px;
 
 				.comment, .comment:focus {
-					width:350px;
+					width:375pxpx;
 					height:115px;
 					-webkit-appearance:none;
-					color:#d77a3c;
+					color:@green;
 					font-size:16px;
 					vertical-align:top;
-					border:1px solid @darkGrey;
+					border:1px solid @green;
 					.box-shadow(inset 0px 0px 4px 1px #ccc);
-					border-radius:2px;
+					.border-radius();
 					margin: 40px auto 10px;
 					display:block;
 					resize: none;
 					outline:none;
-					padding:5px;
+					padding:10px;
+					.inner-shadow();
 				}
 				button {
 					.orangeButton();
-					width: 140px;
-					margin: 11px auto 0;
-					font-size: 20px;
-					font-family: Rokkitt, serif;
-					padding: 9px 0;
-					height: 40px;
 				}
 				.clearfix();
 				display: block;
@@ -331,7 +327,12 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					text-align: left;
 					text-transform: normal;
 				}
-				h2 { font-size: 1.6em; margin: 10px 0 4px; }
+				h2 { 
+					font-size: 24px;
+					margin: 10px 0 4px;
+					text-transform: none;
+					letter-spacing: 0;
+				}
 				p { color: @grey; }
 				h1, h3 {
 					text-align: center;
@@ -357,6 +358,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 				}
 				.next {
 					display: block;
+					margin:0 auto;
 					.greyButton();
 					&.last-child { display: none; }
 				}
@@ -481,7 +483,9 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					width: 520px;
 					.border-box();
 					position: relative;
-					.bigger { font-size: 1.25em; }
+					.bigger { 
+						font-size: 1em; 
+					}
 					.smaller a {
 						&:link, &:hover, &:active, &:visited {
 							margin: 0 5px 0 0;
@@ -493,10 +497,10 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 						}
 					}
 					.minicounter {
-						background-color: @grey;
-						color: white;
-						margin-top:23px !important;
-						&::after { border-color: transparent transparent transparent @grey; }
+						background-color: white;
+						color: @grey;
+						margin-top:18px !important;
+						&::after { border-color: transparent transparent transparent white; }
 					}
 					.faces { right: -10px; bottom: (@optionHeight - 20px)/4; width: 240px; height: 72px; }
 					.faces.lessHeads { a img { margin-top: 26px !important; }}
@@ -522,13 +526,15 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 				&:hover { }
 				background-color: white;
 				color: @green;
-				font-size: 1.35em;
-				.border-radius(0);
+				font-size: 20px;
 				margin: 20px auto;
+				border: 1px solid @green;
+				.border-radius(4px);
+				box-shadow: 0 1px 1px;
 			}
 			.arrows {
 				float: right;
-				margin: -67px 80px 0 -400px;
+				margin: -67px 100px 0 -400px;
 				pointer-events: none;
 				cursor: pointer;
 				color: @green;
@@ -619,7 +625,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							top: -2px;
 							bottom: -2px;
 							right: -4px;
-							font-size: 1.5em;
+							font-size: 1.2em;
 							padding: 6px 0 0;
 							.text-shadow(1px 1px 5px #ddd);
 							text-align: center;
