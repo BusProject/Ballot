@@ -45,11 +45,11 @@ class FeedbackController < ApplicationController
     
     if  params[:flavor] == 'useful'
       amount = feedback.upvotes.size
-      noun = noun.singularize if amount = 1
+      noun = noun.singularize if amount == 1
       feedback.liked_by current_user
     else
       amount = feedback.upvotes.size
-      noun = noun.singularize if amount = 1
+      noun = noun.singularize if amount == 1
       feedback.disliked_by current_user
     end
     
