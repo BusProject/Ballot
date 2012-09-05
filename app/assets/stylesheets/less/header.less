@@ -11,19 +11,27 @@
 
 	.account {
 		float: left;
-		font-family: 'PT Sans',sans-serif;
-		color: @darkGreen;
-
-		height: 120px;
-		width: 200px;
-		margin-right: -160px; 
-		font-size: .8em;
+		font-family: 'Open Sans',sans-serif;
+		color: #3C3A3A;
+		width: 206px;
+		background: #C4C4C0;
+		border: 1px solid #727270;
+		margin: 0px 0 0px -111px;
+		height: auto;
+		padding:10px;
+		.border-box();
+		border-radius:2px;
+		font-weight:400;
+		font-size: .7em;
 		text-align: left;
 		a {
-			color: @darkGreen;
-			padding: 2px;
+			color: #3C3A3A;
 			text-align: left;
-			&:hover { color:#D37A3C; }
+			text-decoration:none;
+			&:hover { 
+				color:#D37A3C;
+				background-color:white; 
+			}
 		}
 		img {
 			width: 80px;
@@ -31,6 +39,8 @@
 			height: 80px;
 			border: 1px solid #556d1b;
 			margin-right: 10px;
+			border-radius:3px;
+			.drop-shadow();
 		}
 	}
 	
