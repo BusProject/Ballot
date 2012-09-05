@@ -63,8 +63,17 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 	}
 	
 	.category-heading {
-		h2, p { color: @orange; font-family: 'Rokkitt', serif; width: 80%; margin: 0 auto; }
-		p { color: @grey; font-size: 1em; font-weight: normal; }
+		h2 { 
+			color: @darkGrey; 
+			width: 100%; 
+			margin: 0 auto 10px; 
+			.inset-text();
+		}
+		
+		p { 
+			color: @darkGrey; 
+		}
+		
 		text-align: center;
 		border-bottom:4px double @lightGreen;
 		padding-bottom: 10px;
@@ -85,9 +94,9 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			color: #8eb636;
 		}
 		.find-ballot, .place-holder {
-			font-family:'Rokkitt', serif;
-			font-size:1.45em;
-			font-weight: bold;
+			font-family:'Open Sans', serif;
+			font-size:1.4em;
+			font-weight: 400;
 		}
 		.find-ballot {
 			&:focus { padding: 19px 10px 14px; }
@@ -116,19 +125,20 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 
 	#map {
 		.confirmation {
-			font-size: 30px;
-			color: @orange;
-			margin: 10px 0 4px;
+			.bigText();
+			.inset-text();
+			margin: 15px 0 10px;
 			z-index: 2;
 			position: relative;
 			a {
 				width: 54px;
 				text-decoration: none;
-				margin: 2px 0 0;
+				margin: 16px 0 0;
 				display: inline-block;
 				font-size: 20px;
 				padding: 8px 8px;
 				.greyButton();
+				.border-radius(0px);
 			}
 		}
 		img {
@@ -147,19 +157,22 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 		position: relative;
 		h1.title {
 			margin: 0 auto;
-			font-family: Rokkitt, serif;
 			padding: 10px;
 			text-align: center;
-			color: @darkGreen;
-			text-transform: uppercase;
-			width: 38%;
+			color: @darkGrey;
+			width: 40%;
 			overflow: hidden;
+			font-family:'Open Sans', sans-serif;
+			font-weight:600;
+			letter-spacing:2px;
+			font-size:26px;
+			.inset-text();
 		}
 		hr { 
 			color: @darkGrey;
 			height:1px;
-			.box-shadow(0, 2px,1px,@grey);
-			@width: 30%;
+			.box-shadow(0, 1px,1px,@grey);
+			@width: 20%;
 			padding: 0;
 			border: 0;
 			width: @width;
@@ -184,14 +197,14 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			font-family: Rokkitt, serif;
 			padding: 10px 20px;
 			height: 42px;
-			.greyButton();
+			.orangeButton();
 			position: relative;
 			font-size: 16px;
 			z-index: 2;
 		}
 
 		hr.button {
-			.three-horizontal-gradient(white,#666,white);
+			.three-horizontal-gradient(#f0f0ed,#666,#f0f0ed);
 			.box-shadow(0,0,0,transparent);
 			padding: 0;
 			height: 2px;
@@ -200,16 +213,22 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			margin: -30px 0 0;
 			position: relative;
 			z-index: 1;
-			&.lower { margin: 0 0 0; }
+			&.lower { 
+				margin: 0 auto; 
+				height:1px;
+				.three-horizontal-gradient(#E4E4E4,#666,#E4E4E4);
+				width:60%;			
+			}
 		}
 		
 		.body {
-			background: transparent image-url('ballot-bg.png') top left repeat;
-			margin-top: 10px;
+			background: #E4E4E4;
+			margin: 10px auto;
+			width:90%;
 			display: none;
 			.optionholder {
 				position: relative;
-				width: 680px;
+				width: 100%;
 				.option {
 					.border-box;
 					color: @darkGrey;
@@ -281,7 +300,6 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					width:350px;
 					height:115px;
 					-webkit-appearance:none;
-					font-family:'PT Sans', sans-serif;
 					color:#d77a3c;
 					font-size:16px;
 					vertical-align:top;
@@ -306,13 +324,11 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 				.clearfix();
 				display: block;
 				.buttons {
-					width: 350px;
 					margin: 0 auto;
 				}
 
 				h2, p {
 					text-align: left;
-					font-family: Rokkitt, serif;
 					text-transform: normal;
 				}
 				h2 { font-size: 1.6em; margin: 10px 0 4px; }
@@ -321,12 +337,17 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					text-align: center;
 					width: 400px;
 					margin: 20px auto;
-					font-family: 'LeagueGothicRegular', Tahoma, sans-serif;
+					font-family: 'Open Sans', sans-serif;
 					text-shadow: 0 2px 2px #fff;
 					&.yes { color: @green; }
 					&.no { color: @red; }
 				}
-				.head { display: block; margin: 20px auto 22px; .head-image(); }
+				.head { 
+					display: block; 
+					margin: 20px auto 22px; 
+					.border-radius();
+					.head-image(); 
+				}
 				.meme {
 					display: block;
 					font-size: 1.5em;
@@ -336,10 +357,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 				}
 				.next {
 					display: block;
-					.gradient(#454443,#3f3630);
-					border-color: #3f3630;
-					font-size: 1.3em;
-					&:hover { .gradient(#3f3630,#454443); }
+					.greyButton();
 					&.last-child { display: none; }
 				}
 				.controls { text-align: right; color: @grey; span.link { color: @darkGrey }  }
@@ -518,7 +536,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			.buttons { text-align: center }
 			.yourFeedback {
 				border-top: none !important;
-				h1, h3 { color: @green; }
+				h1, h3 { color: @darkGreen; }
 				.meme { display: none !important }
 			}
 		}

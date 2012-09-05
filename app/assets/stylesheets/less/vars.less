@@ -7,6 +7,7 @@
 
 @grey: #919191;
 @darkGrey: #5b5b5b;
+@darkerGrey: #3D3D3D;
 @red: #b13b38;
 @green: #8eb237;
 @bgGreen: #98B84A;
@@ -17,12 +18,13 @@
 	background-color: @green;
 	border:1px solid darken(@green, 10%);
 	color:#fff;
-	font-family:'Rokkitt', serif;
-	font-size:20px;
+	font-family:'Open Sans', sans-serif;
+	font-size:16px;
 	text-align:center;
 	text-decoration:none;
 	text-transform:uppercase;
 	cursor:pointer;
+	.border-radius();
 	text-shadow:0px 1px 1px darken(@green,10%);
 		&:hover {
 			.drop-shadow();
@@ -38,12 +40,13 @@
 	background-color: @grey;
 	border:1px solid darken(@grey, 10%);
 	color:#fff;
-	font-family:'Rokkitt', serif;
-	font-size:20px;
+	font-family:'Open Sans', sans-serif;
+	font-size:16px;
 	text-align:center;
 	text-decoration:none;
 	text-transform:uppercase;
 	cursor:pointer;
+	.border-radius();
 	text-shadow:0px 1px 1px darken(@grey,10%);
 		&:hover {
 			.drop-shadow();
@@ -65,12 +68,13 @@
 	background-color: @orange;
 	border:1px solid darken(@orange, 10%);
 	color:#fff;
-	font-family:'Rokkitt', serif;
-	font-size:20px;
+	font-family:'Open Sans', sans-serif;
+	font-size:16px;
 	text-align:center;
 	text-decoration:none;
 	text-transform:uppercase;
 	cursor:pointer;
+	.border-radius();
 	text-shadow:0px 1px 1px darken(@orange,10%);
 		&:hover {
 			.drop-shadow();
@@ -88,23 +92,6 @@
 		}
 }
 	
-/*.orangeButton() {
-	.gradient(#d2793b,#be5e29);
-	.drop-shadow();
-	cursor: pointer;
-	color: white;
-	border: 1px solid @darkOrange;
-	&:hover {
-		.gradient(#be5e29,#d2793b);
-	}
-	&:disabled {
-		.opacity(.5);
-		color: #d2793b;
-		cursor: default;
-		&:hover { .gradient(#d2793b,#be5e29); }
-	}
-} */
-
 .head-image(@width: 70px ) {
 	width: @width;
 	height: @width;
