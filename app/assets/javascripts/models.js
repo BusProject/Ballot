@@ -203,7 +203,7 @@ function Feedback(data) {
 
 		this.friend = ko.computed( function() { 
 			var friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : []
-			return friends.indexOf( this.user_fb ) !== -1
+			return friends.indexOf( this.fb ) !== -1
 		},data)
 		return this
 	}
