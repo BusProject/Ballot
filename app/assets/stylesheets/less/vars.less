@@ -25,6 +25,7 @@
 	text-transform:uppercase;
 	cursor:pointer;
 	.border-radius();
+	padding:10px;
 	text-shadow:0px 1px 1px darken(@green,10%);
 		&:hover {
 			.drop-shadow();
@@ -47,6 +48,7 @@
 	text-transform:uppercase;
 	cursor:pointer;
 	.border-radius();
+	padding:10px;
 	text-shadow:0px 1px 1px darken(@grey,10%);
 		&:hover {
 			.drop-shadow();
@@ -56,7 +58,6 @@
 			box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,.5);
 		}
 		&:disabled {
-			.gradient(#666,#4b4b4b);
 			.opacity(.5);
 			color: @grey;
 			cursor: default;
@@ -75,6 +76,7 @@
 	text-transform:uppercase;
 	cursor:pointer;
 	.border-radius();
+	padding:10px;
 	text-shadow:0px 1px 1px darken(@orange,10%);
 		&:hover {
 			.drop-shadow();
@@ -84,11 +86,8 @@
 			box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,.5);
 		}
 		&:disabled {
-			.gradient(#666,#4b4b4b);
-			.opacity(.5);
-			color: @grey;
+			.opacity(.3);
 			cursor: default;
-			&:hover { .gradient(#666,#4b4b4b); }
 		}
 }
 	
