@@ -8,7 +8,7 @@
 <div class="yourFeedback <%= user.nil?  ? 'no-user' : 'has_user' %>" data-bind="visible: <%= userObj %> != null, if: <%= userObj %> != null ">
 	<h1 class="<%= feedback.option.type unless feedback.nil? %>" data-bind="text: '&ldquo;'+<%= userObj %>.comment+'&rdquo;', visible: <%= userObj %>.comment.length > 0,addClass: <%= userObj %>.type" >
 		<%- unless feedback.nil? %>
-			<%- if feedback.comment.length > 0 %>
+			<%- if !feedback.comment.nil? && feedback.comment.length > 0 %>
 				<%= '"'+feedback.comment+'"'  %><br /><br/>
 			<% end -%>
 			<%= feedback.option.name+' on '+feedback.choice.contest %>
