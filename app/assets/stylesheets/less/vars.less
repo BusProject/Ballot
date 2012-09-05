@@ -20,6 +20,7 @@
 	text-align:center;
 	text-decoration:none;
 	text-transform:uppercase;
+	cursor:pointer;
 	text-shadow:0px 1px 1px darken(@green,10%);
 		&:hover {
 			.drop-shadow();
@@ -40,6 +41,7 @@
 	text-align:center;
 	text-decoration:none;
 	text-transform:uppercase;
+	cursor:pointer;
 	text-shadow:0px 1px 1px darken(@grey,10%);
 		&:hover {
 			.drop-shadow();
@@ -57,8 +59,34 @@
 		}
 }
 	
-	
 .orangeButton() {
+	background-color: @orange;
+	border:1px solid darken(@orange, 10%);
+	color:#fff;
+	font-family:'Rokkitt', serif;
+	font-size:20px;
+	text-align:center;
+	text-decoration:none;
+	text-transform:uppercase;
+	cursor:pointer;
+	text-shadow:0px 1px 1px darken(@orange,10%);
+		&:hover {
+			.drop-shadow();
+			text-decoration:none;
+		}
+		&:active {
+			box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,.5);
+		}
+		&:disabled {
+			.gradient(#666,#4b4b4b);
+			.opacity(.5);
+			color: @grey;
+			cursor: default;
+			&:hover { .gradient(#666,#4b4b4b); }
+		}
+}
+	
+/*.orangeButton() {
 	.gradient(#d2793b,#be5e29);
 	.drop-shadow();
 	cursor: pointer;
@@ -73,7 +101,7 @@
 		cursor: default;
 		&:hover { .gradient(#d2793b,#be5e29); }
 	}
-}
+} */
 
 .head-image(@width: 70px ) {
 	width: @width;
