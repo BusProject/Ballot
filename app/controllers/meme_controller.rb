@@ -90,7 +90,7 @@ class MemeController < ApplicationController
   def fb
     m = Meme.find(params[:id])
     
-    if m.fb.nil? && m.user != current_user
+    if m.fb.nil? || m.user == current_user
       go = m.fbMeme( current_user, params[:auth_token] )
     else
       permission = RestClient.get 'https://graph.facebook.com/'+m.fb+'?acess_token='+params[:auth_token] # Seeing if the user can see the photo
