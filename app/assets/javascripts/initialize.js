@@ -3,7 +3,7 @@ function initialize() {
 	var geocoder = new google.maps.Geocoder()
 
   // Try HTML5 geolocation
-  if(navigator.geolocation && yourLocation.state == 'front' ) {
+  if(navigator.geolocation && yourLocation.state == 'front' && inits.address.length < 1 ) {
 
     navigator.geolocation.getCurrentPosition(
 		function(position) {
@@ -24,7 +24,7 @@ function initialize() {
 		{maximumAge: 0, enableHighAccuracy: true }
 		);
 	} else {
-
+		yourLocation.address( inits.address )
 	}
 
 

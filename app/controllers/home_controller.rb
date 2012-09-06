@@ -12,6 +12,8 @@ class HomeController < ApplicationController
 
       render :template => 'home/splash.html.erb'
     else
+      params['q'] = params['q'] || params['address']
+      @config = { :address => params['q'].gsub('+',' ') }.to_json unless params['q'].nil?
       render :template => 'home/index.html.erb' 
     end
   end
