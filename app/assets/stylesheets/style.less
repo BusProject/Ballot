@@ -42,6 +42,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 	width: 720px;
 	margin: 20px auto;
 	.stars {
+		display:none;
 		h1, h2 { display: inline-block; font-size: 1.8em; }
 		h2 { font-size: 1.5em; }
 		float: right;
@@ -68,6 +69,8 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			width: 100%; 
 			margin: 0 auto 10px; 
 			.inset-text();
+			border-top:4px double @lightGreen;
+			padding-top:10px;
 		}
 		
 		p { 
@@ -83,7 +86,10 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 }
 
 #find-ballot { 
-	.stars { .move-stars(100px) }
+	.stars { 
+		display:none;
+		.move-stars(100px); 
+	}
 	h1.sectionheading { border-bottom:4px double @lightGreen; }
 	#enter-address {
 		.place-holder {
@@ -317,7 +323,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 				padding: 20px 0 10px;
 
 				.comment, .comment:focus {
-					width:375pxpx;
+					width:338px;
 					height:115px;
 					-webkit-appearance:none;
 					color:@green;
@@ -385,10 +391,10 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 
 				&.login {
 					border-bottom: none;
-					width: 620px;
+					width: 90%;
 					img {
 						width: 254px;
-						margin: 4px auto;
+						margin: 20px auto;
 						display: block;
 						&:hover { .opacity(.8) }
 					}
@@ -670,7 +676,10 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 }
 
 #more-coming {
-	.stars { .move-stars(100px) }
+	.stars { 
+		display:none;
+		.move-stars(100px) 
+	}
 	button { 
 		.orangeButton();
 		font-size: 16px;
