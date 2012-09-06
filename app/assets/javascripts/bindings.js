@@ -220,6 +220,19 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			$data.feedback.page( $data.feedback.page() +1 )
 	})
 })
+.on({
+	mouseover: function(e) {
+		var $doc = $(document), $this = $(this), alt = $this.attr('alt'), top = e.pageY-$doc.scrollTop()-26, left = e.pageX-$doc.scrollLeft()-alt.length*10/3.2
+		$this.before('<div class="nametip" style=" top:'+top+'px; left: '+left+'px;" >'+alt+'</div>')
+	},
+	mousemove: function(e) {
+		var $doc = $(document), $this = $(this), alt = $this.attr('alt'), top = e.pageY-$doc.scrollTop()-26, left = e.pageX-$doc.scrollLeft()-alt.length*10/3.2
+		$(this).prev('.nametip').css({left: left, top: top})
+	},
+	mouseout: function(e) {
+		$(this).prev('.nametip').remove()
+	}
+},'.face')
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
 		if( window.innerWidth < 1029 ) {

@@ -288,6 +288,25 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					}
 				}
 			}
+			.nametip {
+				position: fixed;
+				font-size: 10px;
+				color: white;
+				background: @grey;
+				padding: 4px 2px;
+				z-index: 100;
+				&::after {
+					content: ' ';
+					float: left;
+					margin: 14px -50% -14px 40%;
+					border-color: #919191 transparent transparent transparent;
+					border-width: 5px;
+					border-style: solid;
+					position: relative;
+					pointer-events: none;
+				}
+				pointer-events: none;
+			}
 			.yourFeedback {
 				width: 90%;
 				text-align: left;
