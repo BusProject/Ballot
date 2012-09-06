@@ -149,7 +149,7 @@ function Option(data,args) {
 			if( typeof you == 'undefined' ) return this.faces
 			else {
 				var faces = this.faces.slice(0,3)
-				faces.unshift( { image: current_user.image, url: current_user.profile })
+				faces.unshift( { image: current_user.image, url: current_user.profile, name: 'You' })
 				return faces
 			}
 		},this) 
