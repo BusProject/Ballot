@@ -27,18 +27,35 @@
 		ul {
 			list-style-type:none;
 		}
-
-			 a.small {
-				border: none;
-				font-size: 16px;
-				padding: 0;
-				line-height: 20px;
-				
-				&:hover {
+		
+		li {
+			a.main, a.small {
+				border-top:1px solid #bebebe;
+				border-bottom: 1px solid #8c8282;
+				text-align:center;
+				display:block;
+				text-decoration:none;
+				color:#3c3A3a;
+				padding:11px;
+				&:hover { .inner-shadow(); }
+			}
+		}
+		
+		&:last-child a { border-bottom: none; }
+		&:first-child a { border-top: none; }
+		div.container { padding: 12px; }
+		
+		a.small {
+			border:none;
+			font-size:16px;
+			padding:0;
+			line-height: 20px;
+			
+			&:hover {
 					box-shadow:none;
 					color:white;
-				}
 			}
+		}			
 			div.menu-inner { 
 				color: #303030;
 				background: #dadada; 
