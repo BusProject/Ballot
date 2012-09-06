@@ -29,7 +29,7 @@
 					<% if choice.new_record? || choice.commentable? || true %>
 						<div class="faces" data-bind="css: { lessHeads: $data.support() < 3 }">
 							<div class="minicounter" >
-								<div data-bind="html: $data.support()+' '+( $data.support() == 1 ? 'person' : 'people' )+' support '+( $data.support() == 1 ? 's' : '' )+'<br />'+$data.name"></div>
+								<div data-bind="html: $data.support()+' '+( $data.support() == 1 ? 'person' : 'people' )+' support'+( $data.support() == 1 ? 's ' : ' ' )+'<br />'+$data.name"></div>
 							</div>
 							<!-- ko foreach: $data.faces.show -->
 								<a target="_blank" data-bind="attr: {href: $data.url }">
