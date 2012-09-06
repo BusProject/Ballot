@@ -34,7 +34,7 @@
 						</div>
 						<!-- ko foreach: $data.faces.show -->
 							<a target="_blank" data-bind="attr: {href: $data.url }">
-								<img class="miniimage" data-bind="src: $data.image">
+								<img class="face miniimage" data-bind="src: $data.image, attr: { alt: $data.name }">
 							</a>
 						<!-- /ko -->
 					</div>
@@ -64,7 +64,7 @@
 
 					<div class="head" data-bind="addClass: $data.type ">
 						<a data-bind="attr: {href: $data.url }" >
-							<img data-bind="src: $data.image" >
+							<img class="face" data-bind="src: $data.image, attr: { alt: $data.name }" >
 						</a>
 					</div>
 
