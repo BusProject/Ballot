@@ -28,7 +28,7 @@ class Choice < ActiveRecord::Base
       
       option[:faces] = option.feedback.friends_faces( current_user )
       option[:faces] += option.feedback.other_faces( current_user ) if option[:faces].length < 4
-      option[:faces] = option[:faces].map{ |f| {:image => f.user.image, :url => f.user.profile } }.shuffle().slice(0,4)
+      option[:faces] = option[:faces].map{ |f| {:name => f.user.name, :image => f.user.image, :url => f.user.profile } }.shuffle().slice(0,4)
       
       option[:feedbacks] = option.all_feedback(current_user) || []
       
