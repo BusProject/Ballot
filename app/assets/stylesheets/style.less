@@ -252,6 +252,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							position: relative;
 							line-height: 16px;
 							overflow: visible;
+<<<<<<< HEAD
 							height: 35px;
 							font-size: 14px;
 							text-align: left;
@@ -263,20 +264,37 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 								content: '';
 								float: right;
 								margin: -2.45em -2.85em 0 0;
+=======
+							height: 36px;
+							text-align: left;
+							padding: 3px 4px;
+						  	margin: 4px 22px 10px 0;
+							width: 120px;
+						&::after {
+								content: '';
+								float: right;
+								margin: -34px -39px 0 0;
+>>>>>>> Tweaks compensating for some design changes by @noahmanger
 								width: 0;
 								height: 0;
 								border-width: 18px;
 								border-style: solid;
 						}
 						div {
-							width: 120px;
+							width: 114px;
 							overflow: hidden;
 							height: 31px;
 							position: relative;
+<<<<<<< HEAD
 							font-size:12px;
+=======
+							font-size: 11px; 
+							line-height: 13px;
+>>>>>>> Tweaks compensating for some design changes by @noahmanger
 						}
 					}
 	 				.faces {
+						a { position: relative; }
 						position: absolute;
 						img {
 							width: 28px;
@@ -359,8 +377,8 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					margin: 20px auto;
 					font-family: 'Open Sans', sans-serif;
 					text-shadow: 0 2px 2px #fff;
-					&.yes { color: @green; }
-					&.no { color: @red; }
+					&.yes { color: @green; font-size: 90%; }
+					&.no { color: @red; font-size: 90%; }
 				}
 				.head { 
 					display: block; 
@@ -381,7 +399,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					.greyButton();
 					&.last-child { display: none; }
 				}
-				.controls { text-align: right; color: @grey; span.link { color: @darkGrey }  }
+				.controls { text-align: right; color: @grey; span.link { color: @darkGrey }  font-size: 12px; }
 
 				&.login {
 					border-bottom: none;
@@ -421,7 +439,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							margin: 0 30px 50px 0;
 						}
 						.message { 
-							width: 480px;
+							width: 410px;
 							height: auto;
 							display: inline-block;
 							vertical-align: top;
@@ -432,12 +450,14 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							float: right;
 							text-align: right;
 							width: 300px;
-							font-size: 90%;
+							font-size: 12px;
 							margin-top: 10px;
 							color: @grey;
 							.ask { 
+								color: @grey;
 								padding-right: 4px; 
 								width: 212px;
+								font-size: 12px;
 								margin: 4px 0 0 88px;
 								text-align: center;
 							}
@@ -521,7 +541,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 						margin-top:18px !important;
 						&::after { border-color: transparent transparent transparent white; }
 					}
-					.faces { right: -10px; bottom: (@optionHeight - 20px)/4; width: 240px; height: 72px; }
+					.faces { right: -10px; bottom: (@optionHeight - 20px)/4; width: 230px; height: 72px; }
 					.faces.lessHeads { a img { margin-top: 26px !important; }}
 				}
 				&.chooseable {
