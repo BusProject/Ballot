@@ -14,16 +14,19 @@
 	content: 'Cmd+C to Copy';
 }*/
 input[type=text].link {
-	font-family: 'Rokkit', sans-serif;
-	font-size: 10px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
 	font-weight: normal;
-	color: #747474;
+	color: #5b5b5b;
 	border-bottom: 0;
+	background-color:#dadada;
 	border: none;
-	width: 168px;
+	width: 172px;
 	display: block;
 	margin: 0 auto;
 	padding: 2px 4px;
+	border-radius: 3px;
+	border:1px solid #5b5b5b;
 }
 
 #share-box {margin-top:10px;}
@@ -31,7 +34,7 @@ input[type=text].link {
 .icons {
 	width: 180px;
 	padding: 10px 0 0;
-	margin: 0 auto 10px;
+	margin: 0 auto 20px;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	display: block;
@@ -50,12 +53,34 @@ input[type=text].link {
 	width: 45px;
 	height: 26px;
 	float: left;
-	margin: 0;
+	margin: 0 0 20px 0;
 	padding: 0;
 }
+
 .icons a:hover div { background-color: rgba(0,0,0,.1); box-shadow: inset 0px 0px 2px #999 }
 
 .fbook div { background: transparent url(<%= asset_path 'fbook.png'%>) center no-repeat; }
+.twitter div { background: transparent url(<%= asset_path 'twitter.png'%>) center no-repeat; }
+.tumblr div { background: transparent url(<%= asset_path 'tumblr.png'%>) center no-repeat; }
+.googleplus div { background: transparent url(<%= asset_path 'googleplus.png'%>) center no-repeat; }
+
+.fbook {
+	background-color: #3c5d96;
+	border-radius:3px 0 0 3px;
+}
+
+.twitter {background-color: #45b9f1;}
+
+.tumblr {background-color: #3c5872;}
+
+.googleplus {
+	background-color: #b73425;
+	border-radius: 0px 3px 3px 0;
+}
+
+
+/*********
+
 .fbook  {
 	/* for W3C-compliant browsers */
 	background-image: linear-gradient(top, rgba(134,163,201,255) 0%, rgba(104,140,186,255) 7%, rgba(75,117,171,255) 51%);
@@ -68,7 +93,8 @@ input[type=text].link {
 	/* for IE */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#86a3c9', endColorstr='#688cba'endColorstr='#4b75ab');
 }
-.twitter div { background: transparent url(<%= asset_path 'twitter.png'%>) center no-repeat; }
+
+/*********
 .twitter {
 	/* for W3C-compliant browsers */
 	background-image: linear-gradient(top, rgba(157,208,238,255) 0%, rgba(132,192,229,255) 7%, rgba(107,177,220,255) 51%);
@@ -81,7 +107,8 @@ input[type=text].link {
 	/* for IE */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9dd0ee', endColorstr='#84c0e5'endColorstr='#6bb1dc');
 }
-.tumblr div { background: transparent url(<%= asset_path 'tumblr.png'%>) center no-repeat; }
+
+/**********
 .tumblr {
     /* for W3C-compliant browsers */
 	background-image: linear-gradient(top, rgba(121,144,158,255) 0%, rgba(89,117,134,255) 7%, rgba(58,90,111,255) 51%);
@@ -94,7 +121,8 @@ input[type=text].link {
 	/* for IE */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#79909e', endColorstr='#597586'endColorstr='#3a5a6f');
 }
-.googleplus div { background: transparent url(<%= asset_path 'googleplus.png'%>) center no-repeat; }
+
+/*************
 .googleplus {
 	/* for W3C-compliant browsers */
 	background-image: linear-gradient(top, rgba(218,74,56,255) 0%, rgba(192,57,41,255) 52%, rgba(166,40,27,255) 75%);
@@ -107,3 +135,4 @@ input[type=text].link {
 	/* for IE */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#da4a38', endColorstr='#c03929'endColorstr='#a6281b');
 }​
+

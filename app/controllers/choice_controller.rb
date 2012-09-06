@@ -40,7 +40,7 @@ class ChoiceController < ApplicationController
     @title = @choice.contest
     @partial = @choice.contest_type.downcase.index('ballot').nil? ? 'candidate' : 'measure'
     @type = @partial == 'candidate' ? 'Elected Office' : 'Ballot Measure'
-    @message = @type == 'measure' ? @choice.contest.description : 'An election for '+@choice.contest+' between '+@choice.options.map{|o| o.name+'('+o.party+')' }.join(', ')
+    @message = @partial == 'measure' ? @choice.description : 'An election for '+@choice.contest+' between '+@choice.options.map{|o| o.name+'('+o.party+')' }.join(', ')
 
     result = {:state => 'single', :choices => [ @choice ].each{ |c| c.prep current_user } }
 

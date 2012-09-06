@@ -34,9 +34,9 @@ class HomeController < ApplicationController
   def search
     prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'
     results = []
-    results += User.where( "deactivated = ? AND banned = ? AND (lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR id = ?)",false,false, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) ).map{ |user| {:label => user.name, :url => user.profile } }
-    results += Choice.where( "lower(contest) LIKE ?", prepped).map{ |choice| {:label => choice.contest+' ('+choice.geography+')', :url => choice.to_url } }
-    results += Option.where( 'lower(name) LIKE ?',prepped).map{ |option| { :label => option.name+' ('+option.choice.geography+')', :url => option.choice.to_url } }
+    results += User.where( "deactivated = ? AND banned = ? AND (lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR id = ?)",false,false, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) ).limit(20).map{ |user| {:label => user.name, :url => user.profile } }
+    results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => choice.to_url } }
+    results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => option.choice.to_url } }
 
     render :json => results
   end

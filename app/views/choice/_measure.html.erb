@@ -14,7 +14,7 @@
 
 	<div class="body">
 		<div class="full-text">
-			<a target="_blank" href="<%= choice.options.first.blurb_source %>" data-bind="visible: $data == $root.selected(), href: $data.options()[0].blurb_source" >Full Text</a>
+			<a target="_blank" href="<%= choice.options.first.blurb_source %>" data-bind="visible: $data == $root.selected(), href: $data.options()[0].blurb_source" >View full text</a>
 		</div>
 
 		<% n = 0 %>
@@ -34,7 +34,7 @@
 						</div>
 						<!-- ko foreach: $data.faces.show -->
 							<a target="_blank" data-bind="attr: {href: $data.url }">
-								<img class="miniimage" data-bind="src: $data.image">
+								<img class="face miniimage" data-bind="src: $data.image, attr: { alt: $data.name }">
 							</a>
 						<!-- /ko -->
 					</div>
@@ -64,7 +64,7 @@
 
 					<div class="head" data-bind="addClass: $data.type ">
 						<a data-bind="attr: {href: $data.url }" >
-							<img data-bind="src: $data.image" >
+							<img class="face" data-bind="src: $data.image, attr: { alt: $data.name }" >
 						</a>
 					</div>
 

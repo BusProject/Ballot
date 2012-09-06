@@ -1,26 +1,31 @@
 <!-- ko stopBinding: true -->
 	<div id="profile" data-bind="with: current_user " class="ballot-section">
+			<%- if current_user == @user %>
+			<div id="edit-profile">
+				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }">Edit Your Voter Guide </span></a> | 
+				<div style="display: none" class="editor" data-bind="visible: edit ">
+					<input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
+					<textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
+					<p><span class="link" data-bind="click: function() { save() } ">Save</span> | <span class="link" data-bind="click: function() { discard() }">Close</span></p>
+				</div>
+				<div class="status">
+					<p><strong><%= 'Your account has been deactivated - all of your comments and votes are hidden'  if current_user.deactivated? %></strong></p>
+					<p><strong><%= 'Your account has been banned - all of your comments and votes are hidden'  if current_user.banned? %></strong></p>
+					<a><%= link_to 'Reactivated it now', user_cancel_path  if current_user.deactivated? %></a>
+					<a><%= link_to 'Deactivate Your Account', user_cancel_path, :class =>'cancel'  if !current_user.deactivated? %></a>
+				</div>
+			</div>
+				
 		<div class="stars"><h2>&#9733;</h2><h1>&#9733;</h1></div>
 		<h1 class="sectionheading" data-bind="text: guide_name() != null && guide_name() != '' ? guide_name : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
 		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
 		<div class="category-heading">
 			<p class="description" data-bind=" text: description"><%= @user.description %></p>
 		</div>
+		
+	
+			
 
-		<%- if current_user == @user %>
-			<p data-bind="visible: !edit() "><span class="link" data-bind="click: function() {open() }">Edit Your Voter Guide</span></p>
-
-			<div style="display: none" class="editor" data-bind="visible: edit ">
-				<input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
-				<textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
-				<p><span class="link" data-bind="click: function() { save() } ">Save</span> | <span class="link" data-bind="click: function() { discard() }">Close</span></p>
-			</div>
-			<div class="status">
-				<p><strong><%= 'Your account has been deactivated - all of your comments and votes are hidden'  if current_user.deactivated? %></strong></p>
-				<p><strong><%= 'Your account has been banned - all of your comments and votes are hidden'  if current_user.banned? %></strong></p>
-				<p><%= link_to 'Reactivated it now', user_cancel_path  if current_user.deactivated? %></p>
-				<p><%= link_to 'Deactivate Your Account', user_cancel_path, :class =>'cancel'  if !current_user.deactivated? %></p>
-			</div>
 			<script type="text/javascript">
 				current_user.guide_name = ko.observable(current_user.guide_name )
 				current_user.description = ko.observable(current_user.description)
@@ -60,9 +65,12 @@
 			<% end -%>
 		<% end -%>
 	</div>
+
 <!-- /ko -->
 
 <% n = 0 %>
+
+<div id="personal-guide">
 <div id="read-ballot">
 	<% @choices.each do |choice| %>
 		<div data-bind="with: choices()[<%= n %>]" >
@@ -77,4 +85,5 @@
 		<p><em>Redirecting you to the home page in 2.012 seconds</em></p>
 		<script type="text/javascript"> ( function() { setTimeout( function() { document.location = '<%= root_path %>'; }, 2012);} )()</script>
 	<% end %>
+</div>
 </div>

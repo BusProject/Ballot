@@ -17,7 +17,7 @@
 	<div class="head" data-bind="addClass: <%= userObj %>.type, visible: <%= userObj %>.comment.length < 1 ">
 		<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
 	</div>
-	<h3 class="<%= feedback.option.type unless feedback.nil? %>" data-bind="text: '-'+<%= userObj %>.name+( <%= userObj %>.comment.length > 1 ? ' '+<%= userObj %>.time : '' ), addClass: <%= userObj %>.type">
+	<h3 class="comment-details <%= feedback.option.type unless feedback.nil? %>" data-bind="text: '-'+<%= userObj %>.name+( <%= userObj %>.comment.length > 1 ? ' '+<%= userObj %>.time : '' ), addClass: <%= userObj %>.type">
 		<%= '-'+user.first_name+' '+user.last_name unless user.nil? %>
 	</h3>
 	<%- if user == current_user %>
@@ -35,16 +35,16 @@
 <%- if !current_user.nil? && current_user == user %>
 	<div class="yourFeedback" data-bind="visible:  you() == null ">
 		<%= raw @how %>
+		<div class="toggle" data-bind="addClass: $data.you() != null && $data.you().type == 'no' ? 'right' : '' ">
+			<div class="inner">
+				<div class="yes">I'm Voting Yes</div>
+				<div class="no">I'm Voting No</div>
+			</div>
+			<div class="cover">|||</div>
+		</div>
 		<textarea type="text" class="comment" data-bind="elastic: true" placeholder='What do you think?' /></textarea>
 
 		<div class="buttons">
-			<div class="toggle" data-bind="addClass: $data.you() != null && $data.you().type == 'no' ? 'right' : '' ">
-				<div class="inner">
-					<div class="yes">I'm Voting Yes</div>
-					<div class="no">I'm Voting No</div>
-				</div>
-				<div class="cover">|||</div>
-			</div>
 			<button class="submit">Submit</button>
 		</div>
 	</div>

@@ -84,7 +84,7 @@ function Choice(data,args) {
 
 
 		this.feedback.realLength = ko.computed(function() {
-			return this.feedback().length - ( this.you() == null ? 0 : 1) - ( this.featured() == null ? 0 : 1)
+			return this.feedback().length - ( this.you() == null ? 0 : 1) - ( this.featured() == null || this.featured() ==  this.you() ? 0 : 1)
 		},this)
 		this.feedback.everyone = ko.computed(function() {
 			var mode = this.mode()
@@ -149,7 +149,7 @@ function Option(data,args) {
 			if( typeof you == 'undefined' ) return this.faces
 			else {
 				var faces = this.faces.slice(0,3)
-				faces.unshift( { image: current_user.image, url: current_user.profile })
+				faces.unshift( { image: current_user.image, url: current_user.profile, name: 'You' })
 				return faces
 			}
 		},this) 
@@ -204,7 +204,7 @@ function Feedback(data) {
 		this.friend = ko.computed( function() { 
 			var friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : []
 			return friends.indexOf( this.fb ) !== -1
-		},data)
+		},this)
 		return this
 	}
 }

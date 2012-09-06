@@ -7,6 +7,7 @@
 
 @grey: #919191;
 @darkGrey: #5b5b5b;
+@darkerGrey: #3D3D3D;
 @red: #b13b38;
 @green: #8eb237;
 @bgGreen: #98B84A;
@@ -17,12 +18,14 @@
 	background-color: @green;
 	border:1px solid darken(@green, 10%);
 	color:#fff;
-	font-family:'Rokkitt', serif;
-	font-size:20px;
+	font-family:'Open Sans', sans-serif;
+	font-size:16px;
 	text-align:center;
 	text-decoration:none;
 	text-transform:uppercase;
 	cursor:pointer;
+	.border-radius();
+	padding:10px;
 	text-shadow:0px 1px 1px darken(@green,10%);
 		&:hover {
 			.drop-shadow();
@@ -38,12 +41,14 @@
 	background-color: @grey;
 	border:1px solid darken(@grey, 10%);
 	color:#fff;
-	font-family:'Rokkitt', serif;
-	font-size:20px;
+	font-family:'Open Sans', sans-serif;
+	font-size:16px;
 	text-align:center;
 	text-decoration:none;
 	text-transform:uppercase;
 	cursor:pointer;
+	.border-radius();
+	padding:10px;
 	text-shadow:0px 1px 1px darken(@grey,10%);
 		&:hover {
 			.drop-shadow();
@@ -53,7 +58,6 @@
 			box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,.5);
 		}
 		&:disabled {
-			.gradient(#666,#4b4b4b);
 			.opacity(.5);
 			color: @grey;
 			cursor: default;
@@ -65,12 +69,14 @@
 	background-color: @orange;
 	border:1px solid darken(@orange, 10%);
 	color:#fff;
-	font-family:'Rokkitt', serif;
-	font-size:20px;
+	font-family:'Open Sans', sans-serif;
+	font-size:16px;
 	text-align:center;
 	text-decoration:none;
 	text-transform:uppercase;
 	cursor:pointer;
+	.border-radius();
+	padding:10px;
 	text-shadow:0px 1px 1px darken(@orange,10%);
 		&:hover {
 			.drop-shadow();
@@ -80,31 +86,11 @@
 			box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,.5);
 		}
 		&:disabled {
-			.gradient(#666,#4b4b4b);
-			.opacity(.5);
-			color: @grey;
+			.opacity(.3);
 			cursor: default;
-			&:hover { .gradient(#666,#4b4b4b); }
 		}
 }
 	
-/*.orangeButton() {
-	.gradient(#d2793b,#be5e29);
-	.drop-shadow();
-	cursor: pointer;
-	color: white;
-	border: 1px solid @darkOrange;
-	&:hover {
-		.gradient(#be5e29,#d2793b);
-	}
-	&:disabled {
-		.opacity(.5);
-		color: #d2793b;
-		cursor: default;
-		&:hover { .gradient(#d2793b,#be5e29); }
-	}
-} */
-
 .head-image(@width: 70px ) {
 	width: @width;
 	height: @width;

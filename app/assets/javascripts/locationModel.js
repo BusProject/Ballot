@@ -53,7 +53,7 @@ function locationModel(data) {
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
 		for( var i = 0; i < components.length; i ++ ) { 
-			if( components[i].types[0] == "administrative_area_level_1" ) return components[i].short_name
+			if( components[i].types[0] == "administrative_area_level_1" ) return components[i].short_name.toUpperCase()
 		} 
 	}, this)
 	this.address.county = ko.computed( function() { 
