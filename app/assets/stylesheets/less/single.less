@@ -1,17 +1,23 @@
 body.single, body.profile {
 	#read-ballot .row {
+		hr.button.lower { display:none; }
 		.explanation { margin-bottom: 42px; }
 		button.open { display: none }
 		.body { 
 			display: block;
+			padding:15px 15px 0px 15px;
+			width:100%;
 			button.next { display: none }
+			
+			.optionholder { margin-top:0; }
+			
+			.yourFeedback { width:100%; }
 		}
 	}
 }
 body.single {
 	&.not_logged_in .yourFeedback { border-bottom: none }
 }
-
 
 /*
 body.single .row, body.profile .row { border: 0 !important; background: none !important }
