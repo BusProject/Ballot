@@ -42,10 +42,16 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 .on('click touchend','#instructions ul li a:not(".small"), .fixed-link',function(e){
 	$this = $(this)
 	var href = $this.attr('href')
-	if( href[0] == '#' ) {
+	if( href[0] == '#' && href[1] == '!' ) {
+		var $href = $('a[name="'+href.split('!')[1]+'"]')
+		$href.next('.row').find('.open').click()
+		setTimeout( function() { $(document).scrollTop( $href.position().top ) },200)
+		e.preventDefault()
+	} else if( href[0] == '#' ) {
 		var top = $(href).position().top
 		e.preventDefault()
 		$(document).scrollTop( top ).trigger('scroll')
+		e.preventDefault()
 	}
 })
 .on('click touchend','.more',function(e){
@@ -323,6 +329,13 @@ ko.bindingHandlers.addClass = {
 ko.bindingHandlers.stopBinding = {
     init: function() {
         return { controlsDescendantBindings: true };
+    }
+};
+ko.bindingHandlers.bindDescendents = {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		var bindings =  allBindingsAccessor(),
+			bind = bindings['model']
+			ko.applyBindingsToDescendants(bind, element);
     }
 };
 

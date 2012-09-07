@@ -9,11 +9,41 @@ function locationModel(data) {
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ''
 	this.fetch = ko.observable(true)
+	// Style elements
+	this.top = ko.observable(0)
+	this.top.better = ko.computed( function() {
+		return this.top()-window.innerHeight
+	},this)
+	
+
 	var empty = ''
 
 	var choices = data.choices || []
 	this.choices = ko.observableArray( choices.map( function(el) { return Choice(el) } ) )
-	this.selected = ko.observable( this.choices()[0] )
+	this.sections = ko.observableArray([])
+	this.choices.ordered = ko.computed( function() { 
+		var sections = this.sections(), choices = []
+		for (var i=0; i < sections.length; i++) {
+			var contest = sections[i].contests()
+			for (var j=0; j < contest.length; j++) {
+				choices.push( contest[j] )
+			};
+		};
+		return choices
+	},this)
+
+	this.selected = ko.observable( null )
+	
+	this.nearby = ko.computed(function() {
+		var top = this.top(), choices = this.choices.ordered(), items = choices.map(function(el) { return el.contest })
+		if( items.length < 1 ) return ''
+		for (var i=0; i < items.length; i++) {
+			var elem = $( 'a[name="'+items[i]+'"]'), extra = this.selected() == choices[i] ? 500 : 0
+			if( elem.length > 0 && top < elem.position().top + extra ) return choices[i]
+		};
+		if( top < 10 ) return choices[0]
+		else return choices[ choices.length - 1]
+	},this)
 
 	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
 
@@ -162,6 +192,9 @@ function locationModel(data) {
 				callback()
 			})
 	}
+	
+	
+	
 
 	this.menuItems = []
 	var smalls = MenuItem(null,'Other Options',null,'<div class="container"><a href="https://theleague.turbovote.org/?r=ballot" target="_blank" class="small" >Register to Vote</a><a class="small" href="mailto:info@theballot.org">Contact Us</a><a class="small" href="/about">About the Ballot</a></div>');
@@ -170,16 +203,11 @@ function locationModel(data) {
 		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
 		this.candidates = Grouping(['Federal','State','County','Local','Other'],'Candidates','candidate',this,'Take a peak at the candidates that you’ll have the chance to vote on.')
 		
-		var layout = ko.computed( function() {
-			var candidates = this.candidates.contests(),
-				ballotMeasures = this.ballotMeasures.contests(),
-				inner = '<p>Get the lowdown on everything on your ballot for the upcoming election.</p><p data-bind="visible: false">Read what others have to say about ballot measures and share your own views.</p><ul>'
-				if( candidates.length > 0 ) inner += '<li>Candidates</li><li><ul>'+candidates.map( function(el) { return '<li><a href="#'+el.contest+'">'+el.contest+'</a></li>' }).join('')+'</ul></li>';
-				if( ballotMeasures.length > 0 ) inner += '<li>Ballot Measures</li><li><ul>'+ballotMeasures.map( function(el) { return '<li><a href="#'+el.contest+'">'+el.contest+'</a></li>' }).join('')+'</ul></li>';
-				inner += '</ul>'
-			return inner
-		},this)
-		
+		this.sections.push(this.candidates)
+		this.sections.push(this.ballotMeasures)
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest},text: $data.contest"></a>'
+		layout += '</li></ul></li><!-- /ko --></ul>'
 		
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
 			owner = current_user.id == 'unauthenticated' ? 'the' : 'Your',
@@ -189,7 +217,7 @@ function locationModel(data) {
 			
 		this.menuItems.push( 
 			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your on your ballot, see what other people are saying about them, and share your own opinion.</p>'),
-			MenuItem('#read-ballot','Read Your Ballot',layout ),
+			MenuItem('#read-ballot','Read Your Ballot',"<p>Get the lowdown on everything on your ballot for the upcoming election.</p><p>Read what others have to say about ballot measures and share your own views.</p>"+layout,null, this),
 			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra),
 			smalls
 		)
@@ -213,11 +241,6 @@ function locationModel(data) {
 			smalls
 		)
 	}
-
-
-	// Style elements
-	this.top = ko.observable(0)
-
 
 	this.active = ko.computed(function() {
 		var top = this.top()-window.innerHeight/6, items = this.menuItems.filter(function(el) { return el.id != null && el.id[0] == '#' })

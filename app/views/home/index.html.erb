@@ -30,8 +30,8 @@
 		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
 
 		<!-- ko foreach: [candidates,ballotMeasures] -->
-			<div data-bind="visible: $data.visible, attr: {'class' : $data.class }">
-				<div class="category-heading">
+			<div data-bind="visible: $data.visible, attr: {'class' : $data.class, 'id': $data.title }">
+				<div class="category-heading" >
 					<h2 data-bind="text: title"></h2>
 					<p data-bind="text: description"></p>
 				</div>

@@ -75,9 +75,7 @@
 					padding: 0;
 				}
 				ul {
-					overflow:scroll;
 					margin-top: 10px;
-					max-height:400px;
 					li {
 						font-weight: bold;
 						margin: 10px 10px 0;
@@ -90,6 +88,16 @@
 							font-size: 13px;
 							margin: 0 0 10px 10px;
 							a {
+								&.active { color: @orange; }
+								&.done { 
+									.opacity(.6);
+									&::before {
+										content: "\2713";
+										font-size: 8px;
+										float: left;
+										margin-left: -10px;
+									}
+								}
 								&:hover {  }
 							}
 						}

@@ -227,12 +227,15 @@ function Grouping(keys,title,template,locationModel,description) {
 	grouping.description = description
 	grouping.class = title != 'Ballot Measures' ? 'candidates' : 'ballot-measures'
 	grouping.class += ' ballot-category clearfix'
+	grouping.active = ko.computed(function() {
+		return this.contests().indexOf( locationModel.nearby() ) !== -1
+	},grouping)
 
 	return grouping
 }
 
-function MenuItem(id,name,description,html) {
-	var menuItem = { id: id, name: name, html: html, description: description }
+function MenuItem(id,name,description,html,model) {
+	var menuItem = { id: id, name: name, html: html, description: description, model: model }
 
 	return menuItem
 }
