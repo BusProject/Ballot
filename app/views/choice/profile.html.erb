@@ -15,14 +15,7 @@
 					<a><%= link_to 'Deactivate Your Account', user_cancel_path, :class =>'cancel'  if !current_user.deactivated? %></a>
 				</div>
 			</div>
-				
-		<div class="stars"><h2>&#9733;</h2><h1>&#9733;</h1></div>
-		<h1 class="sectionheading" data-bind="text: guide_name() != null && guide_name() != '' ? guide_name : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
-		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
-		<div class="category-heading">
-			<p class="description" data-bind=" text: description"><%= @user.description %></p>
-		</div>
-		
+
 	
 			
 
@@ -64,6 +57,12 @@
 				">Yes</span> </p>
 			<% end -%>
 		<% end -%>
+
+		<h1 class="sectionheading" data-bind="text: guide_name() != null && guide_name() != '' ? guide_name : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
+		<div class="category-heading">
+			<p class="description" data-bind=" text: description"><%= @user.description %></p>
+		</div>
+		
 	</div>
 
 <!-- /ko -->
@@ -73,7 +72,7 @@
 <div id="personal-guide">
 <div id="read-ballot">
 	<% @choices.each do |choice| %>
-		<div data-bind="with: choices()[<%= n %>]" >
+		<div data-bind="with: choices()[<%= n %>]" class="row">
 			<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidate' : 'measure' %>
 			<%=  render 'choice/'+type, :choice => choice, :user => @user %>
 		</div>

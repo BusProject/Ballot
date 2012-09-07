@@ -48,50 +48,54 @@
 			<%- if current_user != user || !current_user.nil? %>
 				<%= render 'choice/measureFeedback', :user => user, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
 			<%- end %>
-			<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
-				What Others Are Saying
-				<select data-bind="value: $data.mode">
-					<option value="normal">Sort By...</option>
-					<option value="best">Most Helpful</option>
-					<option value="friends">Your Friends</option>
-					<option value="yes" >In Support</option>
-					<option value="no" >In Opposition</option>
-				</select>
-				<div class="arrows">&#x25B2;<br />&#x25BC;</div>
-			</div>
+
+			<%- if user.nil? %>
+				<% # hiding all of this if a featured user is set - i.e. we're looking at a profile  %>
+				<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
+					What Others Are Saying
+					<select data-bind="value: $data.mode">
+						<option value="normal">Sort By...</option>
+						<option value="best">Most Helpful</option>
+						<option value="friends">Your Friends</option>
+						<option value="yes" >In Support</option>
+						<option value="no" >In Opposition</option>
+					</select>
+					<div class="arrows">&#x25B2;<br />&#x25BC;</div>
+				</div>
 			
+			
+				<ul data-bind="foreach: feedback.everyone" class="feedback">
+					<li data-bind="addClass: $data.type ">
 
-			<ul data-bind="foreach: feedback.everyone" class="feedback">
-				<li data-bind="addClass: $data.type ">
+						<div class="head" data-bind="addClass: $data.type ">
+							<a data-bind="attr: {href: $data.url }" >
+								<img class="face" data-bind="src: $data.image, attr: { alt: $data.name }" >
+							</a>
+						</div>
 
-					<div class="head" data-bind="addClass: $data.type ">
-						<a data-bind="attr: {href: $data.url }" >
-							<img class="face" data-bind="src: $data.image, attr: { alt: $data.name }" >
-						</a>
-					</div>
+						<strong data-bind="text: $data.option_name+' on '+$parent.contest+':'"></strong>
+						<div class="message" data-bind="text: $data.comment"></div>
 
-					<strong data-bind="text: $data.option_name+' on '+$parent.contest+':'"></strong>
-					<div class="message" data-bind="text: $data.comment"></div>
+						<div class="foot">
+								<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
+							<br />
+								<%- if !current_user.nil? %>
+									<div class="ask">
+										Was this helpful?
+										<span class="helpful link" >Yes</span>
+											&nbsp;|&nbsp;
+										<span class="not link">No</span>
+											&nbsp;|&nbsp;
+										<span class="flag link">Flag</span>
+									</div>
+								<% end -%>
+						</div>
 
-					<div class="foot">
-							<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
-						<br />
-							<%- if !current_user.nil? %>
-								<div class="ask">
-									Was this helpful?
-									<span class="helpful link" >Yes</span>
-										&nbsp;|&nbsp;
-									<span class="not link">No</span>
-										&nbsp;|&nbsp;
-									<span class="flag link">Flag</span>
-								</div>
-							<% end -%>
-					</div>
-
-				</li>
-			</ul>
-			<%- if current_user.nil? || (current_user != user && !user.nil? )%>
-				<%= render 'choice/measureFeedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+					</li>
+				</ul>
+				<%- if current_user.nil? %>
+					<%= render 'choice/measureFeedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+				<% end -%>
 			<% end -%>
 
 			<div class="footer" >
