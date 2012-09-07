@@ -2,6 +2,7 @@
 <% user = user || nil %>
 <% choice.options.new if choice.new_record?  %>
 
+<a data-bind="attr:{name:$data.contest}"></a>
 
 <div class="measure row <%= 'selected' unless choice.new_record? %> commentable" 
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you() }"
@@ -56,6 +57,7 @@
 					<option value="yes" >In Support</option>
 					<option value="no" >In Opposition</option>
 				</select>
+				<div class="arrows">&#x25B2;<br />&#x25BC;</div>
 			</div>
 			
 
