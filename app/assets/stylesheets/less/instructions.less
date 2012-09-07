@@ -23,23 +23,16 @@
 			margin: -64px 0 0.72em -1px;
 			display:none;
 		}
-
+		ul li:first-child a { border-top: none; }
+		ul li:last-child a { border-bottom: none; }
+		ul li a { 
+			border-top: 1px solid #bebebe;
+			border-bottom: 1px solid #8c8282;
+			text-align:center;
+			font-weight:600;
+		}
 		ul {
 			list-style-type:none;
-<<<<<<< HEAD
-			
-			li {
-				a.main, a.small {
-					border-top:1px solid #bebebe;
-					border-bottom: 1px solid #8c8282;
-					text-align:center;
-					display:block;
-					text-decoration:none;
-					color:#3c3A3a;
-					padding:11px;
-					&:hover { .inner-shadow(); }
-				}
-=======
 		}
 		a {
 			display:block;
@@ -47,8 +40,7 @@
 			color: @darkerGrey;
 			padding:11px;
 			&:hover {
-				.drop-shadow();
-				color:white;
+				.inner-shadow();
 			}
 		}
 		li {
@@ -56,31 +48,26 @@
 				padding: 12px;
 				color:@darkerGrey;
 				font-weight:600;
->>>>>>> Change shadows on instructions
 			}
-			&:last-child a { border-bottom: none; }
-			&:first-child a { border-top: none; }
-			div.container { padding: 12px; }
-
-			a.small {
-				border:none !important;
-				font-size:14px;
-				padding:0;
-				line-height: 16px;
+			 a.small {
+				border: none;
+				font-size: 16px;
+				padding: 0;
+				line-height: 20px;
 				
-				&:hover { box-shadow:none !important; color:white !important; }
+				&:hover {
+					box-shadow:none;
+					color:white;
+				}
 			}
-		
-
 			div.menu-inner { 
 				color: #303030;
 				background: #dadada; 
-				font-size:15px;
 				border-bottom:1px solid #8c8282;
-				.inner-shadow();
 				p:last-child, div:last-child { margin-bottom: 0;}
 				p {
 					padding: 10px;
+					margin-bottom: .6em;
 					font-size:13px;
 					line-height:18px;
 				}
@@ -94,35 +81,6 @@
 					border-width: 8px;
 					padding: 0;
 				}
-				ul {
-					margin-top: 10px;
-					li {
-						font-weight: bold;
-						margin: 10px 10px 0;
-						font-size: 18px;
-					}
-					ul {
-						margin-top: 10px;
-						li {
-							font-weight: normal;
-							font-size: 13px;
-							margin: 0 0 10px 10px;
-							a {
-								&.active { color: @orange; }
-								&.done { 
-									.opacity(.6);
-									&::before {
-										content: "\2713";
-										font-size: 8px;
-										float: left;
-										margin-left: -10px;
-									}
-								}
-								&:hover {  }
-							}
-						}
-					}
-				}
 				
 			}
 			&:hover {
@@ -133,7 +91,6 @@
 			.share-container {
 				border-bottom: 1px solid #706868;
 				text-align:center;
-				color: #3C3A3A;
 				
 			}
 		}
