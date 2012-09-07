@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
     :image, :location, :name, :url, :first_name, :last_name, :feedback, 
-    :admin, :authentication_token, :guide_name, :fb, :fb_friends, :description, :alerts
+    :admin, :authentication_token, :guide_name, :fb, :profile,
+    :fb_friends, :description, :alerts
 
   
   # attr_accessible :title, :body
@@ -18,12 +19,15 @@ class User < ActiveRecord::Base
   has_many :choices, :through => :options
   
   
-
+  after_initialize :profile
   
   def to_public
     return self.to_json( :except => [:banned, :deactivated, :admin ] ) 
   end
   
+  def profile
+    self[:profile] = '/'+self.to_url unless self.to_url.nil?
+  end
   
   def deactivate mode = false
     success = true
