@@ -117,7 +117,7 @@ function locationModel(data) {
 
 
 	this.locater = ko.computed( function() { // This is the function that's called when the location is reset
-		var address = this.address(),
+		var address = this.address() || '',
 			geocoder = this.geocoder(),
 			googleLocation = this.googleLocation,
 			latlng = this.latlng,
