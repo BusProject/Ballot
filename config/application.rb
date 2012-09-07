@@ -40,12 +40,14 @@ module Ballot
     config.filter_parameters += [:password]
     
     # Enable the asset pipeline
+    config.assets.paths << Rails.root.join("app", "assets", "flash")
     config.assets.enabled = true
     config.assets.precompile = ['application.js', 'application.css', 'all-ie.css']
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.app_generators.stylesheet_engine :less
+
 
     
   end
