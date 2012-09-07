@@ -16,8 +16,10 @@ function Choice(data,args) {
 		this.description = data.description
 		this.chosen = ko.observable( null )
 		this.geography = data.geography
+		this.nice_geography = data.nice_geography
 		this.commentable = true
 		this.comments = 0;
+		this.commentsPure = ko.observable(0);
 		this.sortOptions = [
 			{value: 'normal', label: 'Sort by...' },
 			{value: 'best', label: 'Most Helpful' },
@@ -26,15 +28,25 @@ function Choice(data,args) {
 		this.mode = ko.observable('normal')
 		this.all = ko.observable( inits.state == 'single' )
 
+
 		if( typeof data.options != 'undefined' ) {
 			var tmp = []
 			for (var i=0; i < data.options.length; i++) {
 				tmp.push( Option(data.options[i]) )
 				this.comments += data.options[i].comments
+				this.commentsPure( this.commentsPure() + data.options[i].comments )
 				this.sortOptions.push( {value: data.options[i].name, label: 'Supporting '+data.options[i].name } )
 			};
 			this.options(tmp)
 		}
+		this.voted = ko.computed(function() {
+			var sum=0, options = this.options()
+			for(var i =0; i < options.length; i++ ) { 
+				sum+= options[i].support()
+			}
+			return sum
+		},this)
+		
 
 		this.yes = ko.computed( function() { 
 			return this.options().filter( function(el) { return el.type == 'yes' })[0] || null  
@@ -77,10 +89,6 @@ function Choice(data,args) {
 
 			return ft
 		},this)
-
-		// this.selected.active = ko.computed( function() {
-		// 	if( this.featured() == null )
-		// },this)
 
 
 		this.feedback.realLength = ko.computed(function() {

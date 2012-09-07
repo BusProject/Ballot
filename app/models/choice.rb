@@ -6,19 +6,29 @@ class Choice < ActiveRecord::Base
   has_many :options, :dependent => :destroy
   accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbant'] == '0' && false  }
   
+  
   def to_url
     return self.geography+'/'+self.contest.gsub(' ','_') unless self.geography.nil? || self.contest.nil?
     return ''
   end
   
-  def geographyNice
+  def geographyNice( statOnly=true)
     @states = ["President","Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
     @stateAbvs = ["Prez","AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
     
     index = @stateAbvs.index(self.geography.slice(0,2))
     index = 0 if self.geography == 'Prez'
     return self.geography if index.nil?
-    return @states[index]
+    return @states[index] if statOnly || self.geography.length == 2
+    
+    geography = self.geography.slice(2,self.geography.length)
+    geography = 'State House District' if geography.slice(0,2) == 'HD'
+    geography = 'State Senate District' if geography.slice(0,2) == 'SD'
+    geography = 'Congressional District' if geography.slice(0,2) == 'CD'
+    
+    district = self.geography.slice(4,self.geography.length).to_i
+    return [@states[index]+"'s", district.ordinalize,geography].join(' ') if district != 0
+    return [@states[index],geography].join(' ')
   end
   
   def prep current_user
@@ -32,7 +42,9 @@ class Choice < ActiveRecord::Base
       
       option[:feedbacks] = option.all_feedback(current_user) || []
       
+      self[:nice_geography] = self.geographyNice(false)
       if self.contest_type.downcase.index('ballot').nil?
+        self[:description] = self.options.map{ |o| o.name }.join(' vs. ')
         if self.options.select{ |o| o.incumbant? }.length > 0
           option[:option_type] = option.incumbant? ? 'Incumbant' : 'Challenger'
         else
@@ -42,6 +54,7 @@ class Choice < ActiveRecord::Base
         option[:option_type] = option.type
       end
     end
+    
   end
   # method to add user feedback to profile - even if prepped missed them
   def addUserFeedback user  
