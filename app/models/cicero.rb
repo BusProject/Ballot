@@ -22,9 +22,14 @@ class Cicero
           Rails.cache.write('cicero',cicero,:expires_in => 24.hours)
         end
     
-        legislative = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/legislative_district?type=ALL_2010&lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json' )
-        leg_districts = legislative['response']['results']['districts']
-    
+        if addresses.index('MT').nil?
+          legislative = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/legislative_district?type=ALL_2010&lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json' )
+          leg_districts = legislative['response']['results']['districts']
+        else
+          legislative = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/legislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json' )
+          leg_districts = legislative['response']['results']['districts']
+        end
+        
         # school = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/nonlegislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json&type=SCHOOL' )
         # school_dist = school['response']['results']['districts']
         # Deactivate for now
@@ -58,6 +63,12 @@ class Cicero
       when 'STATE_UPPER_2010'
         name = 'SD'+district_number(district['district_id'])
       when 'NATIONAL_LOWER_2010'
+        name = district['district_id'] == state ? '' : 'CD'+district_number(district['district_id'])
+      when 'STATE_LOWER'
+        name = 'HD'+district_number(district['district_id'])
+      when 'STATE_UPPER'
+        name = 'SD'+district_number(district['district_id'])
+      when 'NATIONAL_LOWER'
         name = district['district_id'] == state ? '' : 'CD'+district_number(district['district_id'])
       when 'NATIONAL_EXEC'
         name = 'Prez'
