@@ -3,10 +3,11 @@
 <% choice.options.new if choice.new_record?  %>
 <% you = user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == user.id }.first %>
 
+<a data-bind="attr:{name:$data.contest}"></a>
+
 <div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }"
 	itemscope itemtype="http://data-vocabulary.org/Thing" >
-
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
 	<button class="open">Learn More and Comment</button>
@@ -52,7 +53,7 @@
 			<%- end %>
 
 			<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
-				What Others Are Saying
+				<h2>What Others Are Saying</h2>
 				<select data-bind="value: $data.mode, options: $data.sortOptions, optionsValue: 'value', optionsText: 'label'">
 					<option value="normal">Sort By...</option>
 					<option value="best">Most Helpful</option>
@@ -61,6 +62,7 @@
 						<option value="<%= option.name %>" >Supporting <%= option.name %></option>
 					<% end -%>
 				</select>
+				<div class="arrows">&#x25B2;<br />&#x25BC;</div>
 			</div>
 			
 
@@ -73,7 +75,7 @@
 						</a>
 					</div>
 
-					<strong data-bind="text: 'Supporting '+$data.option_name+':'"></strong>
+					<strong data-bind="text: +$data.name+ ' Supports '+$data.option_name+':'"></strong>
 					<div class="message" data-bind="text: $data.comment"></div>
 
 					<div class="foot">

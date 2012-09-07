@@ -23,13 +23,27 @@ class HomeController < ApplicationController
     @config = { :state => 'page' }.to_json
     @title = 'About'
     @content = "
-         <p>TheBallot.org is the 100% social voter guide brought to you by the League of Young Voters, New Era Colorado, Forward Montana, and the Bus Project.</p>
+         <h1>About TheBallot.org</h1>
+         <p>TheBallot.org is the 100% social voter guide brought to you by the <a href='http://www.theleague.com/splash'>League of Young Voters</a>, <a href='http://www.neweracolorado.org'>New Era Colorado</a>, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
          <p>Some cool stuff about TheBallot.org:</p>
          <ul>
           <li>This is a crowdsourced voter guide. The content and order in which it appears is determined by the wisdom of the masses, not by political powerbrokers.</li>
-          <li>This is open-source software. Our commitment to crowdsourcing doesn't stop with ballot measures. We've built this software open source so that others can modify and improve it. Want to check it out? <a href='http://github.com/busproject/ballot' target='_blank'>Here's our GitHub repo</a> - fork away! Want to help? Let us know. We're also utilizing and supporting the Voter Information Project so that other similar projects can piece together the relevant and accurate ballot information for free.</li>
-          <li><a href='/'>Get started using the Ballot now</a></li>
-         </ul>"
+          <li>This is open-source software. Our commitment to crowdsourcing doesn't stop with ballot measures. We've built this software open source so that others can modify and improve it. Want to check it out? <a href='http://github.com/busproject/ballot' target='_blank'>Here's our GitHub repo</a> - fork away! Want to help? Let us know.</li> 
+          <li>We're also utilizing and supporting the Voter Information Project so that other similar projects can piece together the relevant and accurate ballot information for free.</li>
+         </ul>
+         <a class='about-button' href='/'>Find Your Ballot</a>
+         <h1>Who We Are</h1>
+         <p><strong>Scott Duncombe, Developer</strong></p>
+         <p>Scott Duncombe is a native Oregonian, who grew up mostly in Corvallis before going to school at the University of Chicago, studying Chemistry and Political Science. He got involved with democracy and technology while working with the Student Government, eventually becoming the Student Body President. After Chicago, he organized for Obama for America before returning to Oregon, eventually joining the Bus Project to manage technology. The Federation stole him a year later. He also moonlights as a developer for candidates and others.</p>
+         <p><strong>Noah Manger, Designer</strong></p>
+         <p>Text about Noah</p>
+         <p><strong>Sarah Stern</strong></p>
+         <p>Sarah bio</p>
+         <p><strong>Sam Patton</strong></p>
+         <p><strong>Matt Singer</strong></p>
+         <p>Matt Bio</p>         
+         
+         "
     render 'home/show'
   end
   

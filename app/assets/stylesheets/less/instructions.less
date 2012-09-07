@@ -23,51 +23,44 @@
 			margin: -64px 0 0.72em -1px;
 			display:none;
 		}
-		ul li:first-child a { border-top: none; }
-		ul li:last-child a { border-bottom: none; }
-		ul li a { 
-			border-top: 1px solid #bebebe;
-			border-bottom: 1px solid #8c8282;
-			text-align:center;
-			font-weight:600;
-		}
+
 		ul {
 			list-style-type:none;
-		}
-		a {
-			display:block;
-			text-decoration: none;
-			color: @darkerGrey;
-			padding:11px;
-			&:hover {
-				.inner-shadow();
-			}
-		}
-		li {
-			div.container { 
-				padding: 12px;
-				color:@darkerGrey;
-				font-weight:600;
-			}
-			 a.small {
-				border: none;
-				font-size: 16px;
-				padding: 0;
-				line-height: 20px;
-				
-				&:hover {
-					box-shadow:none;
-					color:white;
+			
+			li {
+				a.main, a.small {
+					border-top:1px solid #bebebe;
+					border-bottom: 1px solid #8c8282;
+					text-align:center;
+					display:block;
+					text-decoration:none;
+					color:#3c3A3a;
+					padding:11px;
+					&:hover { .inner-shadow(); }
 				}
 			}
+			&:last-child a { border-bottom: none; }
+			&:first-child a { border-top: none; }
+			div.container { padding: 12px; }
+
+			a.small {
+				border:none !important;
+				font-size:14px;
+				padding:0;
+				line-height: 16px;
+				
+				&:hover { box-shadow:none !important; color:white !important; }
+			}
+		
+
 			div.menu-inner { 
 				color: #303030;
 				background: #dadada; 
+				font-size:15px;
 				border-bottom:1px solid #8c8282;
 				p:last-child, div:last-child { margin-bottom: 0;}
 				p {
 					padding: 10px;
-					margin-bottom: .6em;
 					font-size:13px;
 					line-height:18px;
 				}
@@ -81,6 +74,27 @@
 					border-width: 8px;
 					padding: 0;
 				}
+				ul {
+					overflow:scroll;
+					margin-top: 10px;
+					max-height:400px;
+					li {
+						font-weight: bold;
+						margin: 10px 10px 0;
+						font-size: 18px;
+					}
+					ul {
+						margin-top: 10px;
+						li {
+							font-weight: normal;
+							font-size: 13px;
+							margin: 0 0 10px 10px;
+							a {
+								&:hover {  }
+							}
+						}
+					}
+				}
 				
 			}
 			&:hover {
@@ -91,6 +105,7 @@
 			.share-container {
 				border-bottom: 1px solid #706868;
 				text-align:center;
+				color: #3C3A3A;
 				
 			}
 		}

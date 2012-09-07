@@ -169,7 +169,18 @@ function locationModel(data) {
 	if( this.state == 'front' ) {
 		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
 		this.candidates = Grouping(['Federal','State','County','Local','Other'],'Candidates','candidate',this,'Take a peak at the candidates that you’ll have the chance to vote on.')
-
+		
+		var layout = ko.computed( function() {
+			var candidates = this.candidates.contests(),
+				ballotMeasures = this.ballotMeasures.contests(),
+				inner = '<p>Get the lowdown on everything on your ballot for the upcoming election.</p><p data-bind="visible: false">Read what others have to say about ballot measures and share your own views.</p><ul>'
+				if( candidates.length > 0 ) inner += '<li>Candidates</li><li><ul>'+candidates.map( function(el) { return '<li><a href="#'+el.contest+'">'+el.contest+'</a></li>' }).join('')+'</ul></li>';
+				if( ballotMeasures.length > 0 ) inner += '<li>Ballot Measures</li><li><ul>'+ballotMeasures.map( function(el) { return '<li><a href="#'+el.contest+'">'+el.contest+'</a></li>' }).join('')+'</ul></li>';
+				inner += '</ul>'
+			return inner
+		},this)
+		
+		
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
 			owner = current_user.id == 'unauthenticated' ? 'the' : 'Your',
 			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || [current_user.first_name,current_user.last_name+'\'s','Voter Guide'].join(' '),
@@ -178,7 +189,7 @@ function locationModel(data) {
 			
 		this.menuItems.push( 
 			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your on your ballot, see what other people are saying about them, and share your own opinion.</p>'),
-			MenuItem('#read-ballot','Read Your Ballot','<p>Get the lowdown on everything on your ballot for the upcoming election.</p><p>Read what others have to say about ballot measures and share your own views.</p>'),
+			MenuItem('#read-ballot','Read Your Ballot',layout ),
 			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra),
 			smalls
 		)
