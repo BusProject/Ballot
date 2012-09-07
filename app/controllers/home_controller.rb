@@ -32,7 +32,7 @@ class HomeController < ApplicationController
           <li>We're also utilizing and supporting the Voter Information Project so that other similar projects can piece together the relevant and accurate ballot information for free.</li>
          </ul>
          <a class='about-button' href='/'>Find Your Ballot</a>
-         <h1>Who We Are</h1>
+         <!--<h1>Who We Are</h1>
          <p><strong>Scott Duncombe, Developer</strong></p>
          <p>Scott Duncombe is a native Oregonian, who grew up mostly in Corvallis before going to school at the University of Chicago, studying Chemistry and Political Science. He got involved with democracy and technology while working with the Student Government, eventually becoming the Student Body President. After Chicago, he organized for Obama for America before returning to Oregon, eventually joining the Bus Project to manage technology. The Federation stole him a year later. He also moonlights as a developer for candidates and others.</p>
          <p><strong>Noah Manger, Designer</strong></p>
@@ -41,7 +41,7 @@ class HomeController < ApplicationController
          <p>Sarah bio</p>
          <p><strong>Sam Patton</strong></p>
          <p><strong>Matt Singer</strong></p>
-         <p>Matt Bio</p>         
+         <p>Matt Bio</p>-->         
          
          "
     render 'home/show'
