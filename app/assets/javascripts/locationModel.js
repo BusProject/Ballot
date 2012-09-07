@@ -205,7 +205,7 @@ function locationModel(data) {
 		
 		this.sections.push(this.candidates)
 		this.sections.push(this.ballotMeasures)
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 		
