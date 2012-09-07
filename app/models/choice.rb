@@ -28,7 +28,7 @@ class Choice < ActiveRecord::Base
       
       option[:faces] = option.feedback.friends_faces( current_user )
       option[:faces] += option.feedback.other_faces( current_user ) if option[:faces].length < 4
-      option[:faces] = option[:faces].map{ |f| {:name => f.user.name, :image => f.user.image, :url => f.user.url } }.shuffle().slice(0,4)
+      option[:faces] = option[:faces].map{ |f| {:name => f.user.name, :image => f.user.image, :url => f.user.profile } }.shuffle().slice(0,4)
       
       option[:feedbacks] = option.all_feedback(current_user) || []
       
@@ -42,6 +42,12 @@ class Choice < ActiveRecord::Base
         option[:option_type] = option.type
       end
     end
+  end
+  # method to add user feedback to profile - even if prepped missed them
+  def addUserFeedback user  
+    feedback = user.feedback.select{ |f| f.choice == self }.first
+    option = self.options.select{|o| o.id == feedback.option_id }.first
+    option[:feedbacks].push( feedback ) if option[:feedbacks].select{ |f| f == feedback }.first.nil?
   end
 
   def more page, current_user=nil

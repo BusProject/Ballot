@@ -17,7 +17,7 @@ class ChoiceController < ApplicationController
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
 
-    @choices = @user.choices.each{ |c| c.prep current_user }
+    @choices = @user.choices.each{ |c| c.prep current_user; c.addUserFeedback @user }
     @classes = 'profile home'
     @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide'
     @type = 'Voter Guide'
