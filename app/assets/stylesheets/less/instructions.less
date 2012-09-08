@@ -30,18 +30,19 @@
 				a.main, a.small {
 					border-top:1px solid #bebebe;
 					border-bottom: 1px solid #8c8282;
-					text-align:center;
+					text-align:left;
 					display:block;
 					text-decoration:none;
 					color:#3c3A3a;
 					padding:11px;
-					&:hover { .inner-shadow(); .drop-shadow(); }
+					&:hover { .drop-shadow(); }
 				}
 			}
 		}
 		a {
 			text-decoration: none;
 			color: @darkerGrey;
+			font-weight:600;
 			&:hover {
 				color:white;
 			}
@@ -92,6 +93,10 @@
 						font-weight: bold;
 						margin: 10px 10px 0;
 						font-size: 18px;
+					a {
+						&:hover { box-shadow:none; }
+					}
+					
 					}
 					ul {
 						margin-top: 10px;
@@ -110,7 +115,7 @@
 										margin-left: -10px;
 									}
 								}
-								&:hover {  }
+								&:hover { box-shadow:none; }
 							}
 						}
 					}
@@ -124,7 +129,7 @@
 			}
 			.share-container {
 				border-bottom: 1px solid #706868;
-				text-align:center;
+				text-align:left;
 				color: #3C3A3A;
 				
 			}
