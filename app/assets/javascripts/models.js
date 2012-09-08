@@ -192,6 +192,7 @@ function Feedback(data) {
 			this.name =  data.user.name || '[deleted]'
 			
 		}
+		this.fb = ko.observable( this.fb) 
 		this.type = data.type
 		this.updated = data.updated_at != data.created_at
 		var useless = data.cached_votes_down || 0, useful = data.cached_votes_up || 0
@@ -211,7 +212,7 @@ function Feedback(data) {
 
 		this.friend = ko.computed( function() { 
 			var friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : []
-			return friends.indexOf( this.fb ) !== -1
+			return friends.indexOf( this.fb() ) !== -1
 		},this)
 		return this
 	}
