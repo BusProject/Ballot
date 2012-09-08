@@ -9,9 +9,9 @@
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }"
 	itemscope itemtype="http://data-vocabulary.org/Thing" >
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
-	<div itemprop="description" class="matchup" data-bind="text: $data.description "><%= choice.description %></div>
-	<div itemprop="address" class="geography" data-bind="text: $data.nice_geography "><%= choice[:nice_geography] %></div>
-	<div itemprop="" class="voted" data-bind="text: $data.voted()+' '+( $data.voted() == 1 ? 'person' : 'people' )+' have voted | '+$data.commentsPure()+' '+( $data.commentsPure() == 1 ? 'person' : 'people' )+' have commented' "></div>
+	<div itemprop="description" class="matchup" data-bind="html: '<i class=icon-user></i> ' +$data.description "><%= choice.description %></div>
+	<div itemprop="address" class="geography" data-bind="html: '<i class=icon-map-marker></i> ' +$data.nice_geography "><%= choice[:nice_geography] %></div>
+	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' +$data.voted()+' '+( $data.voted() == 1 ? 'person' : 'people' )+' have voted | ' +$data.commentsPure()+' '+( $data.commentsPure() == 1 ? 'person' : 'people' )+' have commented' "></div>
 	
 	<button class="open">Learn More and Comment</button>
 	<hr class="button">
