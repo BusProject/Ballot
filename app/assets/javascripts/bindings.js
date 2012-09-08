@@ -81,7 +81,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	}
 })
 .on('click touchend','.next',function(e) {
-	$(this).parents('.row').next('.row').find('button.open').click()
+	$(this).parents('.row').nextAll('.row:first').find('button.open').click()
 })
 .on('click ','button.submit',function(e){
 	e.preventDefault()
