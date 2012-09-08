@@ -4,6 +4,8 @@
 @import 'type/font-faces.less';
 @import 'less/layouts.less';
 @import 'less/global.less';
+@import 'type/font-awesome.less';
+@import 'type/font-awesome-ie7.less';
 
 /********* Structure *********/
 body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat fixed; -moz-background-size: cover; background-size: cover; }
@@ -169,9 +171,9 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			padding: 10px;
 			text-align: center;
 			color: @darkGrey;
-			width: 40%;
+			width: 50%;
 			overflow: hidden;
-			font-family:'Open Sans', sans-serif;
+			font-family:'Arvo', Georgia, serif;
 			font-weight:600;
 			letter-spacing:2px;
 			font-size:26px;
@@ -200,6 +202,20 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			width:80%;
 			margin:0 auto;
 			line-height:20px;
+		}	
+		.matchup {
+			font-weight:600;
+			margin-top:10px;
+		}
+		.geography {
+			font-weight:600;
+			margin:6px 0 6px 0;
+			text-transform:uppercase;
+			letter-spacing:2px;
+		}
+		.voted {
+			font-weight:300;
+			margin-bottom:20px;
 		}
 
 		&.selected button.open {
@@ -522,6 +538,8 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							text-decoration: none;
 							.greyButton();
 							margin-top: -15px;
+							position:absolute;
+							left:250px;
 						}
 
 					}
