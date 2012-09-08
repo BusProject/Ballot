@@ -211,9 +211,8 @@ function Feedback(data) {
 		this.time =  day+' '+time
 
 		this.friend = ko.computed( function() { 
-			var friends = typeof yourLocation != 'undefined' ? yourLocation.friends() : []
-			console.log( this.fb() )
-			console.log( friends )
+			var friends = typeof current_user != 'undefined' && current_user.fb_friends != null ?  current_user.fb_friends.split(',') : []
+			console.log( yourLocation )
 			return friends.indexOf( this.fb() ) !== -1
 		},this)
 		return this
