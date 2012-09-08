@@ -2,6 +2,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		e.preventDefault();
 		var $this = $(this),
 			location = yourLocation
+		if( $this.hasClass('find-ballot-submit') ) location.geocoded.address('')
 		location.latlng('38.7, -95.7')
 		location.geocoded(false)
 		location.choices([])

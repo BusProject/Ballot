@@ -13,7 +13,7 @@ function initialize() {
 				if (status == google.maps.GeocoderStatus.OK) {
 					yourLocation.geocoded( true )
 					yourLocation.googleLocation(results[0])
-					yourLocation.geocoded.address = results[0].formatted_address
+					yourLocation.geocoded.address(results[0].formatted_address)
 					yourLocation.address( results[0].formatted_address )
 				}
 			});

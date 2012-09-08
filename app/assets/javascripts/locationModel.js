@@ -7,7 +7,7 @@ function locationModel(data) {
 	this.address = ko.observable('')
 	this.geocoder = ko.observable('')
 	this.geocoded = ko.observable(false)
-	this.geocoded.address = ''
+	this.geocoded.address = ko.observable('')
 	this.fetch = ko.observable(true)
 	// Style elements
 	this.top = ko.observable(0)
@@ -122,13 +122,15 @@ function locationModel(data) {
 			googleLocation = this.googleLocation,
 			latlng = this.latlng,
 			choices = this.choices,
-			geocoded = this.geocoded()
+			geocoded = this.geocoded(),
+			geocoded_address = this.geocoded.address
 
-		if( address.length > 0 && !geocoded && address != this.geocoded.address ) { // If address is located and not previously geocoded
+		if( address.length > 0 && !geocoded && address != geocoded_address() ) { // If address is located and not previously geocoded
 			geocoder.geocode( {address: address}, function(results, status) { 
 				if (status == google.maps.GeocoderStatus.OK) {
 					var first = results[0].geometry.location
 					googleLocation(results[0])
+					geocoded_address(results[0].formatted_address)
 					latlng( first )
 					choices([])
 				}
