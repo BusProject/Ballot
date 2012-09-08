@@ -10,6 +10,7 @@
 
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' +$data.voted()+' '+( $data.voted() == 1 ? 'person' : 'people' )+' have voted | ' +$data.commentsPure()+' '+( $data.commentsPure() == 1 ? 'person' : 'people' )+' have commented' "></div>
 	<button class="open">Learn More and Comment</button>
 	<hr class="button">
 
