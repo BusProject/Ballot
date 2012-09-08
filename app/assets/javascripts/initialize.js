@@ -40,7 +40,6 @@ function initialize() {
 				  	function(response) { 
 						var friends = response.map( function(el) { return el.uid } )
 						if( yourLocation.friends().join('') != friends.join('') ) {
-							yourLocation.friends( friends )
 							$.post( inits.root+'users/update', { fb_friends:  friends.join(',') } )
 						}
 					}
