@@ -3,7 +3,7 @@ class Choice < ActiveRecord::Base
   validates_presence_of :contest, :geography
   validates_uniqueness_of :contest, :scope => :geography
   
-  has_many :options, :dependent => :destroy
+  has_many :options, :dependent => :destroy, :order => 'position DESC'
   accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbant'] == '0' && false  }
   
   
