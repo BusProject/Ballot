@@ -13,26 +13,29 @@
 	itemscope itemtype="http://data-vocabulary.org/Thing" >
 
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
-	<h2>What It Does</h2>
+
+	<div class="profile-explanation">
+	<h2 class="profile-text">What It Does</h2>
 	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	</div>
 
-	
-	<h2>What I Say</h2>
+	<div class="profile-comment">
+	<h2 class="profile-text">What I Say</h2>
 
-	<h1 data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
+	<p data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
 		<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
 			<%= '"'+feedback.comment+'"' %>
 		<% end -%>
-	</h1>
+	</p>
 	<div class="head" data-bind="addClass: $data.<%= userObj %>.type, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 1 ">
 		<img data-bind="src: $data.<%= userObj %>.image" src="<%= user.image unless user.nil? %>">
+	</div>
 	</div>
 
 	<!-- These should work... might need to be massaged a bit. Hopefully they both could work asynchronously -->
 	<%- if user == current_user %>
 		<div class="controls">
-			<button class="meme">Share Your Comment</button>
-			<span class="remove link" >Remove</span>
+			<span class="link">Share Your Comment</span> | <span class="remove link" >Remove</span> | 
 			<!-- Here's a link to the single page - just move this around -->
 			<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Edit</a>
 		</div>
