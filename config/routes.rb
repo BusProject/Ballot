@@ -39,7 +39,7 @@ Ballot::Application.routes.draw do
   match '/m/:id' => 'meme#destroy', :via => :post, :as => 'meme_show_image'
 
 
-  match '/:geography/:contest' => 'choice#show', :as => 'contest'
+  match '/:geography/:contest' => 'choice#show', :contest =>/[^\/]+/ , :as => 'contest'
   
   match '/:id' => 'choice#profile', :as => 'profile'
 
