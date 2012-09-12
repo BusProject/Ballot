@@ -48,7 +48,7 @@ class AdminController < ApplicationController
         render :json => { :success => true, :message => user.name+' is now an admin', :user => user }
       else
         render :json => { :success => false, :message => user.name+' could not be made an admin' }
-      end
+      end 
     end
   end
 
@@ -77,6 +77,6 @@ class AdminController < ApplicationController
   
   protected
     def check_admin
-      redirect_to root_path unless current_user.admin?
+      redirect_to root_path unless !current_user.nil? && current_user.admin?
     end
 end

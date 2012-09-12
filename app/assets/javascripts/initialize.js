@@ -39,8 +39,9 @@ function initialize() {
 					},
 				  	function(response) { 
 						var friends = response.map( function(el) { return el.uid } )
-						if( yourLocation.friends().join('') != friends.join('') ) {
+						if( current_user.fb_friends != friends.join(',') ) {
 							$.post( inits.root+'users/update', { fb_friends:  friends.join(',') } )
+							current_user.fb_friends = friends.join(',')
 						}
 					}
 				)
