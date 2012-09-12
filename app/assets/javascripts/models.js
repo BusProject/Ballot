@@ -133,6 +133,18 @@ function Option(data,args) {
 		this.choice_id = data.choice_id
 		this.photo = data.photo
 		this.party = data.party
+		var party = this.party
+		this.partySmall = function() {
+			if( party.search('Democrat') !== -1 ) return '(D)';
+			if( party.search('Republican') !== -1 ) return '(R)';
+			if( party.search('Green') !== -1 ) return '(G)';
+			if( party.search('Libertarian') !== -1 ) return '(L)';
+			if( party.search('Constitution') !== -1 ) return '(C)';
+			if( party.search('Independent') !== -1 ) return '(I)';
+			return ''
+		}
+		
+		
 		this.incumbant = data.incumbant
 		this.twitter = data.twitter
 		this.facebook = data.facebook

@@ -49,6 +49,14 @@ class Option < ActiveRecord::Base
     return feedback.uniq
   end
   
+  def partySmall
+    return '(D)' unless self.party.index('Democratic').nil?
+    return '(R)' unless self.party.index('Republican').nil?
+    return '(I)' unless self.party.index('Independent').nil?
+    return '(L)' unless self.party.index('Libertarian').nil?
+    return '(G)' unless self.party.index('Green').nil?
+    return ''
+  end
 
 
   
