@@ -15,21 +15,23 @@
 	<hr><a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1></a><hr>
 	<div class="profile-explanation">
 	<h2 class="profile-text">The Candidates</h2>
+	<div class="optionholder your-option" >
+		<!-- ko foreach: $data.options -->
+			<span class="option" data-bind="html: $data.name+' '+$data.partySmall()+'<br />'"><%=  feedback.option.name %> <%=  feedback.option.partySmall %></span>
+		<!-- /ko -->
+	</div>
 	<% n = 0 %>
-	<% choice.options.each do |option| %>
-		<div class="optionholder <%= 'clean-no-script' if n != 0 %>" >
-			<!-- ko foreach: $data.options -->
+	<% choice.options.reject{|o| o == feedback.option }.each do |option| %>
+		<div class="optionholder clean-no-script" >
 				<span class="option" data-bind="html: $data.name+' '+$data.partySmall()+'<br />'"><%= option.name %> <%= option.partySmall %></span>
-			<!-- /ko -->
 		</div>
-	<% n+=1 %>
 	<% end %>
 	</div>
 
 	<div class="profile-comment">
 		<h2 class="profile-text" style="<%= 'display:none;' unless !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind=" visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0">What I Say</h2>
 
-		<p data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
+		<p style="<%= 'display: none' unless !feedback.nil? & !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
 			<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
 				<%= '"'+feedback.comment+'"' %>
 			<% end -%>
