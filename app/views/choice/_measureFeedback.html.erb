@@ -6,14 +6,14 @@
 
 
 <div class="yourFeedback <%= user.nil?  ? 'no-user' : 'has_user' %>" data-bind="visible: <%= userObj %> != null, if: <%= userObj %> != null ">
-	<h1 class="<%= feedback.option.type unless feedback.nil? %>" data-bind="text: '&ldquo;'+<%= userObj %>.comment+'&rdquo;', visible: <%= userObj %>.comment.length > 0,addClass: <%= userObj %>.type" >
+	<span class="<%= feedback.option.type unless feedback.nil? %>" data-bind="text: '&ldquo;'+<%= userObj %>.comment+'&rdquo;', visible: <%= userObj %>.comment.length > 0,addClass: <%= userObj %>.type" >
 		<%- unless feedback.nil? %>
 			<%- if !feedback.comment.nil? && feedback.comment.length > 0 %>
 				<%= '"'+feedback.comment+'"'  %><br /><br/>
 			<% end -%>
 			<%= feedback.option.name+' on '+feedback.choice.contest %>
 		<% end -%>
-	</h1>
+	</span>
 	<div class="head" data-bind="addClass: <%= userObj %>.type, visible: <%= userObj %>.comment.length < 1 ">
 		<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
 	</div>
@@ -22,7 +22,7 @@
 	</h3>
 	<%- if user == current_user %>
 		<div class="controls">
-			<button class="meme">Share Your Comment</button>
+			<button class="meme">Create Badge</button>
 			<button class="next" >Next Measure</button>
 			<span class="remove edit link"  >Edit</span>
 				<span >&nbsp;|&nbsp;</span>
