@@ -78,10 +78,10 @@
 								<img class="face" data-bind="src: $data.image, attr: { alt: $data.name }" >
 							</a>
 						</div>
-
-						<strong data-bind="text: $data.name+ ' Supports '+$data.option_name+':'"></strong>
-						<div class="message" data-bind="text: $data.comment"></div>
-
+						<div class="comment-bubble">
+							<strong data-bind="text: $data.name+ ' Supports '+$data.option_name+':'"></strong>
+							<div class="message" data-bind="text: $data.comment"></div>
+						</div>
 						<div class="foot">
 								<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
 							<br />

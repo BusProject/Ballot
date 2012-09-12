@@ -53,7 +53,7 @@
 			<%- if user.nil? %>
 				<% # hiding all of this if a featured user is set - i.e. we're looking at a profile  %>
 				<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
-					What Others Are Saying
+					<h2>What Others Are Saying</h2>
 					<select data-bind="value: $data.mode">
 						<option value="normal">Sort By...</option>
 						<option value="best">Most Helpful</option>
@@ -68,15 +68,17 @@
 				<ul data-bind="foreach: feedback.everyone" class="feedback">
 					<li data-bind="addClass: $data.type ">
 
-						<div class="head" data-bind="addClass: $data.type ">
+						<div class="head" data-bind="addClass: $data.type">
 							<a data-bind="attr: {href: $data.url }" >
 								<img class="face" data-bind="src: $data.image, attr: { alt: $data.name }" >
 							</a>
 						</div>
 
-						<strong data-bind="text: $data.option_name+' on '+$parent.contest+':'"></strong>
+						<div class="comment-bubble" data-bind="addClass: $data.type">
+						<strong data-bind="text: $data.name+ ' says '+$data.option_name+' on '+$parent.contest"></strong>
 						<div class="message" data-bind="text: $data.comment"></div>
-
+						</div>
+						
 						<div class="foot">
 								<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
 							<br />
