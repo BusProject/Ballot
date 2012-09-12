@@ -63,7 +63,8 @@
 	#read-ballot {
 			
 		.row {
-			margin: 30px auto;
+			margin: 10px auto;
+			.clearfix();
 			&:first-child { margin-top:-75px; }
 			hr.button{ display:none !important;	}
 			
@@ -74,60 +75,89 @@
 			.voted {
 				margin-bottom:20px;
 			}
-	
-		&.candidate {
-			.matchup, .voted { display: none }
-			.body {
-				margin-top:-25px;
-				background-color:transparent;
+			
+		
 				
-				.optionholder { 
+				.matchup, .voted { display: none }
+				
+				.profile-text {
+					float:left;
+					font-size:18px;
+					margin-top:10px;
+					letter-spacing:0;
+				}
+			
+				.profile-explanation {
+					.clearfix();
+					display:block;
 					margin-bottom:20px;
 					
-					.option {
-						.opacity(.2);
-						margin-bottom:0;
-						padding-bottom:0px;
+					.optionholder { 
+						float:right;
+						width:66%;
+						margin-top:10px;
+						font-size:18px;
+						padding:0 10px 10px 10px;
+						text-align:left;
+						font-weight:400px;
+
+					}
+					
+					.explanation {
+						width:66%;
+						text-align:left;
+						padding:10px 10px 10px 10px;
+						float:right;
+					}
+				
+				}
+			
+				.profile-comment {
+					.clearfix();
+					display:block;
+					
+					p {
+						width:66%;
+						float:right;
+						background-color:white;
+						padding:10px;
+						text-align:left;
+						.border-box();
+						.border-radius();
+						.drop-shadow();
 						
-						&.confirmed {
-							.opacity(1) !important;
-							.border-radius();
-							margin-top:20px;
+						&::before {
+							content: '';
+							float: left;
+							margin: 0px 0px 0 -50px;
+							width: 0;
+							height: 0;
+							border-width: 20px;
+							border-style: solid;
+							border-color:white;
+							border-top:20px solid transparent;
+							border-bottom:20px solid transparent;
+							border-left:20px solid transparent;
 						}
 					}
 					
+					.head {
+						float:left;
+						clear:left;
+						margin:10px 0;
+						.border-radius();
+					}
+					
+					.yourFeedback {
+						margin:-35px auto 0px 0px;
+					}
 				}
-				
-				.yourFeedback {
-					margin:-35px auto 0px 0px;
-				}
-				
-				.footer {
-					margin:0 auto;
-					background-image:none;
-					border-bottom:1px solid @grey;
-				}
-				
-			}
-		}
 			
-		&.measure {
-			.voted { display: none; }
-			.body {
-				background-color:transparent;
-				
-				.optionholder {
-					position:relative;
-					top:-50px;
-					.option { .opacity(1) !important; 
-					display:none;
-				}
-				}
-				
-				.yourFeedback {
-					margin:-35px auto 0px 0px;
-				}
-				
+				.controls {
+					margin:10px;
+					font-size:10px;
+					text-align:right;
+					
 				}
 				
 				.footer {
@@ -135,7 +165,8 @@
 					background-image:none;
 					border-bottom:1px solid @grey;
 				}
-			}
+			
+		
 		}
 		
 		}
