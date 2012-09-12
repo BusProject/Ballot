@@ -20,7 +20,8 @@
 	</div>
 
 	<div class="profile-comment">
-	<h2 class="profile-text">What I Say</h2>
+	<h2 style="<%= 'display:none;' unless !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind=" visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0" class="profile-text">What I Say</h2>
+
 
 	<p data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
 		<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>

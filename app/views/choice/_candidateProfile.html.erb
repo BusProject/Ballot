@@ -27,16 +27,16 @@
 	</div>
 
 	<div class="profile-comment">
-	<h2 class="profile-text">What I Say</h2>
+		<h2 class="profile-text" style="<%= 'display:none;' unless !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind=" visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0">What I Say</h2>
 
-	<p data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
-		<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
-			<%= '"'+feedback.comment+'"' %>
-		<% end -%>
-	</p>
-	<div class="head" data-bind="addClass: $data.<%= userObj %>.type, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 1 ">
-		<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
-	</div>
+		<p data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
+			<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
+				<%= '"'+feedback.comment+'"' %>
+			<% end -%>
+		</p>
+		<div class="head" data-bind="addClass: $data.<%= userObj %>.type, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 1 ">
+			<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
+		</div>
 	</div>
 
 	<!-- These should work... might need to be massaged a bit. Hopefully they both could work asynchronously -->
