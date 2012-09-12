@@ -8,14 +8,42 @@
 @import 'type/font-awesome-ie7.less';
 
 /********* Structure *********/
-body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat fixed; -moz-background-size: cover; background-size: cover; }
+body.home { 
+	background: #b2bfc8 image-url('capitol.jpg') no-repeat fixed; 
+	-moz-background-size: cover; 
+	background-size: cover; 
+	background-position: 0 0;
+}
 
 
 #page { 
-	background-color:#f0f0ed;
+	background-color:@bgGrey;
 	/*background: transparent image-url('pageBG.png') top left repeat;*/
-	border: 1px solid #979797;
+	border-right: 3px solid @green;
+	border-left:3px solid @green;
+	border-bottom:none;
 	.border-box();
+	margin:-2px 0 0 0;
+}
+
+#footer {
+	background-color:@bgGrey;
+	color:white;
+	
+	hr {
+		width: 70%;
+		border: 1px dashed @green;
+		margin-bottom: 20px;
+	}
+	p {
+		font-size:11px;
+		text-align:center;
+		width:50%;
+		margin:0 auto 10px;
+		line-height:13px;
+		color:@green;
+	}
+	
 }
 
 .clearfix:after {
@@ -217,9 +245,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 		.geography {
 			font-weight:600;
 			margin:6px 0 6px 0;
-			text-transform:uppercase;
-			letter-spacing:2px;
-		
+					
 			i { 
 				display:inline-block; 
 				margin:0 10px 0 0;
@@ -230,6 +256,8 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 		.voted {
 			font-weight:300;
 			margin-bottom:20px;
+			font-size:12px;
+			margin:20px 0 10px 0;
 			
 			i { 
 				display:inline-block; 
@@ -420,6 +448,13 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					margin: 20px auto 22px; 
 					.border-radius();
 					.head-image(); 
+					height:90px;
+					
+					&::after {
+						padding:10px 0;
+					}
+					
+						
 				}
 				.meme {
 					display:block;
