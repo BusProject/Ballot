@@ -130,7 +130,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		)
 	}
 })
-.on('click touchend','.yourFeedback .meme',function(e) {
+.on('click touchend','.controls .meme',function(e) {
 	var $data = ko.dataFor(this), memetainer = $('#meme-tainer')
 	if( window.innerHeight < 750 ) memetainer.css('top', ((window.innerHeight < 642 ? 642 : window.innerHeight)-632)+'px')
 	if( window.innerWidth < 1100 ) memetainer.css('marginLeft', (( window.innerWidth < 890 ? 780 : window.innerWidth ) -766-162 ) / 2+'px')
