@@ -42,7 +42,7 @@
 	<!-- These should work... might need to be massaged a bit. Hopefully they both could work asynchronously -->
 	<%- if user == current_user %>
 		<div class="controls">
-			<span class="link">Share Your Comment</span> | <span class="remove link" >Remove</span> | 
+			<span class="link">Create Badge</span> | <span class="remove link" >Remove</span> | 
 			<!-- Here's a link to the single page - just move this around -->
 			<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Edit</a>
 		</div>
