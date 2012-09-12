@@ -20,7 +20,7 @@ Here's how you get this baby started on your machine:
 
 *RMagick will need to have ImageMagick installed - do this with Homebrew `brew install imagemagick` from a mac with homebrew - other [machines here](http://www.imagemagick.org/script/binary-releases.php)*
 
-4. I've created a single command that will: Create your database schema via `rake db:migrate`, load data from `lib/candidates.csv` and `lib/meaasures.csv` into the database, create a .env file for [Foreman](https://github.com/ddollar/foreman) that's used to start Rails
+4. I've created a single command, `bundle exec rake seed` that will: Create your database schema via `rake db:migrate`, load data from `lib/candidates.csv` and `lib/meaasures.csv` into the database, create a .env file for [Foreman](https://github.com/ddollar/foreman) that's used to start Rails
 
 5. Start the rails server with `foreman start` at [http://localhost:3000](http://localhost:3000)
 
