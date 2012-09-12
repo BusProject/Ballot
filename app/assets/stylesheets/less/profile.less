@@ -122,10 +122,11 @@
 						
 						&:first-child {
 							color:@green !important;
-							margin-left:-14px;
+							margin-left:-20px;
 							
 							&::before {
-								content: "\2713";
+								content: '\f087   ';
+								font-family:'FontAwesome';
 								position:relative;
 								left:-4px;
 																							
@@ -176,8 +177,12 @@
 				.head {
 					float:left;
 					clear:left;
-					margin:10px 0;
-					.border-radius();
+					margin:10px 0 0 50px;
+					
+					img {
+						.border-radius(5px);
+						.drop-shadow();
+					}
 				}
 			
 				.yourFeedback {
