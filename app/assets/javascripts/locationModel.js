@@ -201,7 +201,7 @@ function locationModel(data) {
 
 	if( this.state == 'front' ) {
 		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
-		this.candidates = Grouping(['Federal','State','County','Local','Other'],'Candidates','candidate',this,'Take a peak at the candidates that you’ll have the chance to vote on.')
+		this.candidates = Grouping(['Federal','State','County','Local','Other'],'Candidates','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on.')
 		
 		this.sections.push(this.candidates)
 		this.sections.push(this.ballotMeasures)
