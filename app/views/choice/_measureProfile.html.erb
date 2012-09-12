@@ -9,7 +9,7 @@
 <a data-bind="attr:{name:$data.contest}"></a>
 
 <div class="measure row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
-	data-bind="css: { selected: $root.selected() == $data }"
+	data-bind="css: { selected: $root.selected() == $data }, addClass: $data.<%= userObj %>.type"
 	itemscope itemtype="http://data-vocabulary.org/Thing" >
 
 	<hr><h1 itemprop="name" class="title" data-bind="text:  $data.<%= userObj %>.type[0].toUpperCase()+$data.<%= userObj %>.type.slice(1,3)+' on '+$data.contest"><%= feedback.option.type %> <%= choice.contest %></h1><hr>
