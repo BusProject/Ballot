@@ -68,8 +68,23 @@
 			&:first-child { margin-top:-75px; }
 			hr.button{ display:none !important;	}
 			
-			h1.no { color:@red; }
-			h1.yes { color: @green; }
+			h1.no { 
+				color:@red; 
+				
+				&::before {
+					content: '\f088   ';
+					font-family:'FontAwesome';
+				}
+			
+			}
+			h1.yes { 
+				color: @green; 
+				
+				&::before {
+					content: '\f087   ';
+					font-family:'FontAwesome';
+				}				
+			}
 			
 			.explanation {
 				margin-bottom:0px !important;
@@ -107,10 +122,13 @@
 						
 						&:first-child {
 							color:@green !important;
+							margin-left:-14px;
 							
 							&::before {
 								content: "\2713";
-															
+								position:relative;
+								left:-4px;
+																							
 							}
 						}
 					}
@@ -143,7 +161,7 @@
 					&::before {
 						content: '';
 						float: left;
-						margin: 0px 0px 0 -50px;
+						margin: 30px 0px 0 -50px;
 						width: 0;
 						height: 0;
 						border-width: 20px;
