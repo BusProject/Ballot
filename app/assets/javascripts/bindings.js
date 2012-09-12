@@ -33,7 +33,9 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			var top = $this.position().top
 			if( top < $(document).scrollTop()  ) $(document).scrollTop( top - 1 );
 		}, 10)
-
+		
+		setTimeout(function() { clearInterval(scrollUp); },1000)
+		
 		$(this).text('Close').nextAll('.body').slideDown(400,function() { 
 			$root.selected($data)
 			clearInterval(scrollUp);
