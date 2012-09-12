@@ -318,7 +318,7 @@ ko.bindingHandlers.overwrite = {
 };
 ko.bindingHandlers.stripClass = {
 	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
-		element.className =''
+		element.className =''+valueAccessor()
 	}
 }
 ko.bindingHandlers.addClass = {
