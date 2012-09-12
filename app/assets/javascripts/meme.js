@@ -77,7 +77,7 @@ function makeMeme(memeRaw,path,flavor) {
 				document.location.toString().replace('new','preview'),
 				{ quote: this.quote.fixed(), theme: this.theme(), meme: this.id() }, 
 				function(response) { 
-					var url = typeof id == 'undefined' && id == null ? 'data:image/png;base64,' + response : document.location.protocol+'//'+document.location.host+'/m/'+id+'.png';
+					var url = typeof id == 'undefined' || id == null ? 'data:image/png;base64,' + response : document.location.protocol+'//'+document.location.host+'/m/'+id+'.png';
 					$('.preview',document.body).html('<a href="'+url+'" target="_blank"><img src="data:image/png;base64,' + response + '" /></a>')
 					loading(false)
 				}
