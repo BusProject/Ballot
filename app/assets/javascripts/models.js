@@ -135,6 +135,7 @@ function Option(data,args) {
 		this.party = data.party
 		var party = this.party
 		this.partySmall = function() {
+			if( party == null ) return '';
 			if( party.search('Democrat') !== -1 ) return '(D)';
 			if( party.search('Republican') !== -1 ) return '(R)';
 			if( party.search('Green') !== -1 ) return '(G)';

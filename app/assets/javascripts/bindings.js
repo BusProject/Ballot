@@ -143,7 +143,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		
 	})
 })
-.on('click touchend','.yourFeedback .remove',function(e) {
+.on('click touchend','.controls .remove',function(e) {
 	var $ctx = ko.contextFor(this),
 		$data = $ctx.$data,
 		option = $data.options().filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],
@@ -163,7 +163,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	if( $data.you().id != 'undefined' ) $.post(
 		inits.root+'feedback/'+$data.you().id+'/remove',
 		function(response){
-			option.feedback.remove( $data.you() )
+			if( $('body').hasClass('profile') ) yourLocation.choices.remove( $data )
+			else option.feedback.remove( $data.you() );
 		}
 	)
 })
