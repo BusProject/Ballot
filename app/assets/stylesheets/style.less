@@ -398,11 +398,10 @@ body.home {
 					width:338px;
 					height:115px;
 					-webkit-appearance:none;
-					color:@green;
+					color:@darkGrey;
 					font-size:16px;
 					vertical-align:top;
-					border:1px solid @green;
-					.box-shadow(inset 0px 0px 4px 1px #ccc);
+					border:1px solid @grey;
 					.border-radius();
 					margin: 20px auto 20px;
 					display:block;
@@ -460,14 +459,38 @@ body.home {
 					display:block;
 					.orangeButton();
 					margin:10px auto;
+					min-width:145px;
+					
+					&::after {
+						content:'  \f03e';
+						font-family:"FontAwesome";
+					}
 				}
 				.next {
 					display: block;
 					margin:10px auto;
 					.greyButton();
+					min-width:145px;
+					
+					&::after {
+						content:'   \f04e';
+						font-family:"FontAwesome";
+					}			
+						
 					&.last-child { display: none; }
 				}
-				.controls { text-align: right; color: @grey; span.link { color: @darkGrey }  font-size: 12px; }
+				.controls { 
+					text-align:right;
+					
+					span {
+						text-align: right !important; 
+						color: @grey; 
+						font-size: 10px;
+						
+						&:hover { color: white; }
+					 }			
+					
+				}
 
 				&.login {
 					border-bottom: none;
@@ -703,14 +726,27 @@ body.home {
 			.buttons { text-align: center }
 			.yourFeedback {
 				border-top: none !important;
-				h1, h3 { 
-					color: @darkGreen;
+				h1 { 
+					color: @green;
 					font-size:24px;
 					width:100%; 
+									
+					&::before {
+						content: '\f087   ';
+						font-family:'FontAwesome';
+					}
 				}
+				
+				span {
+					font-size:16px;
+					color:@darkGrey;
+					text-align:left;
+				}
+				
 				.comment-details {
-					font-size:16px !important;
-					font-weight:300;
+					font-size:14px !important;
+					color:@grey;
+					text-align:left !important
 				}
 				.meme { display: none !important }
 			}
@@ -760,6 +796,13 @@ body.home {
 			}
 
 			.yourFeedback {
+				
+				span {
+					font-size:16px;
+					color:@darkGrey;
+					text-align:left;
+				}
+				
 				.toggle {
 					.no-select();
 					cursor: pointer;
@@ -821,11 +864,18 @@ body.home {
 					}
 				}
 
-				h1, h3 {
+				h1 {
 					
 					&.yes { color: @green; }
 					&.no { color: @red; }
 				}
+				
+				h3.comment-details {
+					color:@grey !important;
+					font-size:14px !important;
+					text-align:left !important;
+				}
+				
 				.comment-details {
 					font-size:16px !important;
 					font-weight:300;
