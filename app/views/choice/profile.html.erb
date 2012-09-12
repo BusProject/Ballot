@@ -73,7 +73,7 @@
 <div id="read-ballot">
 	<% @choices.each do |choice| %>
 		<div data-bind="with: choices()[<%= n %>]" class="row">
-			<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidate' : 'measure' %>
+			<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidateProfile' : 'measureProfile' %>
 			<%=  render 'choice/'+type, :choice => choice, :user => @user %>
 		</div>
 	<% n+=1%>

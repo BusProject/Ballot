@@ -1,0 +1,50 @@
+<% choice = choice || Choice.new %>
+<% user = user || nil %>
+<% choice.options.new if choice.new_record?  %>
+<% feedback = user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == user.id }.first %>
+<% userObj = user == current_user ? 'you()' : 'featured()'  %>
+
+
+
+<a data-bind="attr:{name:$data.contest}"></a>
+
+<div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
+	data-bind="css: { selected: $root.selected() == $data }"
+	itemscope itemtype="http://data-vocabulary.org/Thing" >
+
+	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
+	<h2>The Candidates</h2>
+	<% n = 0 %>
+	<% choice.options.each do |option| %>
+		<div class="optionholder <%= 'clean-no-script' if n != 0 %>" >
+			<!-- ko foreach: $data.options -->
+				<strong class="option" data-bind="text: $data.name+' '+$data.partySmall()"><%= option.name %> <%= option.partySmall %></strong>
+			<!-- /ko -->
+		</div>
+	<% n+=1 %>
+	<% end %>
+
+	<h2>What I Say</h2>
+
+	<h1 data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
+		<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
+			<%= '"'+feedback.comment+'"' %>
+		<% end -%>
+	</h1>
+	<div class="head" data-bind="addClass: $data.<%= userObj %>.type, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 1 ">
+		<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
+	</div>
+
+	<!-- These should work... might need to be massaged a bit. Hopefully they both could work asynchronously -->
+	<%- if user == current_user %>
+		<div class="controls">
+			<button class="meme">Share Your Comment</button>
+			<span class="remove link" >Remove</span>
+			<!-- Here's a link to the single page - just move this around -->
+			<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Edit</a>
+		</div>
+	<% end -%>
+		
+
+
+</div>
