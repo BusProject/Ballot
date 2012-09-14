@@ -9,11 +9,13 @@
 
 /********* Structure *********/
 body.home { 
-	background: #b2bfc8 image-url('bg.jpg') repeat fixed; 
-	background-position: -40px -40px;
+	background: #b2bfc8 image-url('capitol.jpg') no-repeat fixed; 
+	-moz-background-size: cover; 
+	background-size: cover; 
+	background-position: 0 0;
 }
 
-#container { box-shadow: 0px 0px 30px 1px rgba(0,0,0,.1); }
+
 #page { 
 	background-color:@bgGrey;
 	/*background: transparent image-url('pageBG.png') top left repeat;*/
@@ -22,7 +24,6 @@ body.home {
 	border-bottom:none;
 	.border-box();
 	margin:-2px 0 0 0;
-	
 }
 
 #footer {
