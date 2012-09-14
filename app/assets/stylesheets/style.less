@@ -9,13 +9,11 @@
 
 /********* Structure *********/
 body.home { 
-	background: #b2bfc8 image-url('capitol.jpg') no-repeat fixed; 
-	-moz-background-size: cover; 
-	background-size: cover; 
-	background-position: 0 0;
+	background: #b2bfc8 image-url('bg.jpg') repeat fixed; 
+	background-position: -40px -40px;
 }
 
-
+#container { box-shadow: 0px 0px 30px 1px rgba(0,0,0,.1); }
 #page { 
 	background-color:@bgGrey;
 	/*background: transparent image-url('pageBG.png') top left repeat;*/
@@ -24,6 +22,7 @@ body.home {
 	border-bottom:none;
 	.border-box();
 	margin:-2px 0 0 0;
+	
 }
 
 #footer {
@@ -206,6 +205,7 @@ body.home {
 			letter-spacing:2px;
 			font-size:26px;
 			.inset-text();
+			line-height: 1.2em;
 		}
 		hr { 
 			color: @darkGrey;
@@ -783,7 +783,6 @@ body.home {
 					color:@grey;
 					text-align:center !important
 				}
-				.meme { display: none !important }
 			}
 		}
 		&.measure .body {
