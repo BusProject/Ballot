@@ -132,16 +132,22 @@ class Meme < ActiveRecord::Base
         'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 410, :fill => 'white',:shadow => true, :text => contest.upcase },
       },
       'special/morpheus.jpg' => {
-        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 250,:align => Magick::CenterAlign,:top => 8,:fill => 'white',:shadow => true,:text => ('What if I told you').upcase() ,:chars => 28 },
-        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 30,:left => 20,:align => Magick::LeftAlign,:top => 330,:chars => 26,:fill => 'white',:shadow => true,:text => text.gsub(/What if I told you/i,'').upcase()},
+        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 250,:align => Magick::CenterAlign,:top => 8,:fill => 'white',:shadow => true,:text => ('what if i told you').upcase() ,:chars => 28 },
+        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 30,:left => 20,:align => Magick::LeftAlign,:top => 330,:chars => 26,:fill => 'white',:shadow => true,:text => text.gsub(/what if i told you/i,'').upcase()},
         'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 380, :fill => 'white',:shadow => true, :text => action.upcase },
         'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 410, :fill => 'white',:shadow => true, :text => contest.upcase },
       },
       'special/coach-taylor.jpg' => {
         'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 110,:left => 210,:align => Magick::LeftAlign,:top => -30,:fill => 'white',:shadow => true,:text => 'Listen up',:chars => 28,:strokeWidth => 1},
-        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 30,:left => 20,:align => Magick::LeftAlign,:top => 260,:chars => 26,:fill => 'white',:shadow => true, :text => text.gsub(/Listen Up/i,'')},
+        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 30,:left => 20,:align => Magick::LeftAlign,:top => 260,:chars => 26,:fill => 'white',:shadow => true, :text => text.gsub(/listen up/i,'')},
         'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 390, :fill => 'white',:shadow => true, :text => action.upcase },
         'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 420, :fill => 'white',:shadow => true, :text => contest.upcase },
+      },
+      'special/walter.jpg' => {
+        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 50,:left => 250,:align => Magick::CenterAlign,:top => 0,:fill => 'white',:shadow => true,:text => 'AM I THE ONLY ONE AROUND HERE',:chars => 32,:strokeWidth => 1},
+        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 40,:left => 250,:align => Magick::CenterAlign,:top => 290,:chars => 34,:fill => 'white',:shadow => true, :text => text.gsub(/am i the only one around here/i,'')},
+        'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 380, :fill => 'white',:shadow => true, :text => action.upcase },
+        'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 410, :fill => 'white',:shadow => true, :text => contest.upcase },
       }
     }
 
@@ -188,10 +194,10 @@ class Meme < ActiveRecord::Base
           row += 1
           top = section[:size]*row*1.1+section[:top]
 
-          msg.text( section[:left], top, line )
+          msg.text( section[:left], top, line ) unless line.empty? || line.nil?
 
           if shadow
-            shadow.text( section[:left]-2, top+3, line ) 
+            shadow.text( section[:left]-2, top+3, line )   unless line.empty? || line.nil?
             shadow.draw img
           end
           msg.draw img

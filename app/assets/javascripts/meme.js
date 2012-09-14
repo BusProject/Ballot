@@ -28,7 +28,6 @@ function makeMeme(memeRaw,path,flavor) {
 		}, this)
 		
 		this.special = ko.computed( function() {
-			console.log(memes)
 			var quote = this.quote.fixed().trim().toLowerCase(), choices = this.choices()
 			if( quote.search('hey girl') === 0 ) {
 				if( choices.length == memes ) {
@@ -46,6 +45,12 @@ function makeMeme(memeRaw,path,flavor) {
 				if( choices.length == memes ) {
 					this.choices.push(path+'special/morpheus.jpg')
 					this.theme( path+'special/morpheus.jpg' )
+				}
+				return true
+			} else if( quote.search('am i the only one around here') === 0 ) {
+				if( choices.length == memes ) {
+					this.choices.push(path+'special/walter.jpg')
+					this.theme( path+'special/walter.jpg' )
 				}
 				return true
 			} else if( quote.search('one does not simply') === 0 ) {
