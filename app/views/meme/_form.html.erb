@@ -4,11 +4,10 @@
 <body style="padding: 0;">
 <%= javascript_include_tag "meme" %>
 <script type="text/javascript" charset="utf-8">
-	<% path = asset_path( 'yes/1.jpg' ) %>
+	<% path = asset_path( 'new/1.jpg' ) %>
 	makeMeme( 
 		<%= raw @meme.to_json(:include => [ :option, :feedback] ) %>,
-		'<%= path.slice(0, path.index('yes/1') ) %>', 
-		'<%= ['no','against','opposed','reject'].index( @meme.option.name.downcase ) ? 'no' : 'yes' %>'
+		'<%= path.slice(0, path.index('new/1') ) %>'
 	)
 </script>
 
@@ -27,7 +26,7 @@
 		<h2>Step 2: Choose a Background</h2>
 		<p>Express yourself. Choose a background image for your comment so people notice it on their feed.</p>
 	    <div class="pick" data-bind="foreach: choices">
-	        <div data-bind="css: { selected: $parent.theme() == $data }, style: { backgroundImage: $index() == 4 ? 'url('+$data+')' : '' } " ></div>
+	        <div data-bind="css: { selected: $parent.theme() == $data }, style: { backgroundImage: $index() == 6 ? 'url('+$data+')' : '' } " ></div>
 	    </div>
 	</div>
 

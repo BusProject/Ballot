@@ -56,93 +56,99 @@ class Meme < ActiveRecord::Base
 
 
     text = self.quote || ' '
-    theme = self.theme || 'yes/1.jpg'
+    theme = self.theme || 'new/1.jpg'
     theme = theme.gsub('/assets/','')
+    name = self.option.name
+    action = self.option.type
 
     text.slice(0,140)
-    flavor = ['no','against','opposed'].index( self.option.name.downcase ) ? 'no' : 'yes'
-    contest = self.option.choice.contest.split(' ')[0]
-    number = self.option.choice.contest.split(' ')[1]
+    
+    if self.option.choice.contest_type.downcase.index('ballot').nil? 
+      type = 'Candidate'
+      contest = self.option.name
+      action = 'Vote For'
+      flavor = 'yes'
+    else
+      action = 'Vote '+self.option.type
+      contest = self.option.choice.contest
+      type = 'Ballot'
+      flavor = self.option.type
+    end
+    
+    comment = text.length > 0 ? 'Comment' : ''
+
     
     themes = {
-      'yes/1.jpg' => {
-        'quote' => { :font => 'lib/assets/Museo_Slab_500.otf', :size => 35, :align => Magick::CenterAlign,:left => 250,:shadow => true,:top => 10+( ( text.length/28 > 3 ? 0 : 3 - text.length/28 ) )*38,:chars => 27,:text => "''"+text+"''" },
-        'name' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 20,:align => Magick::RightAlign,:left => 480,:shadow => true,:top => 280,:text => '- '+self.user.first_name+' '+self.user.last_name },
-        'measure' => {:font => 'lib/assets/League_Gothic.otf',:size => 44,:left => 40,:top => 444,:text => ['On',contest,number].join(' ').upcase,:fill => 'transparent',:stroke => 'white',:weight => Magick::NormalWeight},
+      'newBallotComment' => {
+        'action' => {:font => 'lib/assets/League_Gothic.otf',:size => 180,:left => 250,:align => Magick::CenterAlign,:top => -20,:fill => 'white',:shadow => true,:text => action.upcase },
+        'on' => {:font => 'lib/assets/Mission-Script.otf',:size => 40,:left => 40,:align => Magick::LeftAlign, :top => 180,:fill => 'white',:shadow => true,:text => 'on' },
+        'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 46,:left => 80,:align => Magick::LeftAlign,:top => 180,:fill => 'white',:shadow => true,:text => contest },
+        'comment' => {:font => 'lib/assets/OpenSans-Bold.ttf',:size => 28,:left => 250,:align => Magick::CenterAlign,:top => 264,:fill => 'white',:shadow => true,:text => text, :chars => 28 },
+        'name' => {:font => 'lib/assets/League_Gothic.otf',:size => 20,:left => 200,:align => Magick::LeftAlign,:top => 454,:fill => 'white',:shadow => false,:text => '- created by '+self.user.name+' on the ballot.org' }
       },
-      'yes/2.jpg' => {
-        'quote' => {:font => 'lib/assets/Haymaker.ttf',:size => 20,:align => Magick::CenterAlign,:left => 250,:top => 284+( ( text.length/32 > 2 ? 0 : 2 - text.length/32 ) )*20,:chars => 32,:text => "''"+text+"''",:fill => 'black'},'name' => {:font => 'lib/assets/Wisdom_Script.otf',:size => 20,:align => Magick::CenterAlign,:left => 250,:top => 410,:text => '- '+self.user.first_name+' '+self.user.last_name,:fill => 'black'},
-        'measure' => {:font => 'lib/assets/Wisdom_Script.otf',:size => 36,:left => 250,:top => 120,:text => 'On '+contest.capitalize,:fill => 'black',:align => Magick::CenterAlign},
-        'numba' => {:font => 'lib/assets/Haymaker.ttf',:size => 80,:left => 244,:top => 150,:text => number,:fill => 'black',:align => Magick::CenterAlign }
+      'newBallot' => {
+        'action' => {:font => 'lib/assets/League_Gothic.otf',:size => 180,:left => 250,:align => Magick::CenterAlign,:top => -20,:fill => 'white',:shadow => true,:text => action.upcase },
+        'on' => {:font => 'lib/assets/Mission-Script.otf',:size => 40,:left => 40,:align => Magick::LeftAlign, :top => 220,:fill => 'white',:shadow => true,:text => 'on' },
+        'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 46,:left => 80,:align => Magick::LeftAlign,:top => 220,:fill => 'white',:shadow => true,:text => contest },
+        'november' => {:font => 'lib/assets/League_Gothic.otf',:size => 90,:left => 250,:align => Magick::CenterAlign,:top => 300,:fill => 'white',:shadow => true,:text => 'on November 6th'.upcase },
+        'name' => {:font => 'lib/assets/League_Gothic.otf',:size => 20,:left => 200,:align => Magick::LeftAlign,:top => 454,:fill => 'white',:shadow => false,:text => '- created by '+self.user.name+' on the ballot.org' }
       },
-      'yes/3.jpg' => {
-        'quote' => {:font => 'lib/assets/ONRAMP.ttf',:size => 40,:left => 20,:top => 120+( ( text.length/28 > 2.5 ? 0 : 2.5 - text.length/28 ) )*44,:chars => 27,:text => "''"+text+"''",:fill => '#5a663e' },
-        'name' => {:font => 'lib/assets/Museo_Slab_500italic.otf',:size => 20,:left => 20,:top => 410,:text => self.user.first_name+' '+self.user.last_name,:fill => '#5a663e' },
-        'measure' => {:font => 'lib/assets/ONRAMP.ttf',:size => 50,:left => 24,:top => 68,:text => ['On',contest,number].join(' ').upcase,:fill => '#d37a3c', }
+      'newCandidateComment' => {
+        'action' => {:font => 'lib/assets/League_Gothic.otf',:size => 160,:left => 250,:align => Magick::CenterAlign,:top => -30,:fill => 'white',:shadow => true,:text =>  action.upcase },
+        'candidate' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 50,:left => 250,:align => Magick::CenterAlign,:top => 150,:fill => 'white',:shadow => true,:text => name },
+        'office' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 26, :chars => 28,:left => 250,:align => Magick::CenterAlign,:top => 210,:fill => 'white',:shadow => true,:text => 'for '+ self.option.choice.contest },
+        'comment' => {:font => 'lib/assets/OpenSans-Bold.ttf',:size => 28,:left => 250,:align => Magick::CenterAlign,:top => 304,:fill => 'white',:shadow => true,:text => text, :chars => 32 },
+        'name' => {:font => 'lib/assets/League_Gothic.otf',:size => 20,:left => 200,:align => Magick::LeftAlign,:top => 454,:fill => 'white',:shadow => false,:text => '- created by '+self.user.name+' on the ballot.org' }
       },
-      'yes/4.jpg' => {
-        'quote' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 26,:left => 16,:shadow => true,:top => 200+( ( text.length/28 > 2 ? 0 : 2 - text.length/28 ) )*38,:chars => 27,:text => "''"+text+"''" },
-        'name' => {:font => 'lib/assets/Museo_Slab_500italic.otf',:size => 20,:left => 16,:top => 390,:text => self.user.first_name+' '+self.user.last_name,:fill => 'white',:shadow => true},
-        'on' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 28,:left => 310,:top => 40,:text => 'on '+contest.downcase,:fill => 'white',:shadow => true},
-        'measure' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 28,:left => 310,:top => 70,:text => self.option.choice.contest.gsub('Measure','').strip().upcase(),:fill => 'white',:shadow => true},
-        'this' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 28,:left => 310,:top => 100,:text => 'this election',:fill => 'white',:shadow => true}
-      },
-      'no/1.jpg' => { 
-        'quote' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 35,:align => Magick::CenterAlign,:left => 250,:shadow => true,:top => 10+( ( text.length/28 > 3 ? 0 : 3 - text.length/28 ) )*38,:chars => 27,:text => "''"+text+"''", },
-        'name' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 20,:align => Magick::RightAlign,:left => 480,:shadow => true,:top => 280,:text => '- '+self.user.first_name+' '+self.user.last_name, },
-        'measure' => {:font => 'lib/assets/League_Gothic.otf',:size => 44,:left => 40,:top => 444,:text => ['On',contest,number].join(' ').upcase,:fill => 'transparent',:stroke => 'white',:weight => Magick::NormalWeight},
-      },
-      'no/2.jpg' => {
-        'quote' => {:font => 'lib/assets/Haymaker.ttf',:size => 20,:align => Magick::CenterAlign,:left => 250,:top => 284+( ( text.length/32 > 2 ? 0 : 2 - text.length/32 ) )*20,:chars => 32,:text => "''"+text+"''",:fill => 'black' },
-        'name' => {:font => 'lib/assets/Wisdom_Script.otf',:size => 20,:align => Magick::CenterAlign,:left => 250,:top => 410,:text => '- '+self.user.first_name+' '+self.user.last_name,:fill => 'black' },
-        'measure' => {:font => 'lib/assets/Wisdom_Script.otf',:size => 36,:left => 250,:top => 120,:text => 'On '+contest.capitalize,:fill => 'black',:align => Magick::CenterAlign },
-        'numba' => {:font => 'lib/assets/Haymaker.ttf',:size => 80,:left => 244,:top => 150,:text => number,:fill => 'black',:align => Magick::CenterAlign }
-      },
-      'no/3.jpg' => {
-        'quote' => {:font => 'lib/assets/ONRAMP.ttf',:size => 40,:left => 20,:top => 120+( ( text.length/28 > 2.5 ? 0 : 2.5 - text.length/28 ) )*44,:chars => 27,:text => "''"+text+"''",:fill => '#ffbabc' },
-        'name' => {:font => 'lib/assets/Museo_Slab_500italic.otf',:size => 20,:left => 20,:top => 410,:text => self.user.first_name+' '+self.user.last_name,:fill => '#ffbabc' },
-        'measure' => {:font => 'lib/assets/ONRAMP.ttf',:size => 50,:left => 24,:top => 68,:text => ['On',contest,number].join(' ').upcase,:fill => 'white' }
-      },
-      'no/4.jpg' => {
-        'quote' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 26,:left => 16,:shadow => true,:top => 200+( ( text.length/28 > 2 ? 0 : 2 - text.length/28 ) )*38,:chars => 27,:text => "''"+text+"''" },
-        'name' => {:font => 'lib/assets/Museo_Slab_500italic.otf',:size => 20,:left => 16,:top => 390,:text => self.user.first_name+' '+self.user.last_name,:fill => 'white',:shadow => true },
-        'on' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 28,:left => 310,:top => 40,:text => 'on '+contest.downcase,:fill => 'white',:shadow => true },
-        'measure' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 28,:left => 310,:top => 70,:text => self.option.choice.contest.gsub('Measure','').strip().upcase(),:fill => 'white',:shadow => true },
-        'this' => {:font => 'lib/assets/Museo_Slab_500.otf',:size => 28,:left => 310,:top => 100,:text => 'this election',:fill => 'white',:shadow => true }
+      'newCandidate' => {
+        'action' => {:font => 'lib/assets/League_Gothic.otf',:size => 180,:left => 250,:align => Magick::CenterAlign,:top => -20,:fill => 'white',:shadow => true,:text => action.upcase },
+        'candidate' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 50,:left => 250,:align => Magick::CenterAlign,:top => 190,:fill => 'white',:shadow => true,:text => name },
+        'office' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 26, :chars => 30,:left => 250,:align => Magick::CenterAlign,:top => 250,:fill => 'white',:shadow => true,:text => 'for '+ self.option.choice.contest },
+        'november' => {:font => 'lib/assets/League_Gothic.otf',:size => 90,:left => 250,:align => Magick::CenterAlign,:top => 320,:fill => 'white',:shadow => true,:text => 'on November 6th'.upcase },
+        'name' => {:font => 'lib/assets/League_Gothic.otf',:size => 20,:left => 200,:align => Magick::LeftAlign,:top => 454,:fill => 'white',:shadow => false,:text => '- created by '+self.user.name+' on the ballot.org' }
       },
       'special/gosling.jpg' => {
         'hey girl' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 20,:top => 10,:fill => 'black',:text => 'Hey Girl' },
         'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 40,:left => 20,:top => 120,:chars => 17,:fill => 'black',:text => text.gsub(/hey girl/i,'') },
-        'vote' => {:font => 'lib/assets/ONRAMP.ttf',:size => 50,:align => Magick::RightAlign,:left => 498,:top => 380,:fill => flavor === 'no' ? 'red' : '#5a663e',:text => 'Vote '+flavor.capitalize },
-        'measure' => {:font => 'lib/assets/ONRAMP.ttf',:size => 30,:align => Magick::RightAlign,:left => 496,:top => 420,:fill => flavor === 'no' ? 'red' : '#5a663e',:text => [contest,number].join(' ').upcase },
+        'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 380, :fill => 'black', :text => action.upcase },
+        'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 410, :fill => 'black', :text => contest.upcase },
       },
       'special/high.jpg' => {
-        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 250,:align => Magick::CenterAlign,:top => 300,:fill => 'white',:shadow => true,:text => 'IS TOO DAMN HIGH' },
-        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 56,:left => 250,:align => Magick::CenterAlign,:top => 16,:chars => 30,:fill => 'white',:shadow => true,:text => text.gsub(/is too damn high/i,'').gsub(/too damn high/i,'') },
-        'vote' => {:font => 'lib/assets/ONRAMP.ttf',:size => 50,:align => Magick::RightAlign,:left => 498,:top => 380,:stroke => 'white',:fill => flavor === 'no' ? 'red' : '#5a663e',:text => 'Vote '+flavor.capitalize },
-        'measure' => {:font => 'lib/assets/ONRAMP.ttf',:size => 30,:align => Magick::RightAlign,:left => 496,:top => 420,:stroke => 'white',:fill => flavor === 'no' ? 'red' : '#5a663e',:text => [contest,number].join(' ').upcase },
+        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 250,:align => Magick::CenterAlign,:top => 280,:fill => 'white',:shadow => true,:text => 'IS TOO DAMN HIGH' },
+        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 30,:left => 250,:align => Magick::CenterAlign,:top => 16,:chars => 50,:fill => 'white',:shadow => true,:text => text.gsub(/is too damn high/i,'').gsub(/too damn high/i,'') },
+        'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 380, :fill => 'white',:shadow => true, :text => action.upcase },
+        'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 410, :fill => 'white',:shadow => true, :text => contest.upcase },
       },
       'special/interesting.jpg' => {
-        'catchphrase' => { :font => 'lib/assets/League_Gothic.otf',:size => 46, :left => 250,:align => Magick::CenterAlign,:top => 8,:fill => 'white',:shadow => false,:text => ('I don\'t always '+(text.split(/but when i do/i)[0].nil? ? '' : text.gsub(/I don\'t always/i,'').gsub(/I dont always/i,'').split(/but when i do/i)[0])+'but when I do').upcase(), :chars => 28, :stroke => '#333333',:strokeWidth => 1},
-        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 50,:left => 250,:align => Magick::CenterAlign,:top => 280,:chars => 28,:fill => 'white',:stroke => '#333333',:strokeWidth => 1,:text => text.split(/but when i do/i)[1].nil? ? '' : text.split(/but when i do/i)[1].upcase()},
-        'vote' => {:font => 'lib/assets/ONRAMP.ttf',:size => 50,:align => Magick::RightAlign,:left => 498,:top => 380,:stroke => 'white',:fill => flavor === 'no' ? 'red' : '#5a663e',:text => 'Vote '+flavor.capitalize},
-        'measure' => {:font => 'lib/assets/ONRAMP.ttf',:size => 30,:align => Magick::RightAlign,:left => 496,:top => 420,:stroke => 'white',:fill => flavor === 'no' ? 'red' : '#5a663e',:text => [contest,number].join(' ').upcase,},
+        'catchphrase' => { :font => 'lib/assets/League_Gothic.otf',:size => 46, :left => 250,:align => Magick::CenterAlign,:top => 8,:fill => 'white',:shadow => true,:text => ('I don\'t always '+(text.split(/but when i do/i)[0].nil? ? '' : text.gsub(/I don\'t always/i,'').gsub(/I dont always/i,'').split(/but when i do/i)[0])+'but when I do').upcase(), :chars => 28 },
+        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 30,:left => 20,:align => Magick::LeftAlign,:shadow => true, :top => 290,:chars => 28,:fill => 'white',:text => text.split(/but when i do/i)[1].nil? ? '' : text.split(/but when i do/i)[1].upcase()},
+        'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 380, :fill => 'white',:shadow => true, :text => action.upcase },
+        'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 410, :fill => 'white',:shadow => true, :text => contest.upcase },
       }, 
       'special/boromir.jpg' => {
-        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 250,:align => Magick::CenterAlign,:top => 8,:fill => 'white',:shadow => false,:text => ('one does not simply').upcase(),:chars => 28,:stroke => '#333333',:strokeWidth => 1},
-        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 46,:left => 250,:align => Magick::CenterAlign,:top => 320,:chars => 28,:fill => 'white',:stroke => '#333333',:strokeWidth => 1,:text => text.gsub(/one does not simply/i,'').upcase()},
-        'vote' => {:font => 'lib/assets/ONRAMP.ttf',:size => 70,:align => Magick::RightAlign,:left => 498,:top => 360,:stroke => 'white',:fill => flavor === 'no' ? 'red' : '#5a663e',:text => 'Vote '+flavor.capitalize},
-        'measure' => {:font => 'lib/assets/ONRAMP.ttf',:size => 30,:align => Magick::RightAlign,:left => 496,:top => 416,:stroke => 'white',:fill => flavor === 'no' ? 'red' : '#5a663e',:text => [contest,number].join(' ').upcase, },
+        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 250,:align => Magick::CenterAlign,:top => 8,:fill => 'white',:shadow => true,:text => ('one does not simply').upcase(),:chars => 28 },
+        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 40,:left => 20, :shadow => true,:align => Magick::LeftAlign,:top => 320,:chars => 28,:fill => 'white',:text => text.gsub(/one does not simply/i,'').upcase()},
+        'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 380, :fill => 'white',:shadow => true, :text => action.upcase },
+        'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 410, :fill => 'white',:shadow => true, :text => contest.upcase },
       },
       'special/morpheus.jpg' => {
-        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 250,:align => Magick::CenterAlign,:top => 8,:fill => 'white',:shadow => false,:text => ('What if I told you').upcase(),:chars => 28,:stroke => '#333333',:strokeWidth => 1},
-        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 40,:left => 164,:align => Magick::CenterAlign,:top => 330,:chars => 26,:fill => 'white',:stroke => '#333333',:strokeWidth => 1,:text => text.gsub(/What if I told you/i,'').upcase()},
-        'vote' => {:font => 'lib/assets/ONRAMP.ttf',:size => 50,:align => Magick::RightAlign,:left => 498,:top => 370,:stroke => 'white',:fill => flavor === 'no' ? 'red' : '#5a663e',:text => 'Vote '+flavor.capitalize},
-        'measure' => {:font => 'lib/assets/ONRAMP.ttf',:size => 30,:align => Magick::RightAlign,:left => 496,:top => 410,:stroke => 'white',:fill => flavor === 'no' ? 'red' : '#5a663e',:text => [contest,number].join(' ').upcase,},
+        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 250,:align => Magick::CenterAlign,:top => 8,:fill => 'white',:shadow => true,:text => ('What if I told you').upcase() ,:chars => 28 },
+        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 30,:left => 20,:align => Magick::LeftAlign,:top => 330,:chars => 26,:fill => 'white',:shadow => true,:text => text.gsub(/What if I told you/i,'').upcase()},
+        'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 380, :fill => 'white',:shadow => true, :text => action.upcase },
+        'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 410, :fill => 'white',:shadow => true, :text => contest.upcase },
+      },
+      'special/coach-taylor.jpg' => {
+        'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 110,:left => 210,:align => Magick::LeftAlign,:top => -30,:fill => 'white',:shadow => true,:text => 'Listen up',:chars => 28,:strokeWidth => 1},
+        'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 30,:left => 20,:align => Magick::LeftAlign,:top => 260,:chars => 26,:fill => 'white',:shadow => true, :text => text.gsub(/Listen Up/i,'')},
+        'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 390, :fill => 'white',:shadow => true, :text => action.upcase },
+        'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 420, :fill => 'white',:shadow => true, :text => contest.upcase },
       }
     }
-    
-    settings = themes[ theme ] || {}
+
+    comment = text.length > 0 ? 'Comment' : ''
+
+    settings = themes[ theme.index('new').nil? ? theme : 'new'+type+comment ] || {}
+
     img = Magick::Image.read("app/assets/images/"+theme ).first
 
     settings.each do |title,section|
@@ -160,7 +166,7 @@ class Meme < ActiveRecord::Base
 
       if shadow
         shadow = Magick::Draw.new
-        shadow.font_size( section[:size]  ).font( section[:font] ).fill('#747474').text_align( align )
+        shadow.font_size( section[:size]  ).font( section[:font] ).fill('#333').text_align( align )
       end
 
       text = section[:text].strip().gsub("''''","").gsub(/\n/,'')
@@ -180,12 +186,12 @@ class Meme < ActiveRecord::Base
 
 
           row += 1
-          top = section[:size]*row+section[:top]
+          top = section[:size]*row*1.1+section[:top]
 
           msg.text( section[:left], top, line )
 
           if shadow
-            shadow.text( section[:left]+1, top+2, line ) 
+            shadow.text( section[:left]-2, top+3, line ) 
             shadow.draw img
           end
           msg.draw img
