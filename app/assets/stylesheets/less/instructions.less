@@ -1,5 +1,5 @@
 #instructions-box {
-	width: 206px;
+	width: 170px;
 	position:fixed;
 	left:auto;
 	top: 50px;
@@ -10,15 +10,14 @@
 		position: absolute;
 	}
 	#instructions {
-		background: @sideGrey;
 		color:#3C3A3A;
 		padding:0px;
 		height:auto;
 		text-align:left;
-		border-color: #727270;
+		border-color: darken(@sideGrey,10%);
+		box-shadow: -2px 2px 5px 0px rgba(0,0,0,.3);
 		border-width: 1px;
 		border-style: solid;
-		border-radius: 2px;
 		img.menutop {
 			margin: -64px 0 0.72em -1px;
 			display:none;
@@ -28,12 +27,13 @@
 			list-style-type:none;
 			li {
 				a.main, a.small {
-					border-top:1px solid #bebebe;
-					border-bottom: 1px solid #8c8282;
+					border-bottom:1px solid darken(@sideGrey,10%);
+					border-top: 1px solid lighten(@sideGrey,10%);
+					.gradient(lighten(@sideGrey,2%), @sideGrey);
 					text-align:left;
 					display:block;
 					text-decoration:none;
-					color:#3c3A3a;
+					color:#fff;
 					padding:11px;
 					&:hover { .drop-shadow(); }
 				}
@@ -50,9 +50,11 @@
 		li {
 			div.container { 
 				padding: 12px;
-				color:@darkerGrey;
+				color:#fff;
 				font-weight:600;
 				display:none;
+				.gradient(@sideGrey, darken(@sideGrey,10%);
+				border-top: 1px solid lighten(@sideGrey,10%);
 			}
 			&:last-child a { border-bottom: none; }
 			&:first-child a { border-top: none; }
@@ -63,13 +65,13 @@
 				padding:0;
 				line-height: 16px;
 				padding:0px !important;
+				background:none !important;
 				
 				&:hover { box-shadow:none !important; color:white !important; }
 			}
 	
 			div.menu-inner { 
-				color: #303030;
-				background: #dadada; 
+				background: lighten(@sideGrey,40%); 
 				font-size:15px;
 				border-bottom:1px solid #8c8282;
 				.inner-shadow();
@@ -78,6 +80,7 @@
 					padding: 10px;
 					font-size:13px;
 					line-height:18px;
+					color:@sideGrey;
 				}
 				.arrow { 
 					display:none;
@@ -96,6 +99,7 @@
 						margin: 10px 10px 0;
 						font-size: 18px;
 					a {
+						color:@sideGrey; 
 						&:hover { box-shadow:none; }
 					}
 					
@@ -106,8 +110,20 @@
 							font-weight: normal;
 							font-size: 13px;
 							margin: 0 0 10px 10px;
+							color:@sideGrey;
 							a {
-								&.active { color: @orange; }
+								color:@sideGrey;
+								display:block;
+								width:90%;
+								&.active { 
+									&:after {
+										content: "\f0da";
+										font-family:"FontAwesome";
+										position:absolute;
+										right:15px;
+									}
+								
+								}
 								&.done { 
 									.opacity(.6);
 									&::before {
