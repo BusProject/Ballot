@@ -3,10 +3,10 @@
 		<div class="left-nav">
 		<ul>
 			<%- if current_user.nil? %>
-					<li>Get Started</li>
-					<li><%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %></li>
+					<li style="border:none;">Get Started</li>
+					<li class="fb-button"><%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %></li>
 		<% else %>
-					<li><%= link_to image_tag(current_user.image || asset_path('alincoln.gif') ), profile_path(current_user.to_url) %></li>
+					<li style="border:none;"><%= link_to image_tag(current_user.image || asset_path('alincoln.gif') ), profile_path(current_user.to_url) %></li>
 					<li style="display:none;"><%= link_to profile_path( current_user.to_url ) do %></li>
 					<li><a><%= current_user.first_name %> <%= current_user.last_name %></a></li>
 					<li><a>My Voter Guide</a></li>
