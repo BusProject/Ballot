@@ -13,11 +13,11 @@
 @bgGreen: #98B84A;
 @bgGrey:#f0f0ed;
 
-@sideGrey: #C4C4C0;
+@sideGrey: @darkGrey;
 
 .greenButton() {
 	background-color: @green;
-	border:1px solid darken(@green, 10%);
+	border:1px solid darken(@green, 20%);
 	color:#fff;
 	font-family:'Open Sans', sans-serif;
 	font-size:16px;
@@ -27,6 +27,8 @@
 	cursor:pointer;
 	.border-radius();
 	padding:10px;
+	box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+	.gradient(@green, darken(@green,5%));
 	text-shadow:0px 1px 1px darken(@green,10%);
 		&:hover {
 			.drop-shadow();
@@ -40,7 +42,7 @@
 
 .greyButton() {
 	background-color: @grey;
-	border:1px solid darken(@grey, 10%);
+	border:1px solid darken(@grey, 20%);
 	color:#fff;
 	font-family:'Open Sans', sans-serif;
 	font-size:14px;
@@ -50,6 +52,8 @@
 	cursor:pointer;
 	.border-radius();
 	padding:10px;
+	box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+	.gradient(@grey, darken(@grey,5%));
 	text-shadow:0px 1px 1px darken(@grey,10%);
 		&:hover {
 			.drop-shadow();
@@ -68,7 +72,7 @@
 	
 .orangeButton() {
 	background-color: @orange;
-	border:1px solid darken(@orange, 10%);
+	border:1px solid darken(@orange, 20%);
 	color:#fff;
 	font-family:'Open Sans', sans-serif;
 	font-size:14px;
@@ -78,6 +82,8 @@
 	cursor:pointer;
 	.border-radius();
 	padding:10px;
+	box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+	.gradient(@orange, darken(@orange,5%));
 	text-shadow:0px 1px 1px darken(@orange,10%);
 		&:hover {
 			.drop-shadow();
