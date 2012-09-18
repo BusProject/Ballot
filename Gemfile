@@ -68,15 +68,3 @@ end
 #end
 
 gem "rspec-rails", :group => [:test, :development]
-group :test do
-  gem "factory_girl_rails"
-  gem "capybara"
-  gem 'launchy'
-  gem 'database_cleaner'
-  gem "guard-rspec"
-  gem 'growl'
-  gem 'jasmine'
-  gem 'jasmine-headless-webkit'
-  gem 'guard-jasmine-headless-webkit'
-  gem 'guard-rails-assets'
-end
