@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
       @content = 
       "
         <script type='text/javascript'> $(document).ready( function() {
-            $('.finder').betterAutocomplete( '/search', function( event, ui ) { document.location = ui.item.url } )
+            $('.finder').betterAutocomplete( '/search', function( event, ui ) { document.location = '/'+ui.item.url } )
             $('.finder').bind('focus.down',function(e) { $(document).scrollTop( $(this).unbind('focus.down').position().top ) })
         })</script>
         <div class='big'>&#161;ERROR!</div>

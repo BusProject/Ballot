@@ -17,10 +17,10 @@
 	height: @memeHeight - 8px;
 	background-color: #cd773a;
 	z-index: 100;
-	top: 120px;
+	top: 100px;
 	.box-shadow(5px,0,80px,#fff);
 	padding: 0;
-	margin: 0 0 0 162px;
+	margin: 0 0 0 5%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	.close {
@@ -51,65 +51,57 @@
 	strong { font-weight: bold;}
 	font-size: 16px;
 	text-align: left;
-	font-family: Rokkitt, serif;
-	background: #cd773a image-url('share-arrows.png') 79% 66% no-repeat;
+	font-family: 'Open Sans', sans-serif;
+	background: #cd773a image-url('share-arrows.png') 79% 59% no-repeat;
 	padding: 20px 30px 20px;
 	color: white;
 	height: @memeHeight;
-	p { margin: 0 0 4px; }
+	p { margin: 0 0 4px; color: white; font-size: 13px; }
 	h1 {
-		font-family: 'LeagueGothicRegular',Tahoma,sans-serif;
-		font-size: 62px;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 34px;
 		color: white;
 		border-top: 1px solid white;
 		border-bottom: 1px solid white;
 		text-transform: uppercase;
 		font-weight: normal;
-		margin: 0 0 4px;
+		margin: 0 0 13px;
 		text-align: center;
-		&::after, &::before {
-			content: '\2605';
-			font-size: 30px;
-			float: left;
-			margin: 8px 2px 30px;
-			position: relative;
-		}
-		&::after { float: right }
+
 	}
 	h2 {
-		font-family: Rokkitt, serif;
-		font-size: 24px;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 18px;
 		color: white;
-		font-weight: normal;
-		margin-right: 200px;
+		font-weight: 700;
+		letter-spacing: 0px;
 		margin: 10px 0 4px;
-		text-decoration: underline;
-		text-align: center;
+		text-align: left;
 	}
 	.choose {
 		width: 340px;
-		margin-left: -30px;
 		float: left;
 		&::after {
 			content: '+';
 			float: right;
 			font-size: 80px;
-			margin: -80px -40px 0 0;
+			margin: -80px -50px 0 0;
+			color: white;
 		}
 		textarea { 
-			font-family: 'Rokkitt';
+			font-family: 'Open Sans', sans-serif;
 			color: @grey;
 			border: 1px solid rgba(0,0,0,.3);
-			font-size: 14px;
+			font-size: 12px;
 			padding: 12px 12px 30px; 
 			display: block;
 			resize: none;
 			width: 300px;
 			background: #fff;
-			height: 80px
+			height: 120px
 		}
 		.up {
-			margin: -20px 0 0 2px;
+			margin: -22px 0 0 2px;
 			font-size: 14px;
 			background: white;
 			text-align: right;
@@ -119,16 +111,16 @@
 			span { width: 60px; }
 		}
 	}
-	&.no .theme .pick div { background-image: image-url('no/thumbs.jpg'); }
-	&.yes .theme .pick div { background-image: image-url('yes/thumbs.jpg'); }
+
 	.theme {
 		float: right;
-		width: 330px;
-		margin-right: -60px;
+		width: 340px;
+		margin-right: -20px;
 		.pick  { 
 			width: 330px;
 			margin-top: 10px;
 			div {
+				background-image: image-url('new/thumbs.jpg');
 				background-color: transparent;
 				background-repeat: no-repeat;
 				width:70px; 
@@ -143,20 +135,19 @@
 				&:nth-child(2) { background-position: -70px 0; }
 				&:nth-child(3) { background-position: -140px 0; }
 				&:nth-child(4) { background-position: -210px 0; }
-				&:nth-child(5) {
-					position: absolute;
+				&:nth-child(5) { background-position: -280px 0; }
+				&:nth-child(6) { background-position: -350px 0; }
+				&:nth-child(7) {
 					background-size: cover;
-					margin: 80px 0 0 234px;
 				}
 			}
 		}
 	}
 	.matt { 
 		@size: 160px;
-		border: 1px solid white;
 		width: @size;
 		clear: both;
-		margin: 190px auto 0;
+		margin: 260px auto 0;
 		.box-shadow(0px,4px,15px,#000);
 		.preview { 
 			background-size: cover; 
@@ -175,15 +166,20 @@
 		}
 		.preview-load {
 			position: absolute;
+			right: -80px;
+			color:white;
+			bottom: 20px;
 		}
 		position: relative;
 		.kill {
+			color:white;
 			font-weight: bold;
 			cursor: pointer;
 			background: none;
 			padding: 2px;
 			position: absolute;
-			right: 0;
+			right: -70px;
+			bottom: 0;
 			&:hover {
 				text-decoration: underline;
 				color: red;
@@ -195,8 +191,9 @@
 		clear: left;
 		width: @width;
 		height: 140px;
-		margin: 20px auto 0;
+		margin: 8px auto 0;
 		text-align: center;
+		h2 { text-align: center; }
 		button.share {
 			border: none;
 			font-size:50px;
@@ -205,7 +202,7 @@
 			cursor: pointer;
 			color: white;
 			margin-top: -4px;
-			font-family: 'Rokkitt', sans-serif;
+			font-family: 'Open Sans', sans-serif;
 			background: #3c332d;
 		}
 		.share-inner {

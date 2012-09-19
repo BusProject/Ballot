@@ -8,14 +8,42 @@
 @import 'type/font-awesome-ie7.less';
 
 /********* Structure *********/
-body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat fixed; -moz-background-size: cover; background-size: cover; }
+body.home { 
+	background: #b2bfc8 image-url('new-bg.jpg') no-repeat fixed; 
+	-moz-background-size: cover; 
+	background-size: cover; 
+	background-position: 0 0;
+}
 
 
 #page { 
-	background-color:#f0f0ed;
+	background-color:@bgGrey;
 	/*background: transparent image-url('pageBG.png') top left repeat;*/
-	border: 1px solid #979797;
+	border-right: 1px solid @darkGrey;
+	border-left:1px solid @darkGrey;
+	border-bottom:none;
 	.border-box();
+	margin:-2px 0 0 0;
+}
+
+#footer {
+	background-color:@bgGrey;
+	color:white;
+	
+	hr {
+		width: 70%;
+		border: 1px dashed @green;
+		margin-bottom: 20px;
+	}
+	p {
+		font-size:11px;
+		text-align:center;
+		width:50%;
+		margin:0 auto 10px;
+		line-height:13px;
+		color:@green;
+	}
+	
 }
 
 .clearfix:after {
@@ -178,6 +206,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			letter-spacing:2px;
 			font-size:26px;
 			.inset-text();
+			line-height: 1.2em;
 		}
 		hr { 
 			color: @darkGrey;
@@ -206,16 +235,37 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 		.matchup {
 			font-weight:600;
 			margin-top:10px;
+			
+			i { 
+				display:inline-block; 
+				margin:0 10px 0 0;
+				color: @grey;
+			}
+			
 		}
 		.geography {
 			font-weight:600;
 			margin:6px 0 6px 0;
-			text-transform:uppercase;
-			letter-spacing:2px;
+					
+			i { 
+				display:inline-block; 
+				margin:0 10px 0 0;
+				color: @grey;
+			}
+			
 		}
 		.voted {
 			font-weight:300;
 			margin-bottom:20px;
+			font-size:12px;
+			margin:20px 0 10px 0;
+			
+			i { 
+				display:inline-block; 
+				margin:0 10px 0 0;
+				color: @grey;
+			}
+			
 		}
 
 		&.selected button.open {
@@ -349,11 +399,10 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					width:338px;
 					height:115px;
 					-webkit-appearance:none;
-					color:@green;
+					color:@darkGrey;
 					font-size:16px;
 					vertical-align:top;
-					border:1px solid @green;
-					.box-shadow(inset 0px 0px 4px 1px #ccc);
+					border:1px solid @grey;
 					.border-radius();
 					margin: 20px auto 20px;
 					display:block;
@@ -399,19 +448,50 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					margin: 20px auto 22px; 
 					.border-radius();
 					.head-image(); 
+					height:90px;
+					
+					&::after {
+						padding:10px 0;
+					}
+					
+						
 				}
 				.meme {
 					display:block;
 					.orangeButton();
 					margin:10px auto;
+					min-width:145px;
+					
+					&::after {
+						content:'  \f03e';
+						font-family:"FontAwesome";
+					}
 				}
 				.next {
 					display: block;
 					margin:10px auto;
 					.greyButton();
+					min-width:145px;
+					
+					&::after {
+						content:'   \f04e';
+						font-family:"FontAwesome";
+					}			
+						
 					&.last-child { display: none; }
 				}
-				.controls { text-align: right; color: @grey; span.link { color: @darkGrey }  font-size: 12px; }
+				.controls { 
+					text-align:right;
+					
+					span {
+						text-align: right !important; 
+						color: @grey; 
+						font-size: 10px;
+						
+						&:hover { color: white; }
+					 }			
+					
+				}
 
 				&.login {
 					border-bottom: none;
@@ -428,7 +508,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			
 					.commentTitle {
 						text-align: left;
-						margin: 0 30 px 10px;
+						margin: 0 15px 30px;
 						padding: 20px 0 40px;
 						
 						h2 {
@@ -478,7 +558,7 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 
 					ul.feedback {
 						li {
-							margin: 10px 30px;
+							margin: 10px 15px;
 							text-align: left;
 							clear: both;
 							a:hover { text-decoration: underline; }
@@ -490,10 +570,46 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 						.head {
 							float: left;
 							.head-image(50px);
-							margin: 0 30px 0px 0;
+							margin: 10px 30px 0px 0;
 							
 							img { .border-radius() !important; }
+						
+							&&::after { display:none; }
 						}
+						
+						.comment-bubble {
+							background-color:white;
+							padding:10px;
+							width:85%;
+							float:right;
+							margin-bottom:10px;
+							.border-radius();
+							.drop-shadow();
+							
+								&::before {
+									content: '';
+									float: left;
+									margin: 5px 0px 0 -50px;
+									width: 0;
+									height: 0;
+									border-width: 20px;
+									border-style: solid;
+									border-color:white;
+									border-top:20px solid transparent;
+									border-bottom:20px solid transparent;
+									border-left:20px solid transparent;
+								}
+								
+								&.yes {
+									strong { color:@green; }
+								}
+								
+								&.no {
+									strong { color: @red; }
+								}
+							
+						}
+						
 						.message { 
 							width: 470px;
 							height: auto;
@@ -512,7 +628,6 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 							margin: 0px 0px 20px;
 							padding:0px 0px 10px;
 							color: @grey;
-							border-bottom:1px dashed @grey;
 							.ask { 
 								color: @grey;
 								padding-right: 4px;
@@ -647,16 +762,28 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			.buttons { text-align: center }
 			.yourFeedback {
 				border-top: none !important;
-				h1, h3 { 
-					color: @darkGreen;
+				h1 { 
+					color: @green;
 					font-size:24px;
 					width:100%; 
+									
+					&::before {
+						content: '\f087   ';
+						font-family:'FontAwesome';
+					}
 				}
+				
+				span {
+					font-size:16px;
+					color:@darkGrey;
+					text-align:left;
+				}
+				
 				.comment-details {
-					font-size:16px !important;
-					font-weight:300;
+					font-size:14px !important;
+					color:@grey;
+					text-align:center !important
 				}
-				.meme { display: none !important }
 			}
 		}
 		&.measure .body {
@@ -704,6 +831,13 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 			}
 
 			.yourFeedback {
+				
+				span {
+					font-size:16px;
+					color:@darkGrey;
+					text-align:left;
+				}
+				
 				.toggle {
 					.no-select();
 					cursor: pointer;
@@ -765,11 +899,18 @@ body.home { background: #b2bfc8 image-url('capitol.jpg') center center no-repeat
 					}
 				}
 
-				h1, h3 {
+				h1 {
 					
 					&.yes { color: @green; }
 					&.no { color: @red; }
 				}
+				
+				h3.comment-details {
+					color:@grey !important;
+					font-size:14px !important;
+					text-align:center !important;
+				}
+				
 				.comment-details {
 					font-size:16px !important;
 					font-weight:300;

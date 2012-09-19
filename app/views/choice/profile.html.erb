@@ -50,7 +50,7 @@
 
 		<% else %>
 			<%- unless current_user.nil? %>
-				<span class="link flag" onclick="$(this).hide().next().show()">Flag this User</span>
+				<span class="link flag" onclick="$(this).hide().next().show()"><i class="icon-flag"></i> Flag this User</span>
 				<p style="display: none;" class="flag">Are you sure? <span class="link" onclick=" 
 					$(this).parent().text('Flagged - thanks');
 					yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.featured().id+'/flag',function(response){}) } )
@@ -73,7 +73,7 @@
 <div id="read-ballot">
 	<% @choices.each do |choice| %>
 		<div data-bind="with: choices()[<%= n %>]" class="row">
-			<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidate' : 'measure' %>
+			<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidateProfile' : 'measureProfile' %>
 			<%=  render 'choice/'+type, :choice => choice, :user => @user %>
 		</div>
 	<% n+=1%>

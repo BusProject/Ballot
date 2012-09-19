@@ -4,45 +4,72 @@ body.splash {
 	#main { margin: 0; width: 100% }
 	.ballot-section {
 		width: 100%;
-		.sectionheading { border: none; font-size: 40px; font-family: Rokkitt, serif;}
+		.sectionheading { 
+			border-top:none;
+			padding-bottom:0px;
+		}
 		.stars { .move-stars(220px, 1.5em, -5em) }
 		.directions {
-			width: 640px;
+			width: 90%;
 			margin: 30px auto;
+			background-color:@sideGrey;
+			.border-radius();
+			padding:30px;
+			font-size:20px;
+			.inset-text();
+			text-align:left;
+			
 			p {
-				text-indent: -10px;
-				font-weight: normal;
-				font-family:  Rokkitt, serif;
-				font-size: 24px;
-				color: @darkGrey;
-				text-align: left;
-				line-height: 1.4em;
-				margin-bottom: 20px;
+				font-size:20px;
+				.inset-text();
+				margin-bottom:20px;
+				font-family:'Arvo', serif;
+				font-weight:700;
 			}
+			
+			ul {
+				color:@darkGrey;
+				text-align:left;
+				
+				li {
+					margin:0 0 20px 75px;
+					text-indent:-40px;
+					
+					
+					i {
+						margin:0 10px 0 0;
+					}
+				}
+			}
+			
 		}
 		.login {
-			background: @bgGreen;
+			background: @green;
 			width: 400px;
 			height: 160px;
-			border: 1px solid @darkGreen;
 			padding: 10px 50px;
 			margin: 0 auto;
 			.border-box();
+			.border-radius;
 			p,a {
 				font-size: 18px;
 				color: white;
-				font-family: Rokkitt, serif;
 			}
 			a {
 				text-decoration: none;
 				&:visited, &:link { color: white; }
-				&:hover { text-decoration: underline; }
+				&:hover { 
+					text-decoration: none;
+					color:@orange; 
+					}
 			}
 			h1 {
-				font-family: Rokkitt, serif;
-				font-size: 36px;
-				color: #333;
-				.text-shadow(1px, 1px, 5px, #fff);
+				font-size: 30px;
+				color: @darkerGrey;
+				.inset-text();
+				margin-bottom:10px;
+				
+				
 			}
 		}
 	}

@@ -5,16 +5,17 @@ function makeMeme(memeRaw,path,flavor) {
 		this.quote = ko.observable( data.feedback.comment )
 		this.choices = ko.observableArray([])
 		this.limit = 140
+		var memes = 6
 		this.loading = ko.observable(false)
 		this.unsaved = true
 		this.title = 'Powered by theballot.org See all my recommendations at '+document.location.host+current_user.profile
 		this.id = ko.observable(null)
 
-		for (var i=1; i < 5; i++) {
-			this.choices.push( path+flavor+'/'+i+'.jpg' )
+		for (var i=1; i < memes+1; i++) {
+			this.choices.push( 'new/'+i+'.jpg' )
 		};
 
-		this.theme = ko.observable( this.choices()[ Math.floor(Math.random()*4) ] )
+		this.theme = ko.observable( this.choices()[ Math.floor(Math.random()*(memes-1)) ] )
 
 		this.quote.fixed = ko.computed( function() { 
 			var limit = this.limit, 
@@ -29,39 +30,51 @@ function makeMeme(memeRaw,path,flavor) {
 		this.special = ko.computed( function() {
 			var quote = this.quote.fixed().trim().toLowerCase(), choices = this.choices()
 			if( quote.search('hey girl') === 0 ) {
-				if( choices.length == 4 ) {
+				if( choices.length == memes ) {
 					this.choices.push(path+'special/gosling.jpg')
 					this.theme( path+'special/gosling.jpg' )
 				}
 				return true
+			} else if( quote.search('listen up') === 0 ) {
+				if( choices.length == memes ) {
+					this.choices.push(path+'special/coach-taylor.jpg')
+					this.theme( path+'special/coach-taylor.jpg' )
+				}
+				return true
 			} else if( quote.search('what if i told you') === 0 ) {
-				if( choices.length == 4 ) {
+				if( choices.length == memes ) {
 					this.choices.push(path+'special/morpheus.jpg')
 					this.theme( path+'special/morpheus.jpg' )
 				}
 				return true
+			} else if( quote.search('am i the only one around here') === 0 ) {
+				if( choices.length == memes ) {
+					this.choices.push(path+'special/walter.jpg')
+					this.theme( path+'special/walter.jpg' )
+				}
+				return true
 			} else if( quote.search('one does not simply') === 0 ) {
-				if( choices.length == 4 ) {
+				if( choices.length == memes ) {
 					this.choices.push(path+'special/boromir.jpg')
 					this.theme( path+'special/boromir.jpg' )
 				}
 				return true
 			} else if( quote.search('is too damn high') === quote.length - 'is too damn high'.length ) {
-							if( quote.search('is too damn high') !== -1 && choices.length == 4 && quote.length != 0  ) {
+							if( quote.search('is too damn high') !== -1 && choices.length == memes && quote.length != 0  ) {
 								this.choices.push(path+'special/high.jpg')
 								this.theme( path+'special/high.jpg' )
 							}
 							return true
 			} else if( quote.replace("'",'').search('i dont always') === 0 && quote.search('but when i do') !== -1 ) {
-				if( choices.length == 4 && quote.length != 0  ) {
+				if( choices.length == memes && quote.length != 0  ) {
 					this.choices.push(path+'special/interesting.jpg')
 					this.theme( path+'special/interesting.jpg' )
 				}
 				return true
 			}
-			if( choices[4] ) {
-				this.choices.remove( choices[4] )
-				this.theme( this.choices()[ Math.floor( Math.random() * 4 ) ] )
+			if( choices[memes] ) {
+				this.choices.remove( choices[memes] )
+				this.theme( this.choices()[ Math.floor( Math.random() * (memes-1) ) ] )
 			}
 
 		},this)
@@ -77,7 +90,7 @@ function makeMeme(memeRaw,path,flavor) {
 				document.location.toString().replace('new','preview'),
 				{ quote: this.quote.fixed(), theme: this.theme(), meme: this.id() }, 
 				function(response) { 
-					var url = typeof id == 'undefined' && id == null ? 'data:image/png;base64,' + response : document.location.protocol+'//'+document.location.host+'/m/'+id+'.png';
+					var url = typeof id == 'undefined' || id == null ? 'data:image/png;base64,' + response : document.location.protocol+'//'+document.location.host+'/m/'+id+'.png';
 					$('.preview',document.body).html('<a href="'+url+'" target="_blank"><img src="data:image/png;base64,' + response + '" /></a>')
 					loading(false)
 				}

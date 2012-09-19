@@ -21,8 +21,8 @@
 	}
 	.flag {
 		float: right;
-		margin: -40px 10px 0 0;
-		font-size: 10px;
+		margin: -20px 10px 0 0;
+		font-size: 12px;
 	}
 
 	h1 {
@@ -63,58 +63,151 @@
 	#read-ballot {
 			
 		.row {
-			margin: 30px auto;
+			margin: 10px auto;
+			.clearfix();
 			&:first-child { margin-top:-75px; }
 			hr.button{ display:none !important;	}
-	
-		&.candidate {
+			
+			h1.no { 
+				color:@red; 
+				
+				&::before {
+					content: '\f088   ';
+					font-family:'FontAwesome';
+				}
+			
+			}
+			h1.yes { 
+				color: @green; 
+				
+				&::before {
+					content: '\f087   ';
+					font-family:'FontAwesome';
+				}				
+			}
+			
+			.explanation {
+				margin-bottom:0px !important;
+			}
+			
+			.voted {
+				margin-bottom:20px;
+			}
+						
 			.matchup, .voted { display: none }
-			.body {
-				margin-top:-25px;
-				background-color:transparent;
+			
+			.profile-text {
+				float:left;
+				font-size:18px;
+				margin-top:10px;
+				letter-spacing:0;
+			}
+		
+			.profile-explanation {
+				.clearfix();
+				display:block;
+				margin-bottom:20px;
 				
 				.optionholder { 
-					.option {
-						.opacity(.2);
+					float:right;
+					width:66%;
+					margin-top:10px;
+					font-size:18px;
+					padding:0 10px 10px 10px;
+					text-align:left;
+					font-weight:400px;
+					
+					
+					&.your-option .option {
 						
-						&.confirmed {
-							.opacity(1) !important;
+						&:first-child {
+							color:@green !important;
+							margin-left:-20px;
+							
+							&::before {
+								content: '\f087   ';
+								font-family:'FontAwesome';
+								position:relative;
+								left:-4px;
+																							
+							}
 						}
 					}
-					
+
 				}
 				
-				.yourFeedback {
-					margin:-35px auto 0px 0px;
+				.explanation {
+					width:66%;
+					text-align:left;
+					padding:10px 10px 10px 10px;
+					float:right;
 				}
-				
-				.footer {
-					margin:0 auto;
-					background-image:none;
-					border-bottom:1px dotted @darkGrey;
-				}
-				
-			}
-		}
 			
-		&.measure {
-			.body {
-				margin-top:-50px;
-				background-color:transparent;
+			}
+			
+			.profile-comment {
+				.clearfix();
+				display:block;
+			
+				p {
+					width:66%;
+					float:right;
+					background-color:white;
+					padding:10px;
+					margin-top:10px;
+					text-align:left;
+					.border-box();
+					.border-radius();
+					.drop-shadow();
 				
-				.optionholder {
-					position:relative;
-					top:-50px;
-					.option { .opacity(1) !important; }
+					&::before {
+						content: '';
+						float: left;
+						margin: 30px 0px 0 -50px;
+						width: 0;
+						height: 0;
+						border-width: 20px;
+						border-style: solid;
+						border-color:white;
+						border-top:20px solid transparent;
+						border-bottom:20px solid transparent;
+						border-left:20px solid transparent;
+					}
 				}
-				
+			
+				.head {
+					float:left;
+					clear:left;
+					margin:10px 0 0 50px;
+					
+					img {
+						.border-radius(5px);
+						.drop-shadow();
+					}
+				}
+			
 				.yourFeedback {
 					margin:-35px auto 0px 0px;
 				}
 			}
-		}
+	
+			.controls {
+				margin:10px;
+				font-size:10px;
+				text-align:right;
+			
+			}
 		
+			.footer {
+				margin:0 auto;
+				background-image:none;
+				border-bottom:1px solid @grey;
+			}
+		
+	
 		}
+	
+	}
 	
 	}
 }

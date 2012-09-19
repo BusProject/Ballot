@@ -94,10 +94,12 @@
     <!--[if lt IE 7]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
+	<%=  render 'devise/account' %>
+
 	<div id="container">
 		<div id="page">
+
 			<div id="header" class="clearfix">
-				<%=  render 'devise/account' %>
 				
 				<%= link_to image_tag( asset_path( 'theballot.png' ) ), root_path, :id => 'logo' %>
 			</div> <!-- header -->
@@ -123,7 +125,12 @@
 
 		</div><!-- page -->
 
-		<div id="footer"></div><!-- footer -->
+		<div id="footer">
+			<hr />
+			<p>TheBallot.org is brought to you by the League of Young Voters, New Era Colorado, Forward Montana, and the Bus Project.</p>
+			<p><a href="mailto:info@theballot.org">Get in touch</a></p>
+			
+		</div><!-- footer -->
 		<div id="meme-cova"></div>
 		<div id="meme-tainer">
 			<iframe scrolling="no"></iframe>

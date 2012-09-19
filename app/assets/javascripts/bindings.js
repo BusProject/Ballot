@@ -33,7 +33,9 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			var top = $this.position().top
 			if( top < $(document).scrollTop()  ) $(document).scrollTop( top - 1 );
 		}, 10)
-
+		
+		setTimeout(function() { clearInterval(scrollUp); },1000)
+		
 		$(this).text('Close').nextAll('.body').slideDown(400,function() { 
 			$root.selected($data)
 			clearInterval(scrollUp);
@@ -130,7 +132,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		)
 	}
 })
-.on('click touchend','.yourFeedback .meme',function(e) {
+.on('click touchend','.controls .meme',function(e) {
 	var $data = ko.dataFor(this), memetainer = $('#meme-tainer')
 	if( window.innerHeight < 750 ) memetainer.css('top', ((window.innerHeight < 642 ? 642 : window.innerHeight)-632)+'px')
 	if( window.innerWidth < 1100 ) memetainer.css('marginLeft', (( window.innerWidth < 890 ? 780 : window.innerWidth ) -766-162 ) / 2+'px')
@@ -143,7 +145,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		
 	})
 })
-.on('click touchend','.yourFeedback .remove',function(e) {
+.on('click touchend','.controls .remove',function(e) {
 	var $ctx = ko.contextFor(this),
 		$data = $ctx.$data,
 		option = $data.options().filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],
@@ -163,7 +165,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	if( $data.you().id != 'undefined' ) $.post(
 		inits.root+'feedback/'+$data.you().id+'/remove',
 		function(response){
-			option.feedback.remove( $data.you() )
+			if( $('body').hasClass('profile') ) yourLocation.choices.remove( $data )
+			else option.feedback.remove( $data.you() );
 		}
 	)
 })
@@ -317,7 +320,7 @@ ko.bindingHandlers.overwrite = {
 };
 ko.bindingHandlers.stripClass = {
 	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
-		element.className =''
+		element.className =''+valueAccessor()
 	}
 }
 ko.bindingHandlers.addClass = {

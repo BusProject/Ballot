@@ -10,12 +10,13 @@
 
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' +$data.voted()+' '+( $data.voted() == 1 ? 'person' : 'people' )+' have voted | ' +$data.commentsPure()+' '+( $data.commentsPure() == 1 ? 'person' : 'people' )+' have commented' "></div>
 	<button class="open">Learn More and Comment</button>
 	<hr class="button">
 
 	<div class="body">
 		<div class="full-text">
-			<a target="_blank" href="<%= choice.options.first.blurb_source %>" data-bind="visible: $data == $root.selected(), href: $data.options()[0].blurb_source" >View full text</a>
+			<a target="_blank" href="<%= choice.options.first.blurb_source %>" data-bind="visible: $data == $root.selected(), href: $data.options()[0].blurb_source" >View full text  <i class="icon-external-link"></i></a>
 		</div>
 
 		<% n = 0 %>
@@ -52,7 +53,7 @@
 			<%- if user.nil? %>
 				<% # hiding all of this if a featured user is set - i.e. we're looking at a profile  %>
 				<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
-					What Others Are Saying
+					<h2>What Others Are Saying</h2>
 					<select data-bind="value: $data.mode">
 						<option value="normal">Sort By...</option>
 						<option value="best">Most Helpful</option>
@@ -67,15 +68,17 @@
 				<ul data-bind="foreach: feedback.everyone" class="feedback">
 					<li data-bind="addClass: $data.type ">
 
-						<div class="head" data-bind="addClass: $data.type ">
+						<div class="head" data-bind="addClass: $data.type">
 							<a data-bind="attr: {href: $data.url }" >
 								<img class="face" data-bind="src: $data.image, attr: { alt: $data.name }" >
 							</a>
 						</div>
 
-						<strong data-bind="text: $data.option_name+' on '+$parent.contest+':'"></strong>
+						<div class="comment-bubble" data-bind="addClass: $data.type">
+						<strong data-bind="text: $data.name+ ' says '+$data.option_name+' on '+$parent.contest"></strong>
 						<div class="message" data-bind="text: $data.comment"></div>
-
+						</div>
+						
 						<div class="foot">
 								<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
 							<br />
