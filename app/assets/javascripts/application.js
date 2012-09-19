@@ -17,7 +17,7 @@ var yourLocation = new locationModel(inits);
 window.onload = function() {
 	document.location.hash = '' // Clearing dumb facebook thing
 	document.body.className = document.body.className.replace('no-script','').trim() //Fixing body class
-	initialize()
-	$('.clean-no-script').remove() // Removing 
-	ko.applyBindings(yourLocation);
+	initialize() // This loads goelocation / facebook friends
+	$('.clean-no-script').remove() // Removing non-necessary elements that knockout will just rebuild
+	ko.applyBindings(yourLocation); // Binds Knockout
 }
