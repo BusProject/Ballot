@@ -12,19 +12,23 @@ class Choice < ActiveRecord::Base
     return ''
   end
   
-  def geographyNice( statOnly=true)
+  def geographyNice( stateOnly=true)
     @states = ["The United States of America","Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
     @stateAbvs = ["Prez","AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
     
     index = @stateAbvs.index(self.geography.slice(0,2))
     index = 0 if self.geography == 'Prez'
     return self.geography if index.nil?
-    return @states[index] if statOnly || self.geography.length == 2 || self.geography == 'Prez'
+    return @states[index] if stateOnly || self.geography.length == 2 || self.geography == 'Prez'
     
     geography = self.geography.slice(2,self.geography.length)
     geography = 'State House District' if geography.slice(0,2) == 'HD'
     geography = 'State Senate District' if geography.slice(0,2) == 'SD'
     geography = 'Congressional District' if geography.slice(0,2) == 'CD'
+
+    geography = 'Legislative District' if @states[index] == 'Nebraska' && geography == 'State Senate District' # Nebraska only has one legislative chamber
+
+    # Going to need to do something here to handle Vermont
     
     district = self.geography.slice(4,self.geography.length).to_i
     return [@states[index]+"'s", district.ordinalize,geography].join(' ') if district != 0
