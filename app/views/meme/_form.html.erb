@@ -33,7 +33,11 @@
 
 	<div class="matt" >
 		<div class="preview">
-			<% encoded = Base64.encode64( @meme.makeBlob ( true ) ) %>
+			<% begin # This saves the page if imagemagick isn't working %>
+				<% encoded = Base64.encode64( @meme.makeBlob ( true ) ) %>
+			<% rescue %>
+				<% encoded = '' %>
+			<% end %>
 			<a href="data:image/png;base64,<%= encoded %>" target="_blank">
 				<img class="original" src="data:image/png;base64,<%= encoded %>">
 			</a>
