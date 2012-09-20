@@ -57,7 +57,7 @@ class UserController < ApplicationController
     json = JSON::parse(RestClient.get 'https://graph.facebook.com/me/accounts?access_token='+current_user.authentication_token)
     pages = json['data'].reject{ |p| p['category'] == 'Application'}
 
-    if pages.empty? && current_user.pages.nil?
+    if pages.empty? && current_user.pages.nil? && session[:origin].nil?
       session[:origin] = request.env["HTTP_REFERER"]
       redirect_to 'https://www.facebook.com/dialog/oauth?client_id='+ENV['FACEBOOK']+'&redirect_uri='+ENV['BASE']+user_pages_path+'&scope=manage_pages&response_type=token'
     else
