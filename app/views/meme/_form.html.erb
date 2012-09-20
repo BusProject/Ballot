@@ -33,27 +33,30 @@
 
 	<div class="matt" >
 		<div class="preview">
-			<% encoded = Base64.encode64( @meme.makeBlob ( true ) ) %>
+			<% begin %>
+				<% encoded = Base64.encode64( @meme.makeBlob ( true ) ) %>
+			<% rescue %>
+				<% encoded = '' %>
+			<% end %>
 			<a href="data:image/png;base64,<%= encoded %>" target="_blank">
 				<img class="original" src="data:image/png;base64,<%= encoded %>">
 			</a>
 		</div>
-		<div class="preview-load" data-bind="visible: loading">Loading...</div>
-		<div class="kill" style="display:none" data-bind="visible: id  ">Delete</div>
+		<div class="preview-load" data-bind="visible: loading"><i class="icon-refresh"></i> Loading...</div>
+		<div class="kill" style="display:none" data-bind="visible: id  "><i class="icon-trash"></i></div>
 	</div>
 
 
 
 	<div class="sharea unsaved" data-bind="css: {unsaved: id() == null } ">
-		<h2>Step 3: Share Your Image</h2>
 		<div class="share-inner">
-			<a target="_blank" class="googleplus"><%= image_tag 'googleplus-icon.png' %></a>
-			<a target="_blank" class="twitter"><%= image_tag 'twitter-icon.png' %></a>
-			<a target="_blank" class="facebook"><%= image_tag 'facebook-icon.png' %></a>
-			<a target="_blank" class="tumblr"><%= image_tag 'tumblr-icon.png' %></a>
-			<a target="_blank" class="pintrest"><%= image_tag 'pintrest-icon.png' %></a>
+			<a target="_blank" class="googleplus social-icons"><i class="icon-google-plus"></i></a>
+			<a target="_blank" class="twitter social-icons"><i class="icon-twitter"></i></a>
+			<a target="_blank" class="facebook social-icons"><i class="icon-facebook"></i></a>
+			<a target="_blank" class="tumblr social-icons"><%= image_tag 'tumblr.png' %></a>
+			<a target="_blank" class="pinterest social-icons"><i class="icon-pinterest"></i></a>
 		</div>
-		<button class="share">SHARE</button>
+		<button class="share">Step 3: Share Your Image</button>
 	</div>
 
 

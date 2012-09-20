@@ -1,4 +1,4 @@
-@memeHeight: 620px; @memeWidth: 800px;
+@memeHeight: 700px; @memeWidth: 800px;
 
 #meme-cova {
 	position: fixed;
@@ -15,10 +15,9 @@
 	position: fixed;
 	width: @memeWidth - 16px;
 	height: @memeHeight - 8px;
-	background-color: #cd773a;
 	z-index: 100;
-	top: 100px;
-	.box-shadow(5px,0,80px,#fff);
+	top: 50px;
+	.box-shadow(5px,0,80px,rgba(0,0,0,.5));
 	padding: 0;
 	margin: 0 0 0 5%;
 	box-sizing: border-box;
@@ -27,17 +26,14 @@
 		position: absolute;
 		right: -18px;
 		color: white;
-		background: black;
 		width: 26px;
 		padding: 6px 0 4px;
 		border-radius: 4px;
-		font-family: Rokkitt, serif;
 		top: -18px;
 		cursor: pointer;
-		font-size: 14px;
+		font-size: 20px;
 		&.close:hover {
-			color: #222;
-			background: #999;
+			color: darken(white, 20%);
 		}
 	}
 	iframe {
@@ -52,7 +48,10 @@
 	font-size: 16px;
 	text-align: left;
 	font-family: 'Open Sans', sans-serif;
-	background: #cd773a image-url('share-arrows.png') 79% 59% no-repeat;
+	/* background: @badge image-url('share-arrows.png') 79% 59% no-repeat; */
+	.gradient(lighten(@badge,10%), @badge);
+	.border-radius(5px);
+	border:1px solid darken(@badge, 20%);
 	padding: 20px 30px 20px;
 	color: white;
 	height: @memeHeight;
@@ -61,10 +60,11 @@
 		font-family: 'Open Sans', sans-serif;
 		font-size: 34px;
 		color: white;
-		border-top: 1px solid white;
-		border-bottom: 1px solid white;
+		border-top: 1px dotted white;
+		border-bottom: 1px dotted white;
+		padding:15px 0px;
 		text-transform: uppercase;
-		font-weight: normal;
+		font-weight: 700;
 		margin: 0 0 13px;
 		text-align: center;
 
@@ -82,10 +82,11 @@
 		width: 340px;
 		float: left;
 		&::after {
-			content: '+';
+			content: "\f078";
+			font-family:"FontAwesome";
 			float: right;
 			font-size: 80px;
-			margin: -80px -50px 0 0;
+			margin: 0px -55px 0 0;
 			color: white;
 		}
 		textarea { 
@@ -96,9 +97,11 @@
 			padding: 12px 12px 30px; 
 			display: block;
 			resize: none;
-			width: 300px;
+			width: 320px;
 			background: #fff;
-			height: 120px
+			height: 146px;
+			margin-top:12px;
+			border-radius:4px;
 		}
 		.up {
 			margin: -22px 0 0 2px;
@@ -128,9 +131,10 @@
 				float: left; 
 				height: 70px; 
 				cursor: pointer;
-				.drop-shadow(0px, 1px, 5px, 0, .5);
-				&:hover { opacity: 0.7 }
-				&.selected {  .box-shadow(0px,1px,15px,#fff) }
+				.drop-shadow(0px, 1px, 5px, 1px, .5);
+				&.selected {  
+					.inner-shadow(0px, 1px, 5px, 0, .8); 
+				}
 				&:nth-child(1) { background-position: 0 0; }
 				&:nth-child(2) { background-position: -70px 0; }
 				&:nth-child(3) { background-position: -140px 0; }
@@ -148,7 +152,7 @@
 		width: @size;
 		clear: both;
 		margin: 260px auto 0;
-		.box-shadow(0px,4px,15px,#000);
+		.box-shadow(0px,1px,9px,#000);
 		.preview { 
 			background-size: cover; 
 			font-size: 22px;
@@ -166,65 +170,104 @@
 		}
 		.preview-load {
 			position: absolute;
-			right: -80px;
-			color:white;
-			bottom: 20px;
+			right: 30px;
+			color:@darkGrey;
+			bottom: 70px;
+			background-color:rgba(255,255,255,.5);
+			padding:5px;
+			border-radius:10px;
 		}
 		position: relative;
 		.kill {
 			color:white;
-			font-weight: bold;
 			cursor: pointer;
 			background: none;
-			padding: 2px;
 			position: absolute;
-			right: -70px;
-			bottom: 0;
+			right: -20px;
+			bottom: 0px;
 			&:hover {
-				text-decoration: underline;
-				color: red;
+				box-shadow: 0px 0px 2px rgba(0,0,0,.5);
 			}
 		}
 	}
 	.sharea {
-		@width: 470px;
+		@width: 232px;
 		clear: left;
 		width: @width;
 		height: 140px;
-		margin: 8px auto 0;
+		margin: 20px auto 0;
 		text-align: center;
 		h2 { text-align: center; }
 		button.share {
-			border: none;
-			font-size:50px;
+			.orangeButton();
 			text-align:center;
-			width: @width - 100px;
 			cursor: pointer;
-			color: white;
-			margin-top: -4px;
-			font-family: 'Open Sans', sans-serif;
-			background: #3c332d;
+			margin-top: 0px;
+			width:@width;
 		}
 		.share-inner {
+			padding:10px;
 			a {
 				cursor: pointer;
-				margin: 0 10px;
+				margin: 0 4px;
 				img {
 					.opacity(.95);
+					width: 30px;
 					&:hover { .opacity(1); }
 				}
 			}
-			width: @width - 100px-10px;
+			width: 100%;
 			display: block;
 			height: 54px;
-			border: 2px solid white;
-			margin: 0 auto;
-			.inner-shadow(2px, 2px, 15px, 0.3);
-			.gradient-image(image-url('share-bg.png'), #000,#494949);
+			border: 1px solid lighten(@badge, 5%);
+			border-radius:5px 5px 0 0;
+			margin: 0px auto 0px;
+			.inner-shadow(0px, -2px, 5px, 0.5);
+			.gradient(darken(@badge,20%),darken(@badge,10%));
+			
+			.social-icons { 
+				border-radius:3px;
+				padding: 8px 6px 3px;
+				color: white;
+				font-size: 20px;
+				display: block;
+				width: 20px;
+				float: left;
+				box-shadow:rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+			}
+			
+			.facebook { 
+				background-color:#3c5d96;
+				border:1px solid darken(#3c5d96,20%)
+			}
+
+			.twitter {
+				background-color: #45b9f1;
+				border:1px solid darken(#45b9f1,20%)
+			}
+
+			.tumblr {
+				background-color: #3c5872;
+				border:1px solid darken(#3c5872,20%);
+				
+				img {
+					width:13px;
+				}
+			}
+
+			.googleplus { 
+				background-color: #b73425; 
+				border:1px solid darken(#b73425,20%)
+			}
+			
+			.pinterest { 
+				background-color: #c74e45; 
+				border:1px solid darken(#c74e45,20%)
+			}
 		}
 		&.unsaved {
 			.share-inner { display: none; }
-			button.share { margin-top: 0; &:hover { .gradient(#3c332d, #434343); } .gradient(#434343, #3c332d); }
+			button.share { .orangeButton(); }
 		}
 	}
 
