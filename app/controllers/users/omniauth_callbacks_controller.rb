@@ -11,6 +11,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user.save if @user.persisted?
     end
 
+    @user.remember_me! # Remembering the user when logging in
+
     if @user.persisted?
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
       sign_in_and_redirect @user, :event => :authentication

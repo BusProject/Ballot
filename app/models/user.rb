@@ -56,7 +56,8 @@ class User < ActiveRecord::Base
         :first_name => data.first_name,
         :last_name => data.last_name,
         :authentication_token => access_token.credentials.token,
-        :fb => data.id
+        :fb => data.id,
+        :remember_me => true
       }
     if user = self.find_by_email(data.email)
       user.update_attributes( attributes)
