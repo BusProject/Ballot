@@ -7,6 +7,7 @@ Ballot::Application.routes.draw do
   
   match '/users/cancel' => 'user#cancel', :as => 'user_cancel'
   match '/users/update' => 'user#update', :as => 'user_update', :via => :post
+  match '/users/pages' => 'user#access_pages', :as => 'user_pages'
 
   match '/admin' => 'admin#index', :as => 'admin'
   match '/admin/find/:object/' => 'admin#find', :as => 'admin_find' #, :via => :post

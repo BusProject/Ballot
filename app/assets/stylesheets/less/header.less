@@ -19,7 +19,7 @@
 	font-family: 'Open Sans',sans-serif;
 	color: #3C3A3A;
 	width: 100%;
-  	.gradient(lighten(@sideGrey,1%), @sideGrey);
+	.gradient(lighten(@sideGrey,1%), @sideGrey);
 	border-bottom: 3px solid @green;
 	box-shadow: 0px 2px 2px rgba(0,0,0,.5);
 	position:fixed;
@@ -43,14 +43,35 @@
 
 			li {
 				float:left;
-				margin:0px 15x;
 				line-height:20px;
 				display:block;
 				font-size:10px;
 				color:white;
 				border-right:1px solid rgba(255,255,255,.5);
 				text-align:center;
-		
+				
+				ul { 
+					display: none; 
+					position: absolute;
+					padding: 4px 0 0;
+					.gradient(@sideGrey, darken(@sideGrey,2%));
+					li {
+						text-align: left;
+						line-height: 1em;
+						padding: 4px 1px;
+						width: 130px;
+						border: none;
+						clear: both;
+						font-size: 90%;
+						img { }
+					}
+				}
+				&:hover { 
+					ul {
+						display: block;
+						&:hover { display: block; }
+					}
+				}
 		
 				a {
 					display:block;
@@ -65,13 +86,11 @@
 				
 				img {
 					width: 20px;
-					float: right;
+					float: left;
 					border-radius:3px;
 					position:relative;
-					right:-15px;
+					left:-15px;
 					.drop-shadow();
-					
-				
 				}
 			}
 	}

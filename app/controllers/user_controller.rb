@@ -52,6 +52,25 @@ class UserController < ApplicationController
     
   end
   
+  def access_pages 
+    
+    begin
+      json = JSON::parse(RestClient.get 'https://graph.facebook.com/me/accounts?access_token='+current_user.authentication_token)
+      pages = json['data'].reject{ |p| p['category'] == 'Application'}
+      pages = pages.map do |page|
+        user = User.find_by_fb(page['id'])
+        user_id = user.nil? ? nil : user.id
+        { :image => 'http://graph.facebook.com/'+page['id']+'/picture?type=square', :name => page['name'], :user => user_id }
+      end
+      current_user.update_attributes( :pages => pages )
+      redirect_to :back
+    rescue
+      redirect_to 'https://www.facebook.com/dialog/oauth?client_id='+ENV['FACEBOOK']+'&redirect_uri='+:back+'&scope=manage_pages&response_type=token'
+    end
+    
+    
+  end
+  
   protected
     def check_user
       redirect_to root_path if current_user.nil?

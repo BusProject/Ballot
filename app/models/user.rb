@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
     :image, :location, :name, :url, :first_name, :last_name, :feedback, 
     :admin, :authentication_token, :guide_name, :fb, :profile,
-    :fb_friends, :description, :alerts
+    :fb_friends, :description, :alerts, :pages
 
   
   # attr_accessible :title, :body
@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :options, :through => :feedback
   has_many :choices, :through => :options
   
+  serialize :pages
   
   after_initialize :profile
   
