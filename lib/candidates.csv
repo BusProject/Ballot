@@ -3,6 +3,18 @@ AL00007,AL,State,AL,Supreme Court Chief Justice,Harry Lyon,Democratic
 AL00008,AL,State,AL,Public Service Commission President,Lucy Baxley,Democratic
 AL00021,AL,State,AL,Supreme Court Chief Justice,Roy Moore,Republican
 AL00022,AL,State,AL,Public Service Commission President,Twinkle Andress Cavanaugh,Republican
+AZ00001,AZ,Federal,AZ,U.S. Senator,Richard Carmona,Democratic,6024413595,"PO Box 12339 | Tucson, AZ 85732"
+AZ00002,AZ,Federal,AZ,U.S. Senator,Marc Victor,Libertarian,4803041296,"25008 South 125th Place | Chandler, AZ 85249"
+AZ00003,AZ,Federal,AZ,U.S. Senator,Jeff Flake,Republican,6028450333,"PO Box 12512 | Tempe, AZ 85284"
+AZ00030,AZ,State,AZ,Corporation Commissioner,Marcia Busching,Democratic,4802523806,"3319 East Highline Canal Road | Phoenix, AZ 85042"
+AZ00031,AZ,State,AZ,Corporation Commissioner,Sandra Kennedy,Democratic,6028813305,"2317 East Wier Avenue | Phoenix, AZ 85040"
+AZ00032,AZ,State,AZ,Corporation Commissioner,Paul Newman,Democratic,5202499376,"177 West 20th Street #3 | Tucson, AZ 85701"
+AZ00033,AZ,State,AZ,Corporation Commissioner,Thomas Meadows,Green,6027538287,"3110 West Royal Palm Road | Phoenix, AZ 85051"
+AZ00034,AZ,State,AZ,Corporation Commissioner,Daniel Pout,Green,"1230 North Mesa Drive Apartment 171 | Mesa, AZ 85201"
+AZ00035,AZ,State,AZ,Corporation Commissioner,Christopher Gohl,Libertarian,4806528643,"17524 East Hawley Drive | Fountain Hills, AZ 85268"
+AZ00036,AZ,State,AZ,Corporation Commissioner,Susan Bitter Smith,Republican,6024991505,"5806 East Lewis Avenue | Scottsdale, AZ 85257"
+AZ00037,AZ,State,AZ,Corporation Commissioner,"Robert ""Bob"" Burns",Republican,6024690799,"PO Box 6419 | Peoria, AZ 85385"
+AZ00038,AZ,State,AZ,Corporation Commissioner,Bob Stump,Republican,4806328100,"8735 West Windrose Drive | Peoria, AZ 85381"
 CA00001,CA,Federal,CA,United States Senator,Dianne Feinstein,Democratic,TRUE
 CA00002,CA,Federal,CA,United States Senator,Elizabeth Emken,Republican,FALSE
 CO00039,CO,State,CO,Colorado University Regent,Stephen C. Ludwig,Democratic,"3100 Huron St. #2G | Denver, CO 80202",www.voteregentludgwig.com
@@ -16,30 +28,67 @@ CO00326,CO,Other,CO,State Court of Appeals,Dennis A. Graham,Non-Partisan
 CO00327,CO,Other,CO,State Court of Appeals,Gale T. Miller,Non-Partisan
 CO00328,CO,Other,CO,State Court of Appeals,Daniel Marc Taubman,Non-Partisan
 CO00329,CO,Other,CO,State Court of Appeals,John R. Webb,Non-Partisan
-DC00023,DC,Federal,DC,United States Senator ('Shadow Senator'),David Schwartzman,Statehood Green,202-829-9063,"1634 Montague Street, NW 20011"
-DC00025,DC,Federal,DC,United States Representative ('Shadow Representative'),G. Lee Aikin,Statehood Green,202-667-3514,"1754 Swann Street, NW 20009"
-DC00003,DC,Federal,DC,Delegate to the United States House of Representatives,Natale Lino Stracuzzi,Statehood Green,202-421-0377,"2804 Jasper Road, SE #402 20020",stracuzziforcongress@gmail.com
-DC00010,DC,Other,DC,Member of the Council of the District of Columbia,Ann C. Wilcox,Statehood Green,202-441-3265,"1500 Massachusetts Avenue, NW #252 20005",Wilcox_Ann@yahoo.com
-DC00008,DC,Other,DC,Member of the Council of the District of Columbia,Vincent Orange,Democratic,202-486-3201,"1540 Taylor Street, NE 20017"
-DC00021,DC,Federal,DC,United States Senator ('Shadow Senator'),Michael D. Brown,Democratic,202-537-0739,"4501 Western Avenue, NW 20016",hrzcom@aol.com
-DC00024,DC,Federal,DC,United States Representative ('Shadow Representative'),Nate Bennett-Fleming,Democratic,202-341-3134,"1394 Morris Road, SE 20020",manager.nbf2012@gmail.com
-DC00002,DC,Federal,DC,Delegate to the United States House of Representatives,Eleanor H. Norton,Democratic,202-207-8829,P.O. Box 70626 20024,citizenstoelectnorton@gmail.com
-DC00004,DC,Other,DC,Member of the Council of the District of Columbia,Mary Brooks Beatty,Republican,202-546-4196,"1228 Duncan Place, NE 20002",mary@marybrooksbeatty.com
-DC00022,DC,Federal,DC,United States Senator ('Shadow Senator'),Nelson F. Rimensnyder,Republican,202-364-2526,"3881 Newark Street, NW #A475 20016",joegrano@netzero.com
-IN00001,IN,Federal,IN,United States Senator,Joe Donnelly,Democratic
-IN00002,IN,Federal,IN,United States Senator,"Andrew ""Andy"" Horning",Libertarian
-IN00003,IN,Federal,IN,United States Senator,Richard E. Mourdock,Republican
-IN00004,IN,Federal,IN,United States Senator,Amy J. Willis,Independent
-IN00029,IN,State,IN,Attorney General,Kay Fleming,Democratic
-IN00030,IN,State,IN,Attorney General,Greg Zoeller,Republican
-IN00031,IN,State,IN,Governor,John R. Gregg,Democratic
-IN00032,IN,State,IN,Governor,Rupert Boneham,Libertarian
-IN00033,IN,State,IN,Governor,Mike Pence,Republican
-IN00034,IN,State,IN,Lieutenant Governor,Vi Simpson,Democratic
-IN00035,IN,State,IN,Lieutenant Governor,Brad Klopfenstein,Libertarian
-IN00036,IN,State,IN,Lieutenant Governor,Sue Ellspermann,Republican
-IN00037,IN,State,IN,Superintendent of Public Instruction,Glenda Ritz,Democratic
-IN00038,IN,State,IN,Superintendent of Public Instruction,Tony Bennett,Republican
+DC00023,DC,Federal,DC,United States Senator ('Shadow Senator'),David Schwartzman,Statehood Green,202-829-9063,"1634 Montague Street NW, Washington, DC 20011"
+DC00025,DC,Federal,DC,United States Representative ('Shadow Representative'),G. Lee Aikin,Statehood Green,202-667-3514,"1754 Swann Street NW, Washington, DC 20009"
+DC00003,DC,Federal,DC,Delegate to the United States House of Representatives,Natale Lino Stracuzzi,Statehood Green,202-421-0377,"2804 Jasper Road SE #402, Washington, DC 20020",stracuzziforcongress@gmail.com
+DC00010,DC,Other,DC,Member of the Council of the District of Columbia,Ann C. Wilcox,Statehood Green,202-441-3265,"1500 Massachusetts Avenue NW #252, Washington, DC 20005",Wilcox_Ann@yahoo.com
+DC00008,DC,Other,DC,Member of the Council of the District of Columbia,Vincent Orange,Democratic,202-486-3201,"1540 Taylor Street NE, Washington, DC 20017"
+DC00021,DC,Federal,DC,United States Senator ('Shadow Senator'),Michael D. Brown,Democratic,202-537-0739,"4501 Western Avenue NW, Washington, DC 20016",hrzcom@aol.com
+DC00024,DC,Federal,DC,United States Representative ('Shadow Representative'),Nate Bennett-Fleming,Democratic,202-341-3134,"1394 Morris Road SE, Washington, DC 20020",manager.nbf2012@gmail.com
+DC00002,DC,Federal,DC,Delegate to the United States House of Representatives,Eleanor H. Norton,Democratic,202-207-8829,"P.O. Box 70626, Washington, DC 20024",citizenstoelectnorton@gmail.com
+DC00004,DC,Other,DC,Member of the Council of the District of Columbia,Mary Brooks Beatty,Republican,202-546-4196,"1228 Duncan Place NE, Washington, DC 20002",mary@marybrooksbeatty.com
+DC00022,DC,Federal,DC,United States Senator ('Shadow Senator'),Nelson F. Rimensnyder,Republican,202-364-2526,"3881 Newark Street NW #A475, Washington, DC 20016",joegrano@netzero.com
+FL00001,FL,Federal,FL,United States Senator,Bill Nelson,Democratic,4078024765,"1516 East Colonial Drive Suite 101 | Orlando, FL 32803", 
+FL00002,FL,Federal,FL,United States Senator,Bill Gaylor,No Party Affiliation,3212591308,"477 N. Harbor City Boulevard  | Melbourne, FL 32935",bill@floridaforbill.com
+FL00003,FL,Federal,FL,United States Senator,Chris Borgia,No Party Affiliation,"4611 South University Dr. #178  | Davie, FL 33328", 
+FL00004,FL,Federal,FL,United States Senator,Connie Mack,Republican,"2103 Coral Way, Suite 401  | Miami, FL 33145",info@conniemack.com
+FL00069,FL,State,FL,Supreme Court Justice,Peggy A. Quince,Nonpartisan, 
+FL00070,FL,State,FL,Supreme Court Justice,R. Fred Lewis,Nonpartisan,rfl@voteyesjusticelewis.com
+FL00071,FL,State,FL,Supreme Court Justice,Barbara J. Pariente,Nonpartisan,bjp@voteyesjusticepariente.com
+HI00001,HI,Federal,HI,U.S. Senator,Mazie Hirono,Democratic,(808) 536-3292,"PO BOX 677 | HONOLULU, HI 96809"
+HI00002,HI,Federal,HI,U.S. Senator,Linda Lingle,Republican,(808) 777-8845,"PO BOX 4559 | HONOLULU, HI 96812"
+HI00150,HI,State,HI,OHA Trustee Island Of Hawaii (1),Robert K. Lindsey,Nonpartisan,(808) 936-6795,"PO BOX 1063 | KAMUELA, HI 96743"
+HI00151,HI,State,HI,OHA Trustee Island Of Hawaii (1),William (Willy) Meyers,Nonpartisan,(808) 896-3422,"PO BOX 491 | PAPAIKOU, HI 96781"
+HI00152,HI,State,HI,OHA Trustee Island Of Hawaii (1),Edwin L.P. Miranda,Nonpartisan,(808) 961-2524,"431 NAHALE-A AVE | HILO, HI 96720"
+HI00153,HI,State,HI,OHA Trustee Island Of Kauai (1),Dan Ahuna,Nonpartisan,(808) 634-4319,"PO BOX 1355 | KAPAA, HI 96746"
+HI00154,HI,State,HI,OHA Trustee Island Of Kauai (1),Keola Alalem Worthington,Nonpartisan,(808) 635-0603,"PO BOX 1501 | KAPAA, HI 96746"
+HI00155,HI,State,HI,OHA Trustee Island Of Kauai (1),Liberta Hussey Albao,Nonpartisan,(808) 652-8290,"PO BOX 164 | KAPAA, HI 96746"
+HI00156,HI,State,HI,OHA Trustee Island Of Kauai (1),Jackie Kahookele Burke,Nonpartisan,(808) 382-2019,"PO BOX 927 | LIHUE, HI 96766"
+HI00157,HI,State,HI,OHA Trustee Island Of Kauai (1),Kanani Kagawa Fu,Nonpartisan,(808) 652-2073,"PO BOX 3296 | LIHUE, HI 96766"
+HI00158,HI,State,HI,OHA Trustee Island Of Kauai (1),Haunani Pacheco,Nonpartisan,(808) 652-7811,"PO BOX 158 | KILAUEA, HI 96754"
+HI00159,HI,State,HI,OHA Trustee Island Of Kauai (1),Sharon A. Pomroy,Nonpartisan,(808) 346-6725,"PO BOX 600 | ANAHOLA, HI 96703"
+HI00160,HI,State,HI,OHA Trustee Island Of Kauai (1),Ronson K. Sahut,Nonpartisan,(808) 212-6116,"PO BOX 674 | KALAHEO, HI 96741"
+HI00161,HI,State,HI,OHA Trustee Island Of Kauai (1),D. Kaliko Santos,Nonpartisan,(808) 346-0841,"PO BOX 1541 | LIHUE, HI 96766"
+HI00162,HI,State,HI,OHA Trustee Island Of Kauai (1),Billy Kealamaikahiki Swain,Nonpartisan,(808) 652-6087,"401 PAPALOA RD, #503 | KAPAA, HI 96746"
+HI00163,HI,State,HI,OHA Trustee Island Of Kauai (1),Leland K. (Radar) Yadao,Nonpartisan,(808) 635-7005,"PO BOX 861 | LIHUE, HI 96766"
+HI00164,HI,State,HI,OHA Trustee Island Of Molokai (1),Colette (Piipii) Machado,Nonpartisan,(808) 282-4354,"PO BOX 142 | KAUNAKAKAI, HI 96748"
+HI00165,HI,State,HI,OHA Trustee No Island Residency Req (1),Keli'i Akina,Nonpartisan,(808) 256-9792,"PO BOX 61036 | HONOLULU, HI 96839"
+HI00166,HI,State,HI,OHA Trustee No Island Residency Req (1),Haunani Apoliona,Nonpartisan,(808) 737-9011,"1447 FRANK ST | HONOLULU, HI 96816"
+HI00167,HI,State,HI,OHA Trustee No Island Residency Req (1),Cal Lee,Nonpartisan,(808) 330-5638,"741 AIPO ST | HONOLULU, HI 96825"
+HI00168,HI,State,HI,OHA Trustee No Island Residency Req (1),Lancelot Haili Lincoln,Nonpartisan,(808) 628-1855,"67-330 GOODALE AVE, B28 | WAIALUA, HI 96791"
+HI00169,HI,State,HI,OHA Trustee No Island Residency Req (1),Kealii J. Makekau,Nonpartisan,(808) 947-4343,"PO BOX 372071 | HONOLULU, HI 96837"
+HI00170,HI,State,HI,OHA Trustee No Island Residency Req (1),Walter Ritte,Nonpartisan,(808) 567-9415,"LOT 69E PUUPEELUA AVE | HOOLEHUA, HI 96729"
+IN00001,IN,Federal,IN,United States Senator,Joe Donnelly,Democratic,"16200 Fox Cross Drive | Granger, IN 46530"
+IN00002,IN,Federal,IN,United States Senator,"Andrew ""Andy"" Horning",Libertarian,"7851 Pleasant Hill Rd | Freedom, IN 47431"
+IN00003,IN,Federal,IN,United States Senator,Richard E. Mourdock,Republican,"10880 Ridge Knoll Dr | Evansville, IN 47710"
+IN00004,IN,Federal,IN,United States Senator,Amy J. Willis,Independent,"8311 Thorn Bend Dr | Indianapolis, IN 46278"
+IN00029,IN,State,IN,Attorney General,Kay Fleming,Democratic,"4305 Manning Road | Indianapolis, IN 46228"
+IN00030,IN,State,IN,Attorney General,Greg Zoeller,Republican,"3309 E 56th St | Indianapolis, IN 46220"
+IN00031,IN,State,IN,Governor,John R. Gregg,Democratic,"20566 East Jericho Road | Sandborn, IN 47578"
+IN00032,IN,State,IN,Governor,Rupert Boneham,Libertarian,"787 E 86th St | Indianapolis, IN 46240"
+IN00033,IN,State,IN,Governor,Mike Pence,Republican,"12955 N German Rd | Columbus, IN 47203"
+IN00034,IN,State,IN,Lieutenant Governor,Vi Simpson,Democratic,"4965 West Woodland Drive | Bloomington, IN 47404"
+IN00035,IN,State,IN,Lieutenant Governor,Brad Klopfenstein,Libertarian,"5455 E 13th St | Indianapolis, IN 46219"
+IN00036,IN,State,IN,Lieutenant Governor,Sue Ellspermann,Republican,"212 E 25th Street | Ferdinand, IN 47532"
+IN00037,IN,State,IN,Superintendent of Public Instruction,Glenda Ritz,Democratic,"4303 Powderhorn Court | Carmel, IN 46033"
+IN00038,IN,State,IN,Superintendent of Public Instruction,Tony Bennett,Republican,"6264 Newark Drive | Noblesville, IN 46062"
+KS00313,KS,Other,KS,Supreme Court Justice,Nancy L. Moritz,Nonpartisan,(785) 260-3132 ,"301 SW 10th Ave  | Topeka, KS 66612 "
+KS00314,KS,Other,KS,Court of Appeals Judge,Steve Leben,Nonpartisan,(913) 432-4975 ,"301 S.W. 10th, Room 267  | Topeka, KS 66612 "
+KS00315,KS,Other,KS,Court of Appeals Judge,G. Joseph Pierron Jr.,Nonpartisan,(785) 856-8419 ,"1808 Castle Pines Court  | Lawrence, KS 66047 "
+KS00316,KS,Other,KS,Court of Appeals Judge,David E. Bruns,Nonpartisan,(785) 233-4664 ,"301 S.W. 10th Ave., Room 278  | Topeka, KS 66612 "
+KS00317,KS,Other,KS,Court of Appeals Judge,G. Gordon Atcheson,Nonpartisan,(913) 649-9835 ,"301 SW 10th Ave  | Topeka, KS 66612 "
+KS00318,KS,Other,KS,Court of Appeals Judge,Karen Arnold-Burger,Nonpartisan,(913) 681-5861 ,"301 SW 10th Ave.  | Topeka, KS 66612 "
+KS00319,KS,Other,KS,Court of Appeals Judge,Richard D. Greene,Nonpartisan,(316) 761-0308 ,"301 W. 10th  | Topeka, KS 66612 "
 MD00001,MD,Federal,MD,U.S. Senator,Ben Cardin,Democratic,443-865-7290,P.O. Box 21093  | Baltimore MD 21228,info@bencardin.com
 MD00002,MD,Federal,MD,U.S. Senator,Daniel John Bongino,Republican,410-924-4577,Bongino for Senate P.O. Box 827 | Severna Park MD 21146,campaign@bongino.com
 MD00003,MD,Federal,MD,U.S. Senator,Lih Young,Democratic,P.O. Box 10286  | Rockville MD 20849,lyoung2k@yahoo.com
@@ -55,6 +104,57 @@ ME00003,ME,Federal,ME,U.S. Senate,Andrew Ian Dodge,Independent for Liberty,"PO B
 ME00004,ME,Federal,ME,U.S. Senate,Angus King,Independent for Maine,"15 Potter Street | Brunswick, ME 04011"
 ME00005,ME,Federal,ME,U.S. Senate,Danny Francis Dalton,Non-Party,"PMB 277 Mail IT 4U, 10 State Road, Suite 9 | Bath, ME 04530"
 ME00006,ME,Federal,ME,U.S. Senate,"Charles E. Summers, Jr.",Republican,"85 Burnham Road | Scarborough, ME 04074"
+MI00001,MI,Federal,MI,United States Senator 6 Year Term (1) Position,Pete Hoekstra,Republican,"1454 Cimmoran Dr | Holland, MI 49423"
+MI00002,MI,Federal,MI,United States Senator 6 Year Term (1) Position,Debbie Stabenow,Democratic,"PO Box 4945 | East Lansing, MI 48826"
+MI00003,MI,Federal,MI,United States Senator 6 Year Term (1) Position,Scotty Boman,Libertarian,"4877 Balfour Rd | Detroit, MI 48224"
+MI00004,MI,Federal,MI,United States Senator 6 Year Term (1) Position,Richard A. Matkin,U.S. Taxpayers,"30 W Harry Ave | Hazel Park, MI 48030"
+MI00005,MI,Federal,MI,United States Senator 6 Year Term (1) Position,Harley Mikkelson,Green,"3122 W Caro Rd | Caro, MI 48723"
+MI00006,MI,Federal,MI,United States Senator 6 Year Term (1) Position,John D. Litle,Natural Law Party,"2763 Arrowwood Trl | Ann Arbor, MI 48105"
+MI00315,MI,State,MI,Member Of The State Board Of Education 8 Year Terms (2) Positions,Todd A. Courser,Republican,"3110 Murphy Lake Rd | Silverwood, MI 48760"
+MI00316,MI,State,MI,Member Of The State Board Of Education 8 Year Terms (2) Positions,Melanie A. Kurdys,Republican,"2267 Preserve Blvd | Portage, MI 49024"
+MI00317,MI,State,MI,Member Of The State Board Of Education 8 Year Terms (2) Positions,Michelle Fecteau,Democratic,"15885 Rosemont | Detroit, MI 48223"
+MI00318,MI,State,MI,Member Of The State Board Of Education 8 Year Terms (2) Positions,Lupe Ramos-Montigny,Democratic,"977 Waltham Ave SE | Grand Rapids, MI 49546"
+MI00319,MI,State,MI,Member Of The State Board Of Education 8 Year Terms (2) Positions,Andy LeCureaux,Libertarian,"PO Box 1033 | Hazel Park, MI 48030"
+MI00320,MI,State,MI,Member Of The State Board Of Education 8 Year Terms (2) Positions,Karen Adams,U.S. Taxpayers,"6274 Tischer Rd | Lake Odessa, MI 48849"
+MI00321,MI,State,MI,Member Of The State Board Of Education 8 Year Terms (2) Positions,Gail M. Graeser,U.S. Taxpayers,"990 W 48th St | Fremont, MI 49412"
+MI00322,MI,State,MI,Member Of The State Board Of Education 8 Year Terms (2) Positions,Candace R. Caveny,Green,"PO Box 1043 | Lapeer, MI 48446"
+MI00323,MI,State,MI,Member Of The State Board Of Education 8 Year Terms (2) Positions,Dwain Reynolds III,Green,"725 Perch Cove Ct | Middleville, MI 49333"
+MI00324,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,Dan Horning,Republican,"17 Howard St | Grand Haven, MI 49417"
+MI00325,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,Robert Steele,Republican,"1865 Superior Rd | Ypsilanti, MI 48198"
+MI00326,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,Mark Bernstein,Democratic,"2002 Scottwood Ave | Ann Arbor, MI 48104"
+MI00327,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,Shauna Ryder Diggs,Democratic,"465 Washington Rd | Grosse Pointe, MI 48230"
+MI00328,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,James Lewis Hudler,Libertarian,"17165 Fahrner Rd | Chelsea, MI 48118"
+MI00329,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,Gregory Scott Stempfle,Libertarian,"1726 Pearson | Ferndale, MI 48220"
+MI00330,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,Joe Sanger,U.S. Taxpayers,"4119 Thackin Dr | Lansing, MI 48911"
+MI00331,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,Gerald T. Van Sickle,U.S. Taxpayers,"PO Box 38 | Wellston, MI 49689"
+MI00332,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,Eric Borregard,Green,"7544 Lake Hollow Ct | Dexter, MI 48130"
+MI00333,MI,State,MI,Member Of The University Of Michigan Board Of Regents 8 Year Terms (2) Positions,Nikki Mattson,Natural Law Party,"3645 Partridge Path Apt 1 | Ann Arbor, MI 48108"
+MI00334,MI,State,MI,Member Of The Michigan State University Board Of Trustees 8 Year Terms (2) Positions,Melanie Foster,Republican,"2561 Meadow Woods Dr | East Lansing, MI 48823"
+MI00335,MI,State,MI,Member Of The Michigan State University Board Of Trustees 8 Year Terms (2) Positions,Jeff Sakwa,Republican,"3465 Hidden Oaks Ln | West Bloomfield, MI 48324"
+MI00336,MI,State,MI,Member Of The Michigan State University Board Of Trustees 8 Year Terms (2) Positions,Joel Ferguson,Democratic,"1341 Cambridge | Lansing, MI 48911"
+MI00337,MI,State,MI,Member Of The Michigan State University Board Of Trustees 8 Year Terms (2) Positions,Brian Mosallam,Democratic,"35 Turnberry Ln | Dearborn, MI 48120"
+MI00338,MI,State,MI,Member Of The Michigan State University Board Of Trustees 8 Year Terms (2) Positions,Michael H. Miller,Libertarian,"6070 Carriage Hill Dr | East Lansing, MI 48823"
+MI00339,MI,State,MI,Member Of The Michigan State University Board Of Trustees 8 Year Terms (2) Positions,Bill Mohr II,U.S. Taxpayers,"1665 20 Mile Rd | Kent City, MI 49330"
+MI00340,MI,State,MI,Member Of The Michigan State University Board Of Trustees 8 Year Terms (2) Positions,Stephen J. Young,U.S. Taxpayers,"3101 134th St | Hopkins, MI 49328"
+MI00341,MI,State,MI,Member Of The Michigan State University Board Of Trustees 8 Year Terms (2) Positions,Lloyd Clarke,Green,"5770 McGrandy Rd | Bridgeport, MI 48722"
+MI00342,MI,State,MI,Member Of The Wayne State University Board Of Governors 8 Year Terms (2) Positions,Michael J. Busuito,Republican,"2556 Amherst Rd | Troy, MI 48098"
+MI00343,MI,State,MI,Member Of The Wayne State University Board Of Governors 8 Year Terms (2) Positions,Satish B. Jasti,Republican,"2995 Saddlewood Rd | West Bloomfield, MI 48324"
+MI00344,MI,State,MI,Member Of The Wayne State University Board Of Governors 8 Year Terms (2) Positions,Sandra Hughes O'Brien,Democratic,"16916 Abby Cir | Northville, MI 48167"
+MI00345,MI,State,MI,Member Of The Wayne State University Board Of Governors 8 Year Terms (2) Positions,Kim Trent,Democratic,"2230 Hyde Park Rd | Detroit, MI 48207"
+MI00346,MI,State,MI,Member Of The Wayne State University Board Of Governors 8 Year Terms (2) Positions,Robert Gale,U.S. Taxpayers,"PO Box 1313 | Sterling Heights, MI 48311"
+MI00347,MI,State,MI,Member Of The Wayne State University Board Of Governors 8 Year Terms (2) Positions,Marc J. Sosnowski,U.S. Taxpayers,"8488 Kinloch St | Dearborn Heights, MI 48127"
+MI00348,MI,State,MI,Member Of The Wayne State University Board Of Governors 8 Year Terms (2) Positions,Margaret Guttshall,Green,"4190 Kensington | Detroit, MI 48224"
+MI00349,MI,State,MI,Member Of The Wayne State University Board Of Governors 8 Year Terms (2) Positions,Latham Redding,Green,"3520 Kensington | Detroit, MI 48224"
+MI00350,MI,State,MI,Justice Of The Supreme Court 8 Year Terms (2) Positions,Doug Dern,Nonpartisan,"4300 N Milford Rd | Highland, MI 48357"
+MI00351,MI,State,MI,Justice Of The Supreme Court 8 Year Terms (2) Positions,Connie Marie Kelley,Nonpartisan,"14900 Fox | Redford, MI 48239"
+MI00352,MI,State,MI,Justice Of The Supreme Court 8 Year Terms (2) Positions,Stephen Markman,Nonpartisan
+MI00353,MI,State,MI,Justice Of The Supreme Court 8 Year Terms (2) Positions,Bridget Mary McCormack,Nonpartisan,"1982 High Hollow Dr | Ann Arbor, MI 48103"
+MI00354,MI,State,MI,Justice Of The Supreme Court 8 Year Terms (2) Positions,Kerry L. Morgan,Nonpartisan,"20601 Sumner | Redford, MI 48240"
+MI00355,MI,State,MI,Justice Of The Supreme Court 8 Year Terms (2) Positions,Colleen O'Brien,Nonpartisan,"1139 Chaffer Dr | Rochester, MI 48306"
+MI00356,MI,State,MI,Justice Of The Supreme Court 8 Year Terms (2) Positions,Bob Roddis,Nonpartisan,"424 Madison | Grosse Pointe Farms, MI 48236"
+MI00357,MI,State,MI,Justice Of The Supreme Court Incumbent,Mindy Barry,Nonpartisan,"1124 Berkshire Rd | Grosse Pointe Park, MI 48230"
+MI00358,MI,State,MI,Justice Of The Supreme Court Incumbent,Shelia Johnson,Nonpartisan,"29222 W Chanticleer Dr | Southfield, MI 48034"
+MI00359,MI,State,MI,Justice Of The Supreme Court Incumbent,Brian Zahra,Nonpartisan
 MO00001,MO,Federal,MO,U. S. Senator,Claire McCaskill,Democratic
 MO00002,MO,Federal,MO,U. S. Senator,Todd Akin,Republican
 MO00003,MO,Federal,MO,U. S. Senator,Jonathan Dine,Libertarian
@@ -220,6 +320,33 @@ TN00004,TN,Federal,TN,United States Senate,David Gatchell,Independent
 TN00005,TN,Federal,TN,United States Senate,James Higdon,Independent
 TN00006,TN,Federal,TN,United States Senate,Michel Joseph Long,Independent
 TN00007,TN,Federal,TN,United States Senate,Troy Stephen Scoggin,Independent
+TX00001,TX,Federal,TX,U. S. Senator,David B.? Collins,Green
+TX00002,TX,Federal,TX,U. S. Senator,John Jay? Myers,Libertarian
+TX00003,TX,Federal,TX,U. S. Senator,Paul Sadler,Democratic
+TX00004,TX,Federal,TX,U. S. Senator,Ted Cruz,Republican
+TX00120,TX,State,TX,Railroad Commissioner,Chris? Kennedy,Green
+TX00121,TX,State,TX,Railroad Commissioner,Christi Craddick,Republican
+TX00122,TX,State,TX,Railroad Commissioner,Dale Henry,Democratic
+TX00123,TX,State,TX,Railroad Commissioner,Vivekananda (Vik)? Wall,Libertarian
+TX00124,TX,State,TX,Railroad? Commissioner,Barry Smitherman,Republican
+TX00125,TX,State,TX,Railroad? Commissioner,Jaime O.? Perez,Libertarian
+TX00126,TX,State,TX,Railroad? Commissioner,Josh? Wendel,Green
+TX00127,TX,State,TX,Justice,Don Willett,Republican
+TX00128,TX,State,TX,Justice,RS Roberto? Koelsch,Libertarian
+TX00129,TX,State,TX,Justice,Charles E.? Waterbury,Green
+TX00130,TX,State,TX,Justice,John Devine,Republican
+TX00131,TX,State,TX,Justice,Tom? Oxford,Libertarian
+TX00132,TX,State,TX,Justice,Jim? Chisholm,Green
+TX00133,TX,State,TX,Justice,Mark? Ash,Libertarian
+TX00134,TX,State,TX,Justice,Michele Petty,Democratic
+TX00135,TX,State,TX,Justice,Nathan Hecht,Republican
+TX00136,TX,State,TX,Presiding Judge,Keith Hampton,Democratic
+TX00137,TX,State,TX,Presiding Judge,Lance? Stott,Libertarian
+TX00138,TX,State,TX,Presiding Judge,Sharon? Keller,Republican
+TX00139,TX,State,TX,Judge,Barbara Parker Hervey,Republican
+TX00140,TX,State,TX,Judge,Mark W.? Bennett,Libertarian
+TX00141,TX,State,TX,Judge,Elsa Alcala,Republican
+TX00142,TX,State,TX,Judge,"William Bryan? Strange, III",Libertarian
 UT00001,UT,Federal,UT,US Senate,Shaun Lynn McCausland,Constitution,(435)668-7118,"51 N 300 W | LaVerkin, UT 84745",www.mrshaungoestowashington.com,shaun@musicomp.net
 UT00002,UT,Federal,UT,US Senate,Scott Howell,Democratic,(801)930-9165,"3686 Cove Point Dr. | Salt Lake City, UT 84109"
 UT00003,UT,Federal,UT,US Senate,Orrin G. Hatch,Republican,(801)797-8200,"4516 South 700 East | Murray, UT 84107",www.orrinhatch.com,orrin@hatchforsenate.com
@@ -238,8 +365,40 @@ UT00029,UT,State,UT,State Auditor,Richard Proctor,Constitution,(801)285-9489,"PO
 UT00030,UT,State,UT,State Treasurer,Christopher Stout,Democratic,(801)892-9700,"880 Red Sage Lane | Salt Lake City, UT 84107",www.stout2012.com,info@christopherstout.org
 UT00031,UT,State,UT,State Treasurer,Vincent C. Marcus III,Libertarian,(801)444-0737,"2880 W 1425 N | Layton, UT 84041",www.votemarcus.com,vince@votemarcus.com
 UT00032,UT,State,UT,State Treasurer,Richard K. Ellis,Republican,(801)569-1464,"2179 West 9140 South | West Jordan, UT 84088",rellisfortreasurer@gmail.com
-VA00001,VA,Federal,VA,U.S. Senate,George F. Allen,Republican,FALSE,804-726-2012,"2819 North Parham Road| Henrico, VA 23229",http://www.georgeallen.com,mike.thomas@georgeallen.com
-VA00002,VA,Federal,VA,U.S. Senate,Timothy M. Kaine,Democratic,FALSE,804-359-710,"PO Box 12307| Richmond, VA 23241",http://www.kaineforva.com,tmk@kaineforsenate.com
+VA00001,VA,Federal,VA,U.S. Senate,George F. Allen,Republican,FALSE,804-726-2012,"2819 North Parham Road| Henrico, VA 23229",http://www.georgeallen.com,mike.thomas@georgeallen.com,?
+VA00002,VA,Federal,VA,U.S. Senate,Timothy M. Kaine,Democratic,FALSE,804-359-710,"PO Box 12307| Richmond, VA 23241",http://www.kaineforva.com,tmk@kaineforsenate.com,e
+VT00001,VT,Federal,VT,For US Senator,Pete Diamondstone,Liberty Union
+VT00002,VT,Federal,VT,For US Senator,Cris Ericson,United States Marijuana
+VT00003,VT,Federal,VT,For US Senator,Laurel Laframboise,VoteKISS
+VT00004,VT,Federal,VT,For US Senator,John Macgovern,Republican
+VT00005,VT,Federal,VT,For US Senator,Peter Moss,Peace and Prosperity
+VT00006,VT,Federal,VT,For US Senator,Bernie Sanders,Independent
+VT00007,VT,Federal,VT,For Representative to Congress,"James ""Sam"" Desrochers",Independent
+VT00008,VT,Federal,VT,For Representative to Congress,Mark Donka,Republican
+VT00009,VT,Federal,VT,For Representative to Congress,Andre Laframboise,VoteKISS
+VT00010,VT,Federal,VT,For Representative to Congress,Jane Newton,Liberty Union
+VT00011,VT,Federal,VT,For Representative to Congress,Peter Welch,Democratic/Working Families
+VT00012,VT,State,VT,For Governor,Randy Brock,Republican
+VT00013,VT,State,VT,For Governor,Dave Eagle,Liberty Union
+VT00014,VT,State,VT,For Governor,Cris Ericson,United States Marijuana
+VT00015,VT,State,VT,For Governor,Emily Peyton,Independent
+VT00016,VT,State,VT,For Governor,Peter Shumlin,Democratic/Working Families
+VT00017,VT,State,VT,For Lieutenant Governor,"Cassandra ""Cass"" Gekas",Progressive/Democratic
+VT00018,VT,State,VT,For Lieutenant Governor,Ben Mitchell,Liberty Union
+VT00019,VT,State,VT,For Lieutenant Governor,Phil Scott,Republican
+VT00020,VT,State,VT,For State Treasurer,"Jessica ""Jessy"" Diamondstone",Liberty Union
+VT00021,VT,State,VT,For State Treasurer,Beth Pearce,Democratic/Working Families
+VT00022,VT,State,VT,For State Treasurer,Don Schramm,Progressive
+VT00023,VT,State,VT,For State Treasurer,Wendy Wilton,Republican
+VT00024,VT,State,VT,For Secretary of State,James C. Condos,Dem/Prog/WF/Rep
+VT00025,VT,State,VT,For Secretary of State,"Mary Alice ""Mal"" Herbert",Liberty Union
+VT00026,VT,State,VT,For Auditor of Accounts,Doug Hoffer,Democratic/Progressive
+VT00027,VT,State,VT,For Auditor of Accounts,Vincent Illuzzi,Republican/Working Families
+VT00028,VT,State,VT,For Auditor of Accounts,Jerry Levy,Liberty Union
+VT00029,VT,State,VT,For Attorney General,Rosemarie Jackowski,Liberty Union
+VT00030,VT,State,VT,For Attorney General,Jack Mcmullen,Republican
+VT00031,VT,State,VT,For Attorney General,William H. Sorrell,Democratic
+VT00032,VT,State,VT,For Attorney General,Ed Stanak,Progressive
 WA00001,WA,Federal,WA,U.S. Senator,Maria Cantwell,Democratic
 WA00002,WA,Federal,WA,U.S. Senator,Michael Baumgartner,Republican
 WA00025,WA,State,WA,Governor,Jay Inslee,Democratic
@@ -277,15 +436,23 @@ WA00274,WA,Other,WA,Court of Appeals,Teresa C. Kulik,Non-Partisan
 WA00275,WA,Other,WA,Court of Appeals,Devin Poulson,Non-Partisan
 WV00001,WV,Federal,WV,U.S. Senate,Joe Manchin III,Democratic,TRUE,info@joemanchinwv.com
 WV00002,WV,Federal,WV,U.S. Senate,John R. Raese,Republican,FALSE,304-594-0281,jtroy@raeseforsenate.org
-WV00009,WV,State,WV,Governor,Earl Ray Tomblin?(Incumbent)?,Democratic,TRUE
+WV00009,WV,State,WV,Governor,Earl Ray Tomblin,Democratic,TRUE
 WV00010,WV,State,WV,Governor,Bill Maloney,Republican,FALSE
-WV00011,WV,State,WV,Agriculture Commissioner,Walt Helmick?,Democratic,FALSE
+WV00011,WV,State,WV,Agriculture Commissioner,Walt Helmick,Democratic,FALSE
 WV00012,WV,State,WV,Agriculture Commissioner,Kent Leonhardt,Republican,FALSE
-WV00013,WV,State,WV,Attorney General,Darrell McGraw?(Incumbent),Democratic,TRUE
+WV00013,WV,State,WV,Attorney General,Darrell McGraw,Democratic,TRUE
 WV00014,WV,State,WV,Attorney General,Patrick Morrisey,Republican,FALSE
-WV00015,WV,State,WV,Auditor,Glen Gainer?(Incumbent),Democratic,TRUE
+WV00015,WV,State,WV,Auditor,Glen Gainer,Democratic,TRUE
 WV00016,WV,State,WV,Auditor,Larry Faircloth,Republican,FALSE
-WV00017,WV,State,WV,Secretary of State,Natalie Tennant?(Incumbent),Democratic,TRUE
+WV00017,WV,State,WV,Secretary of State,Natalie Tennant,Democratic,TRUE
 WV00018,WV,State,WV,Secretary of State,Brian Savilla,Republican,FALSE
-WV00218,WV,State,WV,Treasurer,John Perdue?(Incumbent),Democratic,TRUE
+WV00218,WV,State,WV,Treasurer,John Perdue,Democratic,TRUE
 WV00219,WV,State,WV,Treasurer,Mike Hall,Republican
+WY00001,WY,Federal,WY,United States Senator,John Barrasso,Republican,307-234-0819,"P.O. Box 52008 | Casper, WY 82605",ryan@barrassoforwyoming.com
+WY00002,WY,Federal,WY,United States Senator,Tim Chesnut,Democratic,307-760-5171,"2124 Thornburgh Dr | Laramie, WY 82070",tchesnut@co.albany.wy.us
+WY00003,WY,Federal,WY,United States Senator,Joel Otto,Country,307-332-7989,"2946 Sinks Canyon Rd | Lander, WY 82520",jotto@lisco.com
+WY00004,WY,Federal,WY,United States Representative,Cynthia M. Lummis,Republican,307-630-7704,"3905 Bent Ave | Cheyenne, WY 82001",haley@lummisforwyoming.org
+WY00005,WY,Federal,WY,United States Representative,Chris Henrichsen,Democratic,307-702-1430,"P.O. Box 4097 | Casper, WY 82604",chrishenrichsen@me.com
+WY00006,WY,Federal,WY,United States Representative,Richard P. Brubaker,Libertarian,307-856-4650,"4530 W Mountain View Dr | Riverton, WY 82501",BRUMISTER53@YAHOO.COM
+WY00007,WY,Federal,WY,United States Representative,Daniel Clyde Cummings,Constitution,307-472-1863,"P.O. Box 1060 | Casper, WY 82602-1060",cummings4congress@mail.com
+WY00008,WY,Federal,WY,United States Representative,Don Wills,Country,307-245-3140,"105 Road 161 | Pine Bluffs, WY 82082",don.wills@me.com

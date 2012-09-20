@@ -33,7 +33,7 @@
 
 	<div class="matt" >
 		<div class="preview">
-			<% begin %>
+			<% begin # This saves the page if imagemagick isn't working %>
 				<% encoded = Base64.encode64( @meme.makeBlob ( true ) ) %>
 			<% rescue %>
 				<% encoded = '' %>
