@@ -22,13 +22,15 @@
 										<%= user.name %>
 									<% end %>
 								</li>
-								<% user.pages.reject{|page| page[:fb] == current_user.fb }.each do |page| %>
-									<li>
-										<%= link_to user_page_session_create_path( page[:fb] ), :class => page[:user].nil? ? 'inactive' : ''  do %>
-											<%= image_tag ( page[:image] ) %>
-											<%= page[:name] %>
-										<% end %>
-									</li>
+								<%- if !user.nil? && !user.page.nil? %>
+									<% user.pages.reject{|page| page[:fb] == current_user.fb }.each do |page| %>
+										<li>
+											<%= link_to user_page_session_create_path( page[:fb] ), :class => page[:user].nil? ? 'inactive' : ''  do %>
+												<%= image_tag ( page[:image] ) %>
+												<%= page[:name] %>
+											<% end %>
+										</li>
+									<% end %>
 								<% end %>
 							<% else %>
 								<% current_user.pages.each do |page| %>
