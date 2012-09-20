@@ -222,10 +222,7 @@ Devise.setup do |config|
   # end
   #facebook
   
-<<<<<<< HEAD
+
   config.omniauth :facebook, ENV['FACEBOOK'], ENV['FACEBOOK_SECRET'],   {:scope => 'email, offline_access, friends_activities, user_location, friends_location, user_activities, user_status, user_photos'  }
-=======
-  config.omniauth :facebook, ENV['FACEBOOK'], ENV['FACEBOOK_SECRET'],   {:scope => 'email, offline_access, friends_activities, user_location, friends_location, user_activities, user_status, user_photos, publish_stream '  }
->>>>>>> Noah's-Sub-Master
   
 end
