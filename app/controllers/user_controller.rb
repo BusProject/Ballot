@@ -60,7 +60,7 @@ class UserController < ApplicationController
       pages = pages.map do |page|
         user = User.find_by_fb(page['id'])
         user_id = user.nil? ? nil : user.id
-        { :image => 'http://graph.facebook.com/'+page['id']+'/picture?type=square', :name => page['name'], :user => user_id }
+        { :fb => page['id'], :image => 'http://graph.facebook.com/'+page['id']+'/picture?type=square', :name => page['name'], :user => user_id, :authentication_token => page['access_token'] }
       end
       current_user.update_attributes( :pages => pages )
       redirect_to :back
@@ -69,6 +69,20 @@ class UserController < ApplicationController
     end
     
     
+  end
+  
+  
+  def page_session
+    
+    page_user = User.find_with_fb_id( params[:fb], current_user.pages.select{ |page| page[:fb] == params[:fb]}.first )
+
+
+    session.delete(:logged_in_as) 
+    session[:logged_in_as] = current_user.id
+    
+    sign_in page_user
+    
+    redirect_to :back
   end
   
   protected

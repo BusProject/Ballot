@@ -12,12 +12,28 @@
 							<%= current_user.first_name+' '+current_user.last_name %>
 						<% end %>
 						<ul >
-							<%- if current_user.pages.nil? %>
+							<%- if current_user.pages.nil? && session[:logged_in_as].nil? %>
 								<li><%= link_to 'Login as facebook page', user_pages_path %></li>
+							<% elsif current_user.pages.nil? %>
+								<% user = User.find(session[:logged_in_as]) %>
+								<li>
+									<%= link_to omniauth_authorize_path('user', :facebook)  do %>
+										<%= image_tag ( user.image ) %>
+										Use as <%= user.name %>
+									<% end %>
+								</li>
+								<% user.pages.each do |page| %>
+									<li>
+										<%= link_to user_page_session_create_path( page[:fb] )  do %>
+											<%= image_tag ( page[:image] ) %>
+											<%= page[:name] %>
+										<% end %>
+									</li>
+								<% end %>
 							<% else %>
 								<% current_user.pages.each do |page| %>
 									<li>
-										<%= link_to user_pages_path do %>
+										<%= link_to user_page_session_create_path( page[:fb] )  do %>
 											<%= image_tag ( page[:image] ) %>
 											<%= page[:name] %>
 										<% end %>

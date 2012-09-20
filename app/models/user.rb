@@ -68,6 +68,28 @@ class User < ActiveRecord::Base
     end
   end
   
+  def self.find_with_fb_id(fb_id, attributes)
+    if user = self.find_by_fb(fb_id)
+      return user
+    else
+      graphInfo = JSON::parse(RestClient.get 'https://graph.facebook.com/'+fb_id)
+      attributes = {
+          :image => attributes[:image], 
+          :location => graphInfo['location']['city']+', '+graphInfo['location']['state'],
+          :url => graphInfo['link'],
+          :name => attributes[:name],
+          :first_name => '',
+          :last_name => attributes[:name],
+          :authentication_token => attributes[:authentication_token],
+          :fb => fb_id,
+          :email => graphInfo['username']+'@facebook.com',
+          :password => Devise.friendly_token[0,20]
+        }
+      return self.create!( attributes )
+    end
+
+  end
+  
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
