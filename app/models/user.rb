@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   after_initialize :profile
   
   def to_public
-    return self.to_json( :except => [:banned, :deactivated, :admin ] ) 
+    return self.to_json( :except => [:banned, :deactivated, :admin, :pages ] ) 
   end
   
   def profile
