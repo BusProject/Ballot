@@ -14,7 +14,7 @@
 						<ul >
 							<%- if current_user.pages.nil? && session[:logged_in_as].nil? %>
 								<li><%= link_to 'Login as facebook page', user_pages_path %></li>
-							<% elsif current_user.pages.nil? %>
+							<% elsif current_user.pages.nil?  %>
 								<% user = User.find(session[:logged_in_as]) %>
 								<li>
 									<%= link_to omniauth_authorize_path('user', :facebook)  do %>
@@ -53,9 +53,9 @@
 		
 		<div class="right-nav">
 			<ul>
-				<li><a><i class="icon-edit"></i> Register to Vote</a></li>
-				<li><a><i class="icon-info-sign"></i> About the Ballot</a></li>
-				<li><a><i class="icon-envelope"></i>  Contact</a></li>
+				<li><a target="_blank" href="https://theleague.turbovote.org/?r=ballot"><i class="icon-edit"></i> Register to Vote</a></li>
+				<li><a href="/about"><i class="icon-info-sign"></i> About the Ballot</a></li>
+				<li><a href="mailto:info@theballot.org"><i class="icon-envelope"></i>  Contact</a></li>
 				<li style="padding:0 15px;"><i class="icon-search"></i> Search <input type="text" class="search"></li>
 			</ul>
 		</div>
