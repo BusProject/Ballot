@@ -7,6 +7,9 @@
 					<input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
 					<textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
 					<p><span class="link" data-bind="click: function() { save() } ">Save</span> | <span class="link" data-bind="click: function() { discard() }">Close</span></p>
+					<%= form_for @user, :url => 'users/update', :html => { :multipart => true } do |form| %>
+					  <%= form.file_field :header %>
+					<% end %>
 				</div>
 				<div class="status">
 					<p><strong><%= 'Your account has been deactivated - all of your comments and votes are hidden'  if current_user.deactivated? %></strong></p>

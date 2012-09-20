@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
     :image, :location, :name, :url, :first_name, :last_name, :feedback, 
     :admin, :authentication_token, :guide_name, :fb, :profile,
-    :fb_friends, :description, :alerts, :pages
+    :fb_friends, :description, :alerts, :pages, :profile,
+    :primary, :secondary, :background, :header
 
   
   # attr_accessible :title, :body
@@ -20,14 +21,25 @@ class User < ActiveRecord::Base
   
   serialize :pages
   
-  after_initialize :profile
+  after_initialize :set_profile
+  
+  has_attached_file :header, :s3_credentials => {
+    :bucket            => 'the-ballot',
+    :access_key_id     => ENV['AWS3'],
+    :secret_access_key => ENV['AWS3_SECERET']
+  }
+  #, :styles => { :large =>  }
   
   def to_public
     return self.to_json( :except => [:banned, :deactivated, :admin, :pages ] ) 
   end
   
-  def profile
-    self[:profile] = '/'+self.to_url unless self.to_url.nil?
+  
+  def set_profile
+    self[:profile] = '/'+self.to_url unless self.to_url.nil? if self.profile.nil?
+  end
+  
+  def check_profile
   end
   
   def deactivate mode = false
