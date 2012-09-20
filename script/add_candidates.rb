@@ -75,6 +75,7 @@ files.each do |file|
 
 
           obj['Electoral District'] = obj['Electoral District']
+          obj['Office Name'] = obj['Office Name'].gsub(', Position',' Position') # for Idaho
           obj['Office Name'] = obj['Office Name'].split('-')[0].strip
           obj['Office Name'] = obj['Office Name'].split(',')[0].strip
           obj['Office Level'] = 'State' unless obj['Office Level'].index('State').nil?
@@ -97,7 +98,6 @@ files.each do |file|
             end
           end
 
-        
           choice = Choice.find_or_create_by_geography_and_contest( row_choice[:geography],row_choice[:contest],row_choice)    
           if choice.new_record?
             choice.update_attributes(row_choice)
