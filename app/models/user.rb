@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
         :remember_me => true
       }
     if user = self.find_by_email(data.email)
-      user.update_attributes( attributes)
+      user.update_attributes( attributes )
       user
     else # Create a user with a stub password. 
       attributes[:email] = data.email
