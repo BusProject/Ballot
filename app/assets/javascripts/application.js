@@ -8,7 +8,7 @@
 //= require jquery_ujs
 //= require knockout-latest.debug
 //= require models
-//= require_tree .
+//= require_tree ./main
 
 
 

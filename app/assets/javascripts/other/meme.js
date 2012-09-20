@@ -142,7 +142,7 @@ function makeMeme(memeRaw,path,flavor) {
 										link = document.location.protocol+'//'+document.location.host+current_user.profile, // Le page you're linkg to
 										message = 'Check out '+guide_name
 
-									$('a.facebook',document.body).attr('href',img.replace('.png','')+'/fb?auth_token='+current_user.auth_token);
+									$('a.facebook',document.body).attr('href',img.replace('.png','')+'/fb');
 									$('a.googleplus',document.body).attr('href','https://plus.google.com/share?url='+img.slice(0,-4) );
 									$('a.pintrest',document.body).attr('href','http://pinterest.com/pin/create/button/?url='+escape(link)+'&media='+escape(img)+'&description='+escape(message));
 
