@@ -3,7 +3,7 @@
 		<div class="left-nav">
 		<ul>
 			<%- if current_user.nil? %>
-					<li style="border:none;">Get Started</li>
+					<li style="border:none; font-size:12px; padding-top:3px;">Get Started</li>
 					<li class="fb-button"><%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %></li>
 			<% else %>
 					<li style="width: 130px;">
@@ -41,16 +41,17 @@
 										<% end %>
 									</li>
 								<% end %>
-								<li><%= link_to 'Refresh Pages', user_pages_path %></li>
+								<li><%= link_to ' Refresh Pages', user_pages_path %></li>
 							<% end -%>
 						</ul>
 					</li>
 					<li><%= link_to 'My Voter Guide', profile_path( current_user.to_url ) %></li>
 					<li><%= link_to 'Log out', destroy_user_session_path %></li>
 
+
+		</ul>
 			<strong><%= link_to 'ACCOUNT DEACTIVATED',profile_path(current_user.to_url) if current_user.deactivated? %><%= link_to 'ACCOUNT BANNED', profile_path(current_user.to_url) if current_user.banned? %></strong>
 		<% end -%>
-		</ul>
 		</div>
 		
 		<div class="right-nav">
@@ -58,7 +59,7 @@
 				<li><a target="_blank" href="https://theleague.turbovote.org/?r=ballot"><i class="icon-edit"></i> Register to Vote</a></li>
 				<li><a href="/about"><i class="icon-info-sign"></i> About the Ballot</a></li>
 				<li><a href="mailto:info@theballot.org"><i class="icon-envelope"></i>  Contact</a></li>
-				<li style="padding:0 15px;"><i class="icon-search"></i> Search <input type="text" class="search"></li>
+				<li style="padding:0 15px;"><i class="icon-search"></i> <input type="text" class="search" placeholder="Search"></li>
 			</ul>
 		</div>
 		
