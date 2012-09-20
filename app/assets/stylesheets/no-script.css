@@ -30,7 +30,7 @@ body.no-script.profile .yourFeedback.has_user {
 	margin-top: 20px !important;
 }
 
-body.no-script .account { margin-top: 56px; }
+
 body.no-script .yourFeedback.has_user, body.no-script .row .body { display: block }
 body.no-script .row .optionholder { float: left; width: 300px !important; }
 body.no-script .row .optionholder:first-child { float: left; width: 300px !important; }
