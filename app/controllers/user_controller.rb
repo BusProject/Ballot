@@ -55,11 +55,13 @@ class UserController < ApplicationController
   def access_pages 
     
     newToken = RestClient.get 'https://graph.facebook.com/oauth/access_token?client_id='+ENV['FACEBOOK']+'&client_secret='+ENV['FACEBOOK_SECRET']+'&grant_type=fb_exchange_token&fb_exchange_token='+current_user.authentication_token
+
+
     current_user.update_attributes( :authentication_token => newToken.split('&')[0].gsub('access_token=','') ) # Refreshes the current token
     
     if !FbGraph::User.me( current_user.authentication_token ).permissions.include?(:manage_pages) # Uses FB Graph to check permissions
       session[:origin] = request.env["HTTP_REFERER"]
-      redirect_to 'https://www.facebook.com/dialog/oauth?client_id='+ENV['FACEBOOK']+'&redirect_uri='+ENV['BASE']+user_pages_path+'&scope=manage_pages&response_type=token'
+      redirect_to 'https://www.facebook.com/dialog/oauth?client_id='+ENV['FACEBOOK']+'&redirect_uri='+ENV['BASE']+user_pages_path+'&scope=manage_pages,publish_stream&response_type=token'
     else # If has permission will download current page permissions and allow users to switch into them
       json = JSON::parse(RestClient.get 'https://graph.facebook.com/me/accounts?access_token='+current_user.authentication_token)
       pages = json['data'].reject{ |p| p['category'] == 'Application'}

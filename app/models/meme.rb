@@ -14,13 +14,17 @@ class Meme < ActiveRecord::Base
     return ['"'+self.quote+'" - ',self.user.name,self.user.to_url(true)].join(' ')
   end
   
-  def fbMeme user = self.user, current_token
+  def fbMeme user = self.user, page
 
-    
-    me = FbGraph::User.me( current_token )
+    if !page
+      me = FbGraph::User.me( user.fb )
+    else
+      me = FbGraph::Page.new( user.fb, :access_token => user.authentication_token ).fetch
+    end
+
     message = self.shareText
 
-    photo = me.photo!( :source => self.makeFile, :message => message )
+    photo = me.photo!( :source => self.makeFile, :message => message, :access_token => user.authentication_token )
 
     
     self.fb = 'https://www.facebook.com/photo.php?fbid='+photo.identifier
