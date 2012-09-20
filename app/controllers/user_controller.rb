@@ -54,18 +54,26 @@ class UserController < ApplicationController
   
   def access_pages 
     
-    begin
-      json = JSON::parse(RestClient.get 'https://graph.facebook.com/me/accounts?access_token='+current_user.authentication_token)
-      pages = json['data'].reject{ |p| p['category'] == 'Application'}
+    json = JSON::parse(RestClient.get 'https://graph.facebook.com/me/accounts?access_token='+current_user.authentication_token)
+    pages = json['data'].reject{ |p| p['category'] == 'Application'}
+
+    if pages.empty? && current_user.pages.nil?
+      session[:origin] = request.env["HTTP_REFERER"]
+      redirect_to 'https://www.facebook.com/dialog/oauth?client_id='+ENV['FACEBOOK']+'&redirect_uri='+ENV['BASE']+user_pages_path+'&scope=manage_pages&response_type=token'
+    else
       pages = pages.map do |page|
         user = User.find_by_fb(page['id'])
         user_id = user.nil? ? nil : user.id
         { :fb => page['id'], :image => 'http://graph.facebook.com/'+page['id']+'/picture?type=square', :name => page['name'], :user => user_id, :authentication_token => page['access_token'] }
       end
+
       current_user.update_attributes( :pages => pages )
-      redirect_to :back
-    rescue
-      redirect_to 'https://www.facebook.com/dialog/oauth?client_id='+ENV['FACEBOOK']+'&redirect_uri='+:back+'&scope=manage_pages&response_type=token'
+
+      origin = request.env["HTTP_REFERER"] || session[:origin]
+      session.delete(:origin)
+
+      redirect_to origin
+
     end
     
     
