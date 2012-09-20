@@ -53,6 +53,8 @@ function initialize() {
 		
 	}
 
+	$('.search').betterAutocomplete( '/search', function( event, ui ) { document.location = ui.item.url }, 2,  'top-search')
+	$('.search').bind('focus.down',function(e) { $(document).scrollTop( $(this).unbind('focus.down').position().top ) })
 
 
 	yourLocation.geocoder( geocoder );
