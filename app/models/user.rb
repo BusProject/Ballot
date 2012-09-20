@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
     :image, :location, :name, :url, :first_name, :last_name, :feedback, 
     :admin, :authentication_token, :guide_name, :fb, :profile,
-    :fb_friends, :description, :alerts
+    :fb_friends, :description, :alerts, :pages
 
   
   # attr_accessible :title, :body
@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :options, :through => :feedback
   has_many :choices, :through => :options
   
+  serialize :pages
   
   after_initialize :profile
   
@@ -55,7 +56,8 @@ class User < ActiveRecord::Base
         :first_name => data.first_name,
         :last_name => data.last_name,
         :authentication_token => access_token.credentials.token,
-        :fb => data.id
+        :fb => data.id,
+        :remember_me => true
       }
     if user = self.find_by_email(data.email)
       user.update_attributes( attributes)
@@ -65,6 +67,28 @@ class User < ActiveRecord::Base
       attributes[:password] = Devise.friendly_token[0,20]
       self.create!( attributes )
     end
+  end
+  
+  def self.find_with_fb_id(fb_id, attributes)
+    if user = self.find_by_fb(fb_id)
+      return user
+    else
+      graphInfo = JSON::parse(RestClient.get 'https://graph.facebook.com/'+fb_id)
+      attributes = {
+          :image => attributes[:image], 
+          :location => graphInfo['location']['city']+', '+graphInfo['location']['state'],
+          :url => graphInfo['link'],
+          :name => attributes[:name],
+          :first_name => '',
+          :last_name => attributes[:name],
+          :authentication_token => attributes[:authentication_token],
+          :fb => fb_id,
+          :email => graphInfo['username']+'@facebook.com',
+          :password => Devise.friendly_token[0,20]
+        }
+      return self.create!( attributes )
+    end
+
   end
   
   def self.new_with_session(params, session)

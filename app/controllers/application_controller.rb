@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, with: :render_404
  end
   
+  def after_sign_in_path_for(resource_or_scope)
+     if request.env['omniauth.origin']
+        request.env['omniauth.origin']
+      end
+  end
+  
   private
     def render_404(exception)
       @not_found_path = exception.message

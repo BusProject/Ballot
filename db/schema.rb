@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120831022608) do
+ActiveRecord::Schema.define(:version => 20120919221614) do
 
   create_table "choices", :force => true do |t|
     t.string    "contest"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(:version => 20120831022608) do
     t.text      "description"
     t.text      "fb_friends"
     t.text      "alerts"
+    t.text      "pages"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

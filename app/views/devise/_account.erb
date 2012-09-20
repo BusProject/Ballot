@@ -5,15 +5,46 @@
 			<%- if current_user.nil? %>
 					<li style="border:none;">Get Started</li>
 					<li class="fb-button"><%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %></li>
-		<% else %>
-					<li style="border:none;"><%= link_to image_tag(current_user.image || asset_path('alincoln.gif') ), profile_path(current_user.to_url) %></li>
-					<li style="display:none;"><%= link_to profile_path( current_user.to_url ) do %></li>
-					<li><a><%= current_user.first_name %> <%= current_user.last_name %></a></li>
-					<li><a>My Voter Guide</a></li>
+			<% else %>
+					<li style="width: 130px;">
+						<%= link_to profile_path(current_user.to_url) do %>
+							<%= image_tag(current_user.image || asset_path('alincoln.gif') ) %>
+							<%= current_user.first_name+' '+current_user.last_name %>
+						<% end %>
+						<ul >
+							<%- if current_user.pages.nil? && session[:logged_in_as].nil? %>
+								<li><%= link_to 'Login as facebook page', user_pages_path %></li>
+							<% elsif current_user.pages.nil? %>
+								<% user = User.find(session[:logged_in_as]) %>
+								<li>
+									<%= link_to omniauth_authorize_path('user', :facebook)  do %>
+										<%= image_tag ( user.image ) %>
+										<%= user.name %>
+									<% end %>
+								</li>
+								<% user.pages.reject{|page| page[:fb] == current_user.fb }.each do |page| %>
+									<li>
+										<%= link_to user_page_session_create_path( page[:fb] ), :class => page[:user].nil? ? 'inactive' : ''  do %>
+											<%= image_tag ( page[:image] ) %>
+											<%= page[:name] %>
+										<% end %>
+									</li>
+								<% end %>
+							<% else %>
+								<% current_user.pages.each do |page| %>
+									<li>
+										<%= link_to user_page_session_create_path( page[:fb] ), :class => page[:user].nil? ? 'inactive' : ''  do %>
+											<%= image_tag ( page[:image] ) %>
+											<%= page[:name] %>
+										<% end %>
+									</li>
+								<% end %>
+								<li><%= link_to 'Refresh Pages', user_pages_path %></li>
+							<% end -%>
+						</ul>
+					</li>
+					<li><%= link_to 'My Voter Guide', profile_path( current_user.to_url ) %></li>
 					<li><%= link_to 'Log out', destroy_user_session_path %></li>
-					
-				
-			<% end %>
 
 			<strong><%= link_to 'ACCOUNT DEACTIVATED',profile_path(current_user.to_url) if current_user.deactivated? %><%= link_to 'ACCOUNT BANNED', profile_path(current_user.to_url) if current_user.banned? %></strong>
 		<% end -%>

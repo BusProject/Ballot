@@ -52,6 +52,47 @@ class UserController < ApplicationController
     
   end
   
+  def access_pages 
+    
+    json = JSON::parse(RestClient.get 'https://graph.facebook.com/me/accounts?access_token='+current_user.authentication_token)
+    pages = json['data'].reject{ |p| p['category'] == 'Application'}
+
+    if pages.empty? && current_user.pages.nil? && session[:origin].nil?
+      session[:origin] = request.env["HTTP_REFERER"]
+      redirect_to 'https://www.facebook.com/dialog/oauth?client_id='+ENV['FACEBOOK']+'&redirect_uri='+ENV['BASE']+user_pages_path+'&scope=manage_pages&response_type=token'
+    else
+      pages = pages.map do |page|
+        user = User.find_by_fb(page['id'])
+        user_id = user.nil? ? nil : user.id
+        { :fb => page['id'], :image => 'http://graph.facebook.com/'+page['id']+'/picture?type=square', :name => page['name'], :user => user_id, :authentication_token => page['access_token'] }
+      end
+
+      current_user.update_attributes( :pages => pages )
+
+      origin = request.env["HTTP_REFERER"] || session[:origin]
+      session.delete(:origin)
+
+      redirect_to origin
+
+    end
+    
+    
+  end
+  
+  
+  def page_session
+    
+    page_user = User.find_with_fb_id( params[:fb], current_user.pages.select{ |page| page[:fb] == params[:fb]}.first )
+
+
+    session.delete(:logged_in_as) 
+    session[:logged_in_as] = current_user.id
+    
+    sign_in page_user
+    
+    redirect_to :back
+  end
+  
   protected
     def check_user
       redirect_to root_path if current_user.nil?
