@@ -22,7 +22,7 @@ class HomeController < ApplicationController
     @classes = 'home msg'
     @config = { :state => 'page' }.to_json
     @title = 'About'
-    @content = "
+    @content = <<EOF
          <h1>About TheBallot.org</h1>
          <p>TheBallot.org is the 100% social voter guide brought to you by the <a href='http://www.theleague.com/splash'>League of Young Voters</a>, <a href='http://www.neweracolorado.org'>New Era Colorado</a>, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
          <p>Some cool stuff about TheBallot.org:</p>
@@ -42,17 +42,17 @@ class HomeController < ApplicationController
          <p><strong>Sam Patton</strong></p>
          <p><strong>Matt Singer</strong></p>
          <p>Matt Bio</p>-->         
-         
-         "
+EOF
+
     render 'home/show'
   end
   
   def search
     prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'
     results = []
-    results += User.where( "deactivated = ? AND banned = ? AND (lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR id = ?)",false,false, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) ).limit(20).map{ |user| {:label => user.name, :url => user.profile } }
-    results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => choice.to_url } }
-    results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => option.choice.to_url } }
+    results += User.where( "deactivated = ? AND banned = ? AND (lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR id = ?)",false,false, prepped, prepped, prepped, params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } }
+    results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+choice.to_url } }
+    results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+option.choice.to_url } }
 
     render :json => results
   end
