@@ -19,8 +19,7 @@ class ApplicationController < ActionController::Base
       @not_found_path = exception.message
       @config = { :state => 'error' }.to_json
       @title = "Can't Find That!"
-      @content = 
-      "
+      @content = <<EOF
         <script type='text/javascript'> $(document).ready( function() {
             $('.finder').betterAutocomplete( '/search', function( event, ui ) { document.location = '/'+ui.item.url } )
             $('.finder').bind('focus.down',function(e) { $(document).scrollTop( $(this).unbind('focus.down').position().top ) })
@@ -31,7 +30,7 @@ class ApplicationController < ActionController::Base
         <!--[if IE]><em>I'm sorry we couldn\'t find that for you, try searching maybe?</em><![endif]-->
         <input class='finder' placeholder=\"I'm sorry we couldn\'t find that for you, try searching maybe?\">
         
-      "
+EOF
       @classes = "msg home"
       @content = @content.gsub('#message',exception.to_s.split(' ').map{|w| w[0].upcase+w.slice(1,w.length)}.join(' '))
 
