@@ -197,7 +197,6 @@ function locationModel(data) {
 	
 
 	this.menuItems = []
-	var smalls = MenuItem(null,'Other Options',null,'<div class="container"><a href="https://theleague.turbovote.org/?r=ballot" target="_blank" class="small" ><i class="icon-edit"></i> Register to Vote</a><a class="small" href="mailto:info@theballot.org"><i class="icon-envelope"></i> Contact Us</a><a class="small" href="/about"><i class="icon-info-sign"></i> About the Ballot</a></div>');
 
 	if( this.state == 'front' ) {
 		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
@@ -218,8 +217,7 @@ function locationModel(data) {
 		this.menuItems.push( 
 			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your on your ballot.</p>'),
 			MenuItem('#read-ballot','Read Your Ballot',"<p>Get the lowdown on everything on your ballot for the November 6th Election.</p><p>Read what others have to say about the important races in your state and share your own views.</p>"+layout,null, this),
-			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra),
-			smalls
+			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra)
 		)
 	}
 	if( this.state == 'single' ) {
@@ -227,8 +225,7 @@ function locationModel(data) {
 		this.menuItems.push( 
 			MenuItem(inits.root,'Find Your Ballot'),
 			MenuItem(current_user.url,'Your Voter Guide'),
-			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Page<br>'+makeShare(url)+'</div>'),
-			smalls
+			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Page<br>'+makeShare(url)+'</div>')
 		)
 	}
 	if( this.state == 'profile' ) {
@@ -237,8 +234,7 @@ function locationModel(data) {
 		this.menuItems.push( 
 			MenuItem(inits.root,'Find Your Ballot'),
 			MenuItem(current_user.url,'Your Voter Guide'),
-			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Guide<br>'+makeShare(url,name)+'</div>'),
-			smalls
+			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Guide<br>'+makeShare(url,name)+'</div>')
 		)
 	}
 
