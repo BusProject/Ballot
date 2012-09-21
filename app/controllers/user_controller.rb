@@ -6,9 +6,18 @@ class UserController < ApplicationController
 
     user.description = params[:description] unless params[:description] != 'null' && params[:description].nil?
     user.guide_name = params[:guide_name] unless params[:guide_name] != 'null' && params[:guide_name].nil?
+    user.primary = params[:primary] unless params[:primary] != 'null' && params[:primary].nil?
+    user.secondary = params[:secondary] unless params[:secondary] != 'null' && params[:secondary].nil?
+    user.bg = params[:bg] unless params[:bg] != 'null' && params[:bg].nil?
     user.header = params[:user][:header] if !params[:user].nil? && !params[:user][:header].nil?
+    
     user.fb_friends = params[:fb_friends] unless params[:fb_friends].nil?
 
+    
+    if params[:clearHeader] 
+      user.header = nil
+    end
+    
     unless params[:alerts].nil?
       alerts = user.alerts.nil? ? [] : user.alerts.split(',')
       alerts.push(params[:alerts])
