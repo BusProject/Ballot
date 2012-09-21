@@ -27,6 +27,7 @@ gem "omniauth-facebook"
 
 gem "paperclip", "~> 3.0"
 gem 'aws-sdk', '~> 1.3.4'
+gem 'remotipart', '~> 1.0'
 
 gem 'rmagick'
 gem 'fb_graph'

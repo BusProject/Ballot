@@ -6,6 +6,7 @@ class UserController < ApplicationController
 
     user.description = params[:description] unless params[:description] != 'null' && params[:description].nil?
     user.guide_name = params[:guide_name] unless params[:guide_name] != 'null' && params[:guide_name].nil?
+    user.header = params[:user][:header] if !params[:user].nil? && !params[:user][:header].nil?
     user.fb_friends = params[:fb_friends] unless params[:fb_friends].nil?
 
     unless params[:alerts].nil?
@@ -15,7 +16,9 @@ class UserController < ApplicationController
     end
 
     if user.save
-      render :json => { :success => true}
+      result = { :success => true }
+      result[:header] = user.header.url(:header) if !params[:user].nil? && !params[:user][:header].nil?
+      render :json => result
     else
       render :json => { :success => false }
     end

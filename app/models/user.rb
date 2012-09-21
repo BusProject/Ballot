@@ -22,26 +22,52 @@ class User < ActiveRecord::Base
   serialize :pages
   
   after_initialize :set_profile
+
   
-  has_attached_file :header, :s3_credentials => {
-    :bucket            => 'the-ballot',
-    :access_key_id     => ENV['AWS3'],
-    :secret_access_key => ENV['AWS3_SECERET']
-  }
-  #, :styles => { :large =>  }
+  has_attached_file :header,
+    :styles => {:header => '860x180#'},
+    :storage => :s3, 
+    :s3_credentials => {
+      :bucket            => 'the-ballot',
+      :access_key_id     => ENV['AWS3'],
+      :secret_access_key => ENV['AWS3_SECERET']
+    }
+  before_post_process :resize_images
+  before_save :check_size
   
-  def to_public
-    return self.to_json( :except => [:banned, :deactivated, :admin, :pages ] ) 
+  def image?
+    header_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
+  end
+
+  def resize_images
+    return false unless image?
+  end
+  
+  def check_size
+    return unless image?
+    tempfile = header.queued_for_write[:original]
+    unless tempfile.nil?
+      dimensions = Paperclip::Geometry.from_file( tempfile )
+      return dimensions.height > 180 && dimensions.width > 860
+    end
   end
   
   
+  # Method determining what's turned into JSON
+  def to_public
+    return self.to_json( :except => [:banned, :deactivated, :admin, :pages, :header, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :primary, :secondary, :bg ] ) 
+  end
+  
+  # Method for generating a link to the profile
   def set_profile
     self[:profile] = '/'+self.to_url unless self.to_url.nil? if self.profile.nil?
   end
   
+  # Method to see if profile name is free
   def check_profile
   end
   
+  # 
   def deactivate mode = false
     success = true
     self.feedback.each do |feedback|
@@ -52,6 +78,7 @@ class User < ActiveRecord::Base
     return success
   end
   
+  # Method to determine if a user can comment
   def commentable?
     return !self.banned? && !self.deactivated?
   end
@@ -80,6 +107,7 @@ class User < ActiveRecord::Base
       self.create!( attributes )
     end
   end
+  
   
   def self.find_with_fb_id(fb_id, attributes)
     if user = self.find_by_fb(fb_id)
