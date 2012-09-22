@@ -21,7 +21,7 @@ Ballot::Application.routes.draw do
   
   root :to => "home#index"
   match '/about' => "home#about"
-  match '/search' => "home#search"
+  match '/search' => "home#search", :as => 'search'
   match '/how-to' => redirect('https://docs.google.com/document/d/1U7kY9aU_e89GYb9oDt5ilzpjkzsCFtwUQNCr2AK9MAM/edit')
   match '/source' => redirect('https://github.com/BusProject/Ballot')
 

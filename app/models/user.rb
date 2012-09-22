@@ -21,6 +21,50 @@ class User < ActiveRecord::Base
   
   serialize :pages
   
+  
+  # Method determining what's turned into JSON
+  def to_public
+    return self.to_json( :except => [:banned, :deactivated, :admin, :pages, :header, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :primary, :secondary, :bg ] ) 
+  end
+  
+  
+  # Profile and URL related methods
+  validate :check_profile
+  
+  # Method for generating a link to the profile
+  def set_profile
+    if self.profile.nil?
+      self[:profile] = '/'+self.to_url unless self.to_url.nil?
+    else
+      self[:profile] = '/'+self.profile
+    end
+  end
+  
+  # Method to see if profile name is free
+  def check_profile
+    unless self.profile.nil?
+      id = self.profile.to_i(16).to_s(16) == self.profile ? self.profile.to_i(16).to_s(10).to_i(2).to_s(10) : ''
+      safe = true 
+      if id != '' # Future proofing all URL names for our first 10^20th users
+        safe = id.to_i(16).to_s(10).to_i(2).to_s(10).to_i > 10e20
+      end
+      errors.add( :profile, 'is not unique' ) unless User.find_by_id(id).nil? && User.find_by_profile(self.profile).nil? && safe
+    end
+  end
+  
+  def to_url ( full = false)
+    unless self.new_record? # A simple way of creating funky looking URLs out of User IDs
+      url = self.id.to_s(2).to_i.to_s(16)
+      url = ENV['BASE']+'/'+url if full && !ENV['BASE'].nil?
+    else
+      url = nil
+    end
+
+    return url
+  end
+  
+  
+  # Header image handling
   after_initialize :set_profile
 
   
@@ -48,26 +92,13 @@ class User < ActiveRecord::Base
     tempfile = header.queued_for_write[:original]
     unless tempfile.nil?
       dimensions = Paperclip::Geometry.from_file( tempfile )
-      return dimensions.height > 180 && dimensions.width > 860
+      return dimensions.height >= 150 && dimensions.width >= 720
     end
   end
   
   
-  # Method determining what's turned into JSON
-  def to_public
-    return self.to_json( :except => [:banned, :deactivated, :admin, :pages, :header, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :primary, :secondary, :bg ] ) 
-  end
   
-  # Method for generating a link to the profile
-  def set_profile
-    self[:profile] = '/'+self.to_url unless self.to_url.nil? if self.profile.nil?
-  end
-  
-  # Method to see if profile name is free
-  def check_profile
-  end
-  
-  # 
+  # Method to deactivate self
   def deactivate mode = false
     success = true
     self.feedback.each do |feedback|
@@ -84,7 +115,7 @@ class User < ActiveRecord::Base
   end
   
 
-  
+  # Method for authentication after facebook auth
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token.extra.raw_info
     attributes = {
@@ -108,7 +139,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  
+  # Method for authentication as a page by a user
   def self.find_with_fb_id(fb_id, attributes)
     if user = self.find_by_fb(fb_id)
       return user
@@ -131,6 +162,7 @@ class User < ActiveRecord::Base
 
   end
   
+  
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -146,16 +178,7 @@ class User < ActiveRecord::Base
     self.save
   end
   
-  def to_url ( full = false)
-    unless self.new_record? # A simple way of creating funky looking URLs out of User IDs
-      url = self.id.to_s(2).to_i.to_s(16)
-      url = ENV['BASE']+'/'+url if full && !ENV['BASE'].nil?
-    else
-      url = nil
-    end
 
-    return url
-  end
   
 
 end
