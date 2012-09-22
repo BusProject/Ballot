@@ -36,7 +36,7 @@
 					<textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
 
 					http://theballot.org/<input class="edit-profile" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="Set your guide's URL"  >
-					<span data-bind="visible: profile.checking() ">Searching...</span><span data-bind="visible: profile.available() ">Available</span><span data-bind="visible: !profile.available() && profile.available() != null ">Taken :(</span>
+					<span data-bind="visible: profile.checking() ">Searching...</span><span data-bind="visible: profile.available() && !profile.checking() ">Available</span><span data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null ">Taken :(</span>
 					<br />Current Url: <a data-bind="text: '<%= ENV['BASE'] %>/'+profile.store(), attr: { href: '<%= ENV['BASE'] %>/'+profile.store()} "></a>
 
 					<input class="primary" data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="Change the title text's color"  >
@@ -71,14 +71,22 @@
 
 				current_user.profile = ko.observable(current_user.profile.replace('/','') != current_user.url.replace('/','') ? current_user.profile.replace('/','') : '')
 				current_user.profile.store = ko.observable( current_user.url.replace('/','') )
+				current_user.profile.fix = function(profile) {
+					return profile.replace(/ /g,'_').replace('/','').replace('#','').replace('&','').replace('?','').toLowerCase()
+				}
 				current_user.profile.available = ko.observable(null)
 				current_user.profile.checking = ko.observable(false)
+
 				current_user.profile.checkAvailable = ko.computed( function() {
-					var profile = current_user.profile()
-					if( profile.replace('/','').replace(/ /g,'+').toLowerCase() != profile ) current_user.profile( profile.replace(/ /g,'+').replace('/','').toLowerCase() )
+					var profile = this.profile()
+					if( current_user.profile.fix(profile) != profile ) current_user.profile( current_user.profile.fix(profile)  )
+					if( profile != '' && profile != this.profile.store() && this.profile.store() != this.url.replace('/','') ) this.profile.checking(true)
+				},current_user)
+
+				current_user.profile.checkAvailable = ko.computed( function() {
+					var profile = this.profile()
 					if( profile != '' && profile != this.profile.store() && this.profile.store() != this.url.replace('/','') ) {
-						profile = profile.replace('/','')
-						current_user.profile.checking(true)
+						profile = current_user.profile.fix( profile )
 						$.get('<%= search_path %>',{term: profile, filter: 'profile'},function(r) {
 							current_user.profile.checking(false)
 							if( r.length > 0 ) current_user.profile.available(false)

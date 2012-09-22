@@ -6,7 +6,7 @@ class UserController < ApplicationController
 
     user.description = params[:description] unless params[:description] != 'null' && params[:description].nil?
     user.guide_name = params[:guide_name] unless params[:guide_name] != 'null' && params[:guide_name].nil?
-    user.profile = params[:profile].downcase.gsub(' ','+').gsub('/','') unless params[:profile] != 'null' && params[:profile].nil?
+    user.profile = params[:profile].downcase.gsub(' ','_').gsub('/','').gsub('?','').gsub('#','').gsub('&','') unless params[:profile] != 'null' && params[:profile].nil?
     user.primary = params[:primary] unless params[:primary] != 'null' && params[:primary].nil?
     user.secondary = params[:secondary] unless params[:secondary] != 'null' && params[:secondary].nil?
     user.bg = params[:bg] unless params[:bg] != 'null' && params[:bg].nil?
