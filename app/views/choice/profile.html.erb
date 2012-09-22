@@ -24,6 +24,9 @@
 		
 			<%- if current_user == @user %>
 			<%= javascript_include_tag 'jquery.remotipart' %>
+			<%= javascript_include_tag 'other/bootstrap-colorpicker.js' %>
+			<%= stylesheet_link_tag 'other/colorpicker.css' %>
+
 			<div id="edit-profile">
 				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }"><i class="icon-cog"></i> Edit Your Voter Guide </span></a> | 
 				<div style="display: none" class="editor" data-bind="visible: edit ">
@@ -36,9 +39,9 @@
 					<span data-bind="visible: profile.checking() ">Searching...</span><span data-bind="visible: profile.available() ">Available</span><span data-bind="visible: !profile.available() && profile.available() != null ">Taken :(</span>
 					<br />Current Url: <a data-bind="text: '<%= ENV['BASE'] %>/'+profile.store(), attr: { href: '<%= ENV['BASE'] %>/'+profile.store()} "></a>
 
-					<input data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="Change the title text's color"  >
-					<input data-bind="value: secondary, style: {color: secondary() }, valueUpdate: 'afterkeydown'" placeholder="Change the secondary color"  >
-					<input data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="Change the the background color"  >
+					<input class="primary" data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="Change the title text's color"  >
+					<input class="secondary" data-bind="value: secondary, style: {color: secondary() }, valueUpdate: 'afterkeydown'" placeholder="Change the secondary color"  >
+					<input class="bg" data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="Change the the background color"  >
 
 					<p><span class="link" data-bind="click: function() { save() } ">Save</span> | <span class="link" data-bind="click: function() { discard() }">Cancel</span></p>
 
@@ -100,6 +103,16 @@
 					current_user.__primary = current_user.primary()
 					current_user.__secondary = current_user.secondary()
 					current_user.__bg = current_user.bg()
+					
+					$('input.primary').colorpicker().on('changeColor', function(ev){
+					  current_user.primary( ev.color.toHex() );
+					});
+					$('input.secondary').colorpicker().on('changeColor', function(ev){
+					  current_user.secondary( ev.color.toHex() );
+					});
+					$('input.bg').colorpicker().on('changeColor', function(ev){
+					  current_user.bg( ev.color.toHex() );
+					});
 				}
 				current_user.removeHeader = function() {
 					current_user.header('http://localhost:3000/assets/theballot.png' )
@@ -120,7 +133,7 @@
 					current_user.__bg = null;
 				}
 				current_user.save = function() { 
-					if( !current_user.profile.available() ) {
+					if( !current_user.profile.available() && current_user.profile() != current_user.profile.store() ) {
 						return false
 						$('input.profile').focus()
 					}
