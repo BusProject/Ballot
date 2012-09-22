@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   
   
   # Profile and URL related methods
+  after_initialize :set_profile
   validate :check_profile
   
   # Method for generating a link to the profile
@@ -65,17 +66,21 @@ class User < ActiveRecord::Base
   
   
   # Header image handling
-  after_initialize :set_profile
-
   
-  has_attached_file :header,
-    :styles => {:header => '860x180#'},
-    :storage => :s3, 
-    :s3_credentials => {
-      :bucket            => 'the-ballot',
-      :access_key_id     => ENV['AWS3'],
-      :secret_access_key => ENV['AWS3_SECERET']
-    }
+  if Rails.env == "production"
+    has_attached_file :header,
+      :styles => {:header => '860x180#'},
+      :storage => :s3, 
+      :s3_credentials => {
+        :bucket            => 'the-ballot',
+        :access_key_id     => ENV['AWS3'],
+        :secret_access_key => ENV['AWS3_SECERET']
+      }
+  else
+    has_attached_file :header,
+      :styles => {:header => '860x180#'}
+  end
+  
   before_post_process :resize_images
   before_save :check_size
   

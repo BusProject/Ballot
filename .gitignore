@@ -11,3 +11,4 @@ public/public*
 pg/
 activesupport/
 *.dat
+public/system/
