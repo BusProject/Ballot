@@ -28,10 +28,11 @@ class Choice < ActiveRecord::Base
 
     geography = 'Legislative District' if @states[index] == 'Nebraska' && geography == 'State Senate District' # Nebraska only has one legislative chamber
 
-    # Going to need to do something here to handle Vermont
     
-    district = self.geography.slice(4,self.geography.length).to_i
-    return [@states[index]+"'s", district.ordinalize,geography].join(' ') if district != 0
+    
+    district = self.geography.slice(4,self.geography.length)
+    district = district.ordinalize if district.to_i.to_s == district
+    return [@states[index]+"'s", district,geography].join(' ') if district != ''
     return [@states[index],geography].join(' ')
   end
   

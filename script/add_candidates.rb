@@ -51,7 +51,7 @@ files.each do |file|
             number = sep[1].strip.length < 2 ? '0'+sep[1].strip : sep[1].strip
             number = number.length > 2 && number[0] == '0' ? number.slice(1,2) : number
             number = number[2] == 'A' || number[2] == 'B' ? number.slice(0,2)+number.slice(-1).downcase : number
-          
+            number = number.gsub(' ','-')
 
             unless obj['Electoral District'].index('Legislative').nil?
               if obj['Office Name'].index('Senator')
@@ -73,7 +73,7 @@ files.each do |file|
         
           obj['Electoral District'] = obj['Electoral District'].gsub('(Muni)','')
 
-
+          obj['Office Name'] = obj['Office Name'].gsub(', Position',' Pos')
           obj['Electoral District'] = obj['Electoral District']
           obj['Office Name'] = obj['Office Name'].gsub(', Position',' Position') # for Idaho
           obj['Office Name'] = obj['Office Name'].split('-')[0].strip
