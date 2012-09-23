@@ -7,6 +7,10 @@ class AdminController < ApplicationController
     @bans = User.find_all_by_banned(true)
     @flagged = Feedback.where( "length(flag)- length(replace( flag,',','') ) >= ? AND approved = ?", 2, true )
     @flagged.concat( Feedback.where('approved = ?',false).joins(:user).where('banned = ? AND deactivated = ? AND admin = ?',false,false,false) )
+    
+    # this query will be useful sometime: it is the geography of the races that have recieved comments:
+    # Feedback.all.map{ |f| f.choice.geography }.uniq.sort.each{ |c| puts c }
+    
     @config = {:state => 'off'}.to_json
   end
   
