@@ -73,9 +73,9 @@ files.each do |file|
         
           obj['Electoral District'] = obj['Electoral District'].gsub('(Muni)','')
 
-          obj['Office Name'] = obj['Office Name'].gsub(', Position',' Pos')
+
           obj['Electoral District'] = obj['Electoral District']
-          obj['Office Name'] = obj['Office Name'].gsub(', Position',' Position') # for Idaho
+          obj['Office Name'] = obj['Office Name'].gsub(', Position',' Pos')
           obj['Office Name'] = obj['Office Name'].split('-')[0].strip
           obj['Office Name'] = obj['Office Name'].split(',')[0].strip
           obj['Office Level'] = 'State' unless obj['Office Level'].index('State').nil?
