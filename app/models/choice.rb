@@ -26,7 +26,7 @@ class Choice < ActiveRecord::Base
     geography = 'State Senate District' if geography.slice(0,2) == 'SD'
     geography = 'Congressional District' if geography.slice(0,2) == 'CD'
 
-    geography = 'Legislative District' if @states[index] == 'Nebraska' && geography == 'State Senate District' # Nebraska only has one legislative chamber
+    geography = 'State Legislative District' if @states[index] == 'Nebraska' && geography == 'State Senate District' # Nebraska only has one legislative chamber
 
     
     

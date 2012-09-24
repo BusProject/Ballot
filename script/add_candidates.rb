@@ -64,7 +64,7 @@ files.each do |file|
 
             obj['Electoral District'] = obj['Electoral District'].gsub('Congressional','CD')
             obj['Electoral District'] = obj['Electoral District'].gsub('State Senate','SD')
-            obj['Electoral District'] = obj['Electoral District'].gsub('State Legislature District','SD')
+            obj['Electoral District'] = obj['Electoral District'].gsub('NEState Legislature','NESD')
             obj['Electoral District'] = obj['Electoral District'].gsub('State House','HD')
             obj['Electoral District'] = obj['Electoral District'].gsub('State Representative','HD')          
 
