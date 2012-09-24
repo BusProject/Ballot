@@ -69,11 +69,12 @@ files.each do |file|
             obj['Electoral District'] = obj['Electoral District'].gsub('State Representative','HD')          
 
             obj['Electoral District'] = obj['Electoral District'].gsub(' ','')+number
+            obj['Office Name'] = obj['Office Name'].gsub(', Position',' Pos')
           end
         
           obj['Electoral District'] = obj['Electoral District'].gsub('(Muni)','')
 
-          obj['Office Name'] = obj['Office Name'].gsub(', Position',' Pos')
+
           obj['Electoral District'] = obj['Electoral District']
           obj['Office Name'] = obj['Office Name'].split('-')[0].strip
           obj['Office Name'] = obj['Office Name'].split(',')[0].strip
