@@ -1,4 +1,8 @@
 UID,State,Office Level,Electoral District,Office Name,Candidate Name,Candidate Party,Completed?,Incumbent,Phone,Mailing Address,Website,Email,Facebook URL,Twitter Name,Google Plus URL,Wiki Word,Youtube
+AK00001,AK,Federal,AK,United States Representative,Sharon M. Cissna?,Democratic,(907) 272-8662?,"P.O. Box 141892 | Anchorage, AK 99514"
+AK00002,AK,Federal,AK,United States Representative,Ted Gianoutsos?,Non-Affiliated,(907) 272-1648,"P.O. Box 143115? | Anchorage, AK 99514",http://www.tedandfran.com
+AK00003,AK,Federal,AK,United States Representative,Jim C. McDermott?,Democratic,(907) 328-1097,"123 Chief Evan Drive? | Fairbanks, AK 99709"
+AK00004,AK,Federal,AK,United States Representative,Don Young?,Republican,(907) 563-4314,"2504 Fairbanks Street | Anchorage, AK 99503",http://alaskansfordonyoung.com?
 AL00007,AL,State,AL,Supreme Court Chief Justice,Harry Lyon,Democratic
 AL00008,AL,State,AL,Public Service Commission President,Lucy Baxley,Democratic
 AL00021,AL,State,AL,Supreme Court Chief Justice,Roy Moore,Republican
@@ -38,6 +42,24 @@ DC00024,DC,Federal,DC,United States Representative ('Shadow Representative'),Nat
 DC00002,DC,Federal,DC,Delegate to the United States House of Representatives,Eleanor H. Norton,Democratic,202-207-8829,"P.O. Box 70626, Washington, DC 20024",citizenstoelectnorton@gmail.com
 DC00004,DC,Other,DC,Member of the Council of the District of Columbia,Mary Brooks Beatty,Republican,202-546-4196,"1228 Duncan Place NE, Washington, DC 20002",mary@marybrooksbeatty.com
 DC00022,DC,Federal,DC,United States Senator ('Shadow Senator'),Nelson F. Rimensnyder,Republican,202-364-2526,"3881 Newark Street NW #A475, Washington, DC 20016",joegrano@netzero.com
+1,DE,Federal,DE,U.S. Senator,Thomas R. Carper,Democratic,"600 W MATSON RUN PKY, WILMINGTON, DE 19802?",WWW.CARPERFORDELAWARE.COM?
+6,DE,Federal,DE,U.S. Senator,Kevin Wade,Republican,"137 E 3RD ST, NEW CASTLE, DE 19720?",WWW.WADEFORUSSENATE.COM?,KEVINWADE@WADEFORDELAWARE.COM?
+12,DE,Federal,DE,U.S. Senator,Andrew Richard Groff,Green,"503 ROTHBURY RD, WOODBROOK, WILMINGTON, DE 19803?",WWW.ANDREWGROFFFORSENATE.US?
+17,DE,Federal,DE,U.S. Senator,Alexander Pires,Independent Party of Delaware,"2 DICKINSON ST, REHOBOTH, DE 19971?",FARMERSLAWYER@AOL.COM?
+25,DE,Federal,DE,Representative in Congress,John C. Carney Jr.,Democratic,"506 W 19TH ST, WILMINGTON, DE 19802?",JOHN@JOHNCARNEY.ORG?
+30,DE,Federal,DE,Representative in Congress,Thomas H. Kovach,Republican,"1410 WILLIAM PENN LN, WELDIN PARK, WILMINGTON, DE 19803?",WWW.KOVACHFORCONGRESS.ORG?,TKOVACH@KOVACHFORCONGRESS.ORG?
+36,DE,Federal,DE,Representative in Congress,Bernard August,Green,"101 CARDIFF COURT WEST, MEADOWDALE, NEWARK, DE 19711?",WWW.BERNIEAUGUSTFORUSCONGRESS.US?,NIXMOX@VERIZON.NET?
+42,DE,Federal,DE,Representative in Congress,Scott Gesty,Libertarian,"1609 WINDYBUSH RD, WINDYBUSH, WILMINGTON, DE 19810?",WWW.GESTY4CONGRESS.ORG?
+47,DE,State,DE,Governor,Jack A. Markell,Democratic,"3 GUYENNE RD, GUYENCOURT, WILMINGTON, DE 19807?"
+50,DE,State,DE,Governor,Jeffrey E. Cragg,Republican,"415 FOULKSTONE RD, WOODBROOK, WILMINGTON, DE 19803?",WWW.CRAGG2012.COM?,JEFFCRAGG@COMCAST.NET?
+56,DE,State,DE,Governor,Mark Joseph Perri,Green,"2011 MONROE PL, WILMINGTON, DE 19802?",WWW.PERRIDEGOV.US?,MARK@MPERRI.COM?
+62,DE,State,DE,Governor,Jesse Mcvay,Libertarian,"7 MCBRY CT, WOODS MANOR EAST, DOVER, DE 19901?"
+65,DE,State,DE,Lt. Governor,Matthew Denn,Democratic,"441 COLDSPRING RUN, THISTLEBERRY FARMS, NEWARK, DE 19711?",WWW.MATTDENN.COM?,MATTDENN@HOTMAIL.COM?
+71,DE,State,DE,Lt. Governor,Cheryl Anne Valenzuela,Republican,"503 GILCREST ST, MILFORD, DE 19963?",WWW.SHER2012.COM?,SHER@SHER2012.COM?
+77,DE,State,DE,Lt. Governor,Margaret Mckeown,Libertarian,"3454 LONGRIDGE RD, CLAYTON, DE 19938?"
+80,DE,State,DE,Insurance Commissioner,Karen Stewart,Democratic,"801 W 20TH ST, WILMINGTON, DE 19802?"
+83,DE,State,DE,Insurance Commissioner,Benjamin Mobley,Republican,"66 CANTWELL DR, CANTWELL RIDGE, MIDDLETOWN, DE 19709?",WWW.BENJAMINMOBLEY.COM?,MOBLEYBENJAMIN2012@GMAIL.COM?
+89,DE,State,DE,Insurance Commissioner,David Eisenhour,Libertarian,"P O BOX 257, GEORGETOWN, DE 19947?",WWW.SUSSEXLP.ORG?,CHAIR@SUSSEXLP.ORG?
 FL00001,FL,Federal,FL,United States Senator,Bill Nelson,Democratic,4078024765,"1516 East Colonial Drive Suite 101 | Orlando, FL 32803", 
 FL00002,FL,Federal,FL,United States Senator,Bill Gaylor,No Party Affiliation,3212591308,"477 N. Harbor City Boulevard  | Melbourne, FL 32935",bill@floridaforbill.com
 FL00003,FL,Federal,FL,United States Senator,Chris Borgia,No Party Affiliation,"4611 South University Dr. #178  | Davie, FL 33328", 
@@ -294,10 +316,10 @@ OR00022,OR,State,OR,Attorney General,Ellen Rosenblum,Democrat,503-597-8495,"2236
 OR00023,OR,State,OR,Attorney General,James E Leuenberger,"Libertarian, Constitution",503-542-7433,"PO Box 1684 | Lake Oswego, OR 97035",www.fights4rights.com,jim@fights4rights.com
 OR00191,OR,State,OR,Commissioner of the Bureau of Labor and Industries,Brad Avakian,Nonpartisan,971-673-0781,"2236 SE 10th Ave | Portland, OR 97214",www.bradavakian.com,brad@bradavakian.com
 OR00192,OR,State,OR,Commissioner of the Bureau of Labor and Industries,Bruce Starr,Nonpartisan,503-310-7500,"22115 NW Imbrie Dr #290 | Hillsboro, OR 97124",www.brucestarr.org,bruce@brucestarr.org
-OR00193,OR,State,OR,Judge of the Supreme Court,Nena Cook,Nonpartisan,503-243-1626,"1000 SW Broadway, Suite 1400 | Portland, OR 97205",www.nenacook.com,nena@sussmanshank.com
-OR00194,OR,State,OR,Judge of the Supreme Court,Richard C Baldwin,Nonpartisan,503-988-3052,"1021 SW 4th Avenue | Portland, OR 97204",Richard.C.Baldwin@ojd.state.or.us
-OR00195,OR,State,OR,Judge of the Court of Appeals,James C Egan,Nonpartisan,541-967-3865,"422 SW 5th Ave | Albany, OR 97321",james.c.egan@ojd.state.or.us
-OR00196,OR,State,OR,Judge of the Court of Appeals,Tim Volpert,Nonpartisan,503-241-2300,"3214 NE U.S. Grant Place | Portland, OR 97212",timvolpert@dwt.com
+OR00193,OR,State,OR,Judge of the Supreme Court Pos 3,Nena Cook,Nonpartisan,503-243-1626,"1000 SW Broadway, Suite 1400 | Portland, OR 97205",www.nenacook.com,nena@sussmanshank.com
+OR00194,OR,State,OR,Judge of the Supreme Court Pos 3,Richard C Baldwin,Nonpartisan,503-988-3052,"1021 SW 4th Avenue | Portland, OR 97204",Richard.C.Baldwin@ojd.state.or.us
+OR00195,OR,State,OR,Judge of the Court of Appeals Pos 6,James C Egan,Nonpartisan,541-967-3865,"422 SW 5th Ave | Albany, OR 97321",james.c.egan@ojd.state.or.us
+OR00196,OR,State,OR,Judge of the Court of Appeals Pos 6,Tim Volpert,Nonpartisan,503-241-2300,"3214 NE U.S. Grant Place | Portland, OR 97212",timvolpert@dwt.com
 PA00001,PA,State,PA,Attorney General,Kathleen Kane,Democratic,TRUE,FALSE,(570) 580-0860,"P.O. Box 60230 | Philadelphia, PA 19102",http://www.kathleengkane.com/,info@kathleengkane.com,http://www.facebook.com/Kane.for.AG,KathleenGKane,Kathleen_Kane_(politician),http://www.youtube.com/kathleengkane
 PA00002,PA,State,PA,Attorney General,David Freed,Republican,TRUE,FALSE,717-230-1514,"PO Box 1105 | Harrisburg, PA 17108",http://davidfreedforag.com/,info@DavidFreedforAG.com,https://www.facebook.com/FriendsofDaveFreed,davidfreedforag,David_Freed
 PA00003,PA,State,PA,Auditor General,Eugene Depasquale,Democratic,TRUE,FALSE,"PO Box 1822 | York, PA 17405",http://www.eugene4pa.com/home.html,http://www.facebook.com/DePasqualePA,DePasqualePA,Eugene_DePasquale,http://www.youtube.com/user/EugeneDePasquale
@@ -306,6 +328,8 @@ PA00388,PA,State,PA,State Treasurer,Diana Irey Vaughan,Republican,TRUE,FALSE,"Po
 PA00390,PA,Federal,PA,United States Senator,Tom Smith,Republican,TRUE,FALSE,(412) 265-4632,"333 Allegheny Ave Suite 202 W | Oakmont, PA 15139",http://tomsmithforsenate.com/,info@tomsmithforsenate.com,http://www.facebook.com/TomSmithForSenate,tomsmithforpa,Tom_Smith_(Pennsylvania)
 PA00387,PA,State,PA,State Treasurer,Robert Mccord,Democratic,TRUE,TRUE,http://www.robmccord.com/,Robert_McCord
 PA00389,PA,Federal,PA,United States Senator,Bob Casey Jr,Democratic,TRUE,TRUE,http://bobcasey.com/,"Bob_Casey,_Jr."
+RI00001,RI,Federal,RI,Senator In Congress,Benjamin Barrett Hinckley III,Republican,"16 GIBBS AVE | NEWPORT, RI 02840"
+RI00002,RI,Federal,RI,Senator In Congress,Sheldon Whitehouse,Democratic,"175 CARROLL AVE | NEWPORT, RI 02840"
 SD00001,SD,Federal,SD,United States Representative,Kristi Noem,Republican,"18575 US Hwy 81 | Castlewood, SD 57223"
 SD00002,SD,Federal,SD,United States Representative,Matt Varilek,Democratic,"2108 S Center Ave | Sioux Falls, SD 57101"
 SD00003,SD,State,SD,Public Utilities Commissioner,Russell Clarke,Libertarian,"831 North Duluth Avenue | Sioux Falls, SD 57104"
