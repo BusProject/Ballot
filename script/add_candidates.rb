@@ -72,15 +72,22 @@ files.each do |file|
             obj['Office Name'] = obj['Office Name'].gsub(', Position',' Pos')
           end
           
-          # Codifying some renaming I've done
-          obj['Office Name'] = obj['Office Name'].gsub('Commissioner of the Bureau of Labor and Industries','Labor Comissioner') if obj['Electoral District'] == 'OR'
           
           obj['Electoral District'] = obj['Electoral District'].gsub('(Muni)','')
 
 
           obj['Electoral District'] = obj['Electoral District']
+          
           obj['Office Name'] = obj['Office Name'].split('-')[0].strip
           obj['Office Name'] = obj['Office Name'].split(',')[0].strip
+          obj['Office Name'] = obj['Office Name'].gsub('#','')
+          
+          # Codifying some renaming I've done
+          obj['Office Name'] = obj['Office Name'].gsub('Commissioner of the Bureau of Labor and Industries','Labor Comissioner') if obj['Electoral District'] == 'OR'
+          obj['Office Name'] = obj['Office Name'].gsub('Governor & Lt. Governor','Governor and Lt. Governor') if obj['Electoral District'] == 'MT'
+          obj['Electoral District'] += obj['Office Name'].gsub('Commissioner','District') if obj['Electoral District'] == 'MT' && !obj['Office Name'].index('Public Service Commissioner').nil?
+
+
           obj['Office Level'] = 'State' unless obj['Office Level'].index('State').nil?
     
           row_choice = { :geography => obj['Electoral District'], :contest => obj['Office Name'], :contest_type => obj['Office Level'] }
