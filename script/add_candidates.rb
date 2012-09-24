@@ -71,7 +71,10 @@ files.each do |file|
             obj['Electoral District'] = obj['Electoral District'].gsub(' ','')+number
             obj['Office Name'] = obj['Office Name'].gsub(', Position',' Pos')
           end
-        
+          
+          # Codifying some renaming I've done
+          obj['Office Name'] = obj['Office Name'].gsub('Commissioner of the Bureau of Labor and Industries','Labor Comissioner') if obj['Electoral District'] == 'OR'
+          
           obj['Electoral District'] = obj['Electoral District'].gsub('(Muni)','')
 
 
