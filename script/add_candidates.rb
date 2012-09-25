@@ -82,6 +82,10 @@ files.each do |file|
               obj['Electoral District'] = obj['Electoral District'].strip
             end
             
+            if obj['Electoral District'].slice(0,2) == 'NH'
+              number = ' '+number.to_i.to_s
+              obj['Electoral District'] = obj['Electoral District'].gsub('-','')
+            end
 
             obj['Electoral District'] = obj['Electoral District'].gsub(' ','')+number unless number.nil?
             obj['Office Name'] = obj['Office Name'].gsub(', Position',' Pos')
