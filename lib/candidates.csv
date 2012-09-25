@@ -32,6 +32,11 @@ CO00326,CO,Other,CO,State Court of Appeals,Dennis A. Graham,Non-Partisan
 CO00327,CO,Other,CO,State Court of Appeals,Gale T. Miller,Non-Partisan
 CO00328,CO,Other,CO,State Court of Appeals,Daniel Marc Taubman,Non-Partisan
 CO00329,CO,Other,CO,State Court of Appeals,John R. Webb,Non-Partisan
+CT00359,CT,Federal,CT,US Senate,Chris Murphy,Democratic
+CT00360,CT,Federal,CT,US Senate,Linda McMahon,Independent
+CT00361,CT,Federal,CT,US Senate,Paul Passarelli,Libertarian
+CT00362,CT,Federal,CT,US Senate,Linda McMahon,Republican
+CT00363,CT,Federal,CT,US Senate,Chris Murphy,Working Families
 DC00023,DC,Federal,DC,United States Senator ('Shadow Senator'),David Schwartzman,Statehood Green,202-829-9063,"1634 Montague Street NW, Washington, DC 20011"
 DC00025,DC,Federal,DC,United States Representative ('Shadow Representative'),G. Lee Aikin,Statehood Green,202-667-3514,"1754 Swann Street NW, Washington, DC 20009"
 DC00003,DC,Federal,DC,Delegate to the United States House of Representatives,Natale Lino Stracuzzi,Statehood Green,202-421-0377,"2804 Jasper Road SE #402, Washington, DC 20020",stracuzziforcongress@gmail.com
@@ -42,24 +47,24 @@ DC00024,DC,Federal,DC,United States Representative ('Shadow Representative'),Nat
 DC00002,DC,Federal,DC,Delegate to the United States House of Representatives,Eleanor H. Norton,Democratic,202-207-8829,"P.O. Box 70626, Washington, DC 20024",citizenstoelectnorton@gmail.com
 DC00004,DC,Other,DC,Member of the Council of the District of Columbia,Mary Brooks Beatty,Republican,202-546-4196,"1228 Duncan Place NE, Washington, DC 20002",mary@marybrooksbeatty.com
 DC00022,DC,Federal,DC,United States Senator ('Shadow Senator'),Nelson F. Rimensnyder,Republican,202-364-2526,"3881 Newark Street NW #A475, Washington, DC 20016",joegrano@netzero.com
-1,DE,Federal,DE,U.S. Senator,Thomas R. Carper,Democratic,"600 W MATSON RUN PKY, WILMINGTON, DE 19802?",WWW.CARPERFORDELAWARE.COM?
-6,DE,Federal,DE,U.S. Senator,Kevin Wade,Republican,"137 E 3RD ST, NEW CASTLE, DE 19720?",WWW.WADEFORUSSENATE.COM?,KEVINWADE@WADEFORDELAWARE.COM?
-12,DE,Federal,DE,U.S. Senator,Andrew Richard Groff,Green,"503 ROTHBURY RD, WOODBROOK, WILMINGTON, DE 19803?",WWW.ANDREWGROFFFORSENATE.US?
-17,DE,Federal,DE,U.S. Senator,Alexander Pires,Independent Party of Delaware,"2 DICKINSON ST, REHOBOTH, DE 19971?",FARMERSLAWYER@AOL.COM?
-25,DE,Federal,DE,Representative in Congress,John C. Carney Jr.,Democratic,"506 W 19TH ST, WILMINGTON, DE 19802?",JOHN@JOHNCARNEY.ORG?
-30,DE,Federal,DE,Representative in Congress,Thomas H. Kovach,Republican,"1410 WILLIAM PENN LN, WELDIN PARK, WILMINGTON, DE 19803?",WWW.KOVACHFORCONGRESS.ORG?,TKOVACH@KOVACHFORCONGRESS.ORG?
-36,DE,Federal,DE,Representative in Congress,Bernard August,Green,"101 CARDIFF COURT WEST, MEADOWDALE, NEWARK, DE 19711?",WWW.BERNIEAUGUSTFORUSCONGRESS.US?,NIXMOX@VERIZON.NET?
-42,DE,Federal,DE,Representative in Congress,Scott Gesty,Libertarian,"1609 WINDYBUSH RD, WINDYBUSH, WILMINGTON, DE 19810?",WWW.GESTY4CONGRESS.ORG?
-47,DE,State,DE,Governor,Jack A. Markell,Democratic,"3 GUYENNE RD, GUYENCOURT, WILMINGTON, DE 19807?"
-50,DE,State,DE,Governor,Jeffrey E. Cragg,Republican,"415 FOULKSTONE RD, WOODBROOK, WILMINGTON, DE 19803?",WWW.CRAGG2012.COM?,JEFFCRAGG@COMCAST.NET?
-56,DE,State,DE,Governor,Mark Joseph Perri,Green,"2011 MONROE PL, WILMINGTON, DE 19802?",WWW.PERRIDEGOV.US?,MARK@MPERRI.COM?
-62,DE,State,DE,Governor,Jesse Mcvay,Libertarian,"7 MCBRY CT, WOODS MANOR EAST, DOVER, DE 19901?"
-65,DE,State,DE,Lt. Governor,Matthew Denn,Democratic,"441 COLDSPRING RUN, THISTLEBERRY FARMS, NEWARK, DE 19711?",WWW.MATTDENN.COM?,MATTDENN@HOTMAIL.COM?
-71,DE,State,DE,Lt. Governor,Cheryl Anne Valenzuela,Republican,"503 GILCREST ST, MILFORD, DE 19963?",WWW.SHER2012.COM?,SHER@SHER2012.COM?
-77,DE,State,DE,Lt. Governor,Margaret Mckeown,Libertarian,"3454 LONGRIDGE RD, CLAYTON, DE 19938?"
-80,DE,State,DE,Insurance Commissioner,Karen Stewart,Democratic,"801 W 20TH ST, WILMINGTON, DE 19802?"
-83,DE,State,DE,Insurance Commissioner,Benjamin Mobley,Republican,"66 CANTWELL DR, CANTWELL RIDGE, MIDDLETOWN, DE 19709?",WWW.BENJAMINMOBLEY.COM?,MOBLEYBENJAMIN2012@GMAIL.COM?
-89,DE,State,DE,Insurance Commissioner,David Eisenhour,Libertarian,"P O BOX 257, GEORGETOWN, DE 19947?",WWW.SUSSEXLP.ORG?,CHAIR@SUSSEXLP.ORG?
+1,DE,Federal,DE,U.S. Senator,Thomas R. Carper,Democratic,"600 W MATSON RUN PKY, WILMINGTON, DE 19802E",WWW.CARPERFORDELAWARE.COME
+6,DE,Federal,DE,U.S. Senator,Kevin Wade,Republican,"137 E 3RD ST, NEW CASTLE, DE 19720E",WWW.WADEFORUSSENATE.COME,KEVINWADE@WADEFORDELAWARE.COME
+12,DE,Federal,DE,U.S. Senator,Andrew Richard Groff,Green,"503 ROTHBURY RD, WOODBROOK, WILMINGTON, DE 19803E",WWW.ANDREWGROFFFORSENATE.USE
+17,DE,Federal,DE,U.S. Senator,Alexander Pires,Independent Party of Delaware,"2 DICKINSON ST, REHOBOTH, DE 19971E",FARMERSLAWYER@AOL.COME
+25,DE,Federal,DE,Representative in Congress,John C. Carney Jr.,Democratic,"506 W 19TH ST, WILMINGTON, DE 19802E",JOHN@JOHNCARNEY.ORGE
+30,DE,Federal,DE,Representative in Congress,Thomas H. Kovach,Republican,"1410 WILLIAM PENN LN, WELDIN PARK, WILMINGTON, DE 19803E",WWW.KOVACHFORCONGRESS.ORGE,TKOVACH@KOVACHFORCONGRESS.ORGE
+36,DE,Federal,DE,Representative in Congress,Bernard August,Green,"101 CARDIFF COURT WEST, MEADOWDALE, NEWARK, DE 19711E",WWW.BERNIEAUGUSTFORUSCONGRESS.USE,NIXMOX@VERIZON.NETE
+42,DE,Federal,DE,Representative in Congress,Scott Gesty,Libertarian,"1609 WINDYBUSH RD, WINDYBUSH, WILMINGTON, DE 19810E",WWW.GESTY4CONGRESS.ORGE
+47,DE,State,DE,Governor,Jack A. Markell,Democratic,"3 GUYENNE RD, GUYENCOURT, WILMINGTON, DE 19807E"
+50,DE,State,DE,Governor,Jeffrey E. Cragg,Republican,"415 FOULKSTONE RD, WOODBROOK, WILMINGTON, DE 19803E",WWW.CRAGG2012.COME,JEFFCRAGG@COMCAST.NETE
+56,DE,State,DE,Governor,Mark Joseph Perri,Green,"2011 MONROE PL, WILMINGTON, DE 19802E",WWW.PERRIDEGOV.USE,MARK@MPERRI.COME
+62,DE,State,DE,Governor,Jesse Mcvay,Libertarian,"7 MCBRY CT, WOODS MANOR EAST, DOVER, DE 19901E"
+65,DE,State,DE,Lt. Governor,Matthew Denn,Democratic,"441 COLDSPRING RUN, THISTLEBERRY FARMS, NEWARK, DE 19711E",WWW.MATTDENN.COME,MATTDENN@HOTMAIL.COME
+71,DE,State,DE,Lt. Governor,Cheryl Anne Valenzuela,Republican,"503 GILCREST ST, MILFORD, DE 19963E",WWW.SHER2012.COME,SHER@SHER2012.COME
+77,DE,State,DE,Lt. Governor,Margaret Mckeown,Libertarian,"3454 LONGRIDGE RD, CLAYTON, DE 19938E"
+80,DE,State,DE,Insurance Commissioner,Karen Stewart,Democratic,"801 W 20TH ST, WILMINGTON, DE 19802E"
+83,DE,State,DE,Insurance Commissioner,Benjamin Mobley,Republican,"66 CANTWELL DR, CANTWELL RIDGE, MIDDLETOWN, DE 19709E",WWW.BENJAMINMOBLEY.COME,MOBLEYBENJAMIN2012@GMAIL.COME
+89,DE,State,DE,Insurance Commissioner,David Eisenhour,Libertarian,"P O BOX 257, GEORGETOWN, DE 19947E",WWW.SUSSEXLP.ORGE,CHAIR@SUSSEXLP.ORGE
 FL00001,FL,Federal,FL,United States Senator,Bill Nelson,Democratic,4078024765,"1516 East Colonial Drive Suite 101 | Orlando, FL 32803", 
 FL00002,FL,Federal,FL,United States Senator,Bill Gaylor,No Party Affiliation,3212591308,"477 N. Harbor City Boulevard  | Melbourne, FL 32935",bill@floridaforbill.com
 FL00003,FL,Federal,FL,United States Senator,Chris Borgia,No Party Affiliation,"4611 South University Dr. #178  | Davie, FL 33328", 
@@ -111,6 +116,9 @@ KS00316,KS,Other,KS,Court of Appeals Judge,David E. Bruns,Nonpartisan,(785) 233-
 KS00317,KS,Other,KS,Court of Appeals Judge,G. Gordon Atcheson,Nonpartisan,(913) 649-9835 ,"301 SW 10th Ave  | Topeka, KS 66612 "
 KS00318,KS,Other,KS,Court of Appeals Judge,Karen Arnold-Burger,Nonpartisan,(913) 681-5861 ,"301 SW 10th Ave.  | Topeka, KS 66612 "
 KS00319,KS,Other,KS,Court of Appeals Judge,Richard D. Greene,Nonpartisan,(316) 761-0308 ,"301 W. 10th  | Topeka, KS 66612 "
+MA00001,MA,Federal,MA,US Senate,Elizabeth Warren,Democratic
+MA00002,MA,Federal,MA,US Senate,Scott Brown,Republican
+MA00003,MA,Federal,MA,US Senate,Bill Cimbrelo,Independent
 MD00001,MD,Federal,MD,U.S. Senator,Ben Cardin,Democratic,443-865-7290,P.O. Box 21093  | Baltimore MD 21228,info@bencardin.com
 MD00002,MD,Federal,MD,U.S. Senator,Daniel John Bongino,Republican,410-924-4577,Bongino for Senate P.O. Box 827 | Severna Park MD 21146,campaign@bongino.com
 MD00003,MD,Federal,MD,U.S. Senator,Lih Young,Democratic,P.O. Box 10286  | Rockville MD 20849,lyoung2k@yahoo.com
@@ -177,6 +185,11 @@ MI00356,MI,State,MI,Justice Of The Supreme Court 8 Year Terms (2) Positions,Bob 
 MI00357,MI,State,MI,Justice Of The Supreme Court Incumbent,Mindy Barry,Nonpartisan,"1124 Berkshire Rd | Grosse Pointe Park, MI 48230"
 MI00358,MI,State,MI,Justice Of The Supreme Court Incumbent,Shelia Johnson,Nonpartisan,"29222 W Chanticleer Dr | Southfield, MI 48034"
 MI00359,MI,State,MI,Justice Of The Supreme Court Incumbent,Brian Zahra,Nonpartisan
+MN00001,MN,Federal,MN,US Senate,Amy Klobuchar,Democratic-Farmer-Labor
+MN00002,MN,Federal,MN,US Senate,Kurt Bills,Republican
+MN00003,MN,Federal,MN,US Senate,Stephen Williams,Independence Party of America
+MN00004,MN,Federal,MN,US Senate,Republican Party?,Grassroots
+MN00005,MN,Federal,MN,US Senate,Michael Cavlan,Minnesota Open Progressives
 MO00001,MO,Federal,MO,U. S. Senator,Claire McCaskill,Democratic
 MO00002,MO,Federal,MO,U. S. Senator,Todd Akin,Republican
 MO00003,MO,Federal,MO,U. S. Senator,Jonathan Dine,Libertarian
@@ -211,15 +224,9 @@ MT00286,MT,State,MT,Attorney General,Tim Fox,Republican,406-442-2004,"PO Box 159
 MT00287,MT,State,MT,Attorney General,Pam Bucy,Democratic,406-465-8570,"808 8th Avenue | Helena, MT 59601",Pambucy.com,Pam@pambucy.com
 MT00288,MT,State,MT,Clerk of the Supreme Court,Ed Smith,Democratic,406-442-9691,"630 Floweree Street | Helena, MT 59601",Edsmithformontana.com,Edsmithsupremecourtclerk@gmail.com
 MT00289,MT,State,MT,Clerk of the Supreme Court,Mike Fellows,Libertarian,406-721-9020,"Box 4803 | Missoula, MT 59806",Votefellows@aol.com
-MT00290,MT,State,MT,Governor & Lt. Governor,Rick Hill & Jon Sonju,Republican,406-227-8899,"PO Box 1585 | Helena, MT 59624",Rickhillforgovernor.com,Rick@rickhillforgovernor.com
-MT00291,MT,State,MT,Governor & Lt. Governor,Ron Vandevender & Marc Mulcahy,Libertarian,406-422-3474,"3723 Eagle Canyon Road | Cascade, MT 59421",Ronformontana.com,Ron@ronformontana.com
-MT00292,MT,State,MT,Governor & Lt. Governor,Steve Bullock & John Walsh,Democratic,406-465-6969,"PO Box 1330 | Helena, MT 59624",Stevebullock.com,Staff@stevebullock.com
-MT00293,MT,State,MT,Public Service Commissioner #2,Kirk Bushman,Republican,406-256-8496,"PO Box 80272 | Billings, MT 59108",Kirkbushman.com,Kirk@kirkbushman.com
-MT00294,MT,State,MT,Public Service Commissioner #2,Chuck Tooley,Democratic,406-651-0273,"PO Box 555 | Billings, MT 59103",Tooleyforpsc.org,Chuck@chucktooley.com
-MT00295,MT,State,MT,Public Service Commissioner #3,Roger Koopman,Republican,406-587-7555,"811 South Tracy Avenue | Bozeman, MT 59715",Koopman@imt.net
-MT00296,MT,State,MT,Public Service Commissioner #3,John Vincent,Democratic,406-763-3010,"680 Low Bench Road | Gallatin Gateway, MT 59730",Jcvpsc@gmail.com
-MT00297,MT,State,MT,Public Service Commissioner #4,Gail Gutsche,Democratic,406-360-9932,"1530 Cooper Street | Missoula, MT 59802",Gutsche@wildrockies.org
-MT00298,MT,State,MT,Public Service Commissioner #4,Bob Lake,Republican,406-363-4091,"PO Box 2096 | Hamilton, MT 59840",Boblake.net,Lakemill@montana.com
+MT00290,MT,State,MT,Governor and Lt. Governor,Rick Hill & Jon Sonju,Republican,406-227-8899,"PO Box 1585 | Helena, MT 59624",Rickhillforgovernor.com,Rick@rickhillforgovernor.com
+MT00291,MT,State,MT,Governor and Lt. Governor,Ron Vandevender & Marc Mulcahy,Libertarian,406-422-3474,"3723 Eagle Canyon Road | Cascade, MT 59421",Ronformontana.com,Ron@ronformontana.com
+MT00292,MT,State,MT,Governor and Lt. Governor,Steve Bullock & John Walsh,Democratic,406-465-6969,"PO Box 1330 | Helena, MT 59624",Stevebullock.com,Staff@stevebullock.com
 MT00299,MT,State,MT,Secretary of State,Roger Roots,Libertarian,406-224-1135,"113 Lake Drive East | Livingston, MT 59047",Rogerroots@msn.com
 MT00300,MT,State,MT,Secretary of State,Brad Johnson,Republican,406-422-5933,"3724B Old Highway 12 East | East Helena, MT 59635",Brad@friendsofbrad.com,Friendsofbrad.com
 MT00301,MT,State,MT,Secretary of State,Linda McCulloch,Democratic,406-449-7884,"PO Box 352 | Helena, MT 59624",McCullochformontana.com,Info@mccullochformontana.com
@@ -227,9 +234,9 @@ MT00302,MT,State,MT,State Auditor,Derek Skees,Republican,406-212-5493,"PO Box 91
 MT00303,MT,State,MT,State Auditor,Monica J. Lindeen,Democratic,406-698-4251,"PO Box 1307 | Helena, MT 59624",Lindeen.net,Monica@lindeen.net
 MT00304,MT,State,MT,Superintendent of Public Instruction,Sandy Welch,Republican,406-823-0564,"PO Box 1596 | Helena, MT 59624",Welchformontana.com,Sandy@welchformontana.com
 MT00305,MT,State,MT,Superintendent of Public Instruction,Denise Juneau,Democratic,"PO Box 223 | Helena, MT 59624",Denisejuneau.com,Denise@denisejuneau.com
-MT00306,MT,State,MT,Supreme Court Justice #5,Ed Sheehy,Non-Partisan,406-240-0876,"6585 Linda Vista | Missoula, MT 59803",Sheehyforjustice.com,Esheehy1@msu.com
-MT00307,MT,State,MT,Supreme Court Justice #5,Laurie McKinnon,Non-Partisan,406-424-8360,"Box 774 | Choteau, MT 59422",Mckinnon4justice.com,Mckinnonjustice@3rivers.net
-MT00308,MT,State,MT,Supreme Court Justice #6,Brian Morris,Non-Partisan,406-422-3053,"907 State Street | Helena, MT 59601",Bm_morris@yahoo.com
+MT00306,MT,State,MT,Supreme Court Justice 5,Ed Sheehy,Non-Partisan,406-240-0876,"6585 Linda Vista | Missoula, MT 59803",Sheehyforjustice.com,Esheehy1@msu.com
+MT00307,MT,State,MT,Supreme Court Justice 5,Laurie McKinnon,Non-Partisan,406-424-8360,"Box 774 | Choteau, MT 59422",Mckinnon4justice.com,Mckinnonjustice@3rivers.net
+MT00308,MT,State,MT,Supreme Court Justice 6,Brian Morris,Non-Partisan,406-422-3053,"907 State Street | Helena, MT 59601",Bm_morris@yahoo.com
 NC00030,NC,State,NC,NC Governor,Walter H. Dalton,Democratic
 NC00033,NC,State,NC,NC Lieutenant Governor,Linda D. Coleman,Democratic
 NC00035,NC,State,NC,NC Attorney General,Roy Cooper,Democratic
@@ -286,6 +293,9 @@ NE00096,NE,State,NE,Northeast Community College At Large for Board of Governors,
 NE00102,NE,State,NE,Southeast Community College At Large for Board of Governors,Jim Garver,Non-partisan,402-435-0400,"815 Elmwood Ave, Lincoln, NE  68510"
 NE00103,NE,State,NE,Southeast Community College At Large for Board of Governors,Steven Ottmann,Non-partisan,402-946-4821,"1146 Co Rd F, Dorchester, NE  68343"
 NE00110,NE,State,NE,Western Community College At Large for Board of Governors,Tom Perkins,Non-partisan,308-632-5549,"1010 East 35th St, Scottsbluff, NE  69361"
+NH00008,NH,State,NH,Governor,Maggie Hassan,Democratic
+NH00009,NH,State,NH,Governor,Ovide Lamontagne,Republican
+NH00010,NH,State,NH,Governor,John J. Babiarz,Libertarian
 NJ00025,NJ,Federal,NJ,U.S. Senate,Bob Menedez,Democratic,TRUE
 NJ00026,NJ,Federal,NJ,U.S. Senate,Joe Kyrillos,Republican,FALSE
 NJ00027,NJ,Federal,NJ,U.S. Senate,Jeff Boss,Independent,FALSE
@@ -314,12 +324,12 @@ OR00019,OR,State,OR,State Treasurer,Michael Paul Marsh,Constitution,"2034 Myrtle
 OR00020,OR,State,OR,State Treasurer,Ted Wheeler,Democrat,503-378-4329,"PO Box 1812 | Portland, OR 97207",www.tedwheeler.com,ted@tedwheeler.com
 OR00022,OR,State,OR,Attorney General,Ellen Rosenblum,Democrat,503-597-8495,"2236 SE 10th Ave | Portland, OR 97214",EllenRosenblum.com,"Ellen,Rosenblum@gmail.com"
 OR00023,OR,State,OR,Attorney General,James E Leuenberger,"Libertarian, Constitution",503-542-7433,"PO Box 1684 | Lake Oswego, OR 97035",www.fights4rights.com,jim@fights4rights.com
-OR00191,OR,State,OR,Commissioner of the Bureau of Labor and Industries,Brad Avakian,Nonpartisan,971-673-0781,"2236 SE 10th Ave | Portland, OR 97214",www.bradavakian.com,brad@bradavakian.com
-OR00192,OR,State,OR,Commissioner of the Bureau of Labor and Industries,Bruce Starr,Nonpartisan,503-310-7500,"22115 NW Imbrie Dr #290 | Hillsboro, OR 97124",www.brucestarr.org,bruce@brucestarr.org
-OR00193,OR,State,OR,Judge of the Supreme Court Pos 3,Nena Cook,Nonpartisan,503-243-1626,"1000 SW Broadway, Suite 1400 | Portland, OR 97205",www.nenacook.com,nena@sussmanshank.com
-OR00194,OR,State,OR,Judge of the Supreme Court Pos 3,Richard C Baldwin,Nonpartisan,503-988-3052,"1021 SW 4th Avenue | Portland, OR 97204",Richard.C.Baldwin@ojd.state.or.us
-OR00195,OR,State,OR,Judge of the Court of Appeals Pos 6,James C Egan,Nonpartisan,541-967-3865,"422 SW 5th Ave | Albany, OR 97321",james.c.egan@ojd.state.or.us
-OR00196,OR,State,OR,Judge of the Court of Appeals Pos 6,Tim Volpert,Nonpartisan,503-241-2300,"3214 NE U.S. Grant Place | Portland, OR 97212",timvolpert@dwt.com
+OR00191,OR,State,OR,Labor Comissioner,Brad Avakian,Nonpartisan,971-673-0781,"2236 SE 10th Ave | Portland, OR 97214",www.bradavakian.com,brad@bradavakian.com
+OR00192,OR,State,OR,Labor Comissioner,Bruce Starr,Nonpartisan,503-310-7500,"22115 NW Imbrie Dr #290 | Hillsboro, OR 97124",www.brucestarr.org,bruce@brucestarr.org
+OR00193,OR,State,OR,Judge of the Supreme Court,Nena Cook,Nonpartisan,503-243-1626,"1000 SW Broadway, Suite 1400 | Portland, OR 97205",www.nenacook.com,nena@sussmanshank.com
+OR00194,OR,State,OR,Judge of the Supreme Court,Richard C Baldwin,Nonpartisan,503-988-3052,"1021 SW 4th Avenue | Portland, OR 97204",Richard.C.Baldwin@ojd.state.or.us
+OR00195,OR,State,OR,Judge of the Court of Appeals,James C Egan,Nonpartisan,541-967-3865,"422 SW 5th Ave | Albany, OR 97321",james.c.egan@ojd.state.or.us
+OR00196,OR,State,OR,Judge of the Court of Appeals,Tim Volpert,Nonpartisan,503-241-2300,"3214 NE U.S. Grant Place | Portland, OR 97212",timvolpert@dwt.com
 PA00001,PA,State,PA,Attorney General,Kathleen Kane,Democratic,TRUE,FALSE,(570) 580-0860,"P.O. Box 60230 | Philadelphia, PA 19102",http://www.kathleengkane.com/,info@kathleengkane.com,http://www.facebook.com/Kane.for.AG,KathleenGKane,Kathleen_Kane_(politician),http://www.youtube.com/kathleengkane
 PA00002,PA,State,PA,Attorney General,David Freed,Republican,TRUE,FALSE,717-230-1514,"PO Box 1105 | Harrisburg, PA 17108",http://davidfreedforag.com/,info@DavidFreedforAG.com,https://www.facebook.com/FriendsofDaveFreed,davidfreedforag,David_Freed
 PA00003,PA,State,PA,Auditor General,Eugene Depasquale,Democratic,TRUE,FALSE,"PO Box 1822 | York, PA 17405",http://www.eugene4pa.com/home.html,http://www.facebook.com/DePasqualePA,DePasqualePA,Eugene_DePasquale,http://www.youtube.com/user/EugeneDePasquale
@@ -458,6 +468,10 @@ WA00272,WA,Other,WA,Court of Appeals,Joel Penoyar,Non-Partisan
 WA00273,WA,Other,WA,Court of Appeals,Laurel Siddoway,Non-Partisan
 WA00274,WA,Other,WA,Court of Appeals,Teresa C. Kulik,Non-Partisan
 WA00275,WA,Other,WA,Court of Appeals,Devin Poulson,Non-Partisan
+WI00001,WI,Federal,WI,US Senate,Tammy Baldwin?,Democratic
+WI00002,WI,Federal,WI,US Senate,Tommy Thompson,Republican
+WI00003,WI,Federal,WI,US Senate,Nimrod Allen III,Independent
+WI00004,WI,Federal,WI,US Senate,Joseph Kexel,Libertarian
 WV00001,WV,Federal,WV,U.S. Senate,Joe Manchin III,Democratic,TRUE,info@joemanchinwv.com
 WV00002,WV,Federal,WV,U.S. Senate,John R. Raese,Republican,FALSE,304-594-0281,jtroy@raeseforsenate.org
 WV00009,WV,State,WV,Governor,Earl Ray Tomblin,Democratic,TRUE
