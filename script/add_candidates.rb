@@ -8,7 +8,7 @@ require 'active_support/all'
 files = ARGV.empty? ? Dir["/Users/scott/desktop/new bip/*.csv"] : ARGV
 
 # Optimized to work with Cicero - i.e. first = First, second = Second, third = 3rd, etc
-ordinals = JSON::parse("{\"first\":\"First\",\"second\":\"Second\",\"third\":\"3rd\",\"fourth\":\"4th\",\"fifth\":\"5th\",\"sixth\":\"6th\",\"seventh\":\"7th\",\"eighth\":\"8th\",\"ninth\":\"9th\",\"tenth\":\"10th\",\"eleventh\":\"11th\",\"twelfth\":\"12th\",\"thirteenth\":\"13th\",\"fourteenth\":\"14th\",\"fifteenth\":\"15th\",\"sixteenth\":\"16th\",\"seventeenth\":\"17th\",\"eighteenth\":\"18th\",\"nineteenth\":\"19th\",\"twentieth\":\"20th\",\"twenty-first\":\"21st\",\"twenty-second\":\"22nd\",\"twenty-third\":\"23rd\",\"twenty-fourth\":\"24th\",\"twenty-fifth\":\"25th\",\"twenty-sixth\":\"26th\",\"twenty-seventh\":\"27th\",\"twenty-eighth\":\"28th\",\"twenty-ninth\":\"29th\",\"thirtieth\":\"30th\",\"thirty-first\":\"31st\",\"thirty-second\":\"32nd\",\"thirty-third\":\"33rd\",\"thirty-fourth\":\"34th\",\"thirty-fifth\":\"35th\",\"thirty-sixth\":\"36th\",\"thirty-seventh\":\"37th\",\"thirty-eighth\":\"38th\",\"thirty-ninth\":\"39th\",\"fortieth\":\"40th\",\"forty-first\":\"41st\",\"forty-second\":\"42nd\",\"forty-third\":\"43rd\",\"forty-fourth\":\"44th\",\"forty-fifth\":\"45th\",\"forty-sixth\":\"46th\",\"forty-seventh\":\"47th\",\"forty-eighth\":\"48th\",\"forty-ninth\":\"49th\",\"fiftieth\":\"50th\",\"fifty-first\":\"51st\",\"fifty-second\":\"52nd\",\"fifty-third\":\"53rd\",\"fifty-fourth\":\"54th\",\"fifty-fifth\":\"55th\",\"fifty-sixth\":\"56th\",\"fifty-seventh\":\"57th\",\"fifty-eighth\":\"58th\",\"fifty-ninth\":\"59th\",\"sixtieth\":\"60th\",\"sixty-first\":\"61st\",\"sixty-second\":\"62nd\",\"sixty-third\":\"63rd\",\"sixty-fourth\":\"64th\",\"sixty-fifth\":\"65th\",\"sixty-sixth\":\"66th\",\"sixty-seventh\":\"67th\",\"sixty-eighth\":\"68th\",\"sixty-ninth\":\"69th\",\"seventieth\":\"70th\",\"seventy-first\":\"71st\",\"seventy-second\":\"72nd\",\"seventy-third\":\"73rd\",\"seventy-fourth\":\"74th\",\"seventy-fifth\":\"75th\",\"seventy-sixth\":\"76th\",\"seventy-seventh\":\"77th\",\"seventy-eighth\":\"78th\",\"seventy-ninth\":\"79th\",\"eightieth\":\"80th\",\"eighty-first\":\"81st\",\"eighty-second\":\"82nd\",\"eighty-third\":\"83rd\",\"eighty-fourth\":\"84th\",\"eighty-fifth\":\"85th\",\"eighty-sixth\":\"86th\",\"eighty-seventh\":\"87th\",\"eighty-eighth\":\"88th\",\"eighty-ninth\":\"89th\",\"ninetieth\":\"90th\",\"ninety-first\":\"91st\",\"ninety-second\":\"92nd\",\"ninety-third\":\"93rd\",\"ninety-fourth\":\"94th\",\"ninety-fifth\":\"95th\",\"ninety-sixth\":\"96th\",\"ninety-seventh\":\"97th\",\"ninety-eighth\":\"98th\",\"ninety-ninth\":\"99th\",\"one hundredth\":\"100th\"}" )
+ordinals = JSON::parse("{\"first\":\"1st\",\"second\":\"2nd\",\"third\":\"3rd\",\"fourth\":\"4th\",\"fifth\":\"5th\",\"sixth\":\"6th\",\"seventh\":\"7th\",\"eighth\":\"8th\",\"ninth\":\"9th\",\"tenth\":\"10th\",\"eleventh\":\"11th\",\"twelfth\":\"12th\",\"thirteenth\":\"13th\",\"fourteenth\":\"14th\",\"fifteenth\":\"15th\",\"sixteenth\":\"16th\",\"seventeenth\":\"17th\",\"eighteenth\":\"18th\",\"nineteenth\":\"19th\",\"twentieth\":\"20th\",\"twenty-first\":\"21st\",\"twenty-second\":\"22nd\",\"twenty-third\":\"23rd\",\"twenty-fourth\":\"24th\",\"twenty-fifth\":\"25th\",\"twenty-sixth\":\"26th\",\"twenty-seventh\":\"27th\",\"twenty-eighth\":\"28th\",\"twenty-ninth\":\"29th\",\"thirtieth\":\"30th\",\"thirty-first\":\"31st\",\"thirty-second\":\"32nd\",\"thirty-third\":\"33rd\",\"thirty-fourth\":\"34th\",\"thirty-fifth\":\"35th\",\"thirty-sixth\":\"36th\",\"thirty-seventh\":\"37th\",\"thirty-eighth\":\"38th\",\"thirty-ninth\":\"39th\",\"fortieth\":\"40th\",\"forty-first\":\"41st\",\"forty-second\":\"42nd\",\"forty-third\":\"43rd\",\"forty-fourth\":\"44th\",\"forty-fifth\":\"45th\",\"forty-sixth\":\"46th\",\"forty-seventh\":\"47th\",\"forty-eighth\":\"48th\",\"forty-ninth\":\"49th\",\"fiftieth\":\"50th\",\"fifty-first\":\"51st\",\"fifty-second\":\"52nd\",\"fifty-third\":\"53rd\",\"fifty-fourth\":\"54th\",\"fifty-fifth\":\"55th\",\"fifty-sixth\":\"56th\",\"fifty-seventh\":\"57th\",\"fifty-eighth\":\"58th\",\"fifty-ninth\":\"59th\",\"sixtieth\":\"60th\",\"sixty-first\":\"61st\",\"sixty-second\":\"62nd\",\"sixty-third\":\"63rd\",\"sixty-fourth\":\"64th\",\"sixty-fifth\":\"65th\",\"sixty-sixth\":\"66th\",\"sixty-seventh\":\"67th\",\"sixty-eighth\":\"68th\",\"sixty-ninth\":\"69th\",\"seventieth\":\"70th\",\"seventy-first\":\"71st\",\"seventy-second\":\"72nd\",\"seventy-third\":\"73rd\",\"seventy-fourth\":\"74th\",\"seventy-fifth\":\"75th\",\"seventy-sixth\":\"76th\",\"seventy-seventh\":\"77th\",\"seventy-eighth\":\"78th\",\"seventy-ninth\":\"79th\",\"eightieth\":\"80th\",\"eighty-first\":\"81st\",\"eighty-second\":\"82nd\",\"eighty-third\":\"83rd\",\"eighty-fourth\":\"84th\",\"eighty-fifth\":\"85th\",\"eighty-sixth\":\"86th\",\"eighty-seventh\":\"87th\",\"eighty-eighth\":\"88th\",\"eighty-ninth\":\"89th\",\"ninetieth\":\"90th\",\"ninety-first\":\"91st\",\"ninety-second\":\"92nd\",\"ninety-third\":\"93rd\",\"ninety-fourth\":\"94th\",\"ninety-fifth\":\"95th\",\"ninety-sixth\":\"96th\",\"ninety-seventh\":\"97th\",\"ninety-eighth\":\"98th\",\"ninety-ninth\":\"99th\",\"one hundredth\":\"100th\"}" )
 
 i = 0
 
@@ -75,9 +75,13 @@ files.each do |file|
             obj['Electoral District'] = obj['Electoral District'].gsub('State Representative','HD')          
             
             if number.nil? # Mostly for MA
-              district = obj['Electoral District'].slice(5,obj['Electoral District'].length)
-              ordinal = district.split(' ')[0]
-              obj['Electoral District'] = obj['Electoral District'].gsub( ordinal,ordinals[ ordinal.downcase ])  unless ordinals[ ordinal.downcase ].nil?
+
+              if obj['Electoral District'].slice(0,4) == 'MAHD'
+                district = obj['Electoral District'].slice(5,obj['Electoral District'].length)
+                ordinal = district.split(' ')[0]
+                obj['Electoral District'] = obj['Electoral District'].gsub( ordinal,ordinals[ ordinal.downcase ])  unless ordinals[ ordinal.downcase ].nil?
+              end
+
               obj['Electoral District'] = obj['Electoral District'].slice(0,4) + obj['Electoral District'].slice(5, obj['Electoral District'].length ) if obj['Electoral District'][4] == ' '
               obj['Electoral District'] = obj['Electoral District'].strip
             end
@@ -138,7 +142,7 @@ files.each do |file|
             option.update_attributes(row_option)
           end
           option.save
-        
+                  
           newFile.push( obj.map{|k,v| v }.to_csv ) if obj['Electoral District'].length == 2
         end
       else
