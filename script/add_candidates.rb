@@ -42,7 +42,9 @@ files.each do |file|
           
           obj['Electoral District'] = obj['State']+obj['Electoral District'] if obj['Electoral District'].index(obj['State']) != 0  # Appends the state onto the geography if not there
           obj['Electoral District'] = obj['Electoral District'][2] == ' ' ? obj['Electoral District'].slice(0,2)+obj['Electoral District'].slice(3,obj['Electoral District'].length) : obj['Electoral District'] #Removes a space from the front of the geography
-
+          
+          obj['Electoral District'] = obj['Electoral District'].slice(0,2).upcase+obj['Electoral District'].slice(2,obj['Electoral District'].length) # Always upcase
+          
           #  Nebraska only has one legislative body - Cicero returns districts as State Upper which cicero.rb codes as SD. So should be translated to Senate Districts
           #  Vermont is also weird - city names for leg districts.
           
