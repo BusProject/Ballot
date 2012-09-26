@@ -224,6 +224,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					matches = feedback.filter( function(el) { return el.option_id == option_id })
 				for (var ii=0; ii < matches.length; ii++) {
 					matches[ii].type = options[i].type
+					matches[ii].option_name = options[i].name
 					options[i].feedback.push( Feedback( matches[ii] ) )
 				};
 			};
