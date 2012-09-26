@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
       if id != '' # Future proofing all URL names for our first 10^20th users
         safe = id.to_i(16).to_s(10).to_i(2).to_s(10).to_i > 10e20
       end
+      notstate = self.profile =~ /AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY/
+      safe = notstate.nil? && safe
       errors.add( :profile, 'is not unique' ) unless User.where('(id = ? OR profile = ?)  AND id != ?',id,self.profile,self.id).empty? && safe
     end
   end

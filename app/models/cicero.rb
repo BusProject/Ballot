@@ -30,6 +30,12 @@ class Cicero
           leg_districts = legislative['response']['results']['districts']
         end
         
+        unless addresses.index('NH').nil?
+          legislative = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/legislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json' )
+          extra_leg_districts = legislative['response']['results']['districts']
+          leg_districts.push( extra_leg_districts.select{|r| r['district_type'] == 'STATE_LOWER' }.first )
+        end
+        
         # school = JSON.parse(RestClient.get 'http://cicero.azavea.com/v3.0/nonlegislative_district?lat='+lat+'&lon='+lng+'&token='+cicero['token']+'&user='+cicero['user'].to_s+'&f=json&type=SCHOOL' )
         # school_dist = school['response']['results']['districts']
         # Deactivate for now
@@ -41,7 +47,7 @@ class Cicero
         all_districts = addresses
       end
 
-      return all_districts.uniq
+      return all_districts
     else
       return match.data
     end

@@ -69,7 +69,7 @@ puts collect
 
 puts i.to_s+' total rows, adding '+(Choice.all.count-choices).to_s+' Choices and '+(Option.all.count-options).to_s+' options'
 
-unless ARGV[0].nil?
+if ARGV[0].nil?
   puts 'Saved to /lib/measures.csv'
 
   File.open('lib/measures.csv', "w+") do |f|
