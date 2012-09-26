@@ -108,7 +108,7 @@ files.each do |file|
           obj['Office Name'] = obj['Office Name'].gsub('#','')
           
           # Codifying some renaming I've done
-          obj['Office Name'] = obj['Office Name'].gsub('Commissioner of the Bureau of Labor and Industries','Labor Comissioner') if obj['Electoral District'] == 'OR'
+          obj['Office Name'] = obj['Office Name'].gsub('Commissioner of the Bureau of Labor and Industries','Labor Commissioner') if obj['Electoral District'] == 'OR'
           obj['Office Name'] = obj['Office Name'].gsub('Governor & Lt. Governor','Governor and Lt. Governor') if obj['Electoral District'] == 'MT'
           obj['Electoral District'] += obj['Office Name'].gsub('Commissioner','District') if obj['Electoral District'] == 'MT' && !obj['Office Name'].index('Public Service Commissioner').nil?
 
