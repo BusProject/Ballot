@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   
   # Method for generating a link to the profile
   def set_profile
-    if self.profile.nil?
+    if self.profile.nil? || self.profile.empty?
       self[:profile] = '/'+self.to_url unless self.to_url.nil?
     else
       self[:profile] = '/'+self.profile
