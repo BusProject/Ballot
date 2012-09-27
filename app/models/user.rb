@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   # Profile and URL related methods
   after_initialize :set_profile
   validate :check_profile
+  before_save :fix_profile
   
   # Method for generating a link to the profile
   def set_profile
@@ -54,6 +55,10 @@ class User < ActiveRecord::Base
       safe = notstate.nil? && safe
       errors.add( :profile, 'is not unique' ) unless User.where('(id = ? OR profile = ?)  AND id != ?',id,self.profile,self.id).empty? && safe
     end
+  end
+  
+  def fix_profile
+    self.profile = self.profile.gsub('/','') unless self.profile.nil?
   end
   
   def to_url ( full = false)
