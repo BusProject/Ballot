@@ -112,12 +112,18 @@
 					
 					$('input.primary').colorpicker().on('changeColor', function(ev){
 					  current_user.primary( ev.color.toHex() );
+					}).on('hide',function() {
+						if( current_user.primary() == '' ) $(this).val('')
 					});
 					$('input.secondary').colorpicker().on('changeColor', function(ev){
 					  current_user.secondary( ev.color.toHex() );
+					}).on('hide',function() {
+						if( current_user.secondary() == '' ) $(this).val('')
 					});
 					$('input.bg').colorpicker().on('changeColor', function(ev){
 					  current_user.bg( ev.color.toHex() );
+					}).on('hide',function() {
+						if( current_user.bg() == '' ) $(this).val('')
 					});
 				}
 				current_user.removeHeader = function() {
