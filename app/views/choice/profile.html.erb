@@ -28,37 +28,35 @@
 			<%= stylesheet_link_tag 'other/colorpicker.css' %>
 
 			<div id="edit-profile">
-				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }"><i class="icon-cog"></i> Edit Your Voter Guide </span></a> | 
+				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }"><i class="icon-cog"></i> Customize Your Voter Guide</span></a>
 				<div style="display: none" class="editor" data-bind="visible: edit ">
-					<input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
+					<h3><i class="icon-cog"></i> Customize Your Voter Guide <i class="icon-cog"></i></h3>
+					<p style="text-align:center; margin-bottom:20px"><i class="icon-link"></i> &nbsp <a data-bind="text: '<%= ENV['BASE'] %>/'+profile.store(), attr: { href: '<%= ENV['BASE'] %>/'+profile.store()} "></a></p>
+					<p class="label">Voter Guide Title</p> <input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
+					<p class="label">Voter Guide Description</p> <textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
 
+					<p class="label">Custom URL</p> http://theballot.org/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="Set your guide's URL"  >
+					<span class="url-searching" data-bind="visible: profile.checking() "><i class="icon-search"></i> Searching... </span><span class="url-available" data-bind="visible: profile.available() && !profile.checking() "><i class="icon-ok-sign"></i> Available! </span><span class="url-taken" data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null "><i class="icon-exclamation-sign"></i> Taken! </span>
+					<br />
 
-					<textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
+					<p class="label">Set your primary color</p><input class="primary" data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="Primary color"  >
+					<p class="label">Set your secondary color</p><input class="secondary" data-bind="value: secondary, style: {color: secondary() }, valueUpdate: 'afterkeydown'" placeholder="Secondary color"  >
+					<p class="label">Set your background color</p><input class="bg" data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="Background color"  >
 
-					http://theballot.org/<input class="edit-profile" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="Set your guide's URL"  >
-					<span data-bind="visible: profile.checking() ">Searching...</span><span data-bind="visible: profile.available() && !profile.checking() ">Available</span><span data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null ">Taken :(</span>
-					<br />Current Url: <a data-bind="text: '<%= ENV['BASE'] %>/'+profile.store(), attr: { href: '<%= ENV['BASE'] %>/'+profile.store()} "></a>
-
-					<input class="primary" data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="Change the title text's color"  >
-					<input class="secondary" data-bind="value: secondary, style: {color: secondary() }, valueUpdate: 'afterkeydown'" placeholder="Change the secondary color"  >
-					<input class="bg" data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="Change the the background color"  >
-
-					<p><span class="link" data-bind="click: function() { save() } ">Save</span> | <span class="link" data-bind="click: function() { discard() }">Cancel</span></p>
-
-					<%= form_for @user, :url => user_update_path, :method => :POST, :html => { :multipart => true }, :remote => true, :format => :json do |form| %>
+					<p class="label" style="margin-top:30px;">Upload a custom header image</p><div id="image-upload"><%= form_for @user, :url => user_update_path, :method => :POST, :html => { :multipart => true }, :remote => true, :format => :json do |form| %>
 						<%= form.file_field :header %>
-						Must at least 860 x 180. Will overwrite your current header
+						<p class="small-label">Must at least 860 x 180. Will overwrite your current header.</p>
 						<%= form.submit 'Upload' %>
 						<span class="link" data-bind="click: function() { removeHeader() }, visible:  typeof header() != 'undefined' && header() != null && header() != '/headers/header/missing.png'">Remove Header</span>
 					<% end %>
-					
-
+					</div>
+					<div id="save-cancel"><span class="link" data-bind="click: function() { save() } "> <i class="icon-save"></i></span> Save | <span class="link" data-bind="click: function() { discard() }"><i class="icon-remove-circle"></i> Cancel</span></div>
 				</div>
 				<div class="status">
 					<p><strong><%= 'Your account has been deactivated - all of your comments and votes are hidden'  if current_user.deactivated? %></strong></p>
 					<p><strong><%= 'Your account has been banned - all of your comments and votes are hidden'  if current_user.banned? %></strong></p>
 					<a><%= link_to 'Reactivated it now', user_cancel_path  if current_user.deactivated? %></a>
-					<i class="icon-trash"></i><a><%= link_to ' Deactivate Your Account', user_cancel_path, :class =>'cancel'  if !current_user.deactivated? %></a>
+					<span class="link"><i class="icon-trash"></i><a><%= link_to ' Deactivate Your Account', user_cancel_path, :class =>'link'  if !current_user.deactivated? %></a></span>
 				</div>
 			</div>
 
