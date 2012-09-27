@@ -1,0 +1,25 @@
+<div id="read-ballot" class="ballot-section">
+	<h1 class="sectionheading"><%= @title %></h1>
+	<div class="category-heading">
+		<p>All of <%= @state %>'s candidates and ballot measures.</p>
+	</div>
+
+	<% @choices.group_by(&:contest_type).each do |type,choices| %>
+
+	<div id="<%= type == 'Ballot_Statewide' ? 'Ballot Measures' : type %>">
+
+		<div class="category-heading" >
+			<h2 ><%= type.gsub('_',' ') %></h2>
+			<p ></p>
+		</div>
+		<% choices.each do |choice | %>
+			<div class="row ">
+				<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidateSummary' : 'measureSummary' %>
+				<%=  render 'choice/'+type, :choice => choice, :user => @user %>
+			</div>
+		<% end %>
+	</div>
+
+	<% end %>
+
+</div>

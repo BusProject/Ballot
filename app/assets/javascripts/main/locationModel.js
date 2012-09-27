@@ -34,15 +34,19 @@ function locationModel(data) {
 
 	this.selected = ko.observable( null )
 	
-	this.nearby = ko.computed(function() {
-		var top = this.top(), choices = this.choices.ordered(), items = choices.map(function(el) { return el.contest })
+	this.number = ko.computed(function() {
+		var top = this.top(), choices = this.choices.ordered(), items = choices.map(function(el) { return el.contest+' '+el.geography })
 		if( items.length < 1 ) return ''
 		for (var i=0; i < items.length; i++) {
 			var elem = $( 'a[name="'+items[i]+'"]'), extra = this.selected() == choices[i] ? 500 : 0
-			if( elem.length > 0 && top < elem.position().top + extra ) return choices[i]
+			if( elem.length > 0 && top < elem.offset().top + extra ) return i;
 		};
-		if( top < 10 ) return choices[0]
-		else return choices[ choices.length - 1]
+		if( top < 10 ) return 0;
+		else return choices.length - 1;
+	},this)
+
+	this.nearby = ko.computed(function() {
+		return this.choices.ordered()[ this.number() ];
 	},this)
 
 	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
@@ -217,6 +221,32 @@ function locationModel(data) {
 		this.menuItems.push( 
 			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your on your ballot.</p>'),
 			MenuItem('#read-ballot','Read Your Ballot',"<p>Get the lowdown on everything on your ballot for the November 6th Election.</p><p>Read what others have to say about the important races in your state and share your own views.</p>"+layout,null, this),
+			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra)
+		)
+	}
+	if( this.state == 'state' ) {
+		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','ballot_statewide',this)
+		this.federal = Grouping(['Federal'],'Federal','federal',this)
+		this.state = Grouping(['State'],'State','state',this)
+		this.other = Grouping(['Other'],'Other','other',this)
+		
+		this.sections.push(this.federal)
+		this.sections.push(this.state)
+		this.sections.push(this.other)
+		this.sections.push(this.ballotMeasures)
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="checkScroll: {type:\'li\', target: yourLocation.number },visible: $data.active, foreach: $data.contests"><li>'
+		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
+		layout += '</li></ul></li><!-- /ko --></ul>'
+		
+		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
+			owner = current_user.id == 'unauthenticated' ? 'the' : 'Your',
+			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || [current_user.first_name,current_user.last_name+'\'s','Voter Guide'].join(' '),
+			msg = current_user.id == 'unauthenticated' ? undefined : 'Check out my voter guide on The Ballot',
+			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">Your Voter Guide</a>'
+			
+		this.menuItems.push( 
+			MenuItem(inits.root,'Find Your Ballot',null),
+			MenuItem('#read-ballot','Read Your Ballot', layout ,null, this),
 			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra)
 		)
 	}

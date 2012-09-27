@@ -14,7 +14,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 .on('keydown','#enter-address input',function(e) {
 	if( e.keyCode == 13 ) { $(this).blur().nextAll('a.find-ballot-submit').click(); }
 })
-.on('click touchend', '.row button.open', function(e) {
+.on('click touchend', 'body.front .row button.open', function(e) {
 		if( inits.state == 'profile' || inits.state == 'single' ) return false
 
 		var ctx = ko.contextFor(this),
@@ -30,8 +30,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		}
 		var $this = $(this).parent()
 		scrollUp = setInterval( function() { 
-			var top = $this.position().top
-			if( top < $(document).scrollTop()  ) $(document).scrollTop( top - 1 );
+			var top = $this.position().top - 80
+			if( top < $(document).scrollTop()  ) $(document).scrollTop( top  );
 		}, 10)
 		
 		setTimeout(function() { clearInterval(scrollUp); },1000)
@@ -48,10 +48,10 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	if( href[0] == '#' && href[1] == '!' ) {
 		var $href = $('a[name="'+href.split('!')[1]+'"]')
 		$href.next('.row').find('.open').click()
-		setTimeout( function() { $(document).scrollTop( $href.position().top ) },200)
+		setTimeout( function() { $(document).scrollTop( $href.position().top - 80 ) },200)
 		e.preventDefault()
 	} else if( href[0] == '#' ) {
-		var top = $(href).position().top
+		var top = $(href).position().top-80
 		e.preventDefault()
 		$(document).scrollTop( top ).trigger('scroll')
 		e.preventDefault()
@@ -327,9 +327,54 @@ ko.bindingHandlers.stripClass = {
 ko.bindingHandlers.addClass = {
 	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
 		value = valueAccessor()
-		element.className = element.className.replace(valueAccessor(),'').trim()+' '+value
+		element.className = element.className.replace(valueAccessor(),'').trim()+' '+value;
 	}
 };
+
+
+ko.bindingHandlers.checkScroll = {
+	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		var bindings = allBindingsAccessor(), 
+			settings = bindings.checkScroll,
+			maxHeight = settings.maxHeight+'px' || '200px',
+			visible = ko.toJS(bindings.visible)
+
+		element.style.maxHeight = maxHeight
+
+		if( !visible ) return false;
+
+	}
+	,update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		var bindings = allBindingsAccessor(), 
+			settings = bindings.checkScroll,
+			visible = ko.toJS(bindings.visible),
+			$element = $(element)
+	
+		if( !visible ) {
+			$(element).scrollTop = 0;
+			return false;
+		}
+	
+		var elTop = $element.scrollTop(),
+			elHeight = settings.maxHeight || 200,
+			elBottom = elTop+elHeight,
+			target = ko.toJS(settings.target),
+			targetNode = element.childNodes[target]
+	
+		if( targetNode != null ) {
+			var $target = $(targetNode),
+				$parent = $(targetNode.parentNode)
+				targetTop = $target.offset().top + $target.height() - $parent.offset().top
+
+				console.log( targetTop )
+				// console.log('bottom: ' + elBottom )
+			if( targetTop > elBottom  ) $(element).scrollTop( targetTop + elHeight )
+			if( targetTop < elTop  ) $(element).scrollTop( targetTop - elHeight )
+		}
+	
+	}
+};
+
 
 ko.bindingHandlers.stopBinding = {
     init: function() {
@@ -343,5 +388,7 @@ ko.bindingHandlers.bindDescendents = {
 			ko.applyBindingsToDescendants(bind, element);
     }
 };
+
+
 
 ko.virtualElements.allowedBindings.stopBinding = true;

@@ -106,21 +106,30 @@
 					}
 					ul {
 						margin-top: 10px;
+						max-height: 200px;
+						overflow-y: auto;
+						overflow-x: hidden;
+						position:relative;
+						direction:rtl;  /* Right To Left */ 
+						text-align:left; /* Override direction */
+						max-width: 150px;
+						margin: 0 0 0 -12px;
 						li {
 							font-weight: normal;
 							font-size: 13px;
-							margin: 0 0 10px 10px;
+							width: 120px;
+							margin: 0 10px 10px 0;
 							color:@sideGrey;
+							position: relative;
+							display: block;
 							a {
 								color:@sideGrey;
-								display:block;
-								width:90%;
 								&.active { 
 									&:after {
 										content: "\f0da";
 										font-family:"FontAwesome";
 										position:absolute;
-										right:15px;
+										right: 0px;
 									}
 								
 								}

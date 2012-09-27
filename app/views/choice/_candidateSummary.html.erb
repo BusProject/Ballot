@@ -1,0 +1,14 @@
+<a name="<%= choice.contest %> <%= choice.geography %>"></a>
+
+<div class="candidate row"  itemscope itemtype="http://data-vocabulary.org/Thing" >
+
+	<hr><h1 itemprop="name" class="title" ><%= choice.contest %></h1><hr>
+	<div itemprop="description" class="matchup" ><i class=icon-user></i><%= choice[:description] %></div>
+	<div itemprop="address" class="geography" ><i class=icon-map-marker></i><%= choice[:nice_geography] %></div>
+	<div itemprop="" class="voted">
+		<i class=icon-comments-alt></i> <%= choice.feedback.count %> have voted | <%= choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count %> have commented
+	</div>
+	<a href="<%= choice.to_url %>" ><button class="open">Learn More and Comment</button></a>
+	<hr class="button">
+	
+</div>

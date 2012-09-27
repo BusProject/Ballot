@@ -35,13 +35,39 @@ class ChoiceController < ApplicationController
     @choices_json = @choices.to_json( json_include )
 
   end
+
+  def state
+    
+    @choices = Choice.where('geography LIKE ?', params[:state]+'%' )
+
+    raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
+
+    @choices = @choices.sort_by{ |choice| [ ['Federal','State','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
+    
+    @states = ["The United States of America","Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming",'District of Columbia']
+    @stateAbvs = ["Prez","AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC"]
+    
+    @state = @states[ @stateAbvs.index( params[:state] ) ]
+    
+    @classes = 'home state'
+    @title = @state+'\'s Voter Guide'
+    @type = 'Voter Guide'
+    @message = @state+'\'s Voter Guide by, powered by The Ballot.'
+
+    result = {:state => 'state', :choices => @choices }
+
+    @choices_json = @choices.to_json
+
+    @config = result.to_json
+    
+  end
   
   def show
     @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' '))
 
     raise ActionController::RoutingError.new('Could not find '+params[:contest].gsub('_',' ') ) if @choice.nil?
 
-    @classes = 'home single'
+    @classes = 'single home'
     @title = @choice.contest
     @partial = @choice.contest_type.downcase.index('ballot').nil? ? 'candidate' : 'measure'
     @type = @partial == 'candidate' ? 'Elected Office' : 'Ballot Measure'

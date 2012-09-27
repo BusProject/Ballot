@@ -1,7 +1,5 @@
 	<div id="find-ballot" class="ballot-section">
-		<div class="stars"><h2>&#9733;</h2><h1>&#9733;</h1></div>
 			<h1 class="sectionheading">Look Up What’s On Your Ballot</h1>
-		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
 
 		<div id="enter-address">
 		
@@ -25,9 +23,7 @@
 
 	
 	<div id="read-ballot"  style="display:none;" class="ballot-section" data-bind="visible: choices.notEmpty()">
-		<div class="stars"><h2>&#9733;</h2><h1>&#9733;</h1></div>
 		<h1 class="sectionheading">Here’s What Will Be On Your Ballot</h1>
-		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
 
 		<!-- ko foreach: [candidates,ballotMeasures] -->
 			<div data-bind="visible: $data.visible, attr: {'class' : $data.class, 'id': $data.title }">
@@ -42,9 +38,7 @@
 	</div><!-- read-ballot -->
 	<h1 class="sectionheading" style="display:none;" data-bind="visible: !fetch() ">Loading...</h1>
 	<div id="more-coming" style="display:none;" class="ballot-section" data-bind="visible: geolocated() && fetch()" >
-		<div class="stars"><h2>&#9733;</h2><h1>&#9733;</h1></div>
 		<h1 class="sectionheading">More to Come...</h1>
-		<div class="stars"><h1>&#9733;</h1><h2>&#9733;</h2></div>
 		<div class="category-heading">
 			<p>This isn't your full ballot - we're still adding data <span data-bind="text: address.state() ? ' for '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
 			<br />
