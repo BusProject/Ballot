@@ -19,10 +19,10 @@ describe User do
        user = User.new(@attributes)
        user.save.should == true
      end
-     it 'saves a user - changes info and saves a user'
+     it 'saves a user - changes info and saves a user' do
       user = User.new(@attributes)
       user.save
-      user.profile ='different'
+      user.profile = 'different'
       user.save.should == true
     end
 end
