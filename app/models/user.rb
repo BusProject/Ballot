@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   end
   
   def fix_profile
-    self.profile = self.profile.gsub(/\//,//) unless self.profile.nil?
+    self.profile = self.profile.gsub('/','') unless self.profile.nil?
   end
   
   def to_url ( full = false)
