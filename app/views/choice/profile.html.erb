@@ -134,7 +134,7 @@
 				}
 				current_user.removeHeader = function() {
 					current_user.header('http://localhost:3000/assets/theballot.png' )
-					$.post('users/update',inits.root+'users/update',{ user: {header: null} } )
+					$.post('users/update',inits.root+'users/update',{ clearHeader: true } )
 				}
 				current_user.discard = function() {
 					current_user.edit(false);
