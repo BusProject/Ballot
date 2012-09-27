@@ -44,7 +44,7 @@
 					<p class="label">Set your background color</p><input class="bg" data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="Background color"  >
 
 					<p class="label" style="margin-top:30px;">Upload a custom header image</p><div id="image-upload"><%= form_for @user, :url => user_update_path, :method => :POST, :html => { :multipart => true }, :remote => true, :format => :json do |form| %>
-						<%= form.file_field :header %>
+						<%= form.file_field :header %><span class="loading" ><i class="icon-copy"></i> Saving... </span><span class="success"><i class="icon-ok-sign"></i> Saved! </span><span class="error" ><i class="icon-exclamation-sign"></i> Error! </span>
 						<p class="small-label">Must at least 860 x 180. Will overwrite your current header.</p>
 						<%= form.submit 'Upload' %>
 						<span class="link" data-bind="click: function() { removeHeader() }, visible:  typeof header() != 'undefined' && header() != null && header() != '/headers/header/missing.png'">Remove Header</span>
@@ -133,8 +133,10 @@
 					});
 				}
 				current_user.removeHeader = function() {
-					current_user.header('http://localhost:3000/assets/theballot.png' )
-					$.post(inits.root+'users/update',{ clearHeader: true } )
+					$.post(inits.root+'users/update',{ clearHeader: true },function() {
+						current_user.header(' ')
+						$('.edit_user input[type=file]').val('')
+					})
 				}
 				current_user.discard = function() {
 					current_user.edit(false);
@@ -154,7 +156,6 @@
 					var profile = current_user.profile().replace(/\//g,'') != current_user.url ? current_user.profile().replace(/\//g,'') : ''
 					
 					if( !current_user.profile.available() && profile != current_user.profile.store() &&  profile != '' ) {
-						console.log('failing')
 						return false
 						$('input.profile').focus()
 					}
@@ -192,11 +193,24 @@
 					ko.applyBindings( current_user, document.getElementById("profile")); 
 					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>') });
 				}).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
+					$('.edit_user .loading').hide()
 					// Only when it's remotipart. There's probably a better way to do this but I can't figure it out now
 					if( typeof ajaxOptions.data != 'undefined' && typeof ajaxOptions.data[2] != 'undefined' && ajaxOptions.data[2].name == "remotipart_submitted" && XMLHttpRequest.readyState == 4) { 
 						var data = JSON.parse(XMLHttpRequest.responseText)
-						if( data.success ) current_user.header( data.header )
+						if( data.success ) {
+							current_user.header( data.header )
+							$('.edit_user .success').show()
+							setTimeout( function() {  $('.edit_user .success').hide() },10000)
+						}
+						else {
+							$('.edit_user .error').show()
+							setTimeout( function() {  $('.edit_user .error').hide() },10000)
+						}
 					}
+				}).on('submit','.edit_user',function(e) {
+					$('.error, .success',$this).hide()
+					if( $('input[type=file]',this).val() != '' ) $('.loading',this).show()
+					else e.preventDefault();
 				})
 			</script>
 

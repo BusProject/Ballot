@@ -97,63 +97,18 @@
 			}
 		}
 		
-		.url-searching {
-			display:inline-block;
-			padding:6px 12px 6px 6px;
-			background-color:white;
-			.border-radius(5px);
-			.drop-shadow();
-			margin-left:10px;
-			font-size:12px;
-			
-			&:before {
-				content:"\f0d9";
-				font-family:"FontAwesome";
-				position:relative;
-				left:-10px;
-				font-size:18px;
-				color:white;
-			}
-		}
+
 		
+		.url-searching {
+			.dialogBox();
+		}
+
 		.url-available {
-			display:inline-block;
-			padding:6px 12px 6px 6px;
-			background-color:@green;
-			color:white;
-			.border-radius(5px);
-			.drop-shadow();
-			margin-left:10px;
-			font-size:12px;
-			
-			&:before {
-				content:"\f0d9";
-				font-family:"FontAwesome";
-				position:relative;
-				left:-10px;
-				font-size:18px;
-				color:@green;
-			}
+			.dialogBox(@green,white);
 		}
 		
 		.url-taken {
-			display:inline-block;
-			padding:6px 12px 6px 6px;
-			background-color:@red;
-			color:white;
-			.border-radius(5px);
-			.drop-shadow();
-			margin-left:10px;
-			font-size:12px;
-			
-			&:before {
-				content:"\f0d9";
-				font-family:"FontAwesome";
-				position:relative;
-				left:-10px;
-				font-size:18px;
-				color:@red;
-			}
+			.dialogBox(@red,white);
 		}
 		
 		a {
@@ -180,7 +135,21 @@
 				box-shadow:none;
 				margin-bottom:0;
 			}
-				
+			.loading {
+				.dialogBox();
+			}
+			.error {
+				.dialogBox(@red,white);
+			}
+			.success {
+				.dialogBox(@green,white);
+			}
+			.loading, .error, .success {
+				float: left;
+				margin: -34px 0 0 300px
+				display: none;
+			}
+			
 		}
 		
 		
