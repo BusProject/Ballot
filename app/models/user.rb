@@ -154,14 +154,14 @@ class User < ActiveRecord::Base
       graphInfo = JSON::parse(RestClient.get 'https://graph.facebook.com/'+fb_id)
       attributes = {
           :image => attributes[:image], 
-          :location => graphInfo['location']['city']+', '+graphInfo['location']['state'],
+          :location => graphInfo['location'].nil? ? '' : graphInfo['location']['city']+', '+graphInfo['location']['state'],
           :url => graphInfo['link'],
           :name => attributes[:name],
           :first_name => '',
           :last_name => attributes[:name],
           :authentication_token => attributes[:authentication_token],
           :fb => fb_id,
-          :email => graphInfo['username']+'@facebook.com',
+          :email => graphInfo['username'].nil? ? fb_id+'@facebook.com' : graphInfo['username']+'@facebook.com',
           :password => Devise.friendly_token[0,20]
         }
       return self.create!( attributes )
