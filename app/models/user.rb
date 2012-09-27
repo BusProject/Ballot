@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   
   # Method for generating a link to the profile
   def set_profile
-    if self.profile.nil?
+    if self.profile.nil? || self.profile.empty?
       self[:profile] = '/'+self.to_url unless self.to_url.nil?
     else
       self[:profile] = '/'+self.profile
@@ -44,10 +44,11 @@ class User < ActiveRecord::Base
   # Method to see if profile name is free
   def check_profile
     unless self.profile.nil?
-      id = self.profile.to_i(16).to_s(16) == self.profile ? self.profile.to_i(16).to_s(10).to_i(2).to_s(10) : ''
+      self.profile = self.profile.gsub('/','')
+      id = self.profile.to_i(16).to_s(16) == self.profile ? self.profile.to_i(16).to_s(10).to_i(2).to_s(10).to_i(10) : 0
       safe = true 
-      if id != '' # Future proofing all URL names for our first 10^20th users
-        safe = id.to_i(16).to_s(10).to_i(2).to_s(10).to_i > 10e20
+      if id != 0 # Future proofing all URL names for our first 10^20th users
+        safe = id > 10e20
       end
       notstate = self.profile =~ /AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY/
       safe = notstate.nil? && safe
@@ -154,14 +155,14 @@ class User < ActiveRecord::Base
       graphInfo = JSON::parse(RestClient.get 'https://graph.facebook.com/'+fb_id)
       attributes = {
           :image => attributes[:image], 
-          :location => graphInfo['location']['city']+', '+graphInfo['location']['state'],
+          :location => graphInfo['location'].nil? ? '' : graphInfo['location']['city']+', '+graphInfo['location']['state'],
           :url => graphInfo['link'],
           :name => attributes[:name],
           :first_name => '',
           :last_name => attributes[:name],
           :authentication_token => attributes[:authentication_token],
           :fb => fb_id,
-          :email => graphInfo['username']+'@facebook.com',
+          :email => graphInfo['username'].nil? ? fb_id+'@facebook.com' : graphInfo['username']+'@facebook.com',
           :password => Devise.friendly_token[0,20]
         }
       return self.create!( attributes )

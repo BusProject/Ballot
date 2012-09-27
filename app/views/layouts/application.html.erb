@@ -20,7 +20,7 @@
 
 	<%= stylesheet_link_tag    "application" %>
 
-  <script type="text/javascript" src='https://maps.googleapis.com/maps/api/js?sensor=true'></script>
+  <script type="text/javascript" src='http://maps.googleapis.com/maps/api/js?sensor=true'></script>
   <script type="text/javascript">
 	var current_user = <%= raw current_user.nil? ? { :id => 'unauthenticated'}.to_json : current_user.to_public %>,
 		inits = <%= raw @config || '{}' %>

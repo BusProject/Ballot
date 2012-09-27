@@ -2,46 +2,47 @@
 @import 'less/vars.less';
 
 body.admin {
-	#main { width: 600px; margin: 0 auto; }
-	h1, h2 { color: @darkOrange; margin: 1em 0; }
-	h1 { font-size: 4em; }
-	p, h2 { text-align: left }
-	#instructions { display: none }
-	ul {
-		&.flagged { list-style: disc; li { margin-left: 30px } }
-		text-align: left;
-		width: 400px;
-		li {
-			margin: 30px 0;
-			img {  width: 50px; height: 50px; float: left; margin: -10px 8px 8px }
-			.side { 
-				float: right; 
-				margin-top: -30px; 
-				color: red; 
-				font-size: 12px; 
-				&:hover, a:hover { &:after { color: grey; margin-left: 80px; text-decoration: none !important; position: absolute; }}
-				&.unban &:hover { &:after { content: 'You Sure? Will restore all of their comments'; }}
-				a.rescue:hover { &:after { content: 'You Sure? Will approve the comment and clear all of it\'s flags'; }}
-				a.unapprove:hover { &:after { content: 'You Sure? Will unapprove the comment'; }}
-				a.remove_feedback:hover { &:after { content: 'You Sure? Will permenently delete the comment'; }}
+	#main { width: 600px; margin: 0 auto;
+		h1, h2 { color: @darkOrange; margin: 1em 0; }
+		h1 { font-size: 4em; }
+		p, h2 { text-align: left }
+		#instructions { display: none }
+		ul {
+			&.flagged { list-style: disc; li { margin-left: 30px } }
+			text-align: left;
+			width: 400px;
+			li {
+				margin: 30px 0;
+				img {  width: 50px; height: 50px; float: left; margin: -10px 8px 8px }
+				.side { 
+					float: right; 
+					margin-top: -30px; 
+					color: red; 
+					font-size: 12px; 
+					&:hover, a:hover { &:after { color: grey; margin-left: 80px; text-decoration: none !important; position: absolute; }}
+					&.unban &:hover { &:after { content: 'You Sure? Will restore all of their comments'; }}
+					a.rescue:hover { &:after { content: 'You Sure? Will approve the comment and clear all of it\'s flags'; }}
+					a.unapprove:hover { &:after { content: 'You Sure? Will unapprove the comment'; }}
+					a.remove_feedback:hover { &:after { content: 'You Sure? Will permenently delete the comment'; }}
+				}
 			}
 		}
-	}
-	input {
-		font-size: 1.1em;
-		width: 500px;
-	}
-	div.choice_form {
-		width: 470px;
-		min-height: 500px;
-		padding: 20px 30px;
-		font-size: 10px;
-		input { width: 240px; }
-		.option {
-			border: 1px solid @darkGreen;
-			padding: 20px;
-			margin: 10px 0;
-			.border-radius(5px);
+		input {
+			font-size: 1.1em;
+			width: 500px;
+		}
+		div.choice_form {
+			width: 470px;
+			min-height: 500px;
+			padding: 20px 30px;
+			font-size: 10px;
+			input { width: 240px; }
+			.option {
+				border: 1px solid @darkGreen;
+				padding: 20px;
+				margin: 10px 0;
+				.border-radius(5px);
+			}
 		}
 	}
 }

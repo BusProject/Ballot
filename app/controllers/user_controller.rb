@@ -2,11 +2,12 @@ class UserController < ApplicationController
   before_filter :check_user
 
   def update
+    logger.debug ' running update'
     user = current_user
 
     user.description = params[:description] unless params[:description] != 'null' && params[:description].nil?
     user.guide_name = params[:guide_name] unless params[:guide_name] != 'null' && params[:guide_name].nil?
-    user.profile = params[:profile].downcase.gsub(' ','_').gsub('/','').gsub('?','').gsub('#','').gsub('&','') unless params[:profile] != 'null' && params[:profile].nil?
+    user.profile = params[:profile].downcase.gsub(' ','_').gsub('\\','').gsub('/','').gsub('?','').gsub('#','').gsub('&','') unless params[:profile] != 'null' && params[:profile].nil?
     user.primary = params[:primary] unless params[:primary] != 'null' && params[:primary].nil?
     user.secondary = params[:secondary] unless params[:secondary] != 'null' && params[:secondary].nil?
     user.bg = params[:bg] unless params[:bg] != 'null' && params[:bg].nil?
@@ -32,7 +33,7 @@ class UserController < ApplicationController
     else
       render :json => { :success => false }
     end
-    
+    logger.debug 'completing update '
   end
 
   def cancel
@@ -67,15 +68,18 @@ class UserController < ApplicationController
   
   def access_pages 
     
+    logger.debug ' access pages '
     newToken = RestClient.get 'https://graph.facebook.com/oauth/access_token?client_id='+ENV['FACEBOOK']+'&client_secret='+ENV['FACEBOOK_SECRET']+'&grant_type=fb_exchange_token&fb_exchange_token='+current_user.authentication_token
-
+    logger.debug ' new token '+newToken
 
     current_user.update_attributes( :authentication_token => newToken.split('&')[0].gsub('access_token=','') ) # Refreshes the current token
     
     if !FbGraph::User.me( current_user.authentication_token ).permissions.include?(:manage_pages) # Uses FB Graph to check permissions
+       logger.debug ' no permission '
       session[:origin] = request.env["HTTP_REFERER"]
       redirect_to 'https://www.facebook.com/dialog/oauth?client_id='+ENV['FACEBOOK']+'&redirect_uri='+ENV['BASE']+user_pages_path+'&scope=manage_pages,publish_stream&response_type=token'
     else # If has permission will download current page permissions and allow users to switch into them
+       logger.debug ' has permission '
       json = JSON::parse(RestClient.get 'https://graph.facebook.com/me/accounts?access_token='+current_user.authentication_token)
       pages = json['data'].reject{ |p| p['category'] == 'Application'}
       
@@ -87,9 +91,10 @@ class UserController < ApplicationController
       current_user.update_attributes( :pages => pages )
       origin = request.env["HTTP_REFERER"] || session[:origin]
       session.delete(:origin)
-    
+
+     logger.debug ' redirecting '
       redirect_to origin
-    
+
     end
     
     

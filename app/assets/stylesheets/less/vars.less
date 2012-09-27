@@ -135,3 +135,23 @@
 		float: left;
 	}
 }
+
+.dialogBox( @bgcolor: white, @color: @darkGrey ) {
+	display:inline-block;
+	padding:6px 12px 6px 6px;
+	background-color:@bgcolor;
+	color: @color;
+	.border-radius(5px);
+	.drop-shadow();
+	margin-left:10px;
+	font-size:12px;
+	
+	&:before {
+		content:"\f0d9";
+		font-family:"FontAwesome";
+		position:relative;
+		left:-10px;
+		font-size:18px;
+		color:@bgcolor;
+	}
+}

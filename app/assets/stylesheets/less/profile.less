@@ -1,24 +1,16 @@
+.colorpicker {
+	background-color:white;
+	.drop-shadow();
+	padding:6px;
+}
+
 #profile {
 	position: relative;
 	margin-bottom:100px;
 	
-	input, textarea {
-		width: 400px;
-		display: block;
-		margin: 10px auto;
-	}
-	input { font-size: 24px; color: @orange; font-weight: bold; }
 	textarea { font-size: 16px; color: @grey; height: 60px; }
 	
-	.stars {
-		position: absolute;
-		top: 0;
-		right: 10px;
-		float: none;
-		margin: 0;
-		width: 60px;
-		&:first-child { left: 0; }
-	}
+	
 	.flag {
 		float: right;
 		margin: -20px 10px 0 0;
@@ -34,13 +26,89 @@
 	}
 	
 	#edit-profile {
-		text-align:right;
+		text-align:left;
 		margin-bottom:20px;
 		color:@grey;
+		width:100%;
+		background-color:darken(@bgGrey,10%);
+		border:1px solid darken(@bgGrey,20%);
+		padding:15px 30px;
+		.border-radius(5px);
+		.clearfix;
+		.inner-shadow();
+		
+		
+		.editor { .clearfix; }
 		
 		.status {
 			margin: 0px 0;
 			float:right;
+			
+				.link {
+					color:@darkGrey;
+
+					&:hover { color: @orange; }
+				}
+		}
+		
+		.link {
+			color:@darkGrey;
+			
+			&:hover { color: @orange; }
+		}
+		
+		h3 {
+			text-align:center;
+			font-weight:700;
+			text-transform:uppercase;
+			.inset-text();
+		}
+		
+		.label {
+			display:inline-block;
+			float:left;
+			text-align:right;
+			margin-right:30px;
+			width:33%;
+			color:darken(@darkGrey,30%);
+		}
+		
+		.small-label {
+			font-size:12px;
+			text-align:left;
+		}
+		
+		input, textarea { 
+			width:60%;
+			font-size:16px;
+			display:inline-block;
+			margin:0px 0px 10px 0px;
+			.border-radius(4px);
+			padding:5px;
+			.border-box();
+			.inner-shadow();
+			outline:none;
+			border:1px solid darken(@bgGrey,20%);
+			color:@darkGrey;
+			
+			&.url {
+				width:130px;
+				margin-bottom:40px;
+			}
+		}
+		
+
+		
+		.url-searching {
+			.dialogBox();
+		}
+
+		.url-available {
+			.dialogBox(@green,white);
+		}
+		
+		.url-taken {
+			.dialogBox(@red,white);
 		}
 		
 		a {
@@ -53,6 +121,45 @@
 		a.cancel {
 			font-size: 14px;
 			color:@grey;
+		}
+		
+		#image-upload {
+			width:60%;
+			float:left;
+			text-align:left;
+			margin: 30px 0px;
+			
+			input {
+				display:block;
+				border:none;
+				box-shadow:none;
+				margin-bottom:0;
+			}
+			.loading {
+				.dialogBox();
+			}
+			.error {
+				.dialogBox(@red,white);
+			}
+			.success {
+				.dialogBox(@green,white);
+			}
+			.loading, .error, .success {
+				float: left;
+				margin: -34px 0 0 300px;
+				display: none;
+			}
+			input[type=submit] {
+				.greyButton();
+			}
+			
+		}
+		
+		
+		#save-cancel {
+			text-align:right;
+			display:inline-block;
+			float:right;
 		}
 	}
 	
