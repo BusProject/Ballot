@@ -1,23 +1,27 @@
 <!-- ko stopBinding: true -->
 
-	<div id="profile" data-bind="with: current_user " class="ballot-section">
+	<div id="profile" data-bind="with: current_user  " class="ballot-section">
 			<!-- Primary Color -->
-			<style type="text/css" data-bind="text: primary() != null ? 
-			'h1.sectionheading { color:'+primary()+' !important;}'
+			<style type="text/css" data-bind="text: ko.toJS( primary ) != null && ko.toJS( primary ) != '' ? 
+			'h1.sectionheading { color:'+ ko.toJS( primary )+' !important;}'
 			: ''
 			">h1.sectionheading { color: <%= @user.primary %>!important;}
 			</style>
 			<!-- Secondary Color -->
-			<style type="text/css" data-bind="text: primary() != null ? 
-			'h1.title::before, .optionholder.your-option .option:first-child { color:'+secondary()+' !important;}'+
-			'.ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: '+secondary()+'!important; }'
+			<style type="text/css" data-bind="text: ko.toJS( secondary ) != null && ko.toJS( secondary ) != '' ? 
+			'h1.title::before, .optionholder.your-option .option:first-child { color:'+ko.toJS( secondary )+' !important;}'+
+			'.ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: '+ko.toJS( secondary )+'!important; }'+
+			'h1.no, h1.yes { color: #5B5B5B !important; }'
 			: ''
 			">h1.title::before, .optionholder.your-option .option:first-child { color: <%= @user.secondary %> !important;}
 			.ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: <%= @user.secondary %> !important; }
+			<%- if !@user.secondary.nil? && !@user.secondary.empty? %>
+			h1.no, h1.yes { color: #5B5B5B !important; }
+			<% end -%>
 			</style>
 			<!-- BG Color -->
-			<style type="text/css" data-bind="text: primary() != null ? 
-			'body { background:'+bg()+' !important; background-image: none; }'
+			<style type="text/css" data-bind="text: ko.toJS( bg ) != null && ko.toJS( bg ) != '' ? 
+			'body { background:'+ko.toJS( bg )+' !important; background-image: none; }'
 			: ''
 			">body { background:  <%= @user.bg %> !important; background-image: none; }
 			</style>
@@ -215,6 +219,14 @@
 			</script>
 
 		<% else %>
+			<script type="text/javascript" charset="utf-8">
+				$(document).ready( function() {
+					current_user = inits.user
+					ko.applyBindings( current_user, document.getElementById("profile")); 
+					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>') });
+				})
+			</script>
+		
 			<%- unless current_user.nil? %>
 				<span class="link flag" onclick="$(this).hide().next().show()"><i class="icon-flag"></i> Flag this User</span>
 				<p style="display: none;" class="flag">Are you sure? <span class="link" onclick=" 
@@ -224,7 +236,7 @@
 			<% end -%>
 		<% end -%>
 
-		<h1 class="sectionheading" data-bind="text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
+		<h1 class="sectionheading" data-bind="visible: true || console.log( [name+'\'s','Voter Guide'].join(' ') ),text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
 		<div class="category-heading">
 			<p class="description" data-bind=" text: description"><%= @user.description %></p>
 		</div>
