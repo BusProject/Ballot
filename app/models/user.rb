@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   # Method to see if profile name is free
   def check_profile
     unless self.profile.nil?
-      id = self.profile.to_i(16).to_s(16) == self.profile ? self.profile.to_i(16).to_s(10).to_i(2).to_s(10) : ''
+      id = self.profile.to_i(16).to_s(16) == self.profile ? self.profile.to_i(16).to_s(10).to_i(2).to_s(10) : 0
       safe = true 
       if id != '' # Future proofing all URL names for our first 10^20th users
         safe = id.to_i(16).to_s(10).to_i(2).to_s(10).to_i > 10e20

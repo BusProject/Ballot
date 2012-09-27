@@ -52,7 +52,7 @@ EOF
     results = []
 
     # Stripping profile down to it's root and converting to base 16 to convert into ID. If the base 16 doesn't match the search term - ignore it
-    id = params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(16) == params[:term].gsub(ENV['BASE'],'').gsub(root_path,'') ? params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) : ''
+    id = params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(16) == params[:term].gsub(ENV['BASE'],'').gsub(root_path,'') ? params[:term].gsub(ENV['BASE'],'').gsub(root_path,'').to_i(16).to_s(10).to_i(2).to_s(10) : 0
 
     if params[:filter]
       results += User.where( "id = ? OR profile = ?", id, params[:term] ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } } if params[:filter] == 'profile'
