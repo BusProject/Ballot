@@ -210,7 +210,7 @@
 			<% end -%>
 		<% end -%>
 
-		<h1 class="sectionheading" data-bind="text: guide_name() != null && guide_name() != '' ? guide_name : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
+		<h1 class="sectionheading" data-bind="text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
 		<div class="category-heading">
 			<p class="description" data-bind=" text: description"><%= @user.description %></p>
 		</div>
