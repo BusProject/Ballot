@@ -173,7 +173,7 @@
 					current_user.__bg = null;
 					current_user.__primary = null;
 					current_user.__secondary = null;
-					$.post( inits.root+'users/update', { guide_name:  current_user.description(), guide_name:  current_user.guide_name(), primary:  current_user.primary(), secondary:  current_user.secondary(), bg:  current_user.bg(), profile:  profile }, function(r) { 
+					$.post( inits.root+'users/update', { description:  current_user.description(), guide_name:  current_user.guide_name(), primary:  current_user.primary(), secondary:  current_user.secondary(), bg:  current_user.bg(), profile:  profile }, function(r) { 
 						if( r.success && '/'+current_user.profile() != document.location.pathname ) {
 							var stateObj = {};
 							if( profile == '' ) {
