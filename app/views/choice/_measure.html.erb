@@ -2,7 +2,7 @@
 <% user = user || nil %>
 <% choice.options.new if choice.new_record?  %>
 
-<a data-bind="attr:{name:$data.contest}"></a>
+<a data-bind="attr:{name:$data.contest+' '+$data.geography}"></a>
 
 <div class="measure row <%= 'selected' unless choice.new_record? %> commentable" 
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you() }"

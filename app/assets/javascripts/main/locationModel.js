@@ -34,19 +34,16 @@ function locationModel(data) {
 
 	this.selected = ko.observable( null )
 	
-	this.number = ko.computed(function() {
+
+	this.nearby = ko.computed(function() {
 		var top = this.top(), choices = this.choices.ordered(), items = choices.map(function(el) { return el.contest+' '+el.geography })
 		if( items.length < 1 ) return ''
 		for (var i=0; i < items.length; i++) {
 			var elem = $( 'a[name="'+items[i]+'"]'), extra = this.selected() == choices[i] ? 500 : 0
-			if( elem.length > 0 && top < elem.offset().top + extra ) return i;
+			if( elem.length > 0 && top < elem.offset().top + extra ) return choices[i];
 		};
-		if( top < 10 ) return 0;
-		else return choices.length - 1;
-	},this)
-
-	this.nearby = ko.computed(function() {
-		return this.choices.ordered()[ this.number() ];
+		if( top < 10 ) return choices[ 0 ];
+		else return choices[ choices.length - 1 ];
 	},this)
 
 	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
@@ -203,13 +200,17 @@ function locationModel(data) {
 	this.menuItems = []
 
 	if( this.state == 'front' ) {
-		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.')
-		this.candidates = Grouping(['Federal','State','County','Local','Other'],'Candidates','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on.')
+		var ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'),
+			federalCandidates = Grouping(['Federal'],'Federal','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'),
+			stateCandidates = Grouping(['State'],'State','candidate',this,'These candidates will represent you in your State\'s government.'),
+			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 		
-		this.sections.push(this.candidates)
-		this.sections.push(this.ballotMeasures)
+		this.sections.push( federalCandidates)
+		this.sections.push( stateCandidates)
+		this.sections.push( otherCandidates)
+		this.sections.push( ballotMeasures)
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
-		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest},text: $data.contest"></a>'
+		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 		
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
@@ -225,16 +226,16 @@ function locationModel(data) {
 		)
 	}
 	if( this.state == 'state' ) {
-		this.ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','ballot_statewide',this)
-		this.federal = Grouping(['Federal'],'Federal','federal',this)
-		this.state = Grouping(['State'],'State','state',this)
-		this.other = Grouping(['Other'],'Other','other',this)
+		var ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'),
+			federalCandidates = Grouping(['Federal'],'Federal','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'),
+			stateCandidates = Grouping(['State'],'State','candidate',this,'These candidates will represent you in your State\'s government.'),
+			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 		
-		this.sections.push(this.federal)
-		this.sections.push(this.state)
-		this.sections.push(this.other)
-		this.sections.push(this.ballotMeasures)
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="checkScroll: {type:\'li\', target: yourLocation.number },visible: $data.active, foreach: $data.contests"><li>'
+		this.sections.push( federalCandidates)
+		this.sections.push( stateCandidates)
+		this.sections.push( otherCandidates)
+		this.sections.push( ballotMeasures)
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 		

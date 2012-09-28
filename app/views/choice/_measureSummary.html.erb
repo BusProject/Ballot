@@ -3,12 +3,12 @@
 <div class="measure row "
 	itemscope itemtype="http://data-vocabulary.org/Thing" >
 
-	<hr><a href="<%= choice.to_url %>" ><h1 itemprop="name" class="title" ><%= choice.contest %></h1></a><hr>
+	<hr><a href="/<%= choice.to_url %>" ><h1 itemprop="name" class="title" ><%= choice.contest %></h1></a><hr>
 	<div itemprop="description" class="explanation" ><%= choice.description %></div>
 	<div itemprop="" class="voted" >
 		<i class=icon-comments-alt></i> <%= choice.feedback.count %> have voted | <%= choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count %> have commented
 	</div>
-	<a href="<%= choice.to_url %>" ><button class="open">Learn More and Comment</button></a>
+	<a href="/<%= choice.to_url %>" ><button class="open">Learn More and Comment</button></a>
 	<hr class="button">
 
 </div>

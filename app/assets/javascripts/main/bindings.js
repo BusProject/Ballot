@@ -46,9 +46,10 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	$this = $(this)
 	var href = $this.attr('href')
 	if( href[0] == '#' && href[1] == '!' ) {
-		var $href = $('a[name="'+href.split('!')[1]+'"]')
-		$href.next('.row').find('.open').click()
-		setTimeout( function() { $(document).scrollTop( $href.position().top - 80 ) },200)
+		var $href = $('a[name="'+href.split('!')[1]+'"]'),
+			$button = $href.next('.row').find('button.open')
+		if( !$button.parent().is('a') ) $button.click()
+		setTimeout( function() { $(document).scrollTop( $href.offset().top - 80 ) },200)
 		e.preventDefault()
 	} else if( href[0] == '#' ) {
 		var top = $(href).position().top-80
@@ -331,49 +332,6 @@ ko.bindingHandlers.addClass = {
 	}
 };
 
-
-ko.bindingHandlers.checkScroll = {
-	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
-		var bindings = allBindingsAccessor(), 
-			settings = bindings.checkScroll,
-			maxHeight = settings.maxHeight+'px' || '200px',
-			visible = ko.toJS(bindings.visible)
-
-		element.style.maxHeight = maxHeight
-
-		if( !visible ) return false;
-
-	}
-	,update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
-		var bindings = allBindingsAccessor(), 
-			settings = bindings.checkScroll,
-			visible = ko.toJS(bindings.visible),
-			$element = $(element)
-	
-		if( !visible ) {
-			$(element).scrollTop = 0;
-			return false;
-		}
-	
-		var elTop = $element.scrollTop(),
-			elHeight = settings.maxHeight || 200,
-			elBottom = elTop+elHeight,
-			target = ko.toJS(settings.target),
-			targetNode = element.childNodes[target]
-	
-		if( targetNode != null ) {
-			var $target = $(targetNode),
-				$parent = $(targetNode.parentNode)
-				targetTop = $target.offset().top + $target.height() - $parent.offset().top
-
-				console.log( targetTop )
-				// console.log('bottom: ' + elBottom )
-			if( targetTop > elBottom  ) $(element).scrollTop( targetTop + elHeight )
-			if( targetTop < elTop  ) $(element).scrollTop( targetTop - elHeight )
-		}
-	
-	}
-};
 
 
 ko.bindingHandlers.stopBinding = {

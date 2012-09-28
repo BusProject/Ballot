@@ -3,7 +3,7 @@
 <% choice.options.new if choice.new_record?  %>
 <% you = user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == user.id }.first %>
 
-<a data-bind="attr:{name:$data.contest}"></a>
+<a data-bind="attr:{name:$data.contest+' '+$data.geography}"></a>
 
 <div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }"

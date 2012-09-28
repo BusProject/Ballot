@@ -63,7 +63,7 @@ class ChoiceController < ApplicationController
   end
   
   def show
-    @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' '))
+    @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' ')).sort_by{ |choice| [ ['Federal','State','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }
 
     raise ActionController::RoutingError.new('Could not find '+params[:contest].gsub('_',' ') ) if @choice.nil?
 
@@ -84,7 +84,7 @@ class ChoiceController < ApplicationController
     districts = params['q'].nil? ? Cicero.find(params['l'], params[:address] ) : params['q'].split('|')
     
     unless districts.nil?
-      @choices = Choice.find_all_by_geography( districts ).each{ |c| c.prep current_user }
+      @choices = Choice.find_all_by_geography( districts ).sort_by{ |choice| [ ['Federal','State','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
     else
       query = {'success' => false, 'message' => 'Nothing useful was posted'}.to_json
     end

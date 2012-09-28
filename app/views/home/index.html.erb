@@ -25,7 +25,7 @@
 	<div id="read-ballot"  style="display:none;" class="ballot-section" data-bind="visible: choices.notEmpty()">
 		<h1 class="sectionheading">Here’s What Will Be On Your Ballot</h1>
 
-		<!-- ko foreach: [candidates,ballotMeasures] -->
+		<!-- ko foreach: sections -->
 			<div data-bind="visible: $data.visible, attr: {'class' : $data.class, 'id': $data.title }">
 				<div class="category-heading" >
 					<h2 data-bind="text: title"></h2>
