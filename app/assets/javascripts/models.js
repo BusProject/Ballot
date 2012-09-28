@@ -247,8 +247,8 @@ function Grouping(keys,title,template,locationModel,description) {
 	grouping.title = title
 	grouping.template = template
 	grouping.description = description
-	grouping.class = title != 'Ballot Measures' ? 'candidates' : 'ballot-measures'
-	grouping.class += ' ballot-category clearfix'
+	grouping.className = title != 'Ballot Measures' ? 'candidates' : 'ballot-measures'
+	grouping.className += ' ballot-category clearfix'
 	grouping.active = ko.computed(function() {
 		return this.contests().indexOf( locationModel.nearby() ) !== -1
 	},grouping)

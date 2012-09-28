@@ -239,7 +239,7 @@ function locationModel(data) {
 	}
 
 	this.active = ko.computed(function() {
-		var top = this.top()-window.innerHeight/6, items = this.menuItems.filter(function(el) { return el.id != null && el.id[0] == '#' })
+		var top = this.top()-$(window).innerHeight() /6, items = this.menuItems.filter(function(el) { return el.id != null && el.id[0] == '#' })
 		if( items.length < 1 ) return ''
 		for (var i=0; i < items.length; i++) {
 			var elem = $( items[i].id)
