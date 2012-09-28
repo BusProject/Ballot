@@ -1,0 +1,36 @@
+/* TEAM */
+	Chef/Developer:Scott Duncombe
+	Contact: srduncombe [at] gmail.com
+	Twitter: @mojowen
+	From:Portland, Oregon, USA
+
+	Designer/UI Developer: Noah Manger
+	Contact: noahmanger [at] gmail.com
+	Twitter: @noahmanger
+	From:Portland, Oregon, USA
+
+	Debugger / Advocate: Sarah Stern
+	Contact: sarah [at] theleague.com
+	Twitter: @notsterno
+	From:Brooklyn, New York, USA
+
+	Martial of Funding: Matt Singer
+	Contact: montuckyliberal [at] gmail.com
+	Twitter: @montuckyliberal
+	From:Portland, Oregon, USA
+
+	Historian / Generalismo of Funding: Sam Patton
+	Contact: sam [at] theleague.com
+	Twitter: @samuelpatton
+	From:Berkeley, California, USA
+
+
+/* THANKS */
+
+
+
+/* SITE */
+	Last update:2012/09/28
+	Language:English
+	Doctype:HTML5
+	IDE: Notepad++, Homebrew, Photoshop
