@@ -250,13 +250,25 @@
 
 <div id="personal-guide">
 <div id="read-ballot">
-	<% @choices.each do |choice| %>
-		<div data-bind="with: choices()[<%= n %>]" class="row">
-			<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidateProfile' : 'measureProfile' %>
-			<%=  render 'choice/'+type, :choice => choice, :user => @user %>
+	<% @choices.group_by(&:contest_type).each do |type,choices| %>
+
+		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot Measures' : type %>">
+
+			<div class="category-heading" >
+				<h2 ><%= type.gsub('_',' ') %></h2>
+				<p ></p>
+			</div>
+			<% choices.each do |choice | %>
+				<div data-bind="with: choices()[<%= n %>]" class="row">
+					<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidateProfile' : 'measureProfile' %>
+					<%=  render 'choice/'+type, :choice => choice, :user => @user %>
+				</div>
+				<% n+=1%>
+			<% end %>
 		</div>
-	<% n+=1%>
+
 	<% end %>
+
 	<% if @choices.length == 0 && @user != current_user %>
 		<p></p>
 		<p><%= @user.first_name %> hasn't left any sort of feedback.</p>

@@ -6,7 +6,7 @@
 
 
 
-<a data-bind="attr:{name:$data.contest}"></a>
+<a name="<%= choice.contest %> <%= choice.geography %>"></a>
 
 <div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
 	data-bind="css: { selected: $root.selected() == $data }"
