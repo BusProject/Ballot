@@ -87,7 +87,7 @@ function makeMeme(memeRaw,path,flavor) {
 		this.preview = ko.computed( function() {
 			var loading = this.loading, id = this.id(), url = this.url
 			$.post( 
-				document.location.toString().replace('new','preview'),
+				document.location.toString().replace('new','preview')+'.png',
 				{ quote: this.quote.fixed(), theme: this.theme(), meme: this.id() }, 
 				function(response) { 
 					var url = typeof id == 'undefined' || id == null ? 'data:image/png;base64,' + response : document.location.protocol+'//'+document.location.host+'/m/'+id+'.png';
