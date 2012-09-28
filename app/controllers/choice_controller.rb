@@ -50,9 +50,9 @@ class ChoiceController < ApplicationController
     @state = @states[ @stateAbvs.index( params[:state] ) ]
     
     @classes = 'home state'
-    @title = @state+'\'s Voter Guide'
+    @title = @state+'\'s Full Ballot'
     @type = 'Voter Guide'
-    @message = @state+'\'s Voter Guide by, powered by The Ballot.'
+    @message = @state+'\'s Full Ballot, powered by The Ballot.'
 
     result = {:state => 'state', :choices => @choices }
 
@@ -63,7 +63,7 @@ class ChoiceController < ApplicationController
   end
   
   def show
-    @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' ')).sort_by{ |choice| [ ['Federal','State','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }
+    @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' '))
 
     raise ActionController::RoutingError.new('Could not find '+params[:contest].gsub('_',' ') ) if @choice.nil?
 
