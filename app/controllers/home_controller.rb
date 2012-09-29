@@ -17,6 +17,51 @@ class HomeController < ApplicationController
       render :template => 'home/index.html.erb' 
     end
   end
+
+  def stats
+    @classes = 'home admin'
+    @config = { :state => 'page' }.to_json
+    
+    
+    @users = User.all.map do |user|
+      votes = user.feedback.count
+      comments = user.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count
+      popularity = user.feedback.map { |f| f.cached_votes_total }.sum
+      
+      
+      friends = !user.fb_friends.nil? ? user.fb_friends.split(',').count : 0
+      pages = !user.pages.nil?
+      profile = user.profile != '/'+user.to_url
+      header = user.header.to_s.index("/headers/original/missing.png").nil?
+      
+      { 
+        :last_sign_in => user.last_sign_in_at, 
+        :sign_in_count => user.sign_in_count, 
+        :popularity => popularity,
+        :created_at => user.created_at,
+        :friends => friends,
+        :votes => votes,
+        :comments => comments,
+        :pages => pages,
+        :profile => profile,
+        :header => header
+      }
+    end
+    
+    @matches = Match.all.map{ |m| m.data.select{ |d| d.length == 2 }.first  }
+    @states = Choice.states
+    @states.shift
+    @stateAbvs = Choice.stateAbvs
+    @stateAbvs.shift
+    @matchStates = []
+    n = 0
+    @stateAbvs.each do |state|
+      count = @matches.select{ |match| match == state }.count
+      @matchStates.push( { :count => count, :state => @states[n] } ) unless count == 0
+      n+=1
+    end
+
+  end
   
   def about
     @classes = 'home msg'
