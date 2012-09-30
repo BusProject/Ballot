@@ -34,7 +34,7 @@
 
         var data = google.visualization.arrayToDataTable( <%= raw Match.all.map{ |m| [ m.latlng.split(',')[0].to_f , m.latlng.split(',')[1].to_f ] } %>  );
 
-		var options = { sizeAxis: { maxSize: 3}, markerOpacity: 0.4, backgroundColor: { fill:'transparent' }, region: 'US', resolution: 'counties' };
+		var options = { sizeAxis: { maxSize: 3}, markerOpacity: 0.4, backgroundColor: { fill:'transparent' }, region: 'US', resolution: 'provinces' };
 
 		var chart = new google.visualization.GeoChart(document.getElementById('match_div'));
         chart.draw(data, options);
