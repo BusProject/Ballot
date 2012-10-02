@@ -36,14 +36,26 @@ function locationModel(data) {
 	
 
 	this.nearby = ko.computed(function() {
-		var top = this.top(), choices = this.choices.ordered(), items = choices.map(function(el) { return el.contest+' '+el.geography })
+		var top = this.top(), 
+			choices = this.choices.ordered(), 
+			items = choices.map(function(el) { return el.contest+' '+el.geography })
+
 		if( items.length < 1 ) return ''
-		for (var i=0; i < items.length; i++) {
-			var elem = $( 'a[name="'+items[i]+'"]'), extra = this.selected() == choices[i] ? 500 : 0
-			if( elem.length > 0 && top < elem.offset().top + extra ) return choices[i];
-		};
 		if( top < 10 ) return choices[ 0 ];
-		else return choices[ choices.length - 1 ];
+
+		var selected = this.selected(),
+			extra = selected == null ? 0 : -500
+			start = Math.round( (top + extra)/$(document).height() * items.length - 20 ),
+			start = start < 0 ? 0 : start
+
+		for (var i=  start; i < items.length; i++) {
+			var elemTop = $( 'a[name="'+items[i]+'"]'), 
+				extra = selected == choices[i] ? elemTop.next('.row').height() : 0
+			if( elemTop.length > 0 && top < elemTop.offset().top + extra ) {
+				return choices[i];
+			}
+		};
+		return choices[ choices.length - 1 ];
 	},this)
 
 	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
