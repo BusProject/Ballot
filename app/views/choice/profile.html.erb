@@ -228,6 +228,11 @@
 			</script>
 		
 			<%- unless current_user.nil? %>
+				<span class="link helpful" onclick="
+					$(this).removeClass('link').text('Sweet - thanks')
+					yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.featured().id+'/useful',function(response){}) } )
+				"><i class="icon-thumbs-up"></i> Recommend this Guide</span>
+				<span class="divide">|</span> 
 				<span class="link flag" onclick="$(this).hide().next().show()"><i class="icon-flag"></i> Flag this User</span>
 				<p style="display: none;" class="flag">Are you sure? <span class="link" onclick=" 
 					$(this).parent().text('Flagged - thanks');
