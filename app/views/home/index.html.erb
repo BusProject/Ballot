@@ -28,7 +28,7 @@
 		<h1 class="sectionheading">Here’s What Will Be On Your Ballot</h1>
 
 
-		<!-- ko foreach: [candidates,ballotMeasures] -->
+		<!-- ko foreach: sections -->
 			<div data-bind="visible: $data.visible, attr: {'class' : $data.className, 'id': $data.title }">
 				<div class="category-heading" >
 					<h2 data-bind="text: title"></h2>
