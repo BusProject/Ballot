@@ -20,6 +20,8 @@ class ApplicationController < ActionController::Base
       @config = { :state => 'error' }.to_json
       @title = "Can't Find That!"
       @content = <<EOF
+        <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
+    	
         <script type='text/javascript'> $(document).ready( function() {
             $('.finder').betterAutocomplete( '/search', function( event, ui ) { document.location = '/'+ui.item.url } )
             $('.finder').bind('focus.down',function(e) { $(document).scrollTop( $(this).unbind('focus.down').position().top ) })

@@ -20,6 +20,51 @@ class HomeController < ApplicationController
       render :template => 'home/index.html.erb' 
     end
   end
+
+  def stats
+    @classes = 'home admin'
+    @config = { :state => 'page' }.to_json
+    
+    
+    @users = User.all.map do |user|
+      votes = user.feedback.count
+      comments = user.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count
+      popularity = user.feedback.map { |f| f.cached_votes_total }.sum
+      
+      
+      friends = !user.fb_friends.nil? ? user.fb_friends.split(',').count : 0
+      pages = !user.pages.nil?
+      profile = user.profile != '/'+user.to_url
+      header = user.header.to_s.index("/headers/original/missing.png").nil?
+      
+      { 
+        :last_sign_in => user.last_sign_in_at, 
+        :sign_in_count => user.sign_in_count, 
+        :popularity => popularity,
+        :created_at => user.created_at,
+        :friends => friends,
+        :votes => votes,
+        :comments => comments,
+        :pages => pages,
+        :profile => profile,
+        :header => header
+      }
+    end
+    
+    @matches = Match.all.map{ |m| m.data.select{ |d| d.length == 2 }.first  }
+    @states = Choice.states
+    @states.shift
+    @stateAbvs = Choice.stateAbvs
+    @stateAbvs.shift
+    @matchStates = []
+    n = 0
+    @stateAbvs.each do |state|
+      count = @matches.select{ |match| match == state }.count
+      @matchStates.push( { :count => count, :state => @states[n] } ) unless count == 0
+      n+=1
+    end
+
+  end
   
   def about
     @classes = 'home msg'
@@ -33,18 +78,20 @@ class HomeController < ApplicationController
           <li>This is a crowdsourced voter guide. The content and order in which it appears is determined by the wisdom of the masses, not by political powerbrokers.</li>
           <li>This is open-source software. Our commitment to crowdsourcing doesn't stop with ballot measures. We've built this software open source so that others can modify and improve it. Want to check it out? <a href='http://github.com/busproject/ballot' target='_blank'>Here's our GitHub repo</a> - fork away! Want to help? Let us know.</li> 
           <li>We're also utilizing and supporting the Voter Information Project so that other similar projects can piece together the relevant and accurate ballot information for free.</li>
+          <li>For the latest updates on new features, please <a class="link" target='_blank' href="http://theballot.tumblr.com/">visit our Tumblr</a>.</li>
          </ul>
          <a class='about-button' href='/'>Find Your Ballot</a>
-         <!--<h1>Who We Are</h1>
-         <p><strong>Scott Duncombe, Developer</strong></p>
-         <p>Scott Duncombe is a native Oregonian, who grew up mostly in Corvallis before going to school at the University of Chicago, studying Chemistry and Political Science. He got involved with democracy and technology while working with the Student Government, eventually becoming the Student Body President. After Chicago, he organized for Obama for America before returning to Oregon, eventually joining the Bus Project to manage technology. The Federation stole him a year later. He also moonlights as a developer for candidates and others.</p>
-         <p><strong>Noah Manger, Designer</strong></p>
-         <p>Text about Noah</p>
-         <p><strong>Sarah Stern</strong></p>
-         <p>Sarah bio</p>
-         <p><strong>Sam Patton</strong></p>
-         <p><strong>Matt Singer</strong></p>
-         <p>Matt Bio</p>-->         
+
+         <h1>Who We Are</h1>
+         <p><strong><a href="http://twitter.com/mojowen" target="_blank">Scott Duncombe</a>, Developer</strong></p>
+         <!--<p>Scott Duncombe is a native Oregonian, who grew up mostly in Corvallis before going to school at the University of Chicago, studying Chemistry and Political Science. He got involved with democracy and technology while working with the Student Government, eventually becoming the Student Body President. After Chicago, he organized for Obama for America before returning to Oregon, eventually joining the Bus Project to manage technology. The Federation stole him a year later. He also moonlights as a developer for candidates and others.</p>-->
+         <p><strong><a href="https://twitter.com/noahmanger" target="_blank">Noah Manger</a>, Designer</strong></p>
+         <!--<p>Text about Noah</p>-->
+         <p><strong><a href="https://twitter.com/notsterno" target="_blank">Sarah Stern</a></strong></p>
+         <!--<p>Sarah bio</p>-->
+         <p><strong><a href="https://twitter.com/sampatton" target="_blank">Sam Patton</a></strong></p>
+         <p><strong><a href="https://twitter.com/montuckyliberal" target="_blank">Matt Singer</a></strong></p>
+         <!--<p>Matt Bio</p>-->         
 EOF
 
     render 'home/show'

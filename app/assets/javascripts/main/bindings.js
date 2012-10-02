@@ -322,13 +322,13 @@ ko.bindingHandlers.overwrite = {
 };
 ko.bindingHandlers.stripClass = {
 	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
-		element.className =''+valueAccessor()
+		$(element).attr('class',valueAccessor() )
 	}
 }
 ko.bindingHandlers.addClass = {
 	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
 		value = valueAccessor()
-		element.className = element.className.replace(valueAccessor(),'').trim()+' '+value;
+		$(element).addClass( value )
 	}
 };
 

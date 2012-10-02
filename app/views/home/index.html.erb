@@ -1,3 +1,5 @@
+<script type="text/javascript" src='http://maps.googleapis.com/maps/api/js?sensor=true'></script>
+
 	<div id="find-ballot" class="ballot-section">
 			<h1 class="sectionheading">Look Up What’s On Your Ballot</h1>
 
@@ -5,7 +7,7 @@
 		
 			<div>
 				<input onkeypress="$('.place-holder').hide()" data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="enter your address here">
-				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address().length == 0">enter your address here</label><![endif]-->
+				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0">enter your address here</label><![endif]-->
 				<a href="#" class="cancel find-ballot-submit">Submit</a>
 				</div>
 		
@@ -25,8 +27,9 @@
 	<div id="read-ballot"  style="display:none;" class="ballot-section" data-bind="visible: choices.notEmpty()">
 		<h1 class="sectionheading">Here’s What Will Be On Your Ballot</h1>
 
-		<!-- ko foreach: sections -->
-			<div data-bind="visible: $data.visible, attr: {'class' : $data.class, 'id': $data.title }">
+
+		<!-- ko foreach: [candidates,ballotMeasures] -->
+			<div data-bind="visible: $data.visible, attr: {'class' : $data.className, 'id': $data.title }">
 				<div class="category-heading" >
 					<h2 data-bind="text: title"></h2>
 					<p data-bind="text: description"></p>

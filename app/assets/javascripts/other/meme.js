@@ -137,14 +137,14 @@ function makeMeme(memeRaw,path,flavor) {
 							function(response) {
 								if( response.success ) {
 
-									var guide_name = current_user.guide_name == '' ? current_user.name+"'s Voter Guide" : current_user.guide_name
+									var guide_name = ko.toJS(current_user.guide_name) == '' ? current_user.name+"'s Voter Guide" : ko.toJS(current_user.guide_name)
 										img = document.location.protocol+'//'+document.location.host+response.url, // Le image you're linking to 
 										link = document.location.protocol+'//'+document.location.host+current_user.profile, // Le page you're linkg to
 										message = 'Check out '+guide_name
 
 									$('a.facebook',document.body).attr('href',img.replace('.png','')+'/fb');
 									$('a.googleplus',document.body).attr('href','https://plus.google.com/share?url='+img.slice(0,-4) );
-									$('a.pintrest',document.body).attr('href','http://pinterest.com/pin/create/button/?url='+escape(link)+'&media='+escape(img)+'&description='+escape(message));
+									$('a.pinterest',document.body).attr('href','http://pinterest.com/pin/create/button/?url='+escape(link)+'&media='+escape(img)+'&description='+escape(message));
 
 									var referr = 'theleague99', via = '', hashtags = 'TheBallot'
 									var twitter = 'https://twitter.com/intent/tweet?original_referer='+referr+

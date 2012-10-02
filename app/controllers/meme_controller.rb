@@ -92,7 +92,7 @@ class MemeController < ApplicationController
     page = false
     
     # Refreashing Auth tokens
-    if user = User.find(session[:logged_in_as]) && session[:logged_in_as] != current_user.id
+    if session[:logged_in_as] && user = User.find(session[:logged_in_as]) && session[:logged_in_as] != current_user.id
       user = User.find(session[:logged_in_as])
       json = JSON::parse(RestClient.get 'https://graph.facebook.com/me/accounts?access_token='+user.authentication_token)
       token = json['data'].select{ |p| p['id'] == current_user.fb }.first['access_token']
