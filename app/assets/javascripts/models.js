@@ -208,8 +208,12 @@ function Feedback(data) {
 
 		this.type = data.type
 		this.updated = data.updated_at != data.created_at
-		var useless = data.cached_votes_down || 0, useful = data.cached_votes_up || 0
-		this.usefulness = ko.observable( useful - useless )
+		var useless = data.cached_votes_down || 0, useful = data.cached_votes_up || 0,
+			wilson = useless + useful == 0 ? 0 : ((useful + 1.9208) / (useful + useless) - 1.96 * Math.sqrt((useful * useless) / (useful + useless) + 0.9604) / (useful + useless)) / (1 + 3.8416 / (useful + useless))
+			// Adopted from http://evanmiller.org/how-not-to-sort-by-average-rating.html
+		this.usefulness = ko.observable( wilson )
+		this.useless = useless
+		this.useful = useful
 
 		var date = new Date(data.updated_at),
 			time = date.toLocaleTimeString().slice(0,5)+'am',
