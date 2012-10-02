@@ -3,9 +3,9 @@
 	<div id="profile" data-bind="with: current_user  " class="ballot-section">
 			<!-- Primary Color -->
 			<style type="text/css" data-bind="text: ko.toJS( primary ) != null && ko.toJS( primary ) != '' ? 
-			'h1.sectionheading { color:'+ ko.toJS( primary )+' !important;}'
+			'.sectionheading h1 { color:'+ ko.toJS( primary )+' !important;}'
 			: ''
-			">h1.sectionheading { color: <%= @user.primary %>!important;}
+			">.sectionheading h1 { color: <%= @user.primary %>!important;}
 			</style>
 			<!-- Secondary Color -->
 			<style type="text/css" data-bind="text: ko.toJS( secondary ) != null && ko.toJS( secondary ) != '' ? 
