@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	var users = <%= raw @users.to_json %>,
 		first = Math.min.apply(0, users.map( function(el) { return new Date(el.created_at).getTime() } ) ),
-		firstWeek = new Date( first ).setDate ( new Date( first ).getDate() - new Date( first ).getDay() ),
+		firstWeek = new Date( '08-26-2012' ).getTime(),
 		weeks = Math.round( (new Date().getTime() - firstWeek ) / ( 1000*60*60*24*7 ) ),
 		growth = [ ['Week','Users'] ]
 
@@ -68,5 +68,5 @@
 <h3><%= @matches.count %> Total Matches</h3>
 
 <% @matchStates.sort_by{ |m| m[:count] }.reverse.each do |state| %>
-	<p><strong><%= state[:state] %></strong> <%= state[:count] %> visit<%='s' if state[:count] > 1 %></p>
+	<p><strong><%= state[:state] %></strong> <%= state[:count] %> matches<%='s' if state[:count] > 1 %></p>
 <% end %>
