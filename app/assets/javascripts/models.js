@@ -67,8 +67,8 @@ function Choice(data,args) {
 				if( mode != 'best' ) {
 					var af = a.friend(), 
 						bf = b.friend()
-					if( af && !bf ) return 1; 
-					if ( !bf && af ) return -1;
+					if( af && !bf ) return -1; 
+					if ( !bf && af ) return 1;
 				}
 				return a.usefulness() > b.usefulness() ? -1 : 1 
 			})
