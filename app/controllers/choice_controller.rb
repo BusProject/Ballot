@@ -55,7 +55,7 @@ class ChoiceController < ApplicationController
     @type = 'Voter Guide'
     @message = @state+'\'s Full Ballot, powered by The Ballot.'
     
-    result = {:state => 'state', :choices => @choices }
+    result = {:state => 'state', :choices => @choices, :title => @title, :message => @message }
     
     @choices_json = @choices.to_json
     

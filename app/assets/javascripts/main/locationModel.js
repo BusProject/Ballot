@@ -242,10 +242,11 @@ function locationModel(data) {
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 		
+		var url = document.location.toString(), name = inits.title
 		this.menuItems.push( 
 			MenuItem(inits.root,'Find Your Ballot',null),
 			MenuItem('#read-ballot','Read Your Ballot', layout ,null, this),
-			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra)
+			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+inits.title+'<br>'+makeShare(url,name, inits.message )+extra)
 		)
 	}
 	if( this.state == 'single' ) {
