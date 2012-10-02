@@ -29,6 +29,7 @@
 	<% end -%>
   </script>
   <%= javascript_include_tag "application" %>
+  <!--[if IE]><%= javascript_include_tag "other/ie.js" %><![endif]-->
   <%= csrf_meta_tags %>
 
   <link rel="shortcut icon" href="<%= asset_path 'favicon.jpg'%>" />
