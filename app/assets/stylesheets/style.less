@@ -78,56 +78,61 @@ body.home {
 .ballot-section {
 	width: 720px;
 	margin: 20px auto;
-	.stars {
-		display:none;
-		h1, h2 { display: inline-block; font-size: 1.8em; }
-		h2 { font-size: 1.5em; }
-		float: right;
-		padding-top: 10px;
-		color: @orange;
-		.move-stars();
-		&:first-child { 
-			float: left;
-		}
-
-	}
+	
 	.sectionheading {
 		text-align:center;
-		padding:20px 0px 20px;
-		text-transform:uppercase;
-		font-size: 30px;
+		padding:15px 0px;
+		font-size: 24px;
 		color: white;
 		background-color:@green;
-		font-family:"Arvo", serif;
+		font-family:"Open Sans", serif;
+		.drop-shadow(0,2px,2px,0,.2);
+		.border-radius(5px);
+		width:95%;
+		margin:0 auto;
+		position:relative;
 		
-			&:after {
+			&:before {
 				content:"\f0d7";
 				font-family:"FontAwesome";
 				color:@green;
-				position:relative;
-				top:40px;
+				position:absolute;
+				bottom:-18px;
+				left: 333px;
 			}
+		p { color: white; }
 		
 	}
 	
 	.category-heading {
 		h2 { 
-			color: @orange; 
+			color: @darkGrey; 
 			width: 100%; 
 			margin: 10px auto 0; 
 			padding:10px 0px;
 			font-family:"Arvo";
 			.inset-text();
-			border-radius:10px 10px 0 0;
+			&:before {
+				content: "\f005   ";
+				font-family:"FontAwesome";
+				font-size:80%;
+			}
+			
+			&:after {
+				content: "   \f005";
+				font-family:"FontAwesome";
+				font-size:80%;
+				
+			}
 		}
 		
 		p { 
-			color: @orange;
+			color: @darkGrey;
 		}
 		
 		text-align: center;
-		padding-bottom: 10px;
-		margin: 0 0 20px;
+		padding-bottom: 0px;
+		margin: 0 0 10px;
 		font-family:"Arvo";
 		border-radius:10px 10px 10px 10px;
 		
@@ -209,7 +214,7 @@ body.home {
 #read-ballot {
 	.row {
 		width: 680px;
-		margin: 20px auto 60px;
+		margin: 0px auto 40px;
 		padding: 0;
 		position: relative;
 		h1.title {
@@ -222,7 +227,7 @@ body.home {
 			font-family:'Arvo', Georgia, serif;
 			font-weight:600;
 			letter-spacing:2px;
-			font-size:26px;
+			font-size:24px;
 			.inset-text();
 			line-height: 1.2em;
 		}
@@ -230,7 +235,7 @@ body.home {
 			color: @darkGrey;
 			height:1px;
 			.box-shadow(0, 1px,1px,@grey);
-			@width: 20%;
+			@width: 22%;
 			padding: 0;
 			border: 0;
 			width: @width;
@@ -244,7 +249,7 @@ body.home {
 		}
 		.explanation {
 			color: @darkGrey;
-			padding: 10px 0 20px;
+			padding: 10px 0 10px;
 			font-weight:300;
 			width:80%;
 			margin:0 auto;
@@ -274,7 +279,6 @@ body.home {
 		}
 		.voted {
 			font-weight:300;
-			margin-bottom:20px;
 			font-size:12px;
 			margin:20px 0 10px 0;
 			
@@ -814,6 +818,7 @@ body.home {
 					margin-top: 40px;
 					padding: 0 0 100px 34px;
 					float:left;
+					
 					h1 { 
 						.inset-text();
 						text-align:center !important;
@@ -941,10 +946,17 @@ body.home {
 }
 
 #more-coming {
-	.stars { 
-		display:none;
-		.move-stars(100px) 
+	background-color:@grey;
+	color:white;
+	.border-radius(5px);
+	.drop-shadow();
+	width:66%;
+	padding:10px;
+	
+	p {
+		color:white;
 	}
+	
 	button { 
 		.orangeButton();
 		font-size: 16px;
