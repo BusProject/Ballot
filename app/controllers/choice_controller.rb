@@ -42,7 +42,8 @@ class ChoiceController < ApplicationController
 
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
 
-    @choices = @choices.sort_by{ |choice| [ ['Federal','State','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
+    @choices = @choices.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
+    
     
     @states = Choice.states
     @stateAbvs = Choice.stateAbvs
@@ -53,11 +54,11 @@ class ChoiceController < ApplicationController
     @title = @state+'\'s Full Ballot'
     @type = 'Voter Guide'
     @message = @state+'\'s Full Ballot, powered by The Ballot.'
-
+    
     result = {:state => 'state', :choices => @choices }
-
+    
     @choices_json = @choices.to_json
-
+    
     @config = result.to_json
     
   end

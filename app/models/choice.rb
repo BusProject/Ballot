@@ -45,7 +45,7 @@ class Choice < ActiveRecord::Base
     
     
     district = self.geography.slice(4,self.geography.length)
-    district = district.to_i.ordinalize if district.to_i.to_s == district.gsub('0','')
+    district = district.to_i.ordinalize if !district.nil? && district.to_i.to_s == district.gsub('0','')
     return [@states[index]+"'s", district,geography].join(' ') if district != ''
     return [@states[index],geography].join(' ')
   end

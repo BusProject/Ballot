@@ -203,6 +203,7 @@ function locationModel(data) {
 		var ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'),
 			federalCandidates = Grouping(['Federal'],'Federal','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'),
 			stateCandidates = Grouping(['State'],'State','candidate',this,'These candidates will represent you in your State\'s government.'),
+			countyCandidates = Grouping(['County'],'County','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 		
 		this.sections.push( federalCandidates)
@@ -229,10 +230,12 @@ function locationModel(data) {
 		var ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'),
 			federalCandidates = Grouping(['Federal'],'Federal','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'),
 			stateCandidates = Grouping(['State'],'State','candidate',this,'These candidates will represent you in your State\'s government.'),
+			countyCandidates = Grouping(['County'],'County','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 		
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
+		this.sections.push( countyCandidates )
 		this.sections.push( otherCandidates)
 		this.sections.push( ballotMeasures)
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
@@ -257,10 +260,12 @@ function locationModel(data) {
 		var ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'),
 			federalCandidates = Grouping(['Federal'],'Federal','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'),
 			stateCandidates = Grouping(['State'],'State','candidate',this,'These candidates will represent you in your State\'s government.'),
+			countyCandidates = Grouping(['County'],'County','candidate',this,'These candidates will represent you in your State\'s government.'),
 			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 		
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
+		this.sections.push( countyCandidates)
 		this.sections.push( otherCandidates)
 		this.sections.push( ballotMeasures)
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
