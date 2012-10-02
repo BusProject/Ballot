@@ -48,8 +48,8 @@
 <div class="stats">
 	<h3><%= @users.count %> Total Users</h3>
 	<p><strong>Who've voted:</strong> <%= @users.select{ |u| u[:votes] > 0 }.count %> ( <%= ( @users.select{ |u| u[:votes] > 0 }.count / @users.count.to_f * 100).round(1) %>%)</p>
-	<p><strong>Who've left commented:</strong> <%= @users.select{ |u| u[:comments] > 0  }.count %> ( <%= ( @users.select{ |u| u[:comments] > 0 }.count / @users.count.to_f * 100 ).round(1) %>%) </p>
-	<p><strong>Who've add header pics:</strong> <%= @users.select{ |u| u[:header]  }.count %> ( <%= ( @users.select{ |u| u[:header] }.count / @users.count.to_f * 100 ).round(1) %>%) </p>
+	<p><strong>Who've commented:</strong> <%= @users.select{ |u| u[:comments] > 0  }.count %> ( <%= ( @users.select{ |u| u[:comments] > 0 }.count / @users.count.to_f * 100 ).round(1) %>%) </p>
+	<p><strong>With a header pic:</strong> <%= @users.select{ |u| u[:header]  }.count %> ( <%= ( @users.select{ |u| u[:header] }.count / @users.count.to_f * 100 ).round(1) %>%) </p>
 	<p><strong>With a custom url: </strong> <%= @users.select{ |u| u[:header]  }.count %> ( <%= ( @users.select{ |u| u[:header] }.count / @users.count.to_f * 100 ).round(1) %>%) </p>
 	<p><strong>Most Useful User: </strong> <%= @users.map{ |u| u[:popularity]  }.max %> </p>
 	<p><strong>Avg Usefulness: </strong> <%= ( @users.map{ |u| u[:popularity]  }.sum / @users.select{ |u| u[:comments]}.count.to_f ).round(1) %> </p>
