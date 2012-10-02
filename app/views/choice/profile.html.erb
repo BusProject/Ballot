@@ -236,11 +236,10 @@
 			<% end -%>
 		<% end -%>
 
-		<h1 class="sectionheading" data-bind="visible: true || console.log( [name+'\'s','Voter Guide'].join(' ') ),text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
-		<div class="category-heading">
+		<div class="sectionheading"><h1 data-bind="visible: true || console.log( [name+'\'s','Voter Guide'].join(' ') ),text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
 			<p class="description" data-bind=" text: description"><%= @user.description %></p>
+		<p style="font-size:12px;">Powered by TheBallot.org</p>
 		</div>
-		<em>Powered by TheBallot.org</em>
 
 	</div>
 
