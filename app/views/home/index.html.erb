@@ -38,8 +38,8 @@
 	</div><!-- read-ballot -->
 	<h1 class="sectionheading" style="display:none;" data-bind="visible: !fetch() ">Loading...</h1>
 	<div id="more-coming" style="display:none;" class="ballot-section" data-bind="visible: geolocated() && fetch()" >
-		<h1 class="sectionheading">More to Come...</h1>
-		<div class="category-heading">
+		<h1>More to Come...</h1>
+		<div class="category-heading minor">
 			<p>This isn't your full ballot - we're still adding data <span data-bind="text: address.state() ? ' for '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
 			<br />
 			<%- if current_user.nil? %>
@@ -52,7 +52,7 @@
 				<button style="display:none;" class="alerts" 
 					data-bind="visible: (current_user.alerts == null ? '' : current_user.alerts).search( address.state() ) === -1"
 					onclick="$(this).hide().next().show(); current_user.alerts += yourLocation.address.state()+','; $.post(inits.root+'users/update',{alerts: yourLocation.address.state() } ); ">Update Me When There's More Data</button>
-				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong
+				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>
 			<% end -%>
 		</div>
 	</div>
