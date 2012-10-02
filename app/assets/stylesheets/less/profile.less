@@ -16,25 +16,43 @@
 		font-size: 12px;
 	}
 
-	h1 {
-		padding-bottom:5px !important;
+	.sectionheading {
+		background-color:lighten(@grey,20%);
+		font-family:"Arvo",serif;
+		font-size:30px;
+		.inset-text();
+		.border-radius(0 0 5px 5px);
+		.text-shadow(0,0,0,transparent);
+		width:100%;		
+		
+			&:before {
+				color:lighten(@grey,20%);
+				bottom:-22px;
+			}
+			
+		h1 { 
+			text-transform:uppercase; 
+			font-weight:700;
+			color:@darkGrey;
+		}
+		
+		p {
+			color: @darkGrey;
+			size:14px;
+		}
+		
 	}
 	
-	.category-heading p {
-		margin-bottom:10px;
-	}
 	
 	#edit-profile {
 		text-align:left;
-		margin-bottom:20px;
-		color:@grey;
+		color:white;
 		width:100%;
-		background-color:darken(@bgGrey,10%);
-		border:1px solid darken(@bgGrey,20%);
+		background-color:@grey;
+		border-bottom:1px solid darken(@grey,10%);
 		padding:15px 30px;
-		.border-radius(5px);
+		.border-radius(5px 5px 0 0);
 		.clearfix;
-		.inner-shadow();
 		
 		
 		.editor { .clearfix; }
@@ -44,23 +62,24 @@
 			float:right;
 			
 				.link {
-					color:@darkGrey;
+					color:white;
 
-					&:hover { color: @orange; }
+					&:hover { color:white; text-decoration: underline; }
 				}
 		}
 		
 		.link {
-			color:@darkGrey;
+			color:white;
 			
-			&:hover { color: @orange; }
+			&:hover { color:white; text-decoration: underline; }
 		}
 		
 		h3 {
 			text-align:center;
+			color:white;
 			font-weight:700;
 			text-transform:uppercase;
-			.inset-text();
+			.text-shadow();
 		}
 		
 		.label {
@@ -69,7 +88,7 @@
 			text-align:right;
 			margin-right:30px;
 			width:33%;
-			color:darken(@darkGrey,30%);
+			color:white;
 		}
 		
 		.small-label {
@@ -149,7 +168,7 @@
 				display: none;
 			}
 			input[type=submit] {
-				.greyButton();
+				.orangeButton();
 			}
 			
 		}
@@ -167,9 +186,32 @@
 #personal-guide {
 	
 	#read-ballot {
-			
+		
+		.category-heading {
+			h2 {
+				font-family:"Arvo",serif;
+				color:@darkGrey;
+				padding:10px;
+				width:75%;
+				margin:20px auto 0px;
+				font-size:28px;
+				
+				&:before {
+					content: "\f005   ";
+					font-family:"FontAwesome";
+					color:@grey;
+				}
+				
+				&:after {
+					content: "   \f005";
+					font-family:"FontAwesome";
+					color:@grey;
+				}
+			}	
+		}
+		
 		.row {
-			margin: 10px auto;
+			margin: 0px auto 5px;
 			.clearfix();
 			&:first-child { margin-top:-75px; }
 			hr.button{ display:none !important;	}
@@ -205,19 +247,19 @@
 			.profile-text {
 				float:left;
 				font-size:18px;
-				margin-top:10px;
+				margin-top:0px;
 				letter-spacing:0;
 			}
 		
 			.profile-explanation {
 				.clearfix();
 				display:block;
-				margin-bottom:20px;
+				margin-bottom:0px;
 				
 				.optionholder { 
 					float:right;
 					width:66%;
-					margin-top:10px;
+					margin-top:0px;
 					font-size:18px;
 					padding:0 10px 10px 10px;
 					text-align:left;
