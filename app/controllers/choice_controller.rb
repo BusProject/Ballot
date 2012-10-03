@@ -47,7 +47,7 @@ class ChoiceController < ApplicationController
     if params[:format] == 'json'
       render :json => @choices.to_json( json_include )
     else
-      @types = Choice.where('geography LIKE "%TX%"').select("DISTINCT( contest_type)").sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide'].index( c.contest_type) }.map{ |c| c.contest_type }
+      @types = Choice.where('geography LIKE ?', params[:state]+'%' ).select("DISTINCT( contest_type)").sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide'].index( c.contest_type) }.map{ |c| c.contest_type }
 
       @states = Choice.states
       @stateAbvs = Choice.stateAbvs
