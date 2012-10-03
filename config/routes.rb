@@ -9,6 +9,13 @@ Ballot::Application.routes.draw do
   match '/users/update' => 'user#update', :as => 'user_update', :via => :post
   match '/users/pages' => 'user#access_pages', :as => 'user_pages'
   match '/users/pages/:fb' => 'user#page_session', :as => 'user_page_session_create'
+  match '/users/auth/:provider/callback' => 'authentications#create'
+
+  match '/users/add/:type' => 'choice#new', :via => :get, :type => /candidate|measure/ , :as => 'user_add_choice'
+  match '/users/add' => 'choice#new', :via => :post, :as => 'user_create_choice'
+
+  match '/users/add/:id' => 'choice#add', :via => :get, :as => 'user_add_other_choice'
+  match '/users/add/:id' => 'choice#update', :via => :post, :as => 'user_update_choice'
 
   match '/admin' => 'admin#index', :as => 'admin'
   match '/admin/find/:object/' => 'admin#find', :as => 'admin_find' #, :via => :post
@@ -26,10 +33,8 @@ Ballot::Application.routes.draw do
   match '/how-to' => redirect('https://docs.google.com/document/d/1U7kY9aU_e89GYb9oDt5ilzpjkzsCFtwUQNCr2AK9MAM/edit')
   match '/source' => redirect('https://github.com/BusProject/Ballot')
 
-  match '/auth/:provider/callback' => 'authentications#create'
   match '/lookup' => 'choice#index'
   match '/lookup/:id/more' => 'choice#more'
-  match '/fetch' => 'choice#retrieve', :as => 'choices_fetch'
   
   match '/feedback/save' => 'feedback#update', :via => :post, :as => 'save_feedback'
   match '/feedback/:id/remove' => 'feedback#delete', :via => :post, :as => 'remove_feedback'
