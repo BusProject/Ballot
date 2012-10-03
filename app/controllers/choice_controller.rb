@@ -38,28 +38,33 @@ class ChoiceController < ApplicationController
 
   def state
     
-    @choices = Choice.where('geography LIKE ?', params[:state]+'%' )
+    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order( [ ['Federal','State','County','Other','Ballot_Statewide'].index( :contest_type), :geography  ]  ).limit( 200 ).offset( params[:page] || 0 )
 
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
 
-    @choices = @choices.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
+    @choices = @choices.each{ |c| c.prep current_user }
     
+    if params[:format] == 'json'
+      render :json => @choices.to_json( json_include )
+    else
+      @types = Choice.where('geography LIKE "%TX%"').select("DISTINCT( contest_type)").sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide'].index( c.contest_type) }.map{ |c| c.contest_type }
+
+      @states = Choice.states
+      @stateAbvs = Choice.stateAbvs
     
-    @states = Choice.states
-    @stateAbvs = Choice.stateAbvs
+      @state = @states[ @stateAbvs.index( params[:state] ) ]
     
-    @state = @states[ @stateAbvs.index( params[:state] ) ]
+      @classes = 'home state'
+      @title = @state+'\'s Full Ballot'
+      @type = 'Voter Guide'
+      @message = @state+'\'s Full Ballot, powered by The Ballot.'
     
-    @classes = 'home state'
-    @title = @state+'\'s Full Ballot'
-    @type = 'Voter Guide'
-    @message = @state+'\'s Full Ballot, powered by The Ballot.'
+      result = {:state => 'state', :choices => @choices, :title => @title, :message => @message }
     
-    result = {:state => 'state', :choices => @choices, :title => @title, :message => @message }
+      @choices_json = @choices.to_json
     
-    @choices_json = @choices.to_json
-    
-    @config = result.to_json
+      @config = result.to_json
+    end
     
   end
   

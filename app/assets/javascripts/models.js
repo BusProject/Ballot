@@ -243,6 +243,14 @@ function Grouping(keys,title,template,locationModel,description) {
 			return keys.indexOf(choice.type) !== -1
 		})
 	}, locationModel)
+
+	grouping.contests.cutoff = ko.utils.arrayFilter(locationModel.choices(), function(choice){ return keys.indexOf(choice.type) !== -1}).length
+
+	grouping.contests.fresh = ko.computed( function() {
+		var contests = this.contests()
+		return contests.slice( this.contests.cutoff, contests.length )
+	}, grouping)
+
 	grouping.visible = ko.computed( function() {
 		return this.contests().length > 0
 	},grouping)

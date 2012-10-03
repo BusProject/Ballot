@@ -4,22 +4,57 @@
 		<p>All of <%= @state %>'s candidates and ballot measures.</p>
 	</div>
 
-	<% @choices.group_by(&:contest_type).each do |type,choices| %>
+	<% @grouped = @choices.group_by(&:contest_type) %>
+	
 
-	<div id="<%= type == 'Ballot_Statewide' ? 'Ballot Measures' : type %>">
+	<% @types.each do |type| %>
+		<% n = ['Federal','State','County','Other','Ballot_Statewide'].index( type ) %>
+		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot Measures' : type %>" data-bind="with: sections()[<%= n %>]">
 
-		<div class="category-heading" >
-			<h2 ><%= type.gsub('_',' ') %></h2>
-			<p ></p>
-		</div>
-		<% choices.each do |choice | %>
-			<div class="row ">
-				<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidateSummary' : 'measureSummary' %>
-				<%=  render 'choice/'+type, :choice => choice, :user => @user %>
+			<div class="category-heading" >
+				<h2 ><%= type.gsub('_',' ') %></h2>
+				<p ></p>
 			</div>
-		<% end %>
-	</div>
+			<% unless @grouped[ type ].nil? %>
+				<% @grouped[ type ].each do |choice| %>
+					<div class="row ">
+						<% rowtype = choice.contest_type.downcase.index('ballot').nil? ? 'candidateSummary' : 'measureSummary' %>
+						<%=  render 'choice/'+rowtype, :choice => choice, :user => @user %>
+					</div>
+				<% end %>
+			<% end %>
+			<h1 class="sectionheading" style="display:none;" data-bind="visible: $data.contests().length < 1">Still loading...</h1>
+			
+			<!-- ko foreach: $data.contests.fresh -->
+				<div class="row " data-bind="template: { name: $data.type == 'Ballot_Statwide' ? 'measure' : 'candidate' }"></div>
+			<!-- /ko -->
+		</div>
 
 	<% end %>
 
 </div>
+
+
+<script id="measure" type="text/html">
+	<%=  render 'choice/measureSummary' %>
+</script>
+<script id="candidate" type="text/html">
+	<%=  render 'choice/candidateSummary' %>
+</script>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready( function() { 
+		var page = 1
+		setTimeout( function() { getMore( yourLocation.choices().length ) }, 1000 )
+
+		function getMore( choicesLength ) {
+			if( choicesLength == page * 200 ) {
+				page += 1
+				$.getJSON( document.location.toString()+'.json', { page: choicesLength }, function(response) {
+					ko.utils.arrayPushAll(yourLocation.choices, response.map( function(el) { return Choice(el) }) )
+					setTimeout( function() { getMore( yourLocation.choices().length ) }, 1000 )
+				})
+			}
+		}
+	})
+	
+</script>
