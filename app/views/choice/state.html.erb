@@ -6,6 +6,23 @@
 
 	<% @grouped = @choices.group_by(&:contest_type) %>
 	
+	<%- if @choices.length == 200 %>
+		<a rel="next" style="float: right; margin-top: 20px;" class="clean-no-script" href="<%=  request.fullpath.split('?page=')[0]+'?page='+( ( params[:page] || 0 ).to_i + 200 ).to_s %>" >Next Page</a>
+	<% end %>
+	
+	<%- if params[:page] %>
+			<a rel="prev"  style="float: left; margin-top: 20px;" class="clean-no-script" href="<%=  request.fullpath.split('?page=')[0]+'?page='+( ( params[:page] || 0 ).to_i - 200 ).to_s %>" >Prev Page</a>
+	<% end -%>
+
+<% content_for :head do %>
+<%- if @choices.length == 200 %>
+<link rel="next" href="<%=  request.fullpath.split('?page=')[0]+'?page='+( ( params[:page] || 0 ).to_i + 200 ).to_s %>" >
+<% end %>
+<%- if params[:page] %> 
+<link rel="prev" href="<%=  request.fullpath.split('?page=')[0]+'?page='+( ( params[:page] || 0 ).to_i - 200 ).to_s %>" >
+<script type="text/javascript" charset="utf-8"> document.location = document.location.toString().split('?')[0] </script>
+<% end -%>
+<% end %>
 
 	<% @types.each do |type| %>
 		<% n = ['Federal','State','County','Other','Ballot_Statewide'].index( type ) %>
@@ -33,6 +50,7 @@
 	<% end %>
 
 </div>
+
 
 
 <script id="measure" type="text/html">
