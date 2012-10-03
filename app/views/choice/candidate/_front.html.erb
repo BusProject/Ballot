@@ -52,7 +52,7 @@
 			<hr class="button lower middle">
 
 			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/candidateFeedback', :user => user, :feedback => you %>
+				<%= render 'choice/candidate/feedback', :user => user, :feedback => you %>
 			<%- end %>
 
 			<%- if user.nil? %>
@@ -100,7 +100,7 @@
 					</li>
 				</ul>
 				<%- if current_user.nil?  %>
-					<%= render 'choice/candidateFeedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+					<%= render 'choice/candidate/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
 				<% end -%>
 			<% end -%>
 

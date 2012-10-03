@@ -35,7 +35,7 @@
 			<% unless @grouped[ type ].nil? %>
 				<% @grouped[ type ].each do |choice| %>
 					<div class="row ">
-						<% rowtype = choice.contest_type.downcase.index('ballot').nil? ? 'candidateSummary' : 'measureSummary' %>
+						<% rowtype = choice.contest_type.downcase.index('ballot').nil? ? 'candidate/summary' : 'measure/summary' %>
 						<%=  render 'choice/'+rowtype, :choice => choice, :user => @user %>
 					</div>
 				<% end %>
@@ -54,10 +54,10 @@
 
 
 <script id="measure" type="text/html">
-	<%=  render 'choice/measureSummary' %>
+	<%=  render 'choice/measure/summary' %>
 </script>
 <script id="candidate" type="text/html">
-	<%=  render 'choice/candidateSummary' %>
+	<%=  render 'choice/candidate/summary' %>
 </script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready( function() { 

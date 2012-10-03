@@ -1,0 +1,7 @@
+<%= form_for @choice, :method => "post", :url =>  {:controller => "choice", :action => "create" } do |form| %>
+	<h2>Add Missing Candidate</h2>
+	<h3>Office Name</h3>
+	<%= form.text_field :contest %>
+	
+	<%= submit_tag 'Add to Your Voter Guide'  %><!-- This is the submit button -->
+<% end %>

@@ -11,6 +11,38 @@ class ChoiceController < ApplicationController
     ]
   end
   
+  def new
+    @classes = 'home add'
+    
+    @choice = Choice.new( :contest_type => params[:type] == 'measure' ? 'User_Ballot' : 'User_Candidate' )
+
+    @config =  { :state => 'single' }.to_json
+
+    render :template => 'choice/new.html.erb'
+  end
+  
+  
+  def create
+    
+  end
+
+   
+  
+  def add
+    @choice = Choice.includes( :options ).find(params[:id])
+    
+
+    
+    render :template => 'choice/_form', :layout => false
+  end
+
+  def update
+    @choice = Choice.find(params[:id])
+    @choice.update_attributes( params[:choice] )
+    render :json => { :option => @choice.options, :params => params}
+  end
+  
+  
   def profile
     
     if params[:id].to_i(16).to_s(16) == params[:id]
@@ -75,7 +107,7 @@ class ChoiceController < ApplicationController
 
     @classes = 'single home'
     @title = @choice.contest
-    @partial = @choice.contest_type.downcase.index('ballot').nil? ? 'candidate' : 'measure'
+    @partial = @choice.contest_type.downcase.index('ballot').nil? ? 'candidate/front' : 'measure/front'
     @type = @partial == 'candidate' ? 'Elected Office' : 'Ballot Measure'
     @message = @partial == 'measure' ? @choice.description : 'An election for '+@choice.contest+' between '+@choice.options.map{|o| o.name+'('+o.party+')' }.join(', ')
 

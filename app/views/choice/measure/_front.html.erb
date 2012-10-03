@@ -47,7 +47,7 @@
 		<% end %>
 
 			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/measureFeedback', :user => user, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
+				<%= render 'choice/measure/feedback', :user => user, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
 			<%- end %>
 
 			<%- if user.nil? %>
@@ -97,7 +97,7 @@
 					</li>
 				</ul>
 				<%- if current_user.nil? %>
-					<%= render 'choice/measureFeedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+					<%= render 'choice/measure/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
 				<% end -%>
 			<% end -%>
 
