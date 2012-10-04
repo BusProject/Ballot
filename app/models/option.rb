@@ -51,7 +51,7 @@ class Option < ActiveRecord::Base
   
   def partySmall
     return '' if self.party.nil?
-    return '(D)' unless self.party.index('Democratic').nil?
+    return '(D)' unless self.party.index('Democrat').nil?
     return '(R)' unless self.party.index('Republican').nil?
     return '(I)' unless self.party.index('Independent').nil?
     return '(L)' unless self.party.index('Libertarian').nil?
