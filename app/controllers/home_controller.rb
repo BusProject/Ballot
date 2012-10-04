@@ -124,4 +124,28 @@ EOF
     render :json => results
   end
   
+  def sitemap
+    stateAbvs = Choice.stateAbvs
+    newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at.to_date
+    
+    @urls = [
+        { :url => ENV['BASE']+'/about', :updated => 'Thu, 04 Oct 2012'},
+        { :url => ENV['BASE']+'/guides', :updated => newwest_user  }
+      ]
+    @urls += (1..50).map{ |i| {:url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
+
+    @urls += User.active.map do |user| 
+      updated = user.updated_at > user.feedback.most_recent.updated_at ? user.updated_at : user.feedback.order('updated_at DESC').limit(1).first.updated_at
+      { :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
+    end
+
+    @urls += Choice.all.map{ |c| { :url => c.to_url, :updated => c.updated_at.to_date } } 
+    
+    if params[:format]
+      render :json => @urls.count 
+    else
+      render :template => 'home/sitemap'
+    end
+  end  
+
 end

@@ -14,7 +14,11 @@ class User < ActiveRecord::Base
 
   
   # attr_accessible :title, :body
-  has_many :feedback
+  has_many :feedback do
+    def most_recent
+      all( :order => 'updated_at DESC', :limit => 1).first
+    end
+  end
   has_many :memes, :through => :feedback
   has_many :options, :through => :feedback
   has_many :choices, :through => :options
@@ -51,7 +55,7 @@ class User < ActiveRecord::Base
       if id != 0 # Future proofing all URL names for our first 10^20th users
         safe = id > 10e20
       end
-      notstate = self.profile =~ /AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|users|admin|lookup|feedback|source|search|m|about|how-to|guides|2012|2011|2010|2009|2008/
+      notstate = self.profile =~ /AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|users|admin|lookup|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008/
       safe = notstate.nil? && safe
       errors.add( :profile, 'is not unique' ) unless User.where('(id = ? OR profile = ?)  AND id != ?',id,self.profile,self.id).empty? && safe
     end
@@ -72,6 +76,9 @@ class User < ActiveRecord::Base
     return url
   end
   
+  def self.active
+    return self.find_by_sql(['SELECT "users".* FROM "feedback" INNER JOIN "users" ON "users"."id" = "feedback"."user_id" WHERE ("feedback"."approved" = ? AND "users"."banned" != ? AND "users"."deactivated" != ?  ) ORDER BY "feedback"."updated_at"',true,true,true])
+  end
   
   # Header image handling
   
