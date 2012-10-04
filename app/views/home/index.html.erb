@@ -29,7 +29,7 @@
 
 
 		<!-- ko foreach: sections -->
-			<div data-bind="visible: $data.visible, attr: {'class' : $data.className, 'id': $data.title }">
+			<div data-bind="visible: $data.visible, attr: {'class' : $data.className, 'id': $data.title.replace(/ /g,'_') }">
 				<div class="category-heading" >
 					<h2 data-bind="text: title"></h2>
 					<p data-bind="text: description"></p>

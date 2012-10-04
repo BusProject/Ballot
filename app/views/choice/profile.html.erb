@@ -256,7 +256,7 @@
 <div id="read-ballot">
 	<% @choices.group_by(&:contest_type).each do |type,choices| %>
 
-		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot Measures' : type %>">
+		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot_Measures' : type.index('User').nil? ? type : type.gsub('_','_Created_')+'s'  %>">
 
 			<div class="category-heading" >
 				<h2 ><%= type.gsub('_',' ') %></h2>

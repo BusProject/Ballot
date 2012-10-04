@@ -44,15 +44,15 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 })
 .on('click touchend','#instructions ul li a:not(".small"), .fixed-link',function(e){
 	$this = $(this)
-	var href = $this.attr('href')
+	var href = $this.attr('href').replace(/ /g,'_')
 	if( href[0] == '#' && href[1] == '!' ) {
 		var $href = $('a[name="'+href.split('!')[1]+'"]'),
 			$button = $href.next('.row').find('button.open')
 		if( !$button.parent().is('a') ) $button.click()
-		setTimeout( function() { $(document).scrollTop( $href.offset().top - 80 ) },200)
+		setTimeout( function() { $(document).scrollTop( $href.offset().top - 40 ) },200)
 		e.preventDefault()
 	} else if( href[0] == '#' ) {
-		var top = $(href).position().top-80
+		var top = $(href).position().top-40
 		e.preventDefault()
 		$(document).scrollTop( top ).trigger('scroll')
 		e.preventDefault()
