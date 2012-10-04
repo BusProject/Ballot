@@ -7,20 +7,24 @@
 
 <div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }"
-	itemscope itemtype="http://data-vocabulary.org/Thing" >
+	itemscope itemtype="http://shema.org/ItemList" >
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div itemprop="description" class="matchup" data-bind="html: '<i class=icon-user></i> ' +$data.description "><%= choice.description %></div>
 	<div itemprop="address" class="geography" data-bind="html: '<i class=icon-map-marker></i> ' +$data.nice_geography "><%= choice[:nice_geography] %></div>
 	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' +$data.voted()+' '+( $data.voted() == 1 ? 'person has' : 'people have' )+' voted | ' +$data.commentsPure()+' '+( $data.commentsPure() == 1 ? 'person has' : 'people have' )+' commented' "></div>
-	
+	<meta itemprop="url" content="<%= choice.to_url%>" />
+
 	<button class="open">Learn More and Comment</button>
 	<hr class="button">
 
 	<div class="body">
 
 		<% n = 0 %>
+		<meta itemprop="itemListOrder" content="Unordered" />
+		<meta itemprop="additionalType" content="http://data-vocabulary.org/Person" />
+	  
 		<% choice.options.sort_by{ |o| o.id == you.option_id ? -1 : 1 unless you.nil? }.each do |option| %>
-		<div itemscope itemtype="http://data-vocabulary.org/Person" class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" data-bind="css: {chooseable: $data.featured() == null && current_user.id != 'unauthenticated' }">
+		<div itemscope itemprop="itemListElement" itemtype="http://data-vocabulary.org/Person" class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" data-bind="css: {chooseable: $data.featured() == null && current_user.id != 'unauthenticated' }">
 			<!-- ko foreach: $data.options -->
 				<div class="<%= 'chosen confirmed' if you == option %> option " data-bind="css:{ chosen: $parent.featured() == null && $parent.chosen() == $data, confirmed: $parent.featured() != null && $parent.featured().option_id == $data.id }" >
 					<h1 itemprop="name" data-bind="text: $data.name, addClass: $data.name.toLowerCase()">
@@ -105,7 +109,6 @@
 			<% end -%>
 
 			<div class="footer" >
-				<meta itemprop="url" content="<%= choice.to_url%>" />
 				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Read All Comments</a>
 				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() ">Load More Comments</a>
 			</div>
