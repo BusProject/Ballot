@@ -54,7 +54,7 @@ class ChoiceController < ApplicationController
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
 
-    @choices = @user.choices.sort_by{ |choice| [ ['Federal','State','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
+    @choices = @user.choices.sort_by{ |choice| [ ['Federal','State','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
     @classes = 'profile home'
     @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide'
     @type = 'Voter Guide'
@@ -70,7 +70,7 @@ class ChoiceController < ApplicationController
 
   def state
     
-    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order( [ ['Federal','State','County','Other','Ballot_Statewide'].index( :contest_type), :geography  ]  ).limit( 200 ).offset( params[:page] || 0 )
+    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order( [ ['Federal','State','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( :contest_type), :geography  ]  ).limit( 200 ).offset( params[:page] || 0 )
 
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
 
@@ -79,7 +79,7 @@ class ChoiceController < ApplicationController
     if params[:format] == 'json'
       render :json => @choices.to_json( json_include )
     else
-      @types = Choice.where('geography LIKE ?', params[:state]+'%' ).select("DISTINCT( contest_type)").sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide'].index( c.contest_type) }.map{ |c| c.contest_type }
+      @types = Choice.where('geography LIKE ?', params[:state]+'%' ).select("DISTINCT( contest_type)").sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( c.contest_type) }.map{ |c| c.contest_type }
 
       @states = Choice.states
       @stateAbvs = Choice.stateAbvs
@@ -108,8 +108,8 @@ class ChoiceController < ApplicationController
     @classes = 'single home'
     @title = @choice.contest
     @partial = @choice.contest_type.downcase.index('ballot').nil? ? 'candidate/front' : 'measure/front'
-    @type = @partial == 'candidate' ? 'Elected Office' : 'Ballot Measure'
-    @message = @partial == 'measure' ? @choice.description : 'An election for '+@choice.contest+' between '+@choice.options.map{|o| o.name+'('+o.party+')' }.join(', ')
+    @type = @partial == 'candidate/front' ? 'Elected Office' : 'Ballot Measure'
+    @message = @partial == 'measure/front' ? @choice.description : 'An election for '+@choice.contest+' between '+@choice.options.map{|o| o.name+'('+( o.party || '' )+')' }.join(', ')
 
     result = {:state => 'single', :choices => [ @choice ].each{ |c| c.prep current_user } }
 
