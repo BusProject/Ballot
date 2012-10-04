@@ -8,6 +8,7 @@
 <% else %>
 	<%= render :partial => ['choice',params[:type],'newForm'].join('/') %>
 	<p>Warning: Once you create this object - you will not be able to edit it. So make sure it's perfect. It will appear on your <a href="<%= current_user.profile %>">voter guide</a> and on the appropriate State page under 'User Created' section</p>
+	<p>Ballot Measures and Candidates that are fictitious (not really on the 2012 ballot), duplicates of existing measures or candidates, or deemed misleading will be removed without notice</p>
 	<script type="text/javascript">
 	$(document).on('submit','#new_choice', function(e) { 
 		var success = true
