@@ -12,10 +12,7 @@ Ballot::Application.routes.draw do
   match '/users/auth/:provider/callback' => 'authentications#create'
 
   match '/users/add/:type' => 'choice#new', :via => :get, :type => /candidate|measure/ , :as => 'user_add_choice'
-  match '/users/add' => 'choice#new', :via => :post, :as => 'user_create_choice'
-
-  match '/users/add/:id' => 'choice#add', :via => :get, :as => 'user_add_other_choice'
-  match '/users/add/:id' => 'choice#update', :via => :post, :as => 'user_update_choice'
+  match '/users/add' => 'choice#create', :via => :post, :as => 'user_create_choice'
 
   match '/admin' => 'admin#index', :as => 'admin'
   match '/admin/find/:object/' => 'admin#find', :as => 'admin_find' #, :via => :post

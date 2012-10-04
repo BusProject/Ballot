@@ -16,32 +16,45 @@ class ChoiceController < ApplicationController
     
     @choice = Choice.new( :contest_type => params[:type] == 'measure' ? 'User_Ballot' : 'User_Candidate' )
 
-    @config =  { :state => 'single' }.to_json
+    @config =  { :state => 'not' }.to_json
 
-    render :template => 'choice/new.html.erb'
+    render :template => 'choice/add.html.erb'
   end
   
   
   def create
-    
+    if current_user.nil?
+      render :text => 'no'
+    else
+      @states = Choice.states
+      @abvs = Choice.stateAbvs
+      geography = [@abvs[ @states.index( params[:choice][:geography] ) ],'User',current_user.id.to_s,Time.now.to_i.to_s].join('_')
+      
+      if params[:choice][:contest_type] == 'User_Candidate'
+        @choice = Choice.new( 
+          :contest => params[:choice][:contest],  
+          :geography => geography,
+          :contest_type => params[:choice][:contest_type],
+          :options_attributes => params[:choice][:options_attributes]
+        )
+      else
+        params[:choice][:options_attributes].each{ |k,v| v[:blurb_source] = params[:choice][:blurb_source] }
+        @choice = Choice.new( 
+          :contest => params[:choice][:contest],
+          :description => params[:choice][:description],
+          :geography => geography,
+          :contest_type => params[:choice][:contest_type],
+          :options_attributes => params[:choice][:options_attributes]
+        )
+      end
+      if @choice.save
+        redirect_to contest_path( @choice.geography, @choice.contest.gsub(' ','_'))
+      else
+        redirect_to user_add_choice_path, :error => @choice.errors
+      end
+    end
   end
 
-   
-  
-  def add
-    @choice = Choice.includes( :options ).find(params[:id])
-    
-
-    
-    render :template => 'choice/_form', :layout => false
-  end
-
-  def update
-    @choice = Choice.find(params[:id])
-    @choice.update_attributes( params[:choice] )
-    render :json => { :option => @choice.options, :params => params}
-  end
-  
   
   def profile
     
