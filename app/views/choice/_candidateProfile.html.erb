@@ -36,7 +36,7 @@
 				<%= '"'+feedback.comment+'"' %>
 			<% end -%>
 		</p>
-		<div class="head" data-bind="addClass: $data.<%= userObj %>.type, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 1 ">
+		<div <%= raw 'style="display: none;"' if feedback.comment.nil?  || feedback.comment.empty?  %> class="head" data-bind="addClass: $data.<%= userObj %>.type, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 1 ">
 			<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
 		</div>
 	</div>
