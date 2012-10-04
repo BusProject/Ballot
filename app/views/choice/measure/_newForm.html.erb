@@ -1,0 +1,49 @@
+<%= form_for @choice, :method => "post", :url =>  {:controller => "choice", :action => "create" } do |form| %>
+	<%= form.hidden_field :contest_type %>
+	<h2>Add Missing Ballot Measure</h2>
+	<div>
+		<h3>Ballot Measure Name</h3>
+		<%= form.text_field :contest, { :class => 'required' } %>
+	</div>
+	<div>
+		<h3>Full Text</h3>
+		<p>A link to the official text</p>
+		<input name="choice[blurb_source]" class="required" >
+	</div>
+	<div>
+		<h3>Description</h3>
+		<%= form.text_area :description, { :class => 'required' } %>
+	</div>
+
+	<div>
+		<h3>State</h3>
+		<%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %>
+	</div>
+	
+
+	<div id="options">
+			<div class="option yes">
+				<h3>Affirmative Vote</h3>
+				<select name="choice[options_attributes][0][name]" >
+					<% ['yes','support','affirm','for','maintained','approved','approve'].each do |option| %>
+						<option><%= option.capitalize %></option>
+					<% end %>
+				</select>
+				<h4>Consequences of this vote</h4>
+				<textarea name="choice[options_attributes][0][blurb]" class="required"></textarea>
+			</div>
+			<div class="option no">
+				<h3>Negative Vote</h3>
+				<select name="choice[options_attributes][1][name]" >
+					<% ['no','deny','affirm','against','reject','repealed','rejected'].each do |option| %>
+						<option><%= option.capitalize %></option>
+					<% end %>
+				</select>
+				<h4>Consequences of this vote</h4>
+				<textarea name="choice[options_attributes][1][blurb]" class="required"></textarea>
+			</div>
+	</div>
+
+	<%= submit_tag 'Add to Your Voter Guide'  %><!-- This is the submit button -->
+<% end %>
+

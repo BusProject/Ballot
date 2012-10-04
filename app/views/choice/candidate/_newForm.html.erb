@@ -1,7 +1,54 @@
 <%= form_for @choice, :method => "post", :url =>  {:controller => "choice", :action => "create" } do |form| %>
+	<%= form.hidden_field :contest_type %>
 	<h2>Add Missing Candidate</h2>
-	<h3>Office Name</h3>
-	<%= form.text_field :contest %>
-	
+	<div>
+		<h3>Office Name *</h3>
+		<%= form.text_field :contest, { :class => 'required' } %>
+	</div>
+
+	<div>
+		<h3>State</h3>
+		<%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %>
+	</div>
+	<!-- ko stopBinding: true -->
+		<div id="options">
+			<!-- ko foreach: options -->
+				<div class="option">
+					<h3>Candidate</h3>
+					<div>
+						<label>Name *</label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][name]'   } " class="required">
+					</div>
+					<div >
+						<label>Party</label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][party]'   } ">
+					</div>
+					<div>
+						<label>Website</label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][website]'   } ">
+					</div>
+					<div>
+						<label>Facebook</label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][facebook]'   } ">
+					</div>
+					<div>
+						<label>Twitter</label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][twitter]'   } ">
+					</div>
+					<span class="link" data-bind="click: function() { op.removeOption( $data ); return false;} " >X</span>
+				</div>
+			<!-- /ko -->
+			<button data-bind="click: function() { op.addOption(); return false; }">Add</button>
+		</div>
+	<!-- /ko -->
 	<%= submit_tag 'Add to Your Voter Guide'  %><!-- This is the submit button -->
 <% end %>
+
+<script type="text/javascript">
+	var op = {
+		options: ko.observableArray( [ new Date().getTime() ] ),
+		addOption: function() { op.options.push( new Date().getTime() ); },
+		removeOption: function(option) { op.options.remove( option ); }
+	}
+	$(document).ready( function() {  ko.applyBindings( op, document.getElementById("options")); })
+</script>

@@ -1,0 +1,27 @@
+
+<%- if current_user.nil? %>
+	<div class="yourFeedback login">
+		<h2>Add a Missing Ballot Measure or Candidate</h2>
+		<p>You must be logged in through Facebook to use this feature</p>
+		<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook)  %>
+	</div>
+<% else %>
+	<%= render :partial => ['choice',params[:type],'newForm'].join('/') %>
+	<p>Warning: Once you create this object - you will not be able to edit it. So make sure it's perfect. It will appear on your <a href="<%= current_user.profile %>">voter guide</a> and on the appropriate State page under 'User Created' section</p>
+	<script type="text/javascript">
+	$(document).on('submit','#new_choice', function(e) { 
+		var success = true
+		$('.required',this).each( function() { 
+			var $this = $(this)
+			if( $this.val().length < 1 )  {
+				success = success && false
+				$this.parent().addClass('oops')
+			}
+			
+		})
+		
+		if( success ) return confirm('Are you sure you want to create this?')
+		else return false;
+	})
+	</script>
+<% end %>
