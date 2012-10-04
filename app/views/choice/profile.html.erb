@@ -269,8 +269,17 @@
 				<% n+=1%>
 			<% end %>
 		</div>
-
 	<% end %>
+	<%- if current_user == @user %>
+		<div id="more-coming"  class="ballot-section"  >
+			<h1>Is something missing?</h1>
+			<div class="category-heading minor">
+					<a href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
+					<a href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
+			</div>
+		</div>
+	<% end -%>
+
 
 	<% if @choices.length == 0 && @user != current_user %>
 		<p></p>
