@@ -120,6 +120,7 @@ EOF
       results += User.where( "deactivated = ? AND banned = ? AND (lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR id = ?)",false,false, prepped, prepped, prepped, id ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } }
       results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } }
       results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } }
+      results += Choice.states.reject{ |c| c.downcase.index( params[:term].downcase ).nil? }.map{ |state| { :label => state+"'s Full Ballot", :url => ENV['BASE']+'/'+Choice.stateAbvs[ Choice.states.index(state) ] }   }
     end
     render :json => results
   end
