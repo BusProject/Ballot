@@ -273,6 +273,16 @@ function locationModel(data) {
 			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Page<br>'+makeShare(url)+'</div>')
 		)
 	}
+	if( this.state == 'guides' ) {
+		var url = document.location.toString()
+		
+		
+		this.menuItems.push( 
+			MenuItem(inits.root,'Find Your Ballot'),
+			MenuItem('#read-ballot','Guides By States','<ul>'+inits.states.map( function(el) { return '<li><a href="#'+el.replace(/ /g,'_')+'">'+el+'</a></li>' }).join("\n")+'</ul>',null),
+			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Page<br>'+makeShare(url)+'</div>')
+		)
+	}
 	if( this.state == 'profile' ) {
 		var ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'),
 			federalCandidates = Grouping(['Federal'],'Federal','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'),

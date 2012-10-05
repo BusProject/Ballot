@@ -123,6 +123,17 @@ EOF
     end
     render :json => results
   end
+
+  def guides
+    @guides = User.by_state
+    @classes = 'home profile'
+    @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] }.sort }.to_json
+    
+    if params[:state]
+      state = params[:state].length == 2 ? Choice.states[Choice.stateAbvs.index(params[:state])].gsub(' ','_') : params[:state].capitalize.gsub(' ','_')
+      redirect_to guides_path+'#'+state
+    end
+  end
   
   def sitemap
     stateAbvs = Choice.stateAbvs
