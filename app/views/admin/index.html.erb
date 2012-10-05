@@ -89,6 +89,10 @@
 		$('#find_choice').val('')
 		e.preventDefault();
 	})
+	.on('click','.delete_choice',function(e) {
+		$this = $(this)
+		if( confirm('Are you Sure?') ) $.post( $this.attr('href'), function(r) { console.log(r); $this.parent('li').remove();} )
+	})
 </script>
 <h1>Admin Section</h1>
 
@@ -138,6 +142,14 @@
 	<% end -%>
 </ul>
 <p><input id="unapprove_feedback" placeholder="Unapprove Something: Search by comment or user" ></p>
+<h2>User Generated Choices</h2>
+<ul >
+<% @userGenerated.each do |choice| %>
+	<li><%= link_to choice.contest,choice.to_url  %> <span class="delete_choice link" href="<%= choice_delete_path(choice.id) %>">Delete?</span></li>
+<% end %>
+<%= 'None created yet ' if @userGenerated.empty? %>
+</ul>
 <h2>Edit Choices / Options</h2>
 <p><input id="find_choice" placeholder="Edit Something: Search by contest name or option name" ></p>
 <div class="choice_form"></div>
+

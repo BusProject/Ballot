@@ -20,6 +20,7 @@ Ballot::Application.routes.draw do
   match '/admin/ban/:id' => 'admin#ban', :as => 'user_ban', :via => :post
   match '/admin/choice/:id' => 'admin#choice_edit', :as => 'choice_edit', :via => :get
   match '/admin/choice/:id' => 'admin#choice_update', :as => 'choice_update', :via => :post
+  match '/admin/choice/:id/delete' => 'admin#choice_delete', :as => 'choice_delete', :via => :post
   match '/admin/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
 
 
