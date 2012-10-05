@@ -102,7 +102,7 @@
 				<%- if !@user.nil? && !@user.header.nil? && @user.header.url(:header) != '/headers/header/missing.png' %>
 					<%= link_to image_tag( @user.header.url(:header) ), root_path, :id => 'logo' %>
 				<% else %>
-					<%= link_to image_tag( asset_path( 'theballot.png' ) ), root_path, :id => 'logo' %>
+					<%= link_to image_tag( asset_path( 'logo.jpg' ) ), root_path, :id => 'logo' %>
 				<% end %>
 			</div> <!-- header -->
 
