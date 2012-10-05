@@ -6,7 +6,7 @@
 
 	<div id="<%=  @states [ @stateAbvs.index( stateAbv )  ].gsub(' ','_') %>" class="sectionheading">
 			<h1><%= @states [ @stateAbvs.index( stateAbv )  ] %>'s Voter Guides</h1>
-			<p>All of Oregon's candidates and ballot measures.</p>
+			<p>All of <%= @states [ @stateAbvs.index( stateAbv )  ] %>'s Voter Guides - ranked by usefulness.</p>
 	</div>
 		
 			<% guides.group_by{ |g| g }.map{|u| u[0].rating = u[1].map{ |r| r.rating}.sum; u[0] }.sort_by{ |u| -u.rating }.each do |guide| %>
