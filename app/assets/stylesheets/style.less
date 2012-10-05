@@ -33,7 +33,7 @@ body.home {
 	
 	hr {
 		width: 70%;
-		border: 1px dashed @green;
+		border: 1px dashed @accent;
 		margin-bottom: 20px;
 	}
 	p {
@@ -47,7 +47,7 @@ body.home {
 	
 	a {
 		font-size:11px;
-		color:@green;
+		color:@accent;
 		&.state { margin-right:10px; }
 	}
 	
@@ -84,7 +84,7 @@ body.home {
 		padding:15px 0px;
 		font-size: 24px;
 		color: white;
-		background-color:@green;
+		background-color: @accent;
 		font-family:"Open Sans", serif;
 		.drop-shadow(0,2px,2px,0,.2);
 		.border-radius(5px);
@@ -95,7 +95,7 @@ body.home {
 			&:before {
 				content:"\f0d7";
 				font-family:"FontAwesome";
-				color:@green;
+				color:@accent;
 				position:absolute;
 				bottom:-18px;
 				left: 333px;
@@ -164,12 +164,12 @@ body.home {
 		 	margin: 25px auto 15px;
 			-webkit-appearance:none;
 			padding: 13px 10px;
-			border: 1px solid @green;
+			border: 1px solid @accent;
 			.box-shadow(inset 0px 1px 1px 0px rgba(0,0,0,.3) );
-			color: @green;
+			color: @accent;
 			outline:none;
 			.border-box;
-			.placeholder(#8eb636);
+			.placeholder(@accent);
 			.inner-shadow();
 			
 		}
@@ -206,7 +206,7 @@ body.home {
 		img {
 			width: 620px;
 			margin: 0 auto;
-			border:1px solid #99C337;
+			border:1px solid @accent;
 		}
 	}
 }
