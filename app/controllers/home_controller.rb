@@ -94,7 +94,7 @@ class HomeController < ApplicationController
          <p><strong><a href="https://twitter.com/notsterno" target="_blank">Sarah Stern</a></strong></p>
          <!--<p>Sarah bio</p>-->
          <p><strong><a href="https://twitter.com/sampatton" target="_blank">Sam Patton</a></strong></p>
-         <p><strong><a href="https://twitter.com/montuckyliberal" target="_blank">Matt Singer</a></strong></p>
+         <p><strong><a href="https://twitter.com/mattsinger7" target="_blank">Matt Singer</a></strong></p>
          <!--<p>Matt Bio</p>-->         
 EOF
 
