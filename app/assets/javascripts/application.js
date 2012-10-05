@@ -15,7 +15,12 @@
 var yourLocation = new locationModel(inits);
 
 window.onload = function() {
-	document.location.hash = '' // Clearing dumb facebook thing
+	if( document.location.hash.length > 1 ){
+		var pos = $( document.location.hash ).position(),
+			top = ( pos || {top:0} ).top-40 
+		document.location.hash = ''
+		$(document).scrollTop( top )
+	} // Clearing dumb facebook thing
 	$('body').removeClass('no-script') //Fixing body class
 	initialize() // This loads goelocation / facebook friends
 	$('.clean-no-script').remove() // Removing non-necessary elements that knockout will just rebuild
