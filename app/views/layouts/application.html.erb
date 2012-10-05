@@ -129,18 +129,22 @@
 
 		<div id="footer">
 			<hr />
-			<p>TheBallot.org is brought to you by the League of Young Voters, New Era Colorado, Forward Montana, and the Bus Project.</p>
-			<p style="margin-bottom:0px;"><strong>BALLOTS BY STATE</strong></p>
+			<p style="margin: 10px 0 0;"><strong>BALLOTS BY STATE</strong></p>
 			<% @states = Choice.states %>
 			<% @states.shift %>
 			<% @statesAbvs = Choice.stateAbvs %>
 			<% n = 1 %>
 
 			<% @states.each do |state| %>
-				<a href="<%= ENV['BASE']+'/'+@statesAbvs[n] %>" class="<%= 'active' if @state == state %>"><%= state %></a>
+				<a href="<%= ENV['BASE']+'/'+@statesAbvs[n] %>" class="state <%= 'active' if @state == state %>"><%= state %></a>
 				<% n += 1 %>
 			<% end %>
-
+			<p style="font-size: 9px; margin-top: 20px;">
+				<p>TheBallot.org is brought to you by the <a href="http://theleague.com" target='_blank'>League of Young Voters</a>, <a href="http://neweracolorado.org" target='_blank'>New Era Colorado</a>, <a href="http://forwardmontana.org" target='_blank'>Forward Montana</a>, and the <a href="http://busproject.org" target='_blank'>Bus Project</a>.</p>
+				<%= link_to 'Terms of Service', terms_path %>
+				|&nbsp;&nbsp;
+				<%= link_to 'Privacy Policy', privacy_path %>&nbsp;
+			</p>
 		</div><!-- footer -->
 		<div id="meme-cova"></div>
 		<div id="meme-tainer">
