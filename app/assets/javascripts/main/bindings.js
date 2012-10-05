@@ -53,7 +53,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		e.preventDefault()
 	} else if( href[0] == '#' ) {
 		var top = $(href).position().top-40
-		e.preventDefault()
 		$(document).scrollTop( top ).trigger('scroll')
 		e.preventDefault()
 	}
