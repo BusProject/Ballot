@@ -1,4 +1,4 @@
-Ballot::Application.routes.draw do
+Nov6::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, skip: :registrations
   devise_scope :user do
     resource :registration,

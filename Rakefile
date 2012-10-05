@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Ballot::Application.load_tasks
+Nov6::Application.load_tasks
