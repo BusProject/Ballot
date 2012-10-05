@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
     def most_recent
       all( :order => 'updated_at DESC', :limit => 1).first
     end
+    def rating
+      all( :select => 'SUM( "feedback"."cached_votes_up" - "feedback"."cached_votes_down") AS rating' ).first.rating
+    end
   end
   has_many :memes, :through => :feedback
   has_many :options, :through => :feedback
