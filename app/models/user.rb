@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   
   # Method to see if profile name is free
   def check_profile
-    unless self.profile.nil?
+    if !self.profile.nil? && self.profile.gsub('/','') != self.to_url.gsub('/','')
       self.profile = self.profile.gsub('/','')
       id = self.profile.to_i(16).to_s(16) == self.profile ? self.profile.to_i(16).to_s(10).to_i(2).to_s(10).to_i(10) : 0
       safe = true 
@@ -63,6 +63,8 @@ class User < ActiveRecord::Base
       notstate = self.profile =~ /AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|users|admin|lookup|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008|resources/
       safe = notstate.nil? && safe
       errors.add( :profile, 'is not unique' ) unless User.where('(id = ? OR profile = ?)  AND id != ?',id,self.profile,self.id).empty? && safe
+    else
+      self.profile = nil
     end
   end
   
