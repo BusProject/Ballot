@@ -120,7 +120,7 @@ EOF
     end
     render :json => results
   end
-<<<<<<< HEAD
+
     def privacy
        @classes = 'home msg'
        @config = { :state => 'page' }.to_json
