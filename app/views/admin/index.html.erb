@@ -10,7 +10,7 @@
 							clone = document.createElement('li');
 							clone.innerHTML = '<img><a class="profile"></a><br/><a class="email"></a>';
 						}
-						$('img',clone).attr('src',response.user.image); 
+						$('img',clone).attr('src',response.user.image).parent('a').attr('href',response.user.profile); 
 						$('a.profile',clone).attr('href',response.user.profile).text(response.user.name);
 						$('a.email',clone).attr('href','mailto:'+response.user.email).text(response.user.email);
 						$('.admin').append(clone)
@@ -95,9 +95,9 @@
 <h2>Admins</h2>
 <ul class="users admin">
 	<%- @admins.each do |user| %>
-		<li><%= link_to image_tag(user.image), user.to_url %>
-			<%= link_to user.name, user.to_url %><br />
-			<%= link_to user.email, 'mailto:'+user.email %>
+		<li><%= link_to image_tag(user.image), user.to_url,  %>
+			<%= link_to user.name, user.to_url, :class => 'profile' %><br />
+			<%= link_to user.email, 'mailto:'+user.email, :class => 'email' %>
 		</li>
 	<% end -%>
 </ul>
