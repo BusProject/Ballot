@@ -1,0 +1,13 @@
+> set up dev instance
+x	~ adding data
+	~ creating users
+
+> style and C3-itize
+	~ new styles
+	~ only comments when it is commentable
+
+> deploy
+	~ fork officially github
+	~ create heroku instance
+	~ download fresh Choice/Option data > upload new data
+	~ answer AWS/Cicero questions
