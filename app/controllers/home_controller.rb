@@ -138,22 +138,24 @@ EOF
   
   def sitemap
     stateAbvs = Choice.stateAbvs
-    newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at.to_date
+    newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at
+    newwest_feedback = Feedback.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['approved = ?',false] ).first.updated_at
+
     
     @urls = [
-        { :url => ENV['BASE']+'/about', :updated => 'Thu, 04 Oct 2012'},
-        { :url => ENV['BASE']+'/guides', :updated => newwest_user  }
+        { :priority => '0.3', :url => ENV['BASE']+'/about', :updated => 'Thu, 04 Oct 2012'},
+        { :priority => '0.3', :url => ENV['BASE']+'/guides', :updated => newwest_user > newwest_feedback ? newwest_user.to_date : newwest_feedback.to_date  }
       ]
-    @urls += (1..50).map{ |i| {:url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
+    @urls += (1..50).map{ |i| { :priority => '0.4', :url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
 
     @urls += User.active.map do |user| 
       updated = user.updated_at > user.feedback.most_recent.updated_at ? user.updated_at : user.feedback.order('updated_at DESC').limit(1).first.updated_at
-      { :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
+      { :priority => '0.8', :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
     end
 
-    @urls += Choice.all.map{ |c| { :url => c.to_url, :updated => c.updated_at.to_date } } 
+    @urls += Choice.all.map{ |c| { :priority => '1.0', :url => c.to_url, :updated => c.updated_at.to_date } } 
     
-    if params[:format]
+    if params[:format] == 'json'
       render :json => @urls.count 
     else
       render :template => 'home/sitemap'
