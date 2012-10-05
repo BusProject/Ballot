@@ -127,7 +127,7 @@ EOF
   def guides
     @guides = User.by_state
     @classes = 'home profile'
-    @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] }.sort }.to_json
+    @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] } }.to_json
     
     if params[:state]
       state = params[:state].length == 2 ? Choice.states[Choice.stateAbvs.index(params[:state])].gsub(' ','_') : params[:state].capitalize.gsub(' ','_')
