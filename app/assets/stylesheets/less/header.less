@@ -30,7 +30,6 @@
 	.border-box();
 	border-radius:2px;
 	font-weight:400;
-	font-size: .7em;
 	text-align: right;
 	z-index:98;
 	
@@ -50,35 +49,39 @@
 
 			li {
 				float:left;
-				line-height:20px;
+				line-height:24px;
 				display:block;
-				font-size:10px;
+				font-size: 13px;
 				color:white;
 				text-shadow: 0px -1px 0px darken(@sideGrey,30%);
 				border-right:1px solid darken(@sideGrey,10%);
 				border-left:1px solid lighten(@sideGrey,10%);
 				text-align:center;
-				
 				&:first-child { border-left: none; }
 				&:last-child { border-right: none; }
-				
-				
 				ul { 
 					display: none; 
 					position: absolute;
 					padding: 4px 0 0;
 					margin:-2px;
-					
+					&.accounts li { 
+						width: 140px;
+						margin-left: 0;
+						text-align: left;
+						&:last-child { 
+							padding:5px 5px; 
+							text-align:center;
+						}
+					}
 					li {
 						text-align: left;
-						margin:0px 0 0 0;
+						margin: 0px 0 0 8px;
 						border-top:1px solid lighten(@sideGrey,5%);
 						border-bottom:1px solid darken(@sideGrey,5%);
 						border-left:1px solid darken(@sideGrey,5%);
 						border-right:1px solid darken(@sideGrey,5%);
 						line-height: 1em;
 						padding: 5px 5px;
-						width: 120px;
 						clear: both;
 						font-size: 100%;
 						text-shadow:none;
@@ -86,8 +89,6 @@
 						
 						&:last-child { 
 							border-right: 1px solid darken(@sideGrey,5%) !important;
-							padding:5px 5px; 
-							text-align:center;
 						}
 						
 						&:first-child {
@@ -116,6 +117,7 @@
 							
 							
 						}
+
 					}
 					
 				}
@@ -157,6 +159,10 @@
 		ul { 
 			li{
 				&:last-child { border-right: none; }
+				&.guide {
+					width: 133px;
+					ul li { width: 110px }
+				}
 			}
 		}		
 			
@@ -165,7 +171,10 @@
 
 	.right-nav {
 		float:right;
-
+		ul li.about {
+			width: 100px;
+			ul li { width: 77px }
+		}
 
 
 	}
