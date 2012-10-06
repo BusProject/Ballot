@@ -39,7 +39,8 @@
 					<p class="label">Voter Guide Title</p> <input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
 					<p class="label">Voter Guide Description</p> <textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
 
-					<p class="label">Custom URL</p> http://theballot.org/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="Your New URL"  >
+					<p class="label">Custom URL</p> http://november6th.org/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="Your New URL"  >
+					
 					<span class="url-searching" data-bind="visible: profile.checking() "><i class="icon-search"></i> Searching... </span><span class="url-available" data-bind="visible: profile.available() && !profile.checking() "><i class="icon-ok-sign"></i> Available! </span><span class="url-taken" data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null "><i class="icon-exclamation-sign"></i> Taken! </span>
 					<br />
 
@@ -195,7 +196,7 @@
 
 				$(document).ready( function() { 
 					ko.applyBindings( current_user, document.getElementById("profile")); 
-					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>'); $(this).parent().after('<em>Problem loading your header. Should be back soon. If this persists - reupload.</em>') });
+					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'logo.jpg' )%>'); $(this).parent().after('<em>Problem loading your header. Should be back soon. If this persists - reupload.</em>') });
 				}).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
 					$('.edit_user .loading').hide()
 					// Only when it's remotipart. There's probably a better way to do this but I can't figure it out now
@@ -223,7 +224,7 @@
 				$(document).ready( function() {
 					current_user = inits.user
 					ko.applyBindings( current_user, document.getElementById("profile")); 
-					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>') });
+					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'logo.jpg' )%>') });
 				})
 			</script>
 		
@@ -243,7 +244,7 @@
 
 		<div class="sectionheading"><h1 data-bind="visible: true || console.log( [name+'\'s','Voter Guide'].join(' ') ),text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
 			<p class="description" data-bind=" text: description"><%= @user.description %></p>
-		<p style="font-size:12px;">Powered by TheBallot.org</p>
+		<p style="font-size:12px;">Powered by November6th.org</p>
 		</div>
 
 	</div>

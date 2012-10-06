@@ -76,14 +76,14 @@ class HomeController < ApplicationController
     @config = { :state => 'page' }.to_json
     @title = 'About'
     @content = <<EOF
-         <h1>About TheBallot.org</h1>
-         <p>TheBallot.org is the 100% social voter guide brought to you by the <a href='http://www.theleague.com/splash'>League of Young Voters</a>, <a href='http://www.neweracolorado.org'>New Era Colorado</a>, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
-         <p>Some cool stuff about TheBallot.org:</p>
+         <h1>About november6th.org</h1>
+         <p>november6th.org is the 100% social voter guide brought to you by the <a href='http://www.theleague.com/splash'>League of Young Voters</a>, <a href='http://www.neweracolorado.org'>New Era Colorado</a>, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
+         <p>Some cool stuff about november6th.org:</p>
          <ul>
           <li>This is a crowdsourced voter guide. The content and order in which it appears is determined by the wisdom of the masses, not by political powerbrokers.</li>
           <li>This is open-source software. Our commitment to crowdsourcing doesn't stop with ballot measures. We've built this software open source so that others can modify and improve it. Want to check it out? <a href='http://github.com/busproject/ballot' target='_blank'>Here's our GitHub repo</a> - fork away! Want to help? Let us know.</li> 
           <li>We're also utilizing and supporting the Voter Information Project so that other similar projects can piece together the relevant and accurate ballot information for free.</li>
-          <li>For the latest updates on new features, please <a class="link" target='_blank' href="http://theballot.tumblr.com/">visit our Tumblr</a>.</li>
+          <!--<li>For the latest updates on new features, please <a class="link" target='_blank' href="http://theballot.tumblr.com/">visit our Tumblr</a>.</li>-->
          </ul>
          <a class='about-button' href='/'>Find Your Ballot</a>
 
@@ -128,12 +128,12 @@ EOF
        @title = 'About'
        @content = <<EOF
        <h1>Privacy Policy</h1>
-       <p>The League of Young Voters and The Bus Federation (collectively, "we" or "us") are committed to preserving your privacy and safeguarding the personal and/or sensitive information you provide to us via any of our websites. This commitment is demonstrated by the terms of this Privacy Policy.</p>
+       <p>The League of Young Voters Education Fund and The Bus Federation Civic Fund (collectively, "we" or "us") are committed to preserving your privacy and safeguarding the personal and/or sensitive information you provide to us via any of our websites. This commitment is demonstrated by the terms of this Privacy Policy.</p>
        <p>We reserve the right to modify this Privacy Policy from time to time. The date of the latest revision will be listed at the bottom of the Policy. We encourage you to check this page each time you visit one of our websites so that you will know if the Policy has changed since you last visited the site. Your use of our websites indicates your acceptance to be bound by the terms of the Privacy Policy in effect as of the date of your use. If you do not agree to be bound by the terms of the Privacy Policy, do not use our websites.</p>
 
        <h1>Our Collection of Personal information</h1>
 
-       <p>We do not collect personally identifiable information about individual users unless a user voluntarily provides such information to us, either directly or by agreeing to the terms and conditions if logging onto one of our sites through Facebook. We store any information that you provide, such as your name, mailing address or email address, using secure servers. We may share your information with third party vendors who use your information for the sole purpose of fulfilling your request (e.g., charging your donation). Each of our vendors has agreed to keep your information confidential from disclosure to others. We may also share your information between ourselves (in other words, between the League of Young Voters and The Bus Federation). We may share anonymized information with independent researchers to better understand how people use this site. In addition, we will cooperate with law enforcement, which may include disclosing some of your personal information if necessary. We will never sell any of your personal information to any third party. And we will never post any of your personal information online without your consent.</p>
+       <p>We do not collect personally identifiable information about individual users unless a user voluntarily provides such information to us, either directly or by agreeing to the terms and conditions if logging onto one of our sites through Facebook. We store any information that you provide, such as your name, mailing address or email address, using secure servers. We may share your information with third party vendors who use your information for the sole purpose of fulfilling your request (e.g., charging your donation). Each of our vendors has agreed to keep your information confidential from disclosure to others. We may also share your information between ourselves (in other words, between The League of Young Voters Education Fund or The Bus Federation Civic Fund). We may share anonymized information with independent researchers to better understand how people use this site. In addition, we will cooperate with law enforcement, which may include disclosing some of your personal information if necessary. We will never sell any of your personal information to any third party. And we will never post any of your personal information online without your consent.</p>
 
        <h1>Use of Cookies</h1>
 
@@ -141,7 +141,7 @@ EOF
 
        <h1>Protecting Children's Privacy</h1>
 
-       <p>We are concerned about the safety and privacy of children online. Therefore, we do not and will not knowingly contact or collect personal information from children under 13. It remains possible, however, that we may receive information given to us by or pertaining to children under 13. If we are notified of this, we will promptly delete the information from our servers. If you want to notify us of our receipt of information by or about any child under 13, please email us at <a href="mailto: info@theballot.org">info@theballot.org</a>.</p>
+       <p>We are concerned about the safety and privacy of children online. Therefore, we do not and will not knowingly contact or collect personal information from children under 13. It remains possible, however, that we may receive information given to us by or pertaining to children under 13. If we are notified of this, we will promptly delete the information from our servers. If you want to notify us of our receipt of information by or about any child under 13, please email us at <a href="mailto: info@november6th.org">info@november6th.org</a>.</p>
 
        <h1>Security</h1>
 
@@ -150,7 +150,7 @@ EOF
 
        <h1>Emails</h1>
 
-       <p>You may sign up to receive email communications from us. These emails provide information that we think will be of interest to you, for example, information about new features or content on our sites, or calls for action on certain issues. If you provide us with your email address through some other action on one of our websites, we may add you to your email distribution list. You can always "opt out" of receiving our online communications by following the unsubscribe directions on any of the emails, or by sending us an email at <a href="mailto:info@theballot.org">info@theballot.org</a> asking that we delete you from our email list.</p>
+       <p>You may sign up to receive email communications from us. These emails provide information that we think will be of interest to you, for example, information about new features or content on our sites, or calls for action on certain issues. If you provide us with your email address through some other action on one of our websites, we may add you to your email distribution list. You can always "opt out" of receiving our online communications by following the unsubscribe directions on any of the emails, or by sending us an email at <a href="mailto:info@november6th.org">info@november6th.org</a> asking that we delete you from our email list.</p>
 
        <p>Please recognize that emails are not secure against interception. Therefore, please do not send us sensitive or personal information via email.</p>
 
@@ -162,11 +162,11 @@ EOF
 
        <p>If you have any questions about this Privacy Policy or any of our websites, please contact us at:</p>
 
-       <p>League of Young Voters<br />
+       <p>The League of Young Voters Education Fund<br />
        540 President Street, 3rd Floor<br />
        Brooklyn, NY 11215<br />
        (347) 464-8683<br />
-       <a href="mailto:info@theballot.org">info@theballot.org</a></p>
+       <a href="mailto:info@november6th.org">info@november6th.org</a></p>
 
 
        <p>Last updated: October 5th, 2012</p>
@@ -181,7 +181,7 @@ EOF
        @content = <<EOF
        <h1>Terms of Use</h1>
        
-       <p>Your use of any of the websites owned and operated by the League of Young Voters or The Bus Federation (collectively, "we" or "us") is governed by these Terms of Use. We may modify these Terms of Use from time to time, so we encourage you to check this page each time you revisit one of our websites. The date of the latest revision will be listed below so you will know if the terms have changed since you last accessed the site. Your use of our websites indicates your acceptance to be bound by the provisions of the Terms of Use in effect as of the date of your use. If you do not accept these terms, do not use our websites.</p>
+       <p>Your use of any of the websites owned and operated by The League of Young Voters Education Fund or The Bus Federation Civic Fund (collectively, "we" or "us") is governed by these Terms of Use. We may modify these Terms of Use from time to time, so we encourage you to check this page each time you revisit one of our websites. The date of the latest revision will be listed below so you will know if the terms have changed since you last accessed the site. Your use of our websites indicates your acceptance to be bound by the provisions of the Terms of Use in effect as of the date of your use. If you do not accept these terms, do not use our websites.</p>
         
        <h1>Intellectual Property Rights</h1>
 
@@ -207,7 +207,7 @@ EOF
 
        <h1>Indemnity</h1>
 
-       <p>You agree to defend, indemnify and hold harmless the League of Young Voters and The Bus Federation, their parents, subsidiaries and affiliated organizations, and the officers, directors, employees, members, shareholders, partners, licensees and agents of each of these, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt and expenses (including but not limited to attorney's fees) arising from your use of any of our websites in violation of any term of these Terms of Use.</p>
+       <p>You agree to defend, indemnify and hold harmless The League of Young Voters Education Fund or The Bus Federation Civic Fund, their parents, subsidiaries and affiliated organizations, and the officers, directors, employees, members, shareholders, partners, licensees and agents of each of these, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt and expenses (including but not limited to attorney's fees) arising from your use of any of our websites in violation of any term of these Terms of Use.</p>
 
        <h1>Claims of Copyright Infringement</h1>
 
@@ -223,7 +223,7 @@ EOF
 
        <p>Please address your letter as follows:</p>
 
-       <p>League of Young Voters
+       <p>The League of Young Voters Education Fund
        540 President Street, 3rd Floor<br />
        Brooklyn, NY 11215</p>
 
@@ -233,11 +233,11 @@ EOF
 
        <p>If you have any questions about this Privacy Policy or any of our websites, please contact us at:</p>
 
-       <p>League of Young Voters<br />
+       <p>The League of Young Voters Education Fund<br />
        540 President Street, 3rd Floor<br />
        Brooklyn, NY 11215<br />
        (347) 464-8683<br />
-       <a href="mailto:info@theballot.org">info@theballot.org</a></p>
+       <a href="mailto:info@november6th.org">info@november6th.org</a></p>
 
 
        <p>Last updated: October 5th, 2012</p>
