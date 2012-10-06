@@ -218,10 +218,10 @@ function locationModel(data) {
 			countyCandidates = Grouping(['County'],'County','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 		
+		this.sections.push( ballotMeasures)
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
 		this.sections.push( otherCandidates)
-		this.sections.push( ballotMeasures)
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
@@ -245,11 +245,11 @@ function locationModel(data) {
 			countyCandidates = Grouping(['County'],'County','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 		
+		this.sections.push( ballotMeasures)
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
 		this.sections.push( countyCandidates )
 		this.sections.push( otherCandidates)
-		this.sections.push( ballotMeasures)
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
@@ -275,12 +275,12 @@ function locationModel(data) {
 			stateCandidates = Grouping(['State'],'State','candidate',this,'These candidates will represent you in your State\'s government.'),
 			countyCandidates = Grouping(['County'],'County','candidate',this,'These candidates will represent you in your State\'s government.'),
 			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
-		
+
+		this.sections.push( ballotMeasures)
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
 		this.sections.push( countyCandidates)
 		this.sections.push( otherCandidates)
-		this.sections.push( ballotMeasures)
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'

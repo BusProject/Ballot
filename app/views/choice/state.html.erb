@@ -25,7 +25,7 @@
 <% end %>
 
 	<% @types.each do |type| %>
-		<% n = ['Federal','State','County','Other','Ballot_Statewide'].index( type ) %>
+		<% n = ['Ballot_Statewide','Federal','State','County','Other'].index( type ) %>
 		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot Measures' : type %>" data-bind="with: sections()[<%= n %>]">
 
 			<div class="category-heading" >
