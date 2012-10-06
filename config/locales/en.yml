@@ -15,10 +15,10 @@ en:
         missing: 'Is something missing?'
     # Front page specifics
     front:
-     look_ballot: "Look Up What’s On Your Ballot"
-     address_placeholder: 'enter your address here'
-     confirm: 'Is this right?'
-     on_ballot: 'Here’s What Will Be On Your Ballot'
-     more: 'More to Come...'
-     more_text: "This isn\'t your full ballot - we're still adding data "
-     more_login: "Log in through Facebook to get an email when we've added more."
+        look_ballot: "Look Up What’s On Your Ballot"
+        address_placeholder: 'enter your address here'
+        confirm: 'Is this right?'
+        on_ballot: 'Here’s What Will Be On Your Ballot'
+        more: 'More to Come...'
+        more_text: "This isn\'t your full ballot - we're still adding data "
+        more_login: "Log in through Facebook to get an email when we've added more."
