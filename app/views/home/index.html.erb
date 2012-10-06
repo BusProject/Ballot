@@ -8,7 +8,7 @@
 			<div>
 				<input onkeypress="$('.place-holder').hide()" data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="<%= t('front.address_placeholder') %>">
 				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0"><%= t('front.address_placeholder') %></label><![endif]-->
-				<a href="#" class="cancel find-ballot-submit">Submit</a>
+				<a href="#" class="cancel find-ballot-submit"><%= t('site.submit')%></a>
 				</div>
 		
 		</div><!-- enter address -->
