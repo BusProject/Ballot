@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
       :styles => {:header => '860x180#'},
       :storage => :s3, 
       :s3_credentials => {
-        :bucket            => 'the-ballot',
+        :bucket            => 'november-6',
         :access_key_id     => ENV['AWS3'],
         :secret_access_key => ENV['AWS3_SECERET']
       }
