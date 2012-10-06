@@ -23,7 +23,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			$data = ctx.$data,
 			selected = $root.selected()
 
-		$('.selected .body').slideUp(400, function() { $('button.open', this.parentElement).text("Learn More and Comment"); })
+		$('.selected .body').slideUp(400, function() { $('button.open', this.parentElement ).text( $(this).data('button-text') ); })
 
 		if( selected == $data ) {
 			$root.selected(null);
@@ -37,7 +37,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		
 		setTimeout(function() { clearInterval(scrollUp); },1000)
 		
-		$(this).text('Close').nextAll('.body').slideDown(400,function() { 
+		var $button = $(this), buttonText = $button.text()
+		$button.text('Close').nextAll('.body').data('button-text', buttonText ).slideDown(400,function() { 
 			$root.selected($data)
 			clearInterval(scrollUp);
 		})
