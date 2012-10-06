@@ -13,10 +13,15 @@ class Feedback < ActiveRecord::Base
   belongs_to :choice
   has_many :memes
   
+  before_save :check_choice
 
 
   acts_as_votable
 
+  
+  def check_choice
+    return !self.choice.contest_type.index('Ballot').nil?
+  end
   
   def flaggers
     flaggers = self.flag.split(',')

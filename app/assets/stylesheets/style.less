@@ -703,19 +703,6 @@ body.home {
 				overflow-y: auto;
 				.option {
 					padding: 20px 20px 20px 50px;
-					&.chosen::before, &.confirmed::before {
-							content: "\2713";
-							.checkBox()
-					}
-					&.confirmed { 
-						cursor: default;
-						background-color: @green;
-						margin-top:10px;
-						&::before {
-							content: "\2713";
-							color: white;
-						}
-					}
 					height: @optionHeight;
 					margin: 0 auto;
 					width: 520px;
@@ -742,12 +729,6 @@ body.home {
 					}
 					.faces { right: -10px; bottom: (@optionHeight - 20px)/4; width: 230px; height: 72px; }
 					.faces.lessHeads { a img { margin-top: 26px !important; }}
-				}
-				&.chooseable {
-					.option {
-						&:hover::before { content: "\2713"; .checkBox()}
-						cursor: pointer;
-					}
 				}
 			}
 			select.chosen {

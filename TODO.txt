@@ -1,10 +1,12 @@
 > set up dev instance
 x	~ adding data
-	~ creating users
+x	~ creating users
 
 > style and C3-itize
 	~ new styles
-	~ only comments when it is commentable
+	~ new ballot.jpg for social
+	~ new favicon
+x	~ only comments when it is commentable
 
 > deploy
 	~ fork officially github
