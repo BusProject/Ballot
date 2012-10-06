@@ -67,7 +67,7 @@ class ChoiceController < ApplicationController
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
 
-    @choices = @user.choices.sort_by{ |choice| [ ['Federal','State','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
+    @choices = @user.choices.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
     @classes = 'profile home'
     @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide'
     @type = 'Voter Guide'
@@ -83,7 +83,7 @@ class ChoiceController < ApplicationController
 
   def state
     
-    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order( [ ['Federal','State','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( :contest_type), :geography  ]  ).limit( 200 ).offset( params[:page] || 0 )
+    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order( [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( :contest_type), :geography  ]  ).limit( 200 ).offset( params[:page] || 0 )
 
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
 
@@ -135,7 +135,7 @@ class ChoiceController < ApplicationController
     districts = params['q'].nil? ? Cicero.find(params['l'], params[:address] ) : params['q'].split('|')
     
     unless districts.nil?
-      @choices = Choice.find_all_by_geography( districts ).sort_by{ |choice| [ ['Federal','State','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
+      @choices = Choice.find_all_by_geography( districts ).sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
     else
       query = {'success' => false, 'message' => 'Nothing useful was posted'}.to_json
     end
