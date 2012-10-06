@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   
   if Rails.env == "production"
     has_attached_file :header,
-      :styles => {:header => '860x180#'},
+      :styles => {:header => '964x144#'},
       :storage => :s3, 
       :s3_credentials => {
         :bucket            => 'november-6',
@@ -95,7 +95,7 @@ class User < ActiveRecord::Base
       }
   else
     has_attached_file :header,
-      :styles => {:header => '860x180#'}
+      :styles => {:header => '964x144#'}
   end
   
   before_post_process :resize_images
@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
     tempfile = header.queued_for_write[:original]
     unless tempfile.nil?
       dimensions = Paperclip::Geometry.from_file( tempfile )
-      return dimensions.height >= 150 && dimensions.width >= 720
+      return dimensions.height >= 116 && dimensions.width >= 800
     end
   end
   

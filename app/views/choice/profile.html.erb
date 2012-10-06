@@ -50,7 +50,7 @@
 
 					<p class="label" style="margin-top:30px;">Upload a custom header image</p><div id="image-upload"><%= form_for @user, :url => user_update_path, :method => :POST, :html => { :multipart => true }, :remote => true, :format => :json do |form| %>
 						<%= form.file_field :header %><span class="loading" ><i class="icon-copy"></i> Saving... </span><span class="success"><i class="icon-ok-sign"></i> Saved! </span><span class="error" ><i class="icon-exclamation-sign"></i> Error! </span>
-						<p class="small-label">Must at least 860 x 180. Will overwrite your current header.</p>
+						<p class="small-label">Must at least 964 x 144. Will overwrite your current header.</p>
 						<%= form.submit 'Upload' %>
 						<span class="link" data-bind="click: function() { removeHeader() }, visible:  typeof header() != 'undefined' && header() != null && header() != '/headers/header/missing.png'">Remove Header</span>
 					<% end %>
