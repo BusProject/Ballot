@@ -2,4 +2,23 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+    site:
+        yes: 'Yes'
+        no: 'No'
+        submit: 'Submit'
+        save: 'Save'
+        cancel: 'Cancel'
+        loading: 'Loading...'
+        for: 'for'
+        add_canidate: 'Create a new candidate'
+        add_measure: 'Create a new ballot measure'
+        missing: 'Is something missing?'
+    # Front page specifics
+    front:
+     look_ballot: "Look Up What’s On Your Ballot"
+     address_placeholder: 'enter your address here'
+     confirm: 'Is this right?'
+     on_ballot: 'Here’s What Will Be On Your Ballot'
+     more: 'More to Come...'
+     more_text: "This isn\'t your full ballot - we're still adding data "
+     more_login: "Log in through Facebook to get an email when we've added more."

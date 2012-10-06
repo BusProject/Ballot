@@ -1,13 +1,13 @@
 <script type="text/javascript" src='http://maps.googleapis.com/maps/api/js?sensor=true'></script>
 
 	<div id="find-ballot" class="ballot-section">
-			<h1 class="sectionheading">Look Up What’s On Your Ballot</h1>
+			<h1 class="sectionheading"><%= t("front.look_ballot")%></h1>
 
 		<div id="enter-address">
 		
 			<div>
-				<input onkeypress="$('.place-holder').hide()" data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="enter your address here">
-				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0">enter your address here</label><![endif]-->
+				<input onkeypress="$('.place-holder').hide()" data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="<%= t('front.address_placeholder') %>">
+				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0"><%= t('front.address_placeholder') %></label><![endif]-->
 				<a href="#" class="cancel find-ballot-submit">Submit</a>
 				</div>
 		
@@ -16,8 +16,8 @@
 		<div id="map">
 			<img data-bind="attr: { 'src' : map }">
 			<div style="display:none;" class="confirmation" >
-				Is this right?<br />
-				<a href="#read-ballot" class="fixed-link confirm">Yes</a><a href="" class="cancel clear">No</a>
+				<%= t("front.confirm") %><br />
+				<a href="#read-ballot" class="fixed-link confirm"><%= t('site.yes') %></a><a href="" class="cancel clear"><%= t('site.no') %></a>
 			</div>
 		</div><!-- map -->
 
@@ -25,7 +25,7 @@
 
 	
 	<div id="read-ballot"  style="display:none;" class="ballot-section" data-bind="visible: choices.notEmpty()">
-		<h1 class="sectionheading">Here’s What Will Be On Your Ballot</h1>
+		<h1 class="sectionheading"><%= t('front.on_ballot') %></h1>
 
 
 		<!-- ko foreach: sections -->
@@ -39,14 +39,14 @@
 		<!-- /ko -->
 		
 	</div><!-- read-ballot -->
-	<h1 class="sectionheading" style="display:none;" data-bind="visible: !fetch() ">Loading...</h1>
+	<h1 class="sectionheading" style="display:none;" data-bind="visible: !fetch() "><%= t('site.loading') %></h1>
 	<div id="more-coming" style="display:none;" class="ballot-section" data-bind="visible: geolocated() && fetch()" >
-		<h1>More to Come...</h1>
+		<h1><%= t('front.more')%></h1>
 		<div class="category-heading minor">
-			<p>This isn't your full ballot - we're still adding data <span data-bind="text: address.state() ? ' for '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
+			<p><% t('front.more_text')%><span data-bind="text: address.state() ? ' <%= t('site.for') %> '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
 			<br />
 			<%- if current_user.nil? %>
-				<p>Log in through Facebook to get an email when we've added more.</p>
+				<p><%= t('front.more_login')%></p>
 				<br />
 				<a href="" data-bind="attr: {href:  '<%= omniauth_authorize_path('user', :facebook) %>?state='+address.state() }">
 					<%= image_tag 'fb-login.png', :style => 'width:120px'  %>
@@ -56,9 +56,9 @@
 					data-bind="visible: (current_user.alerts == null ? '' : current_user.alerts).search( address.state() ) === -1"
 					onclick="$(this).hide().next().show(); current_user.alerts += yourLocation.address.state()+','; $.post(inits.root+'users/update',{alerts: yourLocation.address.state() } ); ">Update Me When There's More Data</button>
 				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>
-				<p>Is something missing?</p>
-				<a href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
-				<a href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
+				<p><%= t('site.missing') %></p>
+				<a href="<%= user_add_choice_path('candidate') %>"><button ><%= t('site.add_candidate')%></button></a>
+				<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('site.add_candidate')%></button></a>
 			<% end -%>
 		</div>
 	</div>
