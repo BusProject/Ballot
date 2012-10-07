@@ -87,13 +87,19 @@ class User < ActiveRecord::Base
     return self.find_by_sql(['SELECT "users".* FROM "feedback" INNER JOIN "users" ON "users"."id" = "feedback"."user_id" WHERE ("feedback"."approved" = ? AND "users"."banned" != ? AND "users"."deactivated" != ?  ) ORDER BY "feedback"."updated_at"',true,true,true])
   end
 
-  def self.by_state
-    return self.all( 
-      :select => 'DISTINCT( "choices"."geography"), "users".*,  ( "feedback"."cached_votes_up" - "feedback"."cached_votes_down"  ) AS rating  ', 
-      :joins => :choices, 
-      :conditions => ['"choices"."geography" != ?','Prez'], 
-      :order => '"geography", rating DESC'  
-    ).group_by{|c| c.geography.slice(0,2) }
+  def self.by_state(state=nil)
+    if state.nil?
+      return self.all( :select => 'DISTINCT( "choices"."geography"), "users".*,  ( "feedback"."cached_votes_up" - "feedback"."cached_votes_down"  ) AS rating  ', :joins => :choices, :conditions => ['"choices"."geography" != ?','Prez'], :order => '"geography", rating DESC' ).group_by{|c| c.geography.slice(0,2) } 
+    else
+      return self.all( 
+        :group => ' "users"."id" ',
+        :select => '"users".*,  SUM( "feedback"."cached_votes_up" - "feedback"."cached_votes_down"  ) AS rating  ', 
+        :joins => :choices, 
+        :conditions =>['"choices"."geography" LIKE ?',state+'%'], 
+        :order => 'rating DESC',
+        :limit => 5
+      )
+    end
   end
   
   # Header image handling
