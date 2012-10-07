@@ -84,7 +84,7 @@ class ChoiceController < ApplicationController
 
   def state
     
-    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order( [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( :contest_type), :geography  ]  ).limit( 200 ).offset( params[:page] || 0 )
+    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order("contest_type IN('Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot' ) ASC").limit( 50 ).offset( params[:page] || 0 )
 
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
 
