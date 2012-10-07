@@ -1,6 +1,6 @@
 <% choice = choice || Choice.new %>
 
-<a <%= raw 'data-bind=" attr: { href: \'/\'+$data.geography+\'/\'+$data.contest.replace(/ /g,\'_\') }" ' if choice.new_record? %> name="<%= choice.contest %> <%= choice.geography %>"></a>
+<a <%= raw 'data-bind=" attr: { name: $data.contest+\' \'+$data.geography, href: \'/\'+$data.geography+\'/\'+$data.contest.replace(/ /g,\'_\') }" ' if choice.new_record? %> name="<%= choice.contest unless choice.new_record? %> <%= choice.geography unless choice.new_record? %>"></a>
 
 <div class="candidate row"  itemscope itemtype="http://data-vocabulary.org/Thing" >
 

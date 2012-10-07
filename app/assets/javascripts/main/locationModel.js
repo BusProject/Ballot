@@ -256,7 +256,7 @@ function locationModel(data) {
 		this.sections.push( userBallotMeasures )
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
-		layout += '</li></ul></li><!-- /ko --></ul>'
+		layout += '</li></ul></li><!-- /ko --><li style="font-weight: normal; margin: 10px; font-size: 10px;" data-bind="visible: !yourLocation.fetch() "><em>Still loading...</em></li></ul>'
 		
 		var url = document.location.toString(), name = inits.title
 		this.menuItems.push( 
