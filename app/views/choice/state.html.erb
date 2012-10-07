@@ -43,7 +43,7 @@
 			<h1 class="sectionheading" style="display:none;" data-bind="visible: $data.contests().length < 1">Still loading...</h1>
 			
 			<!-- ko foreach: $data.contests.fresh -->
-				<div class="row " data-bind="template: { name: $data.type == 'Ballot_Statwide' ? 'measure' : 'candidate' }"></div>
+				<div class="row " data-bind="template: { name: $data.type == 'Ballot_Statewide' ? 'measure' : 'candidate' }"></div>
 			<!-- /ko -->
 		</div>
 
