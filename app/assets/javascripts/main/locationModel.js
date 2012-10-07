@@ -9,6 +9,7 @@ function locationModel(data) {
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ko.observable('')
 	this.fetch = ko.observable(true)
+	
 	// Style elements
 	this.top = ko.observable(0)
 	this.top.better = ko.computed( function() {
@@ -18,6 +19,7 @@ function locationModel(data) {
 
 	var empty = ''
 
+	// Choices
 	var choices = data.choices || []
 	this.choices = ko.observableArray( choices.map( function(el) { return Choice(el) } ) )
 	this.sections = ko.observableArray([])
@@ -33,8 +35,13 @@ function locationModel(data) {
 	},this)
 
 	this.selected = ko.observable( null )
+
+	// Guides
+	this.guides = ko.observableArray([])
 	
 
+
+	// The menu
 	this.nearby = ko.computed(function() {
 		var top = this.top(), 
 			choices = this.choices.ordered(), 
@@ -152,12 +159,12 @@ function locationModel(data) {
 	this.map = ko.computed( function() { // Used for confirming map location
 		var latlng = this.latlng(),
 			geolocated = this.geolocated(),
-			zoom = geolocated ? '13' : '3',
+			zoom = geolocated ? '12' : '3',
 			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
 		// When map updates - flash the thing
 		if( geolocated ) {
 			$('#map img').flash(.5, 1000)
-			return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=620x340&sensor=true'+marker
+			return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=320x170&sensor=true'+marker
 		}
 		else return '/assets/staticmap.png'
 	}, this)
@@ -169,6 +176,14 @@ function locationModel(data) {
 		}
 	},this)
 
+	this.grabChoices = ko.computed( function() { // Retrieve guides
+		var geolocated = this.geolocated(),
+			state = this.address.state()
+			
+		if( geolocated && state ) this.getGuides();
+	},this)
+	
+
 	this.grabChoices = ko.computed( function() { // Retrieve choices
 		var lat = this.lat(),
 			lng = this.lng(),
@@ -179,10 +194,10 @@ function locationModel(data) {
 
 		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng ) {
 			fetch(false)
-			this.getBallotChoices(lat,lng,choices,function() { fetch(true);  setTimeout( function() {$('.candidate.row:last .next').text('Next Measure').bind('click touchend',function() { $('.ballot-measures button.open:first').click() }); },100) })
+			this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text('Next Measure').bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
 		}
-
 	}, this)
+
 
 	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for 
 		var state = yourLocation.address.state(), 
@@ -205,10 +220,23 @@ function locationModel(data) {
 				callback()
 			})
 	}
-	
-	
-	
+	this.getGuides = function() { // Useful function for 
+		var state = yourLocation.address.state(), 
+			guides = yourLocation.guides
 
+		$.getJSON(
+			inits.root+'guides/'+state+'.json?limit=5',
+			function(data) { 
+				if( data != null && data.constructor == Array ) {
+					guides(data)
+				}
+			})
+	}
+
+
+	
+	
+	// More menu shite
 	this.menuItems = []
 
 	if( this.state == 'front' ) {
@@ -333,6 +361,7 @@ function locationModel(data) {
 		if( top < 10 ) return items[0].id
 		else return items[ items.length - 1].id
 	},this)
+	
 
 }
 

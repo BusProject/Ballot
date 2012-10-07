@@ -189,6 +189,7 @@ body.home {
 	#map {
 		.confirmation {
 			.bigText();
+			clear:both;
 			.inset-text();
 			margin: 15px 0 10px;
 			z-index: 2;
@@ -206,6 +207,11 @@ body.home {
 		}
 		img {
 			width: 620px;
+			&.located {
+				float: left;
+				width: 300px;
+				margin: 20px 50px;
+			}
 			margin: 0 auto;
 			border:1px solid @accent;
 		}
@@ -213,6 +219,7 @@ body.home {
 }
 
 #read-ballot {
+	clear: both;
 	.row {
 		width: 680px;
 		margin: 0px auto 40px;
@@ -947,6 +954,7 @@ body.home {
 }
 
 #more-coming {
+	clear: both;
 	background-color:@grey;
 	color:white;
 	.border-radius(5px);
