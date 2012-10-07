@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
     return self.find_by_sql(['SELECT "users".* FROM "feedback" INNER JOIN "users" ON "users"."id" = "feedback"."user_id" WHERE ("feedback"."approved" = ? AND "users"."banned" != ? AND "users"."deactivated" != ?  ) ORDER BY "feedback"."updated_at"',true,true,true])
   end
 
-  def self.by_state(state=nil)
+  def self.by_state(state=nil,limit=5)
     if state.nil?
       return self.all( 
       :select => 'DISTINCT( substr("choices"."geography",0,3)) as geography, "users".*,  ( "feedback"."cached_votes_up" - "feedback"."cached_votes_down"  ) AS rating  ',
@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
         :joins => :choices, 
         :conditions =>['"choices"."geography" LIKE ?',state+'%'], 
         :order => 'rating DESC',
-        :limit => 5
+        :limit => limit || 5
       )
     end
   end
