@@ -56,9 +56,9 @@
 					data-bind="visible: (current_user.alerts == null ? '' : current_user.alerts).search( address.state() ) === -1"
 					onclick="$(this).hide().next().show(); current_user.alerts += yourLocation.address.state()+','; $.post(inits.root+'users/update',{alerts: yourLocation.address.state() } ); ">Update Me When There's More Data</button>
 				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>
-				<p>Is something missing?</p>
-				<a href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
-				<a href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
+				<p style="margin-top: 20px;">Is Something Missing?</p>
+				<a class="add_more" href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
+				<a class="add_more" href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
 			<% end -%>
 		</div>
 	</div>

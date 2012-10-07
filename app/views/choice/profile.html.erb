@@ -275,12 +275,12 @@
 		<div id="more-coming"  class="ballot-section"  >
 			<h1>Add More</h1>
 			<p>Search by office or candidate name to find other candidates or ballot measures to endorse</p>
-			<input id="profile_search">
+			<input id="profile_search" placeholder="Find Other Candidates and Ballot Measures">
 
-			<h1>Is something missing?</h1>
+			<h1>Is Something Missing?</h1>
 			<div class="category-heading minor">
-				<a href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
-				<a href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
+				<a class="add_more" href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
+				<a class="add_more" href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
 			</div>
 		</div>
 	<% end -%>
