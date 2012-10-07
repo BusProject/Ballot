@@ -111,15 +111,21 @@ EOF
 
     if params[:filter]
       results += User.where( "id = ? OR profile = ?", id, params[:term] ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } } if params[:filter] == 'profile'
+      if params[:filter] == 'offices'
+        results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } }
+        results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } }
+      end
     else
       prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'
       results = []
       results += User.where( "deactivated = ? AND banned = ? AND (lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR id = ?)",false,false, prepped, prepped, prepped, id ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } }
       results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } }
       results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } }
+      results += Choice.states.reject{ |c| c.downcase.index( params[:term].downcase ).nil? }.map{ |state| { :label => state+"'s Full Ballot", :url => ENV['BASE']+'/'+Choice.stateAbvs[ Choice.states.index(state) ] }   }
     end
     render :json => results
   end
+
 
     def privacy
        @classes = 'home msg'
@@ -246,24 +252,37 @@ EOF
     end
 
   
+  def guides
+    @guides = User.by_state
+    @classes = 'home profile'
+    @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] } }.to_json
+    
+    if params[:state]
+      state = params[:state].length == 2 ? Choice.states[Choice.stateAbvs.index(params[:state])].gsub(' ','_') : params[:state].capitalize.gsub(' ','_')
+      redirect_to guides_path+'#'+state
+    end
+  end
+  
   def sitemap
     stateAbvs = Choice.stateAbvs
-    newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at.to_date
+    newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at
+    newwest_feedback = Feedback.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['approved = ?',false] ).first.updated_at
+
     
     @urls = [
-        { :url => ENV['BASE']+'/about', :updated => 'Thu, 04 Oct 2012'},
-        { :url => ENV['BASE']+'/guides', :updated => newwest_user  }
+        { :priority => '0.3', :url => ENV['BASE']+'/about', :updated => 'Thu, 04 Oct 2012'},
+        { :priority => '0.3', :url => ENV['BASE']+'/guides', :updated => newwest_user > newwest_feedback ? newwest_user.to_date : newwest_feedback.to_date  }
       ]
-    @urls += (1..50).map{ |i| {:url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
+    @urls += (1..50).map{ |i| { :priority => '0.4', :url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
 
     @urls += User.active.map do |user| 
       updated = user.updated_at > user.feedback.most_recent.updated_at ? user.updated_at : user.feedback.order('updated_at DESC').limit(1).first.updated_at
-      { :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
+      { :priority => '0.8', :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
     end
 
-    @urls += Choice.all.map{ |c| { :url => c.to_url, :updated => c.updated_at.to_date } } 
+    @urls += Choice.all.map{ |c| { :priority => '1.0', :url => c.to_url, :updated => c.updated_at.to_date } } 
     
-    if params[:format]
+    if params[:format] == 'json'
       render :json => @urls.count 
     else
       render :template => 'home/sitemap'

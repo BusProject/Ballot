@@ -196,6 +196,7 @@
 				$(document).ready( function() { 
 					ko.applyBindings( current_user, document.getElementById("profile")); 
 					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>'); $(this).parent().after('<em>Problem loading your header. Should be back soon. If this persists - reupload.</em>') });
+					$('#profile_search').betterAutocomplete( '/search?filter=offices', function( event, ui ) { document.location = ui.item.url }, 2,  'top-search')
 				}).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
 					$('.edit_user .loading').hide()
 					// Only when it's remotipart. There's probably a better way to do this but I can't figure it out now
@@ -256,21 +257,34 @@
 <div id="read-ballot">
 	<% @choices.group_by(&:contest_type).each do |type,choices| %>
 
-		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot Measures' : type %>">
+		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot_Measures' : type.index('User').nil? ? type : type.gsub('_','_Created_')+'s'  %>">
 
 			<div class="category-heading" >
 				<h2 ><%= type.gsub('_',' ') %></h2>
 			</div>
 			<% choices.each do |choice | %>
 				<div data-bind="with: choices()[<%= n %>]" class="row">
-					<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidateProfile' : 'measureProfile' %>
+					<% type = choice.contest_type.downcase.index('ballot').nil? ? 'candidate/profile' : 'measure/profile' %>
 					<%=  render 'choice/'+type, :choice => choice, :user => @user %>
 				</div>
 				<% n+=1%>
 			<% end %>
 		</div>
-
 	<% end %>
+	<%- if current_user == @user %>
+		<div id="more-coming"  class="ballot-section"  >
+			<h1>Add More</h1>
+			<p>Search by office or candidate name to find other candidates or ballot measures to endorse</p>
+			<input id="profile_search">
+
+			<h1>Is something missing?</h1>
+			<div class="category-heading minor">
+				<a href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
+				<a href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
+			</div>
+		</div>
+	<% end -%>
+
 
 	<% if @choices.length == 0 && @user != current_user %>
 		<p></p>

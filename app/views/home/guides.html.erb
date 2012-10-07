@@ -1,0 +1,21 @@
+<% @states = Choice.states %>
+<% @stateAbvs = Choice.stateAbvs %>
+
+<div id="read-ballot" class="ballot-section">
+	<% @guides.each do |stateAbv,guides| %>
+
+	<div id="<%=  @states [ @stateAbvs.index( stateAbv )  ].gsub(' ','_') %>" class="sectionheading">
+			<h1><%= @states [ @stateAbvs.index( stateAbv )  ] %>'s Voter Guides</h1>
+			<p>All of <%= @states [ @stateAbvs.index( stateAbv )  ] %>'s Voter Guides - ranked by usefulness.</p>
+	</div>
+		
+			<% guides.group_by{ |g| g }.map{|u| u[0].rating = u[1].map{ |r| r.rating}.sum; u[0] }.sort_by{ |u| -u.rating }.each do |guide| %>
+				<div class="row" >
+					<hr><a href="<%= guide.profile %>" class="full" ><h1 itemprop="name" class="title" ><%= guide.guide_name.nil? || guide.guide_name.empty? ? guide.name+'\'s Voter Guide' : guide.guide_name %></h1></a><hr>
+					<div itemprop="description" class="explanation" ><%= guide.description.nil? || guide.description == 'null' ? '' : guide.description %></div>
+				</div>
+			<% end %>
+
+	
+	<% end %>
+</div>

@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
     def most_recent
       all( :order => 'updated_at DESC', :limit => 1).first
     end
+    def rating
+      all( :select => 'SUM( "feedback"."cached_votes_up" - "feedback"."cached_votes_down") AS rating' ).first.rating
+    end
   end
   has_many :memes, :through => :feedback
   has_many :options, :through => :feedback
@@ -39,11 +42,13 @@ class User < ActiveRecord::Base
   
   # Method for generating a link to the profile
   def set_profile
-    if self.profile.nil? || self.profile.empty?
-      self[:profile] = '/'+self.to_url unless self.to_url.nil?
-    else
-      self[:profile] = '/'+self.profile
-    end
+      if self.has_attribute? 'profile'
+        if self.profile.nil? || self.profile.empty?
+          self[:profile] = '/'+self.to_url unless self.to_url.nil?
+        else
+          self[:profile] = '/'+self.profile
+        end
+      end
   end
   
   # Method to see if profile name is free
@@ -55,7 +60,7 @@ class User < ActiveRecord::Base
       if id != 0 # Future proofing all URL names for our first 10^20th users
         safe = id > 10e20
       end
-      notstate = self.profile =~ /AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|users|admin|lookup|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008/
+      notstate = self.profile =~ /AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|users|admin|lookup|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008|resources/
       safe = notstate.nil? && safe
       errors.add( :profile, 'is not unique' ) unless User.where('(id = ? OR profile = ?)  AND id != ?',id,self.profile,self.id).empty? && safe
     else
@@ -80,6 +85,15 @@ class User < ActiveRecord::Base
   
   def self.active
     return self.find_by_sql(['SELECT "users".* FROM "feedback" INNER JOIN "users" ON "users"."id" = "feedback"."user_id" WHERE ("feedback"."approved" = ? AND "users"."banned" != ? AND "users"."deactivated" != ?  ) ORDER BY "feedback"."updated_at"',true,true,true])
+  end
+
+  def self.by_state
+    return self.all( 
+      :select => 'DISTINCT( "choices"."geography"), "users".*,  ( "feedback"."cached_votes_up" - "feedback"."cached_votes_down"  ) AS rating  ', 
+      :joins => :choices, 
+      :conditions => ['"choices"."geography" != ?','Prez'], 
+      :order => '"geography", rating DESC'  
+    ).group_by{|c| c.geography.slice(0,2) }
   end
   
   # Header image handling

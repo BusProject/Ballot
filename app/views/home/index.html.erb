@@ -29,7 +29,7 @@
 
 
 		<!-- ko foreach: sections -->
-			<div data-bind="visible: $data.visible, attr: {'class' : $data.className, 'id': $data.title }">
+			<div data-bind="visible: $data.visible, attr: {'class' : $data.className, 'id': $data.title.replace(/ /g,'_') }">
 				<div class="category-heading" >
 					<h2 data-bind="text: title"></h2>
 					<p data-bind="text: description"></p>
@@ -56,14 +56,17 @@
 					data-bind="visible: (current_user.alerts == null ? '' : current_user.alerts).search( address.state() ) === -1"
 					onclick="$(this).hide().next().show(); current_user.alerts += yourLocation.address.state()+','; $.post(inits.root+'users/update',{alerts: yourLocation.address.state() } ); ">Update Me When There's More Data</button>
 				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>
+				<p>Is something missing?</p>
+				<a href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
+				<a href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
 			<% end -%>
 		</div>
 	</div>
 
 
 <script id="measure" type="text/html">
-	<%=  render 'choice/measure' %>
+	<%=  render 'choice/measure/front' %>
 </script>
 <script id="candidate" type="text/html">
-	<%=  render 'choice/candidate' %>
+	<%=  render 'choice/candidate/front' %>
 </script>

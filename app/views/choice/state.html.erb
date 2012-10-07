@@ -25,8 +25,8 @@
 <% end %>
 
 	<% @types.each do |type| %>
-		<% n = ['Federal','State','County','Other','Ballot_Statewide'].index( type ) %>
-		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot Measures' : type %>" data-bind="with: sections()[<%= n %>]">
+		<% n = ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Measure'].index( type ) %>
+		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot_Measures' : type.index('User').nil? ? type : type.gsub('_','_Created_')+'s'  %>" data-bind="with: sections()[<%= n %>]">
 
 			<div class="category-heading" >
 				<h2 ><%= type.gsub('_',' ') %></h2>
@@ -35,7 +35,7 @@
 			<% unless @grouped[ type ].nil? %>
 				<% @grouped[ type ].each do |choice| %>
 					<div class="row ">
-						<% rowtype = choice.contest_type.downcase.index('ballot').nil? ? 'candidateSummary' : 'measureSummary' %>
+						<% rowtype = choice.contest_type.downcase.index('ballot').nil? ? 'candidate/summary' : 'measure/summary' %>
 						<%=  render 'choice/'+rowtype, :choice => choice, :user => @user %>
 					</div>
 				<% end %>
@@ -54,10 +54,10 @@
 
 
 <script id="measure" type="text/html">
-	<%=  render 'choice/measureSummary' %>
+	<%=  render 'choice/measure/summary' %>
 </script>
 <script id="candidate" type="text/html">
-	<%=  render 'choice/candidateSummary' %>
+	<%=  render 'choice/candidate/summary' %>
 </script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready( function() { 
