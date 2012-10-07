@@ -279,7 +279,7 @@ function locationModel(data) {
 		
 		this.menuItems.push( 
 			MenuItem(inits.root,'Find Your Ballot'),
-			MenuItem('#read-ballot','Guides By States','<ul style="margin: 20px 0;">'+inits.states.map( function(el) { return '<li><a href="#'+el.replace(/ /g,'_')+'">'+el+'</a></li>' }).join("\n")+'</ul>',null),
+			MenuItem('#read-ballot','Guides By States','<ul style="margin: 20px 0; max-height: 300px; overflow-y: scroll;">'+inits.states.map( function(el) { return '<li><a href="#'+el.replace(/ /g,'_')+'">'+el+'</a></li>' }).join("\n")+'</ul>',null),
 			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Page<br>'+makeShare(url)+'</div>')
 		)
 	}
