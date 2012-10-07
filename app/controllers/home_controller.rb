@@ -253,17 +253,37 @@ EOF
 
   
   def guides
-    @guides = User.by_state
-    @classes = 'home profile'
-    @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] } }.to_json
+
+    @classes = 'home profile guides'
+    
     
     if params[:state]
-      state = params[:state].length == 2 ? Choice.states[Choice.stateAbvs.index(params[:state])].gsub(' ','_') : params[:state].capitalize.gsub(' ','_')
-      redirect_to guides_path+'#'+state
+      if params[:state].length == 2
+        state = Choice.states[ Choice.stateAbvs.index(params[:state] ) ].gsub(' ','_')
+        stateAbv = params[:state]
+      else
+        state =  params[:state].capitalize.gsub(' ','_')
+        stateAbv = Choice.stateAbvs[ Choice.states.index(params[:state].capitalize ) ]
+      end
+
+      @limit = params[:limit] || 100 
+      guides = User.by_state( stateAbv ,@limit )
+      @guides = [ [stateAbv , guides ] ]
+
+      if params[:format] == 'json'
+         render :json => guides.map{ |u| u.to_public(false) }
+      else
+        @config = { :state => 'guides', :states => guides.map{|u| u.name } }.to_json
+      end
+    else
+      @limit = 10
+      @guides = User.by_state
+      @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] } }.to_json
     end
   end
   
   def sitemap
+    stateAbvs = Choice.state
     stateAbvs = Choice.stateAbvs
     newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at
     newwest_feedback = Feedback.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['approved = ?',false] ).first.updated_at
@@ -273,6 +293,7 @@ EOF
         { :priority => '0.3', :url => ENV['BASE']+'/about', :updated => 'Thu, 04 Oct 2012'},
         { :priority => '0.3', :url => ENV['BASE']+'/guides', :updated => newwest_user > newwest_feedback ? newwest_user.to_date : newwest_feedback.to_date  }
       ]
+    @urls += (1..50).map{ |i| { :priority => '0.4', :url => ENV['BASE']+'/guides/'+states[i].capitalize, :updated => Feedback.joins(:choice).where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
     @urls += (1..50).map{ |i| { :priority => '0.4', :url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
 
     @urls += User.active.map do |user| 
