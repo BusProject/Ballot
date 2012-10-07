@@ -30,8 +30,14 @@ class User < ActiveRecord::Base
   
   
   # Method determining what's turned into JSON
-  def to_public
-    return self.to_json( :except => [:banned, :deactivated, :admin, :pages, :header, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :primary, :secondary, :bg ] ) 
+  def to_public(json=true)
+    hidden = [:background, :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :primary, :secondary, :bg]
+    return self.to_json( :except => hidden ) if json
+
+    about = {}
+    attributes = User.attr_accessible[:default].to_a.select{|a| hidden.index(a.to_sym).nil? }.map{ |a| about[a] = self[a] }
+    return about
+    
   end
   
   
