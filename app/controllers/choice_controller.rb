@@ -137,8 +137,6 @@ class ChoiceController < ApplicationController
     
     unless districts.nil?
       @choices = Choice.find_all_by_geography( districts ).sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
-    else
-      query = {'success' => false, 'message' => 'Nothing useful was posted'}.to_json
     end
     
     render :json => @choices.to_json( json_include )
