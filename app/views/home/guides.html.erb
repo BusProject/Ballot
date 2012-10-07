@@ -4,12 +4,14 @@
 <div id="read-ballot" class="ballot-section">
 	<% @guides.each do |stateAbv,guides| %>
 
+	<% guides = guides.group_by{ |g| g }.map{|u| u[0].rating = u[1].map{ |r| r.rating}.sum; u[0] }.sort_by{ |u| -u.rating.to_i }.slice(0,10) %>
+
 	<div id="<%=  @states [ @stateAbvs.index( stateAbv )  ].gsub(' ','_') %>" class="sectionheading">
 			<h1><%= @states [ @stateAbvs.index( stateAbv )  ] %>'s Voter Guides</h1>
-			<p>All of <%= @states [ @stateAbvs.index( stateAbv )  ] %>'s Top Five Voter Guides - ranked by usefulness.</p>
+			<p>The Top <%= guides.count == 1 ? 'Voter Guide' : guides.slice(0,10).count.to_s+' Voter Guides - ranked by usefulness of comments - ' %> in <%= @states [ @stateAbvs.index( stateAbv )  ] %>.</p>
 	</div>
 		
-			<% guides.group_by{ |g| g }.map{|u| u[0].rating = u[1].map{ |r| r.rating}.sum; u[0] }.sort_by{ |u| -u.rating.to_i }.slice(0,5).each do |guide| %>
+			<% guides.each do |guide| %>
 				<div class="row" >
 					<hr><a href="<%= guide.profile %>" class="full" ><h1 itemprop="name" class="title" ><%= guide.guide_name.nil? || guide.guide_name.empty? ? guide.name+'\'s Voter Guide' : guide.guide_name %></h1></a><hr>
 					<div itemprop="description" class="explanation" ><%= guide.description.nil? || guide.description == 'null' ? '' : guide.description %></div>
