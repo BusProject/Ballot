@@ -249,15 +249,10 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 },'.face')
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
-		if( window.innerWidth < 1029 ) {
-			var left = $this.scrollLeft()
-			if( left < 120 ) $('#instructions-box').css({'marginLeft':(-54-left)+'px','left':'auto'})
-			else $('#instructions-box').css('left','-180px')
-		}
 		yourLocation.top( $this.scrollTop() )
 })
 
-ko.bindingHandlers.src = {
+ko.bindingHandlers.src = {http://localhost:3000/caitlin
 	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		var all = allBindingsAccessor(),
 			src = all.src
