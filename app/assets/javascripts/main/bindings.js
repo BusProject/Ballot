@@ -252,7 +252,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		yourLocation.top( $this.scrollTop() )
 })
 
-ko.bindingHandlers.src = {http://localhost:3000/caitlin
+ko.bindingHandlers.src = {
 	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		var all = allBindingsAccessor(),
 			src = all.src
