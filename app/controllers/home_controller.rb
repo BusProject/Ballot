@@ -325,7 +325,7 @@ EOF
       { :priority => '0.8', :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
     end
 
-    @urls += Choice.all.map{ |c| { :priority => '1.0', :url => ENV['BASE']+c.to_url, :updated => c.updated_at.to_date } } 
+    @urls += Choice.all.map{ |c| { :priority => '1.0', :url => ENV['BASE']+'/'+c.to_url, :updated => c.updated_at.to_date } } 
     
     if params[:format] == 'json'
       render :json => @urls.count 
