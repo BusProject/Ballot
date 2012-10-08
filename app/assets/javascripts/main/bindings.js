@@ -6,6 +6,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		location.latlng('38.7, -95.7')
 		location.geocoded(false)
 		location.choices([])
+		location.guides([])
 })
 .on('click touchend','.clear',function(e) {
 	yourLocation.address('')
