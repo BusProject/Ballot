@@ -2,18 +2,24 @@
 <% @stateAbvs = Choice.stateAbvs %>
 
 <div id="read-ballot" class="ballot-section">
+	<div class="intro">
+		<h1><i class="icon-heart"></i>  Top Voter Guides Around the Country <i class="icon-heart"></i></h1>
+		<p>These are the finest voter guides in all the land. A voter guide's rank is determined by how useful other users have found it. To see your voter guide cracking the top 10, share your guide with your friends and tell them to recommend your guide.</p>
+	</div>
+	
 	<% @guides.each do |stateAbv,guides| %>
 
 	<% guides = guides.group_by{ |g| g }.map{|u| u[0].rating = u[1].map{ |r| r.rating}.sum; u[0] }.sort_by{ |u| -u.rating.to_i }.slice(0, @limit ) %>
 
-	<div id="<%=  @states [ @stateAbvs.index( stateAbv )  ].gsub(' ','_') %>" class="sectionheading">
-			<h1><%= @states [ @stateAbvs.index( stateAbv )  ] %>'s Voter Guides</h1>
-			<p>The Top <%= guides.count == 1 ? 'Voter Guide' : guides.count.to_s+' Voter Guides - ranked by usefulness of comments - ' %> in <%= @states [ @stateAbvs.index( stateAbv )  ] %>.</p>
+		
+	<div class="state-guides">
+		<div id="<%=  @states [ @stateAbvs.index( stateAbv )  ].gsub(' ','_') %>">
+			<h1><%= @states [ @stateAbvs.index( stateAbv )  ] %></h1>
 	</div>
 			<ol >
 			<% guides.each do |guide| %>
 					<li >
-						<a href="<%= guide.profile %>" class="full" ><h1 itemprop="name" class="title" ><%= guide.guide_name.nil? || guide.guide_name.empty? ? guide.name+'\'s Voter Guide' : guide.guide_name %></h1></a>
+						<a href="<%= guide.profile %>" class="full" ><h1 itemprop="name" class="title" ><%= guide.guide_name.nil? || guide.guide_name.empty? ? (guide.name || '' )+'\'s Voter Guide' : guide.guide_name %></h1></a>
 						<div itemprop="description" class="explanation" ><%= guide.description.nil? || guide.description == 'null' ? '' : guide.description %></div>
 					</li>
 			<% end %>
@@ -23,5 +29,7 @@
 					<%= link_to "See all of "+@states [ @stateAbvs.index( stateAbv ) ]+"'s Voter Guides", state_guides_path(stateAbv) %>
 				<%- end -%>
 			</div>
+	</div>
 	<% end %>
+	
 </div>
