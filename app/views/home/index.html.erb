@@ -1,5 +1,5 @@
 <script type="text/javascript" src='http://maps.googleapis.com/maps/api/js?sensor=true'></script>
-
+<%= session[:address] %>
 	<div id="find-ballot" class="ballot-section">
 			<h1 class="sectionheading">Look Up What’s On Your Ballot</h1>
 
@@ -10,14 +10,14 @@
 				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0">enter your address here</label><![endif]-->
 				<a href="#" class="cancel find-ballot-submit">Submit</a>
 			</div>
-			<span class="remember link on" data-bind="click: function( $data ) {  var member = $data.remember(); $data.remember( !member ); }, css: { on: remember }"  >Save as home address</span>
+			<span class="remember link " data-bind="click: function( $data ) {  var member = $data.remember(); $data.remember( !member ); }, css: { on: remember }"  >Save as home address</span>
 
 		
 		</div><!-- enter address -->
 			
 		<div id="map"  >
-			<img data-bind="attr: { 'src' : map }, css: { located: geolocated() }">
-			<div class="top-guides" data-bind=" visible: geolocated() ">
+			<img data-bind="attr: { 'src' : map }, css: { located: geolocated() }" >
+			<div style="display:none" class="top-guides" data-bind=" visible: geolocated() ">
 				<h3>Voter Guides Near You</h3>
 				<ol data-bind="foreach:guides">
 					<li>
@@ -35,7 +35,7 @@
 	</div><!-- find-ballot -->
 
 	
-	<div id="read-ballot"  style="display:none;" class="ballot-section" data-bind="visible: choices.notEmpty()">
+	<div id="read-ballot" style="display:none"  class="ballot-section" data-bind="visible: choices.notEmpty() " >
 		<h1 class="sectionheading">Here’s What Will Be On Your Ballot</h1>
 
 
