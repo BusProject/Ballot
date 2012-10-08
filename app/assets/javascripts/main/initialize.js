@@ -4,7 +4,7 @@ function initialize() {
 		if( typeof google.maps != 'undefined' ) var geocoder = new google.maps.Geocoder()
 
 	  // Try HTML5 geolocation
-	  if(navigator.geolocation && yourLocation.state == 'front' && typeof inits.address == 'undefined' ) {
+	  if(navigator.geolocation && yourLocation.state == 'front' && typeof inits.address == '' ) {
 
 	    navigator.geolocation.getCurrentPosition(
 			function(position) {
