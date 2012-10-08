@@ -306,17 +306,17 @@ EOF
   end
   
   def sitemap
-    stateAbvs = Choice.state
+    states = Choice.states
     stateAbvs = Choice.stateAbvs
     newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at
     newwest_feedback = Feedback.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['approved = ?',false] ).first.updated_at
 
     
     @urls = [
-        { :priority => '0.3', :url => ENV['BASE']+'/about', :updated => 'Thu, 04 Oct 2012'},
+        { :priority => '0.3', :url => ENV['BASE']+'/about', :updated => '2012-10-05'},
         { :priority => '0.3', :url => ENV['BASE']+'/guides', :updated => newwest_user > newwest_feedback ? newwest_user.to_date : newwest_feedback.to_date  }
       ]
-    @urls += (1..50).map{ |i| { :priority => '0.4', :url => ENV['BASE']+'/guides/'+states[i].capitalize, :updated => Feedback.joins(:choice).where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
+    (1..50).map{ |i| feedback = Feedback.joins(:choice).where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first; @urls.push( { :priority => '0.4', :url => ENV['BASE']+'/guides/'+states[i].capitalize, :updated => feedback.updated_at.to_date } ) unless feedback.nil? }
     @urls += (1..50).map{ |i| { :priority => '0.4', :url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
 
     @urls += User.active.map do |user| 
@@ -324,7 +324,7 @@ EOF
       { :priority => '0.8', :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
     end
 
-    @urls += Choice.all.map{ |c| { :priority => '1.0', :url => c.to_url, :updated => c.updated_at.to_date } } 
+    @urls += Choice.all.map{ |c| { :priority => '1.0', :url => ENV['BASE']+c.to_url, :updated => c.updated_at.to_date } } 
     
     if params[:format] == 'json'
       render :json => @urls.count 
