@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   
   serialize :pages
   
-  has_one :match
+  belongs_to :match
   
   # Method determining what's turned into JSON
   def to_public(json=true)
