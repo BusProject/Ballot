@@ -2,14 +2,14 @@ function locationModel(data) {
 	this.state = data.state || 'front'
 
 	// Map Objects
-	this.latlng = ko.observable('38.7, -95.7')
-	this.googleLocation = ko.observable({})
+	this.latlng = ko.observable( data.latlng == null ? '38.7, -95.7' : { boom: parseFloat(data.latlng.split(',')[0]), bewm: parseFloat(data.latlng.split(',')[1]) } )
+	this.googleLocation = ko.observable( data.google || {} )
 	this.address = ko.observable('')
 	this.geocoder = ko.observable('')
-	this.geocoded = ko.observable(false)
+	this.geocoded = ko.observable( data.latlng != null )
 	this.geocoded.address = ko.observable('')
 	this.fetch = ko.observable(true)
-	this.remember = ko.observable(true)
+	this.remember = ko.observable( inits.remember )
 
 	// Style elements
 	this.top = ko.observable(0)
@@ -151,14 +151,14 @@ function locationModel(data) {
 					googleLocation(results[0])
 					geocoded_address(results[0].formatted_address)
 					latlng( first )
-					choices([])
+					//choices([])
 				}
 			});
 		}
 	}, this).extend({ throttle: 250 })
 
 	this.map = ko.computed( function() { // Used for confirming map location
-		var latlng = this.latlng(),
+		var latlng = [this.lat(),this.lng()].join(','),
 			geolocated = this.geolocated(),
 			zoom = geolocated ? '14' : '3',
 			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
@@ -186,7 +186,7 @@ function locationModel(data) {
 			state = this.address.state(),
 			fetch = this.fetch
 
-		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng ) {
+		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng && this.address() != '' ) {
 			fetch(false)
 			this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text('Next Measure').bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
 		}
@@ -203,7 +203,7 @@ function locationModel(data) {
 			{
 				l: yourLocation.lat()+','+yourLocation.lng(),
 				address: address,
-				address_text: yourLocation.address()
+				address_text: yourLocation.remember() ? yourLocation.address() : ''
 			},
 			function(data) { 
 				if( data != null && data.constructor == Array ) {
