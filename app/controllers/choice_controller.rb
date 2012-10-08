@@ -75,7 +75,7 @@ class ChoiceController < ApplicationController
     @message = !@user.description.nil? && !@user.guide_name.strip.empty? ? @user.description : 'A Voter Guide by '+@user.first_name+', powered by The Ballot.'
     @image = @user.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @user.memes.last.id )+'.png'
 
-    result = {:state => 'profile', :user => @user }
+    result = {:state => 'profile', :user => @user.to_public(false) }
 
     @config = result.to_json
     @choices_json = @choices.to_json( json_include )
