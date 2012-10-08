@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
     :image, :location, :name, :url, :first_name, :last_name, :feedback, 
     :admin, :authentication_token, :guide_name, :fb, :profile,
     :fb_friends, :description, :alerts, :pages, :profile,
-    :primary, :secondary, :background, :header
+    :primary, :secondary, :bg, :header, :match, :address
 
   
   # attr_accessible :title, :body
@@ -28,14 +28,15 @@ class User < ActiveRecord::Base
   
   serialize :pages
   
+  has_one :match
   
   # Method determining what's turned into JSON
   def to_public(json=true)
-    hidden = [:background, :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :primary, :secondary, :bg]
+    hidden = [ :address, :match , :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header_file_name, :header_content_type, :header_file_size, :header_updated_at ]
     return self.to_json( :except => hidden ) if json
 
     about = {}
-    attributes = User.attr_accessible[:default].to_a.select{|a| hidden.index(a.to_sym).nil? }.map{ |a| about[a] = self[a] }
+    attributes = User.attr_accessible[:default].to_a.concat([:id]).select{|a| hidden.index(a.to_sym).nil? }.map{ |a| about[a] = self[a] }
     return about
     
   end

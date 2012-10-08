@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120920054046) do
+ActiveRecord::Schema.define(:version => 20121008035313) do
 
   create_table "choices", :force => true do |t|
     t.string    "contest"
@@ -137,7 +137,9 @@ ActiveRecord::Schema.define(:version => 20120920054046) do
     t.string    "header_file_name"
     t.string    "header_content_type"
     t.integer   "header_file_size"
-    t.datetime  "header_updated_at"
+    t.timestamp "header_updated_at"
+    t.integer   "match_id"
+    t.string    "address"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
