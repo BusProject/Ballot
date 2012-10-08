@@ -18,7 +18,7 @@
 					</li>
 			<% end %>
 			</ol>
-			<div class="more">
+			<div class="more_guides">
 				<%- if guides.count == 10 %>
 					<%= link_to "See all of "+@states [ @stateAbvs.index( stateAbv ) ]+"'s Voter Guides", state_guides_path(stateAbv) %>
 				<%- end -%>
