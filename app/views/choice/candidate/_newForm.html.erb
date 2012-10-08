@@ -1,22 +1,20 @@
+<div class="add-contest">
 <%= form_for @choice, :method => "post", :url =>  {:controller => "choice", :action => "create" } do |form| %>
 	<%= form.hidden_field :contest_type %>
-	<h2>Add Missing Candidate</h2>
-	<div>
-		<h3>Office Name *</h3>
-		<%= form.text_field :contest, { :class => 'required' } %>
+	<h1><i class="icon-cogs"></i>  Add Missing Candidate Contest</h1>
+	<div class="office-info">
+		<h3><i class="icon-trophy"></i>  Contest Information</h3>
+		<label>Office Name. e.g. Mayor, State Senate</label><%= form.text_field :contest, { :class => 'required' } %>	<br/>
+		<label>State</label> <%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %>
 	</div>
 
-	<div>
-		<h3>State</h3>
-		<%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %>
-	</div>
 	<!-- ko stopBinding: true -->
 		<div id="options">
 			<!-- ko foreach: options -->
-				<div class="option">
-					<h3>Candidate</h3>
+				<div class="option add-option">
+					<h3><i class="icon-user"></i>  Candidate Information</h3>
 					<div>
-						<label>Name *</label>
+						<label>Candidate's Name *</label>
 						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][name]'   } " class="required">
 					</div>
 					<div >
@@ -24,25 +22,26 @@
 						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][party]'   } ">
 					</div>
 					<div>
-						<label>Website</label>
+						<label>Campaign Website</label>
 						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][website]'   } ">
 					</div>
 					<div>
-						<label>Facebook</label>
+						<label>Campaign Facebook Page</label>
 						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][facebook]'   } ">
 					</div>
 					<div>
-						<label>Twitter</label>
+						<label>Campaign Twitter Account</label>
 						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][twitter]'   } ">
 					</div>
-					<span class="link" data-bind="click: function() { op.removeOption( $data ); return false;} " >X</span>
+					<span class="link delete" data-bind="click: function() { op.removeOption( $data ); return false;} " ><i class="icon-remove-sign"></i></span>
 				</div>
 			<!-- /ko -->
-			<button data-bind="click: function() { op.addOption(); return false; }">Add</button>
+			<a class="add-submit" data-bind="click: function() { op.addOption(); return false; }"><i class="icon-plus"></i>  Add Another Candidate</a>
 		</div>
 	<!-- /ko -->
-	<%= submit_tag 'Add to Your Voter Guide'  %><!-- This is the submit button -->
+	<div class="add-final-submit"><%= submit_tag 'Finish'  %><!-- This is the submit button --></div>
 <% end %>
+</div>
 
 <script type="text/javascript">
 	var op = {

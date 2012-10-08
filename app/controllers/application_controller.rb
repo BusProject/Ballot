@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
       @config = { :state => 'error' }.to_json
       @title = "Can't Find That!"
       @content = <<EOF
+        <meta name="robots" content="noindex">
         <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
     	
         <script type='text/javascript'> $(document).ready( function() {

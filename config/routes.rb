@@ -27,6 +27,8 @@ Ballot::Application.routes.draw do
   
   root :to => "home#index"
   match '/about' => "home#about"
+  match '/about/privacy' => "home#privacy", :as => 'privacy'
+  match '/about/terms' => "home#tos", :as => 'terms'
   match '/stats' => "home#stats"
   match '/search' => "home#search", :as => 'search'
   match '/how-to' => redirect('https://docs.google.com/document/d/1U7kY9aU_e89GYb9oDt5ilzpjkzsCFtwUQNCr2AK9MAM/edit')
@@ -36,10 +38,9 @@ Ballot::Application.routes.draw do
 
   match '/guides' => 'home#guides', :as => 'guides'
   match '/guides/list' => 'home#guides'
+  match '/guides/:state' => 'home#guides', :as => 'state_guides'
+  match '/guides/by_state/:state' => redirect( '/guides/%{state}' )
 
-  
-  match '/guides/:state' => 'home#guides', :state =>/AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC/
-  match '/guides/by_state/:state' => 'home#guides', :as => 'guide_by_state'
 
   match '/lookup' => 'choice#index'
   match '/lookup/:id/more' => 'choice#more'

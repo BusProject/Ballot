@@ -1,15 +1,4 @@
 class ChoiceController < ApplicationController
-  def json_include
-    return :include => [ 
-    :options => { 
-      :include => [
-        :feedbacks => {
-            :include => [ :user => { :except => [ :banned, :admin, :deactivated, :alerts, :created_at, :last_name, :modified_at, :fb_friends, :first_name, :guide_name, :description  ] } ]
-          }
-        ] 
-      }
-    ]
-  end
   
   def new
     @classes = 'home add'
@@ -74,23 +63,23 @@ class ChoiceController < ApplicationController
     @message = !@user.description.nil? && !@user.guide_name.strip.empty? ? @user.description : 'A Voter Guide by '+@user.first_name+', powered by The Ballot.'
     @image = @user.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @user.memes.last.id )+'.png'
 
-    result = {:state => 'profile', :user => @user }
+    result = {:state => 'profile', :user => @user.to_public(false) }
 
     @config = result.to_json
-    @choices_json = @choices.to_json( json_include )
+    @choices_json = @choices.to_json( Choice.to_json_conditions )
 
   end
 
   def state
     
-    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order( [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( :contest_type), :geography  ]  ).limit( 200 ).offset( params[:page] || 0 )
+    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order("contest_type IN('Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot' ) ASC").limit( 50 ).offset( params[:page] || 0 )
 
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
 
     @choices = @choices.each{ |c| c.prep current_user }
     
     if params[:format] == 'json'
-      render :json => @choices.to_json( json_include )
+      render :json => @choices.to_json( Choice.to_json_conditions )
     else
       @types = Choice.where('geography LIKE ?', params[:state]+'%' ).select("DISTINCT( contest_type)").sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( c.contest_type) }.map{ |c| c.contest_type }
 
@@ -126,21 +115,31 @@ class ChoiceController < ApplicationController
 
     result = {:state => 'single', :choices => [ @choice ].each{ |c| c.prep current_user } }
 
-    @config = result.to_json( json_include )
+    @config = result.to_json( Choice.to_json_conditions )
 
   end
 
   def index
     
-    districts = params['q'].nil? ? Cicero.find(params['l'], params[:address] ) : params['q'].split('|')
+    cicero = Cicero
+    
+    districts = params['q'].nil? ? cicero.find(params['l'], params[:address] ) : params['q'].split('|')
     
     unless districts.nil?
       @choices = Choice.find_all_by_geography( districts ).sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
-    else
-      query = {'success' => false, 'message' => 'Nothing useful was posted'}.to_json
     end
     
-    render :json => @choices.to_json( json_include )
+    if !params[:address_text].nil? && !params[:address_text].empty?
+      if current_user
+        current_user.address = params[:address_text]
+        current_user.match = cicero.match
+        current_user.save
+      else
+        cookies['ballot_address_cache'] = params[:address_text]
+      end
+    end
+    
+    render :json => @choices.to_json( Choice.to_json_conditions )
   end
 
   def more

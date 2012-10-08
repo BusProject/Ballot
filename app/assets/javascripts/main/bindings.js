@@ -6,6 +6,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		location.latlng('38.7, -95.7')
 		location.geocoded(false)
 		location.choices([])
+		location.guides([])
 })
 .on('click touchend','.clear',function(e) {
 	yourLocation.address('')
@@ -44,7 +45,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 })
 .on('click touchend','#instructions ul li a:not(".small"), .fixed-link',function(e){
 	$this = $(this)
-	var href = $this.attr('href').replace(/ /g,'_')
+	var href = $this.attr('href')
 	if( href[0] == '#' && href[1] == '!' ) {
 		var $href = $('a[name="'+href.split('!')[1]+'"]'),
 			$button = $href.next('.row').find('button.open')
@@ -52,7 +53,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		setTimeout( function() { $(document).scrollTop( $href.offset().top - 40 ) },200)
 		e.preventDefault()
 	} else if( href[0] == '#' ) {
-		var top = $(href).position().top-40
+		var top = $(href.replace(/ /g,'_')).position().top-40
 		$(document).scrollTop( top ).trigger('scroll')
 		e.preventDefault()
 	}
@@ -248,11 +249,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 },'.face')
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
-		if( window.innerWidth < 1029 ) {
-			var left = $this.scrollLeft()
-			if( left < 120 ) $('#instructions-box').css({'marginLeft':(-54-left)+'px','left':'auto'})
-			else $('#instructions-box').css('left','-180px')
-		}
 		yourLocation.top( $this.scrollTop() )
 })
 

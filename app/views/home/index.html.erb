@@ -9,12 +9,22 @@
 				<input onkeypress="$('.place-holder').hide()" data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="<%= t('front.address_placeholder') %>">
 				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0"><%= t('front.address_placeholder') %></label><![endif]-->
 				<a href="#" class="cancel find-ballot-submit"><%= t('site.submit')%></a>
-				</div>
+			</div>
+			<span class="remember link " data-bind="click: function( $data ) {  var member = $data.remember(); $data.remember( !member ); }, css: { on: remember }"  ><%= t('front.save_address') %></span>
 		
 		</div><!-- enter address -->
 			
-		<div id="map">
-			<img data-bind="attr: { 'src' : map }">
+		<div id="map"  >
+			<img data-bind="attr: { 'src' : map }, css: { located: geolocated() }" >
+			<div style="display:none" class="top-guides" data-bind=" visible: geolocated() ">
+				<h3>Voter Guides Near You</h3>
+				<ol data-bind="foreach:guides">
+					<li>
+						<a data-bind="attr:{href: profile}, text: guide_name || name+'\'s Voter Guide' "></a>
+					</li>
+				</ol>
+				<em data-bind="visible: guides().length < 0">Loading...</em>
+			</div>
 			<div style="display:none;" class="confirmation" >
 				<%= t("front.confirm") %><br />
 				<a href="#read-ballot" class="fixed-link confirm"><%= t('site.yes') %></a><a href="" class="cancel clear"><%= t('site.no') %></a>
@@ -24,9 +34,8 @@
 	</div><!-- find-ballot -->
 
 	
-	<div id="read-ballot"  style="display:none;" class="ballot-section" data-bind="visible: choices.notEmpty()">
+	<div id="read-ballot" style="display:none"  class="ballot-section" data-bind="visible: choices.notEmpty() " >
 		<h1 class="sectionheading"><%= t('front.on_ballot') %></h1>
-
 
 		<!-- ko foreach: sections -->
 			<div data-bind="visible: $data.visible, attr: {'class' : $data.className, 'id': $data.title.replace(/ /g,'_') }">
@@ -39,7 +48,7 @@
 		<!-- /ko -->
 		
 	</div><!-- read-ballot -->
-	<h1 class="sectionheading" style="display:none;" data-bind="visible: !fetch() "><%= t('site.loading') %></h1>
+	<h1 class="sectionheading" style="display:none; clear: both;" data-bind="visible: !fetch() "><%= t('site.loading') %></h1>
 	<div id="more-coming" style="display:none;" class="ballot-section" data-bind="visible: geolocated() && fetch()" >
 		<h1><%= t('front.more')%></h1>
 		<div class="category-heading minor">
@@ -59,6 +68,9 @@
 				<p><%= t('site.missing') %></p>
 				<a href="<%= user_add_choice_path('candidate') %>"><button ><%= t('site.add_candidate')%></button></a>
 				<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('site.add_candidate')%></button></a>
+				<p style="margin-top: 20px;">Is Something Missing?</p>
+				<a class="add_more" href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
+				<a class="add_more" href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
 			<% end -%>
 		</div>
 	</div>

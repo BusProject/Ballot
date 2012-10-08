@@ -59,12 +59,12 @@
 	 MM+ .:.  -yo//+osd::://++oossyyhdmhssoosssosds++shddyossssymmmmmddhNNNNNNN/          .```````````````-MMM`````````````````````````````````````hMMo````````````````
 	 MM+      :mmdymmy-           `-/osssyssssydosssshmh+/:-osshmNNNNNNNNNNNNNN/          ````````````````-MMM`````````````````````````````````````hMMo````````````````
 	 MM+      .hmNds+`          ./snnnnnnnsssssssssssssso+:--/sssyyyyyhhhhdddddd:        `````````````````-MMM`````````````````````````````````````hMMo````````````````
-	 MM+      `hmNmy`            http://youngvoter.org                `mMMMMMM/          `````````````````-MMMyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyymMMo````````````````
+	 MM+      `hmNmy`            http://theleague.com                 `mMMMMMM/          `````````````````-MMMyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyymMMo````````````````
 	 MM+      `dNNd+       -onnnnnnnnnnnsssssssssssmmh+::++/..-:+:.    `mMMMMMM/          ````````````````-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo````````````````
 	 MM+      .dNNd/     .shhhhyhdhddsossssss++yh/+dm+::/+/.....:+/-.  `mMMMMMM/          ````````````````-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo````````````````
 	 MM+      :mNNd+   -smhhyhhydhsyyysssssss+/sdsoshmh++sso+:.../o/+o:`mMMMMMM/          .```````````````-MMMMMMMNNMMMMMMMMMMMMMMMMMMMMMMMMMMNNMMMMMMo````````````````
 	 MM+      /NNNms.-ymmhhydhyhdsossyhyssssso/shhshhmms/:+ss+/-/ss/-:+oNMMMMMM/          .```````````````-MMMMMy:--+NMMMMMMMMMMMMMMMMMMMMMMs:-:oNMMMMo```````````````.
-	 MM+      +NNNmd+dNmdhymdyymNmh++syhysssyyoohmhhmNds/..-:+sssssss+/+dMMMMMM/          ````````````````-MMMMm`````http://busfedcivic.org/`````sMMMMo```````````````.
+	 MM+      +NNNmd+dNmdhymdyymNmh++syhysssyyoohmhhmNds/..-:+sssssss+/+dMMMMMM/          ````````````````-MMMMm````http://busfederation.com/````sMMMMo```````````````.
 	 MM+      +mNNNmyhNdyymmyhmNNmh:ssssyyysydy+ymmhmmhs:..../ssssssossomMMMMMM/           .``````````````-MMMMM+...:dMMMMMMMMMMMMMMMMMMMMMN+...:mMMMMo``````````````` 
 	 MM+      .dNNNNhhmyhmmhdNNNNmo+hsssssyhyhdsyNmdmmys+-..--:+++o+:+ssmMMMMMM/           ```````````````-MMMMMMNmmMMMMMMMMMMMMMMMMMMMMMMMMMNmmMMMMMMo``````````````` 
 	 MM+      `ymNNmhdhdmmddNNNNms/yhsssssdmyhdhdNNNNdssso-./+-......+ssNMMMMMM/            ``````````````-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo`````````````.  
@@ -129,18 +129,22 @@
 
 		<div id="footer">
 			<hr />
-			<p>TheBallot.org is brought to you by the League of Young Voters, New Era Colorado, Forward Montana, and the Bus Project.</p>
-			<p style="margin-bottom:0px;"><strong>BALLOTS BY STATE</strong></p>
+			<p style="margin: 10px 0 0;"><strong>BALLOTS BY STATE</strong></p>
 			<% @states = Choice.states %>
 			<% @states.shift %>
 			<% @statesAbvs = Choice.stateAbvs %>
 			<% n = 1 %>
 
 			<% @states.each do |state| %>
-				<a href="<%= ENV['BASE']+'/'+@statesAbvs[n] %>" class="<%= 'active' if @state == state %>"><%= state %></a>
+				<a href="<%= ENV['BASE']+'/'+@statesAbvs[n] %>" class="state <%= 'active' if @state == state %>"><%= state %></a>
 				<% n += 1 %>
 			<% end %>
-
+			<p style="font-size: 9px; margin-top: 20px;">
+				<p>TheBallot.org is brought to you by the <a href="http://theleague.com" target='_blank'>League of Young Voters</a>, New Era Colorado, <a href="http://forwardmontana.org" target='_blank'>Forward Montana</a>, and the <a href="http://busproject.org" target='_blank'>Bus Project</a>.</p>
+				<%= link_to 'Terms of Service', terms_path %>
+				|&nbsp;&nbsp;
+				<%= link_to 'Privacy Policy', privacy_path %>&nbsp;
+			</p>
 		</div><!-- footer -->
 		<div id="meme-cova"></div>
 		<div id="meme-tainer">

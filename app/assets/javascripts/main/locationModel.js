@@ -2,13 +2,15 @@ function locationModel(data) {
 	this.state = data.state || 'front'
 
 	// Map Objects
-	this.latlng = ko.observable('38.7, -95.7')
-	this.googleLocation = ko.observable({})
+	this.latlng = ko.observable( data.latlng == null ? '38.7, -95.7' : { boom: parseFloat(data.latlng.split(',')[0]), bewm: parseFloat(data.latlng.split(',')[1]) } )
+	this.googleLocation = ko.observable( data.google || {} )
 	this.address = ko.observable('')
 	this.geocoder = ko.observable('')
-	this.geocoded = ko.observable(false)
+	this.geocoded = ko.observable( data.latlng != null )
 	this.geocoded.address = ko.observable('')
 	this.fetch = ko.observable(true)
+	this.remember = ko.observable( inits.remember )
+
 	// Style elements
 	this.top = ko.observable(0)
 	this.top.better = ko.computed( function() {
@@ -18,6 +20,7 @@ function locationModel(data) {
 
 	var empty = ''
 
+	// Choices
 	var choices = data.choices || []
 	this.choices = ko.observableArray( choices.map( function(el) { return Choice(el) } ) )
 	this.sections = ko.observableArray([])
@@ -33,8 +36,13 @@ function locationModel(data) {
 	},this)
 
 	this.selected = ko.observable( null )
+
+	// Guides
+	this.guides = ko.observableArray([])
 	
 
+
+	// The menu
 	this.nearby = ko.computed(function() {
 		var top = this.top(), 
 			choices = this.choices.ordered(), 
@@ -143,21 +151,21 @@ function locationModel(data) {
 					googleLocation(results[0])
 					geocoded_address(results[0].formatted_address)
 					latlng( first )
-					choices([])
+					//choices([])
 				}
 			});
 		}
 	}, this).extend({ throttle: 250 })
 
 	this.map = ko.computed( function() { // Used for confirming map location
-		var latlng = this.latlng(),
+		var latlng = [this.lat(),this.lng()].join(','),
 			geolocated = this.geolocated(),
-			zoom = geolocated ? '13' : '3',
+			zoom = geolocated ? '14' : '3',
 			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
 		// When map updates - flash the thing
 		if( geolocated ) {
 			$('#map img').flash(.5, 1000)
-			return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=620x340&sensor=true'+marker
+			return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=320x170&sensor=true'+marker
 		}
 		else return '/assets/staticmap.png'
 	}, this)
@@ -169,6 +177,7 @@ function locationModel(data) {
 		}
 	},this)
 
+
 	this.grabChoices = ko.computed( function() { // Retrieve choices
 		var lat = this.lat(),
 			lng = this.lng(),
@@ -177,12 +186,12 @@ function locationModel(data) {
 			state = this.address.state(),
 			fetch = this.fetch
 
-		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng ) {
+		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng && this.address() != '' ) {
 			fetch(false)
-			this.getBallotChoices(lat,lng,choices,function() { fetch(true);  setTimeout( function() {$('.candidate.row:last .next').text('Next Measure').bind('click touchend',function() { $('.ballot-measures button.open:first').click() }); },100) })
+			this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text('Next Measure').bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
 		}
-
 	}, this)
+
 
 	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for 
 		var state = yourLocation.address.state(), 
@@ -193,7 +202,8 @@ function locationModel(data) {
 			inits.root+'lookup',
 			{
 				l: yourLocation.lat()+','+yourLocation.lng(),
-				address: address
+				address: address,
+				address_text: yourLocation.remember() ? yourLocation.address() : ''
 			},
 			function(data) { 
 				if( data != null && data.constructor == Array ) {
@@ -205,10 +215,27 @@ function locationModel(data) {
 				callback()
 			})
 	}
-	
-	
-	
+	this.getGuides = function(state,guides) { // Useful function for 
+		$.getJSON(
+			inits.root+'guides/'+state+'.json?limit=5',
+			function(data) { 
+				if( data != null && data.constructor == Array ) {
+					guides(data)
+				}
+			})
+	}
 
+
+	this.grabChoices = ko.computed( function() { // Retrieve guides
+		var geolocated = this.geolocated(),
+			state = this.address.state(),
+			guides = this.guides
+			
+		if( geolocated && state && guides().length == 0 ) this.getGuides(state,guides);
+	},this)
+	
+	
+	// More menu shite
 	this.menuItems = []
 
 	if( this.state == 'front' ) {
@@ -256,7 +283,7 @@ function locationModel(data) {
 		this.sections.push( userBallotMeasures )
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
-		layout += '</li></ul></li><!-- /ko --></ul>'
+		layout += '</li></ul></li><!-- /ko --><li style="font-weight: normal; margin: 10px; font-size: 10px;" data-bind="visible: !yourLocation.fetch() "><em>Still loading...</em></li></ul>'
 		
 		var url = document.location.toString(), name = inits.title
 		this.menuItems.push( 
@@ -278,9 +305,9 @@ function locationModel(data) {
 		
 		
 		this.menuItems.push( 
-			MenuItem(inits.root,I18n.t('menu.find')),
-			MenuItem('#read-ballot','Guides By States','<ul style="margin: 20px 0;">'+inits.states.map( function(el) { return '<li><a href="#'+el.replace(/ /g,'_')+'">'+el+'</a></li>' }).join("\n")+'</ul>',null),
-			MenuItem(null,I18n.t('menu.share_this_page'),null,'<div class="container share-container">'+I18n.t('menu.share_this_page')+'<br>'+makeShare(url)+'</div>')
+			MenuItem(inits.root,'Find Your Ballot'),
+			MenuItem('#read-ballot','Guides By States','<ul style="margin: 20px 0; max-height: 300px; overflow-y: scroll;">'+inits.states.map( function(el) { return '<li><a href="#'+el.replace(/ /g,'_')+'">'+el+'</a></li>' }).join("\n")+'</ul>',null),
+			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">'+I18n.t('menu.share_this_page')+'<br>'+makeShare(url)+'</div>')
 		)
 	}
 	if( this.state == 'profile' ) {
@@ -333,6 +360,7 @@ function locationModel(data) {
 		if( top < 10 ) return items[0].id
 		else return items[ items.length - 1].id
 	},this)
+	
 
 }
 

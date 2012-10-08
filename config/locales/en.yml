@@ -25,6 +25,7 @@ en:
     front:
         look_ballot: "Look Up What’s On Your Ballot"
         address_placeholder: 'enter your address here'
+        save_address: 'Save as home address'
         confirm: 'Is this right?'
         on_ballot: 'Here’s What Will Be On Your Ballot'
         more: 'More to Come...'
