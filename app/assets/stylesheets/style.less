@@ -162,7 +162,7 @@ body.home {
 		}
 		.find-ballot {
 			width:520px;
-		 	margin: 25px auto 15px;
+		 	margin: 25px auto 0px;
 			-webkit-appearance:none;
 			padding: 13px 10px;
 			border: 1px solid @accent;
@@ -184,6 +184,32 @@ body.home {
 			position: relative;
 			top: -3px;
 		}
+		
+		.remember {
+			margin:0 0 20px 50px;
+			display:block;
+			text-align:left;
+			font-size:12px;
+			color:lighten(@darkGrey,20%);
+			
+			&:before {
+				content: "\f006  ";
+				font-family:"FontAwesome";
+				
+			}
+			
+			&.on {
+				color:@darkGrey;
+				&:before  {
+					content: "\f005  ";
+					font-family:"FontAwesome";
+					
+				}
+			}
+			 
+		}
+		
+		
 	}
 
 	#map {
@@ -210,11 +236,28 @@ body.home {
 			&.located {
 				float: left;
 				width: 300px;
-				margin: 20px 50px;
+				margin: 0px 50px 20px;
 			}
 			margin: 0 auto;
 			border:1px solid @accent;
 		}
+		
+		.top-guides {
+			h3 {
+				text-align:left;
+			}
+			
+			ol {
+				text-align:left;
+				list-style-type:decimal;
+				
+				a {
+					
+				}	
+			}
+		}
+	
+	
 	}
 }
 

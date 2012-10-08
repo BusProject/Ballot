@@ -10,14 +10,14 @@
 				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0">enter your address here</label><![endif]-->
 				<a href="#" class="cancel find-ballot-submit">Submit</a>
 			</div>
-			<span class="remember link" onclick="$(this).toggleClass('on')" >Remember as my home</span>
+			<span class="remember link" onclick="$(this).toggleClass('on')" >Save as home address</span>
 		
 		</div><!-- enter address -->
 			
 		<div id="map"  >
 			<img data-bind="attr: { 'src' : map }, css: { located: geolocated() }">
 			<div class="top-guides" data-bind=" visible: geolocated() ">
-				<h2>Voter Guides Near You</h2>
+				<h3>Voter Guides Near You</h3>
 				<ol data-bind="foreach:guides">
 					<li>
 						<a data-bind="attr:{href: profile}, text: guide_name || name+'\'s Voter Guide' "></a>
