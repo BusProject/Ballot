@@ -13,6 +13,18 @@ class Choice < ActiveRecord::Base
     return ''
   end
   
+  def self.to_json_conditions
+    return :include => [ 
+    :options => { 
+      :include => [
+        :feedbacks => {
+            :include => [ :user => { :except => [ :banned, :admin, :deactivated, :alerts, :created_at, :last_name, :modified_at, :fb_friends, :first_name, :guide_name, :description  ] } ]
+          }
+        ] 
+      }
+    ]
+  end
+  
   def fullDelete
     self.options.each{ |o| o.delete } unless self.options.nil?
     self.delete
