@@ -1,4 +1,11 @@
 class Cicero
+  
+  @match = {}
+  
+  def self.match
+    return @match
+  end
+  
   def self.find(lat, addresses = [] )
     return lat if lat.nil? 
 
@@ -11,9 +18,9 @@ class Cicero
     lat = lat.is_a?(Float) ? lat.round(3).to_s : lat.to_f.round(3).to_s
     lng = lng.is_a?(Float) ? lng.round(3).to_s : lng.to_f.round(3).to_s
     
-    match = Match.find_by_latlng(lat+','+lng)
+    @match = Match.find_by_latlng(lat+','+lng)
     
-    if match.nil?
+    if @match.nil?
       cicero = Rails.cache.read('cicero')
       
       begin
@@ -42,14 +49,15 @@ class Cicero
 
         all_districts = fix_districts leg_districts # + school_dist
         all_districts+=addresses
-        Match.new(:latlng => lat+','+lng, :data =>  all_districts).save
+        @match = Match.new(:latlng => lat+','+lng, :data =>  all_districts)
+        @match.save
       rescue
         all_districts = addresses
       end
 
       return all_districts
     else
-      return match.data
+      return @match.data
     end
   end
   
