@@ -10,7 +10,8 @@
 				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0">enter your address here</label><![endif]-->
 				<a href="#" class="cancel find-ballot-submit">Submit</a>
 			</div>
-			<span class="remember link" onclick="$(this).toggleClass('on')" >Save as home address</span>
+			<span class="remember link on" data-bind="click: function( $data ) {  var member = $data.remember(); $data.remember( !member ); }, css: { on: remember }"  >Save as home address</span>
+
 		
 		</div><!-- enter address -->
 			

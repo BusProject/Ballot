@@ -9,7 +9,8 @@ function locationModel(data) {
 	this.geocoded = ko.observable(false)
 	this.geocoded.address = ko.observable('')
 	this.fetch = ko.observable(true)
-	
+	this.remember = ko.observable(true)
+
 	// Style elements
 	this.top = ko.observable(0)
 	this.top.better = ko.computed( function() {
@@ -208,7 +209,8 @@ function locationModel(data) {
 			inits.root+'lookup',
 			{
 				l: yourLocation.lat()+','+yourLocation.lng(),
-				address: address
+				address: address,
+				address_text: yourLocation.address()
 			},
 			function(data) { 
 				if( data != null && data.constructor == Array ) {
