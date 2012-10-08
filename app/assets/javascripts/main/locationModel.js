@@ -233,8 +233,8 @@ function locationModel(data) {
 			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">Your Voter Guide</a>'
 			
 		this.menuItems.push( 
-			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your on your ballot.</p>'),
-			MenuItem('#read-ballot','Read Your Ballot',"<p>Get the lowdown on everything on your ballot for the November 6th Election.</p><p>Read what others have to say about the important races in your state and share your own views.</p>"+layout,null, this),
+			MenuItem('#find-ballot',I18n.t('menu.find'),'<p>Enter your voting address to look up what will appear on your on your ballot.</p>'),
+			MenuItem('#read-ballot',I18n.t('menu.read'),"<p>Get the lowdown on everything on your ballot for the November 6th Election.</p><p>Read what others have to say about the important races in your state and share your own views.</p>"+layout,null, this),
 			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra)
 		)
 	}
@@ -260,17 +260,17 @@ function locationModel(data) {
 		
 		var url = document.location.toString(), name = inits.title
 		this.menuItems.push( 
-			MenuItem(inits.root,'Find Your Ballot',null),
-			MenuItem('#read-ballot','Read Your Ballot', layout ,null, this),
+			MenuItem(inits.root,I18n.t('menu.find'),null),
+			MenuItem('#read-ballot',I18n.t('menu.read'), layout ,null, this),
 			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+inits.title+'<br>'+makeShare(url,name, inits.message )+extra)
 		)
 	}
 	if( this.state == 'single' ) {
 		var url = document.location.toString()
 		this.menuItems.push( 
-			MenuItem(inits.root,'Find Your Ballot'),
+			MenuItem(inits.root,I18n.t('menu.find')),
 			MenuItem(current_user.url,'Your Voter Guide'),
-			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Page<br>'+makeShare(url)+'</div>')
+			MenuItem(null,I18n.t('menu.share_this_page'),null,'<div class="container share-container">'+I18n.t('menu.share_this_page')+'<br>'+makeShare(url)+'</div>')
 		)
 	}
 	if( this.state == 'guides' ) {
@@ -278,9 +278,9 @@ function locationModel(data) {
 		
 		
 		this.menuItems.push( 
-			MenuItem(inits.root,'Find Your Ballot'),
+			MenuItem(inits.root,I18n.t('menu.find')),
 			MenuItem('#read-ballot','Guides By States','<ul style="margin: 20px 0;">'+inits.states.map( function(el) { return '<li><a href="#'+el.replace(/ /g,'_')+'">'+el+'</a></li>' }).join("\n")+'</ul>',null),
-			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Page<br>'+makeShare(url)+'</div>')
+			MenuItem(null,I18n.t('menu.share_this_page'),null,'<div class="container share-container">'+I18n.t('menu.share_this_page')+'<br>'+makeShare(url)+'</div>')
 		)
 	}
 	if( this.state == 'profile' ) {
@@ -317,9 +317,9 @@ function locationModel(data) {
 			pronoun = inits.user.id == current_user.id ? 'Your' : inits.user.first_name != '' ? inits.user.first_name+'\'s' : inits.user.last_name+'\'s'
 
 		this.menuItems.push( 
-			MenuItem(inits.root,'Find Your Ballot'),
+			MenuItem(inits.root, I18n.t('menu.find')),
 			MenuItem('#',pronoun+' Voter Guide',layout),
-			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Guide<br>'+makeShare(url,name)+'</div>')
+			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">'+I18n.t('menu.share_this_guide')+'<br>'+makeShare(url,name)+'</div>')
 		)
 	}
 

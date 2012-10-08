@@ -13,6 +13,14 @@ en:
         add_canidate: 'Create a new candidate'
         add_measure: 'Create a new ballot measure'
         missing: 'Is something missing?'
+    # Menu
+    menu:
+        find: 'Find Your Ballot'
+        read: 'Read Your Ballot'
+        share: 'Share'
+        this_ballot: 'This Ballot'
+        this_page: 'This Page'
+        this_guide: 'This Guide'
     # Front page specifics
     front:
         look_ballot: "Look Up What’s On Your Ballot"
@@ -22,3 +30,4 @@ en:
         more: 'More to Come...'
         more_text: "This isn\'t your full ballot - we're still adding data "
         more_login: "Log in through Facebook to get an email when we've added more."
+
