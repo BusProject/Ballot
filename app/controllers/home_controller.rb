@@ -12,9 +12,32 @@ class HomeController < ApplicationController
 
       render :template => 'home/splash.html.erb'
     else
-      params['q'] = params['q'] || params['address']
       
-      @config = { :address => params['q'].gsub('+',' ') }.to_json unless params['q'].nil?
+      address = params['q'] || params['address']
+      
+      if address.nil?
+        remember = true
+        if current_user
+          address = current_user.address unless current_user.address.nil? || current_user.address.empty?
+          if match = current_user.match
+            @choices = Choice.find_all_by_geography( match.data ).sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
+            latlng = match.latlng
+            state = match.data.select{ |d| d.length == 2 }.first
+            google = { :address_components => [ { :short_name => state, :types => ["administrative_area_level_1"] }  ] }
+          end
+        else
+          address = cookies['ballot_address_cache']
+        end
+      else
+        remember = false
+      end
+      address = address || ''
+      latlng = latlng || nil
+      
+      @config = { :address => address.gsub('+',' '), :latlng => latlng, :google => google, :remember => remember }.to_json 
+
+      @choices_json = @choices.to_json( Choice.to_json_conditions )
+      
       @classes = 'home front'
       
       render :template => 'home/index.html.erb' 
