@@ -279,7 +279,6 @@ EOF
 
     @classes = 'home profile guides'
     
-    
     if params[:state]
       if params[:state].length == 2
         state = Choice.states[ Choice.stateAbvs.index(params[:state] ) ].gsub(' ','_')
@@ -297,10 +296,12 @@ EOF
          render :json => guides.map{ |u| u.to_public(false) }
       else
         @config = { :state => 'guides', :states => guides.map{|u| u.name } }.to_json
+        @title = 'Top Voter Guides In '+state.capitalize
       end
     else
       @limit = 10
       @guides = User.by_state
+      @title = 'Top Voter Guides Around the Country'
       @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] } }.to_json
     end
   end
