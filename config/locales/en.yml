@@ -5,6 +5,7 @@ en:
     site:
         yes: 'Yes'
         no: 'No'
+        or: "or"
         submit: 'Submit'
         save: 'Save'
         cancel: 'Cancel'
