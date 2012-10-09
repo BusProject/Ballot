@@ -295,7 +295,7 @@ EOF
       if params[:format] == 'json'
          render :json => guides.map{ |u| u.to_public(false) }
       else
-        @config = { :state => 'guides', :states => guides.map{|u| u.name } }.to_json
+        @config = { :state => 'guides',  :stateName => state, :states => guides.map{|u| u.name } }.to_json
         @title = 'Top Voter Guides In '+state.capitalize
       end
     else

@@ -13,14 +13,46 @@ en:
         add_canidate: 'Create a new candidate'
         add_measure: 'Create a new ballot measure'
         missing: 'Is something missing?'
+        voter_guide: 'Voter Guide'
+    types:
+        ballot_measures:
+            title: 'Ballot Measures'
+            text: 'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'
+        federal: 
+            title: 'Federal'
+            text: 'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'
+        state: 
+            title: 'State'
+            text: "These candidates will represent you in your State\'s government."
+        county: 
+            title: 'County'
+            text: "These candidates will represent you in your State\'s government."
+        other:
+            title: 'Other'
+            text: 'These candidates will represent you in your county, municipal, or judicial government.'
+        user_candidates: 
+            title: 'User Created Candidates'
+            text: 'These are candidates that were created by another user on The Ballot. We cannot verify their accuracy.'
+        user_measures: 
+            title: 'User Created Measures'
+            text: 'These are ballot measures that were created by another user on The Ballot. We cannot verify their accuracy.'
+        
     # Menu
     menu:
         find: 'Find Your Ballot'
+        find_text: 'Enter your voting address to look up what will appear on your on your ballot.'
         read: 'Read Your Ballot'
-        share: 'Share'
-        this_ballot: 'This Ballot'
-        this_page: 'This Page'
-        this_guide: 'This Guide'
+        read_text: 'Get the lowdown on everything on your ballot for the November 6th Election.'
+        read_text_2: 'Read what others have to say about the important races in your state and share your own views.'
+        share: 'Share Your Ballot'
+        share_message: 'Check out my voter guide on The Ballot'
+        the_ballot: 'Share The Ballot'
+        this_ballot: 'Share This Ballot'
+        this_page: 'Share This Page'
+        this_guide: 'Share This Guide'
+        state_guides: 'Guides By States'
+        guides_in: 'Guides in %{state}'
+
     # Front page specifics
     front:
         look_ballot: "Look Up What’s On Your Ballot"
@@ -32,3 +64,7 @@ en:
         more_text: "This isn\'t your full ballot - we're still adding data "
         more_login: "Log in through Facebook to get an email when we've added more."
 
+    i18n_toolbox: 
+        possessive: "%{owner}'s %{thing}"
+        possessive_s: "%{owner} %{thing}"
+        possessive_you: "Your %{thing}"
