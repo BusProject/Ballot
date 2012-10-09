@@ -76,7 +76,6 @@ en:
         next: 'Next Candidate'
     measures:
         next: 'Next Measure'
-    
     # Front page specifics
     front:
         look_ballot: "Look Up What’s On Your Ballot"
@@ -87,21 +86,19 @@ en:
         more: 'More to Come...'
         more_text: "This isn\'t your full ballot - we're still adding data "
         more_login: "Log in through Facebook to get an email when we've added more."
-
     i18n_toolbox: 
         possessive: "%{owner}'s %{thing}"
         possessive_s: "%{owner} %{thing}"
         possessive_you: "Your %{thing}"
-
-	splash:
-		welcome1: "Welcome to Your"
-		welcome2: "100% Social Voter Guide"
-		instructions: "How to use TheBallot.org"
-		research1: "Research:"
-		research2: "Look up which measures and candidates will be on your ballot this election."
-		discuss1: "Discuss:"
-		discuss2: "See how your friends weigh in on the hottest issues of the day and leave your own comments."
-		share1: "Share:"
-		share2: "Create a custom voter guide and personalized badges to share on Facebook, Tumblr and Google+."
-		start: "Get Started"
-		or: "or"
+    splash:
+        welcome1: "Welcome to Your"
+        welcome2: "100% Social Voter Guide"
+        instructions: "How to use TheBallot.org"
+        research1: "Research:"
+        research2: "Look up which measures and candidates will be on your ballot this election."
+        discuss1: "Discuss:"
+        discuss2: "See how your friends weigh in on the hottest issues of the day and leave your own comments."
+        share1: "Share:"
+        share2: "Create a custom voter guide and personalized badges to share on Facebook, Tumblr and Google+."
+        start: "Get Started"
+        or: "or"
