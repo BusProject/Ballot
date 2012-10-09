@@ -32,24 +32,24 @@
 			<%= stylesheet_link_tag 'other/colorpicker.css' %>
 
 			<div id="edit-profile">
-				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }"><i class="icon-cog"></i> Customize Your Voter Guide</span></a>
+				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }"><i class="icon-cog"></i><%= t("profile.customize")%></span></a>
 				<div style="display: none" class="editor" data-bind="visible: edit ">
-					<h3><i class="icon-cog"></i> Customize Your Voter Guide <i class="icon-cog"></i></h3>
+					<h3><i class="icon-cog"></i> <%= t("profile.customize")%> <i class="icon-cog"></i></h3>
 					<p style="text-align:center; margin-bottom:20px"><i class="icon-link"></i> &nbsp <a data-bind="text: '<%= ENV['BASE'] %>/'+profile.store(), attr: { href: '<%= ENV['BASE'] %>/'+profile.store()} "></a></p>
-					<p class="label">Voter Guide Title</p> <input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
-					<p class="label">Voter Guide Description</p> <textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
+					<p class="label"><%= t("profile.title")%></p> <input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
+					<p class="label"><%= t("profile.description")%></p> <textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
 
-					<p class="label">Custom URL</p> http://theballot.org/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="Your New URL"  >
-					<span class="url-searching" data-bind="visible: profile.checking() "><i class="icon-search"></i> Searching... </span><span class="url-available" data-bind="visible: profile.available() && !profile.checking() "><i class="icon-ok-sign"></i> Available! </span><span class="url-taken" data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null "><i class="icon-exclamation-sign"></i> Taken! </span>
+					<p class="label"><%= t("profile.url")%></p> http://theballot.org/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="Your New URL"  >
+					<span class="url-searching" data-bind="visible: profile.checking() "><i class="icon-search"></i> Searching... </span><span class="url-available" data-bind="visible: profile.available() && !profile.checking() "><i class="icon-ok-sign"></i> <%= t("profile.available")%> </span><span class="url-taken" data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null "><i class="icon-exclamation-sign"></i> <%= t("profile.taken")%> </span>
 					<br />
 
-					<p class="label">Set your primary color</p><input class="primary" data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="Primary color"  >
-					<p class="label">Set your secondary color</p><input class="secondary" data-bind="value: secondary, style: {color: secondary() }, valueUpdate: 'afterkeydown'" placeholder="Secondary color"  >
-					<p class="label">Set your background color</p><input class="bg" data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="Background color"  >
+					<p class="label"><%= t("profile.primary")%></p><input class="primary" data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="Primary color"  >
+					<p class="label"><%= t("profile.secondary")%></p><input class="secondary" data-bind="value: secondary, style: {color: secondary() }, valueUpdate: 'afterkeydown'" placeholder="Secondary color"  >
+					<p class="label"><%= t("profile.background")%></p><input class="bg" data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="Background color"  >
 
-					<p class="label" style="margin-top:30px;">Upload a custom header image</p><div id="image-upload"><%= form_for @user, :url => user_update_path, :method => :POST, :html => { :multipart => true }, :remote => true, :format => :json do |form| %>
-						<%= form.file_field :header %><span class="loading" ><i class="icon-copy"></i> Saving... </span><span class="success"><i class="icon-ok-sign"></i> Saved! </span><span class="error" ><i class="icon-exclamation-sign"></i> Error! </span>
-						<p class="small-label">Must at least 860 x 180. Will overwrite your current header.</p>
+					<p class="label" style="margin-top:30px;"><%= t("profile.header")%></p><div id="image-upload"><%= form_for @user, :url => user_update_path, :method => :POST, :html => { :multipart => true }, :remote => true, :format => :json do |form| %>
+						<%= form.file_field :header %><span class="loading" ><i class="icon-copy"></i> <%= t("profile.saving")%> </span><span class="success"><i class="icon-ok-sign"></i> <%= t("profile.saved")%> </span><span class="error" ><i class="icon-exclamation-sign"></i> <%= t("profile.error")%> </span>
+						<p class="small-label"><%= t("profile.headerreq")%></p>
 						<%= form.submit 'Upload' %>
 						<span class="link" data-bind="click: function() { removeHeader() }, visible:  typeof header() != 'undefined' && header() != null && header() != '/headers/header/missing.png'">Remove Header</span>
 					<% end %>

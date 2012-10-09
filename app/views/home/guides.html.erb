@@ -4,14 +4,14 @@
 <div id="read-ballot" class="ballot-section <%= 'single' if @guides.count == 1 %>" >
 	<div class="intro">
 		<h1><i class="icon-heart"></i>
-			  Top Voter Guides 
+			  <%= t("top.guides")%>
 			<%- if @guides.count == 1 %>
-				In <%= @states [ @stateAbvs.index( @guides[0][0] )  ] %>
+				<%= t("top.in")%> <%= @states [ @stateAbvs.index( @guides[0][0] )  ] %>
 			<% else %>
-				Around the Country 
+				<%= t("top.around")%> 
 			<% end -%>
 		<i class="icon-heart"></i></h1>
-		<p>These are the finest voter guides in all the land. A voter guide's rank is determined by how useful other users have found it. To see your voter guide cracking the top 10, share your guide with your friends and tell them to recommend your guide.</p>
+		<p><%= t("top.finest")%></p>
 	</div>
 	
 	<% @guides.each do |stateAbv,guides| %>
