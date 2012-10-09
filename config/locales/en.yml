@@ -16,6 +16,9 @@ en:
         voter_guide: 'Voter Guide'
         deactivated: 'ACCOUNT DEACTIVATED'
         banned: 'ACCOUNT BANNED'
+        helpful: 'Was this helpful?'
+        flag_prompt: 'Are you sure you want to flag?'
+        flag: 'flag'
     types:
         ballot_measures:
             title: 'Ballot Measures'
@@ -69,6 +72,11 @@ en:
         pages: 
             login: 'Login as facebook page'
             refresh: 'Refresh Guides'
+    candidates:
+        next: 'Next Candidate'
+    measures:
+        next: 'Next Measure'
+    
     # Front page specifics
     front:
         look_ballot: "Look Up What’s On Your Ballot"

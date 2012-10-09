@@ -191,7 +191,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	}
 
 	if( $this.hasClass('flag') ) {
-		$this.parent().html('Are you sure you want to flag? <span class="confirm-flag link">Yes</span> / <span class="stop-flag link">No</span>');
+		$this.parent().html([I18n.t('site.flag_check'),' <span class="confirm-flag link">',I18n.t('site.yes'),'</span> / <span class="stop-flag link">',I18n.t('site.no'),'</span>'].join() );
 		return false;
 	}
 	if( $this.hasClass('confirm-flag') ) {
@@ -202,7 +202,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		action = 'flag'
 	}
 	if( $this.hasClass('stop-flag') ) {
-		$this.parent().html('Was this helpful?<span class="helpful link">Yes</span>&nbsp;|&nbsp;<span class="not link">No</span>&nbsp;|&nbsp;<span class="flag link">Flag</span></div>')
+		$this.parent().html( [I18n.t('site.helpful'),'<span class="helpful link">',I18n.t('site.yes'),'</span>&nbsp;|&nbsp;<span class="not link">',I18n.t('site.no'),'</span>&nbsp;|&nbsp;<span class="flag link">',I18n.t('site.flag'),'</span></div>'].join() )
 		return false;
 	}
 
@@ -276,34 +276,6 @@ ko.bindingHandlers.elastic = {
 	}
 }
 
-ko.bindingHandlers.readmore = {
-	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
-		var all = allBindingsAccessor(),
-			ctx = ko.contextFor(element),
-			$parent = ctx.$parent
-		
-		if( all.text == null ) return false
-		if( all.text.length > 300 ) {
-			all.html = all.text.slice(0, all.text.slice(290).search(' ')+290 )+' ... <span class="more link">Read More</span>'
-			if( typeof $parent.readmore == 'undefined' ) $parent.readmore = ko.observable(false)
-		}
-		if( typeof $parent.readmore != 'undefined' ) $(element).addClass('readMored')
-	},
-	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
-		var all = allBindingsAccessor(),
-			ctx = ko.contextFor(element)
-			$parent = ctx.$parent
-
-		if( typeof $parent.readmore != 'undefined'  && $parent.readmore() ) {
-			all.text = all.text
-			var height = $(element).height()
-			if( height > $parent.readmore() ) {
-				$parent.readmore(height)
-			}
-			$(element).height($parent.readmore() )
-		}
-	}
-};
 ko.bindingHandlers.slide = {
 	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
 		if( valueAccessor() ) $(element).slideDown()
