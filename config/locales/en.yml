@@ -102,4 +102,5 @@ en:
         share1: "Share:"
         share2: "Create a custom voter guide and personalized badges to share on Facebook, Tumblr and Google+."
         start: "Get Started"
-        or: "or"
+    state:
+        title: "All of %{state}\'s candidates and ballot measures."

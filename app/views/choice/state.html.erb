@@ -1,7 +1,7 @@
 <div id="read-ballot" class="ballot-section">
 	<div class="sectionheading">
 		<h1><%= @title %></h1>
-		<p>All of <%= @state %>'s candidates and ballot measures.</p>
+		<p><%= t('state.title', { :state => @state } )%></p>
 	</div>
 
 	<% @grouped = @choices.group_by(&:contest_type) %>
