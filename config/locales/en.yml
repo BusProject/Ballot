@@ -92,3 +92,16 @@ en:
         possessive: "%{owner}'s %{thing}"
         possessive_s: "%{owner} %{thing}"
         possessive_you: "Your %{thing}"
+
+	splash:
+		welcome1: "Welcome to Your"
+		welcome2: "100% Social Voter Guide"
+		instructions: "How to use TheBallot.org"
+		research1: "Research:"
+		research2: "Look up which measures and candidates will be on your ballot this election."
+		discuss1: "Discuss:"
+		discuss2: "See how your friends weigh in on the hottest issues of the day and leave your own comments."
+		share1: "Share:"
+		share2: "Create a custom voter guide and personalized badges to share on Facebook, Tumblr and Google+."
+		start: "Get Started"
+		or: "or"
