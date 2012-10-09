@@ -14,6 +14,8 @@ en:
         add_measure: 'Create a new ballot measure'
         missing: 'Is something missing?'
         voter_guide: 'Voter Guide'
+        deactivated: 'ACCOUNT DEACTIVATED'
+        banned: 'ACCOUNT BANNED'
     types:
         ballot_measures:
             title: 'Ballot Measures'
@@ -52,7 +54,21 @@ en:
         this_guide: 'Share This Guide'
         state_guides: 'Guides By States'
         guides_in: 'Guides in %{state}'
-
+    # Top Bar
+    top:
+        start: 'Get Started'
+        login: 'Login with Facebook' # Is an image - will need to change to different 
+        register: 'Register to Vote'
+        about: 'About'
+        news: 'News'
+        contact: 'Contact'
+        search: 'search'
+        log_out: 'Log Out'
+        my_guide: 'My Voter Guide'
+        all_guides: 'All Voter Guides'
+        pages: 
+            login: 'Login as facebook page'
+            refresh: 'Refresh Guides'
     # Front page specifics
     front:
         look_ballot: "Look Up What’s On Your Ballot"
