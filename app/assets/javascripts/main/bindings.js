@@ -191,18 +191,17 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	}
 
 	if( $this.hasClass('flag') ) {
-		$this.parent().html([I18n.t('site.flag_check'),' <span class="confirm-flag link">',I18n.t('site.yes'),'</span> / <span class="stop-flag link">',I18n.t('site.no'),'</span>'].join() );
+		$this.parent().html([I18n.t('site.flag_prompt'),' <span class="confirm-flag link">',I18n.t('site.yes'),'</span> / <span class="stop-flag link">',I18n.t('site.no'),'</span>'].join('') );
 		return false;
 	}
 	if( $this.hasClass('confirm-flag') ) {
 		var option = $ctx.$parent.options().filter( function(el) { return el.id == $data.option_id  })[0]
 		option.feedback.remove( $data )
-		$ctx.parent.comments -= 1;
 		$ctx.$parent.feedback()
 		action = 'flag'
 	}
 	if( $this.hasClass('stop-flag') ) {
-		$this.parent().html( [I18n.t('site.helpful'),'<span class="helpful link">',I18n.t('site.yes'),'</span>&nbsp;|&nbsp;<span class="not link">',I18n.t('site.no'),'</span>&nbsp;|&nbsp;<span class="flag link">',I18n.t('site.flag'),'</span></div>'].join() )
+		$this.parent().html( [I18n.t('site.helpful'),'<span class="helpful link">',I18n.t('site.yes'),'</span>&nbsp;|&nbsp;<span class="not link">',I18n.t('site.no'),'</span>&nbsp;|&nbsp;<span class="flag link">',I18n.t('site.flag'),'</span></div>'].join('') )
 		return false;
 	}
 
