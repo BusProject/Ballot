@@ -121,7 +121,7 @@
 			<% end -%>
 
 			<div class="footer" >
-				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><%= t('site.read_more') %></a>
+				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><%= t('site.read_all') %></a>
 				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() "><%= t('site.load_more')%></a>
 			</div>
 
