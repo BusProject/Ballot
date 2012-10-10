@@ -42,8 +42,13 @@ class FeedbackController < ApplicationController
   def vote
     feedback = Feedback.find( params[:id] )
 
-    
-    render :json => {:success => true, :message => I18n.t('feedback.agree',{:count => amount, :attribute => params[:flavor] }), :callback  => params['callback']
+    if  params[:flavor] == 'useful'
+      amount = feedback.upvotes.size
+    else
+      amount = feedback.upvotes.size
+    end
+
+    render :json => {:success => true, :message => I18n.t('feedback.agree',{:count => amount, :attribute => params[:flavor] }) }, :callback  => params['callback']
     
   end
 
@@ -61,28 +66,28 @@ class FeedbackController < ApplicationController
       flag = flag.split(',')
         
         
-          if user_signed_in? && current_user.commentable?
-            if current_user.id == feedback.user_id
-              render :json => {:success => false, :message => '' }, :callback  => params['callback']
+      if user_signed_in? && current_user.commentable?
+        if current_user.id == feedback.user_id
+          render :json => {:success => false, :message => '' }, :callback  => params['callback']
+        else
+          if flag.index( current_user.id.to_s ).nil?
+            flag.push(current_user.id)
+            feedback[params[:flavor] ] = flag.join(',')
+
+            if feedback.save
+              render :json => {:success => true, :message => '' }, :callback  => params['callback']
             else
-              if flag.index( current_user.id.to_s ).nil?
-                flag.push(current_user.id)
-                feedback[params[:flavor] ] = flag.join(',')
-
-                if feedback.save
-                  render :json => {:success => true, :message => '' }, :callback  => params['callback']
-                else
-                  render :json => {:success => false, :message => '' }, :callback  => params['callback']
-                end
-
-              else
-                render :json => {:success => false, :message => '' }, :callback  => params['callback']
-              end
+              render :json => {:success => false, :message => '' }, :callback  => params['callback']
             end
+
           else
             render :json => {:success => false, :message => '' }, :callback  => params['callback']
           end
-    end  
+        end
+      else
+        render :json => {:success => false, :message => '' }, :callback  => params['callback']
+      end
+    end
   end
 
 end
