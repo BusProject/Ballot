@@ -193,7 +193,7 @@ en:
         start: "Get Started"
     # State page
     state:
-        title: "All of %{state}\'s candidates and ballot measures."
+        title: "All of %{state}'s candidates and ballot measures."
     # Guide page
     guides:
         top: "Top Voter Guides"
