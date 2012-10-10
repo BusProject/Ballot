@@ -96,6 +96,7 @@ class HomeController < ApplicationController
   def about
     @classes = 'home msg'
     @config = { :state => 'page' }.to_json
+    if I18n.locale == :en
     @title = 'About'
     @content = <<EOF
          <h1>About TheBallot.org</h1>
@@ -120,7 +121,7 @@ class HomeController < ApplicationController
          <p><strong><a href="https://twitter.com/mattsinger7" target="_blank">Matt Singer</a></strong></p>
          <!--<p>Matt Bio</p>-->         
 EOF
-
+  end
     render 'home/show'
   end
   
@@ -153,7 +154,8 @@ EOF
     def privacy
        @classes = 'home msg'
        @config = { :state => 'page' }.to_json
-       @title = 'About'
+if I18n.locale == :en
+       @title = 'Prviacy Policy'
        @content = <<EOF
        <h1>Privacy Policy</h1>
        <p>The League of Young Voters and The Bus Federation (collectively, "we" or "us") are committed to preserving your privacy and safeguarding the personal and/or sensitive information you provide to us via any of our websites. This commitment is demonstrated by the terms of this Privacy Policy.</p>
@@ -200,12 +202,14 @@ EOF
        <p>Last updated: October 5th, 2012</p>
 
 EOF
+end
       render 'home/show'
     end
     def tos
        @classes = 'home msg'
        @config = { :state => 'page' }.to_json
-       @title = 'About'
+if I18n.locale == :en
+       @title = 'Terms of Service'
        @content = <<EOF
        <h1>Terms of Use</h1>
        
@@ -271,6 +275,7 @@ EOF
        <p>Last updated: October 5th, 2012</p>
 
 EOF
+end
       render 'home/show'
     end
 
