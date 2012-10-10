@@ -11,7 +11,7 @@
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div itemprop="description" class="matchup" data-bind="html: '<i class=icon-user></i> ' +$data.description "><%= choice.description %></div>
 	<div itemprop="address" class="geography" data-bind="html: '<i class=icon-map-marker></i> ' +$data.nice_geography "><%= choice[:nice_geography] %></div>
-	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' + I18n.t( 'site.voted', { count: $data.voted() })+ ' | ' +I18n.t('site.voted', { count: $data.commentsPure() }) " >
+	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' + I18n.t( 'site.voted', { count: $data.voted() })+ ' | ' +I18n.t('site.commented', { count: $data.commentsPure() }) " >
 		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> | <%= t('site.commented', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> 
 	</div>
 
