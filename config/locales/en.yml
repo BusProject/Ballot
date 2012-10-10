@@ -3,6 +3,7 @@
 
 en:
     site:
+        # Simple words
         'yes': 'Yes'
         'no': 'No'
         or: "or"
@@ -15,28 +16,28 @@ en:
         saved: "Saved!"
         saving: "Saving..."
         submit: 'Submit'
-        add: 'Add to Your Voter Guide'
         save: 'Save'
         cancel: 'Cancel'
         remove: 'Remove'
         edit: 'Edit'
         loading: 'Loading...'
-        join: 'Join the Discussion'
         for: 'for'
-        login: 'You must be logged in through Facebook to use this feature'
-
-        on_the: "on The Ballot"
         
-        # Move these to candidates / measures
-
+        # Objects in the user model
         state: 'State'
-
         voter_guide: 'Voter Guide'
 
+        add: 'Add to Your Voter Guide' # move this to add section
+        
+        # Account specific
+        login: 'You must be logged in through Facebook to use this feature'
+        on_the: "on The Ballot"
+        
+        # Account status 
         deactivated: 'ACCOUNT DEACTIVATED'
         banned: 'ACCOUNT BANNED'
 
-        # Move these to feedback specific
+        # Feedback specific
         helpful: 'Was this helpful?'
         flag_prompt: 'Are you sure you want to flag?'
         flag: 'flag'
@@ -50,7 +51,9 @@ en:
         read_all: 'Read All Comments'
         load_more: 'Load More Comments'
         i_say: 'What I Say'
+        join: 'Join the Discussion'
 
+        # Counting various things
         commented:
             one: 'One person has commented'
             zero: "No one's commented yet"
@@ -67,6 +70,8 @@ en:
             one: 'One person opposes'
             zero: 'No one opposes'
             other: '%{count} people oppose'
+        
+    # Types - used mostly in the side menu and listing things
     types:
         ballot_measures:
             title: 'Ballot Measures'
@@ -120,6 +125,8 @@ en:
         pages: 
             login: 'Login as facebook page'
             refresh: 'Refresh Guides'
+    
+    # used on the single pages and main page
     candidates:
         next: 'Next Candidate'
         open: 'Learn More and Comment'
@@ -141,6 +148,8 @@ en:
             party: "Party"
             campaign: 'Campaign'
             add: 'Add Another Candidate'
+
+    # used on the single pages and main page
     measures:
         next: 'Next Measure'
         open: 'Learn More and Comment'
@@ -229,6 +238,8 @@ en:
 
         recommend: 'Recommend this Guide'
         flag: 'Flag this user'
+        
+    # used on the add form
     add_form:
         warn_1: "Warning: Once you create this contest you will not be able to edit it. So make sure it's perfect. Be sure to include all candidates running for the office. It will appear on your voter guide and on the appropriate State page under the section for \"User Created\" contests."
         warn_2: "Ballot Measures and Candidates that are fictitious (not really on the 2012 ballot), duplicates of existing measures or candidates, or deemed misleading will be removed without notice."
@@ -237,6 +248,8 @@ en:
         missing_header: 'Add a Missing Ballot Measure or Candidate'
         missing: 'Is something missing?'
         confirm: 'Are you sure you want to create this?'
+
+    # used in memes
     badge: 
         title: 'TheBallot.org Badge Creator'
         two_title: 'Step 2: Choose a Background'
@@ -247,6 +260,8 @@ en:
             text: 'What do you want to say on your image? If your comment is too long you can edit it so it fits better.'
             remaining: 'Characters Remaining:'
             too_many: 'Too Many'
+
+    # used in responding to feedback
     feedback:
         agree:
             one: "One other person agrees it's %{attribute}"
