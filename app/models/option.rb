@@ -37,7 +37,7 @@ class Option < ActiveRecord::Base
   end
   
   def type
-    return ['yes','support','affirm','for','maintained','approved','approve'].index( self.name.downcase).nil? ? 'no' : 'yes'
+    return I18n.t('measures.yeses').split(',').index( self.name.downcase).nil? ? I18n.t('site.no').downcase : I18n.t('site.yes').downcase
   end
 
   def all_feedback current_user

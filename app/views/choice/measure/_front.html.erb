@@ -10,13 +10,15 @@
 
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
-	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' +$data.voted()+' '+( $data.voted() == 1 ? 'person' : 'people' )+' have voted | ' +$data.commentsPure()+' '+( $data.commentsPure() == 1 ? 'person' : 'people' )+' have commented' "></div>
-	<button class="open">Learn More and Comment</button>
+	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' + I18n.t( 'site.voted', { count: $data.voted() })+ ' | ' +I18n.t('site.voted', { count: $data.commentsPure() }) " >
+		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> | <%= t('site.commented', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> 
+	</div>
+	<button class="open"><%= t('measures.open' ) %></button>
 	<hr class="button">
 
 	<div class="body">
 		<div class="full-text">
-			<a target="_blank" href="<%= choice.options.first.blurb_source %>" data-bind="visible: $data == $root.selected(), href: $data.options()[0].blurb_source" >View full text  <i class="icon-external-link"></i></a>
+			<a target="_blank" href="<%= choice.options.first.blurb_source %>" data-bind="visible: $data == $root.selected(), href: $data.options()[0].blurb_source" ><%= t('measures.full_text')%> <i class="icon-external-link"></i></a>
 		</div>
 
 		<% n = 0 %>
@@ -26,7 +28,7 @@
 		<div itemprop="itemListElement"  class="optionholder <%= 'clean-no-script' if n != 0 %>" >
 			<!-- ko foreach: $data.options -->
 				<div class="option">
-					<h1 data-bind="text: $data.name, stripClass: true, addClass: $data.type" class="<%= option.option_type unless option.new_record? %> ">
+					<h1 data-bind="text: $data.name, stripClass: true, addClass: ( $data.type == I18n.t('site.no').toLowerCase() ? 'no' : 'yes' )" class="<%= option.option_type == t('site.no').downcase() ? 'no' : 'yes'  unless option.new_record? %> ">
 						<%= option.name %>
 					</h1>
 					<img data-bind="src: $data.photo" src="<%= option.photo %>">
@@ -34,13 +36,28 @@
 
 					<div class="faces">
 						<div class="minicounter" data-bind="">
-							<div data-bind="html: $data.support()+' '+( $data.support() == 1 ? 'person' : 'people' )+' '+($data.type == 'yes' ? 'support' : 'oppose')+( $data.support() == 1 ? 's' : '' )+'<br />'+$parent.contest"></div>
+							<div data-bind="html:  ( $data.type == I18n.t('site.yes').toLowerCase() ? I18n.t('site.support', { count: $data.support() }) : I18n.t('site.oppose', { count: $data.support() }) ) +'<br />'+$parent.contest ">
+								<% if option[:type] == t('site.yes').downcase %>
+									<%= t('site.oppose', { :count => option[:support]} ) %>
+								<% else %>
+									<%= t('site.oppose', { :count => option[:support]} ) %>
+								<% end %>
+								<br /><%= choice.contest %>
+							</div>
 						</div>
 						<!-- ko foreach: $data.faces.show -->
-							<a target="_blank" data-bind="attr: {href: $data.url }">
+							<a target="_blank" class="hide-no-script" data-bind="attr: {href: $data.url }">
 								<img class="face miniimage" data-bind="src: $data.image, attr: { alt: $data.name }">
 							</a>
 						<!-- /ko -->
+						<% unless option.new_record? %>
+							<% option.faces.each do |face| %>
+								<a target="_blank" class="clean-no-script" href="<%= face[:url] %>">
+									<img class="face miniimage" alt="<%= face[:name] %>" src="<%= face[:image] %>">
+								</a>
+							<% end %>
+						<% end %>
+						
 					</div>
 				</div>
 			<!-- /ko -->
@@ -57,11 +74,11 @@
 				<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
 					<h2>What Others Are Saying</h2>
 					<select data-bind="value: $data.mode">
-						<option value="normal">Sort By...</option>
-						<option value="best">Most Helpful</option>
-						<option value="friends">Your Friends</option>
-						<option value="yes" >In Support</option>
-						<option value="no" >In Opposition</option>
+						<option value="normal"><%= t('site.sort_by')%></option>
+						<option value="best"><%= t('site.most_helpful')%></option>
+						<option value="friends"><%= t('site.friends')%></option>
+						<option value="yes" ><%= t('site.in_support')%></option>
+						<option value="no" ><%= t('site.in_opposition')%></option>
 					</select>
 					<div class="arrows">&#x25B2;<br />&#x25BC;</div>
 				</div>
@@ -86,12 +103,12 @@
 							<br />
 								<%- if !current_user.nil? %>
 									<div class="ask">
-										Was this helpful?
-										<span class="helpful link" >Yes</span>
+										<%= t('site.helpful')%>
+										<span class="helpful link" ><Yes><%= t('site.yes')%></span>
 											&nbsp;|&nbsp;
-										<span class="not link">No</span>
+										<span class="not link"><%= t('site.no')%></span>
 											&nbsp;|&nbsp;
-										<span class="flag link">Flag</span>
+										<span class="flag link"><%= t('site.flag')%></span>
 									</div>
 								<% end -%>
 						</div>
@@ -105,8 +122,8 @@
 
 			<div class="footer" >
 				<meta itemprop="url" content="<%= choice.to_url%>" />
-				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Read All Comments</a>
-				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() ">Load More Comments</a>
+				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><%= t('site.read_more') %></a>
+				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() "><%= t('site.load_more')%></a>
 			</div>
 
 			<hr class="button lower">

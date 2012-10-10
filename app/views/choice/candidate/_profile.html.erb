@@ -14,7 +14,7 @@
 
 	<hr><a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1></a><hr>
 	<div class="profile-explanation">
-	<h2 class="profile-text">The Candidates</h2>
+	<h2 class="profile-text"><% t('candidates.list ')%></h2>
 	<div class="optionholder your-option" >
 		<!-- ko foreach: $data.options -->
 			<span class="option" data-bind="html: $data.name+' '+$data.partySmall()+'<br />'"><%=  feedback.option.name %> <%=  feedback.option.partySmall %></span>
@@ -29,7 +29,7 @@
 	</div>
 
 	<div class="profile-comment">
-		<h2 class="profile-text" style="<%= 'display:none;' unless !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind=" visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0">What I Say</h2>
+		<h2 class="profile-text" style="<%= 'display:none;' unless !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind=" visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0"><%= t('site.i_say ')%></h2>
 
 		<p style="<%= 'display: none' unless !feedback.nil? & !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
 			<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
@@ -44,13 +44,13 @@
 	<!-- These should work... might need to be massaged a bit. Hopefully they both could work asynchronously -->
 	<%- if user == current_user %>
 		<div class="controls">
-			<span class="link meme"><i class="icon-picture"></i> Create Badge</span> | <span class="remove link" >Remove</span> | 
+			<span class="link meme"><i class="icon-picture"></i> <%= t('site.badge ')%></span> | <span class="remove link" > <%= t('site.remove ')%></span> | 
 			<!-- Here's a link to the single page - just move this around -->
-			<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }">Edit</a>
+			<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><%= t('site.edit ')%></a>
 		</div>
 	<%- else -%>
 		<div class="controls">
-			<a href="<%= choice.to_url %>" class="link"><i class="icon-comments-alt"></i> Join the Discussion</span>
+			<a href="<%= choice.to_url %>" class="link"><i class="icon-comments-alt"></i> <%= t('site.join') %></span>
 		</div>	
 	<% end -%>
 		

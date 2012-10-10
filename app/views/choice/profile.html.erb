@@ -32,7 +32,7 @@
 			<%= stylesheet_link_tag 'other/colorpicker.css' %>
 
 			<div id="edit-profile">
-				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }"><i class="icon-cog"></i><%= t("profile.customize")%></span></a>
+				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }"><i class="icon-cog"></i> <%= t("profile.customize")%></span></a>
 				<div style="display: none" class="editor" data-bind="visible: edit ">
 					<h3><i class="icon-cog"></i> <%= t("profile.customize")%> <i class="icon-cog"></i></h3>
 					<p style="text-align:center; margin-bottom:20px"><i class="icon-link"></i> &nbsp <a data-bind="text: '<%= ENV['BASE'] %>/'+profile.store(), attr: { href: '<%= ENV['BASE'] %>/'+profile.store()} "></a></p>
@@ -40,7 +40,7 @@
 					<p class="label"><%= t("profile.description")%></p> <textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
 
 					<p class="label"><%= t("profile.url")%></p> http://theballot.org/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="Your New URL"  >
-					<span class="url-searching" data-bind="visible: profile.checking() "><i class="icon-search"></i> Searching... </span><span class="url-available" data-bind="visible: profile.available() && !profile.checking() "><i class="icon-ok-sign"></i> <%= t("profile.available")%> </span><span class="url-taken" data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null "><i class="icon-exclamation-sign"></i> <%= t("profile.taken")%> </span>
+					<span class="url-searching" data-bind="visible: profile.checking() "><i class="icon-search"></i> <%= t('site.searching') %> </span><span class="url-available" data-bind="visible: profile.available() && !profile.checking() "><i class="icon-ok-sign"></i> <%= t("site.available")%> </span><span class="url-taken" data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null "><i class="icon-exclamation-sign"></i> <%= t("site.taken")%> </span>
 					<br />
 
 					<p class="label"><%= t("profile.primary")%></p><input class="primary" data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="Primary color"  >
@@ -48,19 +48,19 @@
 					<p class="label"><%= t("profile.background")%></p><input class="bg" data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="Background color"  >
 
 					<p class="label" style="margin-top:30px;"><%= t("profile.header")%></p><div id="image-upload"><%= form_for @user, :url => user_update_path, :method => :POST, :html => { :multipart => true }, :remote => true, :format => :json do |form| %>
-						<%= form.file_field :header %><span class="loading" ><i class="icon-copy"></i> <%= t("profile.saving")%> </span><span class="success"><i class="icon-ok-sign"></i> <%= t("profile.saved")%> </span><span class="error" ><i class="icon-exclamation-sign"></i> <%= t("profile.error")%> </span>
+						<%= form.file_field :header %><span class="loading" ><i class="icon-copy"></i> <%= t("site.saving")%> </span><span class="success"><i class="icon-ok-sign"></i> <%= t("site.saved")%> </span><span class="error" ><i class="icon-exclamation-sign"></i> <%= t("site.error")%> </span>
 						<p class="small-label"><%= t("profile.headerreq")%></p>
 						<%= form.submit 'Upload' %>
-						<span class="link" data-bind="click: function() { removeHeader() }, visible:  typeof header() != 'undefined' && header() != null && header() != '/headers/header/missing.png'">Remove Header</span>
+						<span class="link" data-bind="click: function() { removeHeader() }, visible:  typeof header() != 'undefined' && header() != null && header() != '/headers/header/missing.png'"><% t('profile.remove_header')%></span>
 					<% end %>
 					</div>
-					<div id="save-cancel"><span class="link" data-bind="click: function() { save() } "> <i class="icon-save"></i> Save</span>  | <span class="link" data-bind="click: function() { discard() }"><i class="icon-remove-circle"></i> Cancel</span></div>
+					<div id="save-cancel"><span class="link" data-bind="click: function() { save() } "> <i class="icon-save"></i> <%= t('site.save')%></span>  | <span class="link" data-bind="click: function() { discard() }"><i class="icon-remove-circle"></i> <%= t('site.cancel')%></span></div>
 				</div>
 				<div class="status">
-					<p><strong><%= t("profile.deactivated")  if current_user.deactivated? %></strong></p>
-					<p><strong><%= t("profile.banned")  if current_user.banned? %></strong></p>
-					<a><%= link_to 'Reactivated it now', user_cancel_path  if current_user.deactivated? %></a>
-					<span class="link"><i class="icon-trash"></i><a><%= link_to ' Deactivate Your Account', user_cancel_path, :class =>'link'  if !current_user.deactivated? %></a></span>
+					<p><strong> <%= t("profile.deactivated")  if current_user.deactivated? %></strong></p>
+					<p><strong> <%= t("profile.banned")  if current_user.banned? %></strong></p>
+					<a> <%= link_to t('profile.do_reactivate'), user_cancel_path  if current_user.deactivated? %></a>
+					<span class="link"><i class="icon-trash"></i><a> <%= link_to t('profile.do_deactivate'), user_cancel_path, :class =>'link'  if !current_user.deactivated? %></a></span>
 				</div>
 			</div>
 
@@ -232,17 +232,17 @@
 				<span class="link helpful" onclick="
 					$(this).removeClass('link').text('Sweet - thanks')
 					yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.featured().id+'/useful',function(response){}) } )
-				"><i class="icon-heart"></i> Recommend this Guide</span>
+				"><i class="icon-heart"></i> <%= t('profile.recommend')%></span>
 				<span class="divide">|</span> 
-				<span class="link flag" onclick="$(this).hide().next().show()"><i class="icon-flag"></i> Flag this User</span>
-				<p style="display: none;" class="flag">Are you sure? <span class="link" onclick=" 
+				<span class="link flag" onclick="$(this).hide().next().show()"><i class="icon-flag"></i> <%= t('profile.flag')%></span>
+				<p style="display: none;" class="flag"><%= t('site.flag_prompt') %> <span class="link" onclick=" 
 					$(this).parent().text('Flagged - thanks');
 					yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.featured().id+'/flag',function(response){}) } )
-				">Yes</span> </p>
+				"><%= t('site.yes') %></span> </p>
 			<% end -%>
 		<% end -%>
 
-		<div class="sectionheading"><h1 data-bind="visible: true || console.log( [name+'\'s','Voter Guide'].join(' ') ),text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : [name+'\'s','Voter Guide'].join(' ') "><%= @user.guide_name || @user.name + '\'s Voter Guide' %></h1>
+		<div class="sectionheading"><h1 data-bind="visible: true,text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : I18n.t('i18n_toolbox.possessive',{ owner: inits.user.name, thing: I18n.t('site.voter_guide') } ) "><%= @user.guide_name || t('i18n_toolbox.possessive', {:owner => @user.name, :thing => t('site.voter_guide') } )%></h1>
 			<p class="description" data-bind=" text: description"><%= @user.description %></p>
 		<p style="font-size:12px;"><%= t("profile.powered")%></p>
 		</div>
@@ -274,13 +274,13 @@
 	<%- if current_user == @user %>
 		<div id="more-coming"  class="ballot-section"  >
 			<h1><%= t("profile.add")%></h1>
-			<p><%= t("profile.addsearch")%></p>
-			<input id="profile_search" placeholder="Find Other Candidates and Ballot Measures">
+			<p><%= t("profile.addsearch") %></p>
+			<input id="profile_search" placeholder="<%= t('profile.find_other') %>" >
 
-			<h1><%= t("profile.missing")%></h1>
+			<h1><%= t("add_form.missing")%></h1>
 			<div class="category-heading minor">
-				<a class="add_more" href="<%= user_add_choice_path('candidate') %>"><button ><%= t("profile.createcandidate")%></button></a>
-				<a class="add_more" href="<%= user_add_choice_path('measure') %>"><button ><%= t("profile.createmeasure")%>Create a new Ballot Measure</button></a>
+				<a class="add_more" href="<%= user_add_choice_path('candidate') %>"><button ><%= t("add_form.create_candidate")%></button></a>
+				<a class="add_more" href="<%= user_add_choice_path('measure') %>"><button ><%= t("add_form.create_measure")%></button></a>
 			</div>
 		</div>
 	<% end -%>
@@ -288,8 +288,8 @@
 
 	<% if @choices.length == 0 && @user != current_user %>
 		<p></p>
-		<p><%= @user.first_name %> <%= t("profile.nofeedback")%>hasn't left any sort of feedback.</p>
-		<p><em><%= t("profile.redirect")%>Redirecting you to the home page in 2.012 seconds</em></p>
+		<p><%= @user.first_name %> <%= t("profile.nofeedback")%></p>
+		<p><em><%= t("profile.redirect")%></em></p>
 		<script type="text/javascript"> ( function() { setTimeout( function() { document.location = '<%= root_path %>'; }, 2012);} )()</script>
 	<% end %>
 </div>

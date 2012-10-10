@@ -1,8 +1,8 @@
 <% user = user || current_user  %>
 <% userObj = user == current_user ? 'you()' : 'featured()'  %>
 
-<% @how = '<h2>Who Will You Support for This Office?</h2>
-<p>Let the world know who you’re supporting for <span data-bind="text: $data.contest"></span>. Your comment will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.</p>' %>
+<% @how = '<h2>'+t('candidates.who')+'</h2>
+<p>'+t('candidates.let')+' <span data-bind="text: $data.contest"></span>. '+t('candidates.can_share')+'</p>' %>
 
 
 <div class="yourFeedback <%= user.nil?  ? 'no-user' : 'has_user' %>" data-bind="visible: <%= userObj %> != null, if: <%= userObj %> != null ">
@@ -22,11 +22,11 @@
 	</h3>
 	<%- if user == current_user %>
 		<div class="controls">
-			<button class="meme">Create a Badge</button>
-			<button class="next">Next Office</button>
-			<span class="remove edit link"  >Edit</span>
+			<button class="meme"><%= t('site.badge' ) %></button>
+			<button class="next"><%= t('candidates.next') %></button>
+			<span class="remove edit link"  ><%= t('site.edit') %></span>
 				<span >&nbsp;|&nbsp;</span>
-			<span class="remove link" >Remove</span>
+			<span class="remove link" ><%= t('site.remove') %></span>
 		</div>
 	<% end -%>
 </div>
@@ -35,11 +35,11 @@
 <%- if !current_user.nil? && true && current_user == user %>
 	<div class="yourFeedback candidate" data-bind="visible: ! you() ">
 		<%= raw @how %>
-		<select class="chosen" data-bind="value: $data.chosen, options: options, optionsCaption:'[ please select a candidate ]', optionsText: 'name'"></select><div class="arrows">&#x25B2;<br />&#x25BC;</div>
+		<select class="chosen" data-bind="value: $data.chosen, options: options, optionsCaption:'[ '+I18n.t( 'candidates.prompt') +' ]', optionsText: 'name'"></select><div class="arrows">&#x25B2;<br />&#x25BC;</div>
 		
-		<textarea type="text" class="comment" data-bind="elastic: true" placeholder='(Leave a comment if you wanna)' /></textarea>
+		<textarea type="text" class="comment" data-bind="elastic: true" placeholder='<%= t('candidates.comment') %>' /></textarea>
 		<div class="buttons">
-			<button class="submit" data-bind="attr: { disabled: chosen() == null }">Submit</button>
+			<button class="submit" data-bind="attr: { disabled: chosen() == null }"><%= t('site.submit' )%></button>
 		</div>
 	</div>
 <% end %>
@@ -48,7 +48,7 @@
 <%- if current_user.nil? && current_user == user %>
 	<div class="yourFeedback login">
 		<%= raw @how %>
-		<p>You must be logged in through Facebook to use this feature</p>
+		<p><%= t('site.login') %></p>
 		<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook)  %>
 	</div>
 <% end -%>

@@ -11,20 +11,20 @@
 	)
 </script>
 
-<div id="meme" class="<%= ['no','against','opposed'].index( @meme.option.name.downcase ) ? 'no' : 'yes' %>">
-	<h1>TheBallot.org Badge Creator</h1>
+<div id="meme" >
+	<h1><%= t('badge.title')%></h1>
 
 
 	<div class="choose">
-		<h2>Step 1: Choose Your Text</h2>
-		<p>What do you want to say on your image? If your comment is too long you can edit it so it fits better.</p>
+		<h2><%= t('badge.one.title')%></h2>
+		<p><%= t('badge.one.text')%></p>
 		<textarea data-bind="value: quote, valueUpdate: 'afterkeydown'"></textarea>
-		<p class="up">Characters Remaining: <span data-bind="text: limit-quote().length"></span> <span style="color: red; display: none" data-bind="visible: limit < quote().length">Too Many!</span></p>
+		<p class="up"><%= t('badge.one.remaining')%> <span data-bind="text: limit-quote().length"></span> <span style="color: red; display: none" data-bind="visible: limit < quote().length"><%= t('badge.one.too_many')%></span></p>
 	</div>
 
 	<div class="theme">
-		<h2>Step 2: Choose a Background</h2>
-		<p>Express yourself. Choose a background image for your comment so people notice it on their feed.</p>
+		<h2><%= t('badge.two_title')%></h2>
+		<p><%= t('badge.two_text')%></p>
 	    <div class="pick" data-bind="foreach: choices">
 	        <div data-bind="css: { selected: $parent.theme() == $data }, style: { backgroundImage: $index() == 6 ? 'url('+$data+')' : '' } " ></div>
 	    </div>
@@ -42,7 +42,7 @@
 				<img class="original" src="data:image/png;base64,<%= encoded %>">
 			</a>
 		</div>
-		<div class="preview-load" data-bind="visible: loading"><i class="icon-refresh"></i> Loading...</div>
+		<div class="preview-load" data-bind="visible: loading"><i class="icon-refresh"></i> <%= t('site.loading') %></div>
 		<div class="kill" style="display:none" data-bind="visible: id  "><i class="icon-trash"></i></div>
 	</div>
 
@@ -56,7 +56,7 @@
 			<a target="_blank" class="tumblr social-icons"><%= image_tag 'tumblr.png' %></a>
 			<a target="_blank" class="pinterest social-icons"><i class="icon-pinterest"></i></a>
 		</div>
-		<button class="share">Step 3: Share Your Image</button>
+		<button class="share"><%= t('badge.three')%></button>
 	</div>
 
 

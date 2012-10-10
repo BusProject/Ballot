@@ -4,14 +4,18 @@
 <div id="read-ballot" class="ballot-section <%= 'single' if @guides.count == 1 %>" >
 	<div class="intro">
 		<h1><i class="icon-heart"></i>
-			  <%= t("top.guides")%>
+			  <%= t("guides.top")%>
 			<%- if @guides.count == 1 %>
-				<%= t("top.in")%> <%= @states [ @stateAbvs.index( @guides[0][0] )  ] %>
+				<%= t("site.in").capitalize %> <%= @states [ @stateAbvs.index( @guides[0][0] )  ] %>
 			<% else %>
-				<%= t("top.around")%> 
+				<%= t("guides.around")%> 
 			<% end -%>
 		<i class="icon-heart"></i></h1>
-		<p><%= t("top.finest")%></p>
+		<%- if @guides.count == 1 %>
+			<p><%= t("guides.finest_state",{ :state => @states [ @stateAbvs.index( @guides[0][0] )]  } ) %></p>
+		<% else %>
+			<p><%= t("guides.finest")%></p>
+		<% end -%>
 	</div>
 	
 	<% @guides.each do |stateAbv,guides| %>
@@ -28,14 +32,14 @@
 			<ol >
 			<% guides.each do |guide| %>
 					<li >
-						<a href="<%= guide.profile %>" class="full" ><h1 itemprop="name" class="title" ><%= guide.guide_name.nil? || guide.guide_name.empty? ? (guide.name || '' )+'\'s Voter Guide' : guide.guide_name %></h1></a>
+						<a href="<%= guide.profile %>" class="full" ><h1 itemprop="name" class="title" ><%= guide.guide_name.nil? || guide.guide_name.empty? ? t('i18n_toolbox.possessive', { :owner => (guide.name || '' ) , :thing => t('site.voter_guide') }) : guide.guide_name %></h1></a>
 						<div itemprop="description" class="explanation" ><%= guide.description.nil? || guide.description == 'null' ? '' : guide.description %></div>
 					</li>
 			<% end %>
 			</ol>
 			<div class="more_guides">
 				<%- if guides.count == 10 %>
-					<%= link_to "See all of "+@states [ @stateAbvs.index( stateAbv ) ]+"'s Voter Guides", state_guides_path(stateAbv) %>
+					<%= link_to t('guides.all',{ :state => @states [ @stateAbvs.index( stateAbv ) ] }), state_guides_path(stateAbv) %>
 				<%- end -%>
 			</div>
 	</div>

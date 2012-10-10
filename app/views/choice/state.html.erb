@@ -25,7 +25,7 @@
 <% end %>
 
 	<% @types.each do |type| %>
-		<% n = ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Measure'].index( type ) %>
+		<% n = ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( type ) %>
 		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot_Measures' : type.index('User').nil? ? type : type.gsub('_','_Created_')+'s'  %>" data-bind="with: sections()[<%= n %>]">
 
 			<div class="category-heading" >
@@ -40,7 +40,7 @@
 					</div>
 				<% end %>
 			<% end %>
-			<h1 class="sectionheading" style="display:none;" data-bind="visible: $data.contests().length < 1">Still loading...</h1>
+			<h1 class="sectionheading" style="display:none;" data-bind="visible: $data.contests().length < 1"><%= t('site.loading ')%></h1>
 			
 			<!-- ko foreach: $data.contests.fresh -->
 				<div class="row " data-bind="template: { name: $data.type == 'Ballot_Statewide' ? 'measure' : 'candidate' }"></div>
@@ -69,7 +69,9 @@
 			if( choicesLength == page * 50 ) {
 				yourLocation.fetch(false)
 				page += 1
-				$.getJSON( document.location.toString()+'.json', { page: choicesLength }, function(response) {
+				var url = document.location.toString()
+					url = url[ url.length -1 ] == '/' ? url.slice(0, url.length -1) : url
+				$.getJSON( url+'.json', { page: choicesLength }, function(response) {
 					ko.utils.arrayPushAll(yourLocation.choices, response.map( function(el) { return Choice(el) }) )
 					setTimeout( function() { getMore( yourLocation.choices().length ) }, 500 )
 				})

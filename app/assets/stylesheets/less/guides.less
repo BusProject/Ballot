@@ -3,9 +3,14 @@ body.guides {
 	
 	.state-guides {
 		width:49%;
-		float:left;
+		&:nth-child(even) {
+			float: right;
+		}
+		&:nth-child(odd) {
+			float:left;
+		}
 		.clearfix;
-		background-color:lighten(@grey,20%);
+		background-color:lighten(@grey,30%);
 		margin:0 .5% 20px;
 		padding:10px;
 		.border-radius(5px);

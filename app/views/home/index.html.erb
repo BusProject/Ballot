@@ -52,7 +52,7 @@
 	<div id="more-coming" style="display:none;" class="ballot-section" data-bind="visible: geolocated() && fetch()" >
 		<h1><%= t('front.more')%></h1>
 		<div class="category-heading minor">
-			<p><% t('front.more_text')%><span data-bind="text: address.state() ? ' <%= t('site.for') %> '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
+			<p><%= t('front.more_text')%><span data-bind="text: address.state() ? ' <%= t('site.for') %> '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
 			<br />
 			<%- if current_user.nil? %>
 				<p><%= t('front.more_login')%></p>
@@ -65,12 +65,9 @@
 					data-bind="visible: (current_user.alerts == null ? '' : current_user.alerts).search( address.state() ) === -1"
 					onclick="$(this).hide().next().show(); current_user.alerts += yourLocation.address.state()+','; $.post(inits.root+'users/update',{alerts: yourLocation.address.state() } ); ">Update Me When There's More Data</button>
 				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>
-				<p><%= t('site.missing') %></p>
-				<a href="<%= user_add_choice_path('candidate') %>"><button ><%= t('site.add_candidate')%></button></a>
-				<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('site.add_candidate')%></button></a>
-				<p style="margin-top: 20px;">Is Something Missing?</p>
-				<a class="add_more" href="<%= user_add_choice_path('candidate') %>"><button >Create a new candidate</button></a>
-				<a class="add_more" href="<%= user_add_choice_path('measure') %>"><button >Create a new Ballot Measure</button></a>
+				<p style="margin-top: 20px;"><%= t('add_form.missing' )%></p>
+				<a href="<%= user_add_choice_path('candidate') %>"><button ><%= t('add_form.add_candidate')%></button></a>
+				<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('add_form.add_candidate')%></button></a>
 			<% end -%>
 		</div>
 	</div>

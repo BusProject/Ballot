@@ -235,7 +235,7 @@ function Feedback(data) {
 	}
 }
 
-function Grouping(keys,title,template,locationModel,description) {
+function Grouping(keys,title,url,template,locationModel,description) {
 	var grouping = {}
 
 	grouping.contests = ko.computed( function() {
@@ -257,6 +257,7 @@ function Grouping(keys,title,template,locationModel,description) {
 
 
 	grouping.title = title
+	grouping.url = url
 	grouping.template = template
 	grouping.description = description
 	grouping.className = title != 'Ballot Measures' ? 'candidates' : 'ballot-measures'

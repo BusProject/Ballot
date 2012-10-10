@@ -1,12 +1,12 @@
 <% user = user || current_user  %>
 <% userObj = user == current_user ? 'you()' : 'featured()'  %>
 
-<% @how = '<h2>How will you vote on this measure?</h2>
-<p>Let the world know how you’re voting on <span data-bind="text: $data.contest"></span>. Your comment will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.</p>' %>
+<% @how = '<h2>'+t('measures.how')+'</h2>
+<p>'+t('measures.let') +' <span data-bind="text: $data.contest"></span>. '+t('measures.can_share')+'</p>' %>
 
 
 <div class="yourFeedback <%= user.nil?  ? 'no-user' : 'has_user' %>" data-bind="visible: <%= userObj %> != null, if: <%= userObj %> != null ">
-	<span class="<%= feedback.option.type unless feedback.nil? %>" data-bind="text: '&ldquo;'+<%= userObj %>.comment+'&rdquo;', visible: <%= userObj %>.comment.length > 0,addClass: <%= userObj %>.type" >
+	<span class="<%= feedback.option.type unless feedback.nil? %>" data-bind="text: '&ldquo;'+<%= userObj %>.comment+'&rdquo;', visible: <%= userObj %>.comment.length > 0,addClass: ( <%= userObj %>.type == I18n.t('site.no').toLowerCase() ? 'no' : 'yes' )" >
 		<%- unless feedback.nil? %>
 			<%- if !feedback.comment.nil? && feedback.comment.length > 0 %>
 				<%= '"'+feedback.comment+'"'  %><br /><br/>
@@ -14,7 +14,7 @@
 			<%= feedback.option.name+' on '+feedback.choice.contest %>
 		<% end -%>
 	</span>
-	<div class="head" data-bind="addClass: <%= userObj %>.type, visible: <%= userObj %>.comment.length < 1 ">
+	<div class="head" data-bind="addClass: ( <%= userObj %>.type == I18n.t('site.no').toLowerCase() ? 'no' : 'yes' ), visible: <%= userObj %>.comment.length < 1 ">
 		<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
 	</div>
 	<h3 class="comment-details <%= feedback.option.type unless feedback.nil? %>" data-bind="text: '-'+<%= userObj %>.name+( <%= userObj %>.comment.length > 1 ? ' '+<%= userObj %>.time : '' ), addClass: <%= userObj %>.type">
@@ -22,11 +22,11 @@
 	</h3>
 	<%- if user == current_user %>
 		<div class="controls">
-			<button class="meme">Create Badge</button>
-			<button class="next" >Next Measure</button>
-			<span class="remove edit link"  >Edit</span>
+			<button class="meme"><%= t('site.badge' ) %></button>
+			<button class="next"><%= t('candidates.next') %></button>
+			<span class="remove edit link"  ><%= t('site.edit') %></span>
 				<span >&nbsp;|&nbsp;</span>
-			<span class="remove link" >Remove</span>
+			<span class="remove link" ><%= t('site.remove') %></span>
 		</div>
 	<% end -%>
 </div>
@@ -35,17 +35,17 @@
 <%- if !current_user.nil? && current_user == user %>
 	<div class="yourFeedback" data-bind="visible:  you() == null ">
 		<%= raw @how %>
-		<div class="toggle" data-bind="addClass: $data.you() != null && $data.you().type == 'no' ? 'right' : '' ">
+		<div class="toggle" data-bind="addClass: $data.you() != null && $data.you().type == I18n.t('site.no').toLowerCase() ? 'right' : '' ">
 			<div class="inner">
-				<div class="yes">I'm Voting Yes</div>
-				<div class="no">I'm Voting No</div>
+				<div class="yes"><%= t('measures.yes')%></div>
+				<div class="no"><%= t('measures.no')%></div>
 			</div>
 			<div class="cover">|||</div>
 		</div>
-		<textarea type="text" class="comment" data-bind="elastic: true" placeholder='What do you think?' /></textarea>
+		<textarea type="text" class="comment" data-bind="elastic: true" placeholder='<%= t('candidates.comment') %>' /></textarea>
 
 		<div class="buttons">
-			<button class="submit">Submit</button>
+			<button class="submit"><%= t('site.submit')%></button>
 		</div>
 	</div>
 <% end %>

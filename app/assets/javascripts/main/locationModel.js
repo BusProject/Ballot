@@ -238,13 +238,13 @@ function locationModel(data) {
 	// More menu shite
 	this.menuItems = []
 	
-	var ballotMeasures = Grouping(['Ballot_Statewide'],I18n.t('types.ballot_measures.title'),'measure',this, I18n.t('types.ballot_measures.text')  ),
-		federalCandidates = Grouping(['Federal'],I18n.t('types.federal.title'),'candidate',this, I18n.t('types.federal.text') ),
-		stateCandidates = Grouping(['State'],I18n.t('types.state.title'),'candidate',this,I18n.t('types.state.text')),
-		countyCandidates = Grouping(['County'],I18n.t('types.county.title'),'candidate',this,I18n.t('types.county.text') ),
-		otherCandidates = Grouping(['Other'],I18n.t('types.other.title'),'candidate',this,I18n.t('types.other.text') )
-		userCandidate = Grouping(['User_Candidate'],I18n.t('types.user_candidates.title'),'candidate',this,I18n.t('types.user_candidates.text'))
-		userBallotMeasures = Grouping(['User_Measure'],I18n.t('types.user_measures.title'),'measure',this,I18n.t('types.user_measures.text'))
+	var ballotMeasures = Grouping(['Ballot_Statewide'],I18n.t('types.ballot_measures.title'),'Ballot Measures','measure',this, I18n.t('types.ballot_measures.text')  ),
+		federalCandidates = Grouping(['Federal'],I18n.t('types.federal.title'),'Federal','candidate',this, I18n.t('types.federal.text') ),
+		stateCandidates = Grouping(['State'],I18n.t('types.state.title'),'State','candidate',this,I18n.t('types.state.text')),
+		countyCandidates = Grouping(['County'],I18n.t('types.county.title'),'County','candidate',this,I18n.t('types.county.text') ),
+		otherCandidates = Grouping(['Other'],I18n.t('types.other.title'),'Other','candidate',this,I18n.t('types.other.text') )
+		userCandidate = Grouping(['User_Candidate'],I18n.t('types.user_candidates.title'),'User Created Candidates','candidate',this,I18n.t('types.user_candidates.text'))
+		userBallotMeasures = Grouping(['User_Ballot'],I18n.t('types.user_measures.title'),'User Created Ballots','measure',this,I18n.t('types.user_measures.text'))
 	
 
 	if( this.state == 'front' ) {
@@ -253,7 +253,7 @@ function locationModel(data) {
 		this.sections.push( stateCandidates)
 		this.sections.push( otherCandidates)
 		this.sections.push( ballotMeasures)
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 		
@@ -279,7 +279,7 @@ function locationModel(data) {
 		this.sections.push( userCandidate )
 		this.sections.push( userBallotMeasures )
 
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --><li style="font-weight: normal; margin: 10px; font-size: 10px;" data-bind="visible: !yourLocation.fetch() "><em>'+I18n.t('site.loading')+'</em></li></ul>'
 		
@@ -317,7 +317,7 @@ function locationModel(data) {
 		this.sections.push( userCandidate )
 		this.sections.push( userBallotMeasures )
 
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 

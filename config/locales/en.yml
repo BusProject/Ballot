@@ -3,23 +3,70 @@
 
 en:
     site:
-        yes: 'Yes'
-        no: 'No'
+        'yes': 'Yes'
+        'no': 'No'
         or: "or"
+        see: "see"
+        in: "in"
+        taken: "Taken!"
+        available: "Available!"
+        searching: "Searching..."
+        error: "Error!"
+        saved: "Saved!"
+        saving: "Saving..."
         submit: 'Submit'
+        add: 'Add to Your Voter Guide'
         save: 'Save'
         cancel: 'Cancel'
+        remove: 'Remove'
+        edit: 'Edit'
         loading: 'Loading...'
+        join: 'Join the Discussion'
         for: 'for'
-        add_canidate: 'Create a new candidate'
-        add_measure: 'Create a new ballot measure'
-        missing: 'Is something missing?'
+        login: 'You must be logged in through Facebook to use this feature'
+
+        on_the: "on The Ballot"
+        
+        # Move these to candidates / measures
+
+        state: 'State'
+
         voter_guide: 'Voter Guide'
+
         deactivated: 'ACCOUNT DEACTIVATED'
         banned: 'ACCOUNT BANNED'
+
+        # Move these to feedback specific
         helpful: 'Was this helpful?'
         flag_prompt: 'Are you sure you want to flag?'
         flag: 'flag'
+        badge: 'Create a Badge'
+        sort_by: 'Sort By...'
+        most_helpful: 'Most Helpful'
+        friends: 'Your Friends'
+        in_support: 'In Support'
+        in_opposition: 'In Opposition'
+        supporting: 'Supporting %{candidate}'
+        read_all: 'Read All Comments'
+        load_more: 'Load More Comments'
+        i_say: 'What I Say'
+
+        commented:
+            one: 'One person has commented'
+            zero: "No one's commented yet"
+            other: '%{count} people have commented'
+        voted:
+            one: 'One person has voted'
+            zero: "No one's voted yet"
+            other: '%{count} people have voted'
+        support:
+            one: 'One person supports'
+            zero: 'No one supports'
+            other: '%{count} people support'
+        oppose:
+            one: 'One person opposes'
+            zero: 'No one opposes'
+            other: '%{count} people oppose'
     types:
         ballot_measures:
             title: 'Ballot Measures'
@@ -75,8 +122,48 @@ en:
             refresh: 'Refresh Guides'
     candidates:
         next: 'Next Candidate'
+        open: 'Learn More and Comment'
+        twitter: 'Twitter'
+        facebook: 'Facebook'
+        website: 'Website'
+        who: 'Who Will You Support for This Office?'
+        let: 'Let the world know who you’re supporting for'
+        can_share: 'Your comment will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.'
+        prompt: 'please select a candidate'
+        comment: '(Leave a comment if you wanna)'
+        list: 'The Candidates'
+        info: 'Contest Information'
+        office_name: 'Office Name. e.g. Mayor, State Senate'
+        add_prompt: 'Add Missing Candidate Contest'
+        candidate:
+            info: 'Candidate Information'
+            name: "Candidate's Name"
+            party: "Party"
+            campaign: 'Campaign'
+            add: 'Add Another Candidate'
     measures:
         next: 'Next Measure'
+        open: 'Learn More and Comment'
+        full_text: 'View full text '
+        yes: "I'm Voting Yes"
+        no: "I'm Voting No"
+        comment: 'What do you think?'
+        how: 'How will you vote on this measure?'
+        let: 'Let the world know how you’re voting on'
+        can_share: 'Your comment will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.'
+        what: 'What It Does'
+        add_prompt: 'Add Missing Ballot Measure'
+        name: 'Ballot Measure Name'
+        link: 'Link to Full Text'
+        description: 'Description'
+        affirmative: 'Affirmative Vote'
+        affirmative_name: 'What is an affirmative vote called?'
+        yeses: 'yes,support,affirm,for,maintained,approved,approve'
+        negative: 'Negative Vote'
+        negative_name: 'Negative Vote'
+        nos: 'no,deny,affirm,against,reject,repealed,rejected'
+        consequences: 'Consequences of this vote'
+
     # Front page specifics
     front:
         look_ballot: "Look Up What’s On Your Ballot"
@@ -87,10 +174,12 @@ en:
         more: 'More to Come...'
         more_text: "This isn\'t your full ballot - we're still adding data "
         more_login: "Log in through Facebook to get an email when we've added more."
+    # Toolbox
     i18n_toolbox: 
         possessive: "%{owner}'s %{thing}"
         possessive_s: "%{owner} %{thing}"
         possessive_you: "Your %{thing}"
+    # Splash page
     splash:
         welcome1: "Welcome to Your"
         welcome2: "100% Social Voter Guide"
@@ -102,5 +191,65 @@ en:
         share1: "Share:"
         share2: "Create a custom voter guide and personalized badges to share on Facebook, Tumblr and Google+."
         start: "Get Started"
+    # State page
     state:
         title: "All of %{state}\'s candidates and ballot measures."
+    # Guide page
+    guides:
+        top: "Top Voter Guides"
+        around: "Around the Country"
+        finest: "These are the finest voter guides in all the land. A voter guide's rank is determined by how useful other users have found it. To see your voter guide cracking the top 10, share your guide with your friends and tell them to recommend your guide."
+        finest_state: "These are the finest voter guides in %{state}. A voter guide's rank is determined by how useful other users have found it. To see your voter guide rise through the ranks, share your guide with your friends and tell them to recommend your guide."
+        all: "See all of %{state}'s Voter Guides"
+    # Profile 
+    profile:
+        customize: "Customize Your Voter Guide"
+        title: "Voter Guide Title"
+        description: "Voter Guide Description"
+        url: "Custom URL"
+        primary: "Set your primary color"
+        secondary: "Set your secondary color"
+        background: "Set your background color"
+        header: "Upload a custom header image"
+        remove_header: "Remove Header"
+        headerreq: "Must be at least 860 x 180. Will overwrite your current header."
+        deactivated: "Your account has been deactivated - all of your comments and votes are hidden"
+        do_deactivate: "Deactivate your account"
+        do_reactivate: "Reactivate your account"
+        banned: "Your account has been banned - all of your comments and votes are hidden"
+        powered: "Powered by TheBallot.org"
+        add: "Add More"
+        addsearch: "Search by office or candidate name to find other candidates or ballot measures to endorse"
+        missing: "Is Something Missing?"
+        create_candidate: "Create a new candidate"
+        create_measure: "Create a new Ballot Measure"
+        nofeedback: "hasn't left any sort of feedback."
+        redirect: "Redirecting you to the home page in 2.012 seconds"
+        find_other: "Find Other Candidates and Ballot Measures"
+
+        recommend: 'Recommend this Guide'
+        flag: 'Flag this user'
+    add_form:
+        warn_1: "Warning: Once you create this contest you will not be able to edit it. So make sure it's perfect. Be sure to include all candidates running for the office. It will appear on your voter guide and on the appropriate State page under the section for \"User Created\" contests."
+        warn_2: "Ballot Measures and Candidates that are fictitious (not really on the 2012 ballot), duplicates of existing measures or candidates, or deemed misleading will be removed without notice."
+        add_canidate: 'Create a new candidate'
+        add_measure: 'Create a new ballot measure'
+        missing_header: 'Add a Missing Ballot Measure or Candidate'
+        missing: 'Is something missing?'
+        confirm: 'Are you sure you want to create this?'
+    badge: 
+        title: 'TheBallot.org Badge Creator'
+        two_title: 'Step 2: Choose a Background'
+        two_text: 'Express yourself. Choose a background image for your comment so people notice it on their feed.'
+        three: 'Step 3: Share Your Image'
+        one: 
+            title: 'Step 1: Choose Your Text'
+            text: 'What do you want to say on your image? If your comment is too long you can edit it so it fits better.'
+            remaining: 'Characters Remaining:'
+            too_many: 'Too Many'
+    feedback:
+        agree:
+            one: "One other person agrees it's %{attribute}"
+            zero: "Only you think it's %{attribute}"
+            other: "%{count} other people agrees it's %{attribute}"
+        
