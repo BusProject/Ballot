@@ -126,7 +126,7 @@ class ChoiceController < ApplicationController
     districts = params['q'].nil? ? cicero.find(params['l'], params[:address] ) : params['q'].split('|')
     
     unless districts.nil?
-      @choices = Choice.find_all_by_geography( districts ).sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
+      @choices = Choice.find_by_districts( districts ).each{ |c| c.prep current_user }
     end
     
     if !params[:address_text].nil? && !params[:address_text].empty?

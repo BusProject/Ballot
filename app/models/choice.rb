@@ -4,7 +4,8 @@ class Choice < ActiveRecord::Base
   validates_uniqueness_of :contest, :scope => :geography
   
   has_many :options, :dependent => :destroy, :order => 'position DESC'
-  has_many :feedback
+  has_many :feedback, :conditions => ['"feedback"."approved" =? ', true]
+  has_many :users, :through => :feedback
   accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbant'] == '0' && false  }
   
   
@@ -65,6 +66,15 @@ class Choice < ActiveRecord::Base
     return [@states[index],geography].join(' ')
   end
   
+  def self.find_by_districts(districts)
+    return self.all( 
+      :select => ' choices.* ', 
+      :include => [:options],  
+      :conditions => ['geography IN(?)',districts ], 
+      :order => "contest_type IN('Federal','State','County','Other','Ballot_Statewide') DESC, geography"
+    )
+  end
+
   def prep current_user
     self.options.each do |option| 
       option[:support] = option.feedback.count_support
