@@ -20,7 +20,7 @@ class HomeController < ApplicationController
         if current_user
           address = current_user.address unless current_user.address.nil? || current_user.address.empty?
           if match = current_user.match
-            @choices = Choice.find_by_districts( districts ).each{ |c| c.prep current_user }
+            @choices = Choice.find_by_districts( match.data ).each{ |c| c.prep current_user }
             latlng = match.latlng
             state = match.data.select{ |d| d.length == 2 }.first
             google = { :address_components => [ { :short_name => state, :types => ["administrative_area_level_1"] }  ] }
