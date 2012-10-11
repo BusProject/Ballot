@@ -9,6 +9,7 @@ task :deploy do
   sh "git commit -am 'Precompiling assets'"
   sh "git push -f heroku compiled:master"
   sh "git checkout master"
+  sh 'rm app/assets/javascripts/i18n/translations.js'
   sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://theballot.org/"'
   sh '/usr/bin/open -a "/Applications/Google Chrome.app" "http://theballot.org/admin"'
 end
