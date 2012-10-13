@@ -20,7 +20,7 @@
 				<h3>Voter Guides Near You</h3>
 				<ol data-bind="foreach:guides">
 					<li>
-						<a data-bind="attr:{href: profile}, text: guide_name || name+'\'s Voter Guide' "></a>
+						<a data-bind="attr:{href: profile}, text: ( guide_name || name+'\'s Voter Guide' ).capitalize() "></a>
 					</li>
 				</ol>
 				<em data-bind="visible: guides().length < 0">Loading...</em>
