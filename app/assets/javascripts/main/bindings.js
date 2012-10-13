@@ -75,13 +75,14 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		$this.toggleClass('right').attr('disabled',false).find('.cover').css({left: '', right: ''})
 	});
 })
-.on('click touchend','.chooseable .option',function(e) {
+.on('click touchend','.chooseable .option:not(.confirmed), .chooseable .chosen',function(e) {
 	if( ['A','SPAN'].indexOf(e.target.tagName) === -1 ) {
 		e.preventDefault();
 		var $ctx = ko.contextFor(this),
 			$parent = $ctx.$parent,
 			$data = $ctx.$data
-			$parent.chosen( $data )
+		if( $(this).hasClass('chosen') ) $parent.chosen( null )
+		else $parent.chosen( $data )
 	}
 })
 .on('click touchend','.next',function(e) {
@@ -97,10 +98,10 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	} else {
 		
 		if( $parent.hasClass('candidate') ) {
-			var $ctx = ko.contextFor( $parent[0] ),
+			var $ctx = ko.contextFor( $parent[0] )
 				$comment = $('.comment', $parent),
-				choice_id = $ctx.$data.id,
-				option = $ctx.$data.chosen(),
+				choice_id = $ctx.$parent.id,
+				option = $ctx.$parent.chosen(),
 				option_id = option.id,
 				comment = $comment.val()
 
@@ -108,8 +109,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			var $toggle = $('.toggle', $parent ),
 				$ctx = ko.contextFor( $toggle[0] ),
 				$comment = $('.comment', $parent),
-				choice_id = $ctx.$data.id,
-				option = $toggle.hasClass('right') ? $ctx.$data.no() : $ctx.$data.yes(),
+				choice_id = $ctx.$parent.id,
+				option = $toggle.hasClass('right') ? $ctx.$parent.no() : $ctx.$parent.yes(),
 				option_id = option.id,
 				comment = $comment.val()
 		}
@@ -137,10 +138,11 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	}
 })
 .on('click touchend','.controls .meme',function(e) {
-	var $data = ko.dataFor(this), memetainer = $('#meme-tainer')
+	var $ctx = ko.contextFor(this), $data = $ctx.$parent, $index = $ctx.$index(), memetainer = $('#meme-tainer')
+
 	if( window.innerHeight < 750 ) memetainer.css('top', ((window.innerHeight < 642 ? 642 : window.innerHeight)-632)+'px')
 	if( window.innerWidth < 1100 ) memetainer.css('marginLeft', (( window.innerWidth < 890 ? 780 : window.innerWidth ) -766-162 ) / 2+'px')
-	$('iframe',memetainer.show() ).attr('src',inits.root+'m/'+$data.you().id+'/new?frame=true' ).parent().prev('#meme-cova').show() 
+	$('iframe',memetainer.show() ).attr('src',inits.root+'m/'+$data.you()[$index].id+'/new?frame=true' ).parent().prev('#meme-cova').show() 
 	$(document.body).bind('click.meme touchstart.meme',function(e) {
 		if( $(e.target).parents( memetainer ).length > 0  ) {
 			$('iframe',memetainer.hide() ).attr('src','').parent().prev('#meme-cova').hide()
@@ -151,26 +153,34 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 })
 .on('click touchend','.controls .remove',function(e) {
 	var $ctx = ko.contextFor(this),
-		$data = $ctx.$data,
-		option = $data.options().filter( function(el) { return el.feedback().indexOf( $data.you() ) !== -1 } )[0],
-		$this = $(this)
+		$data = $ctx.$parent,
+		$index = $ctx.$index(),
+		edit = false
 
+
+		option = $data.options().filter( function(el) { return el.feedback().indexOf( $data.you()[ $index ] ) !== -1 } )[0],
+		$this = $(this)
+	
 	option.support( option.support() -1 )
 	if( $this.hasClass('edit') ) {
 		var $row = $this.parents('.row')
 		if( $row.hasClass('candidate') ) {
-			//$data.chosen( $data.options().filter( function(el) { return el.id == $data.you().option_id })[0] )
+			edit = true
 		} else {
-			$row.find('.pick.'+$data.you().type).addClass('picked')
+			$row.find('.pick.'+$data.you()[ $index ].type).addClass('picked')
 		}
-		$this.parents('.row').find('textarea.comment').val( $data.you().comment )
+		$row.find('textarea.comment:eq('+$index+')').val( $data.you()[$index].comment )
 	}
-
+	
 	if( $data.you().id != 'undefined' ) $.post(
-		inits.root+'feedback/'+$data.you().id+'/remove',
+		inits.root+'feedback/'+$data.you()[ $index ].id+'/remove',
 		function(response){
-			if( $('body').hasClass('profile') ) yourLocation.choices.remove( $data )
-			else option.feedback.remove( $data.you() );
+			if( $('body').hasClass('profile') && $data.featured().length - 1 == 0 ) yourLocation.choices.remove( $data )
+			else {
+				var option_id = $data.you()[ $index ].option_id 
+				option.feedback.remove( $data.you()[ $index ] );
+				if( edit ) $data.chosen( $data.available().filter( function(el) { return el.id == option_id })[0] )
+			}
 		}
 	)
 })

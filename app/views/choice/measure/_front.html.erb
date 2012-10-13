@@ -5,7 +5,7 @@
 <a data-bind="attr:{name:$data.contest+' '+$data.geography}"></a>
 
 <div class="measure row <%= 'selected' unless choice.new_record? %> commentable" 
-	data-bind="css: { selected: $root.selected() == $data, complete: $data.you() }"
+	data-bind="css: { selected: $root.selected() == $data, complete: $data.you()[0] }"
 	itemscope itemtype="http://schema.org/ItemList" >
 
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>

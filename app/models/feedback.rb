@@ -6,7 +6,7 @@ class Feedback < ActiveRecord::Base
   validates_presence_of :option_id, :message => 'Requires an option'
   validates_presence_of :choice_id, :message => 'Requires a choice'
 
-  validates_uniqueness_of :user_id, :scope => :choice_id, :message => 'only one comment and vote per person per choice'
+  # validates_uniqueness_of :user_id, :scope => :choice_id, :message => 'only one comment and vote per person per choice'
 
   belongs_to :user
   belongs_to :option

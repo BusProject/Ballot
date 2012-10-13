@@ -292,6 +292,7 @@ function locationModel(data) {
 	}
 	if( this.state == 'single' ) {
 		var url = document.location.toString()
+		this.selected( this.choices()[0] )
 		this.menuItems.push( 
 			MenuItem(inits.root,I18n.t('menu.find')),
 			MenuItem(current_user.url, I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'})),
