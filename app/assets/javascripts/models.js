@@ -78,7 +78,7 @@ function Choice(data,args) {
 		this.chosen = ko.observable()
 		this.you = ko.computed(function() { 
 			var ft = null
-			ft = this.feedback().filter( function(el) { return el.yourFeedback })
+			ft = this.feedback().filter( function(el) { return  el.ftFeedback })
 			var ids = ft.map( function(el) { return el.option_id })
 			if( ft != null ) {
 				ft.sort( function(a,b) { return a.id > b.id ?  1 : -1  } )
