@@ -6,7 +6,7 @@
 <a data-bind="attr:{name:$data.contest+' '+$data.geography}"></a>
 
 <div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
-	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable }"
+	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable, multi: votes > 1 }"
 	itemscope itemtype="http://shema.org/ItemList" >
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div itemprop="description" class="matchup" data-bind="html: '<i class=icon-user></i> ' +$data.description "><%= choice.description %></div>
@@ -27,9 +27,9 @@
 		<meta itemprop="additionalType" content="http://data-vocabulary.org/Person" />
 	  
 		<% choice.options.sort_by{ |o| o.id == you.option_id ? -1 : 1 unless you.nil? }.each do |option| %>
-		<div itemscope itemprop="itemListElement" itemtype="http://data-vocabulary.org/Person" class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" data-bind="css: {chooseable: $data.featured() == null && current_user.id != 'unauthenticated' }">
+		<div itemscope itemprop="itemListElement" itemtype="http://data-vocabulary.org/Person" class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" data-bind="css: {chooseable: $data.featured().length < votes && current_user.id != 'unauthenticated' }">
 			<!-- ko foreach: $data.options -->
-				<div class="<%= 'chosen confirmed' if you == option %> option " data-bind="css:{ chosen: $parent.featured() == null && $parent.chosen() == $data, confirmed: $parent.featured() != null && $parent.featured().option_id == $data.id }" >
+				<div class="<%= 'chosen confirmed' if you == option %> option " data-bind="css:{ chosen: $parent.chosen() == $data, confirmed: $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 }" >
 					<h1 itemprop="name" data-bind="text: $data.name, addClass: $data.name.toLowerCase()">
 						<%= option.name %>
 					</h1>
@@ -68,7 +68,7 @@
 			<hr class="button lower middle">
 
 			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/candidate/feedback', :user => user, :feedback => you %>
+				<%= render 'choice/candidate/feedback', :choice => choice, :user => user, :feedback => you %>
 			<%- end %>
 
 			<%- if user.nil? %>
@@ -116,7 +116,7 @@
 					</li>
 				</ul>
 				<%- if current_user.nil?  %>
-					<%= render 'choice/candidate/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+					<%= render 'choice/candidate/feedback' , :choice => choice,  :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
 				<% end -%>
 			<% end -%>
 

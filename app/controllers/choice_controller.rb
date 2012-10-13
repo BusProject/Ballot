@@ -23,6 +23,7 @@ class ChoiceController < ApplicationController
         @choice = Choice.new( 
           :contest => params[:choice][:contest],  
           :geography => geography,
+          :votes => params[:choice][:votes].to_i,
           :contest_type => params[:choice][:contest_type],
           :options_attributes => params[:choice][:options_attributes]
         )
@@ -56,7 +57,14 @@ class ChoiceController < ApplicationController
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
 
-    @choices = @user.choices.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
+
+    @choices = @user.choices.uniq.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
+
+    if !current_user.nil? && current_user != @user
+      @recommended = true
+      @user.feedback.each{ |f|  @recommended = @recommended & current_user.voted_for?(f) }
+    end
+
     @classes = 'profile home'
     @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide'
     @type = 'Voter Guide'

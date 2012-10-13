@@ -14,7 +14,6 @@ function Choice(data,args) {
 		this.contest = data.contest,
 		this.type = data.contest_type
 		this.description = data.description
-		this.chosen = ko.observable( null )
 		this.geography = data.geography
 		this.nice_geography = data.nice_geography
 		this.commentable = true
@@ -32,7 +31,7 @@ function Choice(data,args) {
 		if( typeof data.options != 'undefined' ) {
 			var tmp = []
 			for (var i=0; i < data.options.length; i++) {
-				tmp.push( Option(data.options[i]) )
+				tmp.push( Option(data.options[i],this) )
 				this.comments += data.options[i].comments
 				this.commentsPure( this.commentsPure() + data.options[i].comments )
 				this.sortOptions.push( {value: data.options[i].name, label: 'Supporting '+data.options[i].name } )
@@ -75,21 +74,27 @@ function Choice(data,args) {
 			return feedback
 		},this)
 
-		this.you = ko.computed(function() { return this.feedback().filter( function(el) { return el.yourFeedback })[0] || null  },this)
-		if( this.you() != null ) this.comments -= 1;
-
-		this.featured = ko.computed(function() { 
+		this.votes = data.votes || 1
+		this.chosen = ko.observable()
+		this.you = ko.computed(function() { 
 			var ft = null
-			if( typeof inits.user == 'undefined' || inits.user.id == current_user.id ) ft = this.you();
-			else ft = this.feedback().filter( function(el) { return el.ftFeedback })[0]
+			ft = this.feedback().filter( function(el) { return  el.ftFeedback })
+			var ids = ft.map( function(el) { return el.option_id })
 			if( ft != null ) {
-				this.options( this.options().sort(function(a,b) {  return a.id == ft.option_id ? -1 : 1 }) )
-				//this.chosen( this.options().filter(function(a) {  return a.id == ft.option_id ? -1 : 1 })[0] )
+				ft.sort( function(a,b) { return a.id > b.id ?  1 : -1  } )
+				this.options( this.options().sort(function(a,b) {  return ids.indexOf(a.id) !== -1 ? -1 : 1 }) )
 			}
-
 			return ft
 		},this)
-
+		this.featured = this.you
+		this.available = ko.computed( function() {
+			var featured = this.featured()
+			return this.options().filter( function(option) { return ! featured.filter( function(featured) { return featured.option_id == option.id } ).length > 0 })
+		},this)
+		this.selected = ko.computed( function() {
+			var featured = this.featured()
+			return this.options().filter( function(option) { return featured.filter( function(featured) { return featured.option_id == option.id } ).length  > 0 })
+		},this)
 
 		this.feedback.realLength = ko.computed(function() {
 			return this.feedback().length - ( this.you() == null ? 0 : 1) - ( this.featured() == null || this.featured() ==  this.you() ? 0 : 1)
@@ -117,13 +122,13 @@ function Choice(data,args) {
 	}
 }
 
-function Option(data,args) {
+function Option(data,choice) {
 	var args = data || {}
 	if( typeof data == 'undefined' ) throw "No Data for the Option - can't do it"
 
-	return new ballotOption(data)
+	return new ballotOption(data,choice)
 
-	function ballotOption(data) {
+	function ballotOption(data,choice) {
 		this.name = data.name
 		this.blurb = data.blurb
 		this.blurb

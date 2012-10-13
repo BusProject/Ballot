@@ -22,6 +22,7 @@ en:
         edit: 'Edit'
         loading: 'Loading...'
         for: 'for'
+        you_recommend: "You've recommended"
         
         # Objects in the user model
         state: 'State'
@@ -142,6 +143,12 @@ en:
         info: 'Contest Information'
         office_name: 'Office Name. e.g. Mayor, State Senate'
         add_prompt: 'Add Missing Candidate Contest'
+        votes: 'Votes You Can Cast'
+        votes_more: "(Note: this is almost always one)"
+        in_support_of: 'in support of %{candidate}'
+        get_to_votes:
+            one: ' '
+            other: 'You can vote for %{count} candidates for this office.'
         candidate:
             info: 'Candidate Information'
             name: "Candidate's Name"

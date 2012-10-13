@@ -12,7 +12,7 @@
 	data-bind="css: { selected: $root.selected() == $data }"
 	itemscope itemtype="http://data-vocabulary.org/Thing" >
 
-	<hr><a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><h1 itemprop="name" class="title <%= feedback.option.type %>" data-bind="stripClass: 'title', addClass: $data.<%= userObj %>.type, text:  $data.<%= userObj %>.type[0].toUpperCase()+$data.<%= userObj %>.type.slice(1,3)+' on '+$data.contest"><%= feedback.option.type.capitalize %> <%= choice.contest %></h1></a><hr>
+	<hr><a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><h1 itemprop="name" class="title <%= feedback.option.type %>" data-bind="stripClass: 'title', addClass: $data.<%= userObj %>[0].type, text:  $data.<%= userObj %>[0].type[0].toUpperCase()+$data.<%= userObj %>[0].type.slice(1,3)+' on '+$data.contest"><%= feedback.option.type.capitalize %> <%= choice.contest %></h1></a><hr>
 
 	<div class="profile-explanation">
 	<h2 class="profile-text"><%= t('measures.what' ) %></h2>
@@ -20,26 +20,28 @@
 	</div>
 
 	<div class="profile-comment">
-	<h2 style="<%= 'display:none;' unless !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind=" visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0" class="profile-text"><%= t('site.i_say')%></h2>
+	<h2 style="<%= 'display:none;' unless !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind=" visible: $data.<%= userObj %>[0].comment != null && $data.<%= userObj %>[0].comment.length > 0" class="profile-text"><%= t('site.i_say')%></h2>
 
 
-	<p style="<%= 'display: none' unless !feedback.nil? & !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
+	<p style="<%= 'display: none' unless !feedback.nil? & !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind="text: $data.<%= userObj %>[0].comment, visible: $data.<%= userObj %>[0].comment != null && $data.<%= userObj %>[0].comment.length > 0, addClass: $data.<%= userObj %>[0].type" >
 		<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
 			<%= '"'+feedback.comment+'"' %>
 		<% end -%>
 	</p>
-	<div <%= raw 'style="display: none;"' if feedback.comment.nil?  || feedback.comment.empty? %> class="head" data-bind="addClass: $data.<%= userObj %>.type, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 1 ">
-		<img data-bind="src: $data.<%= userObj %>.image" src="<%= user.image unless user.nil? %>">
+	<div <%= raw 'style="display: none;"' if feedback.comment.nil?  || feedback.comment.empty? %> class="head" data-bind="addClass: $data.<%= userObj %>[0].type, visible: $data.<%= userObj %>[0].comment != null && $data.<%= userObj %>[0].comment.length > 1 ">
+		<img data-bind="src: $data.<%= userObj %>[0].image" src="<%= user.image unless user.nil? %>">
 	</div>
 	</div>
 
 	<!-- These should work... might need to be massaged a bit. Hopefully they both could work asynchronously -->
 	<%- if user == current_user %>
+	<!-- ko foreach: selected -->
 		<div class="controls">
 			<span class="link meme"><i class="icon-picture"></i> <%= t('site.badge ')%></span> | <span class="remove link" > <%= t('site.remove ')%></span> | 
 			<!-- Here's a link to the single page - just move this around -->
-			<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><%= t('site.edit ')%></a>
+			<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$parent.geography+'/'+$parent.contest.replace(/ /g,'_') }" ><%= t('site.edit ')%></a>
 		</div>
+	<!-- /ko -->
 	<%- else -%>	
 		<div class="controls">
 			<a href="<%= choice.to_url %>" class="link"><i class="icon-comments-alt"></i> <%= t('site.join') %></span>

@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
     :fb_friends, :description, :alerts, :pages, :profile,
     :primary, :secondary, :bg, :header, :match, :address
 
+  acts_as_voter
   
   # attr_accessible :title, :body
   has_many :feedback do
@@ -25,6 +26,7 @@ class User < ActiveRecord::Base
   has_many :memes, :through => :feedback
   has_many :options, :through => :feedback
   has_many :choices, :through => :options
+
   
   serialize :pages
   
@@ -41,6 +43,9 @@ class User < ActiveRecord::Base
     
   end
   
+  def recommenders
+    return User.find_by_sql( ['SELECT "users".* FROM "votes" INNER JOIN "users" on "votes"."voter_id" = "users"."id" WHERE "votes"."votable_id" IN(?) AND "votes"."votable_type" = "Feedback"', self.feedback.map{ |f| f.id } ]).uniq
+  end
   
   # Profile and URL related methods
   after_initialize :set_profile

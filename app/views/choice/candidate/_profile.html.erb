@@ -1,7 +1,8 @@
 <% choice = choice || Choice.new %>
 <% user = user || nil %>
 <% choice.options.new if choice.new_record?  %>
-<% feedback = user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == user.id }.first %>
+<% feedback = user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == user.id } %>
+
 <% userObj = user == current_user ? 'you()' : 'featured()'  %>
 
 
@@ -15,40 +16,60 @@
 	<hr><a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1></a><hr>
 	<div class="profile-explanation">
 	<h2 class="profile-text"><% t('candidates.list ')%></h2>
-	<div class="optionholder your-option" >
-		<!-- ko foreach: $data.options -->
-			<span class="option" data-bind="html: $data.name+' '+$data.partySmall()+'<br />'"><%=  feedback.option.name %> <%=  feedback.option.partySmall %></span>
-		<!-- /ko -->
-	</div>
-	<% n = 0 %>
-	<% choice.options.reject{|o| o == feedback.option }.each do |option| %>
-		<div class="optionholder clean-no-script" >
+	<% feedback.each_with_index do |yourfeedback,index| %>
+			<%= raw '<!-- ko foreach: selected -->' if index == 0 %>
+			<div class="optionholder your-option <%= 'clean-no-script' if index > 0 %>" >
+				<span class="option" data-bind="html: $data.name+' '+$data.partySmall()+'<br />'"><%= yourfeedback.option.name %> <%= yourfeedback.option.partySmall %></span>
+			</div>
+			<%= raw '<!-- /ko -->' if index == 0 %>
+	<% end %>
+	<% choice.options.reject{|o| feedback.map{ |f| f.option_id }.index(o.id) }.each_with_index do |option,index| %>
+		<%= raw '<!-- ko foreach: available -->' if index == 0 %>
+			<div class="optionholder <%= 'clean-no-script' if index > 0 %>" >
 				<span class="option" data-bind="html: $data.name+' '+$data.partySmall()+'<br />'"><%= option.name %> <%= option.partySmall %></span>
-		</div>
+			</div>
+		<%= raw '<!-- /ko -->' if index == 0 %>
 	<% end %>
 	</div>
 
-	<div class="profile-comment">
-		<h2 class="profile-text" style="<%= 'display:none;' unless !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind=" visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0"><%= t('site.i_say ')%></h2>
+		<% feedback.each_with_index do |yourfeedback,index| %>
+			<%= raw '<!-- ko foreach: featured -->' if index == 0 %>
+			<div class="profile-comment <%= 'clean-no-script' if index > 0 %>" >
+					<h2 class="profile-text" style="<%= 'display:none;' unless !yourfeedback.nil? && !yourfeedback.comment.nil? && yourfeedback.comment.length > 0 %>"
+						data-bind=" visible: $data.comment != null && $data.comment.length > 0">
+						<%= t('site.i_say')%> 
+						<!-- ko text: $parent.votes > 1 ? I18n.t('candidates.in_support_of', { candidate: $data.option_name }) : '' --><%= t('candidates.in_support_of', { :candidate => yourfeedback.option.name }) if choice.votes > 1 %><!-- /ko -->
+					</h2>
 
-		<p style="<%= 'display: none' unless !feedback.nil? & !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind="text: $data.<%= userObj %>.comment, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 0, addClass: $data.<%= userObj %>.type" >
-			<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
-				<%= '"'+feedback.comment+'"' %>
-			<% end -%>
-		</p>
-		<div <%= raw 'style="display: none;"' if feedback.comment.nil?  || feedback.comment.empty?  %> class="head" data-bind="addClass: $data.<%= userObj %>.type, visible: $data.<%= userObj %>.comment != null && $data.<%= userObj %>.comment.length > 1 ">
-			<img data-bind="src: <%= userObj %>.image" src="<%= user.image unless user.nil? %>">
-		</div>
-	</div>
+					<p 
+						style="<%= 'display: none' unless !yourfeedback.nil? & !yourfeedback.comment.nil? && yourfeedback.comment.length > 0 %>"
+						data-bind="text: $data.comment, visible: $data.comment != null && $data.comment.length > 0 "
+					>
+						<%- if !yourfeedback.nil? && !yourfeedback.comment.nil? && yourfeedback.comment.length > 0 %>
+							<%= '"'+yourfeedback.comment+'"' %>
+						<% end -%>
+					</p>
+					<div 
+						<%= raw 'style="display: none;"' if yourfeedback.comment.nil?  || yourfeedback.comment.empty?  %> class="head"
+						data-bind="addClass: $data.type, visible: $data.comment != null && $data.comment.length > 1 "
+					>
+						<img data-bind="src: current_user.image" src="<%= user.image unless user.nil? %>">
+					</div>
+			</div>
+			<%- if user == current_user %>
+				<div class="controls <%= 'clean-no-script' if index > 0 %>" >
+					<span class="link meme"><i class="icon-picture"></i> <%= t('site.badge ')%></span> | <span class="remove link" > <%= t('site.remove ')%></span> | 
+					<!-- Here's a link to the single page - just move this around -->
+					<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$parent.geography+'/'+$parent.contest.replace(/ /g,'_') }" ><%= t('site.edit ')%></a>
+				</div>
+			<%- end -%>
+			<%= raw '<!-- /ko -->' if index == 0 %>
+		<% end %>
 
-	<!-- These should work... might need to be massaged a bit. Hopefully they both could work asynchronously -->
-	<%- if user == current_user %>
-		<div class="controls">
-			<span class="link meme"><i class="icon-picture"></i> <%= t('site.badge ')%></span> | <span class="remove link" > <%= t('site.remove ')%></span> | 
-			<!-- Here's a link to the single page - just move this around -->
-			<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><%= t('site.edit ')%></a>
-		</div>
-	<%- else -%>
+
+
+
+	<%- if user != current_user || current_user.nil? %>
 		<div class="controls">
 			<a href="<%= choice.to_url %>" class="link"><i class="icon-comments-alt"></i> <%= t('site.join') %></span>
 		</div>	

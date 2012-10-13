@@ -5,7 +5,8 @@
 	<div class="office-info">
 		<h3><i class="icon-trophy"></i>  <%= t('candidates.info')%></h3>
 		<label> <%= t('candidates.office_name' )%></label><%= form.text_field :contest, { :class => 'required' } %>	<br/>
-		<label><%= t('site.state' )%></label> <%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %>
+		<label><%= t('site.state' )%></label> <%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %><br />
+		<label><%= t('candidates.votes') %></label> <%= form.select :votes, ['1','2','3','4']  %><em style="font-size: 10px; margin-left: 10px; color: white"><%= t('candidates.votes_more') %></em>
 	</div>
 
 	<!-- ko stopBinding: true -->

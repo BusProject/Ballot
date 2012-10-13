@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008035313) do
+ActiveRecord::Schema.define(:version => 20121013014411) do
 
   create_table "choices", :force => true do |t|
     t.string    "contest"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20121008035313) do
     t.string    "contest_type"
     t.timestamp "created_at",                      :null => false
     t.timestamp "updated_at",                      :null => false
+    t.integer   "votes",        :default => 1
   end
 
   add_index "choices", ["geography", "contest"], :name => "index_choices_on_geography_and_contest", :unique => true
