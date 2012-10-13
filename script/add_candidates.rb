@@ -1,5 +1,10 @@
 #!/usr/local/bin/ruby 
 
+# RestClient.get(
+#   'https://50.116.48.233/list/api?updated=2012-09-30',
+#   {:cookies => {:session => "TwlcEz/Ylza0E1z4pDDW6Kjc9dA=?username=UydidXNvZmVkJwpwMQou"}}
+# )
+
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
 
 require 'csv'
