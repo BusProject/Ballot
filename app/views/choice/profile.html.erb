@@ -227,17 +227,23 @@
 					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>') });
 				})
 			</script>
-			<span class="link helpful" onclick="
-				$(this).removeClass('link').text('Sweet - thanks')
-				yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.featured().id+'/useful',function(response){}) } )
-			"><i class="icon-heart"></i> <%= t('profile.recommend')%></span>
 			<%- unless current_user.nil? %>
+				<% if @recommended %>
+					<span class="helpful"><i class="icon-heart"></i> <%= t('site.you_recommend')%> <%= @user.guide_name || t('i18n_toolbox.possessive', {:owner => @user.name, :thing => t('site.voter_guide') } )%></span>
+				<% else %>
+					<span class="link helpful" onclick="
+						$(this).removeClass('link').text('Sweet - thanks')
+						yourLocation.choices().map( function(el) { el.featured().map( function(featured) { $.post(inits.root+'feedback/'+featured.id+'/useful',function(response){}) } ) } )
+					"><i class="icon-heart"></i> <%= t('profile.recommend')%></span>
+				<% end %>
 				<span class="divide">|</span> 
 				<span class="link flag" onclick="$(this).hide().next().show()"><i class="icon-flag"></i> <%= t('profile.flag')%></span>
 				<p style="display: none;" class="flag"><%= t('site.flag_prompt') %> <span class="link" onclick=" 
 					$(this).parent().text('Flagged - thanks');
 					yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.featured().id+'/flag',function(response){}) } )
 				"><%= t('site.yes') %></span> </p>
+			<% else %>
+				<a class="link helpful" href="<%= omniauth_authorize_path('user', :facebook) %>" ><i class="icon-heart"></i> <%= t('profile.recommend')%></a>
 			<% end -%>
 		<% end -%>
 

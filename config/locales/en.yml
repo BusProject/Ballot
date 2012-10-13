@@ -22,6 +22,7 @@ en:
         edit: 'Edit'
         loading: 'Loading...'
         for: 'for'
+        you_recommend: "You've recommended"
         
         # Objects in the user model
         state: 'State'

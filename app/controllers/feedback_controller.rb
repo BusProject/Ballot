@@ -40,16 +40,21 @@ class FeedbackController < ApplicationController
   end
 
   def vote
-    feedback = Feedback.find( params[:id] )
+    unless current_user.nil?
+      feedback = Feedback.find( params[:id] )
 
-    if  params[:flavor] == 'useful'
-      amount = feedback.upvotes.size
+      if  params[:flavor] == 'useful'
+        amount = feedback.upvotes.size
+        current_user.likes feedback
+      else
+        amount = feedback.upvotes.size
+        current_user.likes feedback
+      end
+
+      render :json => {:success => true, :message => I18n.t('feedback.agree',{:count => amount, :attribute => params[:flavor] }) }, :callback  => params['callback']
     else
-      amount = feedback.upvotes.size
+      render :json => {:success => false, :callback  => params['callback'] }
     end
-
-    render :json => {:success => true, :message => I18n.t('feedback.agree',{:count => amount, :attribute => params[:flavor] }) }, :callback  => params['callback']
-    
   end
 
   def flag

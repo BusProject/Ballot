@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
     :fb_friends, :description, :alerts, :pages, :profile,
     :primary, :secondary, :bg, :header, :match, :address
 
+  acts_as_voter
   
   # attr_accessible :title, :body
   has_many :feedback do
