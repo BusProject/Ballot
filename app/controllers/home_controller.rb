@@ -50,6 +50,8 @@ class HomeController < ApplicationController
     
     if params[:format] == 'json'
       render :json => { :users => User.all.count, :matches => Match.all.count }
+    elsif params[:format] == 'txt'
+      render :inline => ['users: ',User.all.count.to_s,', matches: ',Match.all.count.to_s].join('')
     else
     
       @users = User.all.map do |user|
