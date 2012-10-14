@@ -1,3 +1,5 @@
+<meta property="og:type"   content="<%= ENV['FACEBOOK-NAMESPACE'] || '' %>:voter_guide" /> 
+
 <% choice = choice || Choice.new %>
 <% user = user || nil %>
 <% choice.options.new if choice.new_record?  %>
