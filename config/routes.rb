@@ -50,6 +50,7 @@ Ballot::Application.routes.draw do
   match '/feedback/:id/remove' => 'feedback#delete', :via => :post, :as => 'remove_feedback'
   match '/feedback/:id/flag' => 'feedback#flag', :via => :post, :as => 'flag_feedback'
   match '/feedback/:id/:flavor' => 'feedback#vote', :via => :post, :as => 'rate_feedback'
+  match '/feedback/:id' => 'feedback#show', :as => 'show_feedback'
 
   match '/m/:id/new' => 'meme#new', :via => :get, :as => 'meme_new'
   match '/m/:id/new' => 'meme#update', :via => :post, :as => 'meme_create'

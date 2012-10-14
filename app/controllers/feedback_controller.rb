@@ -56,6 +56,34 @@ class FeedbackController < ApplicationController
       render :json => {:success => false, :callback  => params['callback'] }
     end
   end
+  
+  def show
+    @feedback = Feedback.find( params[:id] )
+    @user = @feedback.user
+    
+    raise ActionController::RoutingError.new('Could not find that feedback') if @feedback.nil? 
+    
+    @choices = [ @feedback.choice ].each{ |c| c.prep current_user; c.addUserFeedback @feedback.user }
+    
+    if !current_user.nil? && current_user != @feedback.user
+      @recommended = current_user.voted_for?( @feedback )
+    end
+    
+    @classes = 'profile home'
+    @title =  'A comment from '+(!@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide')
+    
+    @message = @feedback.comment
+    
+    @image = @feedback.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @feedback.memes.last.id )+'.png'
+    
+    result = {:state => 'profile', :user => @user.to_public(false) }
+    
+    @config = result.to_json
+    @single = true
+    
+    @choices_json = @choices.to_json( Choice.to_json_conditions )
+    render :template => 'choice/profile'
+  end
 
   def flag
 
