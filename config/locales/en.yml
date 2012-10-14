@@ -146,6 +146,7 @@ en:
         votes: 'Votes You Can Cast'
         votes_more: "(Note: this is almost always one)"
         in_support_of: 'in support of %{candidate}'
+        vote: 'Vote # %{count}'
         get_to_votes:
             one: ' '
             other: 'You can vote for %{count} candidates for this office.'

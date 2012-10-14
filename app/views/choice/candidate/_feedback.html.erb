@@ -20,6 +20,7 @@
 			<div class="controls">
 				<button class="meme"><%= t('site.badge' ) %></button>
 				<button class="next"><%= t('candidates.next') %></button>
+				<strong style="display:none;" data-bind="visible: $parent.votes > 1, text: I18n.t('candidates.vote',{count: $index() +1 })"></strong><br />
 				<span class="remove edit link"  ><%= t('site.edit') %></span>
 					<span >&nbsp;|&nbsp;</span>
 				<span class="remove link" ><%= t('site.remove') %></span>
@@ -38,7 +39,8 @@
 		
 			<textarea type="text" class="comment" data-bind="elastic: true" placeholder='<%= t('candidates.comment') %>' /></textarea>
 			<div class="buttons">
-				<button class="submit" data-bind="attr: { disabled: $parent.chosen() == null }"><%= t('site.submit' )%></button>
+				<button class="submit" data-bind="attr: { disabled: $parent.chosen() == null }"><%= t('site.submit' )%></button><br />
+				<strong style="display:none;" data-bind="visible: $parent.votes > 1, text: I18n.t('candidates.vote',{count: $index() +1 })"></strong>
 			</div>
 		</div>
 	<% end %>
