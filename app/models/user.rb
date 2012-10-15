@@ -118,6 +118,16 @@ class User < ActiveRecord::Base
     end
   end
   
+  def self.top_25
+    return User.all( 
+      :limit => 25,
+      :select => '"users".*, SUM( "feedback"."cached_votes_up" - "feedback"."cached_votes_down") AS rating',
+      :group => "users.id",
+      :order => 'rating DESC', 
+      :joins => :feedback 
+    )
+  end
+  
   # Header image handling
   
   if Rails.env == "production"
