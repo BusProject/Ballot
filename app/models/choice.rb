@@ -4,7 +4,17 @@ class Choice < ActiveRecord::Base
   validates_uniqueness_of :contest, :scope => :geography
   
   has_many :options, :dependent => :destroy, :order => 'position DESC'
-  has_many :feedback, :conditions => ['"feedback"."approved" =? ', true]
+  has_many :feedback, :conditions => ['"feedback"."approved" =? ', true] do
+    def count_votes current_user=nil
+      user_id = id = current_user.nil? ? 0 : current_user.id
+      all( :limit => nil, :conditions => nil, :select => 'DISTINCT("user_id" )', :conditions => ['user_id != ?',user_id] ).count
+    end
+    def count_comments current_user=nil
+      user_id = id = current_user.nil? ? 0 : current_user.id
+      all(:limit => nil, :conditions => 'length(comment) > 1', :select => 'DISTINCT("user_id" )',  :conditions => ['user_id != ?',user_id] ).count
+    end
+    
+  end
   has_many :users, :through => :feedback
   accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbant'] == '0' && false  }
   
@@ -78,9 +88,13 @@ class Choice < ActiveRecord::Base
   
 
   def prep current_user
+    self[:voted] = self.feedback.count_votes( current_user )
+    self[:commented] = self.feedback.count_comments( current_user )
+
     self.options.each do |option| 
       option[:support] = option.feedback.count_support
       option[:comments] = option.feedback.count_comments
+
       
       option[:faces] = option.feedback.friends_faces( current_user )
       option[:faces] += option.feedback.other_faces( current_user ) if option[:faces].length < 4
@@ -88,17 +102,21 @@ class Choice < ActiveRecord::Base
       
       option[:feedbacks] = option.all_feedback(current_user) || []
       
-      self[:nice_geography] = self.geographyNice(false)
-      if self.contest_type.downcase.index('ballot').nil?
-        self[:description] = self.options.map{ |o| o.name }.join(' vs. ')
-        if self.options.select{ |o| o.incumbant? }.length > 0
-          option[:option_type] = option.incumbant? ? 'Incumbant' : 'Challenger'
-        else
-          option[:option_type] = 'Open Seat'
-        end
-      else
+      unless self.contest_type.downcase.index('ballot').nil?
         option[:option_type] = option.type
+      else
+        option[:option_type] = ''
       end
+      
+    end
+    self[:nice_geography] = self.geographyNice(false)
+
+    if self.contest_type.downcase.index('ballot').nil?
+      names = self.options.map{ |o| o.name }
+      self[:description] = self.votes >= self.options.length ? 
+        names.to_sentence( :words_connector => I18n.t('i18n_toolbox.array.words_connector'), :two_words_connector => I18n.t('i18n_toolbox.array.two_words_connector'), :last_word_connector => I18n.t('i18n_toolbox.array.last_word_connector') ) : 
+        names.join( I18n.t('i18n_toolbox.array.vs') )
+      self[:description] += ' for '+self.votes.to_s+' positions' if self.votes > 1 
     end
     
   end

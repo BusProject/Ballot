@@ -38,14 +38,7 @@ function Choice(data,args) {
 			};
 			this.options(tmp)
 		}
-		this.voted = ko.computed(function() {
-			var sum=0, options = this.options()
-			for(var i =0; i < options.length; i++ ) { 
-				sum+= options[i].support()
-			}
-			return sum
-		},this)
-		
+
 
 		this.yes = ko.computed( function() { 
 			return this.options().filter( function(el) { return el.type == 'yes' })[0] || null  
@@ -117,6 +110,17 @@ function Choice(data,args) {
 			var comments = this.comments - this.feedback().length
 			return comments > 0 ? 3+this.feedback.page()*10 : false
 		},this)
+
+		this.__voted = data.voted
+		this.voted = ko.computed(function() {
+			return this.__voted + this.you().length > 0 ? 1 : 0
+		},this)
+
+		this.__commented = data.commented
+		this.commented = ko.computed(function() {
+			return this.__commented + this.you().length > 0 ? 1 : 0
+		},this)
+		
 
 		return this;
 	}

@@ -21,6 +21,7 @@ Ballot::Application.routes.draw do
   match '/admin/choice/:id' => 'admin#choice_edit', :as => 'choice_edit', :via => :get
   match '/admin/choice/:id' => 'admin#choice_update', :as => 'choice_update', :via => :post
   match '/admin/choice/:id/delete' => 'admin#choice_delete', :as => 'choice_delete', :via => :post
+  match '/admin/option/:id/delete' => 'admin#option_delete', :as => 'option_delete', :via => :post
   match '/admin/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
 
 
@@ -44,7 +45,6 @@ Ballot::Application.routes.draw do
   
   match '/friends' => 'choice#friends'
 
-
   match '/lookup' => 'choice#index'
   match '/lookup/:id/more' => 'choice#more'
   
@@ -52,6 +52,7 @@ Ballot::Application.routes.draw do
   match '/feedback/:id/remove' => 'feedback#delete', :via => :post, :as => 'remove_feedback'
   match '/feedback/:id/flag' => 'feedback#flag', :via => :post, :as => 'flag_feedback'
   match '/feedback/:id/:flavor' => 'feedback#vote', :via => :post, :as => 'rate_feedback'
+  match '/feedback/:id' => 'feedback#show', :as => 'show_feedback'
 
   match '/m/:id/new' => 'meme#new', :via => :get, :as => 'meme_new'
   match '/m/:id/new' => 'meme#update', :via => :post, :as => 'meme_create'

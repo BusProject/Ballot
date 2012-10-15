@@ -10,15 +10,20 @@
 		<%= form.number_field :order, :style => 'width:30px;' %>
 	</p>
 	<p>
-		<label>Geography</label>:
-		<%= @choice.geography %>
+		<label>Geography</label><br />
+		<%= form.text_field :geography %>
 	</p>
 	<p>
 		<label>Description</label><br />
 		<%= form.text_area :description, :size => "30x4" %>
 	</p>
-
-	<%= link_to 'See the full page', ENV['BASE']+'/'+@choice.to_url %>
+	<p>
+		<label><%= t('candidates.votes') %></label> <%= form.select :votes, [1,2,3,4]  %>
+	</p>
+	<br />
+	
+	<%= link_to 'See the full page', ENV['BASE']+'/'+@choice.to_url, :style => 'font-size: 20px;' %>
+	<hr>
 	<h2>Options</h2>
 	<%= form.fields_for :options do |options_form| %>
 	
@@ -47,6 +52,7 @@
 				<%= options_form.text_area :blurb, :size => "30x10" %><br />
 				<%= options_form.text_field :blurb_source, :placeholder => 'Blurb Source' %>
 			</p>
+			<a href="<%= option_delete_path( options_form.object.id )  %>" class="delete_option">Delete Option</a>
 		</div>
 
 	<% end %>

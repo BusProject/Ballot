@@ -20,7 +20,7 @@
 				<h3>Voter Guides Near You</h3>
 				<ol data-bind="foreach:guides">
 					<li>
-						<a data-bind="attr:{href: profile}, text: guide_name || name+'\'s Voter Guide' "></a>
+						<a data-bind="attr:{href: profile}, text: ( guide_name || name+'\'s Voter Guide' ).capitalize() "></a>
 					</li>
 				</ol>
 				<em data-bind="visible: guides().length < 0">Loading...</em>
@@ -67,7 +67,7 @@
 				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>
 				<p style="margin-top: 20px;"><%= t('add_form.missing' )%></p>
 				<a href="<%= user_add_choice_path('candidate') %>"><button ><%= t('add_form.add_candidate')%></button></a>
-				<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('add_form.add_candidate')%></button></a>
+				<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('add_form.add_measure')%></button></a>
 			<% end -%>
 		</div>
 	</div>

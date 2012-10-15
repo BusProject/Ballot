@@ -99,7 +99,7 @@ en:
     # Menu
     menu:
         find: 'Find Your Ballot'
-        find_text: 'Enter your voting address to look up what will appear on your on your ballot.'
+        find_text: 'Enter your voting address to look up what will appear on your ballot.'
         read: 'Read Your Ballot'
         read_text: 'Get the lowdown on everything on your ballot for the November 6th Election.'
         read_text_2: 'Read what others have to say about the important races in your state and share your own views.'
@@ -146,6 +146,7 @@ en:
         votes: 'Votes You Can Cast'
         votes_more: "(Note: this is almost always one)"
         in_support_of: 'in support of %{candidate}'
+        vote: 'Vote # %{count}'
         get_to_votes:
             one: ' '
             other: 'You can vote for %{count} candidates for this office.'
@@ -188,13 +189,18 @@ en:
         confirm: 'Is this right?'
         on_ballot: 'Here’s What Will Be On Your Ballot'
         more: 'More to Come...'
-        more_text: "This isn\'t your full ballot - we're still adding data "
+        more_text: "This isn't your full ballot - we're still adding data "
         more_login: "Log in through Facebook to get an email when we've added more."
     # Toolbox
     i18n_toolbox: 
         possessive: "%{owner}'s %{thing}"
         possessive_s: "%{owner} %{thing}"
         possessive_you: "Your %{thing}"
+        array:
+              last_word_connector: ', and '
+              two_words_connector: ' and '
+              words_connector: ', '
+              vs: ' vs. '
     # Splash page
     splash:
         welcome1: "Welcome to Your"
@@ -250,7 +256,7 @@ en:
     add_form:
         warn_1: "Warning: Once you create this contest you will not be able to edit it. So make sure it's perfect. Be sure to include all candidates running for the office. It will appear on your voter guide and on the appropriate State page under the section for \"User Created\" contests."
         warn_2: "Ballot Measures and Candidates that are fictitious (not really on the 2012 ballot), duplicates of existing measures or candidates, or deemed misleading will be removed without notice."
-        add_canidate: 'Create a new candidate'
+        add_candidate: 'Create a new candidate'
         add_measure: 'Create a new ballot measure'
         missing_header: 'Add a Missing Ballot Measure or Candidate'
         missing: 'Is something missing?'

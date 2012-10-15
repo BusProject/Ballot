@@ -50,6 +50,8 @@ class HomeController < ApplicationController
     
     if params[:format] == 'json'
       render :json => { :users => User.all.count, :matches => Match.all.count }
+    elsif params[:format] == 'txt'
+      render :inline => ['users: ',User.all.count.to_s,', matches: ',Match.all.count.to_s].join('')
     else
     
       @users = User.all.map do |user|
@@ -284,7 +286,14 @@ end
 
     @classes = 'home profile guides'
     
-    if params[:state]
+    if params[:state] == 'top'
+      @limit = 25
+      guides = User.top_25
+      @guides = [ ['Prez', guides] ]
+      @title = 'Top 25 Voter Guides'
+      @config = { :state => 'guides', :states => guides.map{|u| u.name }  }.to_json
+      
+    elsif params[:state]
       if params[:state].length == 2
         state = Choice.states[ Choice.stateAbvs.index(params[:state] ) ].gsub(' ','_')
         stateAbv = params[:state]
@@ -303,6 +312,7 @@ end
         @config = { :state => 'guides',  :stateName => state, :states => guides.map{|u| u.name } }.to_json
         @title = 'Top Voter Guides In '+state.capitalize
       end
+      
     else
       @limit = 10
       @guides = User.by_state

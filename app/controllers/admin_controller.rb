@@ -85,6 +85,11 @@ class AdminController < ApplicationController
     @choice.fullDelete
     render :json => { :success => true }
   end
+
+  def option_delete
+    @choice = Option.find(params[:id])
+    render :json => { :success => true }
+  end
   
   protected
     def check_admin
