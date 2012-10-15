@@ -1,0 +1,137 @@
+# Bryan's first draft of Vietnamese with some English still in there.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+    site:
+        yes: 'vâng' vâng
+        no: 'không'
+        or: 'hoặc'
+        submit: 'nộp'
+        save: 'giử'
+        cancel: 'hủy bỏ' 
+        loading: 'Loading...' sinh doi mot chuc
+        for: 'cho'
+        add_canidate: 'Tạo ra ứng cử viên mới'
+        add_measure: 'Tạo ra dự luật mới'
+        missing: 'Có mất cái gì không?'
+        voter_guide: 'Hướng Dẫn Bỏ Phiếu'
+        deactivated: 'TÀI KHOảN Bị VÔ HIệU HOÁ'
+        banned: 'TÀI KHOảN Bị CấM'
+        helpful: 'Cái này có giúp không?'
+        flag_prompt: 'Bạn có chắc là muốn cảnh báo không?' 
+        flag: 'cảnh báo'
+    types:
+        ballot_measures:
+            title: 'Dự luật'
+            text: 'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'
+        federal:    
+            title: 'Liên bang'
+            text: 'Hiểu rỏ ứng cử viên này bạn sẽ có một cơ hội để bỏ phiếu cho. Các ứng cử viên này sẽ đại diện cho chính phủ liên bang'
+        state: 
+            title: 'Tiểu bang'
+            text: "Các ứng cử viên này sẽ đại diện cho bạn trong chính quyền tiểu bang của bạn."
+        county: 
+            title: 'Quận hạt' 
+            text: "Các ứng cử viên này sẽ đại diện cho bạn trong chính quyền quận hạt của bạn."
+        other:
+            title: 'Cách khác'
+            text: 'Các ứng cử viên này sẽ đại diện cho bạn trong chính quyền quận hạt, chính quyền thị xã, tòa án liên bang.'
+        user_candidates:  
+            title: 'User Created Candidates'
+            text: 'These are candidates that were created by another user on The Ballot. We cannot verify their accuracy.'
+        user_measures: 
+            title: 'User Created Measures'
+            text: 'These are ballot measures that were created by another user on The Ballot. We cannot verify their accuracy.'
+
+    # Menu
+    menu:
+        find: 'Tìm lá phiếu của bạn' 
+        find_text: 'điền ra địa chỉ nơi bỏ phiếu của bạn để xem những gì trên lá phiếu của bạn.'
+        read: 'đọc lá phiếu của bạn'
+        read_text: 'để hiểu rỏ lá phiếu của bạn trong kỳ bầu cử ngày 6 tháng 11.'
+        read_text_2: 'đọc để biết những ý kiến khác nhau về tàm quan trọng của cuộc tranh cử trong tiểu bang của bạn và cho biết những ý kiến của bạn.'
+        share: 'Chia xẻ ý kiến của bạn' 
+        share_message: 'Xem Hướng Dẫn Bỏ Phiếu của tôi trên TheBallot.org' 
+        the_ballot: 'Chia xẻ TheBallot.org'
+        this_ballot: 'Chia xẻ lá phiếu này'
+        this_page: 'Chia xẻ trang này'
+        this_guide: 'Chia xẻ hướng dẫn này'
+        state_guides: 'Chọn tiểu bang để xem hướng dẫn'
+        guides_in: 'Hướng dẫn trong %{state}'
+    # Top Bar
+    top:
+        start: 'Bắt đầu'
+        login: 'Login with Facebook' # Is an image - will need to change to different 
+        register: 'Register to Vote'
+        about: 'About'
+        news: 'News'
+        contact: 'Contact'
+        search: 'tìm kiếm'
+        log_out: 'Log Out'
+        my_guide: 'My Voter Guide'
+        all_guides: 'All Voter Guides'
+        pages: 
+            login: 'Login as facebook page'
+            refresh: 'Refresh Guides'
+    candidates:
+        next: 'Next Candidate'
+    measures:
+        next: 'Next Measure'
+    # Front page specifics
+    front:
+        look_ballot: "Look Up What’s On Your Ballot"
+        address_placeholder: 'enter your address here'
+        save_address: 'Save as home address'
+        confirm: 'Cái này có đúng không?'
+        on_ballot: 'Here’s What Will Be On Your Ballot'
+        more: 'More to Come...'
+        more_text: "This isn\'t your full ballot - we're still adding data "
+        more_login: "Log in through Facebook to get an email when we've added more."
+    i18n_toolbox: 
+        possessive: "%{owner}'s %{thing}"
+        possessive_s: "%{owner} %{thing}"
+        possessive_you: "%{thing} của bạn"
+    splash:
+        welcome1: "Welcome to Your"
+        welcome2: "100% Social Voter Guide"
+        instructions: "Thế để dùng TheBallot.org"
+        research1: "Nghiên cứu:"
+        research2: "Look up which measures and candidates will be on your ballot this election."
+        discuss1: "Discuss:"
+        discuss2: "See how your friends weigh in on the hottest issues of the day and leave your own comments."
+        share1: "Share:"
+        share2: "Create a custom voter guide and personalized badges to share on Facebook, Tumblr and Google+."
+        start: "Bắt đầu"
+    state:
+        title: "All of %{state}\'s candidates and ballot measures."
+	guides:
+		top: "Top Voter Guides"
+		in: "In"
+		around: "Around the Country"
+		finest: "These are the finest voter guides in all the land. A voter guide's rank is determined by how useful other users have found it. To see your voter guide cracking the top 10, share your guide with your friends and tell them to recommend your guide."
+	profile:
+		customize: "Customize Your Voter Guide"
+		title: "Voter Guide Title"
+		description: "Voter Guide Description"
+		url: "Custom URL"
+		taken: "Taken!"
+		available: "Available!"
+		primary: "Set your primary color"
+		secondary: "Set your secondary color"
+		background: "Set your background color"
+		header: "Upload a custom header image"
+		error: "Error!"
+		saved: "Saved!"
+		saving: "Saving..."
+		headerreq: "Must be at least 860 x 180. Will overwrite your current header."
+		deactivated: "Your account has been deactivated - all of your comments and votes are hidden"
+		banned: "Your account has been banned - all of your comments and votes are hidden"
+		powered: "Powered by TheBallot.org"
+		add: "Add More"
+		addsearch: "Search by office or candidate name to find other candidates or ballot measures to endorse"
+		missing: "Có cái gì mất không?"
+		createcandidate: "Create a new candidate"
+		createmeasure: "Create a new Ballot Measure"
+		nofeedback: "hasn't left any sort of feedback."
+		redirect: "Redirecting you to the home page in 2.012 seconds"
+
