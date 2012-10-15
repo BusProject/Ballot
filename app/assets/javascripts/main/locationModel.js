@@ -2,13 +2,15 @@ function locationModel(data) {
 	this.state = data.state || 'front'
 
 	// Map Objects
-	this.latlng = ko.observable('38.7, -95.7')
-	this.googleLocation = ko.observable({})
+	this.latlng = ko.observable( data.latlng == null ? '38.7, -95.7' : { boom: parseFloat(data.latlng.split(',')[0]), bewm: parseFloat(data.latlng.split(',')[1]) } )
+	this.googleLocation = ko.observable( data.google || {} )
 	this.address = ko.observable('')
 	this.geocoder = ko.observable('')
-	this.geocoded = ko.observable(false)
+	this.geocoded = ko.observable( data.latlng != null )
 	this.geocoded.address = ko.observable('')
 	this.fetch = ko.observable(true)
+	this.remember = ko.observable( inits.remember )
+
 	// Style elements
 	this.top = ko.observable(0)
 	this.top.better = ko.computed( function() {
@@ -18,6 +20,7 @@ function locationModel(data) {
 
 	var empty = ''
 
+	// Choices
 	var choices = data.choices || []
 	this.choices = ko.observableArray( choices.map( function(el) { return Choice(el) } ) )
 	this.sections = ko.observableArray([])
@@ -33,8 +36,13 @@ function locationModel(data) {
 	},this)
 
 	this.selected = ko.observable( null )
+
+	// Guides
+	this.guides = ko.observableArray([])
 	
 
+
+	// The menu
 	this.nearby = ko.computed(function() {
 		var top = this.top(), 
 			choices = this.choices.ordered(), 
@@ -143,21 +151,21 @@ function locationModel(data) {
 					googleLocation(results[0])
 					geocoded_address(results[0].formatted_address)
 					latlng( first )
-					choices([])
+					//choices([])
 				}
 			});
 		}
 	}, this).extend({ throttle: 250 })
 
 	this.map = ko.computed( function() { // Used for confirming map location
-		var latlng = this.latlng(),
+		var latlng = [this.lat(),this.lng()].join(','),
 			geolocated = this.geolocated(),
-			zoom = geolocated ? '13' : '3',
+			zoom = geolocated ? '14' : '3',
 			marker = geolocated ? '&markers=color:0x333|'+latlng : ''
 		// When map updates - flash the thing
 		if( geolocated ) {
 			$('#map img').flash(.5, 1000)
-			return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=620x340&sensor=true'+marker
+			return 'http://maps.googleapis.com/maps/api/staticmap?center='+latlng+'&zoom='+zoom+'&scale=1&size=320x170&sensor=true'+marker
 		}
 		else return '/assets/staticmap.png'
 	}, this)
@@ -169,6 +177,7 @@ function locationModel(data) {
 		}
 	},this)
 
+
 	this.grabChoices = ko.computed( function() { // Retrieve choices
 		var lat = this.lat(),
 			lng = this.lng(),
@@ -177,12 +186,12 @@ function locationModel(data) {
 			state = this.address.state(),
 			fetch = this.fetch
 
-		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng ) {
+		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng && this.address() != '' ) {
 			fetch(false)
-			this.getBallotChoices(lat,lng,choices,function() { fetch(true);  setTimeout( function() {$('.candidate.row:last .next').text('Next Measure').bind('click touchend',function() { $('.ballot-measures button.open:first').click() }); },100) })
+			this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
 		}
-
 	}, this)
+
 
 	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for 
 		var state = yourLocation.address.state(), 
@@ -193,7 +202,8 @@ function locationModel(data) {
 			inits.root+'lookup',
 			{
 				l: yourLocation.lat()+','+yourLocation.lng(),
-				address: address
+				address: address,
+				address_text: yourLocation.remember() ? yourLocation.address() : ''
 			},
 			function(data) { 
 				if( data != null && data.constructor == Array ) {
@@ -205,102 +215,121 @@ function locationModel(data) {
 				callback()
 			})
 	}
-	
-	
-	
+	this.getGuides = function(state,guides) { // Useful function for 
+		$.getJSON(
+			inits.root+'guides/'+state+'.json?limit=5',
+			function(data) { 
+				if( data != null && data.constructor == Array ) {
+					guides(data)
+				}
+			})
+	}
 
+
+	this.grabChoices = ko.computed( function() { // Retrieve guides
+		var geolocated = this.geolocated(),
+			state = this.address.state(),
+			guides = this.guides
+			
+		if( geolocated && state && guides().length == 0 ) this.getGuides(state,guides);
+	},this)
+	
+	
+	// More menu shite
 	this.menuItems = []
+	
+	var ballotMeasures = Grouping(['Ballot_Statewide'],I18n.t('types.ballot_measures.title'),'Ballot Measures','measure',this, I18n.t('types.ballot_measures.text')  ),
+		federalCandidates = Grouping(['Federal'],I18n.t('types.federal.title'),'Federal','candidate',this, I18n.t('types.federal.text') ),
+		stateCandidates = Grouping(['State'],I18n.t('types.state.title'),'State','candidate',this,I18n.t('types.state.text')),
+		countyCandidates = Grouping(['County'],I18n.t('types.county.title'),'County','candidate',this,I18n.t('types.county.text') ),
+		otherCandidates = Grouping(['Other'],I18n.t('types.other.title'),'Other','candidate',this,I18n.t('types.other.text') )
+		userCandidate = Grouping(['User_Candidate'],I18n.t('types.user_candidates.title'),'User Created Candidates','candidate',this,I18n.t('types.user_candidates.text'))
+		userBallotMeasures = Grouping(['User_Ballot'],I18n.t('types.user_measures.title'),'User Created Ballots','measure',this,I18n.t('types.user_measures.text'))
+	
 
 	if( this.state == 'front' ) {
-		var ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'),
-			federalCandidates = Grouping(['Federal'],'Federal','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'),
-			stateCandidates = Grouping(['State'],'State','candidate',this,'These candidates will represent you in your State\'s government.'),
-			countyCandidates = Grouping(['County'],'County','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
-			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
-		
+
 		this.sections.push( ballotMeasures)
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
 		this.sections.push( otherCandidates)
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 		
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
-			owner = current_user.id == 'unauthenticated' ? 'the' : 'Your',
-			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || [current_user.first_name,current_user.last_name+'\'s','Voter Guide'].join(' '),
-			msg = current_user.id == 'unauthenticated' ? undefined : 'Check out my voter guide on The Ballot',
-			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">Your Voter Guide</a>'
+			owner = current_user.id == 'unauthenticated' ? I18n.t('menu.share') : I18n.t('menu.the_ballot'),
+			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: current_user.name, thing: I18n.t("site.voter_guide") } ),
+			msg = current_user.id == 'unauthenticated' ? undefined : I18n.t('menu.share_message'),
+			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">'+I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'})+'</a>'
 			
 		this.menuItems.push( 
-			MenuItem('#find-ballot','Find Your Ballot','<p>Enter your voting address to look up what will appear on your on your ballot.</p>'),
-			MenuItem('#read-ballot','Read Your Ballot',"<p>Get the lowdown on everything on your ballot for the November 6th Election.</p><p>Read what others have to say about the important races in your state and share your own views.</p>"+layout,null, this),
-			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+owner+' Ballot<br>'+makeShare(url,name)+extra)
+			MenuItem('#find-ballot',I18n.t('menu.find'),'<p>'+I18n.t('menu.find_text')+'</p>'),
+			MenuItem('#read-ballot',I18n.t('menu.read'),"<p>"+I18n.t('menu.read_text')+'</p><p>'+I18n.t('menu.read_text_2')+"</p>"+layout,null, this),
+			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">'+owner+'<br>'+makeShare(url,name)+extra)
 		)
 	}
 	if( this.state == 'state' ) {
-		var ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'),
-			federalCandidates = Grouping(['Federal'],'Federal','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'),
-			stateCandidates = Grouping(['State'],'State','candidate',this,'These candidates will represent you in your State\'s government.'),
-			countyCandidates = Grouping(['County'],'County','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
-			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
-		
+
 		this.sections.push( ballotMeasures)
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
 		this.sections.push( countyCandidates )
 		this.sections.push( otherCandidates)
+		this.sections.push( userCandidate )
+		this.sections.push( userBallotMeasures )
+
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
-		layout += '</li></ul></li><!-- /ko --></ul>'
+		layout += '</li></ul></li><!-- /ko --><li style="font-weight: normal; margin: 10px; font-size: 10px;" data-bind="visible: !yourLocation.fetch() "><em>'+I18n.t('site.loading')+'</em></li></ul>'
 		
 		var url = document.location.toString(), name = inits.title
 		this.menuItems.push( 
-			MenuItem(inits.root,'Find Your Ballot',null),
-			MenuItem('#read-ballot','Read Your Ballot', layout ,null, this),
-			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">Share '+inits.title+'<br>'+makeShare(url,name, inits.message )+extra)
+			MenuItem(inits.root,I18n.t('menu.find'),null),
+			MenuItem('#read-ballot',I18n.t('menu.read'), layout ,null, this),
+			MenuItem(null,I18n.t('menu.this_page'),null,'<div class="container share-container">'+I18n.t('menu.this_page')+'<br>'+makeShare(url,name)+'</div>')
 		)
 	}
 	if( this.state == 'single' ) {
 		var url = document.location.toString()
+		this.selected( this.choices()[0] )
 		this.menuItems.push( 
-			MenuItem(inits.root,'Find Your Ballot'),
-			MenuItem(current_user.url,'Your Voter Guide'),
-			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Page<br>'+makeShare(url)+'</div>')
+			MenuItem(inits.root,I18n.t('menu.find')),
+			MenuItem(current_user.url, I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'})),
+			MenuItem(null,I18n.t('menu.this_page'),null,'<div class="container share-container">'+I18n.t('menu.this_page')+'<br>'+makeShare(url,name)+'</div>')
+		)
+	}
+	if( this.state == 'guides' ) {
+		var url = document.location.toString()
+		
+		this.menuItems.push( 
+			MenuItem(inits.root, I18n.t('menu.find')),
+			MenuItem('#read-ballot', inits.stateName ?  I18n.t('menu.guides_in', {state: inits.stateName}) : I18n.t('menu.state_guides') ,'<ul style="margin: 20px 0; max-height: 300px; overflow-y: scroll;">'+inits.states.map( function(el) { return '<li><a href="#'+el.replace(/ /g,'_')+'">'+el+'</a></li>' }).join("\n")+'</ul>',null),
+			MenuItem(null,I18n.t('menu.this_page'),null,'<div class="container share-container">'+I18n.t('menu.this_page')+'<br>'+makeShare(url,name)+'</div>')
 		)
 	}
 	if( this.state == 'profile' ) {
-		var ballotMeasures = Grouping(['Ballot_Statewide'],'Ballot Measures','measure',this,'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'),
-			federalCandidates = Grouping(['Federal'],'Federal','candidate',this,'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'),
-			stateCandidates = Grouping(['State'],'State','candidate',this,'These candidates will represent you in your State\'s government.'),
-			countyCandidates = Grouping(['County'],'County','candidate',this,'These candidates will represent you in your State\'s government.'),
-			otherCandidates = Grouping(['Other'],'Other','candidate',this,'These candidates will represent you in your county, municipal, or judicial government.')
 
 		this.sections.push( ballotMeasures)
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
-		this.sections.push( countyCandidates)
+		this.sections.push( countyCandidates )
 		this.sections.push( otherCandidates)
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
-		
-		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
-			owner = current_user.id == 'unauthenticated' ? 'the' : 'Your',
-			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || [current_user.first_name,current_user.last_name+'\'s','Voter Guide'].join(' '),
-			msg = current_user.id == 'unauthenticated' ? undefined : 'Check out my voter guide on The Ballot',
-			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">Your Voter Guide</a>'
-			
-		
+
 		
 		var url = document.location.host+inits.user.profile, 
-			name = inits.user.guide_name || [inits.user.first_name,inits.user.last_name+'\'s','Voter Guide'].join(' '),
-			pronoun = inits.user.id == current_user.id ? 'Your' : inits.user.first_name != '' ? inits.user.first_name+'\'s' : inits.user.last_name+'\'s'
+			name = inits.user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: inits.user.name, thing: I18n.t("site.voter_guide") } ), 
+			pronoun = inits.user.id == current_user.id ? I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'}) : inits.user.first_name != 'Voter Guide' ? I18n.t('i18n_toolbox.possessive',{owner: inits.user.first_name,thing: 'Voter Guide' } ) : I18n.t('i18n_toolbox.possessive',{owner: inits.user.last_name,thing: 'Voter Guide' } )
 
 		this.menuItems.push( 
-			MenuItem(inits.root,'Find Your Ballot'),
-			MenuItem('#',pronoun+' Voter Guide',layout),
-			MenuItem(null,'Share This Ballot',null,'<div class="container share-container">Share this Guide<br>'+makeShare(url,name)+'</div>')
+			MenuItem(inits.root, I18n.t('menu.find')),
+			MenuItem('#',pronoun,layout),
+			MenuItem(null,I18n.t('menu.this_guide'),null,'<div class="container share-container">'+I18n.t('menu.this_guide')+'<br>'+makeShare(url,name)+'</div>')
 		)
 	}
 
@@ -314,6 +343,7 @@ function locationModel(data) {
 		if( top < 10 ) return items[0].id
 		else return items[ items.length - 1].id
 	},this)
+	
 
 }
 

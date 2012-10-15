@@ -20,6 +20,7 @@ gem 'foreman'
 gem 'aws-s3'
 
 gem 'rest-client'
+gem 'i18n-js'
 
 gem 'devise', '~> 2.0.0'
 gem "omniauth"

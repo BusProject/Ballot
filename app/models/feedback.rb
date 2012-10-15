@@ -6,7 +6,7 @@ class Feedback < ActiveRecord::Base
   validates_presence_of :option_id, :message => 'Requires an option'
   validates_presence_of :choice_id, :message => 'Requires a choice'
 
-  validates_uniqueness_of :user_id, :scope => :choice_id, :message => 'only one comment and vote per person per choice'
+  # validates_uniqueness_of :user_id, :scope => :choice_id, :message => 'only one comment and vote per person per choice'
 
   belongs_to :user
   belongs_to :option
@@ -38,5 +38,15 @@ class Feedback < ActiveRecord::Base
     return !self.approved || self.flag.split(',').length > 2
   end
   
+  
+  def self.friends(current_user=nil)
+    return [] if current_user.nil? || current_user.fb_friends.nil?
+    return self.all( 
+      :conditions => ['fb IN(?)', current_user.fb_friends.split(',')], 
+      :limit => 25, :order => 'created_at DESC', 
+      :joins => [:user ],
+      :include => [:choice => [ :options ]]
+    )
+  end
   
 end

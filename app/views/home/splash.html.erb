@@ -1,18 +1,26 @@
 <div id="splash-ballot" class="ballot-section">
-		<h1 >Welcome to Your <br /> 100% Social Voter Guide</h1>
+		<h1 ><%= t("splash.welcome1")%><br /><%= t("splash.welcome2")%></h1>
 
 	<div class="directions">
+<<<<<<< HEAD
 		<p>How to use November6th.org</p>
 		<ul>
 			<li><i class="icon-search"></i> <strong>Research:</strong> Look up which measures and candidates will be on your ballot this election.</li>
 			<li><i class="icon-comment"></i> <strong>Discuss:</strong> See how your friends weigh in on the hottest ballot measures of the day and leave your own comments.</li>
 			<li><i class="icon-share"></i> <strong>Share:</strong> Create a custom voter guide to share on Facebook, Tumblr and Google+.</li>
+=======
+		<p><%= t("splash.instructions")%></p>
+		<ul>
+			<li><i class="icon-search"></i> <strong><%= t("splash.research1")%></strong> <%= t("splash.research2")%></li>
+			<li><i class="icon-search"></i> <strong><%= t("splash.discuss1")%></strong> <%= t("splash.discuss2")%></li>
+			<li><i class="icon-search"></i> <strong><%= t("splash.share1")%></strong> <%= t("splash.share2")%></li>
+>>>>>>> bus-working
 		</ul>
 	</div>
 	<div class="login">
-		<h1>Get Started</h1>
+		<h1><%= t("splash.start")%></h1>
 		<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %>
-		<p>- or -</p>
+		<p>- <%= t("site.or")%> -</p>
 		<p><%= link_to 'Start Exploring', root_path %></p>
 	</div>
 </div>

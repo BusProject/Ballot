@@ -1,0 +1,54 @@
+<div class="add-contest">
+<%= form_for @choice, :method => "post", :url =>  {:controller => "choice", :action => "create" } do |form| %>
+	<%= form.hidden_field :contest_type %>
+	<h1><i class="icon-cogs"></i>  <%= t('candidates.add_prompt' )%></h1>
+	<div class="office-info">
+		<h3><i class="icon-trophy"></i>  <%= t('candidates.info')%></h3>
+		<label> <%= t('candidates.office_name' )%></label><%= form.text_field :contest, { :class => 'required' } %>	<br/>
+		<label><%= t('site.state' )%></label> <%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %><br />
+		<label><%= t('candidates.votes') %></label> <%= form.select :votes, ['1','2','3','4']  %><em style="font-size: 10px; margin-left: 10px; color: white"><%= t('candidates.votes_more') %></em>
+	</div>
+
+	<!-- ko stopBinding: true -->
+		<div id="options">
+			<!-- ko foreach: options -->
+				<div class="option add-option">
+					<h3><i class="icon-user"></i>  <%= t('candidates.candidate.info ')%></h3>
+					<div>
+						<label><%= t('candidates.candidate.name ')%> *</label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][name]'   } " class="required">
+					</div>
+					<div >
+						<label><%= t('candidates.candidate.party ')%></label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][party]'   } ">
+					</div>
+					<div>
+						<label><%= t('candidates.candidate.campaign ')%> <%= t('candidates.website ')%></label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][website]'   } ">
+					</div>
+					<div>
+						<label><%= t('candidates.candidate.campaign ')%> <%= t('candidates.facebook') %></label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][facebook]'   } ">
+					</div>
+					<div>
+						<label><%= t('candidates.candidate.campaign ')%> <%= t('candidates.twitter ')%></label>
+						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][twitter]'   } ">
+					</div>
+					<span class="link delete" data-bind="click: function() { op.removeOption( $data ); return false;} " ><i class="icon-remove-sign"></i></span>
+				</div>
+			<!-- /ko -->
+			<a class="add-submit" data-bind="click: function() { op.addOption(); return false; }"><i class="icon-plus"></i>  <%= t('candidates.candidate.add')%></a>
+		</div>
+	<!-- /ko -->
+	<div class="add-final-submit"><%= submit_tag t('site.add')  %><!-- This is the submit button --></div>
+<% end %>
+</div>
+
+<script type="text/javascript">
+	var op = {
+		options: ko.observableArray( [ new Date().getTime() ] ),
+		addOption: function() { op.options.push( new Date().getTime() ); },
+		removeOption: function(option) { op.options.remove( option ); }
+	}
+	$(document).ready( function() {  ko.applyBindings( op, document.getElementById("options")); })
+</script>

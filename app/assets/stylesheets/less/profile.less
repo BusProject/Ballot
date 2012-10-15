@@ -18,6 +18,14 @@
 	.helpful {
 		margin: -20px 130px 0 0;
 	}
+	a.helpful:hover::before {
+		color: @darkGrey;
+		position: absolute;
+		content: 'You need to log in first';
+		margin-top: -10px;
+		right: 0;
+		font-size: 8px;
+	}
 	.flag {
 		margin: -20px 10px 0 0;
 	}
@@ -253,8 +261,10 @@
 			.profile-text {
 				float:left;
 				font-size:18px;
-				margin-top:0px;
+				margin-top: 20px;
 				letter-spacing:0;
+				max-width: 210px;
+				text-align: left;
 			}
 		
 			.profile-explanation {
@@ -308,7 +318,7 @@
 					float:right;
 					background-color:white;
 					padding:10px;
-					margin-top:10px;
+					margin-top:30px;
 					text-align:left;
 					.border-box();
 					.border-radius();

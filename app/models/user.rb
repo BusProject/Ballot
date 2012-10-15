@@ -10,27 +10,42 @@ class User < ActiveRecord::Base
     :image, :location, :name, :url, :first_name, :last_name, :feedback, 
     :admin, :authentication_token, :guide_name, :fb, :profile,
     :fb_friends, :description, :alerts, :pages, :profile,
-    :primary, :secondary, :background, :header
+    :primary, :secondary, :bg, :header, :match, :address
 
+  acts_as_voter
   
   # attr_accessible :title, :body
   has_many :feedback do
     def most_recent
       all( :order => 'updated_at DESC', :limit => 1).first
     end
+    def rating
+      all( :select => 'SUM( "feedback"."cached_votes_up" - "feedback"."cached_votes_down") AS rating' ).first.rating
+    end
   end
   has_many :memes, :through => :feedback
   has_many :options, :through => :feedback
   has_many :choices, :through => :options
+
   
   serialize :pages
   
+  belongs_to :match
   
   # Method determining what's turned into JSON
-  def to_public
-    return self.to_json( :except => [:banned, :deactivated, :admin, :pages, :header, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :primary, :secondary, :bg ] ) 
+  def to_public(json=true)
+    hidden = [ :address, :match , :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header_file_name, :header_content_type, :header_file_size, :header_updated_at ]
+    return self.to_json( :except => hidden ) if json
+
+    about = {}
+    attributes = User.attr_accessible[:default].to_a.concat([:id]).select{|a| hidden.index(a.to_sym).nil? }.map{ |a| about[a] = self[a] }
+    return about
+    
   end
   
+  def recommenders
+    return User.find_by_sql( ['SELECT "users".* FROM "votes" INNER JOIN "users" on "votes"."voter_id" = "users"."id" WHERE "votes"."votable_id" IN(?) AND "votes"."votable_type" = "Feedback"', self.feedback.map{ |f| f.id } ]).uniq
+  end
   
   # Profile and URL related methods
   after_initialize :set_profile
@@ -39,11 +54,13 @@ class User < ActiveRecord::Base
   
   # Method for generating a link to the profile
   def set_profile
-    if self.profile.nil? || self.profile.empty?
-      self[:profile] = '/'+self.to_url unless self.to_url.nil?
-    else
-      self[:profile] = '/'+self.profile
-    end
+      if self.has_attribute? 'profile'
+        if self.profile.nil? || self.profile.empty?
+          self[:profile] = '/'+self.to_url unless self.to_url.nil?
+        else
+          self[:profile] = '/'+self.profile
+        end
+      end
   end
   
   # Method to see if profile name is free
@@ -55,7 +72,7 @@ class User < ActiveRecord::Base
       if id != 0 # Future proofing all URL names for our first 10^20th users
         safe = id > 10e20
       end
-      notstate = self.profile =~ /AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|users|admin|lookup|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008/
+      notstate =  Choice.stateAbvs.concat( 'users|admin|lookup|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008|resources'.split('|') ).index( self.profile )
       safe = notstate.nil? && safe
       errors.add( :profile, 'is not unique' ) unless User.where('(id = ? OR profile = ?)  AND id != ?',id,self.profile,self.id).empty? && safe
     else
@@ -81,7 +98,43 @@ class User < ActiveRecord::Base
   def self.active
     return self.find_by_sql(['SELECT "users".* FROM "feedback" INNER JOIN "users" ON "users"."id" = "feedback"."user_id" WHERE ("feedback"."approved" = ? AND "users"."banned" != ? AND "users"."deactivated" != ?  ) ORDER BY "feedback"."updated_at"',true,true,true])
   end
+
+  def self.by_state(state=nil,limit=5)
+    if state.nil?
+      return self.all( 
+      :select => 'DISTINCT( substr("choices"."geography",0,3)) as geography, "users".*,  ( "feedback"."cached_votes_up" - "feedback"."cached_votes_down"  ) AS rating  ',
+      :joins => :choices, 
+      :conditions => ['"choices"."geography" != ?','Prez'], 
+      :order => '"geography", rating DESC' ).group_by{|c| c.geography } 
+    else
+      return self.all( 
+        :group => ' "users"."id" ',
+        :select => '"users".*,  SUM( "feedback"."cached_votes_up" - "feedback"."cached_votes_down"  ) AS rating  ', 
+        :joins => :choices, 
+        :conditions =>['"choices"."geography" LIKE ?',state+'%'], 
+        :order => 'rating DESC',
+        :limit => limit || 5
+      )
+    end
+  end
   
+  def self.top_25
+    return User.all( 
+      :limit => 25,
+      :select => '"users".*, SUM( "feedback"."cached_votes_up" - "feedback"."cached_votes_down") AS rating',
+      :group => "users.id",
+      :order => 'rating DESC', 
+      :joins => :feedback 
+    )
+  end
+  
+  def self.friends(current_user=nil)
+    return [] if current_user.nil? || current_user.fb_friends.nil?
+    return self.where('fb IN(?)', current_user.fb_friends.split(',') )
+  end
+  
+
+
   # Header image handling
   
   if Rails.env == "production"

@@ -13,9 +13,32 @@ class HomeController < ApplicationController
 
       render :template => 'home/splash.html.erb'
     else
-      params['q'] = params['q'] || params['address']
       
-      @config = { :address => params['q'].gsub('+',' ') }.to_json unless params['q'].nil?
+      address = params['q'] || params['address']
+      
+      if address.nil?
+        remember = true
+        if current_user
+          address = current_user.address unless current_user.address.nil? || current_user.address.empty?
+          if match = current_user.match
+            @choices = Choice.find_by_districts( match.data ).each{ |c| c.prep current_user }
+            latlng = match.latlng
+            state = match.data.select{ |d| d.length == 2 }.first
+            google = { :address_components => [ { :short_name => state, :types => ["administrative_area_level_1"] }  ] }
+          end
+        else
+          address = cookies['ballot_address_cache']
+        end
+      else
+        remember = false
+      end
+      address = address || ''
+      latlng = latlng || nil
+      
+      @config = { :address => address.gsub('+',' '), :latlng => latlng, :google => google, :remember => remember }.to_json 
+
+      @choices_json = @choices.to_json( Choice.to_json_conditions )
+      
       @classes = 'home front'
       
       render :template => 'home/index.html.erb' 
@@ -74,6 +97,7 @@ class HomeController < ApplicationController
   def about
     @classes = 'home msg'
     @config = { :state => 'page' }.to_json
+    if I18n.locale == :en
     @title = 'About'
     @content = <<EOF
          <h1>About november6th.org</h1>
@@ -98,7 +122,7 @@ class HomeController < ApplicationController
          <p><strong><a href="https://twitter.com/mattsinger7" target="_blank">Matt Singer</a></strong></p>
          <!--<p>Matt Bio</p>-->         
 EOF
-
+  end
     render 'home/show'
   end
   
@@ -112,20 +136,27 @@ EOF
 
     if params[:filter]
       results += User.where( "id = ? OR profile = ?", id, params[:term] ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } } if params[:filter] == 'profile'
+      if params[:filter] == 'offices'
+        results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } }
+        results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } }
+      end
     else
       prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'
       results = []
       results += User.where( "deactivated = ? AND banned = ? AND (lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR id = ?)",false,false, prepped, prepped, prepped, id ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } }
       results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } }
       results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } }
+      results += Choice.states.reject{ |c| c.downcase.index( params[:term].downcase ).nil? }.map{ |state| { :label => state+"'s Full Ballot", :url => ENV['BASE']+'/'+Choice.stateAbvs[ Choice.states.index(state) ] }   }
     end
     render :json => results
   end
 
+
     def privacy
        @classes = 'home msg'
        @config = { :state => 'page' }.to_json
-       @title = 'About'
+if I18n.locale == :en
+       @title = 'Prviacy Policy'
        @content = <<EOF
        <h1>Privacy Policy</h1>
        <p>The League of Young Voters Education Fund and The Bus Federation Civic Fund (collectively, "we" or "us") are committed to preserving your privacy and safeguarding the personal and/or sensitive information you provide to us via any of our websites. This commitment is demonstrated by the terms of this Privacy Policy.</p>
@@ -172,12 +203,14 @@ EOF
        <p>Last updated: October 5th, 2012</p>
 
 EOF
+end
       render 'home/show'
     end
     def tos
        @classes = 'home msg'
        @config = { :state => 'page' }.to_json
-       @title = 'About'
+if I18n.locale == :en
+       @title = 'Terms of Service'
        @content = <<EOF
        <h1>Terms of Use</h1>
        
@@ -243,28 +276,65 @@ EOF
        <p>Last updated: October 5th, 2012</p>
 
 EOF
+end
       render 'home/show'
     end
 
   
+  def guides
+
+    @classes = 'home profile guides'
+    
+    if params[:state]
+      if params[:state].length == 2
+        state = Choice.states[ Choice.stateAbvs.index(params[:state] ) ].gsub(' ','_')
+        stateAbv = params[:state]
+      else
+        state =  params[:state].capitalize.gsub(' ','_')
+        stateAbv = Choice.stateAbvs[ Choice.states.index(params[:state].capitalize ) ]
+      end
+
+      @limit = params[:limit] || 100 
+      guides = User.by_state( stateAbv ,@limit )
+      @guides = [ [stateAbv , guides ] ]
+
+      if params[:format] == 'json'
+         render :json => guides.map{ |u| u.to_public(false) }
+      else
+        @config = { :state => 'guides',  :stateName => state, :states => guides.map{|u| u.name } }.to_json
+        @title = 'Top Voter Guides In '+state.capitalize
+      end
+    else
+      @limit = 10
+      @guides = User.by_state
+      @title = 'Top Voter Guides Around the Country'
+      @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] } }.to_json
+    end
+  end
+  
+  
   def sitemap
+    states = Choice.states
     stateAbvs = Choice.stateAbvs
-    newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at.to_date
+    newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at
+    newwest_feedback = Feedback.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['approved = ?',false] ).first.updated_at
+
     
     @urls = [
-        { :url => ENV['BASE']+'/about', :updated => 'Thu, 04 Oct 2012'},
-        { :url => ENV['BASE']+'/guides', :updated => newwest_user  }
+        { :priority => '0.3', :url => ENV['BASE']+'/about', :updated => '2012-10-05'},
+        { :priority => '0.3', :url => ENV['BASE']+'/guides', :updated => newwest_user > newwest_feedback ? newwest_user.to_date : newwest_feedback.to_date  }
       ]
-    @urls += (1..50).map{ |i| {:url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
+    (1..50).map{ |i| feedback = Feedback.joins(:choice).where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first; @urls.push( { :priority => '0.4', :url => ENV['BASE']+'/guides/'+states[i].capitalize, :updated => feedback.updated_at.to_date } ) unless feedback.nil? }
+    @urls += (1..50).map{ |i| { :priority => '0.4', :url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
 
     @urls += User.active.map do |user| 
       updated = user.updated_at > user.feedback.most_recent.updated_at ? user.updated_at : user.feedback.order('updated_at DESC').limit(1).first.updated_at
-      { :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
+      { :priority => '0.8', :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
     end
 
-    @urls += Choice.all.map{ |c| { :url => c.to_url, :updated => c.updated_at.to_date } } 
+    @urls += Choice.all.map{ |c| { :priority => '1.0', :url => ENV['BASE']+'/'+c.to_url, :updated => c.updated_at.to_date } } 
     
-    if params[:format]
+    if params[:format] == 'json'
       render :json => @urls.count 
     else
       render :template => 'home/sitemap'

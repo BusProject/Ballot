@@ -40,21 +40,21 @@ class FeedbackController < ApplicationController
   end
 
   def vote
-    feedback = Feedback.find( params[:id] )
-    noun = 'people'
-    
-    if  params[:flavor] == 'useful'
-      amount = feedback.upvotes.size
-      noun = noun.singularize if amount == 1
-      feedback.liked_by current_user
+    unless current_user.nil?
+      feedback = Feedback.find( params[:id] )
+
+      if  params[:flavor] == 'useful'
+        amount = feedback.upvotes.size
+        current_user.likes feedback
+      else
+        amount = feedback.upvotes.size
+        current_user.likes feedback
+      end
+
+      render :json => {:success => true, :message => I18n.t('feedback.agree',{:count => amount, :attribute => params[:flavor] }) }, :callback  => params['callback']
     else
-      amount = feedback.upvotes.size
-      noun = noun.singularize if amount == 1
-      feedback.disliked_by current_user
+      render :json => {:success => false, :callback  => params['callback'] }
     end
-    
-    render :json => {:success => true, :message => amount.to_s+' '+noun+' agree it\'s '+params[:flavor] }, :callback  => params['callback']
-    
   end
 
   def flag
@@ -65,47 +65,34 @@ class FeedbackController < ApplicationController
     params[:flavor] = 'flag'
 
     if flag.nil?
-      render :json => {:success => false, :message => 'that is not a thing'  }, :callback  => params['callback']
+      render :json => {:success => false, :message => ''  }, :callback  => params['callback']
     else
     
       flag = flag.split(',')
         
-      verb = 'mark something as '+params[:flavor]
-      verb = 'flag' if params[:flavor] == 'flag'
+        
+      if user_signed_in? && current_user.commentable?
+        if current_user.id == feedback.user_id
+          render :json => {:success => false, :message => '' }, :callback  => params['callback']
+        else
+          if flag.index( current_user.id.to_s ).nil?
+            flag.push(current_user.id)
+            feedback[params[:flavor] ] = flag.join(',')
 
-      if flag.length == 0
-        msg = ''
-      else
-        noun = flag.length  == 1 ? 'person' : 'people'
-        plural = flag.length == 1 ? 's' : ''
-        msg = ', '+flag.length.to_s+' '+noun+' agree'+plural
-      end
-      msg = ', we\'ll review soon' if params[:flavor] == 'flag'
-          
-        
-        
-          if user_signed_in? && current_user.commentable?
-            if current_user.id == feedback.user_id
-              render :json => {:success => false, :message => 'You can\'t '+verb+' your own thing' }, :callback  => params['callback']
+            if feedback.save
+              render :json => {:success => true, :message => '' }, :callback  => params['callback']
             else
-              if flag.index( current_user.id.to_s ).nil?
-                flag.push(current_user.id)
-                feedback[params[:flavor] ] = flag.join(',')
-
-                if feedback.save
-                  render :json => {:success => true, :message => 'Thanks'+msg }, :callback  => params['callback']
-                else
-                  render :json => {:success => false, :message => 'Something went wrong' }, :callback  => params['callback']
-                end
-
-              else
-                render :json => {:success => false, :message => 'You can\'t '+verb+' twice' }, :callback  => params['callback']
-              end
+              render :json => {:success => false, :message => '' }, :callback  => params['callback']
             end
+
           else
-            render :json => {:success => false, :message => '<a href="'+omniauth_authorize_path('user', :facebook)+'">You need to sign in</a> to '+verb }, :callback  => params['callback']
+            render :json => {:success => false, :message => '' }, :callback  => params['callback']
           end
-    end  
+        end
+      else
+        render :json => {:success => false, :message => '' }, :callback  => params['callback']
+      end
+    end
   end
 
 end

@@ -11,9 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120920054046) do
+ActiveRecord::Schema.define(:version => 20121013014411) do
 
   create_table "choices", :force => true do |t|
+<<<<<<< HEAD
     t.string   "contest"
     t.integer  "order"
     t.boolean  "commentable",  :default => false
@@ -22,6 +23,17 @@ ActiveRecord::Schema.define(:version => 20120920054046) do
     t.string   "contest_type"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+=======
+    t.string    "contest"
+    t.integer   "order"
+    t.boolean   "commentable",  :default => false
+    t.string    "geography"
+    t.text      "description"
+    t.string    "contest_type"
+    t.timestamp "created_at",                      :null => false
+    t.timestamp "updated_at",                      :null => false
+    t.integer   "votes",        :default => 1
+>>>>>>> bus-working
   end
 
   add_index "choices", ["geography", "contest"], :name => "index_choices_on_geography_and_contest", :unique => true
@@ -90,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20120920054046) do
   add_index "options", ["name"], :name => "index_options_on_name"
 
   create_table "users", :force => true do |t|
+<<<<<<< HEAD
     t.string   "email",                  :default => "",    :null => false
     t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
@@ -126,6 +139,46 @@ ActiveRecord::Schema.define(:version => 20120920054046) do
     t.string   "header_content_type"
     t.integer  "header_file_size"
     t.datetime "header_updated_at"
+=======
+    t.string    "email",                  :default => "",    :null => false
+    t.string    "encrypted_password",     :default => "",    :null => false
+    t.string    "reset_password_token"
+    t.timestamp "reset_password_sent_at"
+    t.timestamp "remember_created_at"
+    t.integer   "sign_in_count",          :default => 0
+    t.timestamp "current_sign_in_at"
+    t.timestamp "last_sign_in_at"
+    t.string    "current_sign_in_ip"
+    t.string    "last_sign_in_ip"
+    t.timestamp "created_at",                                :null => false
+    t.timestamp "updated_at",                                :null => false
+    t.string    "image"
+    t.string    "name"
+    t.string    "location"
+    t.string    "url"
+    t.string    "first_name"
+    t.string    "last_name"
+    t.boolean   "admin",                  :default => false
+    t.string    "authentication_token"
+    t.string    "guide_name"
+    t.string    "fb"
+    t.boolean   "banned",                 :default => false
+    t.boolean   "deactivated",            :default => false
+    t.text      "description"
+    t.text      "fb_friends"
+    t.text      "alerts"
+    t.text      "pages"
+    t.string    "profile"
+    t.string    "primary"
+    t.string    "secondary"
+    t.string    "bg"
+    t.string    "header_file_name"
+    t.string    "header_content_type"
+    t.integer   "header_file_size"
+    t.timestamp "header_updated_at"
+    t.integer   "match_id"
+    t.string    "address"
+>>>>>>> bus-working
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

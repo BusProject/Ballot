@@ -1,0 +1,179 @@
+body.add {
+	form#new_choice {
+		.oops {
+			input,textarea { border: 1px solid red; }
+			h3, label, h4 { color: @red }
+		}
+	}
+	.yourFeedback {
+		h1 { margin: 20px 0; }
+		p { margin: 40px 0; }
+	}
+}
+
+.add-warning {
+	width:80%;
+	margin:20px auto;
+	background-color:@orange;
+	padding:10px;
+	.border-radius(2px);
+	position:relative;
+
+	p {
+		margin:0 0 10px;
+		color:white;
+		text-align:left;
+	}
+
+	&:before {
+		content:"\f0d8";
+		font-family:"FontAwesome";
+		color:@orange;
+		position:absolute;
+		top:-19px;
+		left:348px;
+		font-size:35px;
+	}
+	
+	a { 
+		color:white;
+		text-decoration:underline;
+		
+		&:hover {
+			color:white;
+			color:@darkGrey;
+		}
+	}
+	
+}
+.add-contest {
+	text-align:left;
+	color:white;
+	width:90%;
+	background-color:lighten(@grey,10%);
+	padding:15px 30px;
+	.border-radius(5px);
+	.clearfix;
+	
+	h1 {
+		text-align:center;
+		margin:10px 0 20px;
+	}
+	
+	h3 {
+		margin-bottom:10px;
+		font-weight:500;
+		color:white;
+		text-align:center;
+		font-size:18px;
+	}
+	
+	.link {
+		color:white;
+		
+		&:hover { color:white; text-decoration: underline; }
+	}
+	
+	.add-submit {
+		.greyButton;
+		margin:20px auto;
+		display:block;
+		width:27%;
+		
+		&:active { color:white; }
+
+	}
+	
+	.add-final-submit {
+		width:80%;
+		border-top:2px dotted lighten(@grey,20%);
+		padding: 10px 0 0;
+		margin:0 auto;
+		
+		input { 
+			width:auto;
+			margin:0 auto; 
+			.orangeButton;
+			display:block;
+		}
+		
+		
+	}
+	
+	.office-info {
+		background-color:lighten(@grey,20%);
+		.border-radius(5px);
+		width:80%;
+		.clearfix;
+		margin:0 10% 20px;
+		padding:10px;
+	}
+	
+	.add-option {
+		border-bottom:2px dotted lighten(@grey,20%);
+		.clearfix;
+		display:block;
+		padding: 0 0 10px;
+		width:80%;
+		margin:0 10% 20px;
+	}
+	
+	.delete {
+		float:right;
+	}
+	
+	label {
+		display:inline-block;
+		float:left;
+		text-align:right;
+		margin-right:30px;
+		width:33%;
+		color:white;
+	}
+	
+	.small-label {
+		font-size:12px;
+		text-align:left;
+	}
+		
+	input, textarea { 
+		width:50%;
+		font-size:16px;
+		display:inline-block;
+		margin:0px 0px 10px 0px;
+		.border-radius(4px);
+		padding:5px;
+		.border-box();
+		.inner-shadow();
+		outline:none;
+		border:1px solid darken(@bgGrey,20%);
+		color:@darkGrey;
+		
+	}
+
+	.option {
+		margin:10px auto;
+		padding:10px;
+		width:80%;
+		background-color:lighten(@grey,20%);
+		.border-radius(5px);
+		
+		label {
+			width:50%;
+		}
+		input, textarea { width:40%; }
+	}	
+	
+	.yes {
+		h3 {color:@green;}
+		border:1px solid @green;
+	}
+	
+	.no { 
+		h3 {color:@red;}
+		border:1px solid @red;
+		
+	}
+}
+
+}

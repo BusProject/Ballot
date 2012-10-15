@@ -9,6 +9,10 @@ Nov6::Application.routes.draw do
   match '/users/update' => 'user#update', :as => 'user_update', :via => :post
   match '/users/pages' => 'user#access_pages', :as => 'user_pages'
   match '/users/pages/:fb' => 'user#page_session', :as => 'user_page_session_create'
+  match '/users/auth/:provider/callback' => 'authentications#create'
+
+  match '/users/add/:type' => 'choice#new', :via => :get, :type => /candidate|measure/ , :as => 'user_add_choice'
+  match '/users/add' => 'choice#create', :via => :post, :as => 'user_create_choice'
 
   match '/admin' => 'admin#index', :as => 'admin'
   match '/admin/find/:object/' => 'admin#find', :as => 'admin_find' #, :via => :post
@@ -16,6 +20,7 @@ Nov6::Application.routes.draw do
   match '/admin/ban/:id' => 'admin#ban', :as => 'user_ban', :via => :post
   match '/admin/choice/:id' => 'admin#choice_edit', :as => 'choice_edit', :via => :get
   match '/admin/choice/:id' => 'admin#choice_update', :as => 'choice_update', :via => :post
+  match '/admin/choice/:id/delete' => 'admin#choice_delete', :as => 'choice_delete', :via => :post
   match '/admin/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
 
 
@@ -27,13 +32,21 @@ Nov6::Application.routes.draw do
   match '/stats' => "home#stats"
   match '/search' => "home#search", :as => 'search'
   match '/how-to' => redirect('https://docs.google.com/document/d/1U7kY9aU_e89GYb9oDt5ilzpjkzsCFtwUQNCr2AK9MAM/edit')
+  match '/resources/how-to' => redirect('https://docs.google.com/document/d/1U7kY9aU_e89GYb9oDt5ilzpjkzsCFtwUQNCr2AK9MAM/edit')
   match '/source' => redirect('https://github.com/BusProject/Ballot')
   match '/sitemap' => 'home#sitemap', :as => 'sitemap'
 
-  match '/auth/:provider/callback' => 'authentications#create'
+  match '/guides' => 'home#guides', :as => 'guides'
+  match '/guides/list' => 'home#guides'
+  match '/guides/:state' => 'home#guides', :as => 'state_guides'
+  match '/guides/by_state/:state' => redirect( '/guides/%{state}' )
+  match '/guides/top' =>  'home#guides'
+  
+  match '/friends' => 'choice#friends'
+
+
   match '/lookup' => 'choice#index'
   match '/lookup/:id/more' => 'choice#more'
-  match '/fetch' => 'choice#retrieve', :as => 'choices_fetch'
   
   match '/feedback/save' => 'feedback#update', :via => :post, :as => 'save_feedback'
   match '/feedback/:id/remove' => 'feedback#delete', :via => :post, :as => 'remove_feedback'

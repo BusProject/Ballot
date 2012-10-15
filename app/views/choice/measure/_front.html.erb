@@ -1,0 +1,134 @@
+<% choice = choice || Choice.new %>
+<% user = user || nil %>
+<% choice.options.new if choice.new_record?  %>
+
+<a data-bind="attr:{name:$data.contest+' '+$data.geography}"></a>
+
+<div class="measure row <%= 'selected' unless choice.new_record? %> commentable" 
+	data-bind="css: { selected: $root.selected() == $data, complete: $data.you()[0] }"
+	itemscope itemtype="http://schema.org/ItemList" >
+
+	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
+	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' + I18n.t( 'site.voted', { count: $data.voted() })+ ' | ' +I18n.t('site.commented', { count: $data.commentsPure() }) " >
+		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> | <%= t('site.commented', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> 
+	</div>
+	<button class="open"><%= t('measures.open' ) %></button>
+	<hr class="button">
+
+	<div class="body">
+		<div class="full-text">
+			<a target="_blank" href="<%= choice.options.first.blurb_source %>" data-bind="visible: $data == $root.selected(), href: $data.options()[0].blurb_source" ><%= t('measures.full_text')%> <i class="icon-external-link"></i></a>
+		</div>
+
+		<% n = 0 %>
+		<meta itemprop="itemListOrder" content="Unordered" />
+		
+		<% choice.options.each do |option| %>
+		<div itemprop="itemListElement"  class="optionholder <%= 'clean-no-script' if n != 0 %>" >
+			<!-- ko foreach: $data.options -->
+				<div class="option">
+					<h1 data-bind="text: $data.name, stripClass: true, addClass: ( $data.type == I18n.t('site.no').toLowerCase() ? 'no' : 'yes' )" class="<%= option.option_type == t('site.no').downcase() ? 'no' : 'yes'  unless option.new_record? %> ">
+						<%= option.name %>
+					</h1>
+					<img data-bind="src: $data.photo" src="<%= option.photo %>">
+					<div class="blurb" data-bind="text: $data.blurb "><%= option.blurb %></div>
+
+					<div class="faces">
+						<div class="minicounter" data-bind="">
+							<div data-bind="html:  ( $data.type == I18n.t('site.yes').toLowerCase() ? I18n.t('site.support', { count: $data.support() }) : I18n.t('site.oppose', { count: $data.support() }) ) +'<br />'+$parent.contest ">
+								<% if option[:type] == t('site.yes').downcase %>
+									<%= t('site.oppose', { :count => option[:support]} ) %>
+								<% else %>
+									<%= t('site.oppose', { :count => option[:support]} ) %>
+								<% end %>
+								<br /><%= choice.contest %>
+							</div>
+						</div>
+						<!-- ko foreach: $data.faces.show -->
+							<a target="_blank" class="hide-no-script" data-bind="attr: {href: $data.url }">
+								<img class="face miniimage" data-bind="src: $data.image, attr: { alt: $data.name }">
+							</a>
+						<!-- /ko -->
+						<% unless option.new_record? %>
+							<% option.faces.each do |face| %>
+								<a target="_blank" class="clean-no-script" href="<%= face[:url] %>">
+									<img class="face miniimage" alt="<%= face[:name] %>" src="<%= face[:image] %>">
+								</a>
+							<% end %>
+						<% end %>
+						
+					</div>
+				</div>
+			<!-- /ko -->
+		</div>
+		<% n+=1 %>
+		<% end %>
+
+			<%- if current_user != user || !current_user.nil? %>
+				<%= render 'choice/measure/feedback', :user => user, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
+			<%- end %>
+
+			<%- if user.nil? %>
+				<% # hiding all of this if a featured user is set - i.e. we're looking at a profile  %>
+				<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
+					<h2>What Others Are Saying</h2>
+					<select data-bind="value: $data.mode">
+						<option value="normal"><%= t('site.sort_by')%></option>
+						<option value="best"><%= t('site.most_helpful')%></option>
+						<option value="friends"><%= t('site.friends')%></option>
+						<option value="yes" ><%= t('site.in_support')%></option>
+						<option value="no" ><%= t('site.in_opposition')%></option>
+					</select>
+					<div class="arrows">&#x25B2;<br />&#x25BC;</div>
+				</div>
+			
+			
+				<ul data-bind="foreach: feedback.everyone" class="feedback">
+					<li data-bind="addClass: $data.type ">
+
+						<div class="head" data-bind="addClass: $data.type">
+							<a data-bind="attr: {href: $data.url }" >
+								<img class="face" data-bind="src: $data.image, attr: { alt: $data.name }" >
+							</a>
+						</div>
+
+						<div class="comment-bubble" data-bind="addClass: $data.type">
+						<strong data-bind="text: $data.name+ ' says '+$data.option_name+' on '+$parent.contest"></strong>
+						<div class="message" data-bind="text: $data.comment"></div>
+						</div>
+						
+						<div class="foot">
+								<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
+							<br />
+								<%- if !current_user.nil? %>
+									<div class="ask">
+										<%= t('site.helpful')%>
+										<span class="helpful link" ><Yes><%= t('site.yes')%></span>
+											&nbsp;|&nbsp;
+										<span class="not link"><%= t('site.no')%></span>
+											&nbsp;|&nbsp;
+										<span class="flag link"><%= t('site.flag')%></span>
+									</div>
+								<% end -%>
+						</div>
+
+					</li>
+				</ul>
+				<%- if current_user.nil? %>
+					<%= render 'choice/measure/feedback', :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
+				<% end -%>
+			<% end -%>
+
+			<div class="footer" >
+				<meta itemprop="url" content="<%= choice.to_url%>" />
+				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><%= t('site.read_all') %></a>
+				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() "><%= t('site.load_more')%></a>
+			</div>
+
+			<hr class="button lower">
+
+
+
+	</div>
+</div>

@@ -7,6 +7,7 @@ class AdminController < ApplicationController
     @bans = User.find_all_by_banned(true)
     @flagged = Feedback.where( "length(flag)- length(replace( flag,',','') ) >= ? AND approved = ?", 2, true )
     @flagged.concat( Feedback.where('approved = ?',false).joins(:user).where('banned = ? AND deactivated = ? AND admin = ?',false,false,false) )
+    @userGenerated = Choice.where('geography LIKE ?','%User%')
     
     # this query will be useful sometime: it is the geography of the races that have recieved comments:
     # Feedback.all.map{ |f| f.choice.geography }.uniq.sort.each{ |c| puts c }
@@ -77,6 +78,12 @@ class AdminController < ApplicationController
     @choice = Choice.find(params[:id])
     @choice.update_attributes( params[:choice] )
     render :json => { :option => @choice.options, :params => params}
+  end
+  
+  def choice_delete
+    @choice = Choice.find(params[:id])
+    @choice.fullDelete
+    render :json => { :success => true }
   end
   
   protected
