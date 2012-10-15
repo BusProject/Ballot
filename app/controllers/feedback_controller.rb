@@ -80,7 +80,9 @@ class FeedbackController < ApplicationController
     
     @config = result.to_json
     @single = true
-    
+
+    @type = ENV['FACEBOOK_NAMESPACE']+':comment'
+
     @choices_json = @choices.to_json( Choice.to_json_conditions )
     render :template => 'choice/profile'
   end
