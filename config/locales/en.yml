@@ -19,6 +19,7 @@ en:
         save: 'Save'
         cancel: 'Cancel'
         remove: 'Remove'
+        add: 'Add'
         edit: 'Edit'
         loading: 'Loading...'
         for: 'for'
@@ -134,9 +135,11 @@ en:
         twitter: 'Twitter'
         facebook: 'Facebook'
         website: 'Website'
-        who: 'Who Will You Support for This Office?'
-        let: 'Let the world know who you’re supporting for'
-        can_share: 'Your comment will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.'
+        who: 'Is this an Important Race to You?'
+        let: "Show you'll be voting for"
+        let_more: "by adding it to your Voter Guide."
+        can_share: 'Your comment explaining why this is an important race will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.'
+        disclaimer: 'Please - do not endorse any candidate or political party in your comment or your comment will be removed.'
         prompt: 'please select a candidate'
         comment: '(Leave a comment if you wanna)'
         list: 'The Candidates'

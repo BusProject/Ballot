@@ -74,7 +74,7 @@ function Choice(data,args) {
 			return feedback
 		},this)
 
-		this.votes = data.votes || 1
+		this.votes = 1;
 		this.chosen = ko.observable()
 		this.you = ko.computed(function() { 
 			var ft = null

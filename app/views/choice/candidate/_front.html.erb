@@ -26,7 +26,7 @@
 		<meta itemprop="additionalType" content="http://data-vocabulary.org/Person" />
 	  
 		<% choice.options.sort_by{ |o| o.id == you.option_id ? -1 : 1 unless you.nil? }.each do |option| %>
-		<div itemscope itemprop="itemListElement" itemtype="http://data-vocabulary.org/Person" class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" data-bind="css: {chooseable: $data.featured().length < votes && current_user.id != 'unauthenticated' }">
+		<div itemscope itemprop="itemListElement" itemtype="http://data-vocabulary.org/Person" class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" >
 			<!-- ko foreach: $data.options -->
 				<div class="<%= 'chosen confirmed' if you == option %> option " data-bind="css:{ chosen: $parent.chosen() == $data, confirmed: $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 }" >
 					<h1 itemprop="name" data-bind="text: $data.name, addClass: $data.name.toLowerCase()">
@@ -36,41 +36,18 @@
 					<p class="bigger"><span itemprop="affiliation" data-bind="text: $data.party"><%= option.party %></span> <!-- | <span data-bind="text: $data.type"><%= option.option_type unless choice.new_record? %></span>--></p>
 					<p class="smaller"><a target="_blank" data-bind="href: $data.twitter " href="<%= option.twitter %>" ><span><%= t('candidates.twitter' ) %></span></a><a target="_blank" data-bind="href: $data.facebook " target="_blank" href="<%= option.facebook %>" ><span><%= t('candidates.facebook' ) %></span></a><a itemprop="url" data-bind="href: $data.website " href="<%= option.website %>" ><span><%= t('candidates.website' ) %></span></a></p>
 
-					<% if choice.new_record? || choice.commentable? || true %>
-						<div class="faces" data-bind="css: { lessHeads: $data.support() < 3 }">
-							<div class="minicounter" >
-								<div data-bind="html: I18n.t('site.support', { count: $data.support() })+'<br />'+$data.name ">
-									<%= t('site.support', { :count => option[:support]} ) %><br /><%= option.name %>
-								</div>
-							</div>
-							<!-- ko foreach: $data.faces.show -->
-								<a target="_blank" class="hide-no-script" data-bind="attr: {href: $data.url }">
-									<img class="face miniimage" data-bind="src: $data.image, attr: { alt: $data.name }">
-								</a>
-							<!-- /ko -->
-							<% unless option.new_record? %>
-								<% option.faces.each do |face| %>
-									<a target="_blank" class="clean-no-script" href="<%= face[:url] %>">
-										<img class="face miniimage" alt="<%= face[:name] %>" src="<%= face[:image] %>">
-									</a>
-								<% end %>
-							<% end %>
-						</div>
-					<% end %>
 				</div>
 			<!-- /ko -->
 			<div style="clear: both;"></div>
 		</div>
 		<% n+=1 %>
 		<% end %>
-		<% if choice.new_record? || choice.commentable || true %>
-			<hr class="button lower middle">
 
+		<%= render 'choice/candidate/feedback', :user => user, :choice => choice, :feedback => choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.first %>
 
-			<hr class="button lower">
-
-
-		<% end %>
+		<div class="footer" >
+			<meta itemprop="url" content="<%= choice.to_url%>" />
+		</div>
 
 	</div>
 </div>

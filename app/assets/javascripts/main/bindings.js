@@ -101,8 +101,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			var $ctx = ko.contextFor( $parent[0] )
 				$comment = $('.comment', $parent),
 				choice_id = $ctx.$parent.id,
-				option = $ctx.$parent.chosen(),
-				option_id = option.id,
+				option = $ctx.$parent.options()[0],
+				option_id = 'nil',
 				comment = $comment.val()
 
 		} else {
@@ -120,7 +120,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			{ feedback: [ 
 					{
 						option_id: parseInt(option_id),
-						//choice_id: parseInt(choice_id),
+						choice_id: parseInt(choice_id),
 						comment: comment,
 						
 					}

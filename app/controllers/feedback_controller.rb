@@ -7,18 +7,26 @@ class FeedbackController < ApplicationController
       success = true
       if user_signed_in? && current_user.commentable?
         feedbacks.each do |f|
-          option = Option.find(f[1]['option_id'])
-          feedback = option.feedback.new(
-            :user => current_user,
-            :comment => f[1]['comment'],
-            :choice => option.choice
-          )
+          if f[1]['option_id'] == 'NaN'
+            choice = Choice.find( f[1]['choice_id'] )
+            feedback = choice.feedback.new(
+              :user => current_user,
+              :comment => f[1]['comment']
+            )
+          else
+            option = Option.find(f[1]['option_id'])
+            feedback = option.feedback.new(
+              :user => current_user,
+              :comment => f[1]['comment'],
+              :choice => option.choice
+            )
+          end
           if feedback.save
-            sucess = success && true
+            success = success && true
             successes.push({:obj => feedback.id, :updated_at => feedback.updated_at })
           else
-            sucess = success && false
-            errors.push({:obj => feedback.id, :success => false, :error => feedback.errors })
+            success = success && false
+            errors.push( {:obj => feedback.id, :success => false, :error => feedback.errors })
           end
           @json = {'success' => success, 'errors' => errors, 'successes' => successes }
         end
