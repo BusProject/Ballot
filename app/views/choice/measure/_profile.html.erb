@@ -37,11 +37,7 @@
 	<%- if user == current_user %>
 	<!-- ko foreach: selected -->
 		<div class="controls">
-<<<<<<< HEAD:app/views/choice/_measureProfile.html.erb
-			<!-- <span class="link meme"><i class="icon-picture"></i> Create Badge</span> | --> <span class="remove link" >Remove</span> | 
-=======
-			<span class="link meme"><i class="icon-picture"></i> <%= t('site.badge ')%></span> | <span class="remove link" > <%= t('site.remove ')%></span> | 
->>>>>>> bus-working:app/views/choice/measure/_profile.html.erb
+			<!--<span class="link meme"><i class="icon-picture"></i> <%= t('site.badge ')%></span> | --><span class="remove link" > <%= t('site.remove ')%></span> | 
 			<!-- Here's a link to the single page - just move this around -->
 			<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$parent.geography+'/'+$parent.contest.replace(/ /g,'_') }" ><%= t('site.edit ')%></a>
 		</div>

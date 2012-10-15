@@ -62,18 +62,15 @@ class ChoiceController < ApplicationController
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
 
-<<<<<<< HEAD
-    @choices = @user.choices.sort_by{ |choice| [ ['Ballot_Statewide','Federal','State','County','Other'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
-=======
 
-    @choices = @user.choices.uniq.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
+    @choices = @user.choices.uniq.sort_by{ |choice| [ ['Ballot_Statewide','Federal','State','County','Other','User_Ballot','User_Candidate'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
 
     if !current_user.nil? && current_user != @user
       @recommended = true
       @user.feedback.each{ |f|  @recommended = @recommended & current_user.voted_for?(f) }
     end
 
->>>>>>> bus-working
+
     @classes = 'profile home'
     @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide'
     @type = 'Voter Guide'
@@ -89,11 +86,8 @@ class ChoiceController < ApplicationController
 
   def state
     
-<<<<<<< HEAD
-    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order( [ ['Ballot_Statewide','Federal','State','County','Other'].index( :contest_type), :geography  ]  ).limit( 200 ).offset( params[:page] || 0 )
-=======
-    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order("contest_type IN('Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot' ) ASC").limit( 50 ).offset( params[:page] || 0 )
->>>>>>> bus-working
+    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order("contest_type IN( 'Ballot_Statewide','Federal','State','County','Other','User_Ballot','User_Candidate' ) ASC").limit( 50 ).offset( params[:page] || 0 )
+
 
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
 
@@ -102,11 +96,8 @@ class ChoiceController < ApplicationController
     if params[:format] == 'json'
       render :json => @choices.to_json( Choice.to_json_conditions )
     else
-<<<<<<< HEAD
-      @types = Choice.where('geography LIKE ?', params[:state]+'%' ).select("DISTINCT( contest_type)").sort_by{|c| ['Ballot_Statewide','Federal','State','County','Other'].index( c.contest_type) }.map{ |c| c.contest_type }
-=======
-      @types = Choice.where('geography LIKE ?', params[:state]+'%' ).select("DISTINCT( contest_type)").sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( c.contest_type) }.map{ |c| c.contest_type }
->>>>>>> bus-working
+
+      @types = Choice.where('geography LIKE ?', params[:state]+'%' ).select("DISTINCT( contest_type)").sort_by{|c| [ 'Ballot_Statewide','Federal','State','County','Other','User_Ballot','User_Candidate' ].index( c.contest_type) }.map{ |c| c.contest_type }
 
       @states = Choice.states
       @stateAbvs = Choice.stateAbvs
@@ -151,11 +142,6 @@ class ChoiceController < ApplicationController
     districts = params['q'].nil? ? cicero.find(params['l'], params[:address] ) : params['q'].split('|')
     
     unless districts.nil?
-<<<<<<< HEAD
-      @choices = Choice.find_all_by_geography( districts ).sort_by{ |choice| [ ['Ballot_Statewide','Federal','State','County','Other'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user }
-    else
-      query = {'success' => false, 'message' => 'Nothing useful was posted'}.to_json
-=======
       @choices = Choice.find_by_districts( districts ).each{ |c| c.prep current_user }
     end
     
@@ -167,7 +153,7 @@ class ChoiceController < ApplicationController
       else
         cookies['ballot_address_cache'] = params[:address_text]
       end
->>>>>>> bus-working
+
     end
     
     render :json => @choices.to_json( Choice.to_json_conditions )

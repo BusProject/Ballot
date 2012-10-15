@@ -25,13 +25,9 @@
 <% end %>
 
 	<% @types.each do |type| %>
-<<<<<<< HEAD
-		<% n = ['Ballot_Statewide','Federal','State','County','Other'].index( type ) %>
-		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot Measures' : type %>" data-bind="with: sections()[<%= n %>]">
-=======
-		<% n = ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( type ) %>
+		<% n = ['Ballot_Statewide','Federal','State','County','Other','User_Ballot','User_Candidate'].index( type ) %>
 		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot_Measures' : type.index('User').nil? ? type : type.gsub('_','_Created_')+'s'  %>" data-bind="with: sections()[<%= n %>]">
->>>>>>> bus-working
+
 
 			<div class="category-heading" >
 				<h2 ><%= type.gsub('_',' ') %></h2>

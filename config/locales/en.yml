@@ -130,7 +130,7 @@ en:
     # used on the single pages and main page
     candidates:
         next: 'Next Candidate'
-        open: 'Learn More and Comment'
+        open: 'Learn More'
         twitter: 'Twitter'
         facebook: 'Facebook'
         website: 'Website'
@@ -199,7 +199,7 @@ en:
     splash:
         welcome1: "Welcome to Your"
         welcome2: "100% Social Voter Guide"
-        instructions: "How to use TheBallot.org"
+        instructions: "How to use November6th.org"
         research1: "Research:"
         research2: "Look up which measures and candidates will be on your ballot this election."
         discuss1: "Discuss:"
@@ -233,7 +233,7 @@ en:
         do_deactivate: "Deactivate your account"
         do_reactivate: "Reactivate your account"
         banned: "Your account has been banned - all of your comments and votes are hidden"
-        powered: "Powered by TheBallot.org"
+        powered: "Powered by November6th.org"
         add: "Add More"
         addsearch: "Search by office or candidate name to find other candidates or ballot measures to endorse"
         missing: "Is Something Missing?"
@@ -258,7 +258,7 @@ en:
 
     # used in memes
     badge: 
-        title: 'TheBallot.org Badge Creator'
+        title: 'November6th.org Badge Creator'
         two_title: 'Step 2: Choose a Background'
         two_text: 'Express yourself. Choose a background image for your comment so people notice it on their feed.'
         three: 'Step 3: Share Your Image'
