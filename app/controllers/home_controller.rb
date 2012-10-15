@@ -101,7 +101,7 @@ class HomeController < ApplicationController
     @title = 'About'
     @content = <<EOF
          <h1>About november6th.org</h1>
-         <p>november6th.org is the 100% social voter guide brought to you by the <a href='http://www.theleague.com/splash'>League of Young Voters</a>, <a href='http://www.neweracolorado.org'>New Era Colorado</a>, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
+         <p>november6th.org is the 100% social voter guide brought to you by the <a href='http://www.Youngvoter.org'>League of Young Voters</a>, <a href='http://www.neweracolorado.org'>New Era Colorado</a>, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
          <p>Some cool stuff about november6th.org:</p>
          <ul>
           <li>This is a crowdsourced voter guide. The content and order in which it appears is determined by the wisdom of the masses, not by political powerbrokers.</li>
