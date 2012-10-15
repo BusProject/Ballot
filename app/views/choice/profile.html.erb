@@ -1,7 +1,7 @@
 <% if @single %>
-	<meta property="og:type"                content="%= ENV['FACEBOOK-NAMESPACE'] || '' %>:comment" /> 
+	<meta property="og:type"                content="%= ENV['FACEBOOK_NAMESPACE'] || '' %>:comment" /> 
 <% else %>
-	<meta property="og:type"   content="<%= ENV['FACEBOOK-NAMESPACE'] || '' %>:voter_guide" /> 
+	<meta property="og:type"   content="<%= ENV['FACEBOOK_NAMESPACE'] || '' %>:voter_guide" /> 
 <% end %>
 
 <!-- ko stopBinding: true -->
