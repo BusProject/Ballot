@@ -38,6 +38,7 @@ class ChoiceController < ApplicationController
     @config = result.to_json
     @choices_json = @choices.to_json( Choice.to_json_conditions )
 
+    @type = ENV['FACEBOOK_NAMESPACE']+':voter_guide'
   end
 
   def state
@@ -82,7 +83,7 @@ class ChoiceController < ApplicationController
     @classes = 'single home'
     @title = @choice.contest
     @partial = @choice.contest_type.downcase.index('ballot').nil? ? 'candidate/front' : 'measure/front'
-    @type = @partial == 'candidate/front' ? 'Elected Office' : 'Ballot Measure'
+    @type = @partial == 'candidate/front' ? ENV['FACEBOOK_NAMESPACE']+':candidate' : ENV['FACEBOOK_NAMESPACE']+':ballot_measure'
     @message = @partial == 'measure/front' ? @choice.description : 'An election for '+@choice.contest+' between '+@choice.options.map{|o| o.name+'('+( o.party || '' )+')' }.join(', ')
 
     result = {:state => 'single', :choices => [ @choice ].each{ |c| c.prep current_user } }

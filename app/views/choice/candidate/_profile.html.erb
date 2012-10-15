@@ -58,6 +58,7 @@
 			</div>
 			<%- if user == current_user %>
 				<div class="controls <%= 'clean-no-script' if index > 0 %>" >
+					<strong style="display:none;" data-bind="visible: $parent.votes > 1, text: I18n.t('candidates.vote',{count: $index() +1 })"></strong>
 					<span class="link meme"><i class="icon-picture"></i> <%= t('site.badge ')%></span> | <span class="remove link" > <%= t('site.remove ')%></span> | 
 					<!-- Here's a link to the single page - just move this around -->
 					<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$parent.geography+'/'+$parent.contest.replace(/ /g,'_') }" ><%= t('site.edit ')%></a>

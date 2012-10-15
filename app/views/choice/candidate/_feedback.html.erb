@@ -20,6 +20,7 @@
 		<%- if user == current_user %>
 			<div class="controls">
 				<button class="next"><%= t('candidates.next') %></button>
+				<strong style="display:none;" data-bind="visible: $parent.votes > 1, text: I18n.t('candidates.vote',{count: $index() +1 })"></strong><br />
 				<span class="remove edit link"  ><%= t('site.edit') %></span>
 					<span >&nbsp;|&nbsp;</span>
 				<span class="remove link" ><%= t('site.remove') %></span>

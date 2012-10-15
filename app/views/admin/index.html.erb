@@ -89,9 +89,13 @@
 		$('#find_choice').val('')
 		e.preventDefault();
 	})
-	.on('click','.delete_choice',function(e) {
+	.on('click','.delete_option, .delete_choice',function(e) {
 		$this = $(this)
-		if( confirm('Are you Sure?') ) $.post( $this.attr('href'), function(r) { console.log(r); $this.parent('li').remove();} )
+		if( confirm('Are you Sure?') ) {
+			if( $this.hasClass('delete_choice') ) $.post( $this.attr('href'), function(r) { $this.parent('li').remove(); } )
+			else $.post( $this.attr('href'), function(r) { $this.parents('.option').remove(); } )
+			e.preventDefault()
+		}
 	})
 </script>
 <h1>Admin Section</h1>

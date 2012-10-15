@@ -133,8 +133,6 @@ class User < ActiveRecord::Base
     return self.where('fb IN(?)', current_user.fb_friends.split(',') )
   end
   
-
-
   # Header image handling
   
   if Rails.env == "production"
