@@ -40,6 +40,9 @@ Ballot::Application.routes.draw do
   match '/guides/list' => 'home#guides'
   match '/guides/:state' => 'home#guides', :as => 'state_guides'
   match '/guides/by_state/:state' => redirect( '/guides/%{state}' )
+  match '/guides/top' =>  'home#guides'
+  
+  match '/friends' => 'choice#friends'
 
 
   match '/lookup' => 'choice#index'

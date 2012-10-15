@@ -34,4 +34,14 @@ class Feedback < ActiveRecord::Base
   end
   
   
+  def self.friends(current_user=nil)
+    return [] if current_user.nil? || current_user.fb_friends.nil?
+    return self.all( 
+      :conditions => ['fb IN(?)', current_user.fb_friends.split(',')], 
+      :limit => 25, :order => 'created_at DESC', 
+      :joins => [:user ],
+      :include => [:choice => [ :options ]]
+    )
+  end
+  
 end

@@ -75,6 +75,8 @@ class Choice < ActiveRecord::Base
     )
   end
 
+  
+
   def prep current_user
     self.options.each do |option| 
       option[:support] = option.feedback.count_support

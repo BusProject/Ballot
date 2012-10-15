@@ -118,6 +118,23 @@ class User < ActiveRecord::Base
     end
   end
   
+  def self.top_25
+    return User.all( 
+      :limit => 25,
+      :select => '"users".*, SUM( "feedback"."cached_votes_up" - "feedback"."cached_votes_down") AS rating',
+      :group => "users.id",
+      :order => 'rating DESC', 
+      :joins => :feedback 
+    )
+  end
+  
+  def self.friends(current_user=nil)
+    return [] if current_user.nil? || current_user.fb_friends.nil?
+    return self.where('fb IN(?)', current_user.fb_friends.split(',') )
+  end
+  
+
+
   # Header image handling
   
   if Rails.env == "production"

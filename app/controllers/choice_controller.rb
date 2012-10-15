@@ -45,6 +45,11 @@ class ChoiceController < ApplicationController
     end
   end
 
+  def friends
+    @classes = 'profile home'
+    @feedback = Feedback.friends( current_user )
+    
+  end
   
   def profile
     
