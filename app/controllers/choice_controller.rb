@@ -108,7 +108,7 @@ class ChoiceController < ApplicationController
         current_user.match = cicero.match
         current_user.save
       else
-        cookies['ballot_address_cache'] = params[:address_text]
+        cookies[Rails.application.class.to_s.split("::").first+'_address_cache'] = params[:address_text]
       end
 
     end
