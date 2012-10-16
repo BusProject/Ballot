@@ -287,7 +287,7 @@ function locationModel(data) {
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you().length > 0 },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --><li style="font-weight: normal; margin: 10px; font-size: 10px;" data-bind="visible: !yourLocation.fetch() "><em>'+I18n.t('site.loading')+'</em></li></ul>'
 		
-		var url = document.location.toString(), name = inits.title
+		var url = document.location.toString().split('?')[0], name = inits.title
 		this.menuItems.push( 
 			MenuItem(inits.root,I18n.t('menu.find'),null),
 			MenuItem('#read-ballot',I18n.t('menu.read'), layout ,null, this),
@@ -295,7 +295,7 @@ function locationModel(data) {
 		)
 	}
 	if( this.state == 'single' ) {
-		var url = document.location.toString()
+		var url = document.location.toString().split('?')[0]
 		this.selected( this.choices()[0] )
 		this.menuItems.push( 
 			MenuItem(inits.root,I18n.t('menu.find')),
@@ -304,7 +304,7 @@ function locationModel(data) {
 		)
 	}
 	if( this.state == 'guides' ) {
-		var url = document.location.toString()
+		var url = document.location.toString().split('?')[0]
 		
 		this.menuItems.push( 
 			MenuItem(inits.root, I18n.t('menu.find')),

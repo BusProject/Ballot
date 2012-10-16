@@ -70,7 +70,7 @@
 			if( choicesLength == page * 50 ) {
 				yourLocation.fetch(false)
 				page += 1
-				var url = document.location.toString()
+				var url = document.location.toString().split('?')[0]
 					url = url[ url.length -1 ] == '/' ? url.slice(0, url.length -1) : url
 				$.getJSON( url+'.json', { page: choicesLength }, function(response) {
 					ko.utils.arrayPushAll(yourLocation.choices, response.map( function(el) { return Choice(el) }) )
