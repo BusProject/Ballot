@@ -73,7 +73,7 @@ function Choice(data,args) {
 			var ft = null
 			ft = this.feedback().filter( function(el) { return  el.ftFeedback })
 			var ids = ft.map( function(el) { return el.option_id })
-			if( ft != null ) {
+			if( ft != null && this.type == 'Ballot_Statewide' ) {
 				ft.sort( function(a,b) { return a.id > b.id ?  1 : -1  } )
 				this.options( this.options().sort(function(a,b) {  return ids.indexOf(a.id) !== -1 ? -1 : 1 }) )
 			}

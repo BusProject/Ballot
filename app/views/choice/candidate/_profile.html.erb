@@ -16,14 +16,7 @@
 	<hr><a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1></a><hr>
 	<div class="profile-explanation">
 	<h2 class="profile-text"><% t('candidates.list ')%></h2>
-	<% feedback.each_with_index do |yourfeedback,index| %>
-			<%= raw '<!-- ko foreach: selected -->' if index == 0 %>
-			<div class="optionholder your-option <%= 'clean-no-script' if index > 0 %>" >
-				<span class="option" data-bind="html: $data.name+' '+$data.partySmall()+'<br />'"><%= yourfeedback.option.name %> <%= yourfeedback.option.partySmall %></span>
-			</div>
-			<%= raw '<!-- /ko -->' if index == 0 %>
-	<% end %>
-	<% choice.options.reject{|o| feedback.map{ |f| f.option_id }.index(o.id) }.each_with_index do |option,index| %>
+	<% choice.options.each_with_index do |option,index| %>
 		<%= raw '<!-- ko foreach: available -->' if index == 0 %>
 			<div class="optionholder <%= 'clean-no-script' if index > 0 %>" >
 				<span class="option" data-bind="html: $data.name+' '+$data.partySmall()+'<br />'"><%= option.name %> <%= option.partySmall %></span>
@@ -58,10 +51,7 @@
 			</div>
 			<%- if user == current_user %>
 				<div class="controls <%= 'clean-no-script' if index > 0 %>" >
-					<strong style="display:none;" data-bind="visible: $parent.votes > 1, text: I18n.t('candidates.vote',{count: $index() +1 })"></strong>
-					<span class="link meme"><i class="icon-picture"></i> <%= t('site.badge ')%></span> | <span class="remove link" > <%= t('site.remove ')%></span> | 
-					<!-- Here's a link to the single page - just move this around -->
-					<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$parent.geography+'/'+$parent.contest.replace(/ /g,'_') }" ><%= t('site.edit ')%></a>
+					<span class="remove link" > <%= t('site.remove ')%></span>
 				</div>
 			<%- end -%>
 			<%= raw '<!-- /ko -->' if index == 0 %>

@@ -117,6 +117,10 @@ class Choice < ActiveRecord::Base
         names.to_sentence( :words_connector => I18n.t('i18n_toolbox.array.words_connector'), :two_words_connector => I18n.t('i18n_toolbox.array.two_words_connector'), :last_word_connector => I18n.t('i18n_toolbox.array.last_word_connector') ) : 
         names.join( I18n.t('i18n_toolbox.array.vs') )
       self[:description] += ' for '+self.votes.to_s+' positions' if self.votes > 1 
+      unless current_user.nil?
+        feedback = self.feedback.where(['user_id = ?', current_user]).limit(1).first
+        self.options.first[:feedbacks].push( feedback) unless feedback.nil?
+      end
     end
     
   end
@@ -124,7 +128,7 @@ class Choice < ActiveRecord::Base
   def addUserFeedback user  
     feedback = user.feedback.select{ |f| f.choice == self }.first
     option = self.options.select{|o| o.id == feedback.option_id }.first
-    option[:feedbacks].push( feedback ) if option[:feedbacks].select{ |f| f == feedback }.first.nil?
+    option[:feedbacks].push( feedback ) if !option.nil? && option[:feedbacks].select{ |f| f == feedback }.first.nil?
   end
 
   def more page, current_user=nil

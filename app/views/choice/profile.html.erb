@@ -262,7 +262,7 @@
 <div id="personal-guide">
 <div id="read-ballot">
 	<% @choices.group_by(&:contest_type).each do |type,choices| %>
-		<% n = ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( type ) %>
+		<% n = ['Ballot_Statewide','Federal','State','County','Other','User_Ballot','User_Candidate'].index( type ) %>
 		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot_Measures' : type.index('User').nil? ? type : type.gsub('_','_Created_')+'s'  %>">
 
 			<div class="category-heading" >

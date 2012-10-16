@@ -131,15 +131,13 @@ en:
     # used on the single pages and main page
     candidates:
         next: 'Next Candidate'
-        open: 'Learn More'
+        open: 'Learn More and Add to Voter Guide'
         twitter: 'Twitter'
         facebook: 'Facebook'
         website: 'Website'
         who: 'Is this an Important Race to You?'
         let: "Show you'll be voting for"
-        let_more: "by adding it to your Voter Guide."
-        can_share: 'Your comment explaining why this is an important race will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.'
-        disclaimer: 'Please - do not endorse any candidate or political party in your comment or your comment will be removed.'
+        let_more: "by adding it to your Voter Guide"
         prompt: 'please select a candidate'
         comment: '(Leave a comment if you wanna)'
         list: 'The Candidates'
@@ -244,7 +242,7 @@ en:
         banned: "Your account has been banned - all of your comments and votes are hidden"
         powered: "Powered by November6th.org"
         add: "Add More"
-        addsearch: "Search by office or candidate name to find other candidates or ballot measures to endorse"
+        addsearch: "Search by office or candidate name to find other offices to add to your Voter Guide or Ballot Measures to endorse"
         missing: "Is Something Missing?"
         create_candidate: "Create a new candidate"
         create_measure: "Create a new Ballot Measure"

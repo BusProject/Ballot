@@ -3,15 +3,10 @@
 <!-- ko foreach: Array( votes ) -->
 	<div class="yourFeedback <%= user.nil?  ? 'no-user' : 'has_user' %>" data-bind="visible: $parent.you()[ $index() ] != null, if: $parent.you()[ $index() ]   != null ">
 
-		<span data-bind="text: '&ldquo;'+$parent.you()[ $index() ].comment+'&rdquo;', visible: $parent.you()[ $index() ].comment != null && $parent.you()[ $index() ].comment.length > 0,addClass: $parent.you()[ $index() ].type" >
-			<h1 data-bind="text: 'Vote for',$parent.contest].join(' ') " >
-				<%= ['Vote for',feedback.choice.contest].join(' ')  unless feedback.nil? %>
-			</h1>
-			<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
-				<%= '"'+feedback.comment+'"' %>
-			<% end -%>
-		</span>
-		<div class="head" data-bind="addClass: $parent.you()[ $index() ].type, visible:$parent.you()[ $index() ].comment != null && $parent.you()[ $index() ].comment.length < 1 ">
+		<h1 data-bind="text: ['Vote for',$parent.contest].join(' ') " >
+			<%= ['Vote for',feedback.choice.contest].join(' ')  unless feedback.nil? %>
+		</h1>
+		<div class="head" >
 			<img data-bind="src: $parent.you()[ $index() ].image" src="<%= user.image unless user.nil? %>">
 		</div>
 		<h3 class="comment-details" data-bind="text: '- '+$parent.you()[ $index() ].name+( $parent.you()[ $index() ].comment != null && $parent.you()[ $index() ].comment.length > 1 ? ' '+$parent.you()[ $index() ].time : '' ), addClass: $parent.you()[ $index() ].type">
@@ -20,9 +15,6 @@
 		<%- if user == current_user %>
 			<div class="controls">
 				<button class="next"><%= t('candidates.next') %></button>
-				<strong style="display:none;" data-bind="visible: $parent.votes > 1, text: I18n.t('candidates.vote',{count: $index() +1 })"></strong><br />
-				<span class="remove edit link"  ><%= t('site.edit') %></span>
-					<span >&nbsp;|&nbsp;</span>
 				<span class="remove link" ><%= t('site.remove') %></span>
 			</div>
 		<% end -%>
@@ -32,10 +24,8 @@
 	<%- if !current_user.nil? && true && current_user == user %>
 		<div class="yourFeedback candidate" data-bind="visible: ! $parent.you()[ $index() ] && $parent.you().length == $index() ">
 			<h2><%= t('candidates.who') %></h2>
-			<p><%= t('candidates.let') %> <span data-bind="text: $parent.contest"><%= choice.contest %></span> <%= t('candidates.let_more') %>. <%= t('candidates.can_share') %></p><br />
-			<p><%= t('candidates.disclaimer') %></p><br />
+			<p><%= t('candidates.let') %> <span data-bind="text: $parent.contest"><%= choice.contest %></span> <%= t('candidates.let_more') %>.</p><br />
 			
-			<textarea type="text" class="comment" data-bind="elastic: true" placeholder='<%= t('candidates.comment') %>' /></textarea>
 			<div class="buttons">
 				<button class="submit" ><%= t('site.add' )%></button>
 			</div>
