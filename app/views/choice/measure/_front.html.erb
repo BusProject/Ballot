@@ -15,7 +15,7 @@
 	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' + I18n.t( 'site.voted', { count: $data.voted() })+ ' | ' +I18n.t('site.commented', { count: $data.commentsPure() }) " >
 		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> | <%= t('site.commented', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> 
 	</div>
-	<button class="open"><%= t('measures.open' ) %></button>
+	<button class="open"><%= params[:iframe] ? t('site.open') : t('measures.open' ) %></button>
 	<hr class="button">
 
 	<div class="body">
