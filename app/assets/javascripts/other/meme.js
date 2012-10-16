@@ -132,7 +132,7 @@ function makeMeme(memeRaw,path,flavor) {
 					if( data.unsaved ) {
 						$('.share #share-box input').val('http://saving-one-sec').select()
 						$.post(
-							document.location.toString(),
+							document.location.toString().split('?')[0],
 							{ quote: data.quote.fixed(), theme: data.theme(), meme: data.id() }, 
 							function(response) {
 								if( response.success ) {
