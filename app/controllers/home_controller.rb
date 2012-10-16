@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     cookename = 'new_'+Rails.application.class.to_s.split("::").first+'_visitor'
     if current_user.nil? && !cookies[cookename] && params['q'].nil? && params[:iframe].nil?
 
-      cookies['new_ballot_visitor'] = {
+      cookies[cookename] = {
         :value => true,
         :expires => 2.weeks.from_now
       }      
