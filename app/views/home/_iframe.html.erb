@@ -1,0 +1,25 @@
+<style type="text/css" media="screen">
+	body.home { background: none }
+	body, #container, #page, #footer {
+		max-width: <%= params[:iframe] %>px;
+		min-width: <%= params[:iframe] %>px;
+		width: <%= params[:iframe] %>px;
+		margin: 0;
+	}
+	#find-ballot #enter-address .find-ballot { width: <%= params[:iframe].to_i * 520/960 %>px; margin-bottom: 20px; }
+	#main {
+		width: <%= params[:iframe].to_i-180 %>px;
+		margin: -20px 0 0 160px;
+	}
+	.ballot-section {
+		width: <%= params[:iframe].to_i-190 %>px;
+	}
+	#read-ballot .row, .ballot-section .category-heading, #footer { width: <%= params[:iframe].to_i-280 %>px; }
+	#footer { padding-left: 220px; }
+	.account, #header, #more-coming, .remember, .top-guides, .yourFeedback { display: none !important }
+	#find-ballot #map img.located { float:none }
+	#container { padding-top: 0; }
+	#page { border: none }
+	#instructions-box { margin-left: -8px}
+	#instructions-box.top { top: 10px; }
+</style>
