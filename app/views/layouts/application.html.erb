@@ -18,6 +18,8 @@
 
 	<%= stylesheet_link_tag    "application" %>
 
+	<%= render :partial => 'home/iframe' if params[:iframe] %>
+
   <script type="text/javascript">
 	var current_user = <%= raw current_user.nil? ? { :id => 'unauthenticated'}.to_json : current_user.to_public %>,
 		inits = <%= raw @config || '{}' %>
