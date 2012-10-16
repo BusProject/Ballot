@@ -18,7 +18,7 @@ function locationModel(data) {
 	},this)
 	
 
-	var empty = ''
+	var empty = '', __state = ''
 
 	// Choices
 	var choices = data.choices || []
@@ -215,13 +215,13 @@ function locationModel(data) {
 				callback()
 			})
 	}
-	this.getGuides = function(state,guides) { // Useful function for 
+	this.getGuides = function(state,guides ) { // Useful function for 
 		$.getJSON(
 			inits.root+'guides/'+state+'.json?limit=5',
 			function(data) { 
 				if( data != null && data.constructor == Array ) {
-					guides(data)
-				}
+					if( data.length > 0 ) guides(data) 
+				} 
 			})
 	}
 
@@ -231,7 +231,10 @@ function locationModel(data) {
 			state = this.address.state(),
 			guides = this.guides
 			
-		if( geolocated && state && guides().length == 0 ) this.getGuides(state,guides);
+		if( geolocated && state != __state ) {
+			this.getGuides(state,guides,__state);
+			__state = state
+		} 
 	},this)
 	
 	
