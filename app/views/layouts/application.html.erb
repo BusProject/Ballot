@@ -26,6 +26,7 @@
 
 	current_user.url = "<%= current_user.nil? ? root_path.split('?')[0] : profile_path( current_user.to_url )  %>"
 	inits.root = "<%= root_path.split('?')[0] %>";
+	inits.default_url = [ <%= raw params[:iframe].nil? ? '' : '"iframe='+params[:iframe].to_s+'", ' %> ];
 	<%- unless @choices_json.nil? %>
 	inits.choices = <%= raw @choices_json %>;
 	<% end -%>

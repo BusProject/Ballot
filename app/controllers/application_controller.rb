@@ -14,6 +14,9 @@ class ApplicationController < ActionController::Base
       end
   end
   
+  def default_url_options(options={})
+    { :iframe => params[:iframe] }
+  end
   private
     def render_404(exception)
       @not_found_path = exception.message
