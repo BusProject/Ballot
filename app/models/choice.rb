@@ -4,7 +4,15 @@ class Choice < ActiveRecord::Base
   validates_uniqueness_of :contest, :scope => :geography
   
   has_many :options, :dependent => :destroy, :order => 'position DESC'
-  has_many :feedback, :conditions => ['"feedback"."approved" =? ', true]
+  has_many :feedback, :conditions => ['"feedback"."approved" =? ', true] do
+    def votes
+      all( :select => 'DISTINCT(user_id)' ).count
+    end
+    def comments
+      all( :select => 'DISTINCT(user_id)', :conditions => ['comment != ? AND comment != ?',nil,''] ).count
+    end
+    
+  end
   has_many :users, :through => :feedback
   accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbant'] == '0' && false  }
   
