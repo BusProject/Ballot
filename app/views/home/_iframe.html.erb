@@ -6,6 +6,7 @@
 			min-width: <%= params[:iframe] %>px;
 			width: <%= params[:iframe] %>px;
 			margin: 0;
+			background-color: transparent !important;
 		}
 		#find-ballot #enter-address .find-ballot { width: <%= params[:iframe].to_i * 520/960 %>px; margin-bottom: 20px; }
 		#main {
@@ -26,6 +27,7 @@
 			min-width: <%= params[:iframe] %>px;
 			width: <%= params[:iframe] %>px;
 			margin: 0;
+			background-color: transparent !important;
 		}
 		#find-ballot #enter-address .find-ballot { width: <%= params[:iframe].to_i * 520/960 %>px; margin-bottom: 20px; }
 		#main {
@@ -37,8 +39,8 @@
 		}
 		#read-ballot .row, .ballot-section .category-heading, #footer { width: <%= params[:iframe].to_i - 20 %>px; }
 	<% end %>
-	
-	.account, #header, #more-coming, .remember, .top-guides, .yourFeedback { display: none !important }
+	#header { margin: 0 0 14px; }
+	.account, #more-coming, .remember, .top-guides { display: none !important }
 	#find-ballot #map img.located { float:none }
 	#container { padding-top: 0; }
 	#page { border: none }
