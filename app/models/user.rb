@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   
   # Method to see if profile name is free
   def check_profile
-    if !self.profile.nil? && self.profile != self.to_url
+    if !self.profile.nil? && self.profile.gsub('/','') != self.to_url.gsub('/','')
       self.profile = self.profile.gsub('/','')
       id = self.profile.to_i(16).to_s(16) == self.profile ? self.profile.to_i(16).to_s(10).to_i(2).to_s(10).to_i(10) : 0
       safe = true 
