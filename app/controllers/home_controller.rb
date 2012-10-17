@@ -27,7 +27,7 @@ class HomeController < ApplicationController
             google = { :address_components => [ { :short_name => state, :types => ["administrative_area_level_1"] }  ] }
           end
         else
-          address = cookies[Rails.application.class.to_s.split("::")+'_address_cache']
+          address = cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache']
         end
       else
         remember = false
