@@ -16,6 +16,10 @@ class FeedbackController < ApplicationController
           if feedback.save
             sucess = success && true
             successes.push({:obj => feedback.id, :updated_at => feedback.updated_at })
+            
+            type = feedback.choice.contest.index('Ballot').nil? ? 'candidate' : 'measure'
+            url = show_feedback_path( feedback.id )
+            RestClient.get 'https://graph.facebook.com/me/the-ballot:recommend?access_token='+current_user.authentication_token+'&'+type+'='+url
           else
             sucess = success && false
             errors.push({:obj => feedback.id, :success => false, :error => feedback.errors })
@@ -70,18 +74,35 @@ class FeedbackController < ApplicationController
     end
     
     @classes = 'profile home'
-    @title =  'A comment from '+(!@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide')
     
     @message = @feedback.comment
     
-    @image = @feedback.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @feedback.memes.last.id )+'.png'
+    unless params[:guide]
+      if @choices[0].contest_type.index('Ballot').nil? 
+        @title = 'Vote '+@feedback.option.name+' for '+@choices.first.contest
+        type ='candidate'
+        @message = I18n.t('site.voted', { :count => @choices.first.feedback.votes } )+', '+I18n.t('site.commented', { :count => @choices.first.feedback.comments } ) if @message.nil? || @message.empty?
+      else
+        @title = 'Vote '+@feedback.option.name+' on '+@choices.first.contest
+        type = 'ballot_measure'
+        @message = @choices.first.description if @message.nil? || @message.empty?
+      end
+      @geography = @choices.first.geographyNice(false)
+      @redirect = @choices.first.to_url
+    else
+      @title =  'A comment from '+(!@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide')
+
+      type = 'comment'
+    end
+    
+    @image = @feedback.memes.last.nil? ? @feedback.user.image : ENV['BASE']+meme_show_image_path( @feedback.memes.last.id )+'.png'
     
     result = {:state => 'profile', :user => @user.to_public(false) }
     
     @config = result.to_json
     @single = true
 
-    @type = ENV['FACEBOOK_NAMESPACE']+':comment'
+    @type = ENV['FACEBOOK_NAMESPACE']+':'+type
 
     @choices_json = @choices.to_json( Choice.to_json_conditions )
     render :template => 'choice/profile'

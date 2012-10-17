@@ -6,6 +6,7 @@
 <% photo = photo || nil %>
 <% type = @type || 'website' %>
 
+
 <link rel="image_src" href="<% image %>" />
 
 
@@ -16,7 +17,9 @@
 <meta property="og:site_name" content="The Ballot">
 <meta property="fb:app_id" content="<%= ENV['FACEBOOK'] %>">
 <meta property="og:type" content="<%= type %>" />
-
+<%- if @geography %>
+	<meta property="og:geography" content="<%= @geography %>" />
+<% end %>
 
 <% if photo.nil? %>
 	<meta name="twitter:card" content="summary">

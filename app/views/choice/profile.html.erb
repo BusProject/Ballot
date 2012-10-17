@@ -1,4 +1,8 @@
-
+<% if @single && @redirect %>
+<script type="text/javascript" charset="utf-8">
+	document.location = '/<%= @redirect %>';
+</script>
+<% end %>
 <!-- ko stopBinding: true -->
 
 	<div id="profile" data-bind="with: current_user  " class="ballot-section">
