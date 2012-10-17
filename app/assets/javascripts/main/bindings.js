@@ -19,8 +19,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		querysplit = href.split('?')
 		if( querysplit[1] ) append.push( querysplit[1] )
 		$this.attr('href', querysplit[0]+'?'+append.join('&') )
-		console.log( querysplit[0]+'?'+append.join('&') )
-		return false
 	}
 	
 })
