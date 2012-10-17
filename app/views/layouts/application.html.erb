@@ -167,7 +167,7 @@
 			});
 		</script>
 		<%= render :partial => 'home/ga' %>
-		<%= javascript_include_tag asset_path( "other/iframe.js" ) %>
+		<%= javascript_include_tag asset_path( "other/iframe.js" ) if params[:iframe] %>
 	</div>
 </body>
 </html>
