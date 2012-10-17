@@ -18,7 +18,7 @@ function locationModel(data) {
 	},this)
 	
 
-	var empty = ''
+	var empty = '', __state = ''
 
 	// Choices
 	var choices = data.choices || []
@@ -215,13 +215,13 @@ function locationModel(data) {
 				callback()
 			})
 	}
-	this.getGuides = function(state,guides) { // Useful function for 
+	this.getGuides = function(state,guides ) { // Useful function for 
 		$.getJSON(
 			inits.root+'guides/'+state+'.json?limit=5',
 			function(data) { 
 				if( data != null && data.constructor == Array ) {
-					guides(data)
-				}
+					if( data.length > 0 ) guides(data) 
+				} 
 			})
 	}
 
@@ -231,7 +231,10 @@ function locationModel(data) {
 			state = this.address.state(),
 			guides = this.guides
 			
-		if( geolocated && state && guides().length == 0 ) this.getGuides(state,guides);
+		if( geolocated && state != __state ) {
+			this.getGuides(state,guides,__state);
+			__state = state
+		} 
 	},this)
 	
 	
@@ -254,7 +257,7 @@ function locationModel(data) {
 		this.sections.push( otherCandidates)
 		this.sections.push( ballotMeasures)
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
-		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
+		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you().length > 0 },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 		
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
@@ -279,11 +282,12 @@ function locationModel(data) {
 		this.sections.push( userCandidate )
 		this.sections.push( userBallotMeasures )
 
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
-		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
+
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you().length > 0 },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --><li style="font-weight: normal; margin: 10px; font-size: 10px;" data-bind="visible: !yourLocation.fetch() "><em>'+I18n.t('site.loading')+'</em></li></ul>'
 		
-		var url = document.location.toString(), name = inits.title
+		var url = document.location.toString().split('?')[0], name = inits.title
 		this.menuItems.push( 
 			MenuItem(inits.root,I18n.t('menu.find'),null),
 			MenuItem('#read-ballot',I18n.t('menu.read'), layout ,null, this),
@@ -291,7 +295,7 @@ function locationModel(data) {
 		)
 	}
 	if( this.state == 'single' ) {
-		var url = document.location.toString()
+		var url = document.location.toString().split('?')[0]
 		this.selected( this.choices()[0] )
 		this.menuItems.push( 
 			MenuItem(inits.root,I18n.t('menu.find')),
@@ -300,7 +304,7 @@ function locationModel(data) {
 		)
 	}
 	if( this.state == 'guides' ) {
-		var url = document.location.toString()
+		var url = document.location.toString().split('?')[0]
 		
 		this.menuItems.push( 
 			MenuItem(inits.root, I18n.t('menu.find')),
@@ -319,7 +323,7 @@ function locationModel(data) {
 		this.sections.push( userBallotMeasures )
 
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
-		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you() != null },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
+		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you().length > 0 },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 
 		

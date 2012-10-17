@@ -8,6 +8,22 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		location.choices([])
 		location.guides([])
 })
+.on('click touchend','a',function(e) {
+	var $this = $(this), href = $this.attr('href'), append = []
+	for (var i=0; i < inits.default_url.length; i++) {
+		if( (href[0] == '/' || href.search( document.location.protocol+'//'+document.location.hostname ) === 0 ) && href.search( inits.default_url[i] ) === -1 ) {
+			append.push( inits.default_url[i].trim() )
+		} 
+	};
+	if( append.length > 0 ) {
+		querysplit = href.split('?')
+		if( querysplit[1] ) append.push( querysplit[1] )
+		$this.attr('href', querysplit[0]+'?'+append.join('&') )
+		console.log( querysplit[0]+'?'+append.join('&') )
+		return false
+	}
+	
+})
 .on('click touchend','.clear',function(e) {
 	yourLocation.address('')
 	$('#enter-address input').select()
@@ -310,7 +326,6 @@ ko.bindingHandlers.addClass = {
 		$(element).addClass( value )
 	}
 };
-
 
 
 ko.bindingHandlers.stopBinding = {

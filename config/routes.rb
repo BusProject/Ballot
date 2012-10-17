@@ -45,6 +45,7 @@ Ballot::Application.routes.draw do
   
   match '/friends' => 'choice#friends'
 
+
   match '/lookup' => 'choice#index'
   match '/lookup/:id/more' => 'choice#more'
   
