@@ -1,43 +1,44 @@
+<% iframe = params[:iframe].to_i - 16  %>
 <style type="text/css" media="screen">
-	<% if params[:iframe].to_i > 700 %>
+	<% if iframe  > 700 %>
 		body.home { background: none }
 		body, #container, #page, #footer {
-			max-width: <%= params[:iframe] %>px;
-			min-width: <%= params[:iframe] %>px;
-			width: <%= params[:iframe] %>px;
+			max-width: <%= iframe  %>px;
+			min-width: <%= iframe  %>px;
+			width: <%= iframe  %>px;
 			margin: 0;
 			background-color: transparent !important;
 		}
-		#find-ballot #enter-address .find-ballot { width: <%= params[:iframe].to_i * 520/960 %>px; margin-bottom: 20px; }
+		#find-ballot #enter-address .find-ballot { width: <%= iframe  * 520/960 %>px; margin-bottom: 20px; }
 		#main {
-			width: <%= params[:iframe].to_i-180 %>px;
+			width: <%= iframe - 180 %>px;
 			margin: -20px 0 0 160px;
 		}
 		.ballot-section {
-			width: <%= params[:iframe].to_i-190 %>px;
+			width: <%= iframe - 190 %>px;
 		}
-		#read-ballot .row, .ballot-section .category-heading, #footer { width: <%= params[:iframe].to_i-280 %>px; }
+		#read-ballot .row, .ballot-section .category-heading, #footer { width: <%= iframe - 280 %>px; }
 		#footer { padding-left: 220px; }
 		#instructions-box { margin-left: -8px}
 	<% else %>
 		#instructions-box { display: none }
 		body.home { background: none }
 		body, #container, #page, #footer {
-			max-width: <%= params[:iframe] %>px;
-			min-width: <%= params[:iframe] %>px;
-			width: <%= params[:iframe] %>px;
+			max-width: <%= iframe  %>px;
+			min-width: <%= iframe  %>px;
+			width: <%= iframe  %>px;
 			margin: 0;
 			background-color: transparent !important;
 		}
-		#find-ballot #enter-address .find-ballot { width: <%= params[:iframe].to_i * 520/960 %>px; margin-bottom: 20px; }
+		#find-ballot #enter-address .find-ballot { width: <%= iframe  * 520/960 %>px; margin-bottom: 20px; }
 		#main {
-			width: <%= params[:iframe].to_i-20 %>px;
+			width: <%= iframe - 20 %>px;
 			margin: -20px 0 0 -2px;
 		}
 		.ballot-section, #find-ballot #map img {
-			width: <%= params[:iframe].to_i-20 %>px;
+			width: <%= iframe - 20 %>px;
 		}
-		#read-ballot .row, .ballot-section .category-heading, #footer { width: <%= params[:iframe].to_i - 20 %>px; }
+		#read-ballot .row, .ballot-section .category-heading, #footer { width: <%= iframe  - 20 %>px; }
 	<% end %>
 	#header { margin: 0 0 14px; }
 	.account, #more-coming, .remember, .top-guides, .meme { display: none !important }
