@@ -24,7 +24,7 @@ class FeedbackController < ApplicationController
             sucess = success && false
             errors.push({:obj => feedback.id, :success => false, :error => feedback.errors })
           end
-          @json = {'success' => success, 'errors' => errors, 'successes' => successes, 'og' => response }
+          @json = {'success' => success, 'errors' => errors, 'successes' => successes, 'og' => response, 'ob' => url }
         end
         @json = {'success'=>false, 'message'=>'Are you trying to tell me something user #'+current_user.id.to_s+'?'} if feedbacks.empty?
       else
