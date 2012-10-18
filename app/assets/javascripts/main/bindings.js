@@ -117,7 +117,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				choice_id = $ctx.$parent.id,
 				option = $ctx.$parent.chosen(),
 				option_id = option.id,
-				comment = $comment.val()
+				comment = $comment.val(),
+				type: 'candidate'
 
 		} else {
 			var $toggle = $('.toggle', $parent ),
@@ -126,7 +127,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				choice_id = $ctx.$parent.id,
 				option = $toggle.hasClass('right') ? $ctx.$parent.no() : $ctx.$parent.yes(),
 				option_id = option.id,
-				comment = $comment.val()
+				comment = $comment.val(),
+				type: 'ballot_measure'
 		}
 
 		$.post(
@@ -145,9 +147,11 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					option.feedback.push( Feedback( { option_id: option.id, option_name: option.name, comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type, updated_at:  response.successes[0].updated_at } ) )
 					$comment.val('')
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
+					data = { access_token: current_user.auth_token }
+					data[ type ] = response.url 
 					$.post(
 						'https://graph.facebook.com/me/the-ballot:recommend',
-						{ access_token: current_user.auth_token, voter_guide: response.url },
+						data,
 						function(r){console.log(r)}
 					)
 				}
