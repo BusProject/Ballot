@@ -17,8 +17,10 @@
 	<%= render :partial => 'home/meta' %>
 
 	<%= stylesheet_link_tag    "application" %>
-
-	<%= render :partial => 'home/iframe' if params[:iframe] %>
+	
+	<% if is_mobile_device? %>
+	  <%= stylesheet_link_tag "mobile" %>
+	<% end %>
 
   <script type="text/javascript">
 	var current_user = <%= raw current_user.nil? ? { :id => 'unauthenticated'}.to_json : current_user.to_public %>,
@@ -167,7 +169,6 @@
 			});
 		</script>
 		<%= render :partial => 'home/ga' %>
-		<%= javascript_include_tag asset_path( "other/iframe.js" ) if params[:iframe] %>
 	</div>
 </body>
 </html>
