@@ -65,6 +65,7 @@ Ballot::Application.routes.draw do
 
   match '/:geography/:contest' => 'choice#show', :contest =>/[^\/]+/ , :as => 'contest'
   
-  match '/:id' => 'choice#profile', :as => 'profile'
+  match '/:id' => 'choice#profile', :as => 'profile', :via => :get
+  match '/:id' => 'feedback#recommend', :as => 'recommend', :via => :post
 
 end

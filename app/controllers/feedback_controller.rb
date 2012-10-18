@@ -43,6 +43,23 @@ class FeedbackController < ApplicationController
     render :json => { :feedback => feedback.delete, :success => true }, :callback  => params['callback']
   end
 
+  def recommend
+    unless current_user.nil?
+      
+      if params[:id].to_i(16).to_s(16) == params[:id]
+        @user = User.find_by_id( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
+      else
+        @user = User.find_by_profile( params[:id] )
+      end
+      
+      @user.feedback.each do |feedback|
+        current_user.likes feedback
+      end
+      
+      response = RestClient.post 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :voter_guid => ENV['BASE']+@user.profile } if params[:access_token]
+    end
+
+  end
   def vote
     unless current_user.nil?
       feedback = Feedback.find( params[:id] )

@@ -238,7 +238,7 @@
 				<% else %>
 					<span class="link helpful" onclick="
 						$(this).removeClass('link').text('Sweet - thanks')
-						yourLocation.choices().map( function(el) { el.featured().map( function(featured) { $.post(inits.root+'feedback/'+featured.id+'/useful',function(response){}) } ) } )
+						$.post( document.location.toString(), {access_token: current_user.auth_token},function(response){}) 
 					"><i class="icon-heart"></i> <%= t('profile.recommend') %></span>
 				<% end %>
 				<span class="divide">|</span> 
