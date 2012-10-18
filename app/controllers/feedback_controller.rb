@@ -24,7 +24,7 @@ class FeedbackController < ApplicationController
             sucess = success && false
             errors.push({:obj => feedback.id, :success => false, :error => feedback.errors })
           end
-          @json = {'success' => success, 'errors' => errors, 'successes' => successes }
+          @json = {'success' => success, 'errors' => errors, 'successes' => successes, 'og' => response }
         end
         @json = {'success'=>false, 'message'=>'Are you trying to tell me something user #'+current_user.id.to_s+'?'} if feedbacks.empty?
       else
@@ -56,7 +56,6 @@ class FeedbackController < ApplicationController
         current_user.likes feedback
       end
       
-      response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :voter_guid => ENV['BASE']+@user.profile } ){|response, request, result| response } if params[:access_token]
       response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :voter_guide => ENV['BASE']+@user.profile } ){|response, request, result| response } if params[:access_token]
     else
       {:you => '#fail'}
@@ -77,7 +76,7 @@ class FeedbackController < ApplicationController
         current_user.likes feedback
       end
 
-      render :json => {:success => true, :message => I18n.t('feedback.agree',{:count => amount, :attribute => params[:flavor] }) }, :callback  => params['callback']
+      render :json => {:success => true, :message => I18n.t('feedback.agree',{:count => amount, :attribute => params[:flavor] }), :og => response }, :callback  => params['callback']
     else
       render :json => {:success => false, :callback  => params['callback'] }
     end
