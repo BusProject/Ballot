@@ -137,8 +137,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 						//choice_id: parseInt(choice_id),
 						comment: comment,
 					}
-				],
-			access_token: current_user.auth_token
+				]
 			},
 			function(response) {
 				if( response.success ) {
@@ -146,6 +145,11 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					option.feedback.push( Feedback( { option_id: option.id, option_name: option.name, comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type, updated_at:  response.successes[0].updated_at } ) )
 					$comment.val('')
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
+					$.post(
+						'https://graph.facebook.com/me/the-ballot:recommend',
+						{ access_token: current_user.auth_token, voter_guide => response.url },
+						function(r){console.log(r)}
+					)
 				}
 			}
 		)

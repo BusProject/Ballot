@@ -19,12 +19,11 @@ class FeedbackController < ApplicationController
             
             type = feedback.choice.contest.index('Ballot').nil? ? 'candidate' : 'measure'
             url = ENV['BASE']+show_feedback_path( feedback.id )
-            response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], type.to_sym => url }){|response, request, result| response } if params[:access_token]
           else
             sucess = success && false
             errors.push({:obj => feedback.id, :success => false, :error => feedback.errors })
           end
-          @json = {'success' => success, 'errors' => errors, 'successes' => successes, 'og' => response, 'ob' => url }
+          @json = {'success' => success, 'errors' => errors, 'successes' => successes, 'url' => url }
         end
         @json = {'success'=>false, 'message'=>'Are you trying to tell me something user #'+current_user.id.to_s+'?'} if feedbacks.empty?
       else
