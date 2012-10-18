@@ -114,6 +114,7 @@ class FeedbackController < ApplicationController
       @title =  'A comment from '+(!@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide')
       @redirect = ENV['BASE']+@feedback.user.profile+'#!'+@choices.first.contest+' '+@choices.first.geography
       type = 'comment'
+      @voter_guide_reference = ENV['BASE']+@user.profile
     end
     
     @meme = @feedback.memes.last
