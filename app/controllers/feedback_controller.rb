@@ -18,7 +18,7 @@ class FeedbackController < ApplicationController
             successes.push({:obj => feedback.id, :updated_at => feedback.updated_at })
             
             type = feedback.choice.contest.index('Ballot').nil? ? 'candidate' : 'measure'
-            url = show_feedback_path( feedback.id )
+            url = ENV['BASE']+show_feedback_path( feedback.id )
             response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], type.to_sym => url }){|response, request, result| response } if params[:access_token]
           else
             sucess = success && false
@@ -69,7 +69,7 @@ class FeedbackController < ApplicationController
       if  params[:flavor] == 'useful'
         amount = feedback.upvotes.size
         current_user.likes feedback
-        url = show_feedback_path( feedback.id ) +'?guide=true'
+        url = ENV['BASE']+show_feedback_path( feedback.id ) +'?guide=true'
         response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :comment => url }){|response, request, result| response } if params[:access_token]
       else
         amount = feedback.upvotes.size
