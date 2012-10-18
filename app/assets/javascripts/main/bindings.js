@@ -147,7 +147,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
 					$.post(
 						'https://graph.facebook.com/me/the-ballot:recommend',
-						{ access_token: current_user.auth_token, voter_guide => response.url },
+						{ access_token: current_user.auth_token, voter_guide: response.url },
 						function(r){console.log(r)}
 					)
 				}
