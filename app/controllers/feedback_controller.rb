@@ -19,7 +19,7 @@ class FeedbackController < ApplicationController
             
             type = feedback.choice.contest.index('Ballot').nil? ? 'candidate' : 'measure'
             url = show_feedback_path( feedback.id )
-            response = RestClient.post 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], type.to_sym => url } unless params[:access_token]
+            response = RestClient.post 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], type.to_sym => url } if params[:access_token]
           else
             sucess = success && false
             errors.push({:obj => feedback.id, :success => false, :error => feedback.errors })
