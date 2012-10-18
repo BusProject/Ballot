@@ -118,7 +118,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				option = $ctx.$parent.chosen(),
 				option_id = option.id,
 				comment = $comment.val(),
-				type: 'candidate'
+				type = 'candidate'
 
 		} else {
 			var $toggle = $('.toggle', $parent ),
@@ -128,7 +128,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				option = $toggle.hasClass('right') ? $ctx.$parent.no() : $ctx.$parent.yes(),
 				option_id = option.id,
 				comment = $comment.val(),
-				type: 'ballot_measure'
+				type = 'ballot_measure'
 		}
 
 		$.post(
