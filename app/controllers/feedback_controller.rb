@@ -95,7 +95,12 @@ class FeedbackController < ApplicationController
       type = 'comment'
     end
     
-    @image = @feedback.memes.last.nil? ? @feedback.user.image : ENV['BASE']+meme_show_image_path( @feedback.memes.last.id )+'.png'
+    @meme = @feedback.memes.last
+    if @meme.nil?
+      @meme = @feedback.memes.new( :quote => '', :theme => 'new/'+( 1+rand(4) ).to_s+'.jpg' )
+      @meme.save
+    end
+    @image =  ENV['BASE']+meme_show_image_path( @meme.id )+'.png'
     
     result = {:state => 'profile', :user => @user.to_public(false) }
     
