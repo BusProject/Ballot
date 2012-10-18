@@ -136,9 +136,9 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 						option_id: parseInt(option_id),
 						//choice_id: parseInt(choice_id),
 						comment: comment,
-						access_token: current_user.auth_token
 					}
 				]
+				access_token: current_user.auth_token
 			},
 			function(response) {
 				if( response.success ) {
