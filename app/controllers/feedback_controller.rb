@@ -57,8 +57,10 @@ class FeedbackController < ApplicationController
       end
       
       response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :voter_guid => ENV['BASE']+@user.profile } ){|response, request, result| response } if params[:access_token]
+    else
+      {:you => '#fail'}
     end
-
+    render :json => response
   end
   def vote
     unless current_user.nil?
