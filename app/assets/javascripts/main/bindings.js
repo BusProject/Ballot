@@ -231,6 +231,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 
 	$.post(
 		inits.root+'feedback/'+$data.id+'/'+action,
+		{ access_token: current_user.auth_token },
 		function(response){
 			$this.parents('.ask').html( response.message )
 			if( $this.hasClass('conf-flag') ) setTimeout( function() { $this.parent('.feedback').remove() }, 300 )

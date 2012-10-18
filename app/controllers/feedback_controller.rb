@@ -19,7 +19,7 @@ class FeedbackController < ApplicationController
             
             type = feedback.choice.contest.index('Ballot').nil? ? 'candidate' : 'measure'
             url = show_feedback_path( feedback.id )
-            response = RestClient.post 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], type.to_sym => url } if params[:access_token]
+            response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], type.to_sym => url }){|response, request, result| response } if params[:access_token]
           else
             sucess = success && false
             errors.push({:obj => feedback.id, :success => false, :error => feedback.errors })
@@ -56,7 +56,7 @@ class FeedbackController < ApplicationController
         current_user.likes feedback
       end
       
-      response = RestClient.post 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :voter_guid => ENV['BASE']+@user.profile } if params[:access_token]
+      response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :voter_guid => ENV['BASE']+@user.profile } ){|response, request, result| response } if params[:access_token]
     end
 
   end
@@ -67,6 +67,8 @@ class FeedbackController < ApplicationController
       if  params[:flavor] == 'useful'
         amount = feedback.upvotes.size
         current_user.likes feedback
+        url = show_feedback_path( feedback.id ) +'?guide=true'
+        response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :comment => url }){|response, request, result| response } if params[:access_token]
       else
         amount = feedback.upvotes.size
         current_user.likes feedback
@@ -105,10 +107,10 @@ class FeedbackController < ApplicationController
         @message = @choices.first.description if @message.nil? || @message.empty?
       end
       @geography = @choices.first.geographyNice(false)
-      @redirect = @choices.first.to_url
+      @redirect = '/'+@choices.first.to_url
     else
       @title =  'A comment from '+(!@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide')
-
+      @redirect = ENV['BASE']+@feedback.user.profile+'#!'+@choices.first.contest+' '+@choices.first.geography
       type = 'comment'
     end
     
