@@ -49,6 +49,7 @@
 						<%= link_to t('top.my_guide'), current_user.profile %>
 						<ul>
 							<li><%= link_to t('top.all_guides'), guides_path %></li>
+							<li><%= link_to t('top.top_guides'), top_guides_path %></li>
 						</ul>
 					</li>
 					<li><%= link_to t('top.log_out'), destroy_user_session_path %></li>
