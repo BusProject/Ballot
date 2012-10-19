@@ -30,6 +30,7 @@ body.home {
 #page {
   background: none;
   padding: 0;
+  border: none;
 }
 
 #main {
@@ -40,8 +41,55 @@ body.home {
 #header {
   background-color: @bgGrey;
   margin: 0;
-  padding: 15px;
+  height: 72px;
   border-bottom: 1px solid @grey;
+  img {
+    width: 200px !important;
+    margin-top: 14px;
+  }
+  #mobile_nav {
+    li {
+      width: 47px;
+      position: absolute;
+      top: 0;
+      height: 70px;
+      text-align: center;
+      a {
+        display: block;
+        width: 47px;
+        height: 48px;
+        padding-top: 20px;
+        font-size: 8px;
+        color: transparent;
+        text-shadow: none;
+        &:before {
+          display: block;
+          font-size: 32px;
+          font-family:'FontAwesome'; 
+        }
+      }
+      &#mobile_home_link {
+        left: 0;
+        border-right: 1px solid @grey;
+        a {
+          &:before {
+            color: @orange;
+            content: '\f015';
+          }
+        }
+      }
+      &#mobile_menu_link {
+        left: 271px;
+        border-left: 1px solid @grey;
+        a {
+          &:before {
+            color: @green;
+            content: '\f00b';
+          }
+        }
+      }
+    }
+  }
 }
 
 .ballot-section {
