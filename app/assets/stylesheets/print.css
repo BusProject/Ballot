@@ -1,0 +1,8 @@
+#more-coming, #footer, #instructions, .account { display: none }
+
+#header img { width: 300px; }
+
+body, p, div, h2, h3, h4 {
+	font-family: 'Open Sans', sans-serif;
+}
+
