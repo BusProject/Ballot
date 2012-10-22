@@ -51,8 +51,9 @@
 	<h1 class="sectionheading" style="display:none; clear: both;" data-bind="visible: !fetch() "><%= t('site.loading') %></h1>
 	<div id="more-coming" style="display:none;" class="ballot-section" data-bind="visible: geolocated() && fetch()" >
 		<h1><%= t('front.more')%></h1>
+		<br />
+		<p><%= t('front.more_text')%><span data-bind="text: address.state() ? ' <%= t('site.for') %> '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
 		<div class="category-heading minor">
-			<p><%= t('front.more_text')%><span data-bind="text: address.state() ? ' <%= t('site.for') %> '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
 			<br />
 			<%- if current_user.nil? %>
 				<p><%= t('front.more_login')%></p>
