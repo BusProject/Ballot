@@ -38,6 +38,71 @@ body.home {
   padding-bottom: 60px;
 }
 
+/* Splash */
+
+body.splash {
+  .ballot-section {
+    > h1 {
+  		text-align:center;
+  		padding:15px 0px;
+  		font-size: 24px;
+  		color: white;
+  		background-color: @accent;
+  		font-family:"Open Sans", serif;
+  		.drop-shadow(0,2px,2px,0,.2);
+  		.border-radius(5px);
+  		width:95%;
+  		margin:0 auto;
+  		position:relative;
+			&:before {
+				content:"\f0d7";
+				font-family:"FontAwesome";
+				color:@accent;
+				position:absolute;
+				bottom:-18px;
+				left: 50%;
+			}
+  	}
+    .directions {
+      background: white;
+      border: 1px solid @grey;
+      text-align: center;
+      padding: 14px;
+      margin-top: 130px;
+      > p { display: none; }
+      ul li {
+        margin-left: 0;
+        text-indent: 0;
+        font-size: 14px;
+        text-align: center;
+        .icon-search {
+          display: none;
+        }
+        strong {
+          font-size: 20px;
+          margin-bottom: 8px;
+          display: block;
+          color: @orange;
+          font-family: 'Arvo', serif;
+        }
+      }
+    }
+    .login {
+      width: 100%;
+      padding: 0;
+      background: none;
+      position: absolute;
+      top: 190px;
+      h1 { display: none; }
+      p { color: @grey; }
+      a:link { color: @green; }
+    }
+  }
+  #main { padding-bottom: 0px; }
+}
+
+/* Contents */
+
 #header {
   background-color: @bgGrey;
   margin: 0;
