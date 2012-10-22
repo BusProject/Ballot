@@ -1,7 +1,7 @@
 
 <% title = @title || 'November 6th - Your Social Voting Guide' %>
 <% message = @message || 'November6th.org is the 100% social voter guide brought to you by the League of Young Voters Education Fund, New Era Colorado Civic Fund, Forward Montana Foundation, and the Bus Project Foundation.' %>
-<% image = @image || '' #ENV['BASE']+asset_path('ballot.jpg') %>
+<% image = @image || ENV['BASE']+asset_path('Nov6thShare.jpg') %>
 <% url = @url || "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>
 <% photo = photo || nil %>
 <% type = @type || 'website' %>
