@@ -23,7 +23,7 @@
 	<h2 style="<%= 'display:none;' unless !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind=" visible: $data.<%= userObj %>[0].comment != null && $data.<%= userObj %>[0].comment.length > 0" class="profile-text"><%= t('site.i_say')%></h2>
 
 
-	<p style="<%= 'display: none' unless !feedback.nil? & !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind="text: $data.<%= userObj %>[0].comment, visible: $data.<%= userObj %>[0].comment != null && $data.<%= userObj %>[0].comment.length > 0, addClass: $data.<%= userObj %>[0].type" >
+	<p style="<%= 'display: none' unless !feedback.nil? & !feedback.comment.nil? && feedback.comment.length > 0 %>" data-bind="betterText: $data.<%= userObj %>[0].comment, visible: $data.<%= userObj %>[0].comment != null && $data.<%= userObj %>[0].comment.length > 0, addClass: $data.<%= userObj %>[0].type" >
 		<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
 			<%= '"'+feedback.comment+'"' %>
 		<% end -%>

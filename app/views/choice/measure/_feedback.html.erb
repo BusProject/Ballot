@@ -5,7 +5,7 @@
 
 <!-- ko foreach: Array( votes ) -->
 	<div class="yourFeedback <%= user.nil?  ? 'no-user' : 'has_user' %>" data-bind="visible: $parent.you()[0] != null, if: $parent.you()[0] != null ">
-		<span class="<%= feedback.option.type unless feedback.nil? %>" data-bind="text: '&ldquo;'+$parent.you()[0].comment+'&rdquo;', visible: $parent.you()[0].comment.length > 0,addClass: ( $parent.you()[0].type == I18n.t('site.no').toLowerCase() ? 'no' : 'yes' )" >
+		<span class="<%= feedback.option.type unless feedback.nil? %>" data-bind="betterText: '&ldquo;'+$parent.you()[0].comment+'&rdquo;', visible: $parent.you()[0].comment.length > 0,addClass: ( $parent.you()[0].type == I18n.t('site.no').toLowerCase() ? 'no' : 'yes' )" >
 			<%- unless feedback.nil? %>
 				<%- if !feedback.comment.nil? && feedback.comment.length > 0 %>
 					<%= '"'+feedback.comment+'"'  %><br /><br/>
