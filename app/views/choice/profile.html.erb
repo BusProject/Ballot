@@ -253,7 +253,7 @@
 		<% end -%>
 
 		<div class="sectionheading"><h1 data-bind="visible: true,text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : I18n.t('i18n_toolbox.possessive',{ owner: inits.user.name, thing: I18n.t('site.voter_guide') } ) "><%= @user.guide_name || t('i18n_toolbox.possessive', {:owner => @user.name, :thing => t('site.voter_guide') } )%></h1>
-			<p class="description" data-bind=" text: description"><%= @user.description %></p>
+			<p class="description" data-bind=" text: description, visible: description"><%= @user.description %></p>
 		<p style="font-size:12px;"><%= t("profile.powered")%></p>
 		</div>
 
