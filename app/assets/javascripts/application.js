@@ -17,6 +17,9 @@
 var yourLocation = new locationModel(inits);
 
 window.onload = function() {
+  $('#show_mobile_menu').click(function() {
+    $('.account').toggle();
+  });
 	if( document.location.hash.length > 1 ){
 		setTimeout( function() { 
 		var pos = $( document.location.hash + ', a[name="'+document.location.hash.replace('#!','')+'"]' ).offset(),

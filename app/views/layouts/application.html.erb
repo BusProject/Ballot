@@ -112,7 +112,7 @@
 			  <% if is_mobile_device? %>
 			    <ul id="mobile_nav">
 			      <li id="mobile_home_link"><%= link_to "Home", root_path %></li>
-			      <li id="mobile_menu_link"><%= link_to "Menu", root_path %></li>
+			      <li id="mobile_menu_link"><%= link_to "Menu", "#", :id => "show_mobile_menu" %></li>
 			    </ul>
 			  <% end %>
 				<%- if !@user.nil? && !@user.header.nil? && @user.header.url(:header) != '/headers/header/missing.png' %>

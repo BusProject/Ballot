@@ -5,7 +5,7 @@
 
 /* structure */
 
-.account, #instructions-box {
+#instructions-box {
   display: none;
 }
 
@@ -95,13 +95,83 @@ body.splash {
       top: 190px;
       h1 { display: none; }
       p { color: @grey; }
-      a:link { color: @green; }
+      a:link { color: @green !important; }
     }
   }
   #main { padding-bottom: 0px; }
 }
 
 /* Contents */
+
+/* Account menu */
+
+.account {
+  display: none;
+  float: none;
+  position: absolute;
+  top: 69px;
+  width: 320px;
+  min-width: 320px;
+  padding: 0;
+  box-shadow: none;
+  border: 1px solid @grey;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  background: @bgGrey;
+  text-align: left;
+  .left-nav, .right-nav {
+    float: none;
+    width: 100%;
+  }
+  ul {
+    li {
+      float: none;
+      width: 100% !important;
+      padding: 0 !important;
+      border: none;
+      border-bottom: 1px solid @grey;
+      text-align: left;
+      .clearfix();
+      &.icon-home-nav, &.get-started { display: none; }
+      &.fb-button {
+        border-bottom: 1px solid @grey;
+        img {
+          width: 150px;
+          margin-top: 9px;
+        }
+      }
+      a, .icon-search {
+        text-align: left;
+        color: @green;
+        text-shadow: none;
+        height: 48px;
+        line-height: 48px;
+      }
+      .icon-search { padding-left: 10px; margin-left: 5px; }
+      ul {
+        display: block;
+        position: relative;
+        padding: 0;
+        margin: 0;
+        li {
+          margin: 0;
+          background: @bgGrey;
+          border: none;
+          border-top: 1px solid @grey !important;
+          &:first-child { border-left: none; }
+          &:last-child { border-right: none !important; }
+          a {
+            display: block;
+            padding: 0 10px;
+            margin: 0 5px;
+          }
+        }
+      }
+      .icon-home { display: none; }
+    }
+  }
+}
 
 #header {
   background-color: @bgGrey;
@@ -228,6 +298,63 @@ body.splash {
     button.open {
       margin-bottom: 12px;
     }
+    .body {
+      padding: 0;
+      margin: -32px 0 0;
+      .footer { display: none; }
+      .optionholder {
+        max-height: auto;
+        .option {
+          height: auto;
+          margin: 0;
+          h1 {
+            text-align: left !important;
+          }
+          .blurb {
+            font-size: 14px;
+          }
+          .faces {
+            position: relative;
+            bottom: 0;
+            margin-top: 10px;
+            .clearfix();
+            .minicounter {
+              margin: 0 !important;
+            }
+          }
+        }
+        .option:first-child {
+          border-bottom: 1px dashed @grey;
+          margin: 0;
+          padding: 14px;
+        }
+      }
+      .yourFeedback {
+        h2 { font-size: 18px; line-height: 1.4em; }
+        p { font-size: 14px; }
+      }
+    }
+    &.candidate.row .body {
+      .optionholder {
+        .option {
+          padding: 14px;
+          width: 100%;
+          .faces {
+            right: 0;
+            height: auto;
+          }
+        }
+      }
+    }
+    &.measure .body {
+			.optionholder {
+				.option {
+				  width: 100%;
+				  padding: 14px;
+				  float: none;
+				}
+			}
+		}
   }
   .candidate, .measure {
     background-color: @bgGrey;
