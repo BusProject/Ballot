@@ -35,7 +35,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		var ctx = ko.contextFor(this),
 			$root = ctx.$root,
 			$data = ctx.$data,
-			selected = $root.selected()
+			selected = $root.selected(),
+			scrollUp = null
 
 		$('.selected .body').slideUp(400, function() { $('button.open', this.parentElement ).text( $(this).data('button-text') ); })
 
@@ -44,14 +45,18 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			return false
 		}
 		var $this = $(this).parent()
-		scrollUp = setInterval( function() { 
-			var top = $this.position().top - 80
-			if( top < $(document).scrollTop()  ) $(document).scrollTop( top  );
-		}, 10)
-		
-		setTimeout(function() { clearInterval(scrollUp); },1000)
+
+		if( !inits.mobile ) { 
+			scrollUp = setInterval( function() { 
+				var top = $this.position().top - 80
+				if( top < $(document).scrollTop()  ) $(document).scrollTop( top  );
+			}, 10);
+
+			setTimeout(function() { clearInterval(scrollUp); },1000);
+		}
 		
 		var $button = $(this), buttonText = $button.text()
+
 		$button.text('Close').nextAll('.body').data('button-text', buttonText ).slideDown(400,function() { 
 			$root.selected($data)
 			clearInterval(scrollUp);
