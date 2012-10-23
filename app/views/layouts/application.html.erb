@@ -21,7 +21,7 @@
 	
 	
 	<% if is_mobile_device? %>
-	  <%= stylesheet_link_tag "mobile" %>
+		<%= stylesheet_link_tag "mobile" %>
 	<% else %>
 		<%= render :partial => 'home/iframe' if params[:iframe] %>
 		<%= javascript_include_tag asset_path( "other/iframe.js" ) if params[:iframe] %>
@@ -35,8 +35,11 @@
 	current_user.url = "<%= current_user.nil? ? root_path.split('?')[0] : profile_path( current_user.to_url )  %>"
 	inits.root = "<%= root_path.split('?')[0] %>";
 	inits.default_url = [ <%= raw params[:iframe].nil? ? '' : '"iframe='+params[:iframe].to_s+'", ' %> ];
+	<% if is_mobile_device? %>
+		inits.mobile = true;
+	<% end %>
 	<%- unless @choices_json.nil? %>
-	inits.choices = <%= raw @choices_json %>;
+		inits.choices = <%= raw @choices_json %>;
 	<% end -%>
   </script>
   <%= javascript_include_tag "application" %>
