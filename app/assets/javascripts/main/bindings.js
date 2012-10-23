@@ -348,6 +348,13 @@ ko.bindingHandlers.bindDescendents = {
     }
 };
 
+ko.bindingHandlers.betterText = {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		var bindings =  allBindingsAccessor(),
+			bind = bindings['betterText']
+		element.innerHTML = ko.toJS( bind ).replace("\n",'<br /><br />')
+    }
+};
 
 
 ko.virtualElements.allowedBindings.stopBinding = true;

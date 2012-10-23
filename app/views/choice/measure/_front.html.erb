@@ -11,7 +11,7 @@
 	itemscope itemtype="http://schema.org/ItemList" >
 
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
-	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	<div itemprop="description" class="explanation" data-bind="betterText: $data.description, elastic: true"><%= choice.description %></div>
 	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' + I18n.t( 'site.voted', { count: $data.voted() })+ ' | ' +I18n.t('site.commented', { count: $data.commentsPure() }) " >
 		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> | <%= t('site.commented', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> 
 	</div>
@@ -29,12 +29,12 @@
 		<% choice.options.each do |option| %>
 		<div itemprop="itemListElement"  class="optionholder <%= 'clean-no-script' if n != 0 %>" >
 			<!-- ko foreach: $data.options -->
-				<div class="option">
+				<div class="option" data-bind="css: { confirmed: $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 }">
 					<h1 data-bind="text: $data.name, stripClass: true, addClass: ( $data.type == I18n.t('site.no').toLowerCase() ? 'no' : 'yes' )" class="<%= option.option_type == t('site.no').downcase() ? 'no' : 'yes'  unless option.new_record? %> ">
 						<%= option.name %>
 					</h1>
 					<img data-bind="src: $data.photo" src="<%= option.photo %>">
-					<div class="blurb" data-bind="text: $data.blurb "><%= option.blurb %></div>
+					<div class="blurb" data-bind="betterText: $data.blurb "><%= option.blurb %></div>
 
 					<div class="faces">
 						<div class="minicounter" data-bind="">
