@@ -37,6 +37,8 @@ gem 'therubyracer'
 
 gem 'acts_as_votable'
 
+gem 'mobile-fu'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

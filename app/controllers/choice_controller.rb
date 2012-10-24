@@ -1,11 +1,49 @@
 class ChoiceController < ApplicationController
   
 
+
   def friends
     @classes = 'profile home'
     @feedback = Feedback.friends( current_user )
-    
+  end    
+  
+  
+  def create
+    if current_user.nil?
+      render :text => 'no'
+    else
+      @states = Choice.states
+      @abvs = Choice.stateAbvs
+      geography = [@abvs[ @states.index( params[:choice][:geography] ) ],'User',current_user.id.to_s,Time.now.to_i.to_s].join('_')
+      
+      if params[:choice][:contest_type] == 'User_Candidate'
+        @choice = Choice.new( 
+          :contest => params[:choice][:contest],  
+          :geography => geography,
+          :votes => params[:choice][:votes].to_i,
+          :contest_type => params[:choice][:contest_type],
+          :options_attributes => params[:choice][:options_attributes]
+        )
+      else
+        params[:choice][:options_attributes].each{ |k,v| v[:blurb_source] = params[:choice][:blurb_source] }
+        @choice = Choice.new( 
+          :contest => params[:choice][:contest],
+          :description => params[:choice][:description],
+          :geography => geography,
+          :contest_type => params[:choice][:contest_type],
+          :options_attributes => params[:choice][:options_attributes]
+        )
+      end
+      if @choice.save
+        redirect_to contest_path( @choice.geography, @choice.contest.gsub(' ','_'))
+      else
+        redirect_to user_add_choice_path, :error => @choice.errors
+      end
+    end
+    render :template => 'choice/add'
   end
+
+
   
   def profile
     
