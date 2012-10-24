@@ -1,9 +1,9 @@
-/* Mobile stylesheet, served to mobile devices using mobile_fu plugin */
+// Mobile stylesheet, served to mobile devices using mobile_fu plugin
 
 @import 'less/mixins.less';
 @import 'less/vars.less';
 
-/* structure */
+// ---------------- structure ------------------
 
 #instructions-box {
   display: none;
@@ -38,7 +38,7 @@ body.home {
   padding-bottom: 60px;
 }
 
-/* Splash */
+// Splash
 
 body.splash {
   .ballot-section {
@@ -101,9 +101,9 @@ body.splash {
   #main { padding-bottom: 0px; }
 }
 
-/* Contents */
+// ---------- Contents --------------
 
-/* Account menu */
+// Account menu
 
 .account {
   display: none;
@@ -379,6 +379,26 @@ body.splash {
   p {
     display: block;
     width: 100%;
+  }
+}
+
+// static pages
+
+body.msg {
+  #main {
+    padding: 0;
+  }
+  #content {
+    margin: 10px;
+    padding: 14px;
+    background: @bgGrey;
+    border: 1px solid @grey;
+    h1 {
+      font-size: 22px;
+    }
+    p {
+      font-size: 14px;
+    }
   }
 }
 
