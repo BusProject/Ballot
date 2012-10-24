@@ -11,7 +11,7 @@ class HomeController < ApplicationController
       @config = { :state => 'splash' }.to_json
       @classes += 'splash'
 
-      render :template => 'home/splash.html.erb'
+      render :template => 'home/splash'
     else
       
       address = params['q'] || params['address']
@@ -41,7 +41,7 @@ class HomeController < ApplicationController
       
       @classes = 'home front'
       
-      render :template => 'home/index.html.erb' 
+      render :template => 'home/index' 
     end
   end
 

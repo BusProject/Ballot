@@ -7,7 +7,7 @@ class ChoiceController < ApplicationController
 
     @config =  { :state => 'not' }.to_json
 
-    render :template => 'choice/add.html.erb'
+    render :template => 'choice/add'
   end
   
   
