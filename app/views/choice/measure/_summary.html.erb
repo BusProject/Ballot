@@ -8,7 +8,7 @@
 	<hr><a <%= raw 'data-bind=" attr: { href: \'/\'+$data.geography+\'/\'+$data.contest.replace(/ /g,\'_\') }" ' if choice.new_record? %>  href="/<%= choice.to_url %>" ><h1 itemprop="name" class="title" <%= raw 'data-bind=" text: $data.contest " ' if choice.new_record? %> ><%= choice.contest %></h1></a><hr>
 	<div itemprop="description" class="explanation" <%= raw 'data-bind=" text: $data.description " ' if choice.new_record? %>  ><%= choice.description %></div>
 	<div itemprop="" class="voted" <%= raw 'data-bind="html: \'<i class=icon-comments-alt></i> \' + I18n.t(\'site.voted\', { count: $data.voted() })+ \' | \' +I18n.t(\'site.voted\', { count: $data.commentsPure() }) " ' if choice.new_record? %> >
-		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> | <%= t('site.commented', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count } ) %> 
+		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.votes } ) %> | <%= t('site.commented', { :count => choice.feedback.comments } ) %> 
 	</div>
 	<a <%= raw 'data-bind=" attr: { href: \'/\'+$data.geography+\'/\'+$data.contest.replace(/ /g,\'_\') }" ' if choice.new_record? %> href="/<%= choice.to_url %>" ><button class="open">Learn More and Comment</button></a>
 	<hr class="button">

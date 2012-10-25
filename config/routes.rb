@@ -41,9 +41,9 @@ Ballot::Application.routes.draw do
   match '/guides/list' => 'home#guides'
   match '/guides/:state' => 'home#guides', :as => 'state_guides'
   match '/guides/by_state/:state' => redirect( '/guides/%{state}' )
-  match '/guides/top' =>  'home#guides'
-  
-  # match '/friends' => 'choice#friends'
+
+  match '/friends' => 'choice#friends'
+  match '/guides/top' =>  'home#guides', :as => 'top_guides'
 
 
   match '/lookup' => 'choice#index'
@@ -67,6 +67,7 @@ Ballot::Application.routes.draw do
 
   match '/:geography/:contest' => 'choice#show', :contest =>/[^\/]+/ , :as => 'contest'
   
-  match '/:id' => 'choice#profile', :as => 'profile'
+  match '/:id' => 'choice#profile', :as => 'profile', :via => :get
+  match '/:id' => 'feedback#recommend', :as => 'recommend', :via => :post
 
 end

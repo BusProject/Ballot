@@ -35,7 +35,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		var ctx = ko.contextFor(this),
 			$root = ctx.$root,
 			$data = ctx.$data,
-			selected = $root.selected()
+			selected = $root.selected(),
+			scrollUp = null
 
 		$('.selected .body').slideUp(400, function() { $('button.open', this.parentElement ).text( $(this).data('button-text') ); })
 
@@ -44,14 +45,18 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			return false
 		}
 		var $this = $(this).parent()
-		scrollUp = setInterval( function() { 
-			var top = $this.position().top - 80
-			if( top < $(document).scrollTop()  ) $(document).scrollTop( top  );
-		}, 10)
-		
-		setTimeout(function() { clearInterval(scrollUp); },1000)
+
+		if( !inits.mobile ) { 
+			scrollUp = setInterval( function() { 
+				var top = $this.position().top - 80
+				if( top < $(document).scrollTop()  ) $(document).scrollTop( top  );
+			}, 10);
+
+			setTimeout(function() { clearInterval(scrollUp); },1000);
+		}
 		
 		var $button = $(this), buttonText = $button.text()
+
 		$button.text('Close').nextAll('.body').data('button-text', buttonText ).slideDown(400,function() { 
 			$root.selected($data)
 			clearInterval(scrollUp);
@@ -117,7 +122,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				choice_id = $ctx.$parent.id,
 				option = $ctx.$parent.chosen(),
 				option_id = option.id,
-				comment = $comment.val()
+				comment = $comment.val(),
+				type = 'candidate'
 
 		} else {
 			var $toggle = $('.toggle', $parent ),
@@ -126,7 +132,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				choice_id = $ctx.$parent.id,
 				option = $toggle.hasClass('right') ? $ctx.$parent.no() : $ctx.$parent.yes(),
 				option_id = option.id,
-				comment = $comment.val()
+				comment = $comment.val(),
+				type = 'ballot_measure'
 		}
 
 		$.post(
@@ -136,7 +143,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 						option_id: parseInt(option_id),
 						//choice_id: parseInt(choice_id),
 						comment: comment,
-						
 					}
 				]
 			},
@@ -146,6 +152,13 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					option.feedback.push( Feedback( { option_id: option.id, option_name: option.name, comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type, updated_at:  response.successes[0].updated_at } ) )
 					$comment.val('')
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
+					data = { access_token: current_user.auth_token }
+					data[ type ] = response.url 
+					$.post(
+						'https://graph.facebook.com/me/the-ballot:recommend',
+						data,
+						function(r){console.log(r)}
+					)
 				}
 			}
 		)
@@ -231,6 +244,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 
 	$.post(
 		inits.root+'feedback/'+$data.id+'/'+action,
+		{ access_token: current_user.auth_token },
 		function(response){
 			$this.parents('.ask').html( response.message )
 			if( $this.hasClass('conf-flag') ) setTimeout( function() { $this.parent('.feedback').remove() }, 300 )
@@ -339,6 +353,13 @@ ko.bindingHandlers.bindDescendents = {
     }
 };
 
+ko.bindingHandlers.betterText = {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		var bindings =  allBindingsAccessor(),
+			bind = bindings['betterText']
+		element.innerHTML = ko.toJS( bind ).replace("\n",'<br /><br />')
+    }
+};
 
 
 ko.virtualElements.allowedBindings.stopBinding = true;

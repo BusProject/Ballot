@@ -5,15 +5,12 @@ class Choice < ActiveRecord::Base
   
   has_many :options, :dependent => :destroy, :order => 'position DESC'
   has_many :feedback, :conditions => ['"feedback"."approved" =? ', true] do
-    def count_votes current_user=nil
-      user_id = id = current_user.nil? ? 0 : current_user.id
-      all( :limit => nil, :conditions => nil, :select => 'DISTINCT("user_id" )', :conditions => ['user_id != ?',user_id] ).count
+    def votes
+      all( :select => 'DISTINCT(user_id)' ).count
     end
-    def count_comments current_user=nil
-      user_id = id = current_user.nil? ? 0 : current_user.id
-      all(:limit => nil, :conditions => 'length(comment) > 1', :select => 'DISTINCT("user_id" )',  :conditions => ['user_id != ?',user_id] ).count
+    def comments
+      all( :select => 'DISTINCT(user_id)', :conditions => ['comment != ? AND comment != ?',nil,''] ).count
     end
-    
   end
   has_many :users, :through => :feedback
   accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbant'] == '0' && false  }
@@ -70,7 +67,7 @@ class Choice < ActiveRecord::Base
     district = self.geography.slice(4,self.geography.length) if geography != self.geography.slice(2,self.geography.length)
     district = district.to_i.ordinalize if !district.nil? && district.to_i.to_s == district.gsub('0','')
     
-    return [ 'Added by',User.find(Choice.last.geography.split('_')[2]).name,'for',@states[index] ].join(' ') if !geography.index('User').nil?
+    return [ 'Added by', User.find( geography.split('_')[2] ).name,'for',@states[index] ].join(' ') if !geography.index('User').nil?
     
     return [@states[index]+"'s", district,geography].join(' ') if district != ''
     return [@states[index],geography].join(' ')

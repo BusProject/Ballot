@@ -5,7 +5,7 @@
 		<h1 data-bind="text: [ $parent.you()[ $index() ].option_name,'for',$parent.contest].join(' ') " >
 			<%= [feedback.option.name,'for',feedback.choice.contest].join(' ')  unless feedback.nil? %>
 		</h1>
-		<span data-bind="text: '&ldquo;'+$parent.you()[ $index() ].comment+'&rdquo;', visible: $parent.you()[ $index() ].comment != null && $parent.you()[ $index() ].comment.length > 0,addClass: $parent.you()[ $index() ].type" >
+		<span data-bind="betterText: '&ldquo;'+$parent.you()[ $index() ].comment+'&rdquo;', visible: $parent.you()[ $index() ].comment != null && $parent.you()[ $index() ].comment.length > 0,addClass: $parent.you()[ $index() ].type" >
 			<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
 				<%= '"'+feedback.comment+'"' %>
 			<% end -%>
