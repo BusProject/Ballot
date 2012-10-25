@@ -46,9 +46,14 @@ class ChoiceController < ApplicationController
   end
 
   def friends
-    @classes = 'profile home'
+
+    @classes = 'profile home friends'
     @feedback = Feedback.friends( current_user )
-    
+
+    result = {:state => 'friends' }
+
+    @config = result.to_json
+
   end
   
   def profile

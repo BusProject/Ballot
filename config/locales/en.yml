@@ -276,6 +276,10 @@ en:
             remaining: 'Characters Remaining:'
             too_many: 'Too Many'
 
+    friends:
+        heading: "Here's What Your Friends Are Up To"
+        explain: "Here are what your friends are up to on The Ballot"
+        none: "Your friends haven't really done anything on The Ballot yet..."
     # used in responding to feedback
     feedback:
         agree:
