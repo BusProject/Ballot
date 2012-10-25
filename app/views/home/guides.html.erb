@@ -32,6 +32,7 @@
 			<ol >
 			<% guides.each do |guide| %>
 					<li >
+						<%= guide.rating # The rating - do whatever. %>
 						<a href="<%= guide.profile %>" class="full" ><h1 itemprop="name" class="title" ><%= ( guide.guide_name.nil? || guide.guide_name.empty? ? t('i18n_toolbox.possessive', { :owner => (guide.name || '' ) , :thing => t('site.voter_guide') }) : guide.guide_name ).split(' ').map{ |w| w.capitalize }.join(' ') %></h1></a>
 						<div itemprop="description" class="explanation" ><%= guide.description.nil? || guide.description == 'null' ? '' : guide.description %></div>
 					</li>
