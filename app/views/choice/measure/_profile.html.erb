@@ -1,7 +1,7 @@
 <% choice = choice || Choice.new %>
 <% user = user || nil %>
 <% choice.options.new if choice.new_record?  %>
-<% feedback = user.nil? ? nil : choice.options.map{ |o| o[:feedbacks] ? o.feedbacks : o.feedback }.flatten.select{ |f| f.user_id == user.id }.first %>
+<% feedback = user.nil? ? nil : choice.options.map{ |o| o[:feedbacks] ? o.feedbacks : o.feedback }.flatten.select{ |f| f.user_id == user.id }.first if feedback.nil? %>
 <% userObj = user == current_user ? 'you()' : 'featured()'  %>
 
 
