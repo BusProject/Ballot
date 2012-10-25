@@ -102,10 +102,11 @@ class User < ActiveRecord::Base
   def self.by_state(state=nil,limit=5)
     if state.nil?
       return self.all( 
-      :select => 'DISTINCT( substr("choices"."geography",0,3)) as geography, "users".*,  ( "feedback"."cached_votes_up" - "feedback"."cached_votes_down"  ) AS rating  ',
+      :select => 'DISTINCT( substr("choices"."geography",0,3)) as geography, "users".* ',
+      :include => [:feedback],
       :joins => :choices, 
       :conditions => ['"choices"."geography" != ?','Prez'], 
-      :order => '"geography", rating DESC' ).group_by{|c| c.geography } 
+      :order => '"geography" DESC' ).group_by{|c| c.geography }, 
     else
       return self.all( 
         :group => ' "users"."id" ',
