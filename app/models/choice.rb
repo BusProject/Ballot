@@ -5,11 +5,13 @@ class Choice < ActiveRecord::Base
   
   has_many :options, :dependent => :destroy, :order => 'position DESC'
   has_many :feedback, :conditions => ['"feedback"."approved" =? ', true] do
-    def votes
-      all( :select => 'DISTINCT(user_id)' ).count
+    def votes current_user=nil
+      user_id = id = current_user.nil? ? 0 : current_user.id
+      all( :limit => nil, :conditions => nil, :select => 'DISTINCT("user_id" )', :conditions => ['user_id != ?',user_id] ).count
     end
-    def comments
-      all( :select => 'DISTINCT(user_id)', :conditions => ['comment != ? AND comment != ?',nil,''] ).count
+    def comments current_user=nil
+      user_id = id = current_user.nil? ? 0 : current_user.id
+      all(:limit => nil, :conditions => 'length(comment) > 1', :select => 'DISTINCT("user_id" )',  :conditions => ['user_id != ?',user_id] ).count
     end
   end
   has_many :users, :through => :feedback
@@ -85,8 +87,8 @@ class Choice < ActiveRecord::Base
   
 
   def prep current_user
-    self[:voted] = self.feedback.count_votes( current_user )
-    self[:commented] = self.feedback.count_comments( current_user )
+    self[:voted] = self.feedback.votes( current_user )
+    self[:commented] = self.feedback.comments( current_user )
 
     self.options.each do |option| 
       option[:support] = option.feedback.count_support
