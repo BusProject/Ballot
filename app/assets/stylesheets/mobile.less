@@ -329,10 +329,10 @@ body.splash {
             margin-top: 10px;
             .clearfix();
             .minicounter {
-              margin: 0 !important;
+              margin: 0 14px 0 0 !important;
             }
             img.face {
-              margin: 4px 0 0 24px !important;
+              margin: 4px 0 0 10px !important;
             }
           }
         }
@@ -344,6 +344,20 @@ body.splash {
         .option.confirmed:first-child {
           border-bottom: none;
         }
+      }
+      
+      .commentTitle {
+        margin: 1px 0 0;
+        padding: 0;
+        text-align: center;
+        background-color: #bdbdbd;
+        h2 {
+          float: none;
+          padding: 10px 0 4px;
+          font-size: 14px;
+          text-align: center;
+        }
+        select, div.arrows { display: none; }
       }
       
       ul.feedback {
@@ -390,6 +404,7 @@ body.splash {
             height: 50px !important;
             width: 270px;
           }
+          span { text-align: center; }
         }
         .buttons {
           display: inline-block;
@@ -432,6 +447,9 @@ body.splash {
           }
         }
       }
+      .yourFeedback {
+        span.Open { text-align: center; display: block; }
+      }
     }
     &.measure .body {
       .optionholder {
@@ -440,6 +458,9 @@ body.splash {
           padding: 14px;
           float: none;
         }
+      }
+      .yourFeedback {
+        span.yes, span.no { text-align: center; display: block; }
       }
     }
   }
