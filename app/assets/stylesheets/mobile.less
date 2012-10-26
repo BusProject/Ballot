@@ -95,7 +95,7 @@ body.splash {
       top: 190px;
       h1 { display: none; }
       p { color: @grey; }
-      a:link { color: @green !important; }
+      a:link, a:visited, a:hover, a:active { color: @green !important; }
     }
   }
   #main { padding-bottom: 0px; }
@@ -234,6 +234,7 @@ body.splash {
 }
 
 .ballot-section {
+  margin-top: 20px;
   .sectionheading {
     font-size: 18px;
     &:before {
@@ -489,6 +490,78 @@ body.splash {
     width: 100%;
   }
   button { font-size: 12px; }
+}
+
+// ----------------- Voter Guides ---------------------
+
+#profile {
+  margin: 0;
+  .sectionheading {
+    background: transparent;
+  }
+}
+
+#personal-guide {
+  #read-ballot {
+    .category-heading {
+      h2 {
+        font-size: 20px;
+        margin-top: 0;
+        width: 300px;
+        letter-spacing: 1px;
+      }
+    }
+    .row {
+      h1.title { padding: 10px 0; }
+      .profile-explanation {
+        margin-bottom: 15px;
+        h2.profile-text {
+          float: none;
+          text-align: center;
+          margin: 0 auto 4px;
+          max-width: 100%;
+        }
+        .explanation {
+          width: 300px;
+          float: none;
+        }
+        .optionholder {
+          float: none;
+          width: 300px;
+          padding-left: 40px;
+        }
+      }
+      .profile-comment {
+        background-color: #bdbdbd;
+        padding: 15px 10px;
+        h2 {
+          float: none;
+          text-align: center;
+          margin: 0 auto 4px;
+          max-width: 100%;
+        }
+        .head {
+          margin: 5px 10px 0 0;
+          width: 32px;
+          height: 32px;
+          img { width: 32px; height: 32px; }
+        }
+        p {
+          width: 248px;
+          margin-top: 5px;
+          padding: 6px;
+          &:before { content: none; }
+          strong { font-size: 14px; }
+          .message { font-size: 12px; }
+        }
+      }
+      .controls {
+        background-color: #bdbdbd;
+        margin: 1px 0 0;
+        padding: 10px;
+      }
+    }
+  }
 }
 
 // static pages
