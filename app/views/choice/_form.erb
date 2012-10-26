@@ -14,6 +14,10 @@
 		<%= form.text_field :geography %>
 	</p>
 	<p>
+		<label>Contest Type</label><br />
+		<%= form.select :contest_type, ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Measure']  %>
+	</p>
+	<p>
 		<label>Description</label><br />
 		<%= form.text_area :description, :size => "30x4" %>
 	</p>
