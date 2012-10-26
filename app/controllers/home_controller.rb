@@ -174,7 +174,7 @@ EOF
               <br />
               <br />
               <h2>States</h2>
-              <p>State data can be retrieved really easily - it's all available via JSON using the following query:<br />
+              <p>State data can be retrieved really easily - it's all available via JSON using the following query, in this case for Oregon:<br />
                 &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json" target="_blank">http://theballot.org/OR.json</a></p>
               <p>Results are paginated 50 at a time - pass ?page=50 to get the next fifty:<br />
                 &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json?page=50" target="_blank">http://theballot.org/OR.json?page=50</a>,<br />
