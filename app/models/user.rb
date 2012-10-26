@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
       :include => [:feedback],
       :joins => :choices, 
       :conditions => ['"choices"."geography" != ?','Prez'], 
-      :order => '"geography" DESC' ).group_by{|c| c.geography }, 
+      :order => '"geography" ASC' ).group_by{|c| c.geography }, 
     else
       return self.all( 
         :group => ' "users"."id" ',
