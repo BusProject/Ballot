@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
       if id != 0 # Future proofing all URL names for our first 10^20th users
         safe = id > 10e20
       end
-      notstate =  Choice.stateAbvs.concat( 'users|admin|lookup|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008|resources'.split('|') ).index( self.profile )
+      notstate =  Choice.stateAbvs.concat( 'users|admin|lookup|api|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008|resources'.split('|') ).index( self.profile )
       safe = notstate.nil? && safe
       errors.add( :profile, 'is not unique' ) unless User.where('(id = ? OR profile = ?)  AND id != ?',id,self.profile,self.id).empty? && safe
     else

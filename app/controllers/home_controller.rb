@@ -154,6 +154,49 @@ EOF
   end
 
 
+    def api
+       @classes = 'home msg'
+       @config = { :state => 'page' }.to_json
+       if I18n.locale == :en
+              @title = 'API'
+              @content = <<EOF
+              <h1>TheBallot.org's API</h1>
+              <p>Get some of this data hot off the girdle. We provide two main APIs, Lookups and States. Check em out.</p>
+              <p>There's no API KEY or rate limit or any of that crap(at least right now - no guarantees if you take us down). Just dig right in!</p>
+              <p>Questions should be directed at Scott <a href="mailto:scott@busfederation.com">scott@busfederation.com</a> or <a href="http://twitter.com/mojowen" target="_blank">@mojowen</a>.
+              <h2>Lookups</h2>
+              <p>Lookup is the query that's performed on the front page - it's powered by Google's Geolocation services and Cicero</p>
+              <p>To perform a lookup you either need to pass either a LatLng or an Address - which I'll then geocode using Google and then use to Query Cicero</p>
+              <p>For address lookups - use the <em>a</em> parameter, like so: <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC">http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC</a>.
+              <p>For LatLng lookups - use the <em>l</em> parameter with lat then lng - attached by a comma, like so:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/lookup?l=41.923%2C-87.710">http://theballot.org/lookup?l=41.923%2C-87.710</a>.
+              <br />
+              <br />
+              <h2>States</h2>
+              <p>State data can be retrieved really easily - it's all available via JSON using the following query:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/OR.json" target="_blank">http://theballot.org/OR.json</a></p>
+              <p>Results are paginated 50 at a time - pass ?page=50 to get the next fifty:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/OR.json?page=50" target="_blank">http://theballot.org/OR.json?page=50</a>,<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/OR.json?page=100" target="_blank">http://theballot.org/OR.json?page=100</a>, <br />
+                etc...</p>
+              <br />
+              <br />
+              <h2>JSONP / Request Type</h2>
+              <p>Yup we can do that - just pass the function's name in the parameter <em>callback</em></p>
+              <p>All requests are GET requests</p>
+              <br />
+              <br />
+
+              <h2>Data Models</h2>
+              <p>Here's the JSON data you'll get back with both of these queries - returned as an array. Both Ballot Measures and Candidates will be intermixed</p>
+              <script src="https://gist.github.com/3961783.js"> </script>
+              
+EOF
+    end
+    render 'home/show'
+    
+  end
     def privacy
        @classes = 'home msg'
        @config = { :state => 'page' }.to_json
