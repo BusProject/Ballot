@@ -72,6 +72,7 @@ def addCandidate obj
 
 
     obj['Electoral District'] = obj['Electoral District'].gsub('(Muni)','')
+    obj['Electoral District'] = obj['Electoral District'].gsub('?','')
 
 
     obj['Electoral District'] = obj['Electoral District']
