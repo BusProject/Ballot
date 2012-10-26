@@ -72,7 +72,7 @@ class Choice < ActiveRecord::Base
     
     return [ 'Added by',User.find(Choice.last.geography.split('_')[2]).name,'for',@states[index] ].join(' ') if !geography.index('User').nil?
     
-    return [@states[index]+"'s", district,geography].join(' ') if district != ''
+    return [district,geography+",",@states[index]].join(' ') if district != ''
     return [@states[index],geography].join(' ')
   end
   
