@@ -27,11 +27,10 @@ class Choice < ActiveRecord::Base
     :options => { 
       :include => [
         :feedbacks => {
-            :include => [ :user => { :except => [ :updated_at, :header_content_type, :header_file_name, :header_file_size, :header_updated_at, :email, :id, :location, :address, :match , :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :created_at, :url, :match_id, :bg, :secondary, :primary  ] } ],
-            :except => [ :approved, :flag]
+            :include => [ :user => { :except => [ :updated_at, :header_content_type, :header_file_name, :header_file_size, :header_updated_at, :email, :location, :address, :match , :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :created_at, :url, :match_id, :bg, :secondary, :primary  ] } ],
+            :except => [  :approved, :flag]
           }
-        ],
-        :except => [:choice_id] 
+        ]
       }
     ]
   end
