@@ -51,7 +51,7 @@ class ChoiceController < ApplicationController
     @choices = @choices.each{ |c| c.prep current_user }
     
     if params[:format] == 'json'
-      render :json => @choices.to_json( Choice.to_json_conditions )
+      render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
     else
 
       @types = Choice.where('geography LIKE ?', params[:state]+'%' ).select("DISTINCT( contest_type)").sort_by{|c| [ 'Ballot_Statewide','Federal','State','County','Other','User_Ballot','User_Candidate' ].index( c.contest_type) }.map{ |c| c.contest_type }
@@ -95,8 +95,36 @@ class ChoiceController < ApplicationController
   def index
     
     cicero = Cicero
+    districts = nil
     
-    districts = params['q'].nil? ? cicero.find(params['l'], params[:address] ) : params['q'].split('|')
+    if params[:a]
+      # If passed an address, uses 'a' to query using Google's geocoding
+      bloop =JSON::parse(RestClient.get 'http://maps.googleapis.com/maps/api/geocode/json?address=3522+N+Borthwick+Ave+Portland+OR&sensor=true' )
+      if result = bloop['results'][0]
+        address = ['Prez']
+        address.push( result['address_components'].reject{ |a| a['types'].index("locality").nil? }.first['long_name'] )
+        address.push( result['address_components'].reject{ |a| a['types'].index("administrative_area_level_1").nil? }.first['short_name'] )
+        address.push( result['address_components'].reject{ |a| a['types'].index("administrative_area_level_2").nil? }.first['long_name'] + ' County' )
+        l = [result['geometry']['location']['lat'].to_s,result['geometry']['location']['lng'].to_s].join(',')
+        districts = cicero.find( l, address )
+      end
+    else
+      # Uses Google to retrieve the Address components if they're not posted or incomplete
+      if params[:address].nil? || params[:address].select{ |d| d.index('undefined') ||  d.index('false') }.length > 0
+        bloop =JSON::parse(RestClient.get 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+params[:l]+'&sensor=true' )
+        if result = bloop['results'][0]
+          address = ['Prez']
+          address.push( result['address_components'].reject{ |a| a['types'].index("locality").nil? }.first['long_name'] )
+          address.push( result['address_components'].reject{ |a| a['types'].index("administrative_area_level_1").nil? }.first['short_name'] )
+          address.push( result['address_components'].reject{ |a| a['types'].index("administrative_area_level_2").nil? }.first['long_name'] + ' County' )
+        end
+      else
+        address = params[:address] 
+      end
+      districts = params['q'].nil? ? cicero.find(params['l'], address ) : params['q'].split('|')
+    end
+    
+    
     
     unless districts.nil?
       @choices = Choice.find_by_districts( districts ).each{ |c| c.prep current_user }
@@ -113,7 +141,7 @@ class ChoiceController < ApplicationController
 
     end
     
-    render :json => @choices.to_json( Choice.to_json_conditions )
+    render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
   end
 
   def more

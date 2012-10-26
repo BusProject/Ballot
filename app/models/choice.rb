@@ -29,9 +29,10 @@ class Choice < ActiveRecord::Base
     :options => { 
       :include => [
         :feedbacks => {
-            :include => [ :user => { :except => [ :banned, :admin, :deactivated, :alerts, :created_at, :last_name, :modified_at, :fb_friends, :first_name, :guide_name, :description  ] } ]
+            :include => [ :user => { :except => [ :updated_at, :header_content_type, :header_file_name, :header_file_size, :header_updated_at, :email, :id, :location, :address, :match , :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :created_at, :url, :match_id, :bg, :secondary, :primary  ] } ],
           }
-        ] 
+        ],
+        :except => [:choice_id] 
       }
     ]
   end
@@ -122,7 +123,6 @@ class Choice < ActiveRecord::Base
         self.options.first[:feedbacks].push( feedback) unless feedback.nil?
       end
     end
-    
   end
   # method to add user feedback to profile - even if prepped missed them
   def addUserFeedback user  
