@@ -50,7 +50,7 @@ class Cicero
         all_districts = fix_districts leg_districts # + school_dist
         all_districts+=addresses
         @match = Match.new(:latlng => lat+','+lng, :data =>  all_districts)
-        @match.save
+        @match.save unless all_districts.select{ |d| d.index('undefined') ||  d.index('false') }.length > 0
       rescue
         all_districts = addresses
       end
