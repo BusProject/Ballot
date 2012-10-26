@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   
   # Method determining what's turned into JSON
   def to_public(json=true)
-    hidden = [ :address, :match , :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header_file_name, :header_content_type, :header_file_size, :header_updated_at ]
+    hidden = [ :updated_at, :email, :id, :location, :address, :match , :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :created_at, :url, :match_id ]
     return self.to_json( :except => hidden ) if json
 
     about = {}
