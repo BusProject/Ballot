@@ -138,7 +138,7 @@ body.splash {
         border-bottom: 1px solid @grey;
         img {
           width: 150px;
-          margin-top: 9px;
+          margin: -5px 0 0;
         }
       }
       a, .icon-search {
@@ -498,6 +498,23 @@ body.splash {
   margin: 0;
   .sectionheading {
     background: transparent;
+  }
+  #edit-profile {
+    padding: 15px 10px;
+    .border-radius(0);
+    .status {
+      float: none;
+      margin-top: 10px;
+    }
+    .editor {
+      h3 {
+        font-size: 18px;
+      }
+      .label { width: auto; margin-right: 0; }
+      input, textarea {
+        width: 300px;
+      }
+    }
   }
 }
 
