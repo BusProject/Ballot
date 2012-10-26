@@ -165,20 +165,20 @@ EOF
               <p>There's no API KEY or rate limit or any of that crap(at least right now - no guarantees if you take us down). Just dig right in!</p>
               <p>Questions should be directed at Scott <a href="mailto:scott@busfederation.com">scott@busfederation.com</a> or <a href="http://twitter.com/mojowen" target="_blank">@mojowen</a>.
               <h2>Lookups</h2>
-              <p>Lookup is the query that's performed on the front page - it's powered by Google's Geolocation services and Cicero</p>
+              <p>Lookup is the query that's performed on the front page - it's powered by <a href="https://developers.google.com/maps/documentation/geocoding/" target="_blank">Google's Geolocation services</a> and <a href="http://cicero.azavea.com/" target="_blank">Cicero</a></p>
               <p>To perform a lookup you either need to pass either a LatLng or an Address - which I'll then geocode using Google and then use to Query Cicero</p>
               <p>For address lookups - use the <em>a</em> parameter, like so: <br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC">http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC</a>.
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC">http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC</a>.
               <p>For LatLng lookups - use the <em>l</em> parameter with lat then lng - attached by a comma, like so:<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/lookup?l=41.923%2C-87.710">http://theballot.org/lookup?l=41.923%2C-87.710</a>.
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/lookup?l=41.923%2C-87.710">http://theballot.org/lookup?l=41.923%2C-87.710</a>.
               <br />
               <br />
               <h2>States</h2>
               <p>State data can be retrieved really easily - it's all available via JSON using the following query:<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/OR.json" target="_blank">http://theballot.org/OR.json</a></p>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json" target="_blank">http://theballot.org/OR.json</a></p>
               <p>Results are paginated 50 at a time - pass ?page=50 to get the next fifty:<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/OR.json?page=50" target="_blank">http://theballot.org/OR.json?page=50</a>,<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://theballot.org/OR.json?page=100" target="_blank">http://theballot.org/OR.json?page=100</a>, <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json?page=50" target="_blank">http://theballot.org/OR.json?page=50</a>,<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json?page=100" target="_blank">http://theballot.org/OR.json?page=100</a>, <br />
                 etc...</p>
               <br />
               <br />
