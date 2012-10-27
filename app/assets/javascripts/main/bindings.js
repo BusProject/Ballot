@@ -89,12 +89,20 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	$this = $(this);
 	if( $this.attr('disabled') ) return false
 	$this.attr('disabled',true)
-	var animate = $this.hasClass('right') ? { left: '+=135' } : { right: '+=135' }
+	var $ctx = ko.contextFor(this), $parent = $ctx.$parent
+	if( $this.hasClass('right') ) {
+		var animate = { left: '+=135' }, chosen = $parent.yes()
+	} else {
+		var animate = { right: '+=135' }, chosen = $parent.no()
+	}
+
 	$('.cover',$this).animate(animate, 200, function() {
 		$this.toggleClass('right').attr('disabled',false).find('.cover').css({left: '', right: ''})
+		$parent.chosen( chosen )
 	});
 })
-.on('click touchend','.chooseable .option:not(.confirmed), .chooseable .chosen',function(e) {
+.on('click touchend','.chooseable .option:not(.confirmed), .chooseable .chosen, .chooseable .mobile-checkbox',function(e) {
+
 	if( ['A','SPAN'].indexOf(e.target.tagName) === -1 ) {
 		e.preventDefault();
 		var $ctx = ko.contextFor(this),
@@ -103,6 +111,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		if( $(this).hasClass('chosen') ) $parent.chosen( null )
 		else $parent.chosen( $data )
 	}
+	e.stopPropagation()
 })
 .on('click touchend','.next',function(e) {
 	var $button = $(this).parents('.row').nextAll('.row:first').find('button.open')
@@ -130,7 +139,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				$ctx = ko.contextFor( $toggle[0] ),
 				$comment = $('.comment', $parent),
 				choice_id = $ctx.$parent.id,
-				option = $toggle.hasClass('right') ? $ctx.$parent.no() : $ctx.$parent.yes(),
+				option = $ctx.$parent.chosen(),
 				option_id = option.id,
 				comment = $comment.val(),
 				type = 'ballot_measure'

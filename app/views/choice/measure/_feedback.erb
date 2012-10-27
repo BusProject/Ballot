@@ -34,7 +34,7 @@
 	<%- if !current_user.nil? && current_user == user %>
 		<div class="yourFeedback" data-bind="visible:  $parent.you()[0] == null ">
 			<%= raw @how %>
-			<div class="toggle" data-bind="addClass: $parent.you()[0] != null && $parent.you()[0].type == I18n.t('site.no').toLowerCase() ? 'right' : '' ">
+			<div class="toggle" data-bind="addClass:  ( typeof $parent.chosen() != 'undefined' && $parent.chosen().type == I18n.t('site.no').toLowerCase() ) ? 'right' : '' ">
 				<div class="inner">
 					<div class="yes"><%= t('measures.yes')%></div>
 					<div class="no"><%= t('measures.no')%></div>

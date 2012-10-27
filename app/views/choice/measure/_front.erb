@@ -27,12 +27,15 @@
 		<meta itemprop="itemListOrder" content="Unordered" />
 		
 		<% choice.options.each do |option| %>
-		<div itemprop="itemListElement"  class="optionholder <%= 'clean-no-script' if n != 0 %>" >
+		<div itemprop="itemListElement"  class="optionholder <%= 'clean-no-script' if n != 0 %>" data-bind="css: {chooseable: $data.featured().length < votes && current_user.id != 'unauthenticated' }">
 			<!-- ko foreach: $data.options -->
 				<div class="option" data-bind="css: { confirmed: $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 }">
 					<h1 data-bind="text: $data.name, stripClass: true, addClass: ( $data.type == I18n.t('site.no').toLowerCase() ? 'no' : 'yes' )" class="<%= option.option_type == t('site.no').downcase() ? 'no' : 'yes'  unless option.new_record? %> ">
 						<%= option.name %>
 					</h1>
+					<% if is_mobile_device?  %>
+						<input class="mobile-checkbox" type="checkbox" data-bind="attr: { checked: $parent.chosen() == $data || $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 ? 'true' : null }">
+					<% end %>
 					<img data-bind="src: $data.photo" src="<%= option.photo %>">
 					<div class="blurb" data-bind="betterText: $data.blurb "><%= option.blurb %></div>
 
