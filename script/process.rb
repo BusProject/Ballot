@@ -34,7 +34,7 @@ def addCandidate obj
         number = number.gsub(' ','-')
       end
 
-      unless obj['Electoral District'].index('Legislative').nil?
+      if !obj['Electoral District'].index('Legislative').nil? && obj['Electoral District'].index('County Legislative').nil?
         if obj['Office Name'].index('Senator')
           obj['Electoral District'] = obj['Electoral District'].gsub('Legislative','SD')
         else
