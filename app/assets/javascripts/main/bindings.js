@@ -155,7 +155,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					data = { access_token: current_user.auth_token }
 					data[ type ] = response.url 
 					$.post(
-						'https://graph.facebook.com/me/the-ballot:recommend',
+						'https://graph.facebook.com/me/the-ballot:vote',
 						data,
 						function(r){console.log(r)}
 					)
