@@ -76,8 +76,6 @@ def addCandidate obj
 
 
     obj['Electoral District'] = obj['Electoral District']
-    obj['Office Name'] = obj['Office Name'].split('-')[0].strip
-    obj['Office Name'] = obj['Office Name'].split(',')[0].strip
     obj['Office Name'] = obj['Office Name'].gsub('#','')
 
     # Codifying some renaming I've done
