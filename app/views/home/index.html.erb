@@ -66,6 +66,7 @@
 					data-bind="visible: (current_user.alerts == null ? '' : current_user.alerts).search( address.state() ) === -1"
 					onclick="$(this).hide().next().show(); current_user.alerts += yourLocation.address.state()+','; $.post(inits.root+'users/update',{alerts: yourLocation.address.state() } ); ">Update Me When There's More Data</button>
 				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>
+				<a style="color: white; text-decoration: underline" href="mailto:info@theballot.org"><%= t('site.report')%></a>
 			<% end -%>
 		</div>
 	</div>
