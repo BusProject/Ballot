@@ -68,7 +68,8 @@
 				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>
 				<p style="margin-top: 20px;"><%= t('add_form.missing' )%></p>
 				<a href="<%= user_add_choice_path('candidate') %>"><button ><%= t('add_form.add_candidate')%></button></a>
-				<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('add_form.add_measure')%></button></a>
+				<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('add_form.add_measure')%></button></a><br /><br /><br />
+				<a style="color: white; text-decoration: underline" href="mailto:info@theballot.org"><%= t('site.report')%></a>
 			<% end -%>
 		</div>
 	</div>
