@@ -255,6 +255,7 @@ function locationModel(data) {
 		this.sections.push( ballotMeasures)
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
+		this.sections.push( countyCandidates)
 		this.sections.push( otherCandidates)
 
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
