@@ -36,7 +36,7 @@
 <%- if current_user.nil? && current_user == user %>
 	<div class="yourFeedback login">
 		<h2><%= t('candidates.who') %></h2>
-		<p><%= t('candidates.let') %> <span data-bind="text: $parent.contest"><%= choice.contest %></span>. <%= t('candidates.can_share') %></p>
+		<p><%= t('candidates.let') %> <span data-bind="text: $data.contest"><%= choice.contest %></span>.</p>
 		<p><%= t('site.login') %></p>
 		<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook)  %>
 		
