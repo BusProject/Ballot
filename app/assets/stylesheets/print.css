@@ -1,6 +1,6 @@
 @page { margin: 0.5cm; }
 
-#profile span, #edit-profile, .profile-comment img, .controls, .yourFeedback.has_user h1, .yourFeedback.has_user .controls, .yourFeedback.has_user img, .yourFeedback.has_user h3, .full-text, .yourFeedback, .candidate .matchup, #meme-tainer, .login, .smaller, .faces, .voted, button, hr, .top-guides, #more-coming, #footer, #instructions, .account { display: none }
+.body .commentTitle, .body .footer, ul.feedback, #profile span, #edit-profile, .profile-comment img, .controls, .yourFeedback.has_user h1, .yourFeedback.has_user .controls, .yourFeedback.has_user img, .yourFeedback.has_user h3, .full-text, .yourFeedback, .candidate .matchup, #meme-tainer, .login, .smaller, .faces, .voted, button, hr, .top-guides, #more-coming, #footer, #instructions, .account { display: none !important }
 
 #find-ballot, #header { text-align: center; }
 #header img { width: 500px; margin: 0 auto; }
