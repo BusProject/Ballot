@@ -87,7 +87,8 @@ class AdminController < ApplicationController
   end
 
   def option_delete
-    @choice = Option.find(params[:id])
+    @option = Option.find(params[:id])
+    @option.delete
     render :json => { :success => true }
   end
   
