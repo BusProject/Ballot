@@ -318,8 +318,20 @@ body.splash {
         .option {
           height: auto;
           margin: 0;
+          position: relative;
           h1 {
             text-align: left !important;
+            margin-left: 28px;
+          }
+          .mobile-checkbox {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            left: 12px;
+            top: 15px;
+            background: @bgGrey;
+            border: 1px solid @grey;
+            color: @green;
           }
           .blurb {
             font-size: 14px;
@@ -341,9 +353,6 @@ body.splash {
           border-bottom: 1px dashed @grey;
           margin: 0;
           padding: 14px;
-        }
-        .option.confirmed:first-child {
-          border-bottom: none;
         }
       }
       
@@ -382,7 +391,7 @@ body.splash {
       
       .yourFeedback {
         margin: 0;
-        background-color: #bdbdbd;
+        background-color: #d9d9d9;
         &.login { width: 100%; }
         h2, p { display: none; }
         select.chosen {
@@ -394,6 +403,7 @@ body.splash {
           font-size: 15px;
           margin: -83px -145px 0 0;
         }
+        .toggle { display: none; }
         .comment {
           width: 204px;
           height: 19px !important;
@@ -436,13 +446,13 @@ body.splash {
           padding: 14px;
           width: 100%;
           h1 { font-family: "Arvo", serif; }
-          p.bigger { font-size: 14px; }
-          p.smaller { font-size: 12px; }
+          p.bigger { font-size: 14px; margin-left: 28px; }
+          p.smaller { font-size: 12px; margin-left: 28px; }
           .faces {
             right: 0;
             height: auto;
           }
-          &.confirmed { background-color: #dbe8b8; }
+          &.confirmed { background-color: transparent; }
           &.chosen::before, &.confirmed::before {
             content: none;
           }
