@@ -309,6 +309,9 @@ body.splash {
     button.open {
       margin-bottom: 12px;
     }
+    .matchup i.icon-user, .geography i.icon-map-marker {
+      margin-right: 4px;
+    }
     .body {
       padding: 0;
       margin: -32px 0 0;
@@ -318,7 +321,12 @@ body.splash {
         .option {
           height: auto;
           margin: 0;
+          padding: 14px;
+          border-bottom: 1px dashed @grey;
           position: relative;
+          &:last-child {
+            border-bottom: none;
+          }
           h1 {
             text-align: left !important;
             margin-left: 28px;
@@ -348,11 +356,6 @@ body.splash {
               margin: 4px 0 0 10px !important;
             }
           }
-        }
-        .option:first-child {
-          border-bottom: 1px dashed @grey;
-          margin: 0;
-          padding: 14px;
         }
       }
       
@@ -394,14 +397,8 @@ body.splash {
         background-color: #d9d9d9;
         &.login { width: 100%; }
         h2, p { display: none; }
-        select.chosen {
-          width: 270px;
-          margin: 0 0 20px;
-          font-size: 18px;
-        }
-        .arrows {
-          font-size: 15px;
-          margin: -83px -145px 0 0;
+        select.chosen, .arrows {
+          display: none;
         }
         .toggle { display: none; }
         .comment {
@@ -586,6 +583,20 @@ body.splash {
         background-color: #bdbdbd;
         margin: 1px 0 0;
         padding: 10px;
+      }
+    }
+  }
+}
+
+// ----------------- Ballots by State --------------------
+
+body.single, body.profile {
+  #read-ballot .row {
+    .body {
+      padding: 0;
+      margin-top: 0;
+      .optionholder {
+        max-height: none;
       }
     }
   }
