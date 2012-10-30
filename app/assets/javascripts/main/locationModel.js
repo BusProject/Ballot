@@ -10,6 +10,8 @@ function locationModel(data) {
 	this.geocoded.address = ko.observable('')
 	this.fetch = ko.observable(true)
 	this.remember = ko.observable( inits.remember )
+	this.pollingLocation = ko.observable('')
+
 
 	// Style elements
 	this.top = ko.observable(0)
@@ -177,6 +179,45 @@ function locationModel(data) {
 		}
 	},this)
 
+	function pollingPlace(address, callback) {
+		var key = 'AIzaSyAnFJvCCJnJtv86xVD-NXoneJ5OhYWGAjQ'
+		$.ajax({ 
+			url: 'https://www.googleapis.com/civicinfo/us_v1/voterinfo/4000/lookup?key='+key+'&officialOnly=false',
+			type: 'POST',
+			contentType: 'application/json',
+			data: '{ "address": "'+address+'" }',
+			success: function(response) { callback(response) }
+		})
+	}
+
+	function processLocations(locations ) {
+		// This processes election locations into something more manageable
+		var locales = []
+		if( typeof locations == 'undefined' ) return locales;
+		for( var i = 0; i < locations.length; i++ ) {
+			var locale = locations[i],
+				address = [
+					locale.address.line1,
+					locale.address.line2,
+					locale.address.line3,
+					locale.address.city,
+					locale.address.state,
+					locale.address.zip
+				].join(' '),
+				directions = 'https://maps.google.com/maps?q=from:'+yourLocation.address()+' to:'+address,
+				hours = [
+					locale.pollingHours ? 'From: '+locale.pollingHours : '',
+					locale.startDate ? 'on '+locale.startDate : '' ,
+					locale.endDate ? 'till '+locale.endDate : ''
+					].join(' ').trim()
+			locales.push( { 
+				name: locale.address.locationName, 
+				address: address,
+				hours: hours, 
+				directions: directions });
+			}
+	    return locales;
+	}
 
 	this.grabChoices = ko.computed( function() { // Retrieve choices
 		var lat = this.lat(),
@@ -184,11 +225,51 @@ function locationModel(data) {
 			choices = this.choices,
 			geolocated = this.geolocated(),
 			state = this.address.state(),
-			fetch = this.fetch
+			fetch = this.fetch,
+			pollingLocation = this.pollingLocation,
+			noGoogle = { 
+				OR:  'Oregon votes by mail - <a href="http://ballotdrop.org/#'+this.address()+'" target="_blank">find Ballot Drop sites here</a>.<br /><br />If you haven\'t received your ballot yet - and are registered - <a href="http://oregonvotes.org/" target="_blank">contact the Secretary of State for a new ballot<a/>.'
+				}
 
-		if( geolocated && state && choices().length < 1 && fetch() && empty != lat+','+lng && this.address() != '' ) {
+		if( geolocated && state && fetch() && empty != lat+','+lng && this.address() != '' ) {
 			fetch(false)
-			this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
+			if( choices().length < 1 ) this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
+			if( typeof noGoogle[ state ] == 'undefined' ) pollingPlace(
+				this.address(),
+				function(response) {
+					var early = processLocations( response.earlyVoteSites ), earlyHTML = ''
+					if( early.length > 0 ) {
+						earlyHTML = '<a onclick="$(this).hide().next(\'ul\').show().nextAll(\'a.link:first\').show(); return false" href="#" class="link">Click to see Early Vote Locations</a><ul style="display:none;">'
+						earlyHTML += early.map( function(location) { 
+							return [ '<li><strong>'+location.name,
+								'</strong> at <a href="',
+								location.directions,'" target="_blank">',
+								location.address,
+								'</a>',
+								location.hours,
+								'</li>'
+								].join(' ')
+							}).join('')
+						earlyHTML += '</ul>'
+					}
+					pollingLocation( 
+						processLocations( response.pollingLocations ).map( function(location) { 
+							return [ '<strong>Your Polling Place:</strong>',
+								location.name,
+								'at <a href="',
+								location.directions,'" target="_blank">',
+								location.address,
+								'</a> ',
+								location.hours,
+								'<br /><br />'
+								].join(' ')
+						}).join(' ') + earlyHTML+'<a style="display:none;" class="link" onclick="$(this).hide().prev(\'ul\').hide().prevAll(\'a.link:first\').show(); return false" href="#" class="click">Hide All</a>'
+					)
+				}
+			);
+			else {
+				pollingLocation( '<strong>How To Vote:</strong> '+noGoogle[ state ] )
+			}
 		}
 	}, this)
 
