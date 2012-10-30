@@ -25,6 +25,7 @@
 				</ol>
 				<em data-bind="visible: guides().length < 0">Loading...</em>
 			</div>
+			<div class="polling-place" data-bind="html: pollingLocation"></div>
 			<div style="display:none;" class="confirmation" >
 				<%= t("front.confirm") %><br />
 				<a href="#read-ballot" class="fixed-link confirm"><%= t('site.yes') %></a><a href="" class="cancel clear"><%= t('site.no') %></a>
