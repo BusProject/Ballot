@@ -88,7 +88,8 @@ class AdminController < ApplicationController
       contest = url.pop.gsub('_',' ')
       geography = url.pop
       reassign = Choice.find_by_geography_and_contest(geography,contest)
-      
+      message = ''
+
       unless reassign.nil?
         success = true      
         @choice.feedback.each do |feedback|
@@ -107,9 +108,10 @@ class AdminController < ApplicationController
         end
         
         @choice.fullDelete if success
-        
+        message = 'Moved to '+ENV['BASE']+contest_path( reassign.geography, reassign.contest.gsub('_',' ') )
       else
         success = false
+        message = 'could not find '+params[:reassign]
       end
 
     else 
@@ -117,7 +119,7 @@ class AdminController < ApplicationController
       success = true
     end
     
-    render :json => { :success => success }
+    render :json => { :success => success, :message => message }
   end
 
   def option_delete
