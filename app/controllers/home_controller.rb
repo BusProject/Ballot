@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+
     @classes = 'home '
     cookename = 'new_'+Rails.application.class.to_s.split("::").first+'_visitor'
     if current_user.nil? && !cookies[cookename] && params['q'].nil? && params[:iframe].nil?
@@ -139,15 +140,15 @@ EOF
     if params[:filter]
       results += User.where( "id = ? OR profile = ?", id, params[:term] ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } } if params[:filter] == 'profile'
       if params[:filter] == 'offices'
-        results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } }
-        results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } }
+        results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } unless choice.nil? }
+        results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } unless option.choice.nil? }
       end
     else
       prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'
       results = []
       results += User.where( "deactivated = ? AND banned = ? AND (lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR id = ?)",false,false, prepped, prepped, prepped, id ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } }
-      results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } }
-      results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } }
+      results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } unless choice.nil? }
+      results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url  } unless option.choice.nil? }
       results += Choice.states.reject{ |c| c.downcase.index( params[:term].downcase ).nil? }.map{ |state| { :label => state+"'s Full Ballot", :url => ENV['BASE']+'/'+Choice.stateAbvs[ Choice.states.index(state) ] }   }
     end
     render :json => results
