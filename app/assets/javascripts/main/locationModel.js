@@ -233,7 +233,10 @@ function locationModel(data) {
 
 		if( geolocated && state && fetch() && empty != lat+','+lng && this.address() != '' ) {
 			fetch(false)
+
 			if( choices().length < 1 ) this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
+			else fetch(true) // Not needed - used with the Lookup callback
+
 			if( typeof noGoogle[ state ] == 'undefined' ) pollingPlace(
 				this.address(),
 				function(response) {
