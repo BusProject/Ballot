@@ -18,9 +18,15 @@
 
 	<%= stylesheet_link_tag    "application" %>
 
-	<%= render :partial => 'home/iframe' if params[:iframe] %>
-
-  <script type="text/javascript">
+	<%= stylesheet_link_tag    "print.css", :media => 'print' %>
+	
+	
+	<% if !is_mobile_device? %>
+		<%= render :partial => 'home/iframe' if params[:iframe] %>
+		<%= javascript_include_tag asset_path( "other/iframe.js" ) if params[:iframe] %>
+	<% end %>
+	
+	<script type="text/javascript">
 	var current_user = <%= raw current_user.nil? ? { :id => 'unauthenticated'}.to_json : current_user.to_public %>,
 		inits = <%= raw @config || '{}' %>
 
@@ -91,7 +97,7 @@
 <%= yield :head %>
 
 </head>
-<body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= !current_user.nil? && current_user.commentable? ? '' : 'no_comment' %> <%= @classes %>" >
+<body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= !current_user.nil? && current_user.commentable? ? '' : 'no_comment' %> <%= @classes %> <%= 'mobile' if is_mobile_device? %>" >
     <!--[if lt IE 7]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
