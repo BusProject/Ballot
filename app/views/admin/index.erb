@@ -97,6 +97,15 @@
 			e.preventDefault()
 		}
 	})
+	.on('click','.delete_choice_and_resassign',function(e) {
+		$this = $(this)
+		url = prompt('The URL of the choice this should be linked to')
+		$.post( $this.attr('href'), { reassign: url }, function(r) { 
+			if( r.success  ) $this.parent('li').remove();
+			else alert('Something went wrong, couldn\'t delete '+$this.prev('strong').text() )
+		})
+		e.preventDefault()
+	})
 </script>
 <h1>Admin Section</h1>
 
@@ -149,7 +158,15 @@
 <h2>User Generated Choices</h2>
 <ul >
 <% @userGenerated.each do |choice| %>
-	<li><%= link_to choice.contest,choice.to_url  %> <span class="delete_choice link" href="<%= choice_delete_path(choice.id) %>">Delete?</span></li>
+	<li>
+		<strong><%= link_to choice.contest,choice.to_url  %> </strong><br />
+		<% if choice.feedback.votes < 1 %>
+			<span class="delete_choice link" href="<%= choice_delete_path(choice.id) %>">Delete?</span>
+		<% else %>
+			(<%= choice.feedback.votes %> votes and <%= choice.feedback.comments %> comments)
+			<span class="delete_choice_and_resassign link" href="<%= choice_delete_path(choice.id) %>">Delete and Reassign?</span>
+		<% end %>
+	</li>
 <% end %>
 <%= 'None created yet ' if @userGenerated.empty? %>
 </ul>
