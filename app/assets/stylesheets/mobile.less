@@ -573,13 +573,19 @@ body.splash {
           margin: 5px 10px 0 0;
           width: 32px;
           height: 32px;
+          float: right;
           img { width: 32px; height: 32px; }
         }
         p {
-          width: 248px;
-          margin-top: 5px;
+          width: 60%;
+          margin: 5px 20px 10px 10px;
           padding: 6px;
-          &:before { content: none; }
+          &::before {
+                margin: 0 0px 0 -15px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: transparent white transparent transparent;
+            }
           strong { font-size: 14px; }
           .message { font-size: 12px; }
         }
