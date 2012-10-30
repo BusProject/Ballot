@@ -71,8 +71,12 @@ class Choice < ActiveRecord::Base
     district = self.geography.slice(4,self.geography.length) if geography != self.geography.slice(2,self.geography.length)
     district = district.to_i.ordinalize if !district.nil? && district.to_i.to_s == district.gsub('0','')
     
-    return [ 'Added by',User.find(Choice.last.geography.split('_')[2]).name,'for',@states[index] ].join(' ') if !geography.index('User').nil?
-    
+    if !geography.index('User').nil?
+      user = User.find_by_id( geography.split('_')[2] ) || nil
+      return [ 'Added', (user.nil? ? '' : 'by '+user.name),'for',@states[index] ].join(' ') 
+    end
+
+
     return [district,geography+",",@states[index]].join(' ') if district != ''
     return [@states[index],geography].join(' ')
   end
