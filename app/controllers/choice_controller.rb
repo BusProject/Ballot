@@ -116,7 +116,8 @@ class ChoiceController < ApplicationController
           address = ['Prez']
           address.push( result['address_components'].reject{ |a| a['types'].index("locality").nil? }.first['long_name'] )
           address.push( result['address_components'].reject{ |a| a['types'].index("administrative_area_level_1").nil? }.first['short_name'] )
-          address.push( result['address_components'].reject{ |a| a['types'].index("administrative_area_level_2").nil? }.first['long_name'] + ' County' )
+          county = result['address_components'].reject{ |a| a['types'].index("administrative_area_level_2").nil? }.first
+          address.push( county['long_name'] + ' County' ) unless county.nil?
         end
       else
         address = params[:address] 
