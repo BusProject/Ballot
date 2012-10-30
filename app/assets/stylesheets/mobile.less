@@ -10,16 +10,18 @@
 }
 
 #container, #page, #header, #main, #find-ballot, .ballot-section, #enter-address, #enter-address div, #map, #read-ballot, #read-ballot .row, .category-heading, #footer {
-  width: 320px;
+  width: 100%;
   margin-left: 0;
   margin-right: 0;
   overflow: hidden;
+  max-width: none;
 }
 
 body.home { 
   background: #dbe8b8 image-url('iOS/bg_2x.jpg') no-repeat fixed; 
-  -moz-background-size: 320px auto; 
   background-size: 320px auto; 
+  -moz-background-size: 100% auto; 
+  background-size: 100% auto; 
   background-position: 0 0;
 }
 
@@ -110,7 +112,7 @@ body.splash {
   float: none;
   position: absolute;
   top: 69px;
-  width: 320px;
+  width: 100%;
   min-width: 320px;
   padding: 0;
   box-shadow: none;
@@ -220,7 +222,7 @@ body.splash {
         }
       }
       &#mobile_menu_link {
-        left: 271px;
+        right: 0px;
         border-left: 1px solid @grey;
         a {
           &:before {
@@ -271,7 +273,8 @@ body.splash {
       }
     }
     .remember {
-      margin-left: 10px;
+          margin: 0 auto;
+        width: 290px;
     }
   }
   #map {
@@ -540,17 +543,19 @@ body.splash {
         }
         .explanation {
           width: 300px;
+          margin: 0 auto;
           float: none;
         }
         .optionholder {
           float: none;
           width: 300px;
+          margin: 0 auto;
           padding-left: 40px;
         }
       }
       .profile-comment {
         background-color: #bdbdbd;
-        padding: 15px 10px;
+
         h2 {
           float: none;
           text-align: center;
@@ -602,7 +607,7 @@ body.msg {
 }
 
 #footer {
-  width: 320px;
+  width: 100%;
   min-width: 320px;
   padding: 10px;
 }
