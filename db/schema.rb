@@ -14,15 +14,15 @@
 ActiveRecord::Schema.define(:version => 20121013014411) do
 
   create_table "choices", :force => true do |t|
-    t.string    "contest"
-    t.integer   "order"
-    t.boolean   "commentable",  :default => false
-    t.string    "geography"
-    t.text      "description"
-    t.string    "contest_type"
-    t.timestamp "created_at",                      :null => false
-    t.timestamp "updated_at",                      :null => false
-    t.integer   "votes",        :default => 1
+    t.string   "contest"
+    t.integer  "order"
+    t.boolean  "commentable",  :default => false
+    t.string   "geography"
+    t.text     "description"
+    t.string   "contest_type"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "votes",        :default => 1
   end
 
   add_index "choices", ["geography", "contest"], :name => "index_choices_on_geography_and_contest", :unique => true
@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(:version => 20121013014411) do
   add_index "feedback", ["user_id"], :name => "index_feedback_on_user_id"
 
   create_table "matches", :force => true do |t|
-    t.string    "latlng"
-    t.text      "data"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
+    t.string   "latlng"
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "matches", ["latlng"], :name => "index_matches_on_latlng", :unique => true
@@ -72,19 +72,19 @@ ActiveRecord::Schema.define(:version => 20121013014411) do
   end
 
   create_table "options", :force => true do |t|
-    t.integer   "choice_id"
-    t.integer   "position"
-    t.string    "photo"
-    t.text      "blurb"
-    t.string    "name"
-    t.timestamp "created_at",                      :null => false
-    t.timestamp "updated_at",                      :null => false
-    t.string    "twitter"
-    t.string    "facebook"
-    t.string    "website"
-    t.string    "blurb_source"
-    t.string    "party"
-    t.boolean   "incumbant",    :default => false
+    t.integer  "choice_id"
+    t.integer  "position"
+    t.string   "photo"
+    t.text     "blurb"
+    t.string   "name"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "twitter"
+    t.string   "facebook"
+    t.string   "website"
+    t.string   "blurb_source"
+    t.string   "party"
+    t.boolean  "incumbant",    :default => false
   end
 
   add_index "options", ["choice_id"], :name => "index_options_on_choice_id"
