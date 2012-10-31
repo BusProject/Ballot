@@ -33,9 +33,6 @@
 			<!-- ko foreach: $data.options -->
 				<div class="<%= 'chosen confirmed' if you == option %> option " data-bind="css:{ chosen: $parent.chosen() == $data, confirmed: $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 }" >
 					
-					<% if is_mobile_device? %>
-						<input class="mobile-checkbox" type="checkbox" data-bind="attr: { checked: $parent.chosen() == $data || $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 ? 'true' : null }">
-					<% end %>
 					<h1 itemprop="name" data-bind="text: $data.name, addClass: $data.name.toLowerCase()">
 						<%= option.name %>
 					</h1>
