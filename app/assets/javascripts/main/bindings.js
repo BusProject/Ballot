@@ -86,7 +86,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	ctx.$parent.readmore(true)
 	$(this).hide()
 })
-.on('click touchend','.toggle',function(e) {
+.on('click touchstart','.toggle',function(e) {
 	e.preventDefault()
 	$this = $(this);
 	if( $this.attr('disabled') ) return false
