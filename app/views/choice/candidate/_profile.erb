@@ -36,7 +36,7 @@
 
 					<p 
 						style="<%= 'display: none' unless !yourfeedback.nil? & !yourfeedback.comment.nil? && yourfeedback.comment.length > 0 %>"
-						data-bind="text: $data.comment, visible: $data.comment != null && $data.comment.length > 0 "
+						data-bind="betterText: $data.comment, visible: $data.comment != null && $data.comment.length > 0 "
 					>
 						<%- if !yourfeedback.nil? && !yourfeedback.comment.nil? && yourfeedback.comment.length > 0 %>
 							<%= '"'+yourfeedback.comment+'"' %>

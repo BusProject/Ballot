@@ -412,7 +412,7 @@ function locationModel(data) {
 		
 		var url = document.location.host+inits.user.profile, 
 			name = inits.user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: inits.user.name, thing: I18n.t("site.voter_guide") } ), 
-			pronoun = inits.user.id == current_user.id ? I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'}) : inits.user.first_name != 'Voter Guide' ? I18n.t('i18n_toolbox.possessive',{owner: inits.user.first_name,thing: 'Voter Guide' } ) : I18n.t('i18n_toolbox.possessive',{owner: inits.user.last_name,thing: 'Voter Guide' } )
+			pronoun = inits.user.id == current_user.id ? I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'}) : inits.user.first_name != '' ? I18n.t('i18n_toolbox.possessive',{owner: inits.user.first_name,thing: 'Voter Guide' } ) : I18n.t('i18n_toolbox.possessive',{owner: inits.user.last_name,thing: 'Voter Guide' } )
 
 		this.menuItems.push( 
 			MenuItem(inits.root, I18n.t('menu.find')),

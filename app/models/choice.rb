@@ -5,11 +5,11 @@ class Choice < ActiveRecord::Base
   
   has_many :options, :dependent => :destroy, :order => 'position DESC'
   has_many :feedback, :conditions => ['"feedback"."approved" =? ', true] do
-    def count_votes current_user=nil
+    def votes current_user=nil
       user_id = id = current_user.nil? ? 0 : current_user.id
       all( :limit => nil, :conditions => nil, :select => 'DISTINCT("user_id" )', :conditions => ['user_id != ?',user_id] ).count
     end
-    def count_comments current_user=nil
+    def comments current_user=nil
       user_id = id = current_user.nil? ? 0 : current_user.id
       all(:limit => nil, :conditions => 'length(comment) > 1', :select => 'DISTINCT("user_id" )',  :conditions => ['user_id != ?',user_id] ).count
     end
@@ -75,8 +75,6 @@ class Choice < ActiveRecord::Base
       user = User.find_by_id( geography.split('_')[2] ) || nil
       return [ 'Added', (user.nil? ? '' : 'by '+user.name),'for',@states[index] ].join(' ') 
     end
-
-
     return [district,geography+",",@states[index]].join(' ') if district != ''
     return [@states[index],geography].join(' ')
   end
@@ -93,8 +91,8 @@ class Choice < ActiveRecord::Base
   
 
   def prep current_user
-    self[:voted] = self.feedback.count_votes( current_user )
-    self[:commented] = self.feedback.count_comments( current_user )
+    self[:voted] = self.feedback.votes( current_user )
+    self[:commented] = self.feedback.comments( current_user )
 
     self.options.each do |option| 
       option[:support] = option.feedback.count_support

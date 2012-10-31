@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
       if id != 0 # Future proofing all URL names for our first 10^20th users
         safe = id > 10e20
       end
-      notstate =  Choice.stateAbvs.concat( 'users|admin|lookup|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008|resources'.split('|') ).index( self.profile )
+      notstate =  Choice.stateAbvs.concat( 'users|admin|lookup|api|feedback|source|search|sitemap|m|about|how-to|guides|2012|2011|2010|2009|2008|resources'.split('|') ).index( self.profile )
       safe = notstate.nil? && safe
       errors.add( :profile, 'is not unique' ) unless User.where('(id = ? OR profile = ?)  AND id != ?',id,self.profile,self.id).empty? && safe
     else
@@ -102,10 +102,11 @@ class User < ActiveRecord::Base
   def self.by_state(state=nil,limit=5)
     if state.nil?
       return self.all( 
-      :select => 'DISTINCT( substr("choices"."geography",0,3)) as geography, "users".*,  ( "feedback"."cached_votes_up" - "feedback"."cached_votes_down"  ) AS rating  ',
+      :select => 'DISTINCT( substr("choices"."geography",0,3)) as geography, "users".* ',
+      :include => [:feedback],
       :joins => :choices, 
       :conditions => ['"choices"."geography" != ?','Prez'], 
-      :order => '"geography", rating DESC' ).group_by{|c| c.geography } 
+      :order => '"geography" ASC' ).group_by{|c| c.geography } 
     else
       return self.all( 
         :group => ' "users"."id" ',
@@ -128,6 +129,7 @@ class User < ActiveRecord::Base
     )
   end
   
+
   def self.friends(current_user=nil)
     return [] if current_user.nil? || current_user.fb_friends.nil?
     return self.where('fb IN(?)', current_user.fb_friends.split(',') )

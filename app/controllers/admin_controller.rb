@@ -82,12 +82,49 @@ class AdminController < ApplicationController
   
   def choice_delete
     @choice = Choice.find(params[:id])
-    @choice.fullDelete
-    render :json => { :success => true }
+
+    unless params[:reassign].nil?
+      url = params[:reassign].gsub(ENV['BASE'],'').split('/')
+      contest = url.pop.gsub('_',' ')
+      geography = url.pop
+      reassign = Choice.find_by_geography_and_contest(geography,contest)
+      message = ''
+
+      unless reassign.nil?
+        success = true      
+        @choice.feedback.each do |feedback|
+          option = reassign.options.select{ |option| option.name == feedback.option.name }.first
+          if option.nil?
+            success = false && success
+          else
+            double = Feedback.where('choice_id = ? AND option_id = ? AND user_id = ?',reassign.id, option.id, feedback.user_id).count == 0
+            if double
+              feedback.option =  option
+              feedback.choice = reassign
+              feedback.save
+            end
+            success = true && success
+          end
+        end
+        
+        @choice.fullDelete if success
+        message = 'Moved to '+ENV['BASE']+contest_path( reassign.geography, reassign.contest.gsub('_',' ') )
+      else
+        success = false
+        message = 'could not find '+params[:reassign]
+      end
+
+    else 
+      @choice.fullDelete
+      success = true
+    end
+    
+    render :json => { :success => success, :message => message }
   end
 
   def option_delete
-    @choice = Option.find(params[:id])
+    @option = Option.find(params[:id])
+    @option.delete
     render :json => { :success => true }
   end
   

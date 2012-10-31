@@ -21,8 +21,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		querysplit = href.split('?')
 		if( querysplit[1] ) append.push( querysplit[1] )
 		$this.attr('href', querysplit[0]+'?'+append.join('&') )
-		console.log( querysplit[0]+'?'+append.join('&') )
-		return false
 	}
 	
 })
@@ -39,7 +37,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		var ctx = ko.contextFor(this),
 			$root = ctx.$root,
 			$data = ctx.$data,
-			selected = $root.selected()
+			selected = $root.selected(),
+			scrollUp = null
 
 		$('.selected .body').slideUp(400, function() { $('button.open', this.parentElement ).text( $(this).data('button-text') ); })
 
@@ -48,14 +47,18 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			return false
 		}
 		var $this = $(this).parent()
-		scrollUp = setInterval( function() { 
-			var top = $this.position().top - 80
-			if( top < $(document).scrollTop()  ) $(document).scrollTop( top  );
-		}, 10)
-		
-		setTimeout(function() { clearInterval(scrollUp); },1000)
+
+		if( !inits.mobile ) { 
+			scrollUp = setInterval( function() { 
+				var top = $this.position().top - 80
+				if( top < $(document).scrollTop()  ) $(document).scrollTop( top  );
+			}, 10);
+
+			setTimeout(function() { clearInterval(scrollUp); },1000);
+		}
 		
 		var $button = $(this), buttonText = $button.text()
+
 		$button.text('Close').nextAll('.body').data('button-text', buttonText ).slideDown(400,function() { 
 			$root.selected($data)
 			clearInterval(scrollUp);
@@ -88,12 +91,20 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	$this = $(this);
 	if( $this.attr('disabled') ) return false
 	$this.attr('disabled',true)
-	var animate = $this.hasClass('right') ? { left: '+=135' } : { right: '+=135' }
+	var $ctx = ko.contextFor(this), $parent = $ctx.$parent
+	if( $this.hasClass('right') ) {
+		var animate = { left: '+=135' }, chosen = $parent.yes()
+	} else {
+		var animate = { right: '+=135' }, chosen = $parent.no()
+	}
+
 	$('.cover',$this).animate(animate, 200, function() {
 		$this.toggleClass('right').attr('disabled',false).find('.cover').css({left: '', right: ''})
+		$parent.chosen( chosen )
 	});
 })
-.on('click touchend','.chooseable .option:not(.confirmed), .chooseable .chosen',function(e) {
+.on('click touchend','.chooseable .option:not(.confirmed), .chooseable .chosen, .chooseable .mobile-checkbox',function(e) {
+
 	if( ['A','SPAN'].indexOf(e.target.tagName) === -1 ) {
 		e.preventDefault();
 		var $ctx = ko.contextFor(this),
@@ -102,6 +113,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		if( $(this).hasClass('chosen') ) $parent.chosen( null )
 		else $parent.chosen( $data )
 	}
+	e.stopPropagation()
 })
 .on('click touchend','.next',function(e) {
 	var $button = $(this).parents('.row').nextAll('.row:first').find('button.open')
@@ -119,18 +131,20 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 			var $ctx = ko.contextFor( $parent[0] )
 				$comment = $('.comment', $parent),
 				choice_id = $ctx.$parent.id,
-				option = $ctx.$parent.options()[0],
-				option_id = 'nil',
-				comment = $comment.val()
+				option = $ctx.$parent.chosen(),
+				option_id = option.id,
+				comment = $comment.val(),
+				type = 'candidate'
 
 		} else {
 			var $toggle = $('.toggle', $parent ),
 				$ctx = ko.contextFor( $toggle[0] ),
 				$comment = $('.comment', $parent),
 				choice_id = $ctx.$parent.id,
-				option = $toggle.hasClass('right') ? $ctx.$parent.no() : $ctx.$parent.yes(),
+				option = $ctx.$parent.chosen(),
 				option_id = option.id,
-				comment = $comment.val()
+				comment = $comment.val(),
+				type = 'ballot_measure'
 		}
 
 		$.post(
@@ -140,7 +154,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 						option_id: parseInt(option_id),
 						choice_id: parseInt(choice_id),
 						comment: comment,
-						
 					}
 				]
 			},
@@ -150,6 +163,13 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					option.feedback.push( Feedback( { option_id: option.id, option_name: option.name, comment: comment, user: current_user, user_id: current_user.id, id: response.successes[0].obj, type: option.type, updated_at:  response.successes[0].updated_at } ) )
 					$comment.val('')
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
+					data = { access_token: current_user.auth_token }
+					data[ type ] = response.url 
+					$.post(
+						'https://graph.facebook.com/me/the-ballot:vote',
+						data,
+						function(r){console.log(r)}
+					)
 				}
 			}
 		)
@@ -237,6 +257,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 
 	$.post(
 		inits.root+'feedback/'+$data.id+'/'+action,
+		{ access_token: current_user.auth_token },
 		function(response){
 			$this.parents('.ask').html( response.message )
 			if( $this.hasClass('conf-flag') ) setTimeout( function() { $this.parent('.feedback').remove() }, 300 )
@@ -345,6 +366,13 @@ ko.bindingHandlers.bindDescendents = {
     }
 };
 
+ko.bindingHandlers.betterText = {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		var bindings =  allBindingsAccessor(),
+			bind = bindings['betterText']
+		element.innerHTML = ko.toJS( bind ).replace(/\n/g,'<br /><br />')
+    }
+};
 
 ko.bindingHandlers.betterText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel) {

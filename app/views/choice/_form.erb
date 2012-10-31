@@ -1,5 +1,12 @@
+
 <%= form_for @choice, :method => "post", :url =>  {:controller => "admin", :action => "choice_update" } do |form| %>
 	<%= submit_tag 'Save Choice' %> <button>Discard Edits</button>
+	<% if @choice.feedback.votes < 1 %>
+		<button class="delete_choice link" href="<%= choice_delete_path( @choice.id) %>">Delete Choice?</button>
+	<% else %>
+		(<%= @choice.feedback.votes %> votes and <%= @choice.feedback.comments %> comments)
+		<button class="delete_choice_and_resassign link" href="<%= choice_delete_path(@choice.id) %>">Delete and Reassign?</button>
+	<% end %>
 
 	<p>
 		<label>Name</label><br />
@@ -12,6 +19,10 @@
 	<p>
 		<label>Geography</label><br />
 		<%= form.text_field :geography %>
+	</p>
+	<p>
+		<label>Contest Type</label><br />
+		<%= form.select :contest_type, ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Measure']  %>
 	</p>
 	<p>
 		<label>Description</label><br />
@@ -57,4 +68,12 @@
 
 	<% end %>
 	<%= submit_tag 'Save Choice' %> <button>Discard Edits</button>
+
+	<% if @choice.feedback.votes < 1 %>
+		<span class="delete_choice link" href="<%= choice_delete_path( @choice.id) %>">Delete?</span>
+	<% else %>
+		(<%= @choice.feedback.votes %> votes and <%= @choice.feedback.comments %> comments)
+		<span class="delete_choice_and_resassign link" href="<%= choice_delete_path(@choice.id) %>">Delete and Reassign?</span>
+	<% end %>
+
 <% end %>

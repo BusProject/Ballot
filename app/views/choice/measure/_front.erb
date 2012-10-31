@@ -11,7 +11,7 @@
 	itemscope itemtype="http://schema.org/ItemList" >
 
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
-	<div itemprop="description" class="explanation" data-bind="text: $data.description, elastic: true"><%= choice.description %></div>
+	<div itemprop="description" class="explanation" data-bind="betterText: $data.description, elastic: true"><%= choice.description %></div>
 	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' + I18n.t( 'site.voted', { count: $data.voted() })+ ' | ' +I18n.t('site.commented', { count: $data.commentsPure() }) " >
 		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.group_by{ |f| f.user_id }.count } ) %> | <%= t('site.commented', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.group_by{ |f| f.user_id }.count } ) %> 
 	</div>
@@ -27,14 +27,17 @@
 		<meta itemprop="itemListOrder" content="Unordered" />
 		
 		<% choice.options.each do |option| %>
-		<div itemprop="itemListElement"  class="optionholder <%= 'clean-no-script' if n != 0 %>" >
+		<div itemprop="itemListElement"  class="optionholder <%= 'clean-no-script' if n != 0 %>" data-bind="css: {chooseable: $data.featured().length < votes && current_user.id != 'unauthenticated' }">
 			<!-- ko foreach: $data.options -->
-				<div class="option">
+				<div class="option" data-bind="css: { confirmed: $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 }">
 					<h1 data-bind="text: $data.name, stripClass: true, addClass: ( $data.type == I18n.t('site.no').toLowerCase() ? 'no' : 'yes' )" class="<%= option.option_type == t('site.no').downcase() ? 'no' : 'yes'  unless option.new_record? %> ">
 						<%= option.name %>
 					</h1>
+					<% if is_mobile_device?  %>
+						<input class="mobile-checkbox" type="checkbox" data-bind="attr: { checked: $parent.chosen() == $data || $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 ? 'true' : null }">
+					<% end %>
 					<img data-bind="src: $data.photo" src="<%= option.photo %>">
-					<div class="blurb" data-bind="text: $data.blurb "><%= option.blurb %></div>
+					<div class="blurb" data-bind="betterText: $data.blurb "><%= option.blurb %></div>
 
 					<div class="faces">
 						<div class="minicounter" data-bind="">
@@ -97,7 +100,7 @@
 
 						<div class="comment-bubble" data-bind="addClass: $data.type">
 						<strong data-bind="text: $data.name+ ' says '+$data.option_name+' on '+$parent.contest"></strong>
-						<div class="message" data-bind="text: $data.comment"></div>
+						<div class="message" data-bind="betterText: $data.comment"></div>
 						</div>
 						
 						<div class="foot">

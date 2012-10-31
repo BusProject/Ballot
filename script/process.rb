@@ -34,7 +34,12 @@ def addCandidate obj
         number = number.gsub(' ','-')
       end
 
-      unless obj['Electoral District'].index('Legislative').nil?
+      if !obj['Electoral District'].index('Legislative').nil? && obj['Electoral District'].index('County Legislative').nil?
+        
+        # Removing District names for leg districts
+        obj['Office Name'] = obj['Office Name'].split('-')[0].strip
+        obj['Office Name'] = obj['Office Name'].split(',')[0].strip
+        
         if obj['Office Name'].index('Senator')
           obj['Electoral District'] = obj['Electoral District'].gsub('Legislative','SD')
         else
@@ -76,8 +81,6 @@ def addCandidate obj
 
 
     obj['Electoral District'] = obj['Electoral District']
-    obj['Office Name'] = obj['Office Name'].split('-')[0].strip
-    obj['Office Name'] = obj['Office Name'].split(',')[0].strip
     obj['Office Name'] = obj['Office Name'].gsub('#','')
 
     # Codifying some renaming I've done

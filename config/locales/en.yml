@@ -113,6 +113,7 @@ en:
         this_page: 'Share This Page'
         this_guide: 'Share This Guide'
         state_guides: 'Guides By States'
+        top_guides: 'Top Guides'
         guides_in: 'Guides in %{state}'
     # Top Bar
     top:
@@ -188,7 +189,7 @@ en:
     front:
         look_ballot: "Look Up What’s On Your Ballot"
         address_placeholder: 'enter your address here'
-        save_address: 'Save as home address'
+        save_address: 'Remember as home address'
         confirm: 'Is this right?'
         on_ballot: 'Here’s What Will Be On Your Ballot'
         more: 'More to Come...'

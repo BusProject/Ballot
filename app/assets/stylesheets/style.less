@@ -62,7 +62,7 @@ body.home {
 }
  
 .clearfix {
-	display: inline-block;
+	display: block;
 }
 
 /***** Header and Menu *****/
@@ -76,7 +76,7 @@ body.home {
 
 .ballot-section {
 	width: 720px;
-	margin: 20px auto;
+	margin: 40px auto 20px;
 	
 	.sectionheading {
 		text-align:center;
@@ -262,7 +262,7 @@ body.home {
 			clear: both;
 			width: 80%;
 			font-size: 14px;
-			margin: 0 auto;
+			margin: 20px auto 10px;
 			a.link { font-style: italic; }
 			ul {
 				text-align: left;
@@ -398,6 +398,7 @@ body.home {
 				margin-top:25px;
 				.option {
 					.border-box;
+					position: relative;
 					color: @darkGrey;
 					.blurb { 
 						text-align: left; 
@@ -636,6 +637,8 @@ body.home {
 						
 						.arrows {
 							float: right;
+							position: relative;
+							right: 0;
 							margin: 0px -200px 0 0;
 							pointer-events: none;
 							cursor: pointer;
@@ -675,7 +678,7 @@ body.home {
 						.comment-bubble {
 							background-color:white;
 							padding:10px;
-							width:85%;
+							width:80%;
 							float:right;
 							margin-bottom:10px;
 							.border-radius();
@@ -706,7 +709,6 @@ body.home {
 						}
 						
 						.message { 
-							width: 470px;
 							height: auto;
 							vertical-align: top;
 							color: #464646;
@@ -748,10 +750,10 @@ body.home {
 						a {
 							text-decoration: none;
 							.greyButton();
-							margin-top: -15px;
+							margin: -15px 0 0 -110px;
 							position:absolute;
 							width: 200px;
-							left: 230px;
+							left: 50%;
 						}
 
 					}
@@ -833,8 +835,9 @@ body.home {
 				box-shadow: 0 1px 1px;
 			}
 			.arrows {
-				float: right;
-				margin: -85px 130px 0 -400px;
+				position: absolute;
+				right: 50%;
+				margin: -85px -180px 0 0;
 				pointer-events: none;
 				cursor: pointer;
 				color: lighten(@green,50%);
@@ -1055,3 +1058,5 @@ body.home {
 @import 'less/guides.less';
 
 @import 'less/add.less';
+
+@import 'less/mobile.less';
