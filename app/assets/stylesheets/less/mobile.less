@@ -14,7 +14,7 @@ body.mobile {
     }
 
     &.home { 
-      background: #dbe8b8 image-url('iOS/bg_2x.jpg') no-repeat fixed; 
+      background: lighten(#667eac,30%);
       -moz-background-size: 100% auto; 
       background-size: 100% auto; 
       background-position: 0 0;
@@ -182,8 +182,8 @@ body.mobile {
       height: 72px;
       border-bottom: 1px solid @grey;
       img {
-        width: 200px !important;
-        margin-top: 14px;
+          height: 73px;
+          margin-top: 0;
       }
       #mobile_nav {
         li {
@@ -192,6 +192,7 @@ body.mobile {
           top: 0;
           height: 70px;
           text-align: center;
+          background-color: @bgGrey;
           a {
             display: block;
             width: 47px;
@@ -221,7 +222,7 @@ body.mobile {
             border-left: 1px solid @grey;
             a {
               &:before {
-                color: @green;
+                color: @accent;
                 content: '\f00b';
               }
             }
