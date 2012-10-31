@@ -321,10 +321,13 @@ body.mobile {
           margin: -32px 0 0;
           .footer { display: none; }
           .optionholder {
-            max-height: auto;
+            max-height: none;
+            height: auto;
             .option {
               height: auto;
-              margin: 0;
+              margin: 0 auto;
+              width: 80%;
+              min-width: 240px;
               padding: 14px;
               border-bottom: 1px dashed @grey;
               position: relative;
@@ -386,7 +389,7 @@ body.mobile {
               img { width: 32px; height: 32px; }
             }
             .comment-bubble {
-              width: 248px;
+              min-width: 248px;
               margin-top: 5px;
               padding: 6px;
               &:before { content: none; }
@@ -446,13 +449,16 @@ body.mobile {
           .optionholder {
             .option {
               padding: 14px;
-              width: 100%;
               h1 { font-family: "Arvo", serif; }
               p.bigger { font-size: 14px; margin-left: 28px; }
               p.smaller { font-size: 12px; margin-left: 28px; }
               .faces {
                 right: 0;
                 height: auto;
+                @media screen and (min-width: 500px) {
+                    float: right;
+                    margin-top: -60px;
+                }
               }
               &.confirmed { background-color: transparent; }
               &.chosen::before, &.confirmed::before {
@@ -470,6 +476,10 @@ body.mobile {
               width: 100%;
               padding: 14px;
               float: none;
+              h1 {
+                  margin: 0 28px;
+                  float: left;
+              }
             }
           }
           .yourFeedback {
