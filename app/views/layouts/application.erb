@@ -107,6 +107,12 @@
 		<div id="page">
 
 			<div id="header" class="clearfix">
+			  <% if is_mobile_device? %>
+			    <ul id="mobile_nav">
+			      <li id="mobile_home_link"><%= link_to "Home", root_path %></li>
+			      <li id="mobile_menu_link"><%= link_to "Menu", root_path %></li>
+			    </ul>
+			  <% end %>
 				<%- if !@user.nil? && !@user.header.nil? && @user.header.url(:header) != '/headers/header/missing.png' %>
 					<%= link_to image_tag( @user.header.url(:header) ), root_path, :id => 'logo' %>
 				<% else %>
