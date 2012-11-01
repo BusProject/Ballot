@@ -93,7 +93,7 @@ class AdminController < ApplicationController
       unless reassign.nil?
         success = true      
         @choice.feedback.each do |feedback|
-          option = reassign.options.select{ |option| option.name == feedback.option.name }.first
+          option = reassign.options.select{ |option| option.name.split(' ').last == feedback.option.name.split(' ').last && option.name.split(' ').first == feedback.option.name.split(' ').first }.first
           if option.nil?
             success = false && success
           else
