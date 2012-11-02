@@ -797,19 +797,14 @@ body.home {
 						}
 					}
 					.minicounter {
-						background-color: white;
-						color: @grey;
-						margin-top:18px !important;
-						&::after { border-color: transparent transparent transparent white; }
+						display: none;
 					}
 					.faces { right: -10px; bottom: (@optionHeight - 20px)/4; width: 230px; height: 72px; }
 					.faces.lessHeads { a img { margin-top: 26px !important; }}
 				}
 				&.chooseable {
 					.option {
-						&:hover::before { content: "\2713"; .checkBox()}
 						&.confirmed:hover::before { color: white }
-						cursor: pointer;
 					}
 				}
 
