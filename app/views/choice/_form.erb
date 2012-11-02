@@ -6,6 +6,7 @@
 	<% else %>
 		(<%= @choice.feedback.votes %> votes and <%= @choice.feedback.comments %> comments)
 		<button class="delete_choice_and_resassign link" href="<%= choice_delete_path(@choice.id) %>">Delete and Reassign?</button>
+		<button class="delete_choice link" href="<%= choice_delete_path( @choice.id) %>">Delete Choice?</button>
 	<% end %>
 
 	<p>
