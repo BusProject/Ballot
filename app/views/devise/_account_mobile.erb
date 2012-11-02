@@ -1,0 +1,80 @@
+<%- if controller_name != 'sessions' %>
+	<div class="account mobile">
+		<div class="left-nav">
+		<ul>
+			<%- if current_user.nil? %>
+					<li style="border:none; font-size:12px; padding-top:3px;"><%= t('top.start') %></li>
+					<li class="fb-button"><%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %></li>
+			<% else %>
+					<li style="width: 150px;">
+						<%= link_to profile_path(current_user.to_url) do %>
+							<%= image_tag(current_user.image || asset_path('alincoln.gif') ) %>
+							<%= current_user.first_name+' '+current_user.last_name %>
+						<% end %>
+						<ul class="accounts" >
+							<%- if current_user.pages.nil? && session[:logged_in_as].nil? %>
+								<li><%= link_to t('top.pages.login'), user_pages_path %></li>
+							<% elsif current_user.pages.nil?  %>
+								<% user = User.find(session[:logged_in_as]) %>
+								<li>
+									<%= link_to omniauth_authorize_path('user', :facebook)  do %>
+										<%= image_tag ( user.image ) %>
+										<%= user.name %>
+									<% end %>
+								</li>
+								<%- if !user.nil? && !user.pages.nil? %>
+									<% user.pages.reject{|page| page[:fb] == current_user.fb }.each do |page| %>
+										<li>
+											<%= link_to user_page_session_create_path( page[:fb] ), :class => page[:user].nil? ? 'inactive' : ''  do %>
+												<%= image_tag ( page[:image] ) %>
+												<%= page[:name] %>
+											<% end %>
+										</li>
+									<% end %>
+								<% end %>
+							<% else %>
+								<% current_user.pages.each do |page| %>
+									<li>
+										<%= link_to user_page_session_create_path( page[:fb] ), :class => page[:user].nil? ? 'inactive' : ''  do %>
+											<%= image_tag ( page[:image] ) %>
+											<%= page[:name] %>
+										<% end %>
+									</li>
+								<% end %>
+								<li><%= link_to '  '+t('top.pages.refresh') , user_pages_path %></li>
+							<% end -%>
+						</ul>
+					</li>
+					<li class="guide">
+						<%= link_to t('top.my_guide'), current_user.profile %>
+						<ul>
+							<li><%= link_to t('top.all_guides'), guides_path %></li>
+							<li><%= link_to t('top.top_guides'), top_guides_path %></li>
+						</ul>
+					</li>
+					<li><%= link_to t('top.log_out'), destroy_user_session_path %></li>
+
+
+		</ul>
+			<strong><%= link_to t('site.deactivated'),profile_path(current_user.to_url) if current_user.deactivated? %><%= link_to t('site.banned'), profile_path(current_user.to_url) if current_user.banned? %></strong>
+		<% end -%>
+		</div>
+		
+		<div class="right-nav">
+			<ul>
+				<li><a href="<%= ENV['BASE'] %>"><i class="icon-home"></i></a></li>
+				<li><a target="_blank" href="https://theleague.turbovote.org/?r=ballot"><i class="icon-edit"></i> <%= t('top.register') %></a></li>
+				<li class="about">
+					<a href="/about"><i class="icon-info-sign"></i> <%= t('top.about') %></a>
+					<ul>
+						<li><a href="http://news.theballot.org/" target="_blank"><i class="icon-globe"></i><%= t('top.news') %></a></li>
+						<li ><a href="mailto:info@theballot.org"><i class="icon-envelope"></i><%= t('top.contact') %></a></li>
+					</ul>
+				</li>
+				<li style="padding:0 15px;"><i class="icon-search"></i> <input type="text" class="search" placeholder="<%= t('top.search') %>"></li>
+			</ul>
+		</div>
+		
+	</div>
+	
+<% end -%>

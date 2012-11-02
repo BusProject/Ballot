@@ -36,6 +36,8 @@ class ChoiceController < ApplicationController
 
     render :template => 'choice/add'
   end
+
+
   
   def profile
     
