@@ -82,6 +82,7 @@ def addCandidate obj
 
     obj['Electoral District'] = obj['Electoral District']
     obj['Office Name'] = obj['Office Name'].gsub('#','')
+    obj['Office Name'] = obj['Office Name'].gsub('/','-')
 
     # Codifying some renaming I've done
     obj['Office Name'] = obj['Office Name'].gsub('Commissioner of the Bureau of Labor and Industries','Labor Commissioner') if obj['Electoral District'] == 'OR'
