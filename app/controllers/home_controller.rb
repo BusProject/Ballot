@@ -162,7 +162,7 @@ EOF
               @title = 'API'
               @content = <<EOF
               <h1>TheBallot.org's API</h1>
-              <p>Get some of this data hot off the girdle. We provide two main APIs, Lookups and States. Check em out.</p>
+              <p>Get some of this data hot off the griddle. We provide two main APIs, Lookups and States. Check em out.</p>
               <p>There's no API KEY or rate limit or any of that crap(at least right now - no guarantees if you take us down). Just dig right in!</p>
               <p>Questions should be directed at Scott <a href="mailto:scott@busfederation.com">scott@busfederation.com</a> or <a href="http://twitter.com/mojowen" target="_blank">@mojowen</a>.
               <h2>Lookups</h2>
