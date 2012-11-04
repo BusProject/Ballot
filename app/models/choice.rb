@@ -99,7 +99,12 @@ class Choice < ActiveRecord::Base
       
       self[:nice_geography] = self.geographyNice(false)
       if self.contest_type.downcase.index('ballot').nil?
-        self[:description] = self.options.map{ |o| o.name }.join(' vs. ')
+        if self.options.length > self.votes
+          self[:description] = self.options.map{ |o| o.name }.join(' vs. ')
+        else
+          self[:description] = self.options.map{ |o| o.name }.to_sentence
+        end
+        
         if self.options.select{ |o| o.incumbant? }.length > 0
           option[:option_type] = option.incumbant? ? 'Incumbant' : 'Challenger'
         else
