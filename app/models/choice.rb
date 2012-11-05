@@ -118,8 +118,10 @@ class Choice < ActiveRecord::Base
   # method to add user feedback to profile - even if prepped missed them
   def addUserFeedback user  
     feedback = user.feedback.select{ |f| f.choice == self }.first
-    option = self.options.select{|o| o.id == feedback.option_id }.first
-    option[:feedbacks].push( feedback ) if option[:feedbacks].select{ |f| f == feedback }.first.nil?
+    unless feedback.nil?
+      option = self.options.select{|o| o.id == feedback.option_id }.first
+      option[:feedbacks].push( feedback ) if option[:feedbacks].select{ |f| f == feedback }.first.nil? && !option.nil?
+    end
   end
 
   def more page, current_user=nil
