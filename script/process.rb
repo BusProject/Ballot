@@ -154,8 +154,10 @@ def addCandidate obj
 
 
     obj['Office Level'] = 'State' unless obj['Office Level'].index('State').nil?
+    
+    votes = obj['Office Name'].split('Vote for ').length > 1 ? obj['Office Name'].split('Vote for')[1].gsub(')','').to_i : 1
 
-    row_choice = { :geography => obj['Electoral District'].strip, :contest => obj['Office Name'].strip, :contest_type => obj['Office Level'].strip }
+    row_choice = { :votes => votes, :geography => obj['Electoral District'].strip, :contest => obj['Office Name'].strip, :contest_type => obj['Office Level'].strip }
     row_option = { :name => obj['Candidate Name'].strip, :vip_id => obj['UID'].strip }
 
     ['Candidate Party','Website','Twitter Name','Facebook URL','Incumbant'].each do |optional|
