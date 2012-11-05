@@ -1,10 +1,73 @@
+class Matcher # A class to find choices / options in our DB that NOI has fucked
+  @choice
+  @option
+  
+  def choice
+    return @choice
+  end
+  
+  def choice= val
+    @choice = val
+  end
+
+  def option
+    return @option
+  end
+  
+  def option= val
+    @option = val
+  end
+  
+  
+  def initialize obj
+    
+    geography = obj['Electoral District'].strip 
+    contest = obj['Office Name'].strip
+    name = obj['Candidate Name'].strip
+    
+    if obj['UID'] # Search by UID first
+      option = Option.find_by_vip_id( obj['UID'] )
+      unless option.nil?
+        self.choice = option.choice
+        self.option = option
+        return self
+      end
+    end
+    
+    # Now search by geography + contest name - like before
+    choice = Choice.find_by_geography_and_contest( geography, contest )
+    unless choice.nil?
+      self.choice = choice
+      option = Option.all( :select => 'options.*', :conditions => ['choice_id = ? AND name LIKE ? AND name LIKE ? ', choice.id, name.split(' ').first+'%','%'+name.split(' ').last ], :limit => 1 ).first
+      self.option = option || choice.options.new( :name => name, :vip_id => obj['UID'] )
+      return self
+    end
+    
+    # Check by searching the geography for the name
+    option = Option.all( :select => 'options.*', :joins => :choice, :conditions => ['geography = ? AND name LIKE ? AND name LIKE ? ', geography, name.split(' ').first+'%','%'+name.split(' ').last ], :limit => 1 ).first
+    unless option.nil?
+      self.choice = option.choice
+      self.option = option
+      return self
+    end
+    
+    # Lastly if we really cannot find them - create some new ones
+    self.choice = Choice.new( :geography => geography, :contest => contest )
+    self.option = self.choice.options.new( :name => name, :vip_id => obj['UID'] )    
+    return self
+    
+  end
+  
+end
+
 def addCandidate obj
   
   newobj = {}
   
   obj.each do |k,v|
-    betterK = k.split('_').map{|w| w.capitalize }.join(' ')
-    newobj[ betterK ] = v
+    betterK = k
+    betterK = k.split('_').map{|w| w.capitalize }.join(' ') if !betterK.nil? && !betterK.index('_').nil?
+    newobj[ betterK ] = v.gsub(/\r/,'').gsub(/\n/,'').strip
   end
   
   obj = newobj
@@ -45,7 +108,7 @@ def addCandidate obj
         else
           obj['Electoral District'] = obj['Electoral District'].gsub('Legislative','HD')
         end
-        obj['Office Name'] = obj['Office Name'].split(' - ')[1]
+        obj['Office Name'] = obj['Office Name'].split(' - ')[0]
       end
 
       obj['Electoral District'] = obj['Electoral District'].gsub('Congressional','CD')
@@ -92,8 +155,8 @@ def addCandidate obj
 
     obj['Office Level'] = 'State' unless obj['Office Level'].index('State').nil?
 
-    row_choice = { :geography => obj['Electoral District'], :contest => obj['Office Name'], :contest_type => obj['Office Level'] }
-    row_option = { :name => obj['Candidate Name'] }
+    row_choice = { :geography => obj['Electoral District'].strip, :contest => obj['Office Name'].strip, :contest_type => obj['Office Level'].strip }
+    row_option = { :name => obj['Candidate Name'].strip, :vip_id => obj['UID'].strip }
 
     ['Candidate Party','Website','Twitter Name','Facebook URL','Incumbant'].each do |optional|
       unless obj[optional].nil?
@@ -102,25 +165,36 @@ def addCandidate obj
         option_value = 'party' if optional == 'Candidate Party'
         option_value = 'twitter' if optional == 'Twitter Name'
 
-        row_option[option_value] = obj[optional]
+        row_option[option_value] = obj[optional].strip
 
         row_option[option_value] = row_option[option_value].index('http://') == 0 ? row_option[option_value] : 'http://'+row_option[option_value] if option_value == 'website'
         row_option[option_value] = 'http://twitter.com/'+row_option[option_value] if option_value == 'twitter'
+        row_option[option_value] =  row_option[option_value].gsub('Democratic','Democrat') if option_value == 'party'
         row_option[option_value] = row_option[option_value].downcase == 'true' || row_option[option_value] == '1'  if option_value == 'incumbant'
       end
     end
 
-    choice = Choice.find_or_create_by_geography_and_contest( row_choice[:geography],row_choice[:contest],row_choice)    
+    generate = Matcher.new( obj )
+    choice = generate.choice
+    option = generate.option
+    
     if choice.new_record?
       choice.update_attributes(row_choice)
-      collect.push( obj['Electoral District'] )
     end
     choice.save
-    option = choice.options.find_or_create_by_name( row_option[:name], row_option)
+
     if option.new_record?
       option.update_attributes(row_option)
+    else
+      option.party = row_option['party'] if option.party.nil?
+      option.party += ', '+row_option['party'] if !row_option['party'].nil? && option.party.index( row_option['party'] ).nil?
+      option.website = row_option['website'] if option.website.nil? || option.website.empty?  && !row_option['website'].nil?
+      option.facebook = row_option['facebook'] if option.facebook.nil? || option.facebook.empty?  && !row_option['facebook'].nil?
+      option.twitter = row_option['twitter'] if option.twitter.nil? || option.twitter.empty?  && !row_option['twitter'].nil?
+      option.vip_id = row_option[:vip_id]
     end
     option.save
+
     return obj
   else
     return false
