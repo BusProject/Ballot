@@ -81,16 +81,16 @@ en:
             text: 'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'
         federal: 
             title: 'Federal'
-            text: 'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'
+            text: "Take a peek at the candidates that you\'ll have the chance to vote on. These candidates will represent you in the Federal Government."
         state: 
             title: 'State'
-            text: "These candidates will represent you in your State\'s government."
+            text: "These candidates will represent you in your State Government."
         county: 
             title: 'County'
-            text: "These candidates will represent you in your State\'s government."
+            text: "These candidates will represent you in your County Government."
         other:
             title: 'Other'
-            text: 'These candidates will represent you in your county, municipal, or judicial government.'
+            text: 'These candidates will represent you in your Municipal or Judicial Government.'
         user_candidates: 
             title: 'User Created Candidates'
             text: 'These are candidates that were created by another user on The Ballot. We cannot verify their accuracy.'
@@ -111,13 +111,13 @@ en:
         this_ballot: 'Share This Ballot'
         this_page: 'Share This Page'
         this_guide: 'Share This Guide'
-        state_guides: 'Guides By States'
+        state_guides: 'Guides By State'
         top_guides: 'Top Guides'
         guides_in: 'Guides in %{state}'
     # Top Bar
     top:
         start: 'Get Started'
-        login: 'Login with Facebook' # Is an image - will need to change to different 
+        login: 'Log in with Facebook' # Is an image - will need to change to different 
         register: 'Register to Vote'
         about: 'About'
         news: 'News'
@@ -127,7 +127,7 @@ en:
         my_guide: 'My Voter Guide'
         all_guides: 'All Voter Guides'
         pages: 
-            login: 'Login as facebook page'
+            login: 'Log in as facebook page'
             refresh: 'Refresh Guides'
     
     # used on the single pages and main page
@@ -138,13 +138,13 @@ en:
         facebook: 'Facebook'
         website: 'Website'
         who: 'Who Will You Support for This Office?'
-        let: 'Let the world know who you’re supporting for'
+        let: "Let the world know who you\'re supporting for"
         can_share: 'Your comment will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.'
         prompt: 'please select a candidate'
         comment: '(Leave a comment if you wanna)'
         list: 'The Candidates'
         info: 'Contest Information'
-        office_name: 'Office Name. e.g. Mayor, State Senate'
+        office_name: 'Office Name, e.g. Mayor, State Senate'
         add_prompt: 'Add Missing Candidate Contest'
         votes: 'Votes You Can Cast'
         votes_more: "(Note: this is almost always one)"
@@ -180,13 +180,13 @@ en:
         affirmative_name: 'What is an affirmative vote called?'
         yeses: 'yes,support,affirm,for,maintained,approved,approve'
         negative: 'Negative Vote'
-        negative_name: 'Negative Vote'
+        negative_name: 'What is a negative vote called?'
         nos: 'no,deny,affirm,against,reject,repealed,rejected'
         consequences: 'Consequences of this vote'
 
     # Front page specifics
     front:
-        look_ballot: "Look Up What’s On Your Ballot"
+        look_ballot: "Look Up What\'s On Your Ballot"
         address_placeholder: 'enter your address here'
         save_address: 'Remember as home address'
         confirm: 'Is this right?'
@@ -277,5 +277,5 @@ en:
         agree:
             one: "One other person agrees it's %{attribute}"
             zero: "Only you think it's %{attribute}"
-            other: "%{count} other people agrees it's %{attribute}"
+            other: "%{count} other people agree it's %{attribute}"
         
