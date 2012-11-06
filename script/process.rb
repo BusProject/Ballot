@@ -194,6 +194,7 @@ def addCandidate obj
     if option.new_record?
       option.update_attributes(row_option)
     else
+      option.name = row_option[:name]
       option.party = row_option['party'] if option.party.nil?
       option.party += ', '+row_option['party'] if !row_option['party'].nil? && option.party.index( row_option['party'] ).nil?
       option.website = row_option['website'] if option.website.nil? || option.website.empty?  && !row_option['website'].nil?
