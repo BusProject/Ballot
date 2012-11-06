@@ -65,9 +65,13 @@ def addCandidate obj
   newobj = {}
   
   obj.each do |k,v|
-    betterK = k
+    betterK = k.slice(0,1).upcase+k.slice(1,k.length)
+    betterK = 'UID' if betterK == 'Uid'
     betterK = k.split('_').map{|w| w.capitalize }.join(' ') if !betterK.nil? && !betterK.index('_').nil?
-    newobj[ betterK ] = v.gsub(/\r/,'').gsub(/\n/,'').strip
+
+    v = v.gsub(/\r/,'').gsub(/\n/,'').strip if v.class == String
+    
+    newobj[ betterK ] = v
   end
   
   obj = newobj
