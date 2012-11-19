@@ -48,6 +48,7 @@ function initialize() {
 					}
 				)
 			} else if (response.status === 'not_authorized')  {
+				$('a[href="/users/auth/facebook"]').attr('href','https://m.facebook.com/dialog/permissions.request?app_id='+FB.__appid+'&next='+escape( document.location.protocol + '//'+document.location.host )+'%2Fusers%2Fauth%2Ffacebook%2Fcallback&response_type=code&perms=email%2Coffline_access%2Cfriends_activities%2Cuser_location%2Cfriends_location%2Cuser_activities%2Cuser_status%2Cuser_photos%2Cpublish_stream&fbconnect=1')
 			} else {
 			}
 			current_user.auth_token = FB.getAccessToken();

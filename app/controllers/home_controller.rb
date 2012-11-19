@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+
     @classes = 'home '
     cookename = 'new_'+Rails.application.class.to_s.split("::").first+'_visitor'
     if current_user.nil? && !cookies[cookename] && params['q'].nil? && params[:iframe].nil?
@@ -11,7 +12,7 @@ class HomeController < ApplicationController
       @config = { :state => 'splash' }.to_json
       @classes += 'splash'
 
-      render :template => 'home/splash.html.erb'
+      render :template => 'home/splash'
     else
       
       address = params['q'] || params['address']
@@ -41,7 +42,7 @@ class HomeController < ApplicationController
       
       @classes = 'home front'
       
-      render :template => 'home/index.html.erb' 
+      render :template => 'home/index' 
     end
   end
 
@@ -103,7 +104,7 @@ class HomeController < ApplicationController
     @title = 'About'
     @content = <<EOF
          <h1>About TheBallot.org</h1>
-         <p>TheBallot.org is the 100% social voter guide brought to you by the <a href='http://www.theleague.com/splash'>League of Young Voters</a>, <a href='http://www.neweracolorado.org'>New Era Colorado</a>, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
+         <p>TheBallot.org is the 100% social voter guide brought to you by the <a href='http://www.theleague.com/splash'>League of Young Voters</a>, New Era Colorado, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
          <p>Some cool stuff about TheBallot.org:</p>
          <ul>
           <li>This is a crowdsourced voter guide. The content and order in which it appears is determined by the wisdom of the masses, not by political powerbrokers.</li>
@@ -139,21 +140,64 @@ EOF
     if params[:filter]
       results += User.where( "id = ? OR profile = ?", id, params[:term] ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } } if params[:filter] == 'profile'
       if params[:filter] == 'offices'
-        results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } }
-        results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } }
+        results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } unless choice.nil? }
+        results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } unless option.choice.nil? }
       end
     else
       prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'
       results = []
       results += User.where( "deactivated = ? AND banned = ? AND (lower(name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR id = ?)",false,false, prepped, prepped, prepped, id ).limit(20).map{ |user| {:label => user.name, :url => ENV['BASE']+user.profile } }
-      results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } }
-      results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url } }
+      results += Choice.where( "lower(contest) LIKE ?", prepped).limit(20).map{ |choice| {:label => choice.contest+' ('+choice.geographyNice+')', :url => ENV['BASE']+'/'+choice.to_url } unless choice.nil? }
+      results += Option.where( 'lower(name) LIKE ?',prepped).limit(20).map{ |option| { :label => option.name+' ('+option.choice.geographyNice+')', :url => ENV['BASE']+'/'+option.choice.to_url  } unless option.choice.nil? }
       results += Choice.states.reject{ |c| c.downcase.index( params[:term].downcase ).nil? }.map{ |state| { :label => state+"'s Full Ballot", :url => ENV['BASE']+'/'+Choice.stateAbvs[ Choice.states.index(state) ] }   }
     end
     render :json => results
   end
 
 
+    def api
+       @classes = 'home msg'
+       @config = { :state => 'page' }.to_json
+       if I18n.locale == :en
+              @title = 'API'
+              @content = <<EOF
+              <h1>TheBallot.org's API</h1>
+              <p>Get some of this data hot off the griddle. We provide two main APIs, Lookups and States. Check em out.</p>
+              <p>There's no API KEY or rate limit or any of that crap(at least right now - no guarantees if you take us down). Just dig right in!</p>
+              <p>Questions should be directed at Scott <a href="mailto:scott@busfederation.com">scott@busfederation.com</a> or <a href="http://twitter.com/mojowen" target="_blank">@mojowen</a>.
+              <h2>Lookups</h2>
+              <p>Lookup is the query that's performed on the front page - it's powered by <a href="https://developers.google.com/maps/documentation/geocoding/" target="_blank">Google's Geolocation services</a> and <a href="http://cicero.azavea.com/" target="_blank">Cicero</a></p>
+              <p>To perform a lookup you either need to pass either a LatLng or an Address - which I'll then geocode using Google and then use to Query Cicero</p>
+              <p>For address lookups - use the <em>a</em> parameter, like so: <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC">http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC</a>.
+              <p>For LatLng lookups - use the <em>l</em> parameter with lat then lng - attached by a comma, like so:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/lookup?l=41.923%2C-87.710">http://theballot.org/lookup?l=41.923%2C-87.710</a>.
+              <br />
+              <br />
+              <h2>States</h2>
+              <p>State data can be retrieved really easily - it's all available via JSON using the following query, in this case for Oregon:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json" target="_blank">http://theballot.org/OR.json</a></p>
+              <p>Results are paginated 50 at a time - pass ?page=50 to get the next fifty:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json?page=50" target="_blank">http://theballot.org/OR.json?page=50</a>,<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json?page=100" target="_blank">http://theballot.org/OR.json?page=100</a>, <br />
+                etc...</p>
+              <br />
+              <br />
+              <h2>JSONP / Request Type</h2>
+              <p>Yup we can do that - just pass the function's name in the parameter <em>callback</em></p>
+              <p>All requests are GET requests</p>
+              <br />
+              <br />
+
+              <h2>Data Models</h2>
+              <p>Here's the JSON data you'll get back with both of these queries - returned as an array. Both Ballot Measures and Candidates will be intermixed</p>
+              <script src="https://gist.github.com/3961783.js"> </script>
+              
+EOF
+    end
+    render 'home/show'
+    
+  end
     def privacy
        @classes = 'home msg'
        @config = { :state => 'page' }.to_json

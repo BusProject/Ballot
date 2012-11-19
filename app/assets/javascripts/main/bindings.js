@@ -6,6 +6,8 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		location.latlng('38.7, -95.7')
 		location.geocoded(false)
 		location.choices([])
+		location.pollingLocation('')
+		location.fetch(true)
 		location.guides([])
 })
 .on('click touchend','a',function(e) {
@@ -84,17 +86,25 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	ctx.$parent.readmore(true)
 	$(this).hide()
 })
-.on('click touchend','.toggle',function(e) {
+.on('click touchstart','.toggle',function(e) {
 	e.preventDefault()
 	$this = $(this);
 	if( $this.attr('disabled') ) return false
 	$this.attr('disabled',true)
-	var animate = $this.hasClass('right') ? { left: '+=135' } : { right: '+=135' }
+	var $ctx = ko.contextFor(this), $parent = $ctx.$parent
+	if( $this.hasClass('right') ) {
+		var animate = { left: '+=135' }, chosen = $parent.yes()
+	} else {
+		var animate = { right: '+=135' }, chosen = $parent.no()
+	}
+
 	$('.cover',$this).animate(animate, 200, function() {
 		$this.toggleClass('right').attr('disabled',false).find('.cover').css({left: '', right: ''})
+		$parent.chosen( chosen )
 	});
 })
-.on('click touchend','.chooseable .option:not(.confirmed), .chooseable .chosen',function(e) {
+.on('click touchend','.chooseable .option:not(.confirmed), .chooseable .chosen, .chooseable .mobile-checkbox',function(e) {
+
 	if( ['A','SPAN'].indexOf(e.target.tagName) === -1 ) {
 		e.preventDefault();
 		var $ctx = ko.contextFor(this),
@@ -103,6 +113,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		if( $(this).hasClass('chosen') ) $parent.chosen( null )
 		else $parent.chosen( $data )
 	}
+	e.stopPropagation()
 })
 .on('click touchend','.next',function(e) {
 	var $button = $(this).parents('.row').nextAll('.row:first').find('button.open')
@@ -130,7 +141,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				$ctx = ko.contextFor( $toggle[0] ),
 				$comment = $('.comment', $parent),
 				choice_id = $ctx.$parent.id,
-				option = $toggle.hasClass('right') ? $ctx.$parent.no() : $ctx.$parent.yes(),
+				option = $ctx.$parent.chosen() || $ctx.$parent.yes(),
 				option_id = option.id,
 				comment = $comment.val(),
 				type = 'ballot_measure'
@@ -155,7 +166,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					data = { access_token: current_user.auth_token }
 					data[ type ] = response.url 
 					$.post(
-						'https://graph.facebook.com/me/the-ballot:recommend',
+						'https://graph.facebook.com/me/the-ballot:vote',
 						data,
 						function(r){console.log(r)}
 					)
@@ -357,7 +368,7 @@ ko.bindingHandlers.betterText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		var bindings =  allBindingsAccessor(),
 			bind = bindings['betterText']
-		element.innerHTML = ko.toJS( bind ).replace("\n",'<br /><br />')
+		element.innerHTML = ko.toJS( bind ).replace(/\n/g,'<br /><br />')
     }
 };
 

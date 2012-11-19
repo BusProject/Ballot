@@ -6,7 +6,7 @@
 					<li class="get-started" style="border:none; font-size:12px; padding-top:3px;"><%= t('top.start') %></li>
 					<li class="fb-button"><%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %></li>
 			<% else %>
-					<li style="width: 150px;">
+					<li style="width: 200px; overflow: hidden; white-space: nowrap;">
 						<%= link_to profile_path(current_user.to_url) do %>
 							<%= image_tag(current_user.image || asset_path('alincoln.gif') ) %>
 							<%= current_user.first_name+' '+current_user.last_name %>
@@ -72,7 +72,7 @@
 						<li ><a href="mailto:info@theballot.org"><i class="icon-envelope"></i><%= t('top.contact') %></a></li>
 					</ul>
 				</li>
-				<li style="padding:0 15px;"><i class="icon-search"></i> <input type="text" class="search" placeholder="<%= t('top.search') %>"></li>
+				<li style="padding:0 15px;" class="search_nav"><i class="icon-search"></i> <input type="text" class="search" placeholder="<%= t('top.search') %>"></li>
 			</ul>
 		</div>
 		

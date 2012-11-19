@@ -28,6 +28,7 @@ Ballot::Application.routes.draw do
   
   root :to => "home#index"
   match '/about' => "home#about"
+  match '/api' => "home#api"
   match '/about/privacy' => "home#privacy", :as => 'privacy'
   match '/about/terms' => "home#tos", :as => 'terms'
   match '/stats' => "home#stats"

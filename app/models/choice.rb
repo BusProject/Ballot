@@ -28,9 +28,10 @@ class Choice < ActiveRecord::Base
     :options => { 
       :include => [
         :feedbacks => {
-            :include => [ :user => { :except => [ :banned, :admin, :deactivated, :alerts, :created_at, :last_name, :modified_at, :fb_friends, :first_name, :guide_name, :description  ] } ]
+            :include => [ :user => { :except => [ :updated_at, :header_content_type, :header_file_name, :header_file_size, :header_updated_at, :email, :location, :address, :match , :remember_me, :password_confirmation, :location, :password, :feedback, :authentication_token, :alerts, :fb_friends, :banned, :deactivated, :admin, :pages, :header_file_name, :header_content_type, :header_file_size, :header_updated_at, :created_at, :url, :match_id, :bg, :secondary, :primary  ] } ],
+            :except => [  :approved, :flag]
           }
-        ] 
+        ]
       }
     ]
   end
@@ -69,9 +70,11 @@ class Choice < ActiveRecord::Base
     district = self.geography.slice(4,self.geography.length) if geography != self.geography.slice(2,self.geography.length)
     district = district.to_i.ordinalize if !district.nil? && district.to_i.to_s == district.gsub('0','')
     
-    return [ 'Added by', User.find( geography.split('_')[2] ).name,'for',@states[index] ].join(' ') if !geography.index('User').nil?
-    
-    return [@states[index]+"'s", district,geography].join(' ') if district != ''
+    if !geography.index('User').nil?
+      user = User.find_by_id( geography.split('_')[2] ) || nil
+      return [ 'Added', (user.nil? ? '' : 'by '+user.name),'for',@states[index] ].join(' ') 
+    end
+    return [district,geography+",",@states[index]].join(' ') if district != ''
     return [@states[index],geography].join(' ')
   end
   
@@ -101,10 +104,21 @@ class Choice < ActiveRecord::Base
       
       option[:feedbacks] = option.all_feedback(current_user) || []
       
-      unless self.contest_type.downcase.index('ballot').nil?
-        option[:option_type] = option.type
+      self[:nice_geography] = self.geographyNice(false)
+      if self.contest_type.downcase.index('ballot').nil?
+        if self.votes.nil? || self.options.length > self.votes
+          self[:description] = self.options.map{ |o| o.name }.join(' vs. ')
+        else
+          self[:description] = self.options.map{ |o| o.name }.to_sentence
+        end
+        
+        if self.options.select{ |o| o.incumbant? }.length > 0
+          option[:option_type] = option.incumbant? ? 'Incumbant' : 'Challenger'
+        else
+          option[:option_type] = 'Open Seat'
+        end
       else
-        option[:option_type] = ''
+        option[:option_type] = option.type
       end
       
     end
@@ -117,13 +131,14 @@ class Choice < ActiveRecord::Base
         names.join( I18n.t('i18n_toolbox.array.vs') )
       self[:description] += ' for '+self.votes.to_s+' positions' if self.votes > 1 
     end
-    
   end
   # method to add user feedback to profile - even if prepped missed them
   def addUserFeedback user  
     feedback = user.feedback.select{ |f| f.choice == self }.first
-    option = self.options.select{|o| o.id == feedback.option_id }.first
-    option[:feedbacks].push( feedback ) if option[:feedbacks].select{ |f| f == feedback }.first.nil?
+    unless feedback.nil?
+      option = self.options.select{|o| o.id == feedback.option_id }.first
+      option[:feedbacks].push( feedback ) if option[:feedbacks].select{ |f| f == feedback }.first.nil? && !option.nil?
+    end
   end
 
   def more page, current_user=nil

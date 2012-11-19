@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMNyNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                                      `````````````````````                            
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMMyyMMMMMMMhNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                                `````````````````````````````````                      
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMMNoyMMMMMmsNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                             ```````````````````````````````````````                   
+	 MMMMMMMMMMMMMMMMMMMNNNMMMMMMNhohNMMNysNMMMMMNNNMMMMMMMMMMMMMMMMMMMMMMMMMMM/                          ``````````````````````````````````````````````               
+	 MMMy/.`              .+ho-`  .o+. `:s-    `::`                 `-omMMMMMMM/                       ```````````````````````````````````````````````````             
+	 MMs                    `+hh+-:oo/-./+.  `:+:                      .NMMMMMM/                     ```````````````````````````````````````````````````````           
+	 MM+                      `+s//:-:--:-.`-+o.                       `mMMMMMM/                   ```````````````````````````````````````````````````````````         
+	 MM+               ```````.+/+oo+/:.....-:.                        `mMMMMMM/                  ```````````````-/+++++++++++++++++++++++++++/:````````````````       
+	 MM+             `.:/+syhddssyyy+++/:-......`                      `mMMMMMM/                ``````````````:ymNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNh/``````````````      
+	 MM+                    ``+hhdso++o//+//-...--                     `mMMMMMM/               `````````````.hNMMh+++++++++++++++++++++++++++++sNMMm:`````````````     
+	 MM+                      +hds/oo/-...-:---../`                    `mMMMMMM/              `````````````-mMMMN.``````````````````````````````hMMMN/``````````````   
+	 MM+                      :hy:oss:....:/:/-...`                    `mMMMMMM/             ``````````````hMMMMMdssssssssssssssssssssssssssssshMMMMMN.``````````````  
+	 MM+                     :hs+yyy+-.....-/o:.....                   `mMMMMMM/            ``````````````.MMMMmhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhdMMMM+`````````````.  
+	 MM+          ````     `:/. `oh+/::.-/-.:/+:-...`  .//-`           `mMMMMMM/           ```````````````-MMM+.``````````````````````````````````:NMMo``````````````. 
+	 MM+ -hs-.`.odhh+so.   ``   `oyssssoo+-..-://:..` `omdss+:.        `mMMMMMM/           .``````````````-MMM`````````````````````````````````````hMMo````````````````
+	 MM+ shsyhhdyooo/oh/oo+///:/so:/oyhhyo:.-//ossssoosdmysssss+.````` `mMMMMMM/          ````````````````-MMM`````````````````````````````````````hMMo```````````````.
+	 MM+ .:.  -yo//+osd::://++oossyyhdmhssoosssosds++shddyossssymmmmmddhNNNNNNN/          .```````````````-MMM`````````````````````````````````````hMMo````````````````
+	 MM+      :mmdymmy-           `-/osssyssssydosssshmh+/:-osshmNNNNNNNNNNNNNN/          ````````````````-MMM`````````````````````````````````````hMMo````````````````
+	 MM+      .hmNds+`          ./snnnnnnnsssssssssssssso+:--/sssyyyyyhhhhdddddd:        `````````````````-MMM`````````````````````````````````````hMMo````````````````
+	 MM+      `hmNmy`            http://theleague.com                 `mMMMMMM/          `````````````````-MMMyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyymMMo````````````````
+	 MM+      `dNNd+       -onnnnnnnnnnnsssssssssssmmh+::++/..-:+:.    `mMMMMMM/          ````````````````-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo````````````````
+	 MM+      .dNNd/     .shhhhyhdhddsossssss++yh/+dm+::/+/.....:+/-.  `mMMMMMM/          ````````````````-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo````````````````
+	 MM+      :mNNd+   -smhhyhhydhsyyysssssss+/sdsoshmh++sso+:.../o/+o:`mMMMMMM/          .```````````````-MMMMMMMNNMMMMMMMMMMMMMMMMMMMMMMMMMMNNMMMMMMo````````````````
+	 MM+      /NNNms.-ymmhhydhyhdsossyhyssssso/shhshhmms/:+ss+/-/ss/-:+oNMMMMMM/          .```````````````-MMMMMy:--+NMMMMMMMMMMMMMMMMMMMMMMs:-:oNMMMMo```````````````.
+	 MM+      +NNNmd+dNmdhymdyymNmh++syhysssyyoohmhhmNds/..-:+sssssss+/+dMMMMMM/          ````````````````-MMMMm````http://busfederation.com/````sMMMMo```````````````.
+	 MM+      +mNNNmyhNdyymmyhmNNmh:ssssyyysydy+ymmhmmhs:..../ssssssossomMMMMMM/           .``````````````-MMMMM+...:dMMMMMMMMMMMMMMMMMMMMMN+...:mMMMMo``````````````` 
+	 MM+      .dNNNNhhmyhmmhdNNNNmo+hsssssyhyhdsyNmdmmys+-..--:+++o+:+ssmMMMMMM/           ```````````````-MMMMMMNmmMMMMMMMMMMMMMMMMMMMMMMMMMNmmMMMMMMo``````````````` 
+	 MM+      `ymNNmhdhdmmddNNNNms/yhsssssdmyhdhdNNNNdssso-./+-......+ssNMMMMMM/            ``````````````-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo`````````````.  
+	 MM+       +dmmmddhNNddmNmmyoodmhssssyysssosdNNNmhsss+-.:s+-....-+somMMMMMM/             `````````````.+++oMMMMMMMd+++++++++++++++++++sMMMMMMMs+++-````````````.   
+	 MM+       `/++/sdmNmhmmdyshydNmysssso/ooo/+dNmdhssss/..-oo-...-:ooomMMMMMM/              `````````````````NMMMMMMy```````````````````:MMMMMMM:````````````````    
+	 MM+            +mNNdmmyodmhhmNmyssssso+ossshhyo--:+s:..-+o+:-:/+sooNMMMMMM/               ````````````````mMMMMMMs```````````````````:NMMMMMN:```````````````     
+	 MM+            /mNNmNdomNmydNNmysssssssssssssssso:--..../o+/+++ssssmMMMMMM/                 ``````````````.//////`````````````````````://///:``````````````       
+	 MM+            +NNNNNNmNNmdmNNNhssssssssssssssssso/+:...-+oo+osssoodMMMMMM/                  ```````````````````````````````````````````````````````````.         
+	 MM+            sNNNNNNNNNNNNNNNdssssssssssssssssssoos/..-+//:/ss/+/dMMMMMM/                     ````````````````````````````````````````````````````````          
+	 MMy`          `sNNNNNNNNNNNNNNNdyssssssssssssssssssoss:.-/+/+ss++/sNMMMMMM/                       ````````````````````````````````````````````````````            
+	 MMMd+-........-hNNNNNNNNNNNNNNNmyyyyyyyyyyyyyyyyyyyssyo::://+oooydNMMMMMMM/                         ```````````````````````````````````````````````               
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                            `````````````````````````````````````````                  
+	 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM/                              `````````````````````````````````                      
+	                                                                                                                 `````````````````````
+	                                                                                            
+
+
+	                                Images created via http://www.text-image.com/convert/ascii.html and merged via http://jsfiddle.net/mojowen/9cAV9/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# the-ballot: http://ogp.me/ns/fb/the-ballot#">
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="google-site-verification" content="Hqtb5KjIQSIDf8JPIDdOVXz2o6BBMpAi6_34mkWa5Hs" />
+	<meta name="viewport" content="width=device-width">
+	
+	<!-- Putting in some more google web fonts to test -->	
+	<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900|Arvo:400,700|Josefin+Slab:100,300,400,600,700|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	<% title = @title || 'Your Social Voting Guide' %>
+
+	<title>TheBallot.org | <%= title %></title>
+
+	<%= render :partial => 'home/meta' %>
+
+	<%= stylesheet_link_tag    "application" %>
+	<%= stylesheet_link_tag    "print.css", :media => 'print' %>
+	
+	
+	<% if !is_mobile_device? %>
+		<%= render :partial => 'home/iframe' if params[:iframe] %>
+		<%= javascript_include_tag asset_path( "other/iframe.js" ) if params[:iframe] %>
+	<% end %>
+	
+	
+  <script type="text/javascript">
+	var current_user = <%= raw current_user.nil? ? { :id => 'unauthenticated'}.to_json : current_user.to_public %>,
+		inits = <%= raw @config || '{}' %>
+
+	current_user.url = "<%= current_user.nil? ? root_path.split('?')[0] : profile_path( current_user.to_url )  %>"
+	inits.root = "<%= root_path.split('?')[0] %>";
+	inits.default_url = [ <%= raw params[:iframe].nil? ? '' : '"iframe='+params[:iframe].to_s+'", ' %> ];
+	<% if is_mobile_device? %>
+		inits.mobile = true;
+	<% end %>
+	<%- unless @choices_json.nil? %>
+		inits.choices = <%= raw @choices_json %>;
+	<% end -%>
+  </script>
+  <%= javascript_include_tag "application" %>
+  <!--[if IE]><%= javascript_include_tag "other/ie.js" %><![endif]-->
+  <%= csrf_meta_tags %>
+
+  <link rel="shortcut icon" href="<%= asset_path 'favicon.jpg'%>" />
+
+<%= yield :head %>
+
+</head>
+<body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= !current_user.nil? && current_user.commentable? ? '' : 'no_comment' %> <%= @classes %> <%= 'mobile' if is_mobile_device? %>" >
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+	<%=  render 'devise/account' %>
+
+	<div id="container">
+		<div id="page">
+
+			<div id="header" class="clearfix">
+			  <% if is_mobile_device? %>
+			    <ul id="mobile_nav">
+			      <li id="mobile_home_link"><%= link_to "Home", root_path %></li>
+			      <li id="mobile_menu_link"><%= link_to "Menu", "#", :id => "show_mobile_menu" %></li>
+			    </ul>
+			  <% end %>
+				<%- if !@user.nil? && !@user.header.nil? && @user.header.url(:header) != '/headers/header/missing.png' %>
+					<%= link_to image_tag( @user.header.url(:header) ), root_path, :id => 'logo' %>
+				<% else %>
+					<%= link_to image_tag( asset_path( 'theballot.png' ) ), root_path, :id => 'logo' %>
+				<% end %>
+			</div> <!-- header -->
+
+			
+			<div id="instructions-box" style="display:none;" data-bind="css: { top: top() < 140 }, visible: true" >
+				<div id="instructions" data-bind="visible: menuItems.length > 0 ">
+				<img src="<%= asset_path 'menutop.png' %>" class="menutop">
+					<ul data-bind="foreach: menuItems">
+						<li data-bind="overwrite: $data.html ">
+							<a class="main" data-bind="css: { active: false }, text: $data.name, attr: {href: $data.id }"></a>
+							<div style="display:none;" data-bind="slide: $parent.active() == $data.id " class="menu-inner">
+								<div class="arrow"></div>
+								<div data-bind="html: $data.description, bindDescendents: $data.model "></div>
+							</div>
+						</li>
+					</ul>
+				</div><!-- instructions -->
+			</div><!-- instructions-box -->
+			<div id="main">
+				<%= yield %>
+			</div><!-- main -->
+
+		</div><!-- page -->
+
+		<div id="footer">
+			<hr />
+			<p style="margin: 10px 0 0;"><strong>BALLOTS BY STATE</strong></p>
+			<% @states = Choice.states %>
+			<% @states.shift %>
+			<% @statesAbvs = Choice.stateAbvs %>
+			<% n = 1 %>
+
+			<% @states.each do |state| %>
+				<%= link_to state, state_path(@statesAbvs[n]), :class => 'state '+( @state == state ? 'active' : '' )%>
+
+				<% n += 1 %>
+			<% end %>
+			<p style="font-size: 9px; margin-top: 20px;">
+				<p>TheBallot.org is brought to you by the <a href="http://theleague.com" target='_blank'>League of Young Voters</a>, New Era Colorado, <a href="http://forwardmontana.org" target='_blank'>Forward Montana</a>, and the <a href="http://busproject.org" target='_blank'>Bus Project</a>.</p>
+				<%= link_to 'Terms of Service', terms_path %>
+				|&nbsp;&nbsp;
+				<%= link_to 'Privacy Policy', privacy_path %>&nbsp;
+			</p>
+		</div><!-- footer -->
+		<div id="meme-cova"></div>
+		<div id="meme-tainer">
+			<iframe scrolling="no"></iframe>
+			<div class="close"><i class="icon-remove-sign"></i></div>
+		</div>
+		<div id="fb-root"></div>
+		<script src="http://connect.facebook.net/en_US/all.js"></script>
+		<script>
+			FB.__appid = <%= ENV['FACEBOOK'] %>;
+			FB.init({
+				appId: FB.__appid,
+				cookie: true,
+				xfbml: true,
+				oauth: true
+			});
+		</script>
+		<%= render :partial => 'home/ga' %>
+		<%= javascript_include_tag asset_path( "other/iframe.js" ) %>
+	</div>
+</body>
+</html>

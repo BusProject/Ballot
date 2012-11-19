@@ -1,0 +1,84 @@
+<script type="text/javascript" src='http://maps.googleapis.com/maps/api/js?sensor=true'></script>
+
+	<div id="find-ballot" class="ballot-section">
+			<h1 class="sectionheading"><%= t("front.look_ballot")%></h1>
+
+		<div id="enter-address">
+		
+			<div>
+				<input onkeypress="$('.place-holder').hide()" data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="<%= t('front.address_placeholder') %>">
+				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0"><%= t('front.address_placeholder') %></label><![endif]-->
+				<a href="#" class="cancel find-ballot-submit"><%= t('site.submit')%></a>
+			</div>
+			<span class="remember link " data-bind="click: function( $data ) {  var member = $data.remember(); $data.remember( !member ); }, css: { on: remember }"  ><%= t('front.save_address') %></span>
+		
+		</div><!-- enter address -->
+			
+		<div id="map"  data-bind="css: { noGuides: guides().length < 1 && geolocated() }">
+			<img data-bind="attr: { 'src' : map }, css: { located: geolocated() }" >
+			<div style="display:none" class="top-guides" data-bind=" visible: geolocated() ">
+				<h3>Voter Guides Near You</h3>
+				<ol data-bind="foreach:guides">
+					<li>
+						<a data-bind="attr:{href: profile}, text: ( guide_name || name+'\'s Voter Guide' ).capitalize() "></a>
+					</li>
+				</ol>
+				<em data-bind="visible: guides().length < 0">Loading...</em>
+			</div>
+			<div class="polling-place" data-bind="html: pollingLocation"></div>
+			<div style="display:none;" class="confirmation" >
+				<%= t("front.confirm") %><br />
+				<a href="#read-ballot" class="fixed-link confirm"><%= t('site.yes') %></a><a href="" class="cancel clear"><%= t('site.no') %></a>
+			</div>
+		</div><!-- map -->
+
+	</div><!-- find-ballot -->
+
+	
+	<div id="read-ballot" style="display:none"  class="ballot-section" data-bind="visible: choices.notEmpty() " >
+		<h1 class="sectionheading"><%= t('front.on_ballot') %></h1>
+
+		<!-- ko foreach: sections -->
+			<div data-bind="visible: $data.visible, attr: {'class' : $data.className, 'id': $data.title.replace(/ /g,'_') }">
+				<div class="category-heading" >
+					<h2 data-bind="text: title"></h2>
+					<p data-bind="text: description"></p>
+				</div>
+				<div class="candidates" data-bind="template: { name: $data.template, foreach: $data.contests }"></div>
+			</div>
+		<!-- /ko -->
+		
+	</div><!-- read-ballot -->
+	<h1 class="sectionheading" style="display:none; clear: both;" data-bind="visible: !fetch() "><%= t('site.loading') %></h1>
+	<div id="more-coming" style="display:none;" class="ballot-section" data-bind="visible: geolocated() && fetch()" >
+		<h1><%= t('front.more')%></h1>
+		<br />
+		<p><%= t('front.more_text')%><span data-bind="text: address.state() ? ' <%= t('site.for') %> '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
+		<div class="category-heading minor">
+			<br />
+			<%- if current_user.nil? %>
+				<p><%= t('front.more_login')%></p>
+				<br />
+				<a href="" data-bind="attr: {href:  '<%= omniauth_authorize_path('user', :facebook) %>?state='+address.state() }">
+					<%= image_tag 'fb-login.png', :style => 'width:120px'  %>
+				</a>
+			<% else %>
+				<button style="display:none;" class="alerts" 
+					data-bind="visible: (current_user.alerts == null ? '' : current_user.alerts).search( address.state() ) === -1"
+					onclick="$(this).hide().next().show(); current_user.alerts += yourLocation.address.state()+','; $.post(inits.root+'users/update',{alerts: yourLocation.address.state() } ); ">Update Me When There's More Data</button>
+				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>
+				<p style="margin-top: 20px;"><%= t('add_form.missing' )%></p>
+				<a href="<%= user_add_choice_path('candidate') %>"><button ><%= t('add_form.add_candidate')%></button></a>
+				<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('add_form.add_measure')%></button></a><br /><br /><br />
+				<a style="color: white; text-decoration: underline" href="mailto:info@theballot.org"><%= t('site.report')%></a>
+			<% end -%>
+		</div>
+	</div>
+
+
+<script id="measure" type="text/html">
+	<%=  render 'choice/measure/front' %>
+</script>
+<script id="candidate" type="text/html">
+	<%=  render 'choice/candidate/front' %>
+</script>

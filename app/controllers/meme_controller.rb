@@ -10,7 +10,7 @@ class MemeController < ApplicationController
       @meme = feedback.memes.new
       
       if params[:frame]
-        render :layout => false, :template => 'meme/_form.html.erb'
+        render :layout => false, :template => 'meme/_form'
       else
         render :layout => false
       end
@@ -70,7 +70,7 @@ class MemeController < ApplicationController
       format.png { render :text =>  @meme.makeBlob }
       format.jpeg { render :text =>  @meme.makeBlob }
       format.gif { render :text =>  @meme.makeBlob }
-      format.html { render :layout => false, :template => 'meme/_img.html.erb' }
+      format.html { render :layout => false, :template => 'meme/_img' }
     end
   end
 
