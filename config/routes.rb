@@ -66,9 +66,11 @@ Ballot::Application.routes.draw do
 
   match '/:state' => 'choice#state', :state =>/AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC/ , :as => 'state'
 
+  match '/:id' => 'choice#profile', :as => 'profile', :via => :get
+  match '/:id/past' => 'choice#profile', :as => 'profile_all', :via => :get, :all => true
+  match '/:id' => 'feedback#recommend', :as => 'recommend', :via => :post
+
   match '/:geography/:contest' => 'choice#show', :contest =>/[^\/]+/ , :as => 'contest'
   
-  match '/:id' => 'choice#profile', :as => 'profile', :via => :get
-  match '/:id' => 'feedback#recommend', :as => 'recommend', :via => :post
 
 end
