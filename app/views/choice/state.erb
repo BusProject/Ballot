@@ -48,7 +48,11 @@
 		</div>
 
 	<% end %>
-
+	<% if @choices.empty? %>
+		<div id="more-coming" class="ballot-section" >
+			<%= render :partial => 'choice/missing' %>
+		</div>
+	<% end%>
 </div>
 
 
