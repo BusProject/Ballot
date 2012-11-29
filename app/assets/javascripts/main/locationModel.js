@@ -420,6 +420,7 @@ function locationModel(data) {
 		this.menuItems.push( 
 			MenuItem(inits.root, I18n.t('menu.find')),
 			MenuItem('#',pronoun,layout),
+			inits.more ? MenuItem(document.location.toString()+'/all','Old Endorsements') : null,
 			MenuItem(null,I18n.t('menu.this_guide'),null,'<div class="container share-container">'+I18n.t('menu.this_guide')+'<br>'+makeShare(url,name)+'</div>')
 		)
 	}
