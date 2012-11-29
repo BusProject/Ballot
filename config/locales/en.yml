@@ -186,7 +186,7 @@ en:
 
     # Front page specifics
     front:
-        look_ballot: "Look Up What\'s On Your Ballot"
+        look_ballot: "Look Up What's On Your Ballot"
         address_placeholder: 'enter your address here'
         save_address: 'Remember as home address'
         confirm: 'Is this right?'
