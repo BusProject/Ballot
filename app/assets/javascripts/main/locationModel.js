@@ -310,17 +310,17 @@ function locationModel(data) {
 			})
 	}
 
-
-	this.grabChoices = ko.computed( function() { // Retrieve guides
-		var geolocated = this.geolocated(),
-			state = this.address.state(),
-			guides = this.guides
-			
-		if( geolocated && state != __state ) {
-			this.getGuides(state,guides,__state);
-			__state = state
-		} 
-	},this)
+	// Disabling for now
+	// this.grabChoices = ko.computed( function() { // Retrieve guides
+	// 	var geolocated = this.geolocated(),
+	// 		state = this.address.state(),
+	// 		guides = this.guides
+	// 		
+	// 	if( geolocated && state != __state ) {
+	// 		this.getGuides(state,guides,__state);
+	// 		__state = state
+	// 	} 
+	// },this)
 	
 	
 	// More menu shite
