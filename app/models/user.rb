@@ -29,12 +29,12 @@ class User < ActiveRecord::Base
     def future
       all( :select => 'choices.*', 
         :conditions => ['date >= ?',Date.today],
-        :joins => [:users => [:choices => [:electionballot => [ :electionday ]]]] )
+        :joins => [:options => [:choice => [:electionballot => [ :electionday ]]]] )
     end
     def past
       all( :select => 'choices.*', 
         :conditions => ['date < ?',Date.today],
-        :joins => [:users => [:choices => [:electionballot => [ :electionday ]]]] ) 
+        :joins => [:options => [:choice => [:electionballot => [ :electionday ]]]] )
     end
   end
 
