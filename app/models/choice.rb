@@ -95,10 +95,8 @@ class Choice < ActiveRecord::Base
   def self.types_by_state(state)
     return self.all(
       :conditions => ['geography LIKE ? AND date > ?', state+'%',Date.today],
-      :select => 'DISTINCT( contest_type) ',
-      :joins => [:electionballot => [:electionday]],
-      :include => [:options => [:feedback]],
-      :order => "contest_type IN('Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot' ) ASC"
+      :select => 'DISTINCT( choices.contest_type) ',
+      :joins => [:electionballot => [:electionday]]
     ).sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( c.contest_type) }.map{ |c| c.contest_type }
   end
   
