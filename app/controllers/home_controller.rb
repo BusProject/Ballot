@@ -3,17 +3,17 @@ class HomeController < ApplicationController
 
     @classes = 'home '
     cookename = 'new_'+Rails.application.class.to_s.split("::").first+'_visitor'
-    if current_user.nil? && !cookies[cookename] && params['q'].nil? && params[:iframe].nil?
-
-      cookies[cookename] = {
-        :value => true,
-        :expires => 2.weeks.from_now
-      }      
-      @config = { :state => 'splash' }.to_json
-      @classes += 'splash'
-
-      render :template => 'home/splash'
-    else
+    # if current_user.nil? && !cookies[cookename] && params['q'].nil? && params[:iframe].nil?
+    # 
+    #   cookies[cookename] = {
+    #     :value => true,
+    #     :expires => 2.weeks.from_now
+    #   }      
+    #   @config = { :state => 'splash' }.to_json
+    #   @classes += 'splash'
+    # 
+    #   render :template => 'home/splash'
+    # else
       
       address = params['q'] || params['address']
       
@@ -43,7 +43,7 @@ class HomeController < ApplicationController
       @classes = 'home front'
       
       render :template => 'home/index' 
-    end
+    # end
   end
 
   def stats
