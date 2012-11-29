@@ -1,7 +1,9 @@
 class Choice < ActiveRecord::Base
-  attr_accessible :contest, :geography, :contest_type, :commentable, :description, :order, :options, :options_attributes, :votes
+  attr_accessible :contest, :geography, :contest_type, :commentable, :description, :order, :options, :options_attributes, :votes, :electionballot
   validates_presence_of :contest, :geography
-  validates_uniqueness_of :contest, :scope => :geography
+  validates_uniqueness_of :contest, :scope => [ :geography, :electionballot_id ]
+  
+  belongs_to :electionballot
   
   has_many :options, :dependent => :destroy, :order => 'position DESC'
   has_many :feedback, :conditions => ['"feedback"."approved" =? ', true] do

@@ -11,21 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105004443) do
+ActiveRecord::Schema.define(:version => 20121121231611) do
 
   create_table "choices", :force => true do |t|
-    t.string    "contest"
-    t.integer   "order"
-    t.boolean   "commentable",  :default => false
-    t.string    "geography"
-    t.text      "description"
-    t.string    "contest_type"
-    t.timestamp "created_at",                      :null => false
-    t.timestamp "updated_at",                      :null => false
-    t.integer   "votes",        :default => 1
+    t.string   "contest"
+    t.integer  "order"
+    t.boolean  "commentable",       :default => false
+    t.string   "geography"
+    t.text     "description"
+    t.string   "contest_type"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.integer  "votes",             :default => 1
+    t.integer  "electionballot_id"
   end
 
-  add_index "choices", ["geography", "contest"], :name => "index_choices_on_geography_and_contest", :unique => true
+  add_index "choices", ["geography", "contest", "electionballot_id"], :name => "index_choices_on_geography_and_contest_and_electionballot_id", :unique => true
+
+  create_table "electionballots", :force => true do |t|
+    t.integer  "electionday_id"
+    t.string   "name"
+    t.text     "notes"
+    t.boolean  "open",           :default => true
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "electiondays", :force => true do |t|
+    t.date     "date"
+    t.string   "election_type"
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "feedback", :force => true do |t|
     t.integer   "user_id"
@@ -47,6 +65,18 @@ ActiveRecord::Schema.define(:version => 20121105004443) do
   add_index "feedback", ["option_id"], :name => "index_feedback_on_option_id"
   add_index "feedback", ["user_id"], :name => "index_feedback_on_user_id"
 
+  create_table "feedbacks", :force => true do |t|
+    t.string    "choice_key"
+    t.integer   "support",    :default => 0
+    t.boolean   "approved",   :default => true
+    t.text      "comment"
+    t.integer   "user_id"
+    t.timestamp "created_at",                   :null => false
+    t.timestamp "updated_at",                   :null => false
+  end
+
+  add_index "feedbacks", ["choice_key"], :name => "index_feedbacks_on_choice_key"
+
   create_table "matches", :force => true do |t|
     t.string    "latlng"
     t.text      "data"
@@ -57,35 +87,35 @@ ActiveRecord::Schema.define(:version => 20121105004443) do
   add_index "matches", ["latlng"], :name => "index_matches_on_latlng", :unique => true
 
   create_table "memes", :force => true do |t|
-    t.string   "image"
-    t.text     "quote"
-    t.integer  "feedback_id"
-    t.string   "theme"
-    t.boolean  "anomyous",    :default => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.string   "fb"
-    t.string   "twitter"
-    t.string   "tumblr"
-    t.string   "imgur"
-    t.string   "pintrest"
+    t.string    "image"
+    t.text      "quote"
+    t.integer   "feedback_id"
+    t.string    "theme"
+    t.boolean   "anomyous",    :default => false
+    t.timestamp "created_at",                     :null => false
+    t.timestamp "updated_at",                     :null => false
+    t.string    "fb"
+    t.string    "twitter"
+    t.string    "tumblr"
+    t.string    "imgur"
+    t.string    "pintrest"
   end
 
   create_table "options", :force => true do |t|
-    t.integer  "choice_id"
-    t.integer  "position"
-    t.string   "photo"
-    t.text     "blurb"
-    t.string   "name"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.string   "twitter"
-    t.string   "facebook"
-    t.string   "website"
-    t.string   "blurb_source"
-    t.string   "party"
-    t.boolean  "incumbant",    :default => false
-    t.string   "vip_id"
+    t.integer   "choice_id"
+    t.integer   "position"
+    t.string    "photo"
+    t.text      "blurb"
+    t.string    "name"
+    t.timestamp "created_at",                      :null => false
+    t.timestamp "updated_at",                      :null => false
+    t.string    "twitter"
+    t.string    "facebook"
+    t.string    "website"
+    t.string    "blurb_source"
+    t.string    "party"
+    t.boolean   "incumbant",    :default => false
+    t.string    "vip_id"
   end
 
   add_index "options", ["choice_id"], :name => "index_options_on_choice_id"
@@ -136,13 +166,13 @@ ActiveRecord::Schema.define(:version => 20121105004443) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "votes", :force => true do |t|
-    t.integer  "votable_id"
-    t.string   "votable_type"
-    t.integer  "voter_id"
-    t.string   "voter_type"
-    t.boolean  "vote_flag"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer   "votable_id"
+    t.string    "votable_type"
+    t.integer   "voter_id"
+    t.string    "voter_type"
+    t.boolean   "vote_flag"
+    t.timestamp "created_at",   :null => false
+    t.timestamp "updated_at",   :null => false
   end
 
   add_index "votes", ["votable_id", "votable_type"], :name => "index_votes_on_votable_id_and_votable_type"
