@@ -80,13 +80,62 @@ class Choice < ActiveRecord::Base
     return [@states[index],geography].join(' ')
   end
   
-  def self.find_by_districts(districts)
-    return self.all( 
-      :select => ' choices.* ', 
-      :include => [:options],  
-      :conditions => ['geography IN(?)',districts ], 
-      :order => "contest_type IN('Federal','State','County','Other','Ballot_Statewide') DESC, geography"
+
+  def self.find_by_state(state,limit=50,offset=0)
+    return self.all(
+      :conditions => ['geography LIKE ? AND date > ?', state+'%',Date.today],
+      :select => 'choices.*',
+      :joins => [:electionballot => [:electionday]],
+      :include => [:options => [:feedback]],
+      :order => "contest_type IN('Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot' ) ASC",
+      :limit => limit,
+      :offset => offset
     )
+  end
+  def self.types_by_state(state)
+    return self.all(
+      :conditions => ['geography LIKE ? AND date > ?', state+'%',Date.today],
+      :select => 'DISTINCT( contest_type) ',
+      :joins => [:electionballot => [:electionday]],
+      :include => [:options => [:feedback]],
+      :order => "contest_type IN('Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot' ) ASC"
+    ).sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( c.contest_type) }.map{ |c| c.contest_type }
+  end
+  
+  def self.find_office(geography,contest) 
+    return Choice.all( 
+      :limit => 1,
+      :joins => [ :electionballot => [ :electionday ] ], 
+      :include => [:options => [:feedback => [:user] ] ], 
+      :conditions => ['geography = ? AND contest = ?',geography,contest], 
+      :order => 'electiondays.date DESC', 
+      :select => 'choices.*'
+    ).first
+  end
+  
+  def self.find_by_districts(districts,hidepast=true)
+    future = Electionday.all( 
+      :order => 'date DESC', 
+      :conditions => ['date > ? AND geography IN(?)',Date.today,districts], 
+      :joins => [ :electionballots => [ :choices ] ], 
+      :select => 'electiondays.*',
+      :limit => 1
+    )
+
+    return future.first.choices.by_district(districts) unless future.first.nil?
+    return [] if hidepast # Generally will return empty if no coming elections
+    
+    past = Electionday.all( # Returns most recent election for these districts
+      :order => 'date ASC', 
+      :conditions => ['date < ? AND geography IN(?)',Date.today, districts ],
+      :joins => [ :electionballots => [ :choices ] ], 
+      :include => [:choices => [:options => [:feedback => [:user] ] ]], 
+      :select => 'electiondays.*', 
+      :limit => 1
+    ).first
+    
+    return past.choices.by_district(districts)
+
   end
 
   

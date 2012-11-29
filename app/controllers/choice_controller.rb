@@ -67,8 +67,10 @@ class ChoiceController < ApplicationController
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
 
+    choices = params[:past] ? @user.choices.past :  @user.choices.future
+    more = ! params[:past] && !@user.choices.empty?
 
-    @choices = @user.choices.uniq.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
+    @choices = choices.uniq.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
 
     if !current_user.nil? && current_user != @user
       @recommended = true
@@ -81,7 +83,7 @@ class ChoiceController < ApplicationController
     @message = !@user.description.nil? && !@user.guide_name.strip.empty? ? @user.description : 'A Voter Guide by '+@user.first_name+', powered by The Ballot.'
     @image = @user.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @user.memes.last.id )+'.png'
 
-    result = {:state => 'profile', :user => @user.to_public(false) }
+    result = {:state => 'profile', :user => @user.to_public(false), :more => more }
 
     @config = result.to_json
     @choices_json = @choices.to_json( Choice.to_json_conditions )
@@ -91,7 +93,7 @@ class ChoiceController < ApplicationController
 
   def state
     
-    @choices = Choice.where('geography LIKE ?', params[:state]+'%' ).order("contest_type IN('Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot' ) ASC").limit( 50 ).offset( params[:page] || 0 )
+    @choices = Choice.find_by_state(params[:state], 50, params[:page] || 0 )
 
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
 
@@ -100,7 +102,7 @@ class ChoiceController < ApplicationController
     if params[:format] == 'json'
       render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
     else
-      @types = Choice.where('geography LIKE ?', params[:state]+'%' ).select("DISTINCT( contest_type)").sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( c.contest_type) }.map{ |c| c.contest_type }
+      @types = Choice.types_by_state( params[:state])
 
       @states = Choice.states
       @stateAbvs = Choice.stateAbvs
@@ -122,7 +124,7 @@ class ChoiceController < ApplicationController
   end
   
   def show
-    @choice = Choice.find_by_geography_and_contest(params[:geography],params[:contest].gsub('_',' '))
+    @choice = Choice.find_office(params[:geography],params[:contest].gsub('_',' '))
 
     raise ActionController::RoutingError.new('Could not find '+params[:contest].gsub('_',' ') ) if @choice.nil?
 

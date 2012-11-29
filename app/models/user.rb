@@ -25,7 +25,20 @@ class User < ActiveRecord::Base
   end
   has_many :memes, :through => :feedback
   has_many :options, :through => :feedback
-  has_many :choices, :through => :options
+  has_many :choices, :through => :options do
+    def future
+      all( :select => 'choices.*', 
+        :conditions => ['date >= ?',Date.today],
+        :joins => [:users => [:choices => [:electionballot => [ :electionday ]]]], 
+        :include => [ :options => [:feedback ] ] )
+    end
+    def past
+      all( :select => 'choices.*', 
+        :conditions => ['date < ?',Date.today],
+        :joins => [:users => [:choices => [:electionballot => [ :electionday ]]]], 
+        :include => [ :options => [:feedback ] ] )
+    end
+  end
 
   
   serialize :pages
