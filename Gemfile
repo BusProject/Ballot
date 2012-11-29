@@ -76,6 +76,8 @@ end
 
 gem "rspec-rails", :group => [:test, :development]
 
-group :test do
+group :test, :development do
   gem "factory_girl_rails"
+  gem "guard-rspec"
+  gem "growl"
 end
