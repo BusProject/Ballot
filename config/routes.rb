@@ -26,6 +26,11 @@ Ballot::Application.routes.draw do
     match '/option/:id/delete' => 'admin#option_delete', :as => 'option_delete', :via => :post
     match '/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
     
+    scope '/districts' do      
+      match '' => 'districts#index', :as => 'districts'
+      match '/add' => 'districts#new', :via => :get
+      match '/add' => 'districts#create', :via => :post
+    end
   end
    
 

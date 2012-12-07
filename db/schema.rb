@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121231611) do
+ActiveRecord::Schema.define(:version => 20121206205719) do
 
   create_table "choices", :force => true do |t|
     t.string   "contest"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(:version => 20121121231611) do
   end
 
   add_index "choices", ["geography", "contest", "electionballot_id"], :name => "index_choices_on_geography_and_contest_and_electionballot_id", :unique => true
+
+  create_table "districts", :force => true do |t|
+    t.string   "name"
+    t.text     "shape"
+    t.string   "geography"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "electionballots", :force => true do |t|
     t.integer  "electionday_id"
