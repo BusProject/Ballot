@@ -24,6 +24,7 @@ class ChoiceController < ApplicationController
           :contest => params[:choice][:contest],  
           :geography => geography,
           :votes => params[:choice][:votes].to_i,
+          :electionballot => Electionballot.find(params[:choice][:electionballot_id] ),
           :contest_type => params[:choice][:contest_type],
           :options_attributes => params[:choice][:options_attributes]
         )
@@ -34,6 +35,7 @@ class ChoiceController < ApplicationController
           :description => params[:choice][:description],
           :geography => geography,
           :contest_type => params[:choice][:contest_type],
+          :electionballot => Electionballot.find(params[:choice][:electionballot_id] ),
           :options_attributes => params[:choice][:options_attributes]
         )
       end
@@ -176,6 +178,7 @@ class ChoiceController < ApplicationController
     end
     
     
+    districts += District.geography_match( districts, params['l'])
     
     unless districts.nil?
       @choices = Choice.find_by_districts( districts ).each{ |c| c.prep current_user }
