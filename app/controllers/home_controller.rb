@@ -22,6 +22,7 @@ class HomeController < ApplicationController
         if current_user
           address = current_user.address unless current_user.address.nil? || current_user.address.empty?
           if match = current_user.match
+            match.data += District.geography_match( match.data, match.latlng )
             @choices = Choice.find_by_districts( match.data ).each{ |c| c.prep current_user }
             latlng = match.latlng
             state = match.data.select{ |d| d.length == 2 }.first
