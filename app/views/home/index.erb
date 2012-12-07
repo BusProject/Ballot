@@ -56,6 +56,9 @@
 			<h1>There May Be More Data</h1>
 			<p>There may be more data <%= t('site.for') %> <span data-bind="text: yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ] "></span> - we are limited in how deep we can perform matches on addresses (State Legislatures on up)</p>
 			<p>Visit <a data-bind="text: yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]+'\'s State Page', attr: { href: '/'+address.state() } "></a> for a full list</p>
+			<p style="margin-top: 20px;"><%= t('add_form.missing' )%></p>
+			<a href="<%= user_add_choice_path('candidate') %>"><button ><%= t('add_form.add_candidate')%></button></a>
+			<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('add_form.add_measure')%></button></a><br /><br /><br />
 		</div>
 		
 		<!-- <h1><%= t('front.more')%></h1>
