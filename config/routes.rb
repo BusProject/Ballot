@@ -14,15 +14,20 @@ Ballot::Application.routes.draw do
   match '/users/add/:type' => 'choice#new', :via => :get, :type => /candidate|measure/ , :as => 'user_add_choice'
   match '/users/add' => 'choice#create', :via => :post, :as => 'user_create_choice'
 
-  match '/admin' => 'admin#index', :as => 'admin'
-  match '/admin/find/:object/' => 'admin#find', :as => 'admin_find' #, :via => :post
-  match '/admin/:id' => 'admin#admin', :as => 'user_admin', :via => :post
-  match '/admin/ban/:id' => 'admin#ban', :as => 'user_ban', :via => :post
-  match '/admin/choice/:id' => 'admin#choice_edit', :as => 'choice_edit', :via => :get
-  match '/admin/choice/:id' => 'admin#choice_update', :as => 'choice_update', :via => :post
-  match '/admin/choice/:id/delete' => 'admin#choice_delete', :as => 'choice_delete', :via => :post
-  match '/admin/option/:id/delete' => 'admin#option_delete', :as => 'option_delete', :via => :post
-  match '/admin/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
+  scope '/admin' do
+    match '' => 'admin#index', :as => 'admin'
+
+    match '/find/:object/' => 'admin#find', :as => 'admin_find' #, :via => :post
+    match '/:id' => 'admin#admin', :as => 'user_admin', :via => :post
+    match '/ban/:id' => 'admin#ban', :as => 'user_ban', :via => :post
+    match '/choice/:id' => 'admin#choice_edit', :as => 'choice_edit', :via => :get
+    match '/choice/:id' => 'admin#choice_update', :as => 'choice_update', :via => :post
+    match '/choice/:id/delete' => 'admin#choice_delete', :as => 'choice_delete', :via => :post
+    match '/option/:id/delete' => 'admin#option_delete', :as => 'option_delete', :via => :post
+    match '/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
+    
+  end
+   
 
 
   
@@ -62,7 +67,6 @@ Ballot::Application.routes.draw do
   match '/m/:id/fb' => 'meme#fb', :via => :get, :as => 'meme_fb_image'
   match '/m/:id' => 'meme#show', :via => :get, :as => 'meme_show_image'
   match '/m/:id' => 'meme#destroy', :via => :post, :as => 'meme_show_image'
-
 
   match '/:state' => 'choice#state', :state =>/AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC/ , :as => 'state'
 
