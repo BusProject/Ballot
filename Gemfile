@@ -39,6 +39,8 @@ gem 'acts_as_votable'
 
 gem 'mobile-fu'
 
+gem 'georuby'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
