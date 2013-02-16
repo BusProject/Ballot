@@ -149,7 +149,7 @@ class ChoiceController < ApplicationController
     
     if params[:a]
       # If passed an address, uses 'a' to query using Google's geocoding
-      bloop =JSON::parse(RestClient.get 'http://maps.googleapis.com/maps/api/geocode/json?address=3522+N+Borthwick+Ave+Portland+OR&sensor=true' )
+      bloop =JSON::parse(RestClient.get 'http://maps.googleapis.com/maps/api/geocode/json?address='+params[:a]+'&sensor=false' )
       if result = bloop['results'][0]
         address = ['Prez']
         address.push( result['address_components'].reject{ |a| a['types'].index("locality").nil? }.first['long_name'] )
