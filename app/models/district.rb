@@ -18,13 +18,14 @@ class District < ActiveRecord::Base
   def locate lat,lng
     shape = JSON::parse(self.shape)
     features = shape["features"]
-    
+
     features.each do |feature|
       polygon = Polygon.from_array( feature['geometry']['coordinates'][0] )
-      return feature['properties']['Name'] if polygon.contains_point?(lng,lat)
+      return feature['properties']['Name'] if polygon.is_inside?(lng,lat)
     end
     
     return false
   end
   
 end
+
