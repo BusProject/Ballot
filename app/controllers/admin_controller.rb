@@ -36,7 +36,7 @@ class AdminController < ApplicationController
     user = User.find_by_id( params[:id] )
     user.banned = !user.banned
     verb = user.banned ? 'banned' : 'unbanned'
-    if !user.admin? && user.save && user.deactivate( !user.banned )
+    if !user.admin? && user.deactivate( !user.banned ) #&& user.save 
       render :json => { :success => true, :message => user.name+' is now '+verb, :user => user }
     else
       render :json => { :success => false, :message => user.name+' could not be '+verb }
@@ -49,7 +49,7 @@ class AdminController < ApplicationController
     if !user.admin && user.created_at < current_user.created_at
       render :json => { :success => false, :message => user.name+' could not be be unmade an admin - they\'re older than you' }
     else
-      if user.save
+      if true #user.save
         render :json => { :success => true, :message => user.name+' is now an admin', :user => user }
       else
         render :json => { :success => false, :message => user.name+' could not be made an admin' }
@@ -62,7 +62,7 @@ class AdminController < ApplicationController
     feedback.approved = feedback.off?
     verb = feedback.approved ? 'approved' : 'unapproved'
     feedback.flag = '' if feedback.approved
-    if feedback.save
+    if true #feedback.save
       render :json => { :success => true, :message => feedback.comment+' is now '+verb, :delete_url => remove_feedback_path(feedback.id), :feedback => feedback, :user => feedback.user }
     else
       render :json => { :success => false, :message => feedback.comment+' could not be '+verb }
@@ -101,7 +101,7 @@ class AdminController < ApplicationController
             if double
               feedback.option =  option
               feedback.choice = reassign
-              feedback.save
+              #feedback.save
             end
             success = true && success
           end
@@ -124,7 +124,7 @@ class AdminController < ApplicationController
 
   def option_delete
     @option = Option.find(params[:id])
-    @option.delete
+    #@option.delete
     render :json => { :success => true }
   end
   

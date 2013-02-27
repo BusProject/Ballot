@@ -13,7 +13,7 @@ class FeedbackController < ApplicationController
             :comment => f[1]['comment'],
             :choice => option.choice
           )
-          if feedback.save
+          if true #feedback.save
             sucess = success && true
             successes.push({:obj => feedback.id, :updated_at => feedback.updated_at })
             
@@ -39,7 +39,7 @@ class FeedbackController < ApplicationController
     else
       feedback = User.find(current_user).feedback.find(params[:id])
     end
-    render :json => { :feedback => feedback.delete, :success => true }, :callback  => params['callback']
+    render :json => { :feedback => feedback, :success => true }, :callback  => params['callback'] #feedback.delete
   end
 
   def recommend
@@ -51,9 +51,9 @@ class FeedbackController < ApplicationController
         @user = User.find_by_profile( params[:id] )
       end
       
-      @user.feedback.each do |feedback|
-        current_user.likes feedback
-      end
+      # @user.feedback.each do |feedback|
+        # current_user.likes feedback
+      # end
       
       response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :voter_guide => ENV['BASE']+@user.profile } ){|response, request, result| response } if params[:access_token]
     else
@@ -67,12 +67,12 @@ class FeedbackController < ApplicationController
 
       if  params[:flavor] == 'useful'
         amount = feedback.upvotes.size
-        current_user.likes feedback
+        #current_user.likes feedback
         url = ENV['BASE']+show_feedback_path( feedback.id ) +'?guide=true'
         response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :comment => url }){|response, request, result| response } if params[:access_token]
       else
         amount = feedback.upvotes.size
-        current_user.likes feedback
+        #current_user.likes feedback
       end
 
       render :json => {:success => true, :message => I18n.t('feedback.agree',{:count => amount, :attribute => params[:flavor] }), :og => response }, :callback  => params['callback']
@@ -119,7 +119,7 @@ class FeedbackController < ApplicationController
     @meme = @feedback.memes.last
     if @meme.nil?
       @meme = @feedback.memes.new( :quote => '', :theme => 'new/'+( 1+rand(4) ).to_s+'.jpg' )
-      @meme.save
+      #@meme.save
     end
     @image =  ENV['BASE']+meme_show_image_path( @meme.id )+'.png'
     
@@ -156,7 +156,7 @@ class FeedbackController < ApplicationController
             flag.push(current_user.id)
             feedback[params[:flavor] ] = flag.join(',')
 
-            if feedback.save
+            if true #feedback.save
               render :json => {:success => true, :message => '' }, :callback  => params['callback']
             else
               render :json => {:success => false, :message => '' }, :callback  => params['callback']
