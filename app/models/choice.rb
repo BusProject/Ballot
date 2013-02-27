@@ -83,7 +83,7 @@ class Choice < ActiveRecord::Base
 
   def self.find_by_state(state,limit=50,offset=0)
     return self.all(
-      :conditions => ['geography LIKE ? AND date > ?', state+'%',Date.today],
+      :conditions => ['geography LIKE ? AND date > ?', state+'%', Date.parse('2012-11-5')], #Date.today],
       :select => 'choices.*',
       :joins => [:electionballot => [:electionday]],
       :include => [:options => [:feedback]],
@@ -94,7 +94,7 @@ class Choice < ActiveRecord::Base
   end
   def self.types_by_state(state)
     return self.all(
-      :conditions => ['geography LIKE ? AND date > ?', state+'%',Date.today],
+      :conditions => ['geography LIKE ? AND date > ?', state+'%', Date.parse('2012-11-5')], #Date.today],
       :select => 'DISTINCT( choices.contest_type) ',
       :joins => [:electionballot => [:electionday]]
     ).sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( c.contest_type) }.map{ |c| c.contest_type }
@@ -114,7 +114,7 @@ class Choice < ActiveRecord::Base
   def self.find_by_districts(districts,hidepast=true)
     future = Electionday.all( 
       :order => 'date DESC', 
-      :conditions => ['date > ? AND geography IN(?)',Date.today,districts], 
+      :conditions => ['date > ? AND geography IN(?)', Date.parse('2012-11-5'),districts ], #,Date.today
       :joins => [ :electionballots => [ :choices ] ], 
       :select => 'electiondays.*',
       :limit => 1
@@ -125,7 +125,7 @@ class Choice < ActiveRecord::Base
     
     past = Electionday.all( # Returns most recent election for these districts
       :order => 'date ASC', 
-      :conditions => ['date < ? AND geography IN(?)',Date.today, districts ],
+      :conditions => ['date < ? AND geography IN(?)', Date.parse('2012-11-5'),districts ], #Date.today,
       :joins => [ :electionballots => [ :choices ] ], 
       :include => [:choices => [:options => [:feedback => [:user] ] ]], 
       :select => 'electiondays.*', 
