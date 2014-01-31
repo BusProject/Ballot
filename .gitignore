@@ -12,3 +12,4 @@ pg/
 activesupport/
 *.dat
 public/system/
+*.swp

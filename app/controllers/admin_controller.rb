@@ -127,6 +127,86 @@ class AdminController < ApplicationController
     @option.delete
     render :json => { :success => true }
   end
+
+  def import_candidates
+    require 'csv'
+    require 'active_support/all'
+    require File.expand_path( File.join('lib', 'process.rb') )
+
+    @headers = params[:headers]
+    file = params[:"candidates-import"].path
+    row = 0
+
+    CSV.foreach(file, {:headers => @headers}) do |data|
+      #skip the header row 
+      if row == 0
+        row += 1
+        next
+      end
+
+      # begin
+      obj = {}
+      ii=0
+      data.each do |d|
+        unless d.nil?
+          obj[ @headers[ii] ] = ActiveSupport::Inflector.transliterate(d)
+        end
+        ii+=1
+      end
+      newobj = addCandidate(obj)
+      row+=1
+    end
+    render :json => { :success => true }
+  end
+
+  def import_measures
+    require 'csv'
+    require 'active_support/all'
+
+    @headers = params[:headers]
+    file = params[:"measures-import"].path
+    row = 0
+
+    CSV.foreach(file, {:headers => @headers}) do |data|
+      #skip the header row 
+      if row == 0
+        row += 1
+        next
+      end
+
+      obj = {}
+      ii=0
+
+      data.each do |d|
+        unless d.nil?
+          obj[ @headers[ii] ] = ActiveSupport::Inflector.transliterate(d)
+        else
+          obj[ @headers[ii] ] = ''
+        end
+        
+        ii+=1
+      end
+
+
+      row_choice = { :geography => obj['State'], :contest => obj['Title'], :contest_type => 'Ballot_Statewide', :description => obj['Subtitle'] }
+      row_option1 = { :name => obj['Response 1'], :blurb => obj['Response 1 Blurb'], :blurb_source => obj['Text'] }
+      row_option2 = { :name => obj['Response 2'], :blurb => obj['Response 2 Blurb'], :blurb_source => obj['Text'] }
+
+      choice = Choice.find_or_create_by_geography_and_contest( row_choice[:geography],row_choice[:contest],row_choice)    
+      choice.update_attributes(row_choice)
+      choice.save
+      option = choice.options.find_or_create_by_name( row_option1[:name], row_option1)
+      option.update_attributes(row_option1)
+      option.save
+      
+      option = choice.options.find_or_create_by_name( row_option2[:name], row_option2)
+      option.update_attributes(row_option2)
+      option.save
+
+      row+=1
+    end
+    render :json => { :success => true }
+  end
   
   protected
     def check_admin
