@@ -171,8 +171,10 @@
 <h2>Edit Choices / Options</h2>
 <p><input id="find_choice" placeholder="Edit Something: Search by contest name or option name" ></p>
 <div class="choice_form"></div>
+
 <h2>Import Candidates</h2>
-<form action='/admin/import/candidates' method='post' id='import-candidates' enctype='multipart/form-data'>
+
+<%= form_tag '/admin/import/candidates',  :id=>'import-candidates', :enctype=>'multipart/form-data'  do %>
   <ul class="import-form-page">
     <li>
       <label>select file</label>
@@ -186,10 +188,11 @@
       <div class="data"><input type='submit' id='import-candidates-preview-button' value='Preview' class='button'/></div>
     </li>
   </ul>
-</form>
+<% end %>
 
 <h2>Import Measures</h2>
-<form action='/admin/import/measures' method='post' id='import-measures' enctype='multipart/form-data'>
+
+<%= form_tag '/admin/import/measures',  :id=>'import-measures', :enctype=>'multipart/form-data'  do %>
   <ul class="import-form-page">
     <li>
       <label>select file</label>
@@ -203,7 +206,5 @@
       <div class="data"><input type='submit' id='import-measures-preview-button' value='Preview' class='button'/></div>
     </li>
   </ul>
-</form>
-<form action='' method='post'>
-  <input type='submit' value='submit'>
-</form>
+<% end %>
+

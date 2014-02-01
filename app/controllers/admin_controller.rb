@@ -131,13 +131,13 @@ class AdminController < ApplicationController
   def import_candidates
     require 'csv'
     require 'active_support/all'
-    require File.expand_path( File.join('lib', 'process.rb') )
+    require File.expand_path( File.join('script', 'process.rb') )
 
     @headers = params[:headers]
     file = params[:"candidates-import"].path
     row = 0
 
-    CSV.foreach(file, {:headers => @headers}) do |data|
+    CSV.foreach(file) do |data|
       #skip the header row 
       if row == 0
         row += 1
@@ -167,7 +167,7 @@ class AdminController < ApplicationController
     file = params[:"measures-import"].path
     row = 0
 
-    CSV.foreach(file, {:headers => @headers}) do |data|
+    CSV.foreach(file) do |data|
       #skip the header row 
       if row == 0
         row += 1

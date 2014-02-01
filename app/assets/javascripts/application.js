@@ -42,6 +42,7 @@ window.onload = function() {
       //submit the form as normal
       return true;
     }
+    e.preventDefault();
     previewImportFile(e, CANDIDATES);
     submitFlag = true;
     return false;
@@ -51,6 +52,7 @@ window.onload = function() {
       //submit the form as normal
       return true;
     }
+    e.preventDefault();
     previewImportFile(e, MEASURES);
     submitFlag = true;
     return false;
@@ -59,7 +61,7 @@ window.onload = function() {
 
 function previewImportFile(e, type, submitFlag){
   var self = this;
-  var fHandle = e.currentTarget[0].files[0]
+  var fHandle = e.currentTarget[2].files[0]
   var fr = new FileReader();
   fr.readAsText(fHandle);
   fr.onload = function(e){
@@ -95,6 +97,7 @@ function buildMatrix(o) {
   matrix[0] = new Array();
   for(var i = 0; i < o.headers.length; i++){
     matrix[0][i] = "<select name='headers[]' id='headers-" + i + "'>" + o.options + "</select>";
+    setTimeout(function(){$("#headers-" + i).val(o.headers[i])},500);
   }
   
   for(var i = 0; i < o.rows.length; i++) {
@@ -128,38 +131,40 @@ function buildOptions(type) {
   var options = '';
 
   if(type == MEASURES) {
-    options += '<option value="id">ID</options>';
-    options += '<option value="state">State</options>';
-    options += '<option value="title">Title</options>';
-    options += '<option value="subtitle">Subtitle</options>';
-    options += '<option value="brief">Brief</options>';
-    options += '<option value="text">Text</options>';
-    options += '<option value="response_1">Response 1</options>';
-    options += '<option value="blurb">Response 1 Blurb</options>';
-    options += '<option value="response_2">Response 2</options>';
-    options += '<option value="response_2_blurb">Response 2 Blurb</option>';
+    options += '<option value="nil">Do Not Import</option>';
+    options += '<option value="ID">ID</options>';
+    options += '<option value="State">State</options>';
+    options += '<option value="Title">Title</options>';
+    options += '<option value="Subtitle">Subtitle</options>';
+    options += '<option value="Brief">Brief</options>';
+    options += '<option value="Text">Text</options>';
+    options += '<option value="Response 1">Response 1</options>';
+    options += '<option value="Response 1 Blurb">Response 1 Blurb</options>';
+    options += '<option value="Response 2">Response 2</options>';
+    options += '<option value="Response 2 Blurb">Response 2 Blurb</option>';
   }
 
   if(type == CANDIDATES) {
-    options += '<option value="uid">UID</option>';
-    options += '<option value="state">State</option>';
-    options += '<option value="office_level">Office Level</option>';
-    options += '<option value="electoral_district">Electoral District</option>';
-    options += '<option value="office_name">Office Name</option>';
-    options += '<option value="candidate_name">Candidate Name</option>';
-    options += '<option value="candidate_party">Candidate Party</option>';
-    options += '<option value="completed">Completed?</option>';
-    options += '<option value="incumbent">Incumbent</option>';
-    options += '<option value="phone">Phone</option>';
-    options += '<option value="mailing_address">Mailing Address</option>';
-    options += '<option value="website">Website</option>';
-    options += '<option value="email">Email</option>';
-    options += '<option value="facebook_url">Facebook URL</option>';
-    options += '<option value="twitter_name">Twitter Name</option>';
-    options += '<option value="google_plus_url">Google Plus URL</option>';
-    options += '<option value="wiki_word">Wiki Word</option>';
-    options += '<option value="youtube">Youtube</option>';
-    options += '<option value="source">Source</option>';
+    options += '<option value="nil">Do Not Import</option>';
+    options += '<option value="UID">UID</option>';
+    options += '<option value="State">State</option>';
+    options += '<option value="Office Level">Office Level</option>';
+    options += '<option value="Electoral District">Electoral District</option>';
+    options += '<option value="Office Name">Office Name</option>';
+    options += '<option value="Candidate Name">Candidate Name</option>';
+    options += '<option value="Candidate Party">Candidate Party</option>';
+    options += '<option value="Completed?">Completed?</option>';
+    options += '<option value="Incumbent">Incumbent</option>';
+    options += '<option value="Phone">Phone</option>';
+    options += '<option value="Mailing Address">Mailing Address</option>';
+    options += '<option value="Website">Website</option>';
+    options += '<option value="Email">Email</option>';
+    options += '<option value="Facebook URL">Facebook URL</option>';
+    options += '<option value="Twitter Name">Twitter Name</option>';
+    options += '<option value="Google Plus URL">Google Plus URL</option>';
+    options += '<option value="Wiki Word">Wiki Word</option>';
+    options += '<option value="Youtube">Youtube</option>';
+    options += '<option value="Source">Source</option>';
   }
 
   return options;
