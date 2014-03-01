@@ -36,7 +36,7 @@
 			<p data-bind="visible: $parent.votes > 1, text: I18n.t('candidates.get_to_votes',{ count:$parent.votes})"><%= t('candidates.get_to_votes', {:count => choice.votes} ) %></p>
 
 			<select class="chosen" data-bind="value: $parent.chosen, options: $parent.available, optionsCaption:'[ '+I18n.t( 'candidates.prompt') +' ]', optionsText: 'name'"></select><div class="arrows">&#x25B2;<br />&#x25BC;</div>
-		
+
 			<textarea type="text" class="comment" data-bind="elastic: true" placeholder='<%= t('candidates.comment') %>' /></textarea>
 			<div class="buttons">
 				<button class="submit" data-bind="attr: { disabled: $parent.chosen() == null }"><%= t('site.submit' )%></button><br />
@@ -53,6 +53,6 @@
 		<p><%= t('candidates.get_to_votes', {:count => choice.votes} ) %></p>
 		<p><%= t('site.login') %></p>
 		<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook)  %>
-		
+
 	</div>
 <% end -%>

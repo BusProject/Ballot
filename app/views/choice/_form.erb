@@ -33,12 +33,12 @@
 		<label><%= t('candidates.votes') %></label> <%= form.select :votes, [1,2,3,4]  %>
 	</p>
 	<br />
-	
+
 	<%= link_to 'See the full page', ENV['BASE']+'/'+@choice.to_url, :style => 'font-size: 20px;' %>
 	<hr>
 	<h2>Options</h2>
 	<%= form.fields_for :options do |options_form| %>
-	
+
 		<div class="option">
 			<p>
 				<label>Name</label><br />

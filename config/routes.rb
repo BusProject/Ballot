@@ -4,7 +4,7 @@ Ballot::Application.routes.draw do
     resource :registration,
       only: [:new, :create ], path: 'users', path_names: { new: 'sign_up' }, controller: 'devise/registrations'
   end
-  
+
   match '/users/cancel' => 'user#cancel', :as => 'user_cancel'
   match '/users/update' => 'user#update', :as => 'user_update', :via => :post
   match '/users/pages' => 'user#access_pages', :as => 'user_pages'
@@ -25,17 +25,17 @@ Ballot::Application.routes.draw do
     match '/choice/:id/delete' => 'admin#choice_delete', :as => 'choice_delete', :via => :post
     match '/option/:id/delete' => 'admin#option_delete', :as => 'option_delete', :via => :post
     match '/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
-    
-    scope '/districts' do      
+
+    scope '/districts' do
       match '' => 'districts#index', :as => 'districts'
       match '/add' => 'districts#new', :via => :get
       match '/add' => 'districts#create', :via => :post
     end
   end
-   
 
 
-  
+
+
   root :to => "home#index"
   match '/about' => "home#about"
   match '/api' => "home#api"
@@ -59,7 +59,7 @@ Ballot::Application.routes.draw do
 
   match '/lookup' => 'choice#index'
   match '/lookup/:id/more' => 'choice#more'
-  
+
   match '/feedback/save' => 'feedback#update', :via => :post, :as => 'save_feedback'
   match '/feedback/:id/remove' => 'feedback#delete', :via => :post, :as => 'remove_feedback'
   match '/feedback/:id/flag' => 'feedback#flag', :via => :post, :as => 'flag_feedback'
@@ -80,6 +80,6 @@ Ballot::Application.routes.draw do
   match '/:id' => 'feedback#recommend', :as => 'recommend', :via => :post
 
   match '/:geography/:contest' => 'choice#show', :contest =>/[^\/]+/ , :as => 'contest'
-  
+
 
 end
