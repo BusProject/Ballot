@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Nov6
+module OpenBallot
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -38,7 +38,7 @@ module Nov6
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    
+
     # Enable the asset pipeline
     config.assets.paths << Rails.root.join("app", "assets", "flash")
     config.assets.enabled = true
@@ -49,6 +49,6 @@ module Nov6
     config.app_generators.stylesheet_engine :less
 
 
-    
+
   end
 end

@@ -6,8 +6,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require i18n
-//= require i18n/translations
+// require i18n
+// require i18n/translations
 //= require knockout-latest.debug
 //= require models
 //= require_tree ./main

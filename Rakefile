@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Nov6::Application.load_tasks
+OpenBallot::Application.load_tasks

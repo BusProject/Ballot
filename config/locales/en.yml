@@ -267,13 +267,8 @@ en:
         confirm: 'Are you sure you want to create this?'
 
     # used in memes
-<<<<<<< HEAD
-    badge: 
-        title: 'November6th.org Badge Creator'
-=======
     badge:
         title: 'TheBallot.org Badge Creator'
->>>>>>> master
         two_title: 'Step 2: Choose a Background'
         two_text: 'Express yourself. Choose a background image for your comment so people notice it on their feed.'
         three: 'Step 3: Share Your Image'

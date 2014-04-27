@@ -1,6 +1,6 @@
 class Option < ActiveRecord::Base
   belongs_to :choice
-  attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbant, :feedback, :blurb_source, :vip_id
+  # attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbant, :feedback, :blurb_source
 
   has_many :feedback, :conditions => [ "length(flag)- length(replace( flag,',','') ) < ? AND approved = ?", 2, true ], :order => ['cached_votes_up - cached_votes_down DESC'], :limit => 4, :readonly => true do
     def page(offset = 0, limit = 10, current_user=nil)
@@ -35,7 +35,7 @@ class Option < ActiveRecord::Base
       all(:limit => nil, :conditions => 'length(comment) > 1' ).count
     end
   end
-  
+
   def type
     return I18n.t('measures.yeses').split(',').index( self.name.downcase).nil? ? I18n.t('site.no').downcase : I18n.t('site.yes').downcase
   end
@@ -48,7 +48,7 @@ class Option < ActiveRecord::Base
     end
     return feedback.uniq
   end
-  
+
   def partySmall
     return '' if self.party.nil?
     return '(D)' unless self.party.index('Democrat').nil?
@@ -60,12 +60,12 @@ class Option < ActiveRecord::Base
   end
 
 
-  
+
   def current_user_is
     return self[:current_user]
   end
 
-  
+
   validates_uniqueness_of :name, :scope => :choice_id
-  
+
 end

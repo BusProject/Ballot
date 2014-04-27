@@ -1,7 +1,7 @@
 task :deploy do
   sh "bundle exec rake spec"
   sh "git checkout -B compiled"
-  sh "git merge -s recursive -Xtheirs nov6"
+  sh "git merge -s recursive -Xtheirs openballot"
   sh 'bundle exec rake assets:clean'
   sh 'bundle exec rake i18n:js:export'
   sh 'bundle exec rake assets:precompile'
@@ -9,5 +9,5 @@ task :deploy do
   sh "git commit -am 'Precompiling assets'"
   sh "git push -f heroku compiled:master"
   sh 'rm app/assets/javascripts/i18n/translations.js'
-  sh "git checkout nov6"
+  sh "git checkout openballot"
 end

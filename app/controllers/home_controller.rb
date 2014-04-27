@@ -2,49 +2,36 @@ class HomeController < ApplicationController
   def index
 
     @classes = 'home '
-    cookename = 'new_'+Rails.application.class.to_s.split("::").first+'_visitor'
-    # if current_user.nil? && !cookies[cookename] && params['q'].nil? && params[:iframe].nil?
-    #
-    #   cookies[cookename] = {
-    #     :value => true,
-    #     :expires => 2.weeks.from_now
-    #   }
-    #   @config = { :state => 'splash' }.to_json
-    #   @classes += 'splash'
-    #
-    #   render :template => 'home/splash'
-    # else
 
-      address = params['q'] || params['address']
+    address = params['q'] || params['address']
 
-      if address.nil?
-        remember = true
-        if current_user
-          address = current_user.address unless current_user.address.nil? || current_user.address.empty?
-          if match = current_user.match
-            match.data += District.geography_match( match.data, match.latlng )
-            @choices = Choice.find_by_districts( match.data ).each{ |c| c.prep current_user }
-            latlng = match.latlng
-            state = match.data.select{ |d| d.length == 2 }.first
-            google = { :address_components => [ { :short_name => state, :types => ["administrative_area_level_1"] }  ] }
-          end
-        else
-          address = cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache']
+    if address.nil?
+      remember = true
+      if current_user
+        address = current_user.address unless current_user.address.nil? || current_user.address.empty?
+        if match = current_user.match
+          @choices = Choice.find_by_districts( match.data ).each{ |c| c.prep current_user }
+          latlng = match.latlng
+          state = match.data.select{ |d| d.length == 2 }.first
+          google = { :address_components => [ { :short_name => state, :types => ["administrative_area_level_1"] }  ] }
         end
       else
-        remember = false
+        address = cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache']
       end
-      address = address || ''
-      latlng = latlng || nil
+    else
+      remember = false
+    end
+    address = address || ''
+    latlng = latlng || nil
 
-      @config = { :address => address.gsub('+',' '), :latlng => latlng, :google => google, :remember => remember }.to_json
+    @config = { :address => address.gsub('+',' '), :latlng => latlng, :google => google, :remember => remember }.to_json
 
-      @choices_json = @choices.to_json( Choice.to_json_conditions )
+    @choices_json = @choices.to_json( Choice.to_json_conditions )
 
-      @classes = 'home front'
+    @classes = 'home front'
 
-      render :template => 'home/index'
-    # end
+    render :template => 'home/index'
+
   end
 
   def stats
@@ -261,7 +248,7 @@ if I18n.locale == :en
        @content = <<EOF
        <h1>Terms of Use</h1>
 
-       <p>Your use of any of the websites owned and operated by the League of Young Voters or The Bus Federation (collectively, "we" or "us") is governed by these Terms of Use. We may modify these Terms of Use from time to time, so we encourage you to check this page each time you revisit one of our websites. The date of the latest revision will be listed below so you will know if the terms have changed since you last accessed the site. Your use of our websites indicates your acceptance to be bound by the provisions of the Terms of Use in effect as of the date of your use. If you do not accept these terms, do not use our websites.</p>
+       <p>Your use of any of the websites owned and operated by The League of Young Voters Education Fund or The Bus Federation Civic Fund (collectively, "we" or "us") is governed by these Terms of Use. We may modify these Terms of Use from time to time, so we encourage you to check this page each time you revisit one of our websites. The date of the latest revision will be listed below so you will know if the terms have changed since you last accessed the site. Your use of our websites indicates your acceptance to be bound by the provisions of the Terms of Use in effect as of the date of your use. If you do not accept these terms, do not use our websites.</p>
 
        <h1>Intellectual Property Rights</h1>
 

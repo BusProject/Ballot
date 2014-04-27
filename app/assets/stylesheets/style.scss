@@ -10,7 +10,7 @@
 
 /********* Structure *********/
 body.home {
-	background: #b2bfc8 image_url('nov6background.jpg') no-repeat fixed;
+	background: #b2bfc8 url('new-bg.jpg') no-repeat fixed;
 	background-position: top center;
 }
 
@@ -18,8 +18,8 @@ body.home {
 #page {
 	background-color:$bgGrey;
 	//background: transparent image_url('pageBG.png') top left repeat;
-	border-right: 1px solid $darkGrey;
-	border-left:1px solid $darkGrey;
+	// border-right: 1px solid $darkGrey;
+	// border-left:1px solid $darkGrey;
 	border-bottom:none;
 	@include border-box;
 	margin:-2px 0 0 0;

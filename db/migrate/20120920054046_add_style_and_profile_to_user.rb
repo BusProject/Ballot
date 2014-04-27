@@ -4,6 +4,5 @@ class AddStyleAndProfileToUser < ActiveRecord::Migration
     add_column :users, :primary, :string
     add_column :users, :secondary, :string
     add_column :users, :bg, :string
-    add_attachment :users, :header
   end
 end

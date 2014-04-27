@@ -13,13 +13,10 @@ $green: #8eb237;
 $bgGreen: #98B84A;
 $bgGrey:#f0f0ed;
 
-
-$nov6Red: #424592;
-
 $sideGrey: $darkGrey;
 $badge: $darkerGrey;
 
-$accent: $nov6Red;
+$accent: $green;
 
 @mixin greenButton() {
 	background-color: $accent;

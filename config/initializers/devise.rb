@@ -10,7 +10,7 @@ Devise.setup do |config|
   # config.mailer = "Devise::Mailer"
 
   # Automatically apply schema changes in tableless databases
-  config.apply_schema = false
+  # config.apply_schema = false
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -109,11 +109,11 @@ Devise.setup do |config|
   config.remember_for = 4.weeks
 
   # If true, extends the user's remember period when remembered via cookie.
-  config.extend_remember_period = true 
+  config.extend_remember_period = true
 
   # If true, uses the password salt as remember token. This should be turned
   # to false if you are not using database authenticatable.
-  config.use_salt_as_remember_token = true
+  # config.use_salt_as_remember_token = true
 
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
@@ -221,8 +221,9 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
   #facebook
-  
 
-  config.omniauth :facebook, ENV['FACEBOOK'], ENV['FACEBOOK_SECRET'],   {:scope => 'email, offline_access, friends_activities, user_location, friends_location, user_activities, user_status, user_photos, publish_stream'  }
-  
+
+  # config.omniauth :facebook, ENV['FACEBOOK'], ENV['FACEBOOK_SECRET'],   {:scope => 'email, offline_access, friends_activities, user_location, friends_location, user_activities, user_status, user_photos, publish_stream'  }
+
+  config.secret_key = ENV['DEVISE_SCECRET'] || '7b0df1dc24add07c5444645f43b46f99c96d57716eabda11ab20497302ce1b70b408fdd9a832ac64d894f00a5e06c12e9c01ea6fb981abbd3af4ff267d66db32'
 end

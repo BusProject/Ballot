@@ -1,9 +1,7 @@
 class Choice < ActiveRecord::Base
-  attr_accessible :contest, :geography, :contest_type, :commentable, :description, :order, :options, :options_attributes, :votes, :electionballot
+  # attr_accessible :contest, :geography, :contest_type, :commentable, :description, :order, :options, :options_attributes, :votes
   validates_presence_of :contest, :geography
-  validates_uniqueness_of :contest, :scope => [ :geography, :electionballot_id ]
-
-  belongs_to :electionballot
+  validates_uniqueness_of :contest, :scope => :geography
 
   has_many :options, :dependent => :destroy, :order => 'position DESC'
   has_many :feedback, :conditions => ['"feedback"."approved" =? ', true] do
@@ -15,6 +13,7 @@ class Choice < ActiveRecord::Base
       user_id = id = current_user.nil? ? 0 : current_user.id
       all(:limit => nil, :conditions => 'length(comment) > 1', :select => 'DISTINCT("user_id" )',  :conditions => ['user_id != ?',user_id] ).count
     end
+
   end
   has_many :users, :through => :feedback
   accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbant'] == '0' && false  }
@@ -80,44 +79,12 @@ class Choice < ActiveRecord::Base
     return [@states[index],geography].join(' ')
   end
 
-
-  def self.find_by_state(state,limit=50,offset=0)
+  def self.find_by_districts(districts)
     return self.all(
-      :conditions => ['geography LIKE ? AND date > ?', state+'%',Date.today],
-      :select => 'choices.*',
-      :joins => [:electionballot => [:electionday]],
-      :include => [:options => [:feedback]],
-      :order => "contest_type IN('Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot' ) ASC",
-      :limit => limit,
-      :offset => offset
-    )
-  end
-  def self.types_by_state(state)
-    return self.all(
-      :conditions => ['geography LIKE ? AND date > ?', state+'%',Date.today],
-      :select => 'DISTINCT( choices.contest_type) ',
-      :joins => [:electionballot => [:electionday]]
-    ).sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( c.contest_type) }.map{ |c| c.contest_type }
-  end
-
-  def self.find_office(geography,contest)
-    return Choice.all(
-      :limit => 1,
-      :joins => [ :electionballot => [ :electionday ] ],
-      :include => [:options => [:feedback => [:user] ] ],
-      :conditions => ['geography = ? AND contest = ?',geography,contest],
-      :order => 'electiondays.date DESC',
-      :select => 'choices.*'
-    ).first
-  end
-
-  def self.find_by_districts(districts,hidepast=true)
-    future = Electionday.all(
-      :order => 'date DESC',
-      :conditions => ['date > ? AND geography IN(?)', Date.parse('2012-11-5'),districts ], #,Date.today
-      :joins => [ :electionballots => [ :choices ] ],
-      :select => 'electiondays.*',
-      :limit => 1
+      :select => ' choices.* ',
+      :include => [:options],
+      :conditions => ['geography IN(?)',districts ],
+      :order => "contest_type IN('Federal','State','County','Other','Ballot_Statewide') DESC, geography"
     )
 
     return future.first.choices.by_district(districts) unless future.first.nil?
@@ -153,19 +120,8 @@ class Choice < ActiveRecord::Base
 
       option[:feedbacks] = option.all_feedback(current_user) || []
 
-      self[:nice_geography] = self.geographyNice(false)
-      if self.contest_type.downcase.index('ballot').nil?
-        if self.votes.nil? || self.options.length > self.votes
-          self[:description] = self.options.map{ |o| o.name }.join(' vs. ')
-        else
-          self[:description] = self.options.map{ |o| o.name }.to_sentence
-        end
-
-        if self.options.select{ |o| o.incumbant? }.length > 0
-          option[:option_type] = option.incumbant? ? 'Incumbant' : 'Challenger'
-        else
-          option[:option_type] = 'Open Seat'
-        end
+      unless self.contest_type.downcase.index('ballot').nil?
+        option[:option_type] = option.type
       else
         option[:option_type] = option.type
       end
@@ -179,15 +135,17 @@ class Choice < ActiveRecord::Base
         names.to_sentence( :words_connector => I18n.t('i18n_toolbox.array.words_connector'), :two_words_connector => I18n.t('i18n_toolbox.array.two_words_connector'), :last_word_connector => I18n.t('i18n_toolbox.array.last_word_connector') ) :
         names.join( I18n.t('i18n_toolbox.array.vs') )
       self[:description] += ' for '+self.votes.to_s+' positions' if self.votes > 1
+      unless current_user.nil?
+        feedback = self.feedback.where(['user_id = ?', current_user]).limit(1).first
+        self.options.first[:feedbacks].push( feedback) unless feedback.nil?
+      end
     end
   end
   # method to add user feedback to profile - even if prepped missed them
   def addUserFeedback user
-    feedback = user.feedback.find{ |f| f.choice == self }
-    unless feedback.nil?
-      option = self.options.select{|o| o.id == feedback.option_id }.first
-      option[:feedbacks].push( feedback ) if option[:feedbacks].select{ |f| f == feedback }.first.nil? && !option.nil?
-    end
+    feedback = user.feedback.select{ |f| f.choice == self }.first
+    option = self.options.select{|o| o.id == feedback.option_id }.first
+    option[:feedbacks].push( feedback ) if !option.nil? && option[:feedbacks].select{ |f| f == feedback }.first.nil?
   end
 
   def more page, current_user=nil
