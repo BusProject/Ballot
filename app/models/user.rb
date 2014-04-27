@@ -3,15 +3,8 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :rememberable, :trackable, :validatable,
-         :omniauthable
+         :omniauthable, :registerable
 
-  # Setup accessible (or protected) attributes for your model
-  # attr_accessible :email, :password, :password_confirmation, :remember_me,
-  #   :image, :location, :name, :url, :first_name, :last_name, :feedback,
-  #   :admin, :authentication_token, :guide_name, :fb, :profile,
-  #   :fb_friends, :description, :alerts, :pages, :profile,
-  #   :primary, :secondary, :bg, :header, :match, :address
-  # attr_accessible :title, :body
   has_many :feedback do
     def most_recent
       all( :order => 'updated_at DESC', :limit => 1).first

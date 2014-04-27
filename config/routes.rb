@@ -1,9 +1,5 @@
 OpenBallot::Application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, skip: :registrations
-  devise_scope :user do
-    resource :registration,
-      only: [:new, :create ], path: 'users', path_names: { new: 'sign_up' }, controller: 'devise/registrations'
-  end
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   match '/users/cancel' => 'user#cancel', :as => 'user_cancel', :via => :get
   match '/users/update' => 'user#update', :as => 'user_update', :via => :post

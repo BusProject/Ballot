@@ -45,9 +45,6 @@
 		<% if choice.new_record? || choice.commentable || true %>
 			<hr class="button lower middle">
 
-			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/candidate/feedback', :choice => choice, :user => user, :feedback => you %>
-			<%- end %>
 
 			<%- if user.nil? %>
 				<% # hiding all of this if a featured user is set - i.e. we're looking at a profile  %>
