@@ -1,8 +1,8 @@
 <% choice = choice || Choice.new %>
 <% user = user || nil %>
 <% choice.options.new if choice.new_record?  %>
-<% feedback = user.nil? ? nil : choice.options.map{ |o| o[:feedbacks] ?  o.feedbacks : o.feedback }.flatten.select{ |f| f.user_id == user.id } %>
-
+<% feedback = user.nil? ? nil : choice.options.map{ |o| o[:feedbacks] ?  o.feedbacks : o.feedback }.flatten.select{ |f| f.user_id == user.id } if feedback.nil? %>
+<% feedback = [feedback] if feedback.class != Array %>
 <% userObj = user == current_user ? 'you()' : 'featured()'  %>
 
 
@@ -62,7 +62,7 @@
 
 	<%- if user != current_user || current_user.nil? %>
 		<div class="controls">
-			<a href="<%= choice.to_url %>" class="link"><i class="icon-comments-alt"></i> <%= t('site.join') %></span>
+			<a href="<%= choice.to_url %>" class="link"><i class="icon-comments-alt"></i> <%= t('site.join') %></a>
 		</div>	
 	<% end -%>
 		

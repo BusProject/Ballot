@@ -279,12 +279,18 @@
 		</div>
 	<% end %>
 	<%- if current_user == @user && !@single %>
-		<div id="more-coming"  class="ballot-section"  >
+		<!-- <div id="more-coming"  class="ballot-section"  >
 			<h1><%= t("profile.add")%></h1>
 			<p><%= t("profile.addsearch") %></p>
 			<input id="profile_search" placeholder="<%= t('profile.find_other') %>" >
 
 		</div>
+			<h1><%= t("add_form.missing")%></h1>
+			<div class="category-heading minor">
+				<a class="add_more" href="<%= user_add_choice_path('candidate') %>"><button ><%= t("add_form.create_candidate")%></button></a>
+				<a class="add_more" href="<%= user_add_choice_path('measure') %>"><button ><%= t("add_form.create_measure")%></button></a>
+			</div>
+		</div> -->
 	<% end -%>
 	<%- if @single %>
 		<a href="<%= @user.profile %>" style="margin-top: 100px; display: block">

@@ -6,7 +6,8 @@ require 'csv'
 require 'active_support/all'
 require File.expand_path( File.join(File.dirname(__FILE__), 'process.rb') )
 
-files = ARGV.empty? ? Dir["/Users/scott/desktop/new bip/*.csv"] : ARGV
+files = ARGV.empty? ? Dir["lib/states/*.csv"] : ARGV
+
 
 i = 0
 
@@ -36,7 +37,8 @@ files.each do |file|
           ii+=1
         end
         
-        a
+        newobj = addCandidate(obj)
+        
         newFile.push( obj.map{|k,v| v }.to_csv ) if obj['Electoral District'].length == 2
       else
         data.each{ |k|  key.push( k ) }

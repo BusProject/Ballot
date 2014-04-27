@@ -86,14 +86,14 @@ class AdminController < ApplicationController
     unless params[:reassign].nil?
       url = params[:reassign].gsub(ENV['BASE'],'').split('/')
       contest = url.pop.gsub('_',' ')
-      geography = url.pop
+      geography = url.pop.gsub('%20',' ')
       reassign = Choice.find_by_geography_and_contest(geography,contest)
       message = ''
 
       unless reassign.nil?
         success = true      
         @choice.feedback.each do |feedback|
-          option = reassign.options.select{ |option| option.name == feedback.option.name }.first
+          option = reassign.options.select{ |option| option.name.split(' ').last == feedback.option.name.split(' ').last && option.name.split(' ').first == feedback.option.name.split(' ').first }.first
           if option.nil?
             success = false && success
           else
@@ -111,7 +111,7 @@ class AdminController < ApplicationController
         message = 'Moved to '+ENV['BASE']+contest_path( reassign.geography, reassign.contest.gsub('_',' ') )
       else
         success = false
-        message = 'could not find '+params[:reassign]
+        message = 'Could not find - searched deets are '+['geography:',geography,'contest:',contest].join(' ')
       end
 
     else 

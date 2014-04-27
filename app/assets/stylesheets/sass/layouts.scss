@@ -1,0 +1,47 @@
+$width: 960px;
+
+html {
+	padding:0;
+	/* for W3C-compliant browsers */
+	margin: 0;
+}
+
+body {
+	height: 100%;
+	padding: 0px 0 0;
+	margin:0;
+}
+
+#container {
+	height: 100%;
+	max-width:960px;
+	clear:both;
+	margin:0 auto;
+	padding-top:30px;
+}
+
+#page {
+	padding: 10px;
+	width: $width;
+	height:100%;
+}
+
+
+#header {
+	width: $width;
+}
+
+#main {
+	min-height: 400px;
+	width:900px;
+	margin-top:5%;
+	margin-left: 6%;
+	padding-bottom:100px;
+	height:100%;
+}
+
+
+#footer {
+	min-width:$width;
+	padding:20px 75px;
+}

@@ -1,0 +1,31 @@
+
+<%= form_for @district, :method => "post", :url =>  '' do |form| %>
+	<h2>Add a New District</h2>
+	<p>
+		<%= form.text_field :name, :placeholder => 'Name it something' %>
+	</p>
+	<p>
+		<%= form.text_field :geography, :placeholder => 'The geography to match to' %>
+	</p>
+	<p>
+		<%= form.text_area :shape, :placeholder => 'Paste in GeoJSON Shape Files', :style => 'width: 100%' %><br />
+	</p>
+	<%= form.submit :disabled => 'disabled' %>
+	<div style="text-align: center; color: grey">No JSON...</div>
+
+<% end -%>
+
+<script>
+	$(document).on('change','form textarea',function() {
+		try {
+			JSON.parse( $(this).val() )
+			$(this).css('borderColor','green')
+			$('input[type=submit]').attr('disabled',null)
+			$('form div').text('Valid JSON :)').css('color','green')
+		} catch(e) {
+			$(this).css('borderColor','red')
+			$('input[type=submit]').attr('disabled',true)
+			$('form div').text('Invalid JSON :(').css('color','red')
+		}
+	})
+</script>

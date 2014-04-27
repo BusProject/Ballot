@@ -12,17 +12,15 @@
 	<p><%= t('add_form.warn_2') %></p>
 	</div>
 	<script type="text/javascript">
-	$(document).on('submit','#new_choice', function(e) { 
+	$(document).on('submit','#new_choice', function(e) {
 		var success = true
-		$('.required',this).each( function() { 
+		$('.required',this).each( function() {
 			var $this = $(this)
 			if( $this.val().length < 1 )  {
 				success = success && false
 				$this.parent().addClass('oops')
 			}
-			
 		})
-		
 		if( success ) return confirm('<%= t('add_form.confirm') %>')
 		else return false;
 	})

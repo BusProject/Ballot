@@ -1,0 +1,32 @@
+body.single, body.profile {
+	#read-ballot .row {
+		hr.button.lower { display:none; }
+		.explanation { margin-bottom: 0px; }
+		.voted { margin:10px 0 50px;}
+		.measure,
+		button.open { display: none }
+		.body { 
+			display: block;
+			padding:15px 15px 0px 15px;
+			width:100%;
+			button.next { display: none }
+			
+			.optionholder { margin-top:0; }
+			
+			.yourFeedback { width:100%; }
+		}
+	}
+}
+body.single {
+	&.not_logged_in .yourFeedback { border-bottom: none }
+}
+
+/*
+body.single .row, body.profile .row { border: 0 !important; background: none !important }
+body.single .row.commentable h1.title::before, body.single .row.commentable h1.title::after,
+body.profile .row.commentable h1.title::before, body.profile .row.commentable h1.title::after { content: ''; width: 0; height: 0; border: 0; }
+body.single .row h1.title, body.single .row.commentable h1.title,
+body.profile .row h1.title, body.profile .row.commentable h1.title { text-indent: 0; background: none; font-size: 60px; color: #d37a3c; text-align: center; cursor: default; }
+body.single div.explanation, body.single .option div.blurb, body.single .option h1, body.single .foot,
+body.profile div.explanation, body.profile .option div.blurb, body.profile .option h1, body.profile .foot { color: #d37a3c !important }
+body.single .body a, body.profile .body a, body.single .body .link, body.profile .body .link { color: !important }*/

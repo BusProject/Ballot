@@ -26,18 +26,18 @@ en:
         loading: 'Loading...'
         for: 'for'
         you_recommend: "You've recommended"
-        
+
         # Objects in the user model
         state: 'State'
         voter_guide: 'Voter Guide'
 
         add: 'Add to Your Voter Guide' # move this to add section
-        
+
         # Account specific
         login: 'You must be logged in through Facebook to use this feature'
         on_the: "on The Ballot"
-        
-        # Account status 
+
+        # Account status
         deactivated: 'ACCOUNT DEACTIVATED'
         banned: 'ACCOUNT BANNED'
 
@@ -74,31 +74,31 @@ en:
             one: 'One person opposes'
             zero: 'No one opposes'
             other: '%{count} people oppose'
-        
+
     # Types - used mostly in the side menu and listing things
     types:
         ballot_measures:
             title: 'Ballot Measures'
             text: 'Learn about initiatives, referenda, and other ballot measures appearing on your ballot, see what other people are saying about them, and share your own opinion.'
-        federal: 
+        federal:
             title: 'Federal'
-            text: 'Take a peek at the candidates that you’ll have the chance to vote on. These candidates will represent you the Federal Government.'
-        state: 
+            text: "Take a peek at the candidates that you\'ll have the chance to vote on. These candidates will represent you in the Federal Government."
+        state:
             title: 'State'
-            text: "These candidates will represent you in your State\'s government."
-        county: 
+            text: "These candidates will represent you in your State Government."
+        county:
             title: 'County'
-            text: "These candidates will represent you in your State\'s government."
+            text: "These candidates will represent you in your County Government."
         other:
             title: 'Other'
-            text: 'These candidates will represent you in your county, municipal, or judicial government.'
-        user_candidates: 
+            text: 'These candidates will represent you in your Municipal or Judicial Government.'
+        user_candidates:
             title: 'User Created Candidates'
             text: 'These are candidates that were created by another user on The Ballot. We cannot verify their accuracy.'
-        user_measures: 
+        user_measures:
             title: 'User Created Measures'
             text: 'These are ballot measures that were created by another user on The Ballot. We cannot verify their accuracy.'
-        
+
     # Menu
     menu:
         find: 'Find Your Ballot'
@@ -112,13 +112,13 @@ en:
         this_ballot: 'Share This Ballot'
         this_page: 'Share This Page'
         this_guide: 'Share This Guide'
-        state_guides: 'Guides By States'
+        state_guides: 'Guides By State'
         top_guides: 'Top Guides'
         guides_in: 'Guides in %{state}'
     # Top Bar
     top:
         start: 'Get Started'
-        login: 'Login with Facebook' # Is an image - will need to change to different 
+        login: 'Log in with Facebook' # Is an image - will need to change to different
         register: 'Register to Vote'
         about: 'About'
         news: 'News'
@@ -127,10 +127,10 @@ en:
         log_out: 'Log Out'
         my_guide: 'My Voter Guide'
         all_guides: 'All Voter Guides'
-        pages: 
-            login: 'Login as facebook page'
+        pages:
+            login: 'Log in as facebook page'
             refresh: 'Refresh Guides'
-    
+
     # used on the single pages and main page
     candidates:
         next: 'Next Candidate'
@@ -138,14 +138,14 @@ en:
         twitter: 'Twitter'
         facebook: 'Facebook'
         website: 'Website'
-        who: 'Is this an Important Race to You?'
-        let: "Show you'll be voting for"
-        let_more: "by adding it to your Voter Guide"
+        who: 'Who Will You Support for This Office?'
+        let: "Let the world know who you\'re supporting for"
+        can_share: 'Your comment will be posted here and you can easily share it on other sites like Facebook, Tumblr, and Pinterest.'
         prompt: 'please select a candidate'
         comment: '(Leave a comment if you wanna)'
         list: 'The Candidates'
         info: 'Contest Information'
-        office_name: 'Office Name. e.g. Mayor, State Senate'
+        office_name: 'Office Name, e.g. Mayor, State Senate'
         add_prompt: 'Add Missing Candidate Contest'
         votes: 'Votes You Can Cast'
         votes_more: "(Note: this is almost always one)"
@@ -181,13 +181,13 @@ en:
         affirmative_name: 'What is an affirmative vote called?'
         yeses: 'yes,support,affirm,for,maintained,approved,approve'
         negative: 'Negative Vote'
-        negative_name: 'Negative Vote'
+        negative_name: 'What is a negative vote called?'
         nos: 'no,deny,affirm,against,reject,repealed,rejected'
         consequences: 'Consequences of this vote'
 
     # Front page specifics
     front:
-        look_ballot: "Look Up What’s On Your Ballot"
+        look_ballot: "Look Up What's On Your Ballot"
         address_placeholder: 'enter your address here'
         save_address: 'Remember as home address'
         confirm: 'Is this right?'
@@ -196,7 +196,7 @@ en:
         more_text: "This isn't your full ballot - we're still adding data "
         more_login: "Log in through Facebook to get an email when we've added more."
     # Toolbox
-    i18n_toolbox: 
+    i18n_toolbox:
         possessive: "%{owner}'s %{thing}"
         possessive_s: "%{owner} %{thing}"
         possessive_you: "Your %{thing}"
@@ -227,7 +227,7 @@ en:
         finest: "These are the finest voter guides in all the land. A voter guide's rank is determined by how useful other users have found it. To see your voter guide cracking the top 10, share your guide with your friends and tell them to recommend your guide."
         finest_state: "These are the finest voter guides in %{state}. A voter guide's rank is determined by how useful other users have found it. To see your voter guide rise through the ranks, share your guide with your friends and tell them to recommend your guide."
         all: "See all of %{state}'s Voter Guides"
-    # Profile 
+    # Profile
     profile:
         customize: "Customize Your Voter Guide"
         title: "Voter Guide Title"
@@ -255,7 +255,7 @@ en:
 
         recommend: 'Recommend this Guide'
         flag: 'Flag this user'
-        
+
     # used on the add form
     add_form:
         warn_1: "Warning: Once you create this contest you will not be able to edit it. So make sure it's perfect. Be sure to include all candidates running for the office. It will appear on your voter guide and on the appropriate State page under the section for \"User Created\" contests."
@@ -267,21 +267,29 @@ en:
         confirm: 'Are you sure you want to create this?'
 
     # used in memes
+<<<<<<< HEAD
     badge: 
         title: 'November6th.org Badge Creator'
+=======
+    badge:
+        title: 'TheBallot.org Badge Creator'
+>>>>>>> master
         two_title: 'Step 2: Choose a Background'
         two_text: 'Express yourself. Choose a background image for your comment so people notice it on their feed.'
         three: 'Step 3: Share Your Image'
-        one: 
+        one:
             title: 'Step 1: Choose Your Text'
             text: 'What do you want to say on your image? If your comment is too long you can edit it so it fits better.'
             remaining: 'Characters Remaining:'
             too_many: 'Too Many'
 
+    friends:
+        heading: "Here's What Your Friends Are Up To"
+        explain: "Here are what your friends are up to on The Ballot"
+        none: "Your friends haven't really done anything on The Ballot yet..."
     # used in responding to feedback
     feedback:
         agree:
             one: "One other person agrees it's %{attribute}"
             zero: "Only you think it's %{attribute}"
-            other: "%{count} other people agrees it's %{attribute}"
-        
+            other: "%{count} other people agree it's %{attribute}"

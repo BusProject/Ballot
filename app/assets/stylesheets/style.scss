@@ -1,0 +1,330 @@
+@import 'sass/mixins';
+@import 'sass/vars';
+
+@import 'type/font-faces';
+@import 'sass/layouts';
+@import 'sass/global';
+// @import 'type/font-awesome';
+// @import 'type/font-awesome-ie7';
+
+
+/********* Structure *********/
+body.home {
+	background: #b2bfc8 image_url('nov6background.jpg') no-repeat fixed;
+	background-position: top center;
+}
+
+
+#page {
+	background-color:$bgGrey;
+	//background: transparent image_url('pageBG.png') top left repeat;
+	border-right: 1px solid $darkGrey;
+	border-left:1px solid $darkGrey;
+	border-bottom:none;
+	@include border-box;
+	margin:-2px 0 0 0;
+}
+
+#footer {
+	background-color: $bgGrey;
+	color:white;
+	width:960px;
+
+	hr {
+		width: 70%;
+		border: 1px dashed $accent;
+		margin-bottom: 20px;
+	}
+	p {
+		font-size:11px;
+		text-align:center;
+		width:100%;
+		margin:0 auto 10px;
+		line-height:13px;
+		color:$darkGrey;
+	}
+
+	a {
+		font-size:11px;
+		color:$accent;
+		&.state { margin-right:10px; }
+	}
+
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+.clearfix {
+	display: block;
+}
+
+/***** Header and Menu *****/
+@import 'sass/header';
+
+
+/***** Page ****/
+
+
+
+.ballot-section {
+	width: 720px;
+	margin: 40px auto 20px;
+
+	.sectionheading {
+		text-align:center;
+		padding:15px 0px;
+		font-size: 24px;
+		color: white;
+		background-color: $accent;
+		font-family:"Open Sans", serif;
+		@include drop-shadow(0,2px,2px,0,.2);
+		@include border-radius(5px);
+		width:95%;
+		margin:0 auto;
+		position:relative;
+
+			&:before {
+				content:"\f0d7";
+				font-family:"FontAwesome";
+				color:$accent;
+				position:absolute;
+				bottom:-18px;
+				left: 50%;
+			}
+		p { color: white; }
+
+	}
+
+	.category-heading {
+		h2 {
+			color: $darkGrey;
+			width: 100%;
+			margin: 10px auto 0;
+			padding:10px 0px;
+			font-family:"Arvo";
+			@include inset-text();
+			&:before {
+				content: "\f005";
+				margin-right: 4px;
+				font-family:"FontAwesome";
+				font-size:80%;
+			}
+
+			&:after {
+				content: "\f005";
+				margin-left: 4px;
+				font-family:"FontAwesome";
+				font-size:80%;
+
+			}
+		}
+
+		p {
+			color: $darkGrey;
+		}
+
+		text-align: center;
+		padding-bottom: 0px;
+		margin: 0 0 10px;
+		font-family:"Arvo";
+		border-radius:10px 10px 10px 10px;
+
+
+	}
+
+}
+
+#find-ballot {
+	.stars {
+		display:none;
+		@include move-stars(100px);
+	}
+	#enter-address {
+		.place-holder {
+			position: absolute;
+			margin: 45px 0 0 -60px;
+			left: 50%;
+			text-align: left;
+			@include no-select();
+			pointer-events: none;
+			color: $accent;
+		}
+		.find-ballot, .place-holder {
+			font-family:'Open Sans', serif;
+			font-size:1.4em;
+			font-weight: 400;
+		}
+		.find-ballot {
+			width:520px;
+		 	margin: 25px auto 0px;
+			-webkit-appearance:none;
+			padding: 13px 10px;
+			border: 1px solid $accent;
+			@include box-shadow(inset 0px 1px 1px 0px rgba(0,0,0,.3) );
+			color: $accent;
+			outline:none;
+			@include border-box;
+			@include placeholder($accent);
+			@include inner-shadow();
+
+		}
+		a.find-ballot-submit {
+			@include greenButton();
+			@include border-radius(0px 2px 2px 0px);
+			display:inline-block;
+			margin:1px 0px 0px -4px;
+			width:80px;
+			padding: 20px 10px;
+			position: relative;
+			top: -3px;
+		}
+
+		.remember {
+			margin:0 0 20px 50px;
+			display:block;
+			text-align:left;
+			font-size:12px;
+			color:lighten($darkGrey,20%);
+
+			&:before {
+				content: "\f006  ";
+				font-family:"FontAwesome";
+
+			}
+
+			&.on {
+				color:$darkGrey;
+				&:before  {
+					content: "\f005  ";
+					font-family:"FontAwesome";
+
+				}
+			}
+
+		}
+
+
+	}
+
+	#map {
+		.confirmation {
+			@include bigText();
+			clear:both;
+			@include inset-text();
+			margin: 15px 0 10px;
+			z-index: 2;
+			position: relative;
+			a {
+				width: 54px;
+				text-decoration: none;
+				margin: 16px 0 0;
+				display: inline-block;
+				font-size: 20px;
+				padding: 8px 8px;
+				@include greyButton();
+				@include border-radius(0px);
+			}
+		}
+		img {
+			width: 620px;
+			&.located {
+				float: left;
+				width: 300px;
+				margin: 0px 50px 20px;
+			}
+			margin: 0 auto;
+			border:1px solid $accent;
+		}
+
+		.top-guides {
+			h3 {
+				text-align:left;
+			}
+
+			ol {
+				text-align:left;
+				list-style-type:decimal;
+				li { line-height: 1.4em; }
+				a {
+
+				}
+			}
+		}
+		.polling-place {
+			clear: both;
+			width: 80%;
+			font-size: 14px;
+			margin: 20px auto 10px;
+			a.link { font-style: italic; }
+			ul {
+				text-align: left;
+				list-style: disc;
+				margin: 0 auto;
+				width: 90%;
+				li { margin: 8px 4px; }
+			}
+		}
+		&.noGuides {
+			.top-guides { display: none; }
+			img { float: none }
+		}
+
+
+	}
+}
+
+
+#more-coming {
+	clear: both;
+	background-color:$grey;
+	color:white;
+	@include border-radius(5px);
+	@include drop-shadow();
+	width:66%;
+	padding:10px;
+
+	p {
+		color:white;
+	}
+
+	input#profile_search {
+		width: 400px;
+		margin: 20px 0;
+		font-size: 18px;
+	}
+
+	button {
+		@include orangeButton();
+		font-size: 16px;
+		padding: 10px 20px;
+	}
+	a.add_more button {
+		margin: 20px 10px;
+		font-size: 12px;
+		width: 240px;
+	}
+
+}
+
+
+
+/** Nonsplash Styling **/
+@import 'sass/message';
+/** Admin Styling **/
+@import 'sass/jQueryUI';
+@import 'sass/admin';
+
+@import 'sass/not_logged_in';
+@import 'sass/single';
+
+
+@import 'sass/add';
+
+// @import 'sass/mobile';

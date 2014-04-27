@@ -1,11 +1,37 @@
 <div id="personal-guide">
 	<div id="read-ballot" data-bind="stopBinding: true">
+
+		<div id="read-ballot" class="ballot-section">
+			<div class="sectionheading">
+				<h1><%= t('friends.heading') %></h1>
+				<p><%= t('friends.explain') %></p>
+			</div>
+		</div>
+
 		<% @feedback.each_with_index do |feedback,n| %>
 
-			<div data-bind="with: choices()[<%= n %>]" class="row">
-				<%=  render 'choice/'+( feedback.choice.contest_type.index('Ballot').nil? ? 'candidate/profile' : 'measure/profile' ), :choice => feedback.choice, :user => feedback.user %>
+			<div class="friendrow">
+
+				<div class="head">
+					<%= image_tag feedback.user.image %>
+				</div>
+				<h4><%= feedback.user.first_name %> voted</h4>
+
+				<p class="friend-comment" style="<%= 'display: none' unless !feedback.nil? & !feedback.comment.nil? && feedback.comment.length > 0 %>" >
+					<%- if !feedback.nil? && !feedback.comment.nil? && feedback.comment.length > 0 %>
+						<%= '"'+feedback.comment+'"' %>
+					<% end -%>
+				</p>
+
+				<% type = feedback.choice.contest_type.downcase.index('ballot').nil? ? 'candidate/profile' : 'measure/profile' %>
+				<%=  render 'choice/'+type, :choice => feedback.choice, :user => feedback.user, :feedback => feedback %>
+
 			</div>
 
 		<% end %>
 	</div>
 </div>
+
+<% if @feedback.empty? %>
+	<h2 style="width: 500px; margin: 0 auto;"><%= t('friends.none') %></h2>
+<% end %>

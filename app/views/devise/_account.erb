@@ -6,7 +6,7 @@
 					<li class="get-started" style="border:none; font-size:12px; padding-top:3px;"><%= t('top.start') %></li>
 					<li class="fb-button"><%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %></li>
 			<% else %>
-					<li style="width: 150px;">
+					<li style="width: 200px; overflow: hidden; white-space: nowrap;">
 						<%= link_to profile_path(current_user.to_url) do %>
 							<%= image_tag(current_user.image || asset_path('alincoln.gif') ) %>
 							<%= current_user.first_name+' '+current_user.last_name %>
@@ -47,10 +47,10 @@
 					</li>
 					<li class="guide">
 						<%= link_to t('top.my_guide'), current_user.profile %>
-						<ul>
+						<!-- <ul>
 							<li><%= link_to t('top.all_guides'), guides_path %></li>
 							<li><%= link_to t('top.top_guides'), top_guides_path %></li>
-						</ul>
+						</ul> -->
 					</li>
 					<li><%= link_to t('top.log_out'), destroy_user_session_path %></li>
 

@@ -228,7 +228,8 @@ function locationModel(data) {
 			fetch = this.fetch,
 			pollingLocation = this.pollingLocation,
 			noGoogle = { 
-				OR:  'Oregon votes by mail - <a href="http://ballotdrop.org/#'+this.address()+'" target="_blank">find Ballot Drop sites here</a>.<br /><br />If you haven\'t received your ballot yet - and are registered - <a href="http://oregonvotes.org/" target="_blank">contact the Secretary of State for a new ballot<a/>.'
+				// OR:  'Oregon votes by mail - <a href="http://ballotdrop.org/#'+this.address()+'" target="_blank">find Ballot Drop sites here</a>.<br /><br />If you haven\'t received your ballot yet - and are registered - <a href="http://oregonvotes.org/" target="_blank">contact the Secretary of State for a new ballot<a/>.'
+				LA:  'Find your Polling Place by looking up your precinct<br />at the <a href="https://voterportal.sos.la.gov/voter.aspx" target="_blank">Lousiana Secretary of State<a/>.'
 				}
 
 		if( geolocated && state && fetch() && empty != lat+','+lng && this.address() != '' ) {
@@ -237,39 +238,39 @@ function locationModel(data) {
 			if( choices().length < 1 ) this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
 			else fetch(true) // Not needed - used with the Lookup callback
 
-			if( typeof noGoogle[ state ] == 'undefined' ) pollingPlace(
-				this.address(),
-				function(response) {
-					var early = processLocations( response.earlyVoteSites ), earlyHTML = ''
-					if( early.length > 0 ) {
-						earlyHTML = '<a onclick="$(this).hide().next(\'ul\').show().nextAll(\'a.link:first\').show(); return false" href="#" class="link">Click to see Early Vote Locations</a><ul style="display:none;">'
-						earlyHTML += early.map( function(location) { 
-							return [ '<li><strong>'+location.name,
-								'</strong> at <a href="',
-								location.directions,'" target="_blank">',
-								location.address,
-								'</a>',
-								location.hours,
-								'</li>'
-								].join(' ')
-							}).join('')
-						earlyHTML += '</ul>'
-					}
-					pollingLocation( 
-						processLocations( response.pollingLocations ).map( function(location) { 
-							return [ '<strong>Your Polling Place:</strong>',
-								location.name,
-								'at <a href="',
-								location.directions,'" target="_blank">',
-								location.address,
-								'</a> ',
-								location.hours,
-								'<br /><br />'
-								].join(' ')
-						}).join(' ') + earlyHTML+'<a style="display:none;" class="link" onclick="$(this).hide().prev(\'ul\').hide().prevAll(\'a.link:first\').show(); return false" href="#" class="click">Hide All</a>'
-					)
-				}
-			);
+			if( typeof noGoogle[ state ] == 'undefined' )  'whoops';// pollingPlace(
+			// 				this.address(),
+			// 				function(response) {
+			// 					var early = processLocations( response.earlyVoteSites ), earlyHTML = ''
+			// 					if( early.length > 0 ) {
+			// 						earlyHTML = '<a onclick="$(this).hide().next(\'ul\').show().nextAll(\'a.link:first\').show(); return false" href="#" class="link">Click to see Early Vote Locations</a><ul style="display:none;">'
+			// 						earlyHTML += early.map( function(location) { 
+			// 							return [ '<li><strong>'+location.name,
+			// 								'</strong> at <a href="',
+			// 								location.directions,'" target="_blank">',
+			// 								location.address,
+			// 								'</a>',
+			// 								location.hours,
+			// 								'</li>'
+			// 								].join(' ')
+			// 							}).join('')
+			// 						earlyHTML += '</ul>'
+			// 					}
+			// 					pollingLocation( 
+			// 						processLocations( response.pollingLocations ).map( function(location) { 
+			// 							return [ '<strong>Your Polling Place:</strong>',
+			// 								location.name,
+			// 								'at <a href="',
+			// 								location.directions,'" target="_blank">',
+			// 								location.address,
+			// 								'</a> ',
+			// 								location.hours,
+			// 								'<br /><br />'
+			// 								].join(' ')
+			// 						}).join(' ') + earlyHTML+'<a style="display:none;" class="link" onclick="$(this).hide().prev(\'ul\').hide().prevAll(\'a.link:first\').show(); return false" href="#" class="click">Hide All</a>'
+			// 					)
+			// 				}
+			// 			);
 			else {
 				pollingLocation( '<strong>How To Vote:</strong> '+noGoogle[ state ] )
 			}
@@ -279,7 +280,7 @@ function locationModel(data) {
 
 	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for 
 		var state = yourLocation.address.state(), 
-			address = state ? ['Prez',(state+yourLocation.address.city()), state, (state+yourLocation.address.county()+' County') ] : []
+			address = state ? ['Prez',(state+yourLocation.address.city()), state, (state+yourLocation.address.county()+( state != 'LA' ? ' County' : ' Parish' ) ) ] : []
 
 		// Doing the openState call, will probably want to build this into something else
 		$.getJSON(
@@ -309,17 +310,17 @@ function locationModel(data) {
 			})
 	}
 
-
-	this.grabChoices = ko.computed( function() { // Retrieve guides
-		var geolocated = this.geolocated(),
-			state = this.address.state(),
-			guides = this.guides
-			
-		if( geolocated && state != __state ) {
-			this.getGuides(state,guides,__state);
-			__state = state
-		} 
-	},this)
+	// Disabling for now
+	// this.grabChoices = ko.computed( function() { // Retrieve guides
+	// 	var geolocated = this.geolocated(),
+	// 		state = this.address.state(),
+	// 		guides = this.guides
+	// 		
+	// 	if( geolocated && state != __state ) {
+	// 		this.getGuides(state,guides,__state);
+	// 		__state = state
+	// 	} 
+	// },this)
 	
 	
 	// More menu shite
@@ -417,6 +418,7 @@ function locationModel(data) {
 		this.menuItems.push( 
 			MenuItem(inits.root, I18n.t('menu.find')),
 			MenuItem('#',pronoun,layout),
+			inits.more ? MenuItem(document.location.toString()+'/all','Old Endorsements') : null,
 			MenuItem(null,I18n.t('menu.this_guide'),null,'<div class="container share-container">'+I18n.t('menu.this_guide')+'<br>'+makeShare(url,name)+'</div>')
 		)
 	}

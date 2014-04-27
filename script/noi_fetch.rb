@@ -10,11 +10,12 @@ require File.expand_path( File.join(File.dirname(__FILE__), 'process.rb') )
 last = Choice.all( :limit => 1, :conditions => ['geography NOT LIKE ?','%_User_%'], :order => 'created_at DESC', :select => 'choices.created_at' ).first.created_at.to_date.to_s
 
 data = JSON::parse( 
-RestClient.get(
-  'https://50.116.48.233/list/api?updated='+last,
-  {:cookies => {:session => "TwlcEz/Ylza0E1z4pDDW6Kjc9dA=?username=UydidXNvZmVkJwpwMQou"}}
-) 
+  RestClient.get(
+    'https://50.116.48.233/list/api?updated='+last,
+    {:cookies => {:session => "TwlcEz/Ylza0E1z4pDDW6Kjc9dA=?username=UydidXNvZmVkJwpwMQou"}}
+  ) 
 )
+
 
 puts 'Attempting to add '+data.length.to_s+' new rows of data since '+last
 

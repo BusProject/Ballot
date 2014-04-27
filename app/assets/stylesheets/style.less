@@ -778,12 +778,28 @@ body.home {
 				overflow-y: auto;
 				.option {
 					padding: 20px 20px 20px 50px;
-					height: @optionHeight;
+
+					&.chosen::before, &.confirmed::before {
+							content: "\2713";
+							.checkBox()
+					}
+					height: auto;
+					&.confirmed { 
+						cursor: default;
+						background-color: @green;
+						margin-top:10px;
+						&::before {
+							content: "\2713";
+							color: white;
+						}
+					}
+					min-height: @optionHeight;
 					margin: 0 auto;
-					width: 520px;
+					width: 560px;
 					.border-box();
 					position: relative;
 					.bigger { 
+					    width: 250px;
 						font-size: 1em; 
 					}
 					.smaller a {
@@ -1032,7 +1048,11 @@ body.home {
 		font-size: 12px;
 		width: 240px;
 	}
-	
+	.category-heading {
+        p { font-size: 90%; margin-bottom: .3em; }
+        margin: 0;
+        h1 { margin-bottom: 8px; }
+	}
 }
 
 /** Profile Styling **/
@@ -1051,6 +1071,7 @@ body.home {
 @import 'less/not_logged_in.less';
 @import 'less/single.less';
 @import 'less/guides.less';
+@import 'less/friends.less';
 
 @import 'less/add.less';
 

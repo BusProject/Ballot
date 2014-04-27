@@ -1,0 +1,181 @@
+@mixin box-shadow ($x: 0, $y: 0, $blur: 1px, $color: #000) {
+  box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  -webkit-box-shadow: $x $y $blur $color;
+}
+@mixin text-shadow( $x:1px, $y:1px, $blur:1px, $color:#637c2a ) {
+	text-shadow: $x $y $blur $color;
+}
+@mixin border-box() {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+@mixin no-select() {
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	-o-user-select: none;
+	user-select: none;
+}
+
+@mixin inset-text( $x:0px, $y:1px, $blur:1px, $color:#fff ) {
+	text-shadow: $x $y $blur $color;
+}
+
+
+
+// From CSS-Tricks
+// src: http://css-tricks.com/snippets/css/useful-css3-less-mixins/
+@mixin border-radius ($radius: 2px) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius:    $radius;
+	border-radius:         $radius;
+
+	-moz-background-clip:    padding;
+	-webkit-background-clip: padding-box;
+	background-clip:         padding-box;
+}
+
+@mixin rotate ($deg) {
+	-webkit-transform: rotate($deg);
+	-moz-transform: 	 rotate($deg);
+	-ms-transform: 		 rotate($deg);
+	-o-transform: 		 rotate($deg);
+}
+@mixin opacity ($opacity: 0.5) {
+	-webkit-opacity: 	$opacity;
+	-moz-opacity: 		$opacity;
+	opacity: 		$opacity;
+}
+
+@mixin drop-shadow ($x: 0, $y: 1px, $blur: 2px, $spread: 0, $alpha: 0.25) {
+	-webkit-box-shadow:	$x $y $blur $spread rgba(0, 0, 0, $alpha);
+	-moz-box-shadow:	$x $y $blur $spread rgba(0, 0, 0, $alpha);
+	box-shadow:		$x $y $blur $spread rgba(0, 0, 0, $alpha);
+}
+@mixin inner-shadow ($x: 0, $y: 0px, $blur: 4px, $spread: 0, $alpha: 0.25) {
+	-webkit-box-shadow: inset $x $y $blur $spread rgba(0, 0, 0, $alpha);
+	-moz-box-shadow:    inset $x $y $blur $spread rgba(0, 0, 0, $alpha);
+	box-shadow:         inset $x $y $blur $spread rgba(0, 0, 0, $alpha);
+}
+
+@mixin gradient ($startColor: #eee, $endColor: white) {
+	background-color: $startColor;
+	background: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+	background: -webkit-linear-gradient(top, $startColor, $endColor);
+	background: -moz-linear-gradient(top, $startColor, $endColor);
+	background: -ms-linear-gradient(top, $startColor, $endColor);
+	background: -o-linear-gradient(top, $startColor, $endColor);
+}
+@mixin gradient-image ($img, $startColor: #eee, $endColor: white) {
+	background-color: $startColor;
+	background-image: $img, -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+	background-image: $img, -webkit-linear-gradient(top, $startColor, $endColor);
+	background-image: $img, -moz-linear-gradient(top, $startColor, $endColor);
+	background-image: $img, -ms-linear-gradient(top, $startColor, $endColor);
+	background-image: $img, -o-linear-gradient(top, $startColor, $endColor);
+}
+@mixin horizontal-gradient ($startColor: #eee, $endColor: white) {
+ 	background-color: $startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor));
+	background-image: -webkit-linear-gradient(left, $startColor, $endColor);
+	background-image: -moz-linear-gradient(left, $startColor, $endColor);
+	background-image: -ms-linear-gradient(left, $startColor, $endColor);
+	background-image: -o-linear-gradient(left, $startColor, $endColor);
+}
+@mixin three-horizontal-gradient ($startColor: #eee, $endColor: white, $lastColor: #eee) {
+ 	background-color: $startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor));
+	background-image: -webkit-linear-gradient(left, $startColor, $endColor,$lastColor);
+	background-image: -moz-linear-gradient(left, $startColor, $endColor,$lastColor);
+	background-image: -ms-linear-gradient(left, $startColor, $endColor,$lastColor);
+	background-image: -o-linear-gradient(left, $startColor, $endColor,$lastColor);
+}
+
+
+// From Twitter Bootstrap
+// src: https://github.com/twitter/bootstrap/blob/master/less/mixins.less
+
+@mixin placeholder($color: $placeholderText) {
+  &:-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+}
+// For clearing floats like a boss h5bp.com/q
+@mixin clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// More from twitter
+@mixin top($arrowWidth: 5px, $color: #000) {
+    bottom: 0;
+    left: 50%;
+    margin-left: -$arrowWidth;
+    border-left: $arrowWidth solid transparent;
+    border-right: $arrowWidth solid transparent;
+    border-top: $arrowWidth solid $color;
+  }
+@mixin left($arrowWidth: 5px, $color: #000) {
+    top: 50%;
+    right: 0;
+    margin-top: -$arrowWidth;
+    border-top: $arrowWidth solid transparent;
+    border-bottom: $arrowWidth solid transparent;
+    border-left: $arrowWidth solid $color;
+}
+@mixin bottom($arrowWidth: 5px, $color: #000) {
+    top: 0;
+    left: 50%;
+    margin-left: -$arrowWidth;
+    border-left: $arrowWidth solid transparent;
+    border-right: $arrowWidth solid transparent;
+    border-bottom: $arrowWidth solid $color;
+}
+@mixin right($arrowWidth: 5px, $color: #000) {
+    top: 50%;
+    left: 0;
+    margin-top: -$arrowWidth;
+    border-top: $arrowWidth solid transparent;
+    border-bottom: $arrowWidth solid transparent;
+    border-right: $arrowWidth solid $color;
+  }
+
+// me
+@mixin rightAfter($arrowWidth: 5px, $color: #000) {
+	@include left($arrowWidth,$color);
+	content: ' ';
+	position: absolute;
+}
+@mixin leftAfter($arrowWidth: 5px, $color: #000) {
+	@include right($arrowWidth,$color);
+	content: ' ';
+	position: absolute;
+}
+// from https://code.google.com/p/wro4j/source/browse/wro4j-extensions/src/test/resources/ro/isdc/wro/extensions/processor/bourboncss/expected/mixin-appearance.css?r=290d4110411b2023057a1376c3cf91de6f36238e&spec=svn778e00e1be798f2cca9579450a88d55edd12a70a
+@mixin appearance() {
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+@mixin ellipsisWrap() {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

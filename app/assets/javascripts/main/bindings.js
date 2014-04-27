@@ -141,7 +141,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 				$ctx = ko.contextFor( $toggle[0] ),
 				$comment = $('.comment', $parent),
 				choice_id = $ctx.$parent.id,
-				option = $ctx.$parent.chosen(),
+				option = $ctx.$parent.chosen() || $ctx.$parent.yes(),
 				option_id = option.id,
 				comment = $comment.val(),
 				type = 'ballot_measure'
