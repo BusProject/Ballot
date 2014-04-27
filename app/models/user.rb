@@ -17,12 +17,12 @@ class User < ActiveRecord::Base
   has_many :options, :through => :feedback
   has_many :choices, :through => :options do
     def future
-      all( :select => 'choices.*', 
+      all( :select => 'choices.*',
         :conditions => ['date >= ?',Date.today],
         :joins => [:options => [:choice => [:electionballot => [ :electionday ]]]] )
     end
     def past
-      all( :select => 'choices.*', 
+      all( :select => 'choices.*',
         :conditions => ['date < ?',Date.today],
         :joins => [:options => [:choice => [:electionballot => [ :electionday ]]]] )
     end

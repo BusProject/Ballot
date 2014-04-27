@@ -48,7 +48,6 @@ OpenBallot::Application.routes.draw do
 
   match '/:id' => 'choice#profile', :as => 'profile', :via => :get
   match '/:id/past' => 'choice#profile', :as => 'profile_all', :via => :get, :past => true
-  match '/:id' => 'feedback#recommend', :as => 'recommend', :via => :post
 
 
 

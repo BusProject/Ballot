@@ -194,7 +194,6 @@ class ChoiceController < ApplicationController
       else
         cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache'] = params[:address_text]
       end
-
     end
 
     render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
