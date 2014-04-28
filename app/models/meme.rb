@@ -1,19 +1,19 @@
 class Meme < ActiveRecord::Base
   include Rails.application.routes.url_helpers
-  
+
   attr_accessible :image, :quote, :feedback, :theme
-  
+
   belongs_to :feedback
   has_one :user, :through => :feedback
   has_one :option, :through => :feedback
 
 
 
-  
+
   def shareText
     return ['"'+self.quote+'" - ',self.user.name,self.user.to_url(true)].join(' ')
   end
-  
+
   def fbMeme user = self.user, page
 
     if !page
@@ -26,13 +26,13 @@ class Meme < ActiveRecord::Base
 
     photo = me.photo!( :source => self.makeFile, :message => message, :access_token => user.authentication_token )
 
-    
+
     self.fb = 'https://www.facebook.com/photo.php?fbid='+photo.identifier
     self.save if user == self.user
 
     return self.fb
   end
-  
+
   def makeBlob reset = false
     require 'RMagick'
     if self.new_record? || !File.exists?( self.getTMP ) || reset
@@ -43,7 +43,7 @@ class Meme < ActiveRecord::Base
     end
     return img.to_blob
   end
-  
+
   def makeFile
     if self.new_record? || !File.exists?( self.getTMP )
       img = self.generate
@@ -54,7 +54,7 @@ class Meme < ActiveRecord::Base
     end
     return img
   end
-  
+
   def generate
     require 'RMagick'
 
@@ -66,8 +66,8 @@ class Meme < ActiveRecord::Base
     action = self.option.type
 
     text.slice(0,140)
-    
-    if self.option.choice.contest_type.downcase.index('ballot').nil? 
+
+    if self.option.choice.contest_type.downcase.index('ballot').nil?
       type = 'Candidate'
       contest = self.option.name
       action = 'Vote For'
@@ -78,10 +78,10 @@ class Meme < ActiveRecord::Base
       type = 'Ballot'
       flavor = self.option.type
     end
-    
+
     comment = text.length > 0 ? 'Comment' : ''
 
-    
+
     themes = {
       'newBallotComment' => {
         'action' => {:font => 'lib/assets/League_Gothic.otf',:size => 180,:left => 250,:align => Magick::CenterAlign,:top => -20,:fill => 'white',:shadow => true,:text => action.upcase },
@@ -128,7 +128,7 @@ class Meme < ActiveRecord::Base
         'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 30,:left => 20,:align => Magick::LeftAlign,:shadow => true, :top => 290,:chars => 28,:fill => 'white',:text => text.split(/but when i do/i)[1].nil? ? '' : text.split(/but when i do/i)[1].upcase()},
         'vote' => {:font => 'lib/assets/Mission-Script.otf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 380, :fill => 'white',:shadow => true, :text => action.upcase },
         'measure' => {:font => 'lib/assets/Arvo-bold.ttf',:size => 30,:align => Magick::RightAlign,:left => 490,:top => 410, :fill => 'white',:shadow => true, :text => contest.upcase },
-      }, 
+      },
       'special/boromir.jpg' => {
         'catchphrase' => {:font => 'lib/assets/League_Gothic.otf',:size => 80,:left => 250,:align => Magick::CenterAlign,:top => 8,:fill => 'white',:shadow => true,:text => ('one does not simply').upcase(),:chars => 28 },
         'message' => {:font => 'lib/assets/League_Gothic.otf',:size => 40,:left => 20, :shadow => true,:align => Magick::LeftAlign,:top => 320,:chars => 28,:fill => 'white',:text => text.gsub(/one does not simply/i,'').upcase()},
@@ -170,7 +170,7 @@ class Meme < ActiveRecord::Base
       shadow = section[:shadow]
       chars = section[:chars] || 1000
       align = section[:align] || Magick::LeftAlign
-    
+
       msg = Magick::Draw.new
       msg.font_size( section[:size] ).font( section[:font] ).fill( fill ).font_weight( weight ).stroke( stroke ).stroke_width( strokeWidth ).text_align( align )
 
@@ -180,7 +180,7 @@ class Meme < ActiveRecord::Base
       end
 
       text = section[:text].strip().gsub("''''","").gsub(/\n/,'')
-    
+
       unless text.empty?
         row = 0
         until text.nil? do
@@ -211,17 +211,17 @@ class Meme < ActiveRecord::Base
     end
     return img
   end
-  
+
 
   def awsStart
     require 'aws/s3'
-    
+
     AWS::S3::Base.establish_connection!( :access_key_id     =>  ENV['AWS3'], :secret_access_key => ENV['AWS3_SECRET'] ) unless AWS::S3::Base.connected?
-    
+
     return AWS::S3::S3Object
-    
+
   end
-  
+
   def getTMP
     return 'tmp/memes-'+self.id.to_s+'.png'
     # aws = awsStart
@@ -234,9 +234,9 @@ class Meme < ActiveRecord::Base
     aws.store( filename, self.makeMeme, 'the-ballot')
     self.image = filename
   end
-  
+
   def destroy_meme
-     # AWS::S3::S3Object.delete('myfile.png','the-ballot') 
+     # AWS::S3::S3Object.delete('myfile.png','the-ballot')
   end
 
 end
