@@ -75,10 +75,10 @@ class ChoiceController < ApplicationController
 
     @choices = choices.uniq.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
 
-    if !current_user.nil? && current_user != @user
-      @recommended = true
-      @user.feedback.each{ |f|  @recommended = @recommended & current_user.voted_for?(f) }
-    end
+    # if !current_user.nil? && current_user != @user
+    #   @recommended = true
+    #   @user.feedback.each{ |f|  @recommended = @recommended && current_user.voted_for?(f) }
+    # end
 
 
     @classes = 'profile home'
