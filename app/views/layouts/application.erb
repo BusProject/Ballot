@@ -89,6 +89,9 @@
 				</div><!-- instructions -->
 			</div><!-- instructions-box -->
 			<div id="main">
+                          <% if flash[:notice] %>
+                            <p class="notice"><%=h flash[:notice] %></p>
+                          <% end %>
 				<%= yield %>
 			</div><!-- main -->
 

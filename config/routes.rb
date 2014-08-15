@@ -8,6 +8,10 @@ Ballot::Application.routes.draw do
   match '/users/cancel' => 'user#cancel', :as => 'user_cancel'
   match '/users/update' => 'user#update', :as => 'user_update', :via => :post
   match '/users/pages' => 'user#access_pages', :as => 'user_pages'
+  match '/users/login' => 'user#login', :as => 'user_login'
+  match '/users/forgot_password' => 'user#forgot_password', :as => 'user_forgot_password'
+  match '/users/signup' => 'user#signup', :as => 'user_signup', :as => 'user_signup', :via => :post
+  match '/users/signin' => 'user#signin', :as => 'user_signin', :as => 'user_signin', :via => :post
   match '/users/pages/:fb' => 'user#page_session', :as => 'user_page_session_create'
   match '/users/auth/:provider/callback' => 'authentications#create'
 

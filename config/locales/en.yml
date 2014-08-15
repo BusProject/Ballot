@@ -25,6 +25,7 @@ en:
         loading: 'Loading...'
         for: 'for'
         you_recommend: "You've recommended"
+        tagline: 'Your Social Voting Guide'
         
         # Objects in the user model
         state: 'State'
@@ -117,8 +118,7 @@ en:
     # Top Bar
     top:
         start: 'Get Started'
-        login: 'Log in with Facebook' # Is an image - will need to change to different 
-        register: 'Register to Vote'
+        sign_in: 'Sign In/Sign Up'
         about: 'About'
         news: 'News'
         contact: 'Contact'
@@ -129,6 +129,23 @@ en:
         pages: 
             login: 'Log in as facebook page'
             refresh: 'Refresh Guides'
+
+    #User login/creation
+    user:
+        sign_up: 'Sign Up'
+        sign_in: 'Sign In'
+        sign_in_blurb: 'Sign in with your TheBallot.org account'
+        sign_up_blurb: 'New to TheBallot.org?'
+        email: 'Email'
+        password: 'Password'
+        forgot_password: 'Forgot your password?'
+        forgot_password_blurb: "Fill in your email address and we'll send you a new password."
+        forgot_password_button: 'Reset password'
+        no_such_email: 'This email address does not exist in our records.'
+        password_sent: 'Your password has been sent to the email address provided.'
+        or: 'or'
+        new: 'New to TheBallot.org?'
+        register: 'Register to Vote'
     
     # used on the single pages and main page
     candidates:

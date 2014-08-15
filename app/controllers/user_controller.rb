@@ -102,9 +102,7 @@ class UserController < ApplicationController
   
   
   def page_session
-    
     page_user = User.find_with_fb_id( params[:fb], current_user.pages.select{ |page| page[:fb] == params[:fb]}.first )
-
 
     session.delete(:logged_in_as) 
     session[:logged_in_as] = current_user.id
@@ -117,12 +115,35 @@ class UserController < ApplicationController
   def login
     render layout: 'login'
   end
+
+  def signin
+    page_user = User.find_by email: params[:email]
+
+    session.delete(:logged_in_as) 
+    session[:logged_in_as] = page_user.id
+    
+    sign_in page_user
+    
+    redirect_to :back
+  end
   
   def signup
     render layout: 'login'
   end
   
   def forgot_password
+    if request.post?
+      page_user = User.find_by_email(params[:email])
+      if !page_user
+        flash[:notice] = t('user.no_such_email')
+      else
+        password = Devise.friendly_token[0,20] 
+        User.set_password(page_user, password)
+        UserMailer.forgot_password(page_user, password).deliver
+        flash[:notice] = t('user.password_sent')
+        redirect_to :back
+      end
+    end
   end
   
   protected

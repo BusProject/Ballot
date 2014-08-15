@@ -225,7 +225,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  # Method for authentication as a page by a user
+  # Method for authentication as a page by a Facebook user
   def self.find_with_fb_id(fb_id, attributes)
     if user = self.find_by_fb(fb_id)
       return user
@@ -245,9 +245,17 @@ class User < ActiveRecord::Base
         }
       return self.create!( attributes )
     end
-
   end
   
+  def self.set_password(user, password)
+    time = Time.now
+    attributes = {
+      :password => password,
+      :reset_password_sent_at => time,
+      :updated_at => time
+    }
+    user.update_attributes(attributes)
+  end
   
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -263,8 +271,5 @@ class User < ActiveRecord::Base
     self.authentication_token = auth.access_token
     self.save
   end
-  
-
-  
 
 end
