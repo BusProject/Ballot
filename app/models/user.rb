@@ -253,6 +253,7 @@ class User < ActiveRecord::Base
       :password => atts[:password],
       :first_name => atts[:first_name],
       :last_name => atts[:last_name],
+      :name => atts[:first_name] + ' ' + atts[:last_name],
       :authentication_token => atts[:authenticity_token]
     }
     return self.create!( attributes )
