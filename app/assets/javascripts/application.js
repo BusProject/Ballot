@@ -57,7 +57,7 @@ window.onload = function() {
     submitFlag = true;
     return false;
   });
-  $('.lightbox').colorbox({height: 300, width: 800, scrolling: false});
+  $('.lightbox').colorbox({height: '452px', width: '800px', scrolling: false, closeButton: false});
 }
 
 function previewImportFile(e, type, submitFlag){

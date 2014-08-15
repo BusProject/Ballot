@@ -148,6 +148,8 @@ en:
         new: 'New to TheBallot.org?'
         register: 'Register to Vote'
         bad_login: 'You have entered an incorrect username and/or password.'
+        first_name: 'First name'
+        last_name: 'Last name'
     
     # used on the single pages and main page
     candidates:

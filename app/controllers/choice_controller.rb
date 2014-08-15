@@ -92,7 +92,7 @@ class ChoiceController < ApplicationController
 
     @type = '';
     if !@user.fb.nil?
-      @type = ENV['FACEBOOK_NAMESPACE']+':voter_guide'
+      #@type = ENV['FACEBOOK_NAMESPACE']+':voter_guide'
     end
   end
 

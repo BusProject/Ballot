@@ -1,31 +1,34 @@
 <% if current_user.nil? %>
   <div id="sign-in">
     <%= form_tag(user_signin_path, method: 'post') do %>
-      <h1><%= t('user.sign_in') %></h1>
-      <%= t('user.sign_up_blurb') %>
+      <h1><%= t('user.sign_in') %></h1><br>
+      <%= t('user.sign_in_blurb') %><br><br>
       <%= label_tag(:email, t('user.email')) %>
       <%= text_field_tag(:email) %>
       <%= label_tag(:password, t('user.password')) %>
       <%= password_field_tag(:password) %>
-      <%= link_to t('user.forgot_password'), user_forgot_password_path %>
-      <%= t('user.or') %>
-      <%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %>
       <%= submit_tag(t('user.sign_in')) %>
     <% end %>
+    <%= link_to t('user.forgot_password'), user_forgot_password_path, :class => 'forgot-popup', :rel => 'login-popup' %><br><br>
+    <span style="position: relative; left: 15px;">
+      <span style="position: relative; top: -30px; right: 15px;"><%= t('user.or') %></span>
+      <%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %>
+    </span>
   </div>
   <div id="sign-up">
     <%= form_tag(user_signup_path, method: 'post') do %>
-      <h1><%= t('user.sign_up') %></h1>
+      <h1><%= t('user.sign_up') %></h1><br>
+      <%= t('user.sign_up_blurb') %><br><br>
       <%= label_tag(:email, t('user.email')) %>
       <%= text_field_tag(:email) %>
-      <%= label_tag(:password, t('user.password')) %>
-      <%= password_field_tag(:password) %>
-      <%= label_tag(:password_confirmation, t('user.confirm_password')) %>
-      <%= password_field_tag(:password_confirmation) %>
       <%= label_tag(:first_name, t('user.first_name')) %>
       <%= text_field_tag(:first_name) %>
       <%= label_tag(:last_name, t('user.last_name')) %>
       <%= text_field_tag(:last_name) %>
+      <%= label_tag(:password, t('user.password')) %>
+      <%= password_field_tag(:password) %>
+      <%= label_tag(:password_confirmation, t('user.confirm_password')) %>
+      <%= password_field_tag(:password_confirmation) %>
       <%= submit_tag(t('user.sign_up')) %>
     <% end %>
   </div>
