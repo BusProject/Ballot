@@ -6,7 +6,7 @@
 		<div id="enter-address">
 		
 			<div>
-				<input onkeypress="$('.place-holder').hide()" data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="<%= t('front.address_placeholder') %>">
+				<input mnkeypress="$('.place-holder').hide()" data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="<%= t('front.address_placeholder') %>">
 				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0"><%= t('front.address_placeholder') %></label><![endif]-->
 				<a href="#" class="cancel find-ballot-submit"><%= t('site.submit')%></a>
 			</div>
@@ -70,7 +70,7 @@
 				<p><%= t('front.more_login')%></p>
 				<br />
 				<a href="" data-bind="attr: {href:  '<%= omniauth_authorize_path('user', :facebook) %>?state='+address.state() }">
-					<%= image_tag 'fb-login.png', :style => 'width:120px'  %>
+                                  <a href=""><button ><%= t('top.login')%></button></a><br /><br /><br />
 				</a>
 			<% else %>
 				<button style="display:none;" class="alerts" 

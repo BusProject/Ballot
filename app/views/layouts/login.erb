@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# the-ballot: http://ogp.me/ns/fb/the-ballot#">
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <% title = @title || t('site.tagline') %>
+    <title>TheBallot.org | <%= title %></title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= yield :head %>
+    <!-- TEMPORARY! Move to LESS later! -->
+    <style type="text/css">
+      #page.login {width: 800px; padding: 25px; border: 1px solid #000000}
+      #sign-up, #sign-in {width: 370px; float: left;}
+      #sign-in {border-right: 1px solid #000000; padding-right: 25px;}
+      #sign-up {padding-left: 25px;}
+      #sign-up label, #sign-up input, #sign-in label, #sign-in input {display: block;}
+      #sign-up label, #sign-in label {text-align: left;}
+    </style>
+    <!-- END TEMPORARY -->
+
+  </head>
+  <body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= !current_user.nil? && current_user.commentable? ? '' : 'no_comment' %> <%= @classes %> <%= 'mobile' if is_mobile_device? %>" >
+    <div id="page" class="login">
+      <%= yield %>
+    </div>
+  </body>
+</html>

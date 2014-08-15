@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_filter :check_user
+  before_filter :check_user, except: [:login, :signup, :forgot_password]
 
   def update
     logger.debug ' running update'
@@ -112,6 +112,17 @@ class UserController < ApplicationController
     sign_in page_user
     
     redirect_to :back
+  end
+
+  def login
+    render layout: 'login'
+  end
+  
+  def signup
+    render layout: 'login'
+  end
+  
+  def forgot_password
   end
   
   protected

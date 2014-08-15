@@ -1,0 +1,27 @@
+<% if current_user.nil? %>
+  <div id="sign-in">
+    <%= form_tag(user_signin_path, method: 'post') do %>
+      <h1><%= t('user.sign_in') %></h1>
+      <%= t('user.sign_up_blurb') %>
+      <%= label_tag(:email, t('user.email')) %>
+      <%= text_field_tag(:email) %>
+      <%= label_tag(:password, t('user.password')) %>
+      <%= text_field_tag(:password) %>
+      <%= t('user.forgot_password') %>
+      <%= t('user.or') %>
+      <%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %>
+      <%= submit_tag(t('user.sign_in')) %>
+    <% end %>
+  </div>
+  <div id="sign-up">
+    <%= form_tag(user_signup_path, method: 'post') do %>
+      <h1><%= t('user.sign_up') %></h1>
+      <%= label_tag(:email, t('user.email')) %>
+      <%= text_field_tag(:email) %>
+      <%= label_tag(:password, t('user.password')) %>
+      <%= text_field_tag(:password) %>
+      <%= submit_tag(t('user.sign_up')) %>
+    <% end %>
+  </div>
+  <div style="clear: both; float: none;"></div>
+<% end %>

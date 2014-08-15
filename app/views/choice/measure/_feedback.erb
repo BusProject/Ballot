@@ -53,7 +53,7 @@
 <%- if current_user.nil? && current_user == user %>
 	<div class="yourFeedback login">
 		<%= raw @how %>
-		<p>You must be logged in through Facebook to use this feature</p>
-		<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook)  %>
+		<p>You must be logged in to use this feature</p>
+                <a href=""><button ><%= t('top.login')%></button></a>
 	</div>
 <% end -%>
