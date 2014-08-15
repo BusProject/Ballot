@@ -246,9 +246,20 @@ class User < ActiveRecord::Base
       return self.create!( attributes )
     end
   end
+
+  def self.create_manually(atts)
+    attributes = {
+      :email => atts[:email],
+      :password => atts[:password],
+      :first_name => atts[:first_name],
+      :last_name => atts[:last_name],
+      :authentication_token => atts[:authenticity_token]
+    }
+    return self.create!( attributes )
+  end
   
   def self.set_password(user, password)
-    time = Time.now
+    time = Time.now.time.strftime("%Y-%m-%d %H:$M:$S")
     attributes = {
       :password => password,
       :reset_password_sent_at => time,

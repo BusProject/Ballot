@@ -119,7 +119,6 @@ class UserController < ApplicationController
   def signin
     page_user = User.find_by_email(params[:email])
     page_user.valid_password?(params[:password])
-    logger.debug page_user.to_yaml
 
     if !page_user
       flash[:notice] = t('user.bad_login')
@@ -128,15 +127,17 @@ class UserController < ApplicationController
       session[:logged_in_as] = page_user.id
     
       sign_in page_user
-    
-      flash[:notice] = 'Welcome!'
       redirect_to :back
     end
   end
   
   def signup
-    render layout: 'login'
-    
+    page_user = User.create_manually(params)
+    session.delete(:logged_in_as) 
+    session[:logged_in_as] = page_user.id
+  
+    sign_in page_user
+    redirect_to :back
   end
   
   def forgot_password
