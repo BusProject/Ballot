@@ -138,14 +138,16 @@ en:
         sign_up_blurb: 'New to TheBallot.org?'
         email: 'Email'
         password: 'Password'
+        confirm_password: 'Repeat password'
         forgot_password: 'Forgot your password?'
-        forgot_password_blurb: "Fill in your email address and we'll send you a new password."
+        forgot_password_blurb: "Fill in your email address and we'll send you a new one."
         forgot_password_button: 'Reset password'
         no_such_email: 'This email address does not exist in our records.'
-        password_sent: 'Your password has been sent to the email address provided.'
+        password_sent: 'Your new password has been sent to the email address provided.'
         or: 'or'
         new: 'New to TheBallot.org?'
         register: 'Register to Vote'
+        bad_login: 'You have entered an incorrect username and/or password.'
     
     # used on the single pages and main page
     candidates:

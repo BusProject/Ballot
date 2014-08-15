@@ -6,7 +6,7 @@
       <%= label_tag(:email, t('user.email')) %>
       <%= text_field_tag(:email) %>
       <%= label_tag(:password, t('user.password')) %>
-      <%= text_field_tag(:password) %>
+      <%= password_field_tag(:password) %>
       <%= link_to t('user.forgot_password'), user_forgot_password_path %>
       <%= t('user.or') %>
       <%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook) %>
@@ -19,7 +19,9 @@
       <%= label_tag(:email, t('user.email')) %>
       <%= text_field_tag(:email) %>
       <%= label_tag(:password, t('user.password')) %>
-      <%= text_field_tag(:password) %>
+      <%= password_field_tag(:password) %>
+      <%= label_tag(:password_confirmation, t('user.confirm_password')) %>
+      <%= password_field_tag(:password_confirmation) %>
       <%= submit_tag(t('user.sign_up')) %>
     <% end %>
   </div>

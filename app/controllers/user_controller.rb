@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_filter :check_user, except: [:login, :signup, :forgot_password]
+  before_filter :check_user, except: [:login, :signup, :signin, :forgot_password]
 
   def update
     logger.debug ' running update'
@@ -117,18 +117,26 @@ class UserController < ApplicationController
   end
 
   def signin
-    page_user = User.find_by email: params[:email]
+    page_user = User.find_by_email(params[:email])
+    page_user.valid_password?(params[:password])
+    logger.debug page_user.to_yaml
 
-    session.delete(:logged_in_as) 
-    session[:logged_in_as] = page_user.id
+    if !page_user
+      flash[:notice] = t('user.bad_login')
+    else
+      session.delete(:logged_in_as) 
+      session[:logged_in_as] = page_user.id
     
-    sign_in page_user
+      sign_in page_user
     
-    redirect_to :back
+      flash[:notice] = 'Welcome!'
+      redirect_to :back
+    end
   end
   
   def signup
     render layout: 'login'
+    
   end
   
   def forgot_password
@@ -140,7 +148,7 @@ class UserController < ApplicationController
         password = Devise.friendly_token[0,20] 
         User.set_password(page_user, password)
         UserMailer.forgot_password(page_user, password).deliver
-        flash[:notice] = t('user.password_sent')
+        flash[:notice] = t('user.password_sent') + ' ' + password
         redirect_to :back
       end
     end
