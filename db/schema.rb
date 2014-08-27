@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206205719) do
+ActiveRecord::Schema.define(:version => 20140827041354) do
+
+  create_table "blocks", :force => true do |t|
+    t.integer  "guide_id"
+    t.integer  "option_id"
+    t.integer  "user_option_id"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "blocks", ["guide_id"], :name => "index_blocks_on_guide_id"
+  add_index "blocks", ["option_id"], :name => "index_blocks_on_option_id"
+  add_index "blocks", ["user_option_id"], :name => "index_blocks_on_user_option_id"
 
   create_table "choices", :force => true do |t|
     t.string   "contest"
@@ -73,6 +87,16 @@ ActiveRecord::Schema.define(:version => 20121206205719) do
   add_index "feedback", ["option_id"], :name => "index_feedback_on_option_id"
   add_index "feedback", ["user_id"], :name => "index_feedback_on_user_id"
 
+  create_table "guides", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.boolean  "publish"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "guides", ["user_id"], :name => "index_guides_on_user_id"
+
   create_table "matches", :force => true do |t|
     t.string   "latlng"
     t.text     "data"
@@ -116,6 +140,21 @@ ActiveRecord::Schema.define(:version => 20121206205719) do
 
   add_index "options", ["choice_id"], :name => "index_options_on_choice_id"
   add_index "options", ["name"], :name => "index_options_on_name"
+
+  create_table "user_options", :force => true do |t|
+    t.integer  "choice_id"
+    t.integer  "user_id"
+    t.integer  "position"
+    t.string   "photo"
+    t.text     "blurb"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_options", ["choice_id"], :name => "index_user_options_on_choice_id"
+  add_index "user_options", ["name"], :name => "index_user_options_on_name"
+  add_index "user_options", ["user_id"], :name => "index_user_options_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

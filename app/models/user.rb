@@ -260,7 +260,8 @@ class User < ActiveRecord::Base
   end
   
   def self.set_password(user, password)
-    time = Time.now.time.strftime("%Y-%m-%d %H:$M:$S")
+    #time = Time.now.time.strftime("%Y-%m-%d %H:$M:$S")
+    time = Time.now
     attributes = {
       :password => password,
       :reset_password_sent_at => time,

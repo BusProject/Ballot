@@ -83,7 +83,8 @@ class ChoiceController < ApplicationController
     @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+"'s Voter Guide"
     @type = 'Voter Guide'
     @message = !@user.description.nil? && !@user.guide_name.strip.empty? ? @user.description : 'A Voter Guide by '+@user.first_name+', powered by The Ballot.'
-    @image = @user.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @user.memes.last.id )+'.png'
+    @image = @user.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @user.memes.last.id )+'.png' 
+    @guides = Guide.where(:user_id => @user.id)
 
     result = {:state => 'profile', :user => @user.to_public(false), :more => more }
 

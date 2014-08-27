@@ -6,7 +6,7 @@
 		<img src="<%= meme_show_image_path ( @meme.id)%>.png" itemprop="contentURL" >
 	</a><br />
 	<a href="<%= ENV['BASE']+@meme.user.profile %>" style="color: #333; text-underline: none; font-family: sans-serif;">
-		<%= t('site.see').capitalize %> <%= @meme.user.guide_name.nil? || @meme.user.guide_name.empty? ? t('i18n_toolbox.possessive', {:owner => @meme.user.name, :thing => t('site.voter_guide') } : @meme.user.guide_name %> <%= t('site.on_the')%>
+		<%= t('site.see').capitalize %> <%= @meme.user.guide_name.nil? || @meme.user.guide_name.empty? ? t('i18n_toolbox.possessive', {:owner => @meme.user.name, :thing => t('site.voter_guide_page') } : @meme.user.guide_name %> <%= t('site.on_the')%>
 	</a>
 	<meta itemprop="author" content="<%= @meme.user.name %>">
 	<meta itemprop="datePublished" content="<%= @meme.created_at %>">

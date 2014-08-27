@@ -1,0 +1,129 @@
+<h1><%= t("guide.editing") %> 
+<% if @guide.name.nil? %>
+  <%= t('guide.guide_no') %>
+  <%= @guide.id %>
+<% else %>
+  <%= @guide.name %>
+<% end %>
+</h1>
+
+<div id="profile">
+  <div id="edit-profile">
+    <style>
+      #profile {margin: 50px;}
+      #edit-profile {max-width: 820px !important}
+      input[type="checkbox"] {width: auto !important;}
+    </style>
+    <%= render 'form' %>
+  </div>
+</div>
+
+<% 
+  contest_hash = Hash.new
+  contests = Array.new 
+  @choices.each do |c|
+    contest_hash[c.id] = c.geography + ' - ' + c.contest
+    contests.push([c.geography + ' - ' + c.contest, c.id])  
+  end
+
+  option_selects = Hash.new
+  option_hash = Hash.new
+  contests_options = Hash.new
+  @options.each do |o|
+    option_selects[o.choice_id] = Array.new
+    contests_options[o.id] = o.choice_id
+  end
+  @options.each do |o|
+    if o.party.nil?
+      option_selects[o.choice_id].push([o.name, o.id])
+      option_hash[o.id] = o.name
+    else
+      option_selects[o.choice_id].push([o.name + ' (' + o.party + ')', o.id])
+      option_hash[o.id] = o.name + ' (' + o.party + ')'
+    end
+  end
+
+  writeins_hash = Hash.new
+  contests_writeins = Hash.new
+  @writeins.each do |w|
+    writeins_hash[w.id] = w.name
+    contests_writeins[w.id] = w.choice_id
+  end
+%>
+
+<% @blocks.each do |block| %>
+  <div class="ballot-section">
+    <div class="sectionheading">
+      <%= block.title %><br>
+      <% if block.option_id.nil? and !block.user_option_id.nil? %>
+        <%= contest_hash[contests_writeins[block.user_option_id]] %><br>
+        <%= writeins_hash[block.user_option_id] %><br>
+      <% else %>
+        <%= contest_hash[contests_options[block.option_id]] %><br>
+        <%= option_hash[block.option_id] %><br>
+      <% end %>
+      <%= block.content %><br><br>
+      <p style="font-size: 12px;">
+      <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
+      </p>
+    </div>
+  </div>
+<% end %>
+
+<div class="ballot-section">
+  <div class="sectionheading">
+    <%= t('guide.add_block'); %><br>
+    <%= form_tag(block_create_path, :method => :post) do %>
+      <%= hidden_field_tag(:guide_id, @guide.id) %>
+      <%= label_tag(:title, t('guide.block_title')) %>
+      <%= text_field_tag(:title) %><br>
+      <%= label_tag(:contest_id, t('guide.block_contest')) %>
+      <%= select_tag 'contest_id', options_for_select(contests)%>
+      <% option_selects.each do |id, s| %>
+        <div class="option_select option-<%= id %>">
+          <%= label_tag(:option_id, t('guide.block_option')) %>
+          <%= select_tag 'option_id', options_for_select(s) %>
+        </div>
+      <% end %>
+      <p style="font-size: 12px;"><%= link_to(t('guide.writein'), 'javascript:writein();') %> </p>
+      <div class="custom_option">
+        <%= label_tag(:custom_name, t('guide.writein_name')) %>
+        <%= text_field_tag(:custom_name) %><br>
+      </div>
+      <br><%= label_tag(:content, t('guide.block_content')) %>
+      <%= text_area_tag(:content) %><br>
+      <%= submit_tag(t('site.submit')) %>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to t("site.back"), profile_path(@user), :class => 'button' %>
+
+<script>
+  jQuery(document).ready(function() {
+    disable_options(); 
+  });
+
+  jQuery('select[name=contest_id]').change(function() {
+    disable_options();
+    enable_option(jQuery(this).val());
+  });
+
+  function disable_options() {
+    jQuery('.option_select').hide();
+    jQuery('.option_select select').attr('disabled', 'disabled');
+    jQuery('.custom_option').hide();
+    jQuery('.custom_option input').attr('disabled', 'disabled');
+  }
+
+  function enable_option(id) {
+    jQuery('.option-'+id).show();
+    jQuery('.option-'+id+' select').removeAttr('disabled');
+  }
+
+  function writein() {
+    disable_options();
+    jQuery('.custom_option').show();
+    jQuery('.custom_option input').removeAttr('disabled');
+  }
+</script>

@@ -348,9 +348,9 @@ function locationModel(data) {
 		
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
 			owner = current_user.id == 'unauthenticated' ? I18n.t('menu.share') : I18n.t('menu.the_ballot'),
-			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: current_user.name, thing: I18n.t("site.voter_guide") } ),
+			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: current_user.name, thing: I18n.t("site.voter_guide_page") } ),
 			msg = current_user.id == 'unauthenticated' ? undefined : I18n.t('menu.share_message'),
-			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">'+I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'})+'</a>'
+			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">'+I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide Page'})+'</a>'
 			
 		this.menuItems.push( 
 			MenuItem('#find-ballot',I18n.t('menu.find'),'<p>'+I18n.t('menu.find_text')+'</p>'),
@@ -414,7 +414,7 @@ function locationModel(data) {
 
 		
 		var url = document.location.host+inits.user.profile, 
-			name = inits.user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: inits.user.name, thing: I18n.t("site.voter_guide") } ), 
+			name = inits.user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: inits.user.name, thing: I18n.t("site.voter_guide_page") } ), 
 			pronoun = inits.user.id == current_user.id ? I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'}) : inits.user.first_name != '' ? I18n.t('i18n_toolbox.possessive',{owner: inits.user.first_name,thing: 'Voter Guide' } ) : I18n.t('i18n_toolbox.possessive',{owner: inits.user.last_name,thing: 'Voter Guide' } )
 
 		this.menuItems.push( 
