@@ -2,6 +2,6 @@
   <%= label_tag(:name, t('guide.name')) %>
   <%= text_field_tag(:name, @guide.name) %><br>
   <%= label_tag(:publish, t('guide.publish')) %>
-  <%= check_box_tag(:publish, @guide.publish) %><br>
+  <%= check_box_tag(:publish, nil, @guide.publish) %><br>
   <div id="image-upload"><%= submit_tag(t('site.submit')) %></div>
 <% end %>

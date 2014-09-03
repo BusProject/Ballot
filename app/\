@@ -7,7 +7,6 @@ class GuideController < ApplicationController
     @guide = Guide.find(params[:id])
     if !@guide.publish
       flash[:notice] = t('guide.not_published')
-      redirect_to :back
     end
     @user = current_user
     @blocks = Block.where(:guide_id => params[:id])
@@ -33,7 +32,7 @@ class GuideController < ApplicationController
     @guide.user = current_user
     if @guide.save
       flash[:notice] = t('guide.creation_success')
-    end
+      end
     redirect_to :back
   end
 
@@ -42,7 +41,7 @@ class GuideController < ApplicationController
   def update
     @guide = Guide.find(params[:id])
 
-    if @guide.update_attributes(:id => params[:id], :publish => params[:publish])
+    if @guide.update_attributes(params)
       flash[:notice] = t('guide.update_success')
     else
       flash[:notice] = t('guide.update_failure')
