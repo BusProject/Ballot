@@ -12,7 +12,16 @@
     <style>
       #profile {margin: 50px;}
       #edit-profile {max-width: 820px !important}
+      #profile #edit-profile #image-upload {width: 100%;}
+      .ballot-section {width: 840px; float: left;}
+      .ballot-section.half {width: 420px;}
+      .ballot-section .sectionheading {font-size: 16px;}
+      .input {float: left; text-align: left; width: 60%;}
+      .blurb {float: right; text-align: left; width: 60%; margin-right: 20px; font-size: 14px;}
+      input[type="text"], input[type="select"], textarea {width: 60%; font-size: 16px; display: inline-block; margin: 0px 0px 10px 0px; border-radius: 4px; background-clip: padding-box; padding: 5px; outline: none; box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25); border: 1px solid #c2c2b5; color: #5b5b5b;}
       input[type="checkbox"] {width: auto !important;}
+      label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
+      input[type="submit"] {margin: 0px auto !important;} 
     </style>
     <%= render 'form' %>
   </div>
@@ -20,18 +29,45 @@
 
 <% 
   contest_hash = Hash.new
-  contests = Array.new 
+  contests = Hash.new
+  measures = Hash.new
+  states = Hash.new
+  states[t('guide.select_state')] = 0
+
   @choices.each do |c|
-    contest_hash[c.id] = c.geography + ' - ' + c.contest
-    contests.push([c.geography + ' - ' + c.contest, c.id])  
+    states[c.geography] = c.geography
+    contest_hash[c.id] = c.contest
+    if c.description.nil?
+      contests[c.geography] = Array.new
+      contests[c.geography].push([t('guide.select_contest'),0])
+    else
+      measures[c.geography] = Array.new
+      measures[c.geography].push([t('guide.select_measure'),0])
+    end
   end
 
+  @choices.each do |c|
+    if c.description.nil?
+      contests[c.geography].push([c.contest, c.id])  
+    else
+      measures[c.geography].push([c.contest, c.id])  
+    end
+  end
+
+  options_blurbs = Hash.new
   option_selects = Hash.new
+  measure_selects = Hash.new
   option_hash = Hash.new
   contests_options = Hash.new
+  measure_options = Hash.new
   @options.each do |o|
     option_selects[o.choice_id] = Array.new
-    contests_options[o.id] = o.choice_id
+    if o.party.nil?
+      contests_options[o.id] = o.choice_id
+    else
+      measure_options[o.id] = o.choice_id
+    end
+    options_blurbs[o.id] = o.blurb
   end
   @options.each do |o|
     if o.party.nil?
@@ -52,9 +88,15 @@
 %>
 
 <% @blocks.each do |block| %>
-  <div class="ballot-section">
+  <% 
+    halfwidth = ''
+    if !block.full_size.nil? and !block.full_size
+      halfwidth = ' half'
+    end
+  %>
+  <div class="ballot-section<%= halfwidth %>">
     <div class="sectionheading">
-      <%= block.title %><br>
+      <span style="font-size: 24px; display: block;"><%= block.title %></span><br>
       <% if block.option_id.nil? and !block.user_option_id.nil? %>
         <%= contest_hash[contests_writeins[block.user_option_id]] %><br>
         <%= writeins_hash[block.user_option_id] %><br>
@@ -64,6 +106,7 @@
       <% end %>
       <%= block.content %><br><br>
       <p style="font-size: 12px;">
+      <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
       <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
       </p>
     </div>
@@ -72,53 +115,187 @@
 
 <div class="ballot-section">
   <div class="sectionheading">
-    <%= t('guide.add_block'); %><br>
+    <span style="font-size: 24px; display: block;"><%= t('guide.block_add'); %></span><br>
+    <ul>
+      <li><%= link_to(t('guide.block_measure'), "javascript:type('measure');", :class => 'swap') %></li>
+      <li><%= link_to(t('guide.block_contest'), "javascript:type('contest');", :class => 'swap') %></li>
+      <li><%= link_to(t('guide.block_html'), "javascript:type('html');", :class => 'swap') %></li>
+    </ul>  
+    <div id="contest">
     <%= form_tag(block_create_path, :method => :post) do %>
       <%= hidden_field_tag(:guide_id, @guide.id) %>
-      <%= label_tag(:title, t('guide.block_title')) %>
-      <%= text_field_tag(:title) %><br>
-      <%= label_tag(:contest_id, t('guide.block_contest')) %>
-      <%= select_tag 'contest_id', options_for_select(contests)%>
+      <%= hidden_field_tag(:full_size, true) %>
+      <div class="title">
+        <%= label_tag(:title, t('guide.block_title')) %>
+        <%= text_field_tag(:title) %>
+      </div>
+      <div class="states">
+        <%= label_tag(:state, t('guide.block_state')) %>
+        <%= select_tag 'state', options_for_select(states) %>
+      </div>
+      <% contests.each do |state, c| %>
+        <div class="contest_select <%= state %>">
+          <%= label_tag(:contest_id, t('guide.block_contest')) %>
+          <div class="input">
+            <%= select_tag 'contest_id', options_for_select(c) %>
+          </div>
+        </div>
+      <% end %>
+      <% measures.each do |state, m| %>
+        <div class="measure_select <%= state %>">
+          <%= label_tag(:contest_id, t('guide.block_measure')) %>
+          <div class="input">
+            <%= select_tag 'contest_id', options_for_select(m) %>
+          </div>
+        </div>
+      <% end %>
       <% option_selects.each do |id, s| %>
         <div class="option_select option-<%= id %>">
           <%= label_tag(:option_id, t('guide.block_option')) %>
-          <%= select_tag 'option_id', options_for_select(s) %>
+          <div class="input"><%= select_tag 'option_id', options_for_select(s) %></div>
+          <% s.each do |o, opt_id| %>
+            <div class="blurb blurb-<%= opt_id %>"><%= options_blurbs[opt_id] %></div>
+          <% end %>
         </div>
       <% end %>
-      <p style="font-size: 12px;"><%= link_to(t('guide.writein'), 'javascript:writein();') %> </p>
-      <div class="custom_option">
+      <p class="writein" style="clear: both; font-size: 12px;"><%= link_to(t('guide.writein'), 'javascript:writein();') %> </p>
+      <div class="input custom_option">
         <%= label_tag(:custom_name, t('guide.writein_name')) %>
-        <%= text_field_tag(:custom_name) %><br>
+        <div class="input"><%= text_field_tag(:custom_name) %></div><br>
       </div>
-      <br><%= label_tag(:content, t('guide.block_content')) %>
-      <%= text_area_tag(:content) %><br>
-      <%= submit_tag(t('site.submit')) %>
+      <div class="comments">
+        <%= label_tag(:content, t('guide.block_content')) %>
+        <%= text_area_tag(:content) %>
+      </div>
+      <div id="image-upload" class="submit">
+        <%= link_to(t('guide.block_new_type'), "javascript:reset();") %><br>
+        <%= submit_tag(t('site.submit')) %>
+      </div>
     <% end %>
+    </div>
   </div>
 </div>
+
+<div style="clear: both; float: none;"></div>
 
 <%= link_to t("site.back"), profile_path(@user), :class => 'button' %>
 
 <script>
+  typename = false;
+
   jQuery(document).ready(function() {
-    disable_options(); 
+    reset();
+  });
+
+  jQuery('select[name=option_id]').change(function() {
+    disable_blurbs();
+    enable_blurb(jQuery(this).val());
   });
 
   jQuery('select[name=contest_id]').change(function() {
     disable_options();
+    disable_blurbs();
     enable_option(jQuery(this).val());
   });
+
+  jQuery('select[name=state]').change(function() {
+    disable_options();
+    disable_contests();
+    disable_measures();
+    disable_blurbs();
+    enable_contest(jQuery(this).val());
+  });
+
+  function reset() {
+    enable_type();
+    disable_basics();
+    disable_options(); 
+    disable_contests();
+    disable_measures();
+    disable_blurbs();
+  }
+
+  function type(the_typename) {
+    typename = the_typename
+
+    disable_type();
+    enable_basics();
+    if (typename != 'html') {
+      enable_state();
+    }
+  }
+
+  function disable_type() {
+    jQuery('.swap').hide();
+  }
+
+  function enable_type() {
+    jQuery('.swap').show();
+    typename = false;
+  }
+
+  function disable_basics() {
+    jQuery('.title').hide();
+    jQuery('.title input').attr('disabled', 'disabled');
+    jQuery('.states').hide();
+    jQuery('.states select').attr('disabled', 'disabled');
+    jQuery('.comments').hide();
+    jQuery('.comments input').attr('disabled', 'disabled');
+    jQuery('.submit').hide();
+    jQuery('.submit input').attr('disabled', 'disabled');
+  }
+
+  function disable_contests() {
+    jQuery('.contest_select').hide();
+    jQuery('.contest_select select').attr('disabled', 'disabled');
+  }
+
+  function disable_measures() {
+    jQuery('.measure_select').hide();
+    jQuery('.measure_select select').attr('disabled', 'disabled');
+  }
+
+  function disable_blurbs() {
+    jQuery('.blurb').hide();
+  }
 
   function disable_options() {
     jQuery('.option_select').hide();
     jQuery('.option_select select').attr('disabled', 'disabled');
     jQuery('.custom_option').hide();
     jQuery('.custom_option input').attr('disabled', 'disabled');
+    jQuery('.writein').hide();
   }
+
+  function enable_blurb(id) {
+    jQuery('.blurb-'+id).show();
+  }
+
+  function enable_contest(state) {
+    jQuery('.'+typename+'_select.'+state).show();
+    jQuery('.'+typename+'_select.'+state+' select').removeAttr('disabled');
+  }
+
 
   function enable_option(id) {
     jQuery('.option-'+id).show();
     jQuery('.option-'+id+' select').removeAttr('disabled');
+    jQuery('.writein').show();
+    enable_blurb(jQuery('.option-'+id+' select[name="option_id"]').val());
+  }
+
+  function enable_state() {
+    jQuery('.states').show();
+    jQuery('.states select').removeAttr('disabled');
+  }
+
+  function enable_basics() {
+    jQuery('.title').show();
+    jQuery('.title input').removeAttr('disabled');
+    jQuery('.comments').show();
+    jQuery('.comments input').removeAttr('disabled');
+    jQuery('.submit').show();
+    jQuery('.submit input').removeAttr('disabled');
   }
 
   function writein() {

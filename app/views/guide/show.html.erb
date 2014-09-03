@@ -1,5 +1,108 @@
-<p id="notice"><%= notice %></p>
+<h1>
+<% if @guide.name.nil? %>
+  <%= t('guide.guide_no') %>
+  <%= @guide.id %>
+<% else %>
+  <%= @guide.name %>
+<% end %>
+</h1>
 
+<style>
+  #profile {margin: 50px;}
+  #edit-profile {max-width: 820px !important}
+  #profile #edit-profile #image-upload {width: 100%;}
+  .ballot-section {width: 840px; float: left;}
+  .ballot-section.half {width: 420px;}
+  .ballot-section .sectionheading {font-size: 16px;}
+  .input {float: left; text-align: left; width: 60%;}
+  .blurb {float: right; text-align: left; width: 60%; margin-right: 20px; font-size: 14px;}
+  input[type="text"], input[type="select"], textarea {width: 60%; font-size: 16px; display: inline-block; margin: 0px 0px 10px 0px; border-radius: 4px; background-clip: padding-box; padding: 5px; outline: none; box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25); border: 1px solid #c2c2b5; color: #5b5b5b;}
+  input[type="checkbox"] {width: auto !important;}
+  label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
+  input[type="submit"] {margin: 0px auto !important;} 
+</style>
 
-<%= link_to 'Edit', edit_guide_path(@guide) %> |
-<%= link_to 'Back', guides_path %>
+<% 
+  contest_hash = Hash.new
+  contests = Hash.new
+  measures = Hash.new
+  states = Hash.new
+  states[t('guide.select_state')] = 0
+
+  @choices.each do |c|
+    states[c.geography] = c.geography
+    contest_hash[c.id] = c.contest
+    if c.description.nil?
+      contests[c.geography] = Array.new
+      contests[c.geography].push([t('guide.select_contest'),0])
+    else
+      measures[c.geography] = Array.new
+      measures[c.geography].push([t('guide.select_measure'),0])
+    end
+  end
+
+  @choices.each do |c|
+    if c.description.nil?
+      contests[c.geography].push([c.contest, c.id])  
+    else
+      measures[c.geography].push([c.contest, c.id])  
+    end
+  end
+
+  options_blurbs = Hash.new
+  option_selects = Hash.new
+  measure_selects = Hash.new
+  option_hash = Hash.new
+  contests_options = Hash.new
+  measure_options = Hash.new
+  @options.each do |o|
+    option_selects[o.choice_id] = Array.new
+    if o.party.nil?
+      contests_options[o.id] = o.choice_id
+    else
+      measure_options[o.id] = o.choice_id
+    end
+    options_blurbs[o.id] = o.blurb
+  end
+  @options.each do |o|
+    if o.party.nil?
+      option_selects[o.choice_id].push([o.name, o.id])
+      option_hash[o.id] = o.name
+    else
+      option_selects[o.choice_id].push([o.name + ' (' + o.party + ')', o.id])
+      option_hash[o.id] = o.name + ' (' + o.party + ')'
+    end
+  end
+
+  writeins_hash = Hash.new
+  contests_writeins = Hash.new
+  @writeins.each do |w|
+    writeins_hash[w.id] = w.name
+    contests_writeins[w.id] = w.choice_id
+  end
+%>
+
+<% @blocks.each do |block| %>
+  <% 
+    halfwidth = ''
+    if !block.full_size.nil? and !block.full_size
+      halfwidth = ' half'
+    end
+  %>
+  <div class="ballot-section<%= halfwidth %>">
+    <div class="sectionheading">
+      <span style="font-size: 24px; display: block;"><%= block.title %></span><br>
+      <% if block.option_id.nil? and !block.user_option_id.nil? %>
+        <%= contest_hash[contests_writeins[block.user_option_id]] %><br>
+        <%= writeins_hash[block.user_option_id] %><br>
+      <% else %>
+        <%= contest_hash[contests_options[block.option_id]] %><br>
+        <%= option_hash[block.option_id] %><br>
+      <% end %>
+      <%= block.content %><br><br>
+    </div>
+  </div>
+<% end %>
+
+<div style="clear: both; float: none;"></div>
+

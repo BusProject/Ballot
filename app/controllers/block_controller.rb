@@ -52,4 +52,15 @@ class BlockController < ApplicationController
     flash[:notice] = t('guide.block_delete_flash')
     redirect_to :back
   end
+
+  # POST /blocks/:id/half
+  def half
+    @block = Block.find(params[:id])
+    if @block.full_size.nil?
+      @block.full_size = true
+    end
+    @block.full_size = !@block.full_size
+    @block.save
+    redirect_to :back
+  end
 end

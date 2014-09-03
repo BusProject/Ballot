@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140827041354) do
+ActiveRecord::Schema.define(:version => 20140902183008) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20140827041354) do
     t.text     "content"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "order"
+    t.boolean  "full_size"
   end
 
   add_index "blocks", ["guide_id"], :name => "index_blocks_on_guide_id"

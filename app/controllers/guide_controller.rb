@@ -3,6 +3,11 @@ class GuideController < ApplicationController
   # GET /guides/1.json
   def show
     @guide = Guide.find(params[:id])
+    @user = current_user
+    @blocks = Block.where(:guide_id => params[:id])
+    @choices = Choice.all(:select => "id, geography, contest, description", :order => "geography, contest")
+    @options = Option.all(:select => "id, choice_id, name, party, blurb", :order => "choice_id, name")
+    @writeins = UserOption.all(:select => "id, choice_id, name", :order => "choice_id, name")
   end
 
   # GET /guides/1/edit
@@ -10,8 +15,8 @@ class GuideController < ApplicationController
     @guide = Guide.find(params[:id])
     @user = current_user
     @blocks = Block.where(:guide_id => params[:id])
-    @choices = Choice.all(:select => "id, geography, contest", :order => "geography, contest")
-    @options = Option.all(:select => "id, choice_id, name, party", :order => "choice_id, name")
+    @choices = Choice.all(:select => "id, geography, contest, description", :order => "geography, contest")
+    @options = Option.all(:select => "id, choice_id, name, party, blurb", :order => "choice_id, name")
     @writeins = UserOption.all(:select => "id, choice_id, name", :order => "choice_id, name")
   end
 

@@ -267,6 +267,7 @@
                 <%= guide.name %>
               <% end %>
               <p style="font-size: 12px;">
+                <%= link_to t('guide.show'), guide_show_path(guide) %> | 
                 <%= link_to t('guide.edit'), guide_edit_path(guide) %> | 
                 <%= link_to t('guide.delete'), guide_delete_path(guide), :method => :post, :confirm => t('guide.delete_confirm') %> 
               </p>

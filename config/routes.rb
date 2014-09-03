@@ -25,6 +25,7 @@ Ballot::Application.routes.draw do
   match '/guide/:id/delete' => 'guide#destroy', :as => 'guide_delete', :via => :post
   match '/block/new' => 'block#new', :as => 'block_new'
   match '/block/create' => 'block#create', :as => 'block_create', :via => :post
+  match '/block/:id/half' => 'block#half', :as => 'block_half', :via => :post
   match '/block/:id/edit' => 'block#edit', :as => 'block_edit'
   match '/block/:id/delete' => 'block#destroy', :as => 'block_delete', :via => :post
 

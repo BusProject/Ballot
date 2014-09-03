@@ -1,0 +1,32 @@
+<%= form_tag(block_create_path, :method => :post) do %>
+  <%= hidden_field_tag(:guide_id, @guide.id) %>
+  <%= hidden_field_tag(:full_size, true) %>
+  <%= label_tag(:title, t('guide.block_title')) %>
+  <%= text_field_tag(:title) %><br>
+  <%= label_tag(:state, t('guide.block_state')) %>
+  <div class='state input'><%= select_tag 'state', options_for_select(@states) %></div>
+  <% measures.each do |state, m| %>
+    <div class="measure_select <%= state %>">
+      <%= label_tag(:contest_id, t('guide.block_measure')) %>
+      <div class="input">
+        <%= select_tag 'contest_id', options_for_select(m) %>
+      </div>
+    </div>
+  <% end %>
+  <% option_selects.each do |id, s| %>
+    <div class="option_select option-<%= id %>">
+      <%= label_tag(:option_id, t('guide.block_option')) %>
+      <div class="input"><%= select_tag 'option_id', options_for_select(s) %></div>
+      <% s.each do |o, opt_id| %>
+        <div class="blurb blurb-<%= opt_id %>"><%= options_blurbs[opt_id] %></div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="input custom_option">
+    <%= label_tag(:custom_name, t('guide.writein_name')) %>
+    <div class="input"><%= text_field_tag(:custom_name) %></div><br>
+  </div>
+  <br><%= label_tag(:content, t('guide.block_content')) %>
+  <%= text_area_tag(:content) %><br>
+  <div id="image-upload"><%= submit_tag(t('site.submit')) %></div>
+<% end %>

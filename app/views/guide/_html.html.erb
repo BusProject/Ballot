@@ -1,0 +1,9 @@
+    <%= form_tag(block_create_path, :method => :post) do %>
+      <%= hidden_field_tag(:guide_id, @guide.id) %>
+      <%= hidden_field_tag(:full_size, true) %>
+      <%= label_tag(:title, t('guide.block_title')) %>
+      <%= text_field_tag(:title) %><br>
+      <%= label_tag(:content, t('guide.block_content')) %>
+      <%= text_area_tag(:content) %><br>
+      <div id="image-upload"><%= submit_tag(t('site.submit')) %></div>
+    <% end %>
