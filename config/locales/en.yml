@@ -320,6 +320,7 @@ en:
       block_html: 'HTML'
       block_option: 'Options'
       block_half: 'Halve Block Width'
+      block_edit: 'Edit this block'
       writein: 'I want to write in my own candidate!'
       writein_name: 'Name'
       writein_party: 'Party'

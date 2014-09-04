@@ -27,6 +27,7 @@ Ballot::Application.routes.draw do
   match '/block/create' => 'block#create', :as => 'block_create', :via => :post
   match '/block/:id/half' => 'block#half', :as => 'block_half', :via => :post
   match '/block/:id/edit' => 'block#edit', :as => 'block_edit'
+  match '/block/:id/update' => 'block#update', :as => 'block_update', :via => :post
   match '/block/:id/delete' => 'block#destroy', :as => 'block_delete', :via => :post
 
   scope '/admin' do

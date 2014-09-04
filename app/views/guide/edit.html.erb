@@ -110,6 +110,7 @@
         <% end %>
         <%= block.content.html_safe %><br><br>
         <p style="font-size: 12px;">
+        <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
         <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
         <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
         </p>

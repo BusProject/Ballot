@@ -1,17 +1,7 @@
-<%= form_for(@block) do |f| %>
-  <% if @block.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@block.errors.count, "error") %> prohibited this block from being saved:</h2>
-
-      <ul>
-      <% @block.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= form_tag(block_update_path, method: 'post') do %>
+  <%= label_tag(:title, t('guide.block_title')) %>
+  <%= text_field_tag(:title, @block.title) %><br>
+  <%= label_tag(:content, t('guide.block_content')) %>
+  <%= text_area_tag(:content, @block.content) %><br>
+  <div id="image-upload"><%= submit_tag(t('site.submit')) %></div>
 <% end %>
