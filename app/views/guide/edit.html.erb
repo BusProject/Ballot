@@ -90,6 +90,7 @@
     end
   %>
 
+  <div id="sortable">
   <% @blocks.each do |block| %>
     <% 
       halfwidth = ''
@@ -107,7 +108,7 @@
           <%= contest_hash[contests_options[block.option_id]] %><br>
           <%= option_hash[block.option_id] %><br>
         <% end %>
-        <%= block.content %><br><br>
+        <%= block.content.html_safe %><br><br>
         <p style="font-size: 12px;">
         <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
         <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
@@ -115,6 +116,7 @@
       </div>
     </div>
   <% end %>
+</div>
 
   <div class="ballot-section">
     <div class="sectionheading">
@@ -189,6 +191,8 @@
 
     jQuery(document).ready(function() {
       reset();
+      $( "#sortable" ).sortable();
+      $( "#sortable" ).disableSelection();
     });
 
     jQuery('select[name=option_id]').change(function() {
@@ -317,4 +321,5 @@
     }
 
     tinyMCE.init({mode : "textareas", menubar: false, theme: 'modern', skin: 'light'});
+
 </script>
