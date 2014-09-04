@@ -326,6 +326,7 @@ en:
       select_contest: 'Select a Contest'
       select_state: 'Select a State'
       select_measure: 'Select a Measure'
+      not_published: 'This guide has not been published'
         
     # used on the add form
     add_form:

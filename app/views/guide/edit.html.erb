@@ -23,7 +23,7 @@
         #main label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
         #main input[type="submit"] {margin: 0px auto !important;} 
         #main select {margin-left: 7px;}
-        #main .mce-container {margin-top: 30px;;}
+        #main .mce-tinymce {margin-top: 10px;}
         #main .comments {width: 90%; margin: 0px auto;}
       </style>
       <%= render 'form' %>
@@ -167,7 +167,7 @@
           <div class="input" style="margin-left: 7px;"><%= text_field_tag(:custom_name) %></div><br>
         </div>
         <div class="comments">
-          <%= label_tag(:content, t('guide.block_content')) %><br>
+          <p align="center"><%= t('guide.block_content') %></p>
           <%= text_area_tag(:content) %>
         </div>
         <div style="clear: both; float: none;"></div>
