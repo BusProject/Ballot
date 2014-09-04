@@ -99,6 +99,8 @@
         <%= contest_hash[contests_options[block.option_id]] %><br>
         <%= option_hash[block.option_id] %><br>
       <% end %>
+      <%= options_blurbs[block.option_id] %>
+
       <%= block.content.html_safe %><br><br>
     </div>
   </div>
