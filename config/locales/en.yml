@@ -299,6 +299,8 @@ en:
       delete_flash: 'The guide has been deleted.'
       editing: 'Editing'
       name: 'Guide Name'
+      slug: 'Guide Slug'
+      slug_not_unique: 'This slug is already in use.'
       publish: 'Publish this guide?'
       creation_success: 'Your new guide has been created.'
       creation_failure: 'Your new guide could not be created.'

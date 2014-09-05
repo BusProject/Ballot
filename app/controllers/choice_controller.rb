@@ -66,7 +66,6 @@ class ChoiceController < ApplicationController
       @user = User.find_by_profile( params[:id] )
     end
 
-
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
 
     choices = params[:past] ? @user.choices.past :  @user.choices.future

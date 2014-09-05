@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140902183008) do
+ActiveRecord::Schema.define(:version => 20140905140323) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20140902183008) do
     t.boolean  "publish"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "slug"
   end
 
   add_index "guides", ["user_id"], :name => "index_guides_on_user_id"

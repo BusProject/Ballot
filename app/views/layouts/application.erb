@@ -92,6 +92,9 @@
         <% if flash[:notice] %>
           <p class="notice"><%=h flash[:notice] %></p>
         <% end %>
+        <% if flash[:error] %>
+          <p class="error"><%=h flash[:error] %></p>
+        <% end %>
         <%= yield %>
       </div><!-- main -->
 
