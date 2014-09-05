@@ -3,7 +3,7 @@
     <div class="left-nav">
     <ul>
       <%- if current_user.nil? %>
-          <li class="get-started" style="border:none; font-size:12px; padding-top:3px;"><%= t('top.start') %></li>
+          <li class="get-started" style="padding-right: 15px;"><%= t('top.start') %></li>
                                         <li><%= link_to t('top.sign_in'), user_login_path, :class => 'lightbox', :rel => 'login-popup' %></li>
       <% else %>
           <li style="width: 200px; overflow: hidden; white-space: nowrap;">
