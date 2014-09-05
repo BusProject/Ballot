@@ -20,6 +20,7 @@
   #main input[type="checkbox"] {width: auto !important;}
   #main label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
   #main input[type="submit"] {margin: 0px auto !important;} 
+  #main .hidden {display: block; height: 0px; overflow: hidden;}
 </style>
 
 <% 
@@ -51,16 +52,20 @@
 
   options_blurbs = Hash.new
   option_selects = Hash.new
-  measure_selects = Hash.new
   option_hash = Hash.new
-  contests_options = Hash.new
   measure_options = Hash.new
+  measure_sides = Hash.new
+  contest_options = Hash.new
   @options.each do |o|
     option_selects[o.choice_id] = Array.new
     if o.party.nil?
-      contests_options[o.id] = o.choice_id
-    else
       measure_options[o.id] = o.choice_id
+      if measure_sides[o.choice_id].nil?
+        measure_sides[o.choice_id] = Hash.new
+      end
+      measure_sides[o.choice_id][o.name] = o.blurb
+    else
+      contest_options[o.id] = o.choice_id
     end
     options_blurbs[o.id] = o.blurb
   end
@@ -81,7 +86,6 @@
     contests_writeins[w.id] = w.choice_id
   end
 %>
-
 <% @blocks.each do |block| %>
   <% 
     halfwidth = ''
@@ -91,20 +95,53 @@
   %>
   <div class="ballot-section<%= halfwidth %>">
     <div class="sectionheading">
-      <span style="font-size: 24px; display: block;"><%= block.title %></span><br>
       <% if block.option_id.nil? and !block.user_option_id.nil? %>
-        <%= contest_hash[contests_writeins[block.user_option_id]] %><br>
-        <%= writeins_hash[block.user_option_id] %><br>
+        <h1 style="background: #D37A3C; padding: 10px;" class=""><%= contest_hash[contests_writeins[block.user_option_id]] %></h1><br>
+        <h2><%= writeins_hash[block.user_option_id] %></h2><br>
       <% else %>
-        <%= contest_hash[contests_options[block.option_id]] %><br>
-        <%= option_hash[block.option_id] %><br>
+        <% 
+          print_measure_blurbs = false
+          if !measure_options[block.option_id].nil?
+            contest_name = contest_hash[measure_options[block.option_id]]
+            print_measure_blurbs = true
+          elsif !contest_options[block.option_id].nil?
+            contest_name = contest_hash[contest_options[block.option_id]]
+          else
+            contest_name = block.title
+          end
+        %>
+        <h1 style="background: #D37A3C; padding: 10px;" class=""><%= contest_name %></h1><br>
+        <% if !option_hash[block.option_id].nil? %>
+          <h2><%= option_hash[block.option_id] %></h2><br>
+        <% end %>
       <% end %>
-      <%= options_blurbs[block.option_id] %>
-
-      <%= block.content.html_safe %><br><br>
+      <% if !block.content.nil? %>
+        <p style="text-align: left; padding: 0 40px;"><%= block.content.html_safe %></p>
+      <% end %>
+      <% if print_measure_blurbs %>
+        <div style=""><a href="javascript:expand(<%= measure_options[block.option_id] %>)">expand details</a></div>
+        <table style="height: 0px; margin: 0 40px; text-align: left; color: #5b5b5b; background: #fff;" cellspacing="10" id="measure-<%= measure_options[block.option_id] %>" class="hidden">
+          <tbody><tr>
+            <td style="color: green; background: #fff;">Yes:</td>
+            <td style=""><%= measure_sides[measure_options[block.option_id]]['Yes'] %></td>
+            </tr><tr>
+            <td style="color: red; background: #fff;">No:</td>
+            <td style=""><%= measure_sides[measure_options[block.option_id]]['No'] %></td>
+          </tbody></tr>
+        </table>
+      <% end %>
     </div>
   </div>
 <% end %>
 
 <div style="clear: both; float: none;"></div>
 
+<script>
+  function expand(id) {
+    if(jQuery('#measure-'+id).hasClass('hidden')) {
+      jQuery('#measure-'+id).animate(500).removeClass('hidden');
+    } else {
+      jQuery('#measure-'+id).animate(500).addClass('hidden');
+    }
+  }
+</script>
