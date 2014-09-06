@@ -34,6 +34,7 @@ class GuideController < ApplicationController
   def create
     @guide = Guide.new
     @guide.user = current_user
+    @guide.slug = Devise.friendly_token[0,20]
     if @guide.save
       flash[:notice] = t('guide.creation_success')
     end
