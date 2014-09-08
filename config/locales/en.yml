@@ -141,6 +141,7 @@ en:
         email: 'Email'
         password: 'Password'
         confirm_password: 'Repeat password'
+        password_mismatch: 'Passwords do not match'
         forgot_password: 'Forgot your password?'
         forgot_password_blurb: "Fill in your email address and we'll send you a new one."
         forgot_password_button: 'Reset password'
