@@ -285,4 +285,7 @@ class User < ActiveRecord::Base
     self.save
   end
 
+  def valid_password?(submitted)
+  end
+
 end
