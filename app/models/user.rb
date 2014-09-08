@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :rememberable, :trackable, :validatable,
-         :omniauthable
+         :omniauthable, :token_authenticatable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
@@ -285,7 +285,8 @@ class User < ActiveRecord::Base
     self.save
   end
 
-  def valid_password?(submitted)
+  def self.valid_password?(submitted)
+    
   end
 
 end
