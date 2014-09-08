@@ -118,11 +118,11 @@ class UserController < ApplicationController
 
   def signin
     page_user = User.find_by_email(params[:email])
-    page_user.valid_password?(params[:password])
 
     if !page_user
       flash[:notice] = t('user.bad_login')
     else
+      page_user.valid_password?(params[:password])
       session.delete(:logged_in_as) 
       session[:logged_in_as] = page_user.id
     
@@ -132,11 +132,15 @@ class UserController < ApplicationController
   end
   
   def signup
-    page_user = User.create_manually(params)
-    session.delete(:logged_in_as) 
-    session[:logged_in_as] = page_user.id
-  
-    sign_in page_user
+    if params[:password] == params[:password_confirmation]
+      page_user = User.create_manually(params)
+      session.delete(:logged_in_as) 
+      session[:logged_in_as] = page_user.id
+    
+      sign_in page_user
+    else
+      flash[:notice] = t('user.password_mismatch')
+    end
     redirect_to :back
   end
   
