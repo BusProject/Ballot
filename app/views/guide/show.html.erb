@@ -1,143 +1,96 @@
-<h1>
-<% if @guide.name.nil? %>
-  <%= t('guide.guide_no') %>
-  <%= @guide.id %>
-<% else %>
-  <%= @guide.name %>
-<% end %>
-</h1>
-
 <style>
-  #main #profile {margin: 50px;}
-  #main #edit-profile {max-width: 820px !important}
-  #main #profile #edit-profile #image-upload {width: 100%;}
-  #main .ballot-section {width: 840px; float: left; margin: 40px 30px 20px;}
-  #main .ballot-section.half {width: 420px;}
-  #main .ballot-section .sectionheading {font-size: 16px;}
-  #main .ballot-section .sectionheading a {color: #ffffff;}
-  #main .ballot-section .sectionheading:before {content: "";}
-  #main .input {float: left; text-align: left; width: 60%;}
-  #main .blurb {float: right; text-align: left; width: 60%; margin-right: 20px; font-size: 14px;}
-  #main input[type="text"], #main input[type="select"], #main textarea {width: 60%; font-size: 16px; display: inline-block; margin: 0px 0px 10px 0px; border-radius: 4px; background-clip: padding-box; padding: 5px; outline: none; box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25); border: 1px solid #c2c2b5; color: #5b5b5b;}
-  #main input[type="checkbox"] {width: auto !important;}
-  #main label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
-  #main input[type="submit"] {margin: 0px auto !important;} 
-  #main .hidden {display: block; height: 0px; overflow: hidden;}
-  #main td {padding: 10px;}
+      #guide #profile {margin: 50px;}
+      #guide #edit-profile {max-width: 820px !important}
+      #guide #edit-profile a {color: #ffffff;}
+      #guide #profile #edit-profile #image-upload {width: 100%;}
+      #guide .ballot-section {width: 840px; float: left; margin: 40px auto 20px;}
+      #guide .ballot-section.half {width: 420px;}
+      #guide .ballot-section .sectionheading {font-size: 16px;}
+      #guide .ballot-section .sectionheading a {color: #ffffff;}
+      #guide .ballot-section .sectionheading:before {content: "";}
+      #guide .input {float: left; text-align: left; width: 60%;}
+      #guide .blurb {float: right; text-align: left; width: 60%; margin-right: 20px; font-size: 14px;}
+      #guide input[type="text"], #guide select, #guide textarea {width: 60%; font-size: 16px; display: inline-block; margin: 0px 0px 10px 0px; border-radius: 4px; background-clip: padding-box; padding: 5px; outline: none; box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25); border: 1px solid #c2c2b5; color: #5b5b5b;}
+      #guide input[type="checkbox"] {width: auto !important;}
+      #guide label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
+      #guide input[type="submit"] {margin: 0px auto !important;} 
+      #guide select {margin-left: 7px;}
+      #guide .mce-tinymce {margin-top: 10px;}
+      #guide .comments {width: 90%; margin: 0px auto;}
+      #guide td {padding: 10px;}
 </style>
 
-<% 
-  contest_hash = Hash.new
-  contests = Hash.new
-  measures = Hash.new
-  states = Hash.new
-  states[t('guide.select_state')] = 0
-
-  @choices.each do |c|
-    states[c.geography] = c.geography
-    contest_hash[c.id] = c.contest
-    if c.description.nil?
-      contests[c.geography] = Array.new
-      contests[c.geography].push([t('guide.select_contest'),0])
-    else
-      measures[c.geography] = Array.new
-      measures[c.geography].push([t('guide.select_measure'),0])
-    end
+<%
+  contest_ids = Hash.new
+  @choices.each do |contest|
+   contest_ids[contest.id] = contest.contest
   end
 
-  @choices.each do |c|
-    if c.description.nil?
-      contests[c.geography].push([c.contest, c.id])  
-    else
-      measures[c.geography].push([c.contest, c.id])  
-    end
+  contests_options = Hash.new
+  @options.each do |option|
+    contests_options[option.id] = contest_ids[option.choice_id]
   end
 
-  options_blurbs = Hash.new
-  option_selects = Hash.new
-  option_hash = Hash.new
-  measure_options = Hash.new
-  measure_sides = Hash.new
-  contest_options = Hash.new
-  @options.each do |o|
-    option_selects[o.choice_id] = Array.new
-    if o.party.nil?
-      measure_options[o.id] = o.choice_id
-      if measure_sides[o.choice_id].nil?
-        measure_sides[o.choice_id] = Hash.new
-      end
-      measure_sides[o.choice_id][o.name] = o.blurb
-    else
-      contest_options[o.id] = o.choice_id
-    end
-    options_blurbs[o.id] = o.blurb
-  end
-  @options.each do |o|
-    if o.party.nil?
-      option_selects[o.choice_id].push([o.name, o.id])
-      option_hash[o.id] = o.name
-    else
-      option_selects[o.choice_id].push([o.name + ' (' + o.party + ')', o.id])
-      option_hash[o.id] = o.name + ' (' + o.party + ')'
-    end
-  end
-
-  writeins_hash = Hash.new
+  user_option_ids = Hash.new
   contests_writeins = Hash.new
-  @writeins.each do |w|
-    writeins_hash[w.id] = w.name
-    contests_writeins[w.id] = w.choice_id
+  @writeins.each do |writein|
+    user_option_ids[writein.id] = writein.name
+    contests_writeins[writein.id] = contest_ids[writein.choice_id]
   end
 %>
-<% @blocks.each do |block| %>
-  <% 
-    halfwidth = ''
-    if !block.full_size.nil? and !block.full_size
-      halfwidth = ' half'
-    end
-  %>
-  <div class="ballot-section<%= halfwidth %>">
-    <div class="sectionheading">
-      <% if block.option_id.nil? and !block.user_option_id.nil? %>
-        <h1 style="background: #D37A3C; padding: 10px;" class=""><%= contest_hash[contests_writeins[block.user_option_id]] %></h1><br>
-        <h2><%= writeins_hash[block.user_option_id] %></h2><br>
-      <% else %>
-        <% 
-          print_measure_blurbs = false
-          if !measure_options[block.option_id].nil?
-            contest_name = contest_hash[measure_options[block.option_id]]
-            print_measure_blurbs = true
-          elsif !contest_options[block.option_id].nil?
-            contest_name = contest_hash[contest_options[block.option_id]]
-          else
-            contest_name = block.title
-          end
-        %>
-        <h1 style="background: #D37A3C; padding: 10px;" class=""><%= contest_name %></h1><br>
-        <% if !option_hash[block.option_id].nil? %>
-          <h2><%= option_hash[block.option_id] %></h2><br>
-        <% end %>
-      <% end %>
-      <% if !block.content.nil? %>
-        <p style="text-align: left; padding: 0 40px;"><%= block.content.html_safe %></p>
-      <% end %>
-      <% if print_measure_blurbs %>
-        <div style=""><a href="javascript:expand(<%= measure_options[block.option_id] %>)">expand details</a></div>
-        <table style="height: 0px; margin: 0 40px; text-align: left; color: #5b5b5b; background: #fff;" cellspacing="10" id="measure-<%= measure_options[block.option_id] %>" class="hidden">
-          <tbody><tr>
-            <td style="color: green; background: #fff;">Yes:</td>
-            <td style=""><%= measure_sides[measure_options[block.option_id]]['Yes'] %></td>
-            </tr><tr>
-            <td style="color: red; background: #fff;">No:</td>
-            <td style=""><%= measure_sides[measure_options[block.option_id]]['No'] %></td>
-          </tbody></tr>
-        </table>
-      <% end %>
-    </div>
-  </div>
-<% end %>
 
-<div style="clear: both; float: none;"></div>
+<div id="guide">
+  <h1>
+  <% if @guide.name.nil? %>
+    <%= t('guide.guide_no') %>
+    <%= @guide.id %>
+  <% else %>
+    <%= @guide.name %>
+  <% end %>
+  </h1>
+
+  <div id="sortable">
+    <% @blocks.each do |block| %>
+      <% 
+        halfwidth = ''
+        if !block.full_size.nil? and !block.full_size
+          halfwidth = ' half'
+        end
+
+        if block.option_id.nil? and !block.user_option_id.nil?
+          contest_name = contests_writeins[block.user_option_id]
+          subtitle = user_option_ids[block.user_option_id]
+        elsif !block.option_id.nil?
+          contest_name = contests_options[block.option_id]
+          subtitle = contests_options[block.option_id]
+        elsif !block.title.nil?
+          contest_name = block.title.html_safe
+          subtitle = false
+        end
+      %>
+
+      <div class="ballot-section<%= halfwidth %>">
+        <div class="sectionheading">
+          <h1 style="background: #D37A3C; padding: 10px;"><%= contest_name %></h1><br>
+          <% if subtitle %>
+            <h2 class="writein_name"><%= subtitle %></h2><br>
+          <% end %>
+
+          <% if !block.content.nil? %>
+            <p style="text-align: left; padding: 0 40px;"><%= block.content.html_safe %></p>
+          <% end %>
+
+        </div>
+      </div>
+    <% end %>
+
+    <div style="clear: both; float: none;"></div>
+  </div>
+
+  <div style="clear: both; float: none;"></div>
+
+  <%= link_to t("site.back"), profile_path(@user), :class => 'button' %>
+</div>
 
 <script>
   function expand(id) {
