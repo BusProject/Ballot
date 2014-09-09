@@ -1,0 +1,40 @@
+<% 
+  halfwidth = ''
+  if !block.full_size.nil? and !block.full_size
+    halfwidth = ' half'
+  end
+
+  #if !measure_options[block.option_id].nil?
+  #  contest_name = contest_hash[measure_options[block.option_id]]
+  #elsif !contest_options[block.option_id].nil?
+  #  contest_name = contest_hash[contest_options[block.option_id]]
+  #else
+  #  contest_name = block.title
+  #end
+  contest_name = 'contest_title'
+%>
+<div class="ballot-section<%= halfwidth %>">
+  <div class="sectionheading">
+    <% if block.option_id.nil? and !block.user_option_id.nil? %>
+      <h1 style="background: #D37A3C; padding: 10px;" class="">contest name for write-in</h1><br>
+      <h2>write-in name</h2><br>
+    <% else %>
+      <h1 style="background: #D37A3C; padding: 10px;" class=""><%= contest_name %></h1><br>
+        <h2>Choice!</h2><br>
+    <% end %>
+
+    <% if !block.content.nil? %>
+      <p style="text-align: left; padding: 0 40px;"><%= block.content.html_safe %></p>
+    <% end %>
+
+    <p style="font-size: 12px;">
+      <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
+      <% if !block.full_size.nil? and !block.full_size %>
+        <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %> | 
+      <% else %>
+        <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
+      <% end %>
+      <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
+    </p>
+  </div>
+</div>

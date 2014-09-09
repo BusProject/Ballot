@@ -1,347 +1,386 @@
-<h1><%= t("guide.editing") %> 
-<% if @guide.name.nil? %>
-  <%= t('guide.guide_no') %>
-  <%= @guide.id %>
-<% else %>
-  <%= @guide.name %>
-<% end %>
-</h1>
+<style>
+      #guide #profile {margin: 50px;}
+      #guide #edit-profile {max-width: 820px !important}
+      #guide #edit-profile a {color: #ffffff;}
+      #guide #profile #edit-profile #image-upload {width: 100%;}
+      #guide .ballot-section {width: 840px; float: left; margin: 40px 30px 20px;}
+      #guide .ballot-section.half {width: 420px;}
+      #guide .ballot-section .sectionheading {font-size: 16px;}
+      #guide .ballot-section .sectionheading a {color: #ffffff;}
+      #guide .ballot-section .sectionheading:before {content: "";}
+      #guide .input {float: left; text-align: left; width: 60%;}
+      #guide .blurb {float: right; text-align: left; width: 60%; margin-right: 20px; font-size: 14px;}
+      #guide input[type="text"], #guide select, #guide textarea {width: 60%; font-size: 16px; display: inline-block; margin: 0px 0px 10px 0px; border-radius: 4px; background-clip: padding-box; padding: 5px; outline: none; box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25); border: 1px solid #c2c2b5; color: #5b5b5b;}
+      #guide input[type="checkbox"] {width: auto !important;}
+      #guide label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
+      #guide input[type="submit"] {margin: 0px auto !important;} 
+      #guide select {margin-left: 7px;}
+      #guide .mce-tinymce {margin-top: 10px;}
+      #guide .comments {width: 90%; margin: 0px auto;}
 
-<div id="profile">
-  <div id="edit-profile">
-    <style>
-      #main #profile {margin: 50px;}
-      #main #edit-profile {max-width: 820px !important}
-      #main #edit-profile a {color: #ffffff;}
-      #main #profile #edit-profile #image-upload {width: 100%;}
-      #main .ballot-section {width: 840px; float: left; margin: 40px 30px 20px;}
-      #main .ballot-section.half {width: 420px;}
-      #main .ballot-section .sectionheading {font-size: 16px;}
-      #main .ballot-section .sectionheading a {color: #ffffff;}
-      #main .ballot-section .sectionheading:before {content: "";}
-      #main .input {float: left; text-align: left; width: 60%;}
-      #main .blurb {float: right; text-align: left; width: 60%; margin-right: 20px; font-size: 14px;}
-      #main input[type="text"], #main select, #main textarea {width: 60%; font-size: 16px; display: inline-block; margin: 0px 0px 10px 0px; border-radius: 4px; background-clip: padding-box; padding: 5px; outline: none; box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25); border: 1px solid #c2c2b5; color: #5b5b5b;}
-      #main input[type="checkbox"] {width: auto !important;}
-      #main label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
-      #main input[type="submit"] {margin: 0px auto !important;} 
-      #main select {margin-left: 7px;}
-      #main .mce-tinymce {margin-top: 10px;}
-      #main .comments {width: 90%; margin: 0px auto;}
-      </style>
-      <%= render 'form' %>
-    </div>
-  </div>
+</style>
+<div id="guide">
+  <h1><%= t("guide.editing") %> 
+  <% if @guide.name.nil? %>
+    <%= t('guide.guide_no') %>
+    <%= @guide.id %>
+  <% else %>
+    <%= @guide.name %>
+  <% end %>
+  </h1>
 
-  <% 
-    contest_hash = Hash.new
-    contests = Hash.new
-    measures = Hash.new
-    states = Hash.new
-    states[t('guide.select_state')] = 0
-
-    @choices.each do |c|
-      states[c.geography] = c.geography
-      contest_hash[c.id] = c.contest
-      if c.description.nil?
-        contests[c.geography] = Array.new
-        contests[c.geography].push([t('guide.select_contest'),0])
-      else
-        measures[c.geography] = Array.new
-        measures[c.geography].push([t('guide.select_measure'),0])
-      end
-    end
-
-    @choices.each do |c|
-      if c.description.nil?
-        contests[c.geography].push([c.contest, c.id])  
-      else
-        measures[c.geography].push([c.contest, c.id])  
-      end
-    end
-
-    options_blurbs = Hash.new
-    option_selects = Hash.new
-    measure_selects = Hash.new
-    option_hash = Hash.new
-    measure_options = Hash.new
-    contest_options = Hash.new
-    @options.each do |o|
-      option_selects[o.choice_id] = Array.new
-      if o.party.nil?
-        measure_options[o.id] = o.choice_id
-      else
-        contest_options[o.id] = o.choice_id
-      end
-      options_blurbs[o.id] = o.blurb
-    end
-    @options.each do |o|
-      if o.party.nil?
-        option_selects[o.choice_id].push([o.name, o.id])
-        option_hash[o.id] = o.name
-      else
-        option_selects[o.choice_id].push([o.name + ' (' + o.party + ')', o.id])
-        option_hash[o.id] = o.name + ' (' + o.party + ')'
-      end
-    end
-
-    writeins_hash = Hash.new
-    contests_writeins = Hash.new
-    @writeins.each do |w|
-      writeins_hash[w.id] = w.name
-      contests_writeins[w.id] = w.choice_id
-    end
-  %>
-
-  <div id="sortable">
-    <% @blocks.each do |block| %>
-      <% 
-        halfwidth = ''
-        if !block.full_size.nil? and !block.full_size
-          halfwidth = ' half'
-        end
-      %>
-      <div class="ballot-section<%= halfwidth %>">
-        <div class="sectionheading">
-          <% if block.option_id.nil? and !block.user_option_id.nil? %>
-            <h1 style="background: #D37A3C; padding: 10px;" class=""><%= contest_hash[contests_writeins[block.user_option_id]] %></h1><br>
-            <h2><%= writeins_hash[block.user_option_id] %></h2><br>
-          <% else %>
-            <% 
-              if !measure_options[block.option_id].nil?
-                contest_name = contest_hash[measure_options[block.option_id]]
-              elsif !contest_options[block.option_id].nil?
-                contest_name = contest_hash[contest_options[block.option_id]]
-              else
-                contest_name = block.title
-              end
-            %>
-            <h1 style="background: #D37A3C; padding: 10px;" class=""><%= contest_name %></h1><br>
-            <% if !option_hash[block.option_id].nil? %>
-              <h2><%= option_hash[block.option_id] %></h2><br>
-            <% end %>
-          <% end %>
-          <% if !block.content.nil? %>
-            <p style="text-align: left; padding: 0 40px;"><%= block.content.html_safe %></p>
-          <% end %>
-          <p style="font-size: 12px;">
-            <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
-            <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
-            <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
-          </p>
-        </div>
+  <div id="profile">
+    <div id="edit-profile">
+        <%= render 'form' %>
       </div>
+    </div>
+
+    <div id="sortable">
+      <% @blocks.each do |block| %>
+<% 
+  halfwidth = ''
+  if !block.full_size.nil? and !block.full_size
+    halfwidth = ' half'
+  end
+
+  #if !measure_options[block.option_id].nil?
+  #  contest_name = contest_hash[measure_options[block.option_id]]
+  #elsif !contest_options[block.option_id].nil?
+  #  contest_name = contest_hash[contest_options[block.option_id]]
+  #else
+  #  contest_name = block.title
+  #end
+  contest_name = 'contest_title'
+%>
+<div class="ballot-section<%= halfwidth %>">
+  <div class="sectionheading">
+    <% if block.option_id.nil? and !block.user_option_id.nil? %>
+      <h1 style="background: #D37A3C; padding: 10px;" class="">contest name for write-in</h1><br>
+      <h2>write-in name</h2><br>
+    <% else %>
+      <h1 style="background: #D37A3C; padding: 10px;" class=""><%= contest_name %></h1><br>
+        <h2>Choice!</h2><br>
     <% end %>
 
-    <div style="clear: both; float: none;"></div>
-  </div>
+    <% if !block.content.nil? %>
+      <p style="text-align: left; padding: 0 40px;"><%= block.content.html_safe %></p>
+    <% end %>
 
-  <div class="ballot-section">
-    <div class="sectionheading">
-      <h1 style="background: #D37A3C; padding: 10px;" class=""><%= t('guide.block_add'); %></h1><br>
-      <ul>
-        <li><h2><%= link_to(t('guide.block_measure'), "javascript:type('measure');", :class => 'swap') %></h2></li>
-        <li><h2><%= link_to(t('guide.block_contest'), "javascript:type('contest');", :class => 'swap') %></h2></li>
-        <li><h2><%= link_to(t('guide.block_html'), "javascript:type('html');", :class => 'swap') %></h2></li>
-      </ul>  
-      <div id="contest">
-      <%= form_tag(block_create_path, :method => :post) do %>
-        <%= hidden_field_tag(:guide_id, @guide.id) %>
-        <%= hidden_field_tag(:full_size, true) %>
-        <div class="title">
-          <%= label_tag(:title, t('guide.block_title')) %>
-          <%= text_field_tag(:title) %>
-        </div>
-        <div class="states">
-          <%= label_tag(:state, t('guide.block_state')) %>
-          <div class="input"><%= select_tag 'state', options_for_select(states) %></div>
-        </div>
-        <% contests.each do |state, c| %>
-          <div class="contest_select <%= state %>">
+    <p style="font-size: 12px;">
+      <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
+      <% if !block.full_size.nil? and !block.full_size %>
+        <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %> | 
+      <% else %>
+        <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
+      <% end %>
+      <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
+    </p>
+  </div>
+</div>
+      <% end %>
+
+      <div style="clear: both; float: none;"></div>
+    </div>
+
+    <div class="ballot-section">
+      <div class="sectionheading">
+        <h1 style="background: #D37A3C; padding: 10px;" class=""><%= t('guide.block_add'); %></h1><br>
+        <ul>
+          <li><h2><%= link_to(t('guide.block_measure'), "javascript:type('measure');", :class => 'swap') %></h2></li>
+          <li><h2><%= link_to(t('guide.block_contest'), "javascript:type('contest');", :class => 'swap') %></h2></li>
+          <li><h2><%= link_to(t('guide.block_html'), "javascript:type('html');", :class => 'swap') %></h2></li>
+        </ul>  
+
+        <div id="contest">
+        <%= form_tag(block_create_path, :method => :post) do %>
+          <%= hidden_field_tag(:guide_id, @guide.id) %>
+          <%= hidden_field_tag(:full_size, true) %>
+          <div class="title">
+            <%= label_tag(:title, t('guide.block_title')) %>
+            <%= text_field_tag(:title) %>
+          </div>
+          <div class="states">
+            <%= label_tag(:state, t('guide.block_state')) %>
+            <div class="input"><%= select_tag 'state' %></div>
+          </div>
+          <div class="contest_select">
             <%= label_tag(:contest_id, t('guide.block_contest')) %>
             <div class="input">
-              <%= select_tag 'contest_id', options_for_select(c) %>
+              <%= select_tag 'contest_id' %>
             </div>
           </div>
-        <% end %>
-        <% measures.each do |state, m| %>
-          <div class="measure_select <%= state %>">
-            <%= label_tag(:contest_id, t('guide.block_measure')) %>
-            <div class="input">
-              <%= select_tag 'contest_id', options_for_select(m) %>
-            </div>
-          </div>
-        <% end %>
-        <% option_selects.each do |id, s| %>
-          <div class="option_select option-<%= id %>">
+          <div class="option_select">
             <%= label_tag(:option_id, t('guide.block_option')) %>
-            <div class="input"><%= select_tag 'option_id', options_for_select(s) %></div>
-            <% s.each do |o, opt_id| %>
-              <div style="margin-bottom: 10px; float: right;"><div class="blurb blurb-<%= opt_id %>"><%= options_blurbs[opt_id] %></div></div>
-            <% end %>
+            <div class="input"><%= select_tag 'option_id' %></div>
+            <div style="margin-bottom: 10px; float: right;"><div class="blurb">blurb</div></div>
             <div class="writein" style="clear: both; font-size: 12px;"><%= link_to(t('guide.writein'), 'javascript:writein();') %> </div>
+            </div>
+          <div class="custom_option">
+            <%= label_tag(:custom_name, t('guide.writein_name')) %>
+            <div class="input" style="margin-left: 7px;"><%= text_field_tag(:custom_name) %></div><br>
+          </div>
+          <div class="comments">
+            <p align="center"><%= t('guide.block_content') %></p>
+            <%= text_area_tag(:content) %>
+          </div>
+          <div style="clear: both; float: none;"></div>
+          <div id="image-upload" class="submit">
+            <%= link_to(t('guide.block_new_type'), "javascript:reset();") %><br>
+            <%= submit_tag(t('site.submit')) %>
           </div>
         <% end %>
-        <div class="custom_option">
-          <%= label_tag(:custom_name, t('guide.writein_name')) %>
-          <div class="input" style="margin-left: 7px;"><%= text_field_tag(:custom_name) %></div><br>
         </div>
-        <div class="comments">
-          <p align="center"><%= t('guide.block_content') %></p>
-          <%= text_area_tag(:content) %>
-        </div>
-        <div style="clear: both; float: none;"></div>
-        <div id="image-upload" class="submit">
-          <%= link_to(t('guide.block_new_type'), "javascript:reset();") %><br>
-          <%= submit_tag(t('site.submit')) %>
-        </div>
-      <% end %>
       </div>
     </div>
-  </div>
 
-  <div style="clear: both; float: none;"></div>
+    <div style="clear: both; float: none;"></div>
 
-  <%= link_to t("site.back"), profile_path(@user), :class => 'button' %>
+    <%= link_to t("site.back"), profile_path(@user), :class => 'button' %>
+</div>
 
-  <script>
-    typename = false;
+<% 
+  def false_if_blank(obj)
+    if obj.nil? || !obj
+      return false
+    end
+    return obj
+  end
 
-    jQuery(document).ready(function() {
-      reset();
-      $( "#sortable" ).sortable();
-      $( "#sortable" ).disableSelection();
-    });
+  def false_if_blank_quote(obj)
+    if obj.nil? || !obj
+      return false
+    end
+    return ('"' + obj.gsub('"', '\"') + '"').html_safe
+  end
+%>
 
-    jQuery('select[name=option_id]').change(function() {
-      disable_blurbs();
-      enable_blurb(jQuery(this).val());
-    });
-
-    jQuery('select[name=contest_id]').change(function() {
-      disable_options();
-      disable_blurbs();
-      enable_option(jQuery(this).val());
-    });
-
-    jQuery('select[name=state]').change(function() {
-      disable_options();
-      disable_contests();
-      disable_measures();
-      disable_blurbs();
-      enable_contest(jQuery(this).val());
-    });
-
-    function reset() {
-      enable_type();
-      disable_basics();
-      disable_options(); 
-      disable_contests();
-      disable_measures();
-      disable_blurbs();
-    }
-
-    function type(the_typename) {
-      typename = the_typename
-
-      disable_type();
-      enable_basics();
-      if (typename != 'html') {
-        enable_state();
-      } else {
-        enable_title();
-      }
-    }
-
-    function disable_type() {
-      jQuery('.swap').hide();
-    }
-
-    function enable_type() {
-      jQuery('.swap').show();
+    <script>
       typename = false;
-    }
+      blocks = {};
+      <% @blocks.each do |block| %>
+        blocks[<%= block.id %>] = {};
+        blocks[<%= block.id %>]['id'] = <%= block.id %>;
+        blocks[<%= block.id %>]['guide_id'] = <%= false_if_blank(block.guide_id) %>;
+        blocks[<%= block.id %>]['option_id'] = <%= false_if_blank(block.option_id) %>;
+        blocks[<%= block.id %>]['user_option_id'] = <%= false_if_blank(block.user_option_id) %>;
+        blocks[<%= block.id %>]['title'] = <%= false_if_blank_quote(block.title) %>;
+        blocks[<%= block.id %>]['content'] = <%= false_if_blank_quote(block.content) %>;
+        blocks[<%= block.id %>]['order'] = <%= false_if_blank_quote(block.order) %>;
+        blocks[<%= block.id %>]['full_size'] = <%= false_if_blank(block.full_size) %>;
+      <% end %>
 
-    function disable_basics() {
-      jQuery('.title').hide();
-      jQuery('.title input').attr('disabled', 'disabled');
-      jQuery('.states').hide();
-      jQuery('.states select').attr('disabled', 'disabled');
-      jQuery('.comments').hide();
-      jQuery('.comments input').attr('disabled', 'disabled');
-      jQuery('.submit').hide();
-      jQuery('.submit input').attr('disabled', 'disabled');
-    }
+      contests = {};
+      <% @choices.each do |contest| %>
+        contests[<%= contest.id %>] = {};
+        contests[<%= contest.id %>]['id'] = <%= contest.id %>;
+        <% if contest.contest_type == 'Ballot_Statewide' %>
+          contests[<%= contest.id %>]['type'] = 'measure';
+        <% else %>
+          contests[<%= contest.id %>]['type'] = 'contest';
+        <% end %>
+        contests[<%= contest.id %>]['title'] = <%= false_if_blank_quote(contest.contest) %>;
+        contests[<%= contest.id %>]['state'] = <%= false_if_blank_quote(contest.geography) %>;
+      <% end %>
 
-    function disable_contests() {
-      jQuery('.contest_select').hide();
-      jQuery('.contest_select select').attr('disabled', 'disabled');
-    }
+      options = {};
+      <% @options.each do |option| %>
+        options[<%= option.id %>] = {};
+        options[<%= option.id %>]['id'] = <%= option.id %>;
+        options[<%= option.id %>]['contest_id'] = <%= false_if_blank(option.choice_id) %>;
+        options[<%= option.id %>]['name'] = <%= false_if_blank_quote(option.name) %>;
+        options[<%= option.id %>]['blurb'] = <%= false_if_blank_quote(option.blurb) %>;
+      <% end %>
 
-    function disable_measures() {
-      jQuery('.measure_select').hide();
-      jQuery('.measure_select select').attr('disabled', 'disabled');
-    }
+      writeins = {};
+      <% @writeins.each do |writein| %>
+        writeins[<%= writein.id %>] = {};
+        writeins[<%= writein.id %>]['id'] = <%= writein.id %>;
+        writeins[<%= writein.id %>]['choice_id'] = <%= false_if_blank(writein.choice_id) %>;
+        writeins[<%= writein.id %>]['name'] = <%= false_if_blank_quote(writein.name) %>;
+      <% end %>
 
-    function disable_blurbs() {
-      jQuery('.blurb').hide();
-    }
+      make_states(); //Populate state select since we can do that right now
 
-    function disable_options() {
-      jQuery('.option_select').hide();
-      jQuery('.option_select select').attr('disabled', 'disabled');
-      jQuery('.custom_option').hide();
-      jQuery('.custom_option input').attr('disabled', 'disabled');
-      writein_control();
-    }
+      jQuery(document).ready(function() {
+        reset();
+      });
 
-    function enable_blurb(id) {
-      jQuery('.blurb-'+id).show();
-    }
+      jQuery('select[name="state"]').change(function() {
+        disable_contests();
+        enable_contest($(this).val());
+      });
 
-    function writein_control() {
-      if(typename == 'contest') {
-        jQuery('.writein').show().css('display', 'block');
-      } else {
-        jQuery('.writein').hide().css('display', 'none');
+      jQuery('select[name="contest_id]').change(function() {
+        alert('hi!');
+        disable_options();
+        enable_option($(this).val());
+      });
+
+      function reset() {
+        jQuery('select[name="state"]').val(0);
+        enable_type();
+        disable_basics();
+        disable_options(); 
+        disable_contests();
+        disable_measures();
+        disable_blurbs();
       }
-    }
 
-    function enable_contest(state) {
-      jQuery('.'+typename+'_select.'+state).show();
-      jQuery('.'+typename+'_select.'+state+' select').removeAttr('disabled');
-    }
+      function type(the_typename) {
+        typename = the_typename
+
+        disable_type();
+        enable_basics();
+        if (typename != 'html') {
+          enable_state();
+        } else {
+          enable_title();
+        }
+      }
+
+      function disable_type() {
+        jQuery('.swap').hide();
+      }
+
+      function enable_type() {
+        jQuery('.swap').show();
+        typename = false;
+      }
+
+      function disable_basics() {
+        jQuery('.title').hide();
+        jQuery('.title input').attr('disabled', 'disabled');
+        jQuery('.states').hide();
+        jQuery('.states select').attr('disabled', 'disabled');
+        jQuery('.comments').hide();
+        jQuery('.comments input').attr('disabled', 'disabled');
+        jQuery('.submit').hide();
+        jQuery('.submit input').attr('disabled', 'disabled');
+      }
+
+      function disable_contests() {
+        jQuery('.contest_select').hide();
+        jQuery('.contest_select select').attr('disabled', 'disabled');
+      }
+
+      function disable_measures() {
+        jQuery('.measure_select').hide();
+        jQuery('.measure_select select').attr('disabled', 'disabled');
+      }
+
+      function disable_blurbs() {
+        jQuery('.blurb').hide();
+      }
+
+      function disable_options() {
+        jQuery('.option_select').hide();
+        jQuery('.option_select select').attr('disabled', 'disabled');
+        jQuery('.custom_option').hide();
+        jQuery('.custom_option input').attr('disabled', 'disabled');
+        writein_control();
+      }
+
+      function enable_blurb(id) {
+        jQuery('.blurb').append('');
+      }
+
+      function writein_control() {
+        if(typename == 'contest') {
+          jQuery('.writein').show().css('display', 'block');
+        } else {
+          jQuery('.writein').hide().css('display', 'none');
+        }
+      }
+
+      function enable_contest(state) {
+        jQuery('select[name="contest_id"]').html('').append('<option value=0><%= t("guide.select_contest") %></option>');      
+        contest_keys = get_keys(contests);
+        contest_options = [];
+
+        for(i = 0; i < contest_keys.length; i++) {
+          if((contests[contest_keys[i]]['state'] == state) && (contests[contest_keys[i]]['type'] == typename)) contest_options.push(contests[contest_keys[i]]);
+        }
+        for(i = 0; i < contest_options.length; i++) {
+          jQuery('select[name="contest_id"]').append('<option value="' + contest_options[i]['id'] + '">' + contest_options[i]['title'] + '</option>');
+        }
+
+        jQuery('.contest_select').show();
+        jQuery('select[name="contest_id"]').removeAttr('disabled');
+      }
 
 
-    function enable_option(id) {
-      jQuery('.option-'+id).show();
-      jQuery('.option-'+id+' select').removeAttr('disabled');
-      enable_blurb(jQuery('.option-'+id+' select[name="option_id"]').val());
-      writein_control();
-    }
+      function enable_option(id) {
+        alert(id);
+        jQuery('select[name="option_id"]').html('').append('<option value=0><%= t("guide.select_option") %></option>');;
+        option_keys = get_keys(options);
+        options_options = [];
 
-    function enable_state() {
-      jQuery('.states').show();
-      jQuery('.states select').removeAttr('disabled');
-    }
+        for(i = 0; i < option_keys.length; i++) {
+          if(options[option_keys[i]]['contest_id'] == id) options_options.push(options[option_keys[i]]);
+        }
+        for(i = 0; i < options_options.length; i++) {
+          jQuery('select[name="option_id"]').append('<option value="' + options_options[i]['id'] + '">' + options_options[i]['title'] + '</option>');
+        }
 
-    function enable_title() {
-      jQuery('.title').show();
-      jQuery('.title input').removeAttr('disabled');
-    }
+        jQuery('select[name="option_id"]').show();
+        jQuery('select[name="option_id"]').removeAttr('disabled');
 
-    function enable_basics() {
-      jQuery('.comments').show();
-      jQuery('.comments input').removeAttr('disabled');
-      jQuery('.submit').show();
-      jQuery('.submit input').removeAttr('disabled');
-    }
+        if (typename == 'contest') {
+          writein_control();
+        } else if (typename == 'measure') {
+          enable_blurb(id);
+        }
+      }
 
-    function writein() {
-      disable_options();
-      jQuery('.custom_option').show();
-      jQuery('.custom_option input').removeAttr('disabled');
-    }
+      function enable_state() {
+        jQuery('.states').show();
+        jQuery('.states select').removeAttr('disabled');
+      }
 
-    tinyMCE.init({mode : "textareas", menubar: false, theme: 'modern', skin: 'light'});
-  </script>
+      function enable_title() {
+        jQuery('.title').show();
+        jQuery('.title input').removeAttr('disabled');
+      }
+
+      function enable_basics() {
+        jQuery('.comments').show();
+        jQuery('.comments input').removeAttr('disabled');
+        jQuery('.submit').show();
+        jQuery('.submit input').removeAttr('disabled');
+      }
+
+      function writein() {
+        disable_options();
+        jQuery('.custom_option').show();
+        jQuery('.custom_option input').removeAttr('disabled');
+      }
+
+      function make_states() {
+        jQuery('.states select').append('<option value=0><%= t("guide.select_state") %></option>');      
+        contest_keys = get_keys(contests);
+        states = [];
+        for(i = 0; i < contest_keys.length; i++) {
+          if(!is_included(states, contests[contest_keys[i]]['state'])) states.push(contests[contest_keys[i]]['state']);
+        }
+        states.sort();
+        for(i = 0; i < states.length; i++) {
+          jQuery('.states select').append('<option value="' + states[i] + '">' + states[i] + '</option>');
+        }
+      }
+
+      function is_included(arr, obj) {
+        return (arr.indexOf(obj) != -1);
+      }
+
+      function get_keys(dictionary) {
+        var keys = [];
+        for (var key in dictionary) {
+          if (dictionary.hasOwnProperty(key)) {
+            keys.push(key);
+          }
+        }
+        return keys;
+      }
+
+      tinyMCE.init({mode : "textareas", menubar: false, theme: 'modern', skin: 'light'});
+    </script>
