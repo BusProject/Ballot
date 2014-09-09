@@ -85,3 +85,5 @@ group :test, :development do
   gem "guard-rspec"
   gem "growl"
 end
+
+gem 'newrelic_rpm'

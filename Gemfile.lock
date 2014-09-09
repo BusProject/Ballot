@@ -137,6 +137,7 @@ GEM
     multi_json (1.8.4)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    newrelic_rpm (3.9.4.245)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth2 (0.9.3)
@@ -282,6 +283,7 @@ DEPENDENCIES
   jquery-rails
   less-rails
   mobile-fu
+  newrelic_rpm
   nokogiri
   omniauth
   omniauth-facebook
