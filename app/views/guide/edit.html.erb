@@ -39,7 +39,7 @@
     <% contest_ids[contest.id] = contest.contest %>
     contests[<%= contest.id %>] = {};
     contests[<%= contest.id %>]['id'] = <%= contest.id %>;
-    <% if contest.contest_type == 'Ballot_Statewide' %>
+    <% if !contest.contest_type.nil? and contest.contest_type == 'Ballot_Statewide' %>
       contests[<%= contest.id %>]['type'] = 'measure';
     <% else %>
       contests[<%= contest.id %>]['type'] = 'contest';
