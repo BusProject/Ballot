@@ -11,27 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140911160232) do
-
-  create_table "aoptions", :force => true do |t|
-    t.integer  "choice_id"
-    t.integer  "position"
-    t.string   "photo"
-    t.text     "blurb"
-    t.string   "name"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.string   "twitter"
-    t.string   "facebook"
-    t.string   "website"
-    t.string   "blurb_source"
-    t.string   "party"
-    t.boolean  "incumbant",    :default => false
-    t.string   "vip_id"
-  end
-
-  add_index "aoptions", ["choice_id"], :name => "index_options_on_choice_id"
-  add_index "aoptions", ["name"], :name => "index_options_on_name"
+ActiveRecord::Schema.define(:version => 20140905140323) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
@@ -143,6 +123,26 @@ ActiveRecord::Schema.define(:version => 20140911160232) do
     t.string   "imgur"
     t.string   "pintrest"
   end
+
+  create_table "options", :force => true do |t|
+    t.integer  "choice_id"
+    t.integer  "position"
+    t.string   "photo"
+    t.text     "blurb"
+    t.string   "name"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "twitter"
+    t.string   "facebook"
+    t.string   "website"
+    t.string   "blurb_source"
+    t.string   "party"
+    t.boolean  "incumbant",    :default => false
+    t.string   "vip_id"
+  end
+
+  add_index "options", ["choice_id"], :name => "index_options_on_choice_id"
+  add_index "options", ["name"], :name => "index_options_on_name"
 
   create_table "user_options", :force => true do |t|
     t.integer  "choice_id"
