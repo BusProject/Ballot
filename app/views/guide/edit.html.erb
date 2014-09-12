@@ -65,7 +65,7 @@
       <%= contest.to_yaml %>
     <% end %>
     contests[<%= contest.id %>]['title'] = <%= false_if_blank_quote(contest.contest) %>;
-    contests[<%= contest.id %>]['state'] = <%= false_if_blank_quote(contest.geography) %>;
+    contests[<%= contest.id %>]['state'] = <%= false_if_blank_quote(contest.geography[0,2]) %>;
   <% end %>
 
   options = {};
