@@ -30,11 +30,13 @@
   jQuery('select[name="state"]').change(function() {
     disable_contests();
     enable_contest($(this).val());
+    reset_writein();
     submit_toggle();
   });
 
   jQuery('select[name="contest_id"]').change(function() {
     disable_options();
+    reset_writein();
     enable_option($(this).val());
     submit_toggle();
   });
@@ -43,8 +45,13 @@
     submit_toggle();
   });
 
+  jQuery('input[name="custom_name"]').change(function() {
+    submit_toggle();
+  });
+
   function reset() {
     jQuery('select[name="state"]').val(0);
+    reset_writein();
     enable_type();
     disable_basics();
     disable_options(); 
@@ -100,6 +107,7 @@
   }
 
   function disable_options() {
+    jQuery('select[name="option_id"]').html('');
     jQuery('.option_select').hide();
     jQuery('.option_select select').attr('disabled', 'disabled');
     jQuery('.custom_option').hide();
@@ -194,7 +202,7 @@
   }
 
   function submit_toggle() {
-    if((jQuery('select[name="option_id"]').val() == 0) || (jQuery('select[name="option_id"]').html() == '')) {
+    if((jQuery('input[name="custom_name"]').val() == '') && ((jQuery('select[name="option_id"]').val() == 0) || (jQuery('select[name="option_id"]').html() == ''))) {
       jQuery('.submit input').attr('disabled', 'disabled');
     } else {
       jQuery('.submit input').removeAttr('disabled');
@@ -203,6 +211,7 @@
 
   function writein() {
     disable_options();
+    submit_toggle();
     jQuery('.custom_option').show();
     jQuery('.custom_option input').removeAttr('disabled');
   }
@@ -227,6 +236,10 @@
     } else {
       jQuery('#measure-'+id).animate(500).addClass('hidden');
     }
+  }
+
+  function reset_writein() {
+    jQuery('input[name="custom_name"]').val('');
   }
 
   tinyMCE.init({mode : "textareas", menubar: false, theme: 'modern', skin: 'light'});
