@@ -1,40 +1,118 @@
+<script>
+  blocks = {};
+  <% @blocks.each do |block| %>
+    blocks[<%= block.id %>] = {};
+    blocks[<%= block.id %>]['id'] = <%= block.id %>;
+    blocks[<%= block.id %>]['guide_id'] = <%= false_if_blank(block.guide_id) %>;
+    blocks[<%= block.id %>]['option_id'] = <%= false_if_blank(block.option_id) %>;
+    blocks[<%= block.id %>]['user_option_id'] = <%= false_if_blank(block.user_option_id) %>;
+    blocks[<%= block.id %>]['title'] = <%= false_if_blank_quote(block.title) %>;
+    blocks[<%= block.id %>]['content'] = <%= false_if_blank_quote(block.content) %>;
+    blocks[<%= block.id %>]['order'] = <%= false_if_blank_quote(block.order) %>;
+    blocks[<%= block.id %>]['full_size'] = <%= false_if_blank(block.full_size) %>;
+  <% end %>
+
+  contests = {};
+  <% contests = Hash.new %>
+  <% @choices.each do |contest| %>
+    <% contests[contest.id] = contest.contest %>
+    contests[<%= contest.id %>] = {};
+    contests[<%= contest.id %>]['id'] = <%= contest.id %>;
+    <% begin %>
+      <% if !contest.contest_type.nil? and contest.contest_type == 'Ballot_Statewide' %>
+        contests[<%= contest.id %>]['type'] = 'measure';
+      <% else %>
+        contests[<%= contest.id %>]['type'] = 'contest';
+      <% end %>
+    <% rescue Exception %> //trying to figure out what the fuck Heroku doesn't like
+      <%= contest.to_yaml %>
+    <% end %>
+    contests[<%= contest.id %>]['title'] = <%= false_if_blank_quote(contest.contest) %>;
+    contests[<%= contest.id %>]['state'] = <%= false_if_blank_quote(contest.geography[0,2]) %>;
+  <% end %>
+
+  options = {};
+  <% options_hash = Hash.new %>
+  <% contests_options = Hash.new %>
+  <% @options.each do |option| %>
+    <% options_hash[option.id] = option.name %>
+    <% contests_options[option.id] = option.choice_id %>
+    options[<%= option.id %>] = {};
+    options[<%= option.id %>]['id'] = <%= option.id %>;
+    options[<%= option.id %>]['contest_id'] = <%= false_if_blank(option.choice_id) %>;
+    options[<%= option.id %>]['name'] = <%= false_if_blank_quote(option.name) %>;
+    options[<%= option.id %>]['blurb'] = <%= false_if_blank_quote(option.blurb) %>;
+  <% end %>
+</script>
+
 <% 
+  user_option_ids = Hash.new
+  contests_writeins = Hash.new
+  @writeins.each do |writein|
+    user_option_ids[writein.id] = writein.name
+    contests_writeins[writein.id] = contests[writein.choice_id]
+  end
+
+  def false_if_blank(obj)
+    if obj.nil? || !obj
+      return false
+    end
+    return obj
+  end
+
+  def false_if_blank_quote(obj)
+    if obj.nil? || !obj
+      return false
+    end
+    return ('"' + obj.gsub('"', '\"') + '"').html_safe
+  end
+%>
+
+
+<% @blocks.each do |block|  
   halfwidth = ''
   if !block.full_size.nil? and !block.full_size
     halfwidth = ' half'
   end
 
-  #if !measure_options[block.option_id].nil?
-  #  contest_name = contest_hash[measure_options[block.option_id]]
-  #elsif !contest_options[block.option_id].nil?
-  #  contest_name = contest_hash[contest_options[block.option_id]]
-  #else
-  #  contest_name = block.title
-  #end
-  contest_name = 'contest_title'
-%>
-<div class="ballot-section<%= halfwidth %>">
-  <div class="sectionheading">
-    <% if block.option_id.nil? and !block.user_option_id.nil? %>
-      <h1 style="background: #D37A3C; padding: 10px;" class="">contest name for write-in</h1><br>
-      <h2>write-in name</h2><br>
-    <% else %>
-      <h1 style="background: #D37A3C; padding: 10px;" class=""><%= contest_name %></h1><br>
-        <h2>Choice!</h2><br>
-    <% end %>
+  if block.option_id.nil? and !block.user_option_id.nil?
+    contest_name = contests_writeins[block.user_option_id]
+    #contest_name = block.user_option_id
+    subtitle = user_option_ids[block.user_option_id]
+    #subtitle = block.user_option_id
+  elsif !block.option_id.nil?
+    contest_name = contests[contests_options[block.option_id]]
+    #contest_name = block.option_id
+    subtitle = options_hash[block.option_id]
+    #subtitle = block.option_id
+  elsif !block.title.nil?
+    contest_name = block.title.html_safe
+    subtitle = false
+  end %>
 
-    <% if !block.content.nil? %>
-      <p style="text-align: left; padding: 0 40px;"><%= block.content.html_safe %></p>
-    <% end %>
-
-    <p style="font-size: 12px;">
-      <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
-      <% if !block.full_size.nil? and !block.full_size %>
-        <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %> | 
-      <% else %>
-        <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
+  <div class="ballot-section<%= halfwidth %>">
+    <div class="sectionheading">
+      <h1 style="background: #D37A3C; padding: 10px;"><%= contest_name %></h1><br>
+      <% if subtitle %>
+        <h2 class="writein_name"><%= subtitle %></h2><br>
       <% end %>
-      <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
-    </p>
+
+      <% if !block.content.nil? %>
+        <p style="text-align: left; padding: 0 40px;"><%= block.content.html_safe %></p>
+      <% end %>
+
+      <% if controls %>
+        <p style="font-size: 12px;">
+          <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
+          <% if !block.full_size.nil? and !block.full_size %>
+            <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %> | 
+          <% else %>
+            <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
+          <% end %>
+          <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
+        </p>
+      <% end %>
+
+    </div>
   </div>
-</div>
+<% end %>
