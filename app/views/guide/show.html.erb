@@ -21,23 +21,26 @@
 </style>
 
 <%
-  contest_ids = Hash.new
+  contests = Hash.new
   @choices.each do |contest|
-   contest_ids[contest.id] = contest.contest
+    contests[contest.id] = contest.contest
   end
 
+  options = Hash.new
   contests_options = Hash.new
   @options.each do |option|
-    contests_options[option.id] = contest_ids[option.choice_id]
+    options[option.id] = option.name 
+    contests_options[option.id] = option.choice_id
   end
-
+  
   user_option_ids = Hash.new
   contests_writeins = Hash.new
   @writeins.each do |writein|
     user_option_ids[writein.id] = writein.name
-    contests_writeins[writein.id] = contest_ids[writein.choice_id]
+    contests_writeins[writein.id] = contests[writein.choice_id]
   end
 %>
+
 
 <div id="guide">
   <h1>
@@ -61,8 +64,8 @@
           contest_name = contests_writeins[block.user_option_id]
           subtitle = user_option_ids[block.user_option_id]
         elsif !block.option_id.nil?
-          contest_name = contests_options[block.option_id]
-          subtitle = contests_options[block.option_id]
+          contest_name = contests[contests_options[block.option_id]]
+          subtitle = options[block.option_id]
         elsif !block.title.nil?
           contest_name = block.title.html_safe
           subtitle = false
