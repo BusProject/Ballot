@@ -19,6 +19,22 @@
       #guide .comments {width: 90%; margin: 0px auto;}
       #guide td {padding: 10px;}
 </style>
+<% 
+  def false_if_blank(obj)
+    if obj.nil? || !obj
+      return false
+    end
+    return obj
+  end
+
+  def false_if_blank_quote(obj)
+    if obj.nil? || !obj
+      return false
+    end
+    return ('"' + obj.gsub('"', '\"') + '"').html_safe
+  end
+%>
+
 <script>
   blocks = {};
   <% @blocks.each do |block| %>
@@ -190,22 +206,6 @@
 
     <%= link_to t("site.back"), profile_path(@user), :class => 'button' %>
 </div>
-
-<% 
-  def false_if_blank(obj)
-    if obj.nil? || !obj
-      return false
-    end
-    return obj
-  end
-
-  def false_if_blank_quote(obj)
-    if obj.nil? || !obj
-      return false
-    end
-    return ('"' + obj.gsub('"', '\"') + '"').html_safe
-  end
-%>
 
     <script>
       typename = false;
