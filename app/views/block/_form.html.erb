@@ -2,6 +2,6 @@
   <%= label_tag(:title, t('guide.block_title')) %>
   <%= text_field_tag(:title, @block.title) %><br>
   <%= label_tag(:content, t('guide.block_content')) %>
-  <%= text_area_tag(:content, @block.content) %><br>
+  <%= text_area_tag(:content, @block.content, :class => 'tinymce') %><br>
   <div id="image-upload"><%= submit_tag(t('site.submit')) %></div>
 <% end %>

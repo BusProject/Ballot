@@ -19,10 +19,13 @@
   <%= stylesheet_link_tag    "application" %>
   <%= stylesheet_link_tag    "print.css", :media => 'print' %>
   
-  
   <% if !is_mobile_device? %>
     <%= render :partial => 'home/iframe' if params[:iframe] %>
     <%= javascript_include_tag asset_path( "other/iframe.js" ) if params[:iframe] %>
+    <%= javascript_include_tag '//tinymce.cachefly.net/4.1/tinymce.min.js' %>
+    <script>
+      tinymce.init({selector:'textarea.tinymce', menubar:false});
+    </script>
   <% end %>
   
   
