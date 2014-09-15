@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140905140323) do
+ActiveRecord::Schema.define(:version => 20140915192446) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
@@ -28,6 +28,20 @@ ActiveRecord::Schema.define(:version => 20140905140323) do
   add_index "blocks", ["guide_id"], :name => "index_blocks_on_guide_id"
   add_index "blocks", ["option_id"], :name => "index_blocks_on_option_id"
   add_index "blocks", ["user_option_id"], :name => "index_blocks_on_user_option_id"
+
+  create_table "bootsy_image_galleries", :force => true do |t|
+    t.integer  "bootsy_resource_id"
+    t.string   "bootsy_resource_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "bootsy_images", :force => true do |t|
+    t.string   "image_file"
+    t.integer  "image_gallery_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "choices", :force => true do |t|
     t.string   "contest"
