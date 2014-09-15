@@ -174,6 +174,7 @@ function Option(data,choice) {
     }
 
     this.faces = data.faces
+    if (typeof this.faces != 'undef') {
     this.faces.show = ko.computed( function() { 
       var you = this.feedback().filter( function(el) { return el.yourFeedback })[0]
       if( typeof you == 'undefined' ) return this.faces

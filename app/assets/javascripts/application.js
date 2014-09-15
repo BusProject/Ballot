@@ -13,8 +13,6 @@
 //= require models
 //= require jquery_csv
 //= require_tree ./main
-//= require tinymce/tinymce.min
-
 
 
 var yourLocation = new locationModel(inits);

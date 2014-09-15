@@ -57,7 +57,7 @@
           </div>
           <div class="comments">
             <p align="center"><%= t('guide.block_content') %></p>
-            <%= text_area_tag(:content) %>
+            <%= text_area_tag :content, nil, :class => 'tinymce' %>
           </div>
           <div style="clear: both; float: none;"></div>
           <div id="image-upload" class="submit">
