@@ -1,19 +1,3 @@
-<%
-  def false_if_blank(obj)
-    if obj.nil? || !obj
-      return false
-    end
-    return obj
-  end
-
-  def false_if_blank_quote(obj)
-    if obj.nil? || !obj
-      return false
-    end
-    return ('"' + obj.gsub('"', '\"') + '"').html_safe
-  end
-%>
-
 <script>
   blocks = {};
   <% @blocks.each do |block| %>
@@ -67,6 +51,20 @@
   @writeins.each do |writein|
     user_option_ids[writein.id] = writein.name
     contests_writeins[writein.id] = contests[writein.choice_id]
+  end
+
+  def false_if_blank(obj)
+    if obj.nil? || !obj
+      return false
+    end
+    return obj
+  end
+
+  def false_if_blank_quote(obj)
+    if obj.nil? || !obj
+      return false
+    end
+    return ('"' + obj.gsub('"', '\"') + '"').html_safe
   end
 %>
 
