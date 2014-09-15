@@ -24,7 +24,7 @@
     <%= javascript_include_tag asset_path( "other/iframe.js" ) if params[:iframe] %>
     <%= javascript_include_tag '//tinymce.cachefly.net/4.1/tinymce.min.js' %>
     <script>
-      tinymce.init({selector:'textarea.tinymce', menubar:false});
+      tinymce.init({selector:'textarea.tinymce', menubar:false, width: 716, height: 172});
     </script>
   <% end %>
   
