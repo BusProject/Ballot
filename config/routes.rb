@@ -7,8 +7,8 @@ OpenBallot::Application.routes.draw do
   match '/users/pages/:fb' => 'user#page_session', :as => 'user_page_session_create', :via => :get
   match '/users/auth/:provider/callback' => 'authentications#create', :via => :get
 
-  match '/users/add/:type' => 'choice#new', :via => :get, :type => /candidate|measure/ , :as => 'user_add_choice'
-  match '/users/add' => 'choice#create', :via => :post, :as => 'user_create_choice'
+  match '/:type/add' => 'choice#new', :via => :get, :type => /candidate|measure/ , :as => 'user_add_choice'
+  match '/add' => 'choice#create', :via => :post, :as => 'user_create_choice'
 
   scope '/admin' do
     match '' => 'admin#index', :as => 'admin', :via => :get
@@ -44,11 +44,10 @@ OpenBallot::Application.routes.draw do
 
   match '/:state' => 'choice#state', :state =>/AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC/ , :as => 'state', :via => :get
   match '/:geography/:contest' => 'choice#show', :contest =>/[^\/]+/ , :as => 'contest', :via => :get
+  match '/:geography/:contest/edit' => 'choice#edit', :contest =>/[^\/]+/ , :as => 'edit_contest', :via => :get
 
 
   match '/:id' => 'choice#profile', :as => 'profile', :via => :get
   match '/:id/past' => 'choice#profile', :as => 'profile_all', :via => :get, :past => true
-
-
 
 end

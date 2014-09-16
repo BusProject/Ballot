@@ -5,8 +5,6 @@ class AdminController < ApplicationController
     @classes = 'home admin'
     @admins = User.find_all_by_admin(true)
     @bans = User.find_all_by_banned(true)
-    @flagged = Feedback.where( "length(flag)- length(replace( flag,',','') ) >= ? AND approved = ?", 2, true )
-    @flagged.concat( Feedback.where('approved = ?',false).joins(:user).where('banned = ? AND deactivated = ? AND admin = ?',false,false,false) )
     @userGenerated = Choice.where('geography LIKE ?','%User%')
 
     # this query will be useful sometime: it is the geography of the races that have recieved comments:

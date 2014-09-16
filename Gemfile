@@ -20,6 +20,7 @@ gem 'georuby'
 group :assets do
   gem 'sass-rails'
   gem 'uglifier'
+  gem 'font-awesome-sass-rails'
 end
 
 gem 'jquery-rails'

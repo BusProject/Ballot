@@ -133,28 +133,7 @@
 </ul>
 <p><input id="ban_users" placeholder="Ban Someone: Search by name, email, profile url" ></p>
 
-<h2>Flagged Comments</h2>
-<p>All comments with over three flags or that are unapproved from active users</p>
-<ul class="flagged">
-	<%- @flagged.each do |flagged| %>
-		<li>
-			<div class="comment"><%= flagged.comment %></div>
-			<div class="info">By <%= link_to flagged.user.name, flagged.user.profile, :class=>'profile' unless flagged.user.nil? %> on <%= flagged.updated_at %></div>
-			<%- if flagged.flaggers.length > 0 %>
-				<div class="flaggers">Flagged by
-					<%- flagged.flaggers.each do |flagger| %>
-						<%= link_to flagger.name, flagger.profile %>
-					<% end -%>
-				</div>
-			<% end -%>
-			<div class="side">
-				<%= link_to flagged.off? ? 'rescue' : 'unapprove', approval_feedback_path(flagged.id), :class=>'approval_comment ' +(flagged.off? ?  'rescue' : 'unapprove' )  %>
-				<%= link_to 'remove', remove_feedback_path(flagged.id), :class=>'remove_feedback' %>
-			</div>
-		</li>
-	<% end -%>
-</ul>
-<p><input id="unapprove_feedback" placeholder="Unapprove Something: Search by comment or user" ></p>
+
 <h2>User Generated Choices</h2>
 <ul >
 <% @userGenerated.each do |choice| %>

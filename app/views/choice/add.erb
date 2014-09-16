@@ -6,10 +6,9 @@
 		<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook)  %>
 	</div>
 <% else %>
-	<%= render :partial => ['choice',params[:type],'newForm'].join('/') %>
+	<%= render :partial => ['choice',params[:type] || @choice.contest_type.split('_').last.downcase,'newForm'].join('/') %>
 	<div class="add-warning">
-	<p><%= t('add_form.warn_1') %></p>
-	<p><%= t('add_form.warn_2') %></p>
+	<p><%= t('add_form.warn') %></p>
 	</div>
 	<script type="text/javascript">
 	$(document).on('submit','#new_choice', function(e) {

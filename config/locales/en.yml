@@ -144,9 +144,11 @@ en:
         prompt: 'please select a candidate'
         comment: '(Leave a comment if you wanna)'
         list: 'The Candidates'
-        info: 'Contest Information'
+        office_info: 'Office Information'
+        contest_info: 'Contest Information'
         office_name: 'Office Name, e.g. Mayor, State Senate'
-        add_prompt: 'Add Missing Candidate Contest'
+        office_description: 'Office Description, a short summary of what duties this elected official performs'
+        add_prompt: 'Add Missing Elected Office'
         votes: 'Votes You Can Cast'
         votes_more: "(Note: this is almost always one)"
         in_support_of: 'in support of %{candidate}'
@@ -258,8 +260,7 @@ en:
 
     # used on the add form
     add_form:
-        warn_1: "Warning: Once you create this contest you will not be able to edit it. So make sure it's perfect. Be sure to include all candidates running for the office. It will appear on your voter guide and on the appropriate State page under the section for \"User Created\" contests."
-        warn_2: "Ballot Measures and Candidates that are fictitious (not really on the 2012 ballot), duplicates of existing measures or candidates, or deemed misleading will be removed without notice."
+        warn: "Ballot Measures and Candidates that are fictitious (not really on the ballot), duplicates of existing measures or candidates, or deemed misleading will be removed without notice."
         add_candidate: 'Create a new candidate'
         add_measure: 'Create a new ballot measure'
         missing_header: 'Add a Missing Ballot Measure or Candidate'

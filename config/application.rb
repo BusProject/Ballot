@@ -48,7 +48,5 @@ module OpenBallot
     config.assets.version = '1.0'
     config.app_generators.stylesheet_engine :less
 
-
-
   end
 end

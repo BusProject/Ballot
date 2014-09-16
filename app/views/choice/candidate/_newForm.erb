@@ -3,41 +3,45 @@
 	<%= form.hidden_field :contest_type %>
 	<h1><i class="icon-cogs"></i>  <%= t('candidates.add_prompt' )%></h1>
 	<div class="office-info">
-		<h3><i class="icon-trophy"></i>  <%= t('candidates.info')%></h3>
+		<h3><i class="icon-group"></i>  <%= t('candidates.office_info')%></h3>
 		<label> <%= t('candidates.office_name' )%></label><%= form.text_field :contest, { :class => 'required' } %>	<br/>
-		<label><%= t('site.state' )%></label> <%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %><br />
-		<label><%= t('candidates.votes') %></label> <%= form.select :votes, ['1','2','3','4']  %><em style="font-size: 10px; margin-left: 10px; color: white"><%= t('candidates.votes_more') %></em>
-		<label>Election</label> <%= form.select :electionballot_id, Electionballot.all( :conditions => ['date > ?',Date.today], :joins => [:electionday], :order => 'date DESC' ).map{ |c| [ [c.name,'-',c.electionday.date].join(' '), c.id ] } %>		
+		<label><%= t('candidates.office_description') %></label><%= form.text_area :description, { :class => 'required' } %><br />
+		<h3><i class="icon-trophy"></i>  <%= t('candidates.contest_info')%></h3>
+		<label><%= t('site.state' )%></label> <%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'} %><br />
+		<label><%= t('candidates.votes') %></label> <%= form.select :votes, ['1','2','3','4']  %><em style="font-size: 10px; margin-left: 10px; color: white"><%= t('candidates.votes_more') %></em><br />
+		<label>Election</label> <%= form.select :electionballot_id, Electionballot.all( :conditions => ['date > ?',Date.today], :joins => [:electionday], :order => 'date DESC' ).map{ |c| [ [c.name,'-',c.electionday.date].join(' '), c.id ] } %><br />
 	</div>
 
 	<!-- ko stopBinding: true -->
 		<div id="options">
 			<!-- ko foreach: options -->
-				<div class="option add-option">
-					<h3><i class="icon-user"></i>  <%= t('candidates.candidate.info ')%></h3>
-					<div>
-						<label><%= t('candidates.candidate.name ')%> *</label>
-						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][name]'   } " class="required">
+				<% @options.each_with_index do |option, index| %>
+					<div class="option add-option <%= 'clean-no-script' if index > 0 %>">
+						<h3><i class="icon-user"></i>  <%= t('candidates.candidate.info ')%></h3>
+						<div>
+							<label><%= t('candidates.candidate.name ')%> *</label>
+							<input value="<%= option.name %>" data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][name]'}, value: $data.name " class="required">
+						</div>
+						<div >
+							<label><%= t('candidates.candidate.party ')%></label>
+							<input value="<%= option.party %>" data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][party]'}, value: $data.party ">
+						</div>
+						<div>
+							<label><%= t('candidates.candidate.campaign ')%> <%= t('candidates.website ')%></label>
+							<input value="<%= option.website %>" data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][website]'}, value: $data.website ">
+						</div>
+						<div>
+							<label><%= t('candidates.candidate.campaign ')%> <%= t('candidates.facebook') %></label>
+							<input value="<%= option.facebook %>" data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][facebook]'}, value: $data.facebook ">
+						</div>
+						<div>
+							<label><%= t('candidates.candidate.campaign ')%> <%= t('candidates.twitter ')%></label>
+							<input value="<%= option.twitter %>" data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][twitter]'}, value: $data.twitter ">
+						</div>
+						<span class="link delete" data-bind="click: function() { op.removeOption( $data ); return false;} " ><i class="icon-remove-sign"></i></span>
 					</div>
-					<div >
-						<label><%= t('candidates.candidate.party ')%></label>
-						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][party]'   } ">
-					</div>
-					<div>
-						<label><%= t('candidates.candidate.campaign ')%> <%= t('candidates.website ')%></label>
-						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][website]'   } ">
-					</div>
-					<div>
-						<label><%= t('candidates.candidate.campaign ')%> <%= t('candidates.facebook') %></label>
-						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][facebook]'   } ">
-					</div>
-					<div>
-						<label><%= t('candidates.candidate.campaign ')%> <%= t('candidates.twitter ')%></label>
-						<input data-bind="attr: { name: 'choice[options_attributes]['+$index()+'][twitter]'   } ">
-					</div>
-					<span class="link delete" data-bind="click: function() { op.removeOption( $data ); return false;} " ><i class="icon-remove-sign"></i></span>
-				</div>
-			<!-- /ko -->
+				<% end %>
+  	 		 <!-- /ko -->
 			<a class="add-submit" data-bind="click: function() { op.addOption(); return false; }"><i class="icon-plus"></i>  <%= t('candidates.candidate.add')%></a>
 		</div>
 	<!-- /ko -->
@@ -47,7 +51,7 @@
 
 <script type="text/javascript">
 	var op = {
-		options: ko.observableArray( [ new Date().getTime() ] ),
+		options: ko.observableArray( <%= raw @options.to_json %> ),
 		addOption: function() { op.options.push( new Date().getTime() ); },
 		removeOption: function(option) { op.options.remove( option ); }
 	}

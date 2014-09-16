@@ -186,7 +186,7 @@
 			<div class="close"><i class="icon-remove-sign"></i></div>
 		</div>
 		<div id="fb-root"></div>
-		<script src="http://connect.facebook.net/en_US/all.js"></script>
+		<!--<script src="http://connect.facebook.net/en_US/all.js"></script>
 		<script>
 			FB.__appid = <%= ENV['FACEBOOK'] %>;
 			FB.init({
@@ -195,7 +195,7 @@
 				xfbml: true,
 				oauth: true
 			});
-		</script>
+		</script>-->
 		<%= render :partial => 'home/ga' %>
 		<%= javascript_include_tag asset_path( "other/iframe.js" ) %>
 	</div>

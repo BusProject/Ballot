@@ -4,8 +4,6 @@
 @import 'type/font-faces';
 @import 'sass/layouts';
 @import 'sass/global';
-// @import 'type/font-awesome';
-// @import 'type/font-awesome-ie7';
 
 
 /********* Structure *********/
@@ -68,6 +66,7 @@ body.home {
 /***** Header and Menu *****/
 @import 'sass/header';
 
+@import 'sass/instructions';
 
 /***** Page ****/
 

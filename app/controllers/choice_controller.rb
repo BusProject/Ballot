@@ -4,9 +4,18 @@ class ChoiceController < ApplicationController
     @classes = 'home add'
 
     @choice = Choice.new( :contest_type => params[:type] == 'measure' ? 'User_Ballot' : 'User_Candidate' )
+    @options = [ Option.new ]
 
     @config =  { :state => 'not' }.to_json
+    render :template => 'choice/add'
+  end
 
+  def edit
+    @classes = 'home add'
+    @choice = Choice.find_office(params[:geography],params[:contest].gsub('_',' '))
+    @options = @choice.options
+
+    @choice.geography = @choice.state
     render :template => 'choice/add'
   end
 
@@ -27,7 +36,8 @@ class ChoiceController < ApplicationController
           :votes => params[:choice][:votes].to_i,
           :electionballot => Electionballot.find(params[:choice][:electionballot_id] ),
           :contest_type => params[:choice][:contest_type],
-          :options_attributes => params[:choice][:options_attributes]
+          :options_attributes => params[:choice][:options_attributes],
+          :description => params[:choice][:description],
         )
       else
         params[:choice][:options_attributes].each{ |k,v| v[:blurb_source] = params[:choice][:blurb_source] }
@@ -46,6 +56,7 @@ class ChoiceController < ApplicationController
         redirect_to user_add_choice_path, :error => @choice.errors
       end
     end
+  end
 
 
   def friends
@@ -138,7 +149,7 @@ class ChoiceController < ApplicationController
     @type = @partial == 'candidate/front' ? ENV['FACEBOOK_NAMESPACE']+':candidate' : ENV['FACEBOOK_NAMESPACE']+':ballot_measure'
     @message = @partial == 'measure/front' ? @choice.description : 'An election for '+@choice.contest+' between '+@choice.options.map{|o| o.name+'('+( o.party || '' )+')' }.join(', ')
 
-    result = {:state => 'single', :choices => [ @choice ].each{ |c| c.prep current_user } }
+    result = {:state => 'single', :choices => [ @choice ] }
 
     @config = result.to_json( Choice.to_json_conditions )
 

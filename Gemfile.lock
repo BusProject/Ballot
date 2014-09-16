@@ -40,6 +40,9 @@ GEM
     dotenv (0.10.0)
     erubis (2.7.0)
     execjs (2.0.2)
+    font-awesome-sass-rails (3.0.2.2)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
@@ -134,6 +137,7 @@ PLATFORMS
 
 DEPENDENCIES
   devise
+  font-awesome-sass-rails
   foreman
   georuby
   i18n-js

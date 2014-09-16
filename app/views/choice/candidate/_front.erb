@@ -33,7 +33,7 @@
 						<%= option.name %>
 					</h1>
 					<meta itemprop="title" content="<%= choice.contest %>">
-					<p class="bigger"><span itemprop="affiliation" data-bind="text: $data.party"><%= option.party %></span> <!-- | <span data-bind="text: $data.type"><%= option.option_type unless choice.new_record? %></span>--></p>
+					<p class="bigger"><span itemprop="affiliation" data-bind="text: $data.party"><%= option.party %></span> | <span data-bind="text: $data.type"><%= option.type unless choice.new_record? %></span> </p>
 					<p class="smaller"><a target="_blank" data-bind="href: $data.twitter " href="<%= option.twitter %>" ><span><%= t('candidates.twitter' ) %></span></a><a target="_blank" data-bind="href: $data.facebook " target="_blank" href="<%= option.facebook %>" ><span><%= t('candidates.facebook' ) %></span></a><a itemprop="url" data-bind="href: $data.website " href="<%= option.website %>" ><span><%= t('candidates.website' ) %></span></a></p>
 
 				</div>
