@@ -71,7 +71,7 @@
 
     <div style="clear: both; float: none;"></div>
 
-    <%= link_to t("site.back"), profile_path(@user), :class => 'button' %>
+    <%= link_to t("site.back"), profile_path(current_user.to_url), :class => 'button' %>
 </div>
 
 <%= render 'include', :locals => {:blocks => @blocks, :choices => @choices, :options => @options, :writeins => @writeins} %>
