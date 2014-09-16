@@ -49,8 +49,13 @@
     submit_toggle();
   });
 
+  jQuery('input[name="title"]').change(function() {
+    submit_toggle();
+  });
+
   function reset() {
     jQuery('select[name="state"]').val(0);
+    jQuery('input[name="title"]').val('');
     reset_writein();
     enable_type();
     disable_basics();
@@ -202,7 +207,7 @@
   }
 
   function submit_toggle() {
-    if((jQuery('input[name="custom_name"]').val() == '') && ((jQuery('select[name="option_id"]').val() == 0) || (jQuery('select[name="option_id"]').html() == ''))) {
+    if(((jQuery('input[name="custom_name"]').val() == '') && ((jQuery('select[name="option_id"]').val() == 0) || (jQuery('select[name="option_id"]').html() == ''))) && (jQuery('input[name="title"]').val == '')) {
       jQuery('.submit input').attr('disabled', 'disabled');
     } else {
       jQuery('.submit input').removeAttr('disabled');
