@@ -44,8 +44,9 @@ class GuideController < ApplicationController
   # PUT /guides/1
   # PUT /guides/1.json
   def update
-    @guide = Guide.find(:all, :conditions => 'slug = "' + params[:slug] + '" AND id != ' + params[:id])
-    if @guide
+    @guide = Guide.where(['slug = ? AND id <> ?', params[:slug], params[:id]])
+
+    if @guide.any?
       flash[:notice] = t('guide.slug_not_unique')
     else
       @guide = Guide.find(params[:id])
