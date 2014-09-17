@@ -19,7 +19,7 @@ Ballot::Application.routes.draw do
   match '/users/add' => 'choice#create', :via => :post, :as => 'user_create_choice'
 
   match '/guide/create' => 'guide#create', :as => 'guide_create', :via => :post
-  match '/guide/:id' => 'guide#show', :as => 'guide_show'
+  match '/:id' => 'guide#show', :as => 'guide_show'
   match '/guide/:id/edit' => 'guide#edit', :as => 'guide_edit'
   match '/guide/:id/update' => 'guide#update', :as => 'guide_update', :via => :post
   match '/guide/:id/delete' => 'guide#destroy', :as => 'guide_delete', :via => :post
@@ -93,9 +93,9 @@ Ballot::Application.routes.draw do
 
   match '/:state' => 'choice#state', :state =>/AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC/ , :as => 'state'
 
-  match '/:id' => 'choice#profile', :as => 'profile', :via => :get
-  match '/:id/past' => 'choice#profile', :as => 'profile_all', :via => :get, :past => true
-  match '/:id' => 'feedback#recommend', :as => 'recommend', :via => :post
+  match '/profile/:profile' => 'choice#profile', :as => 'profile', :via => :get
+  match '/profile/:profile/past' => 'choice#profile', :as => 'profile_all', :via => :get, :past => true
+  match '/profile/:profile' => 'feedback#recommend', :as => 'recommend', :via => :post
 
   match '/:geography/:contest' => 'choice#show', :contest =>/[^\/]+/ , :as => 'contest'
   

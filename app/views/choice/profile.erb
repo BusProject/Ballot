@@ -42,7 +42,7 @@
                                         <p class="label"><%= t("profile.title")%></p> <input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.name_page") %>">
                                         <p class="label"><%= t("profile.description")%></p> <textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.write_about_page") %>"></textarea>
 
-                                        <p class="label"><%= t("profile.url")%></p> http://theballot.org/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.new_url") %>"  >
+                                        <p class="label"><%= t("profile.url")%></p> http://theballot.org/profile/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.new_url") %>"  >
 					<span class="url-searching" data-bind="visible: profile.checking() "><i class="icon-search"></i> <%= t('site.searching') %> </span><span class="url-available" data-bind="visible: profile.available() && !profile.checking() "><i class="icon-ok-sign"></i> <%= t("site.available")%> </span><span class="url-taken" data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null "><i class="icon-exclamation-sign"></i> <%= t("site.taken")%> </span>
 					<br />
 

@@ -60,10 +60,10 @@ class ChoiceController < ApplicationController
   
   def profile
     
-    if params[:id].to_i(16).to_s(16) == params[:id]
-      @user = User.find_by_id( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
+    if params[:profile].to_i(16).to_s(16) == params[:profile]
+      @user = User.find_by_id( params[:profile].to_i(16).to_s(10).to_i(2).to_s(10) )
     else
-      @user = User.find_by_profile( params[:id] )
+      @user = User.find_by_profile( params[:profile] )
     end
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
