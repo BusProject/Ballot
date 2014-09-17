@@ -46,7 +46,10 @@
 
   <link rel="shortcut icon" href="<%= asset_path 'favicon.jpg'%>" />
 
-<%= yield :head %>
+  <%= yield :head %>
+
+  <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+  <script>tinymce.init({selector:'.tinymce', menubar:false});</script>
 
 </head>
 <body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= !current_user.nil? && current_user.commentable? ? '' : 'no_comment' %> <%= @classes %> <%= 'mobile' if is_mobile_device? %>" >
