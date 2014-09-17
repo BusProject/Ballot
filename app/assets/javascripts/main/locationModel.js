@@ -355,7 +355,7 @@ function locationModel(data) {
 		this.menuItems.push( 
 			MenuItem('#find-ballot',I18n.t('menu.find'),'<p>'+I18n.t('menu.find_text')+'</p>'),
 			MenuItem('#read-ballot',I18n.t('menu.read'),"<p>"+I18n.t('menu.read_text')+'</p><p>'+I18n.t('menu.read_text_2')+"</p>"+layout,null, this),
-			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">'+owner+'<br>'+makeShare(url,name)+extra)
+			MenuItem(null,'Share Your List of Voter Guides',null,'<div class="container share-container">'+owner+'<br>'+makeShare(url,name)+extra)
 		)
 	}
 	if( this.state == 'state' ) {
