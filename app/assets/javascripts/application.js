@@ -22,7 +22,7 @@ window.onload = function() {
     $('.account').toggle();
   });
   if( document.location.hash.length > 1 ){
-    setTimeout( function() { 
+    setTimeout( function() {
     var pos = $( document.location.hash + ', a[name="'+document.location.hash.replace('#!','')+'"]' ).offset(),
       top = ( pos || {top:0} ).top-30
     document.location.hash = ''
@@ -33,10 +33,10 @@ window.onload = function() {
   initialize() // This loads goelocation / facebook friends
   $('.clean-no-script').remove() // Removing non-necessary elements that knockout will just rebuild
   ko.applyBindings(yourLocation); // Binds Knockout
-  
+
   CANDIDATES = 'candidates';
   MEASURES = 'measures';
-  var submitFlag = false; 
+  var submitFlag = false;
   $('#import-candidates').submit(function(e){
     if(submitFlag){
       //submit the form as normal
@@ -72,7 +72,7 @@ function previewImportFile(e, type, submitFlag){
   //prepare the form for submission
   $(e.currentTarget).find('input[type=submit]').val('Import');
 }
-  
+
 function buildImportForm(importStr, type){
   var $el = $('#import-' + type + ' #importPreviewContainer');
   var previewRows = 5; //number of rows to show in preview
@@ -100,7 +100,7 @@ function buildMatrix(o) {
     matrix[0][i] = "<select name='headers[]' id='headers-" + i + "'>" + o.options + "</select>";
     setTimeout(function(){$("#headers-" + i).val(o.headers[i])},500);
   }
-  
+
   for(var i = 0; i < o.rows.length; i++) {
     row = [];
     for (var j = 0; j < o.rows[i].length; j++) {
@@ -111,7 +111,7 @@ function buildMatrix(o) {
     }
     matrix.push(row);
   }
-  return matrix; 
+  return matrix;
 }
 
 function buildImportHtml(o){
