@@ -48,7 +48,8 @@ module Ballot
     config.assets.version = '1.0'
     config.app_generators.stylesheet_engine :less
 
+    config.i18n.enforce_available_locales = true
 
-    
+
   end
 end
