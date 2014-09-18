@@ -284,7 +284,7 @@ DEPENDENCIES
   less-rails
   mobile-fu
   newrelic_rpm
-  nokogiri (= 1.6.3)
+  nokogiri (~> 1.6.3)
   omniauth
   omniauth-facebook
   paperclip (~> 3.0)
