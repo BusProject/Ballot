@@ -174,16 +174,17 @@ function Option(data,choice) {
     }
 
     this.faces = data.faces
-    if (typeof this.faces != 'undef') {
-    this.faces.show = ko.computed( function() { 
-      var you = this.feedback().filter( function(el) { return el.yourFeedback })[0]
-      if( typeof you == 'undefined' ) return this.faces
-      else {
-        var faces = this.faces.slice(0,3)
-        faces.unshift( { image: current_user.image, url: current_user.profile, name: 'You' })
-        return faces
-      }
-    },this) 
+    if (typeof this.faces != 'undefined') {
+      this.faces.show = ko.computed( function() {
+        var you = this.feedback().filter( function(el) { return el.yourFeedback })[0]
+        if( typeof you == 'undefined' ) return this.faces
+        else {
+          var faces = this.faces.slice(0,3)
+          faces.unshift( { image: current_user.image, url: current_user.profile, name: 'You' })
+          return faces
+        }
+      },this)
+    }
 
     return this;
   }

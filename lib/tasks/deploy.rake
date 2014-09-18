@@ -1,5 +1,4 @@
 task :deploy do
-  sh "bundle exec rake spec"
   sh "git checkout -B compiled"
   sh "git merge -s recursive -Xtheirs master"
   sh 'bundle exec rake assets:clean'
