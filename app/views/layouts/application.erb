@@ -6,10 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="google-site-verification" content="Hqtb5KjIQSIDf8JPIDdOVXz2o6BBMpAi6_34mkWa5Hs" />
   <meta name="viewport" content="width=device-width">
-  
-  <!-- Putting in some more google web fonts to test -->  
+
+  <!-- Putting in some more google web fonts to test -->
   <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900|Arvo:400,700|Josefin+Slab:100,300,400,600,700|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
-  
+
   <% title = @title || t('site.tagline') %>
 
   <title>TheBallot.org | <%= title %></title>
@@ -18,13 +18,13 @@
 
   <%= stylesheet_link_tag    "application" %>
   <%= stylesheet_link_tag    "print.css", :media => 'print' %>
-  
+
   <% if !is_mobile_device? %>
     <%= render :partial => 'home/iframe' if params[:iframe] %>
     <%= javascript_include_tag asset_path( "other/iframe.js" ) if params[:iframe] %>
   <% end %>
-  
-  
+
+
   <script type="text/javascript">
   var current_user = <%= raw current_user.nil? ? { :id => 'unauthenticated'}.to_json : current_user.to_public %>,
     inits = <%= raw @config || '{}' %>
@@ -47,9 +47,6 @@
   <link rel="shortcut icon" href="<%= asset_path 'favicon.jpg'%>" />
 
   <%= yield :head %>
-
-  <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-  <script>tinymce.init({selector:'.tinymce', menubar:false});</script>
 
 </head>
 <body class="no-script <%= current_user.nil? ? 'not_logged_in' : 'logged_in' %> <%= !current_user.nil? && current_user.commentable? ? '' : 'no_comment' %> <%= @classes %> <%= 'mobile' if is_mobile_device? %>" >
@@ -75,7 +72,7 @@
         <% end %>
       </div> <!-- header -->
 
-      
+
       <div id="instructions-box" style="display:none;" data-bind="css: { top: top() < 140 }, visible: true" >
         <div id="instructions" data-bind="visible: menuItems.length > 0 ">
         <img src="<%= asset_path 'menutop.png' %>" class="menutop">
@@ -130,7 +127,7 @@
     <div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
     <script>
-      
+
       FB.__appid = "<%= ENV['FACEBOOK'] %>";
       FB.init({
         appId: FB.__appid,
