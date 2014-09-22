@@ -18,18 +18,6 @@ Ballot::Application.routes.draw do
   match '/users/add/:type' => 'choice#new', :via => :get, :type => /candidate|measure/ , :as => 'user_add_choice'
   match '/users/add' => 'choice#create', :via => :post, :as => 'user_create_choice'
 
-  match '/guide/create' => 'guide#create', :as => 'guide_create', :via => :post
-  match '/:id' => 'guide#show', :as => 'guide_show'
-  match '/guide/:id/edit' => 'guide#edit', :as => 'guide_edit'
-  match '/guide/:id/update' => 'guide#update', :as => 'guide_update', :via => :post
-  match '/guide/:id/delete' => 'guide#destroy', :as => 'guide_delete', :via => :post
-  match '/block/new' => 'block#new', :as => 'block_new'
-  match '/block/create' => 'block#create', :as => 'block_create', :via => :post
-  match '/block/:id/half' => 'block#half', :as => 'block_half', :via => :post
-  match '/block/:id/edit' => 'block#edit', :as => 'block_edit'
-  match '/block/:id/update' => 'block#update', :as => 'block_update', :via => :post
-  match '/block/:id/delete' => 'block#destroy', :as => 'block_delete', :via => :post
-
   scope '/admin' do
     match '' => 'admin#index', :as => 'admin'
 
@@ -99,5 +87,17 @@ Ballot::Application.routes.draw do
 
   match '/:geography/:contest' => 'choice#show', :contest =>/[^\/]+/ , :as => 'contest'
   
+  match '/guide/create' => 'guide#create', :as => 'guide_create', :via => :post
+  match '/:id' => 'guide#show', :as => 'guide_show'
+  match '/guide/:id/edit' => 'guide#edit', :as => 'guide_edit'
+  match '/guide/:id/update' => 'guide#update', :as => 'guide_update', :via => :post
+  match '/guide/:id/delete' => 'guide#destroy', :as => 'guide_delete', :via => :post
+  match '/block/new' => 'block#new', :as => 'block_new'
+  match '/block/create' => 'block#create', :as => 'block_create', :via => :post
+  match '/block/:id/half' => 'block#half', :as => 'block_half', :via => :post
+  match '/block/:id/edit' => 'block#edit', :as => 'block_edit'
+  match '/block/:id/update' => 'block#update', :as => 'block_update', :via => :post
+  match '/block/:id/delete' => 'block#destroy', :as => 'block_delete', :via => :post
+
 
 end
