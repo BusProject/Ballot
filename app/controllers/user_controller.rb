@@ -148,6 +148,7 @@ class UserController < ApplicationController
   end
   
   def forgot_password
+    @classes = 'home'
     if request.post?
       page_user = User.find_by_email(params[:email])
       if !page_user
@@ -156,7 +157,7 @@ class UserController < ApplicationController
         password = Devise.friendly_token[0,20] 
         User.set_password(page_user, password)
         UserMailer.forgot_password(page_user, password).deliver
-        flash[:notice] = t('user.password_sent') + ' ' + password
+        flash[:notice] = t('user.password_sent')
         redirect_to :back
       end
     end
