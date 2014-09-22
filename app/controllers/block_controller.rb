@@ -1,6 +1,7 @@
 class BlockController < ApplicationController
   # GET /blocks/1/edit
   def edit
+    @classes =  'home'
     @block = Block.find(params[:id])
   end
 

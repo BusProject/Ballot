@@ -6,6 +6,7 @@ class GuideController < ApplicationController
   # guide_id and user_id are mixed up.
   def show
     @guide = Guide.find_by_slug( params[:id] )
+    @classes = 'home'
     raise ActionController::RoutingError.new('Could not find that guide') if @guide.nil? 
 
     if !@guide.publish and @guide.user_id != current_user.id
@@ -22,6 +23,7 @@ class GuideController < ApplicationController
   # GET /guides/1/edit
   def edit
     @guide = Guide.find(params[:id])
+    @classes = 'home'
     @user = current_user
     @blocks = Block.where(:guide_id => params[:id])
     @choices = Choice.all()
