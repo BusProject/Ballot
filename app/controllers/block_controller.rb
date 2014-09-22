@@ -38,9 +38,9 @@ class BlockController < ApplicationController
     @block = Block.find(params[:id])
 
     if @block.update_attributes(params)
-      flash[:notice] = t('guide.block_update_failure')
-    else
       flash[:notice] = t('guide.block_update_success')
+    else
+      flash[:notice] = t('guide.block_update_failure')
     end
     redirect_to :back
   end
