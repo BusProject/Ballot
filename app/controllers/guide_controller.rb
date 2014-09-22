@@ -36,7 +36,7 @@ class GuideController < ApplicationController
   def create
     @guide = Guide.new
     @guide.user = current_user
-    @guide.slug = Devise.friendly_token[0,20]
+    @guide.slug = Devise.friendly_token[0,20].downcase
     if @guide.save
       flash[:notice] = t('guide.creation_success')
     end
@@ -46,6 +46,7 @@ class GuideController < ApplicationController
   # PUT /guides/1
   # PUT /guides/1.json
   def update
+    params[:slug] = params[:slug].downcase
     @guide = Guide.where(['slug = ? AND id <> ?', params[:slug], params[:id]])
 
     if @guide.any?
