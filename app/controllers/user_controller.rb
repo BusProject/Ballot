@@ -122,13 +122,16 @@ class UserController < ApplicationController
     if !page_user
       flash[:notice] = t('user.bad_login')
     else
-      page_user.valid_password?(params[:password])
-      session.delete(:logged_in_as) 
-      session[:logged_in_as] = page_user.id
-    
-      sign_in page_user
-      redirect_to :back
+      if page_user.valid_password?(params[:password])
+        session.delete(:logged_in_as) 
+        session[:logged_in_as] = page_user.id
+      
+        sign_in page_user
+      else
+        flash[:notice] = t('user.bad_login')
+      end
     end
+    redirect_to :back
   end
   
   def signup
