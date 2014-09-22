@@ -112,8 +112,8 @@
 <h2>Admins</h2>
 <ul class="users admin">
   <%- @admins.each do |user| %>
-    <li><%= link_to image_tag(user.image), user.to_url  %>
-      <%= link_to user.name, user.to_url, :class => 'profile' %><br />
+    <li><%= link_to image_tag(user.image), profile_path(user)  %>
+      <%= link_to user.name, profile_path(user), :class => 'profile' %><br />
       <%= link_to user.email, 'mailto:'+user.email, :class => 'email' %>
     </li>
   <% end -%>
@@ -123,7 +123,7 @@
 
 <h2>Banned Users</h2>
 <ul class="users banned"> <%- @bans.each do |user| %> <li><%= image_tag(user.image) %>
-    <%= link_to user.name, user.to_url, :class => 'profile' %><br />
+    <%= link_to user.name, profile_path(user), :class => 'profile' %><br />
     <%= link_to user.email, 'mailto:'+user.email, :class => 'email' %><br />
     <%= link_to 'unban', user_ban_path( user.id ), :class => 'unban side' %>
   </li>
