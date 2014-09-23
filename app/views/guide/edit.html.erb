@@ -1,5 +1,5 @@
 <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-<script>tinymce.init({selector:'.tinymce', menubar: false, plugins: ['link', 'image', 'code'], toolbar: ["undo redo | bold italic underline strikethrough | link image | alignleft aligncenter alignright | code"]});</script>
+<script>tinymce.init({selector:'.tinymce', menubar: false, plugins: ['link', 'image', 'code'], toolbar: ["undo redo | bold italic underline strikethrough | link image | alignleft aligncenter alignright | code"], valid_children: "+body[style]"});</script>
 
 <div id="guide">
   <h1><%= t("guide.editing") %>
@@ -16,7 +16,7 @@
         <%= render 'form' %>
       </div>
     </div>
-    <div id="sortable">
+    <div>
       <%= render 'block', :controls => true %>
       <div style="clear: both; float: none;"></div>
     </div>
