@@ -5,7 +5,7 @@ class GuideController < ApplicationController
   # GET /guides/1.json
   # guide_id and user_id are mixed up.
   def show
-    @guide = Guide.find_by_slug( params[:id] )
+    @guide = Guide.find_by_slug( params[:id].downcase )
     @classes = 'home'
     raise ActionController::RoutingError.new('Could not find that guide') if @guide.nil? 
 
