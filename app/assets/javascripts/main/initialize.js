@@ -18,7 +18,7 @@ function initialize() {
 						yourLocation.address( results[0].formatted_address )
 					}
 				});
-			}, 
+			},
 			function(error) {
 				console.log(error)
 			},
@@ -39,7 +39,7 @@ function initialize() {
 						method: 'fql.query',
 						query: 'SELECT uid FROM user WHERE is_app_user = '+FB.__appid+' AND uid IN (SELECT uid2 FROM friend WHERE uid1 =me() );'
 					},
-				  	function(response) { 
+				  	function(response) {
 						var friends = response.map( function(el) { return el.uid } )
 						if( current_user.fb_friends != friends.join(',') ) {
 							$.post( inits.root+'users/update', { fb_friends:  friends.join(',') } )
@@ -53,7 +53,7 @@ function initialize() {
 			}
 			current_user.auth_token = FB.getAccessToken();
 		})
-		
+
 	}
 
 	$('.search').betterAutocomplete( '/search', function( event, ui ) { document.location = ui.item.url }, 2,  'top-search')

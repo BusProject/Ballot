@@ -1,16 +1,16 @@
 class ChoiceController < ApplicationController
-  
+
   def new
     @classes = 'home add'
-    
+
     @choice = Choice.new( :contest_type => params[:type] == 'measure' ? 'User_Ballot' : 'User_Candidate' )
 
     @config =  { :state => 'not' }.to_json
 
     render :template => 'choice/add'
   end
-  
-  
+
+
   def create
     if current_user.nil?
       render :text => 'no'
@@ -18,10 +18,10 @@ class ChoiceController < ApplicationController
       @states = Choice.states
       @abvs = Choice.stateAbvs
       geography = [@abvs[ @states.index( params[:choice][:geography] ) ],'User',current_user.id.to_s,Time.now.to_i.to_s].join('_')
-      
+
       if params[:choice][:contest_type] == 'User_Candidate'
-        @choice = Choice.new( 
-          :contest => params[:choice][:contest],  
+        @choice = Choice.new(
+          :contest => params[:choice][:contest],
           :geography => geography,
           :votes => params[:choice][:votes].to_i,
           :electionballot => Electionballot.find(params[:choice][:electionballot_id] ),
@@ -30,7 +30,7 @@ class ChoiceController < ApplicationController
         )
       else
         params[:choice][:options_attributes].each{ |k,v| v[:blurb_source] = params[:choice][:blurb_source] }
-        @choice = Choice.new( 
+        @choice = Choice.new(
           :contest => params[:choice][:contest],
           :description => params[:choice][:description],
           :geography => geography,
@@ -57,16 +57,16 @@ class ChoiceController < ApplicationController
     @config = result.to_json
 
   end
-  
+
   def profile
-    
+
     if params[:id].to_i(16).to_s(16) == params[:id]
       @user = User.find_by_id( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
     else
       @user = User.find_by_profile( params[:id] )
     end
 
-    raise ActionController::RoutingError.new('Could not find that user') if @user.nil? 
+    raise ActionController::RoutingError.new('Could not find that user') if @user.nil?
 
     choices = params[:past] ? @user.choices.past :  @user.choices.future
     more = ! params[:past] && !@user.choices.empty?
@@ -82,7 +82,7 @@ class ChoiceController < ApplicationController
     @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+"'s Voter Guide"
     @type = 'Voter Guide'
     @message = !@user.description.nil? && !@user.guide_name.strip.empty? ? @user.description : 'A Voter Guide by '+@user.first_name+', powered by The Ballot.'
-    @image = @user.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @user.memes.last.id )+'.png' 
+    @image = @user.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @user.memes.last.id )+'.png'
     @guides = Guide.where(:user_id => @user.id)
 
     result = {:state => 'profile', :user => @user.to_public(false), :more => more }
@@ -97,13 +97,13 @@ class ChoiceController < ApplicationController
   end
 
   def state
-    
+
     @choices = Choice.find_by_state(params[:state], 50, params[:page] || 0 )
 
-    raise ActionController::RoutingError.new('Could not find that state') if @choices.nil? 
+    raise ActionController::RoutingError.new('Could not find that state') if @choices.nil?
 
     @choices = @choices.each{ |c| c.prep current_user }
-    
+
     if params[:format] == 'json'
       render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
     else
@@ -111,23 +111,23 @@ class ChoiceController < ApplicationController
 
       @states = Choice.states
       @stateAbvs = Choice.stateAbvs
-    
+
       @state = @states[ @stateAbvs.index( params[:state] ) ]
-    
+
       @classes = 'home state'
       @title = @state+'\'s Full Ballot'
       @type = 'Voter Guide'
       @message = @state+'\'s Full Ballot, powered by The Ballot.'
-    
+
       result = {:state => 'state', :choices => @choices, :title => @title, :message => @message }
-    
+
       @choices_json = @choices.to_json
-    
+
       @config = result.to_json
     end
-    
+
   end
-  
+
   def show
     @choice = Choice.find_office(params[:geography],params[:contest].gsub('_',' '))
 
@@ -146,10 +146,10 @@ class ChoiceController < ApplicationController
   end
 
   def index
-    
+
     cicero = Cicero
     districts = nil
-    
+
     if params[:a]
       # If passed an address, uses 'a' to query using Google's geocoding
       bloop =JSON::parse(RestClient.get 'http://maps.googleapis.com/maps/api/geocode/json?address='+params[:a]+'&sensor=false' )
@@ -175,18 +175,18 @@ class ChoiceController < ApplicationController
           address.push( county['long_name'] + ( state != 'LA' ? ' County' : ' Parish') ) unless county.nil?
         end
       else
-        address = params[:address] 
+        address = params[:address]
       end
       districts = params['q'].nil? ? cicero.find(params['l'], address ) : params['q'].split('|')
     end
-    
-    
+
+
     districts += District.geography_match( districts, params['l'])
-    
+
     unless districts.nil?
       @choices = Choice.find_by_districts( districts ).each{ |c| c.prep current_user }
     end
-    
+
     if !params[:address_text].nil? && !params[:address_text].empty?
       if current_user
         current_user.address = params[:address_text]
@@ -196,7 +196,7 @@ class ChoiceController < ApplicationController
         cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache'] = params[:address_text]
       end
     end
-    
+
     render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
   end
 

@@ -7,7 +7,7 @@ function Choice(data,args) {
       return new ballotChoice(data)
       break;
   }
-  
+
   function ballotChoice(data) {
     this.options = ko.observableArray([])
     this.id = data.id
@@ -40,15 +40,15 @@ function Choice(data,args) {
     }
 
 
-    this.yes = ko.computed( function() { 
-      return this.options().filter( function(el) { return el.type == 'yes' })[0] || null  
+    this.yes = ko.computed( function() {
+      return this.options().filter( function(el) { return el.type == 'yes' })[0] || null
     },this)
-    this.no = ko.computed( function() { 
-      return this.options().filter( function(el) { return el.type == 'no' })[0] || null  
+    this.no = ko.computed( function() {
+      return this.options().filter( function(el) { return el.type == 'no' })[0] || null
     },this)
 
 
-    this.feedback = ko.computed( function() { 
+    this.feedback = ko.computed( function() {
       var feedback = [], mode = this.mode(), options = this.options()
 
       for (var i=0; i < options.length; i++) {
@@ -57,19 +57,19 @@ function Choice(data,args) {
 
       feedback.sort( function(a,b) {
         if( mode != 'best' ) {
-          var af = a.friend(), 
+          var af = a.friend(),
             bf = b.friend()
-          if( af && !bf ) return -1; 
+          if( af && !bf ) return -1;
           if ( !bf && af ) return 1;
         }
-        return a.usefulness() > b.usefulness() ? -1 : 1 
+        return a.usefulness() > b.usefulness() ? -1 : 1
       })
       return feedback
     },this)
 
     this.votes = data.votes || 1
     this.chosen = ko.observable()
-    this.you = ko.computed(function() { 
+    this.you = ko.computed(function() {
       var ft = null
       ft = this.feedback().filter( function(el) { return  el.ftFeedback })
       var ids = ft.map( function(el) { return el.option_id })
@@ -94,14 +94,14 @@ function Choice(data,args) {
     },this)
     this.feedback.everyone = ko.computed(function() {
       var mode = this.mode()
-      var feedback = this.feedback().filter( function(el) { 
+      var feedback = this.feedback().filter( function(el) {
         var condition = !el.ftFeedback && !el.yourFeedback && el.comment != null && el.comment.length > 0
         if( mode == 'yes' || mode == 'no' ) condition = condition && el.type == mode
         else if( mode == 'friends' ) condition = condition && el.friend()
         else if( mode != '' && mode != 'best' && mode != 'normal' ) condition = el.option_name == mode && condition
-        
+
         return condition
-      }) || [] 
+      }) || []
       return this.all() ? feedback : feedback.slice(0,3)
     },this)
 
@@ -120,7 +120,7 @@ function Choice(data,args) {
     this.commented = ko.computed(function() {
       return this.__commented + this.you().length > 0 ? 1 : 0
     },this)
-    
+
 
     return this;
   }
@@ -153,16 +153,16 @@ function Option(data,choice) {
       if( party.search('Independent') !== -1 ) return '(I)';
       return ''
     }
-    
-    
+
+
     this.incumbant = data.incumbant
     this.twitter = data.twitter
     this.facebook = data.facebook
     this.website = data.website
     this.blurb_source = data.blurb_source
-    
+
     this.feedback = ko.observableArray([])
-    
+
     this.type = data.option_type
     data.feedback = data.feedbacks
     if( typeof data.feedback != 'undefined' ) {
@@ -174,17 +174,17 @@ function Option(data,choice) {
     }
 
     this.faces = data.faces
-    if (typeof this.faces != 'undef') {
-    this.faces.show = ko.computed( function() { 
-      var you = this.feedback().filter( function(el) { return el.yourFeedback })[0]
-      if( typeof you == 'undefined' ) return this.faces
-      else {
-        var faces = this.faces.slice(0,3)
-        faces.unshift( { image: current_user.image, url: current_user.profile, name: 'You' })
-        return faces
-      }
-    },this) 
-
+    if (typeof this.faces != 'undefined') {
+      this.faces.show = ko.computed( function() {
+        var you = this.feedback().filter( function(el) { return el.yourFeedback })[0]
+        if( typeof you == 'undefined' ) return this.faces
+        else {
+          var faces = this.faces.slice(0,3)
+          faces.unshift( { image: current_user.image, url: current_user.profile, name: 'You' })
+          return faces
+        }
+      },this)
+    }
     return this;
   }
 }
@@ -192,7 +192,7 @@ function Option(data,choice) {
 function Feedback(data) {
   if( typeof data == 'undefined' ) throw "No Data for the Option - can't do it"
 
-  return new ballotFeedback(data) 
+  return new ballotFeedback(data)
   function ballotFeedback(data) {
     this.option_id = data.option_id
     this.option_name = data.option_name
@@ -213,7 +213,7 @@ function Feedback(data) {
       this.url = data.user.profile || ''
       this.fb = data.user.fb || ''
       this.name =  data.user.name || '[deleted]'
-      
+
     }
 
     this.type = data.type
@@ -237,7 +237,7 @@ function Feedback(data) {
 
     this.time =  day+' '+time
 
-    this.friend = ko.computed( function() { 
+    this.friend = ko.computed( function() {
       var friends = typeof current_user != 'undefined' && current_user.fb_friends != null ?  current_user.fb_friends.split(',') : []
       return friends.indexOf( this.fb ) !== -1
     },this)

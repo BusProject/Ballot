@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140915192446) do
+ActiveRecord::Schema.define(:version => 20140905140323) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
