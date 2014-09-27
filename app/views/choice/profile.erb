@@ -3,33 +3,33 @@
 <!-- ko stopBinding: true -->
 
 	<div id="profile" data-bind="with: current_user  " class="ballot-section">
-			<% if !is_mobile_device? %>
-				<!-- Primary Color -->
-				<style type="text/css" data-bind="text: ko.toJS( primary ) != null && ko.toJS( primary ) != '' ? 
-				'.sectionheading h1 { color:'+ ko.toJS( primary )+' !important;}'
-				: ''
-				">.sectionheading h1 { color: <%= @user.primary %>!important;}
-				</style>
-				<!-- Secondary Color -->
-				<style type="text/css" data-bind="text: ko.toJS( secondary ) != null && ko.toJS( secondary ) != '' ? 
-				'h1.title::before, .optionholder.your-option .option:first-child { color:'+ko.toJS( secondary )+' !important;}'+
-				'.ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: '+ko.toJS( secondary )+'!important; }'+
-				'h1.no, h1.yes { color: #5B5B5B !important; }'
-				: ''
-				">h1.title::before, .optionholder.your-option .option:first-child { color: <%= @user.secondary %> !important;}
-				.ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: <%= @user.secondary %> !important; }
-				<%- if !@user.secondary.nil? && !@user.secondary.empty? %>
-				h1.no, h1.yes { color: #5B5B5B !important; }
-				<% end -%>
-				</style>
-				<!-- BG Color -->
-				<style type="text/css" data-bind="text: ko.toJS( bg ) != null && ko.toJS( bg ) != '' ? 
-				'body { background:'+ko.toJS( bg )+' !important; background-image: none; }'
-				: ''
-				">body { background:  <%= @user.bg %> !important; background-image: none; }
-				</style>
-			<% end %>
-			<%- if current_user == @user %>
+                      <% if !is_mobile_device? %>
+                              <!-- Primary Color -->
+                              <style type="text/css" data-bind="text: ko.toJS( primary ) != null && ko.toJS( primary ) != '' ? 
+                              '.sectionheading h1 { color:'+ ko.toJS( primary )+' !important;}'
+                              : ''
+                              ">.sectionheading h1 { color: <%= @user.primary %>!important;}
+                              </style>
+                              <!-- Secondary Color -->
+                              <style type="text/css" data-bind="text: ko.toJS( secondary ) != null && ko.toJS( secondary ) != '' ? 
+                              'h1.title::before, .optionholder.your-option .option:first-child { color:'+ko.toJS( secondary )+' !important;}'+
+                              '.ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: '+ko.toJS( secondary )+'!important; }'+
+                              'h1.no, h1.yes { color: #5B5B5B !important; }'
+                              : ''
+                              ">h1.title::before, .optionholder.your-option .option:first-child { color: <%= @user.secondary %> !important;}
+                              .ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: <%= @user.secondary %> !important; }
+                              <%- if !@user.secondary.nil? && !@user.secondary.empty? %>
+                              h1.no, h1.yes { color: #5B5B5B !important; }
+                              <% end -%>
+                              </style>
+                              <!-- BG Color -->
+                              <style type="text/css" data-bind="text: ko.toJS( bg ) != null && ko.toJS( bg ) != '' ? 
+                              'body { background:'+ko.toJS( bg )+' !important; background-image: none; }'
+                              : ''
+                              ">body { background:  <%= @user.bg %> !important; background-image: none; }
+                              </style>
+                      <% end %>
+                      <%- if current_user == @user %>
 			<%= javascript_include_tag 'jquery.remotipart' %>
 			<%= javascript_include_tag 'other/bootstrap-colorpicker.js' %>
 			<%= stylesheet_link_tag 'other/colorpicker.css' %>
@@ -42,7 +42,7 @@
                                         <p class="label"><%= t("profile.title")%></p> <input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.name_page") %>">
                                         <p class="label"><%= t("profile.description")%></p> <textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.write_about_page") %>"></textarea>
 
-                                        <p class="label"><%= t("profile.url")%></p> http://theballot.org/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.new_url") %>"  >
+                                        <p class="label"><%= t("profile.url")%></p> http://theballot.org/profile/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.new_url") %>"  >
 					<span class="url-searching" data-bind="visible: profile.checking() "><i class="icon-search"></i> <%= t('site.searching') %> </span><span class="url-available" data-bind="visible: profile.available() && !profile.checking() "><i class="icon-ok-sign"></i> <%= t("site.available")%> </span><span class="url-taken" data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null "><i class="icon-exclamation-sign"></i> <%= t("site.taken")%> </span>
 					<br />
 
@@ -260,17 +260,19 @@
         <div id="guides" class="ballot-section">
           <% @guides.each do |guide| %>
             <div class="sectionheading">
-              <% if guide.name.nil? %>
+              <% if guide.name.nil? and (guide.name != '') %>
                 <%= t('guide.guide_no') %>
                 <%= guide.id %>
               <% else %>
                   <%= guide.name %>
               <% end %>
-              <p style="font-size: 12px;">
-                <%= link_to t('guide.show'), guide_show_path({:id => guide.slug}) %> | 
-                <%= link_to t('guide.edit'), guide_edit_path(guide) %> | 
-                <%= link_to t('guide.delete'), guide_delete_path(guide), :method => :post, :confirm => t('guide.delete_confirm') %> 
-              </p>
+                <p style="font-size: 12px;">
+                  <%= link_to t('guide.show'), guide_show_path({:id => guide.slug}) %> 
+                  <% if current_user == @user %>
+                    | <%= link_to t('guide.edit'), guide_edit_path(guide) %>
+                    | <%= link_to t('guide.delete'), guide_delete_path(guide), :method => :post, :confirm => t('guide.delete_confirm') %> 
+                  <% end %>
+                </p>
             </div>
             <br><br>
           <% end %>
@@ -322,8 +324,6 @@
 	<% if @choices.length == 0 && @user != current_user %>
 		<p></p>
 		<p><%= @user.first_name %> <%= t("profile.nofeedback")%></p>
-		<p><em><%= t("profile.redirect")%></em></p>
-		<script type="text/javascript"> ( function() { setTimeout( function() { document.location = '<%= root_path %>'; }, 2012);} )()</script>
 	<% end %>
 </div>
 </div>

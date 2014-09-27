@@ -49,7 +49,7 @@
             <% end -%>
           </li>
           <li class="guide">
-            <%= link_to t('top.my_guide'), current_user.profile %>
+            <%= link_to t('top.my_guides'), profile_path(current_user.to_url) %>
             <!-- <ul>
               <li><%= link_to t('top.all_guides'), guides_path %></li>
               <li><%= link_to t('top.top_guides'), top_guides_path %></li>

@@ -122,13 +122,16 @@ class UserController < ApplicationController
     if !page_user
       flash[:notice] = t('user.bad_login')
     else
-      page_user.valid_password?(params[:password])
-      session.delete(:logged_in_as) 
-      session[:logged_in_as] = page_user.id
-    
-      sign_in page_user
-      redirect_to :back
+      if page_user.valid_password?(params[:password])
+        session.delete(:logged_in_as) 
+        session[:logged_in_as] = page_user.id
+      
+        sign_in page_user
+      else
+        flash[:notice] = t('user.bad_login')
+      end
     end
+    redirect_to :back
   end
   
   def signup
@@ -145,6 +148,7 @@ class UserController < ApplicationController
   end
   
   def forgot_password
+    @classes = 'home'
     if request.post?
       page_user = User.find_by_email(params[:email])
       if !page_user
@@ -153,7 +157,7 @@ class UserController < ApplicationController
         password = Devise.friendly_token[0,20] 
         User.set_password(page_user, password)
         UserMailer.forgot_password(page_user, password).deliver
-        flash[:notice] = t('user.password_sent') + ' ' + password
+        flash[:notice] = t('user.password_sent')
         redirect_to :back
       end
     end

@@ -1,3 +1,6 @@
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>tinymce.init({selector:'.tinymce', menubar: false, plugins: ['link', 'image', 'code'], toolbar: ["undo redo | bold italic underline strikethrough | link image | alignleft aligncenter alignright | code"], valid_children: "+body[style]"});</script>
+
 <h1><%= t("guide.editing") %> 
 <%= @block.title %>
 </h1>
@@ -24,3 +27,5 @@
       <%= render 'form' %>
     </div>
   </div>
+
+  <%= link_to t("site.back"), :back, :class => 'button' %>
