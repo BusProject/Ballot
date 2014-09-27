@@ -299,7 +299,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 },'.face')
 .scroll(function(e){ // Binding the scroll
 		$this = $(this)
-		yourLocation.top( $this.scrollTop() )
+		if( typeof yourLocation !== 'undefined' ) yourLocation.top( $this.scrollTop() )
 })
 
 ko.bindingHandlers.src = {

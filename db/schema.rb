@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140905140323) do
+ActiveRecord::Schema.define(:version => 20140927010158) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
@@ -29,20 +29,6 @@ ActiveRecord::Schema.define(:version => 20140905140323) do
   add_index "blocks", ["option_id"], :name => "index_blocks_on_option_id"
   add_index "blocks", ["user_option_id"], :name => "index_blocks_on_user_option_id"
 
-  create_table "bootsy_image_galleries", :force => true do |t|
-    t.integer  "bootsy_resource_id"
-    t.string   "bootsy_resource_type"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-  end
-
-  create_table "bootsy_images", :force => true do |t|
-    t.string   "image_file"
-    t.integer  "image_gallery_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
   create_table "choices", :force => true do |t|
     t.string   "contest"
     t.integer  "order"
@@ -57,31 +43,6 @@ ActiveRecord::Schema.define(:version => 20140905140323) do
   end
 
   add_index "choices", ["geography", "contest", "electionballot_id"], :name => "index_choices_on_geography_and_contest_and_electionballot_id", :unique => true
-
-  create_table "districts", :force => true do |t|
-    t.string   "name"
-    t.text     "shape"
-    t.string   "geography"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "electionballots", :force => true do |t|
-    t.integer  "electionday_id"
-    t.string   "name"
-    t.text     "notes"
-    t.boolean  "open",           :default => true
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-  end
-
-  create_table "electiondays", :force => true do |t|
-    t.date     "date"
-    t.string   "election_type"
-    t.string   "name"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
 
   create_table "feedback", :force => true do |t|
     t.integer  "user_id"
@@ -122,21 +83,6 @@ ActiveRecord::Schema.define(:version => 20140905140323) do
   end
 
   add_index "matches", ["latlng"], :name => "index_matches_on_latlng", :unique => true
-
-  create_table "memes", :force => true do |t|
-    t.string   "image"
-    t.text     "quote"
-    t.integer  "feedback_id"
-    t.string   "theme"
-    t.boolean  "anomyous",    :default => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.string   "fb"
-    t.string   "twitter"
-    t.string   "tumblr"
-    t.string   "imgur"
-    t.string   "pintrest"
-  end
 
   create_table "options", :force => true do |t|
     t.integer  "choice_id"

@@ -11,37 +11,36 @@ class Feedback < ActiveRecord::Base
   belongs_to :user
   belongs_to :option
   belongs_to :choice
-  has_many :memes
-  
+
 
 
   acts_as_votable
 
-  
+
   def flaggers
     flaggers = self.flag.split(',')
     return flaggers.map { |flagger| User.find_by_id(flagger) }.select{ |flagger| ! flagger.nil? }
   end
-  
-  def user_flatten 
+
+  def user_flatten
     ['name', 'url', 'location', 'image', 'fb', 'profile' ].each do |k|
       self['user_'+k] = self.user[k]
     end
   end
-  
+
   def off?
     return !self.approved || self.flag.split(',').length > 2
   end
-  
-  
+
+
   def self.friends(current_user=nil)
     return [] if current_user.nil? || current_user.fb_friends.nil?
-    return self.all( 
-      :conditions => ['fb IN(?)', current_user.fb_friends.split(',')], 
-      :limit => 25, :order => 'created_at DESC', 
+    return self.all(
+      :conditions => ['fb IN(?)', current_user.fb_friends.split(',')],
+      :limit => 25, :order => 'created_at DESC',
       :joins => [:user ],
       :include => [:choice => [ :options ]]
     )
   end
-  
+
 end
