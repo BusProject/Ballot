@@ -15,14 +15,14 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	for (var i=0; i < inits.default_url.length; i++) {
 		if( (href[0] == '/' || href.search( document.location.protocol+'//'+document.location.hostname ) === 0 ) && href.search( inits.default_url[i] ) === -1 ) {
 			append.push( inits.default_url[i].trim() )
-		} 
+		}
 	};
 	if( append.length > 0 ) {
 		querysplit = href.split('?')
 		if( querysplit[1] ) append.push( querysplit[1] )
 		$this.attr('href', querysplit[0]+'?'+append.join('&') )
 	}
-	
+
 })
 .on('click touchend','.clear',function(e) {
 	yourLocation.address('')
@@ -48,22 +48,22 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		}
 		var $this = $(this).parent()
 
-		if( !inits.mobile ) { 
-			scrollUp = setInterval( function() { 
+		if( !inits.mobile ) {
+			scrollUp = setInterval( function() {
 				var top = $this.position().top - 80
 				if( top < $(document).scrollTop()  ) $(document).scrollTop( top  );
 			}, 10);
 
 			setTimeout(function() { clearInterval(scrollUp); },1000);
 		}
-		
+
 		var $button = $(this), buttonText = $button.text()
 
-		$button.text('Close').nextAll('.body').data('button-text', buttonText ).slideDown(400,function() { 
+		$button.text('Close').nextAll('.body').data('button-text', buttonText ).slideDown(400,function() {
 			$root.selected($data)
 			clearInterval(scrollUp);
 		})
-		
+
 })
 .on('click touchend','#instructions ul li a:not(".small"), .fixed-link',function(e){
 	$this = $(this)
@@ -123,11 +123,11 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 .on('click ','button.submit',function(e){
   alert('thisshit');
 	e.preventDefault()
-	var $this = $(this), $parent = $this.parents('.yourFeedback') 
+	var $this = $(this), $parent = $this.parents('.yourFeedback')
 	if( current_user.id == 'unauthenticated' ) {
 		document.location = $('.account a').attr('href')
 	} else {
-		
+
 		if( $parent.hasClass('candidate') ) {
 			var $ctx = ko.contextFor( $parent[0] )
 				$comment = $('.comment', $parent),
@@ -150,7 +150,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 
 		$.post(
 			inits.root+'feedback/save',
-			{ feedback: [ 
+			{ feedback: [
 					{
 						option_id: parseInt(option_id),
 						//choice_id: parseInt(choice_id),
@@ -165,7 +165,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 					$comment.val('')
 					$('.yourFeedback img').load( function() { $('.selected .overlayText, .selected .overlayBg').hide().fadeIn() })
 					data = { access_token: current_user.auth_token }
-					data[ type ] = response.url 
+					data[ type ] = response.url
 					$.post(
 						'https://graph.facebook.com/me/the-ballot:vote',
 						data,
@@ -181,13 +181,13 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 
 	if( window.innerHeight < 750 ) memetainer.css('top', ((window.innerHeight < 642 ? 642 : window.innerHeight)-632)+'px')
 	if( window.innerWidth < 1100 ) memetainer.css('marginLeft', (( window.innerWidth < 890 ? 780 : window.innerWidth ) -766-162 ) / 2+'px')
-	$('iframe',memetainer.show() ).attr('src',inits.root+'m/'+$data.you()[$index].id+'/new?frame=true' ).parent().prev('#meme-cova').show() 
+	$('iframe',memetainer.show() ).attr('src',inits.root+'m/'+$data.you()[$index].id+'/new?frame=true' ).parent().prev('#meme-cova').show()
 	$(document.body).bind('click.meme touchstart.meme',function(e) {
 		if( $(e.target).parents( memetainer ).length > 0  ) {
 			$('iframe',memetainer.hide() ).attr('src','').parent().prev('#meme-cova').hide()
 			$(this).unbind('click.meme touchstart.meme')
 		}
-		
+
 	})
 })
 .on('click touchend','.controls .remove',function(e) {
@@ -199,7 +199,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 
 		option = $data.options().filter( function(el) { return el.feedback().indexOf( $data.you()[ $index ] ) !== -1 } )[0],
 		$this = $(this)
-	
+
 	option.support( option.support() -1 )
 	if( $this.hasClass('edit') ) {
 		var $row = $this.parents('.row')
@@ -210,13 +210,13 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 		}
 		$row.find('textarea.comment:eq('+$index+')').val( $data.you()[$index].comment )
 	}
-	
+
 	if( $data.you().id != 'undefined' ) $.post(
 		inits.root+'feedback/'+$data.you()[ $index ].id+'/remove',
 		function(response){
 			if( $('body').hasClass('profile') && $data.featured().length - 1 == 0 ) yourLocation.choices.remove( $data )
 			else {
-				var option_id = $data.you()[ $index ].option_id 
+				var option_id = $data.you()[ $index ].option_id
 				option.feedback.remove( $data.you()[ $index ] );
 				if( edit ) $data.chosen( $data.available().filter( function(el) { return el.id == option_id })[0] )
 			}
@@ -268,7 +268,7 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 .on('click touchend','.body a.get-more',function(e) {
 	e.preventDefault();
 	var $data = ko.dataFor(this), options = $data.options()
-	$.get( 
+	$.get(
 		inits.root+'lookup/'+$data.id+'/more', {page: $data.feedback.more() },
 		function(response) {
 			var feedback = response
@@ -326,13 +326,13 @@ ko.bindingHandlers.elastic = {
 }
 
 ko.bindingHandlers.slide = {
-	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
+	update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		if( valueAccessor() ) $(element).slideDown()
 		else $(element).slideUp()
 	}
 };
 ko.bindingHandlers.overwrite = {
-	init: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
+	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		var val = valueAccessor()
 		if( val ) {
 			element.innerHTML = val
@@ -340,12 +340,12 @@ ko.bindingHandlers.overwrite = {
 	}
 };
 ko.bindingHandlers.stripClass = {
-	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
+	update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		$(element).attr('class',valueAccessor() )
 	}
 }
 ko.bindingHandlers.addClass = {
-	update: function(element, valueAccessor, allBindingsAccessor, viewModel) { 
+	update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		value = valueAccessor()
 		$(element).addClass( value )
 	}

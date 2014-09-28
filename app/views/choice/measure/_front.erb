@@ -6,7 +6,7 @@
 
 <a data-bind="attr:{name:$data.contest+' '+$data.geography}"></a>
 
-<div class="measure row <%= 'selected' unless choice.new_record? %> commentable" 
+<div class="measure row <%= 'selected' unless choice.new_record? %> commentable"
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you()[0] }"
 	itemscope itemtype="http://schema.org/ItemList" >
 
@@ -25,7 +25,7 @@
 
 		<% n = 0 %>
 		<meta itemprop="itemListOrder" content="Unordered" />
-		
+
 		<% choice.options.each do |option| %>
 		<div itemprop="itemListElement"  class="optionholder <%= 'clean-no-script' if n != 0 %>" data-bind="css: {chooseable: $data.featured().length < votes && current_user.id != 'unauthenticated' }">
 			<!-- ko foreach: $data.options -->
@@ -61,7 +61,7 @@
 								</a>
 							<% end %>
 						<% end %>
-						
+
 					</div>
 				</div>
 			<!-- /ko -->
@@ -86,8 +86,8 @@
 					</select>
 					<div class="arrows">&#x25B2;<br />&#x25BC;</div>
 				</div>
-			
-			
+
+
 				<ul data-bind="foreach: feedback.everyone" class="feedback">
 					<li data-bind="addClass: $data.type ">
 
@@ -101,7 +101,7 @@
 						<strong data-bind="text: $data.name+ ' says '+$data.option_name+' on '+$parent.contest"></strong>
 						<div class="message" data-bind="betterText: $data.comment"></div>
 						</div>
-						
+
 						<div class="foot">
 								<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
 							<br />

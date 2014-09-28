@@ -167,7 +167,7 @@ def addCandidate obj
     #row_choice = { :votes => votes, :geography => obj['State'].strip, :contest => obj['Office Name'].strip, :contest_type => obj['Office Level'].strip }
     row_option = { :name => obj['Candidate Name'].to_s.strip, :vip_id => obj['UID'].to_s.strip }
 
-    ['Candidate Party','Website','Twitter Name','Facebook URL','Incumbant'].each do |optional|
+    ['Candidate Party','Website','Twitter Name','Facebook URL','Incumbent'].each do |optional|
       unless obj[optional].nil?
         option_value = optional.downcase
         option_value = 'facebook' if optional == 'Facebook URL'
@@ -179,7 +179,7 @@ def addCandidate obj
         row_option[option_value] = row_option[option_value].index('http://') == 0 ? row_option[option_value] : 'http://'+row_option[option_value] if option_value == 'website'
         row_option[option_value] = 'http://twitter.com/'+row_option[option_value] if option_value == 'twitter'
         row_option[option_value] =  row_option[option_value].gsub('Democratic','Democrat') if option_value == 'party'
-        row_option[option_value] = row_option[option_value].downcase == 'true' || row_option[option_value] == '1'  if option_value == 'incumbant'
+        row_option[option_value] = row_option[option_value].downcase == 'true' || row_option[option_value] == '1'  if option_value == 'incumbent'
       end
     end
 

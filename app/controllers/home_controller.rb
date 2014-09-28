@@ -39,7 +39,7 @@ class HomeController < ApplicationController
          <p>Some cool stuff about TheBallot.org:</p>
          <ul>
           <li>This is a crowdsourced voter guide. The content and order in which it appears is determined by the wisdom of the masses, not by political powerbrokers.</li>
-          <li>This is open-source software. Our commitment to crowdsourcing doesn't stop with ballot measures. We've built this software open source so that others can modify and improve it. Want to check it out? <a href='http://github.com/busproject/ballot' target='_blank'>Here's our GitHub repo</a> - fork away! Want to help? Let us know.</li> 
+          <li>This is open-source software. Our commitment to crowdsourcing doesn't stop with ballot measures. We've built this software open source so that others can modify and improve it. Want to check it out? <a href='http://github.com/busproject/ballot' target='_blank'>Here's our GitHub repo</a> - fork away! Want to help? Let us know.</li>
           <li>We're also utilizing and supporting the Voter Information Project so that other similar projects can piece together the relevant and accurate ballot information for free.</li>
           <li>For the latest updates on new features, please <a class="link" target='_blank' href="http://theballot.tumblr.com/">visit our Tumblr</a>.</li>
          </ul>
@@ -54,13 +54,13 @@ class HomeController < ApplicationController
          <!--<p>Sarah bio</p>-->
          <p><strong><a href="https://twitter.com/sampatton" target="_blank">Sam Patton</a></strong></p>
          <p><strong><a href="https://twitter.com/mattsinger7" target="_blank">Matt Singer</a></strong></p>
-         <!--<p>Matt Bio</p>-->         
+         <!--<p>Matt Bio</p>-->
 EOF
   end
     render 'home/show'
   end
-  
-  
+
+
   def search
     prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'
     results = []
@@ -146,9 +146,9 @@ if I18n.locale == :en
        @title = 'Terms of Service'
        @content = <<EOF
        <h1>Terms of Use</h1>
-       
+
        <p>Your use of any of the websites owned and operated by the League of Young Voters or The Bus Federation (collectively, "we" or "us") is governed by these Terms of Use. We may modify these Terms of Use from time to time, so we encourage you to check this page each time you revisit one of our websites. The date of the latest revision will be listed below so you will know if the terms have changed since you last accessed the site. Your use of our websites indicates your acceptance to be bound by the provisions of the Terms of Use in effect as of the date of your use. If you do not accept these terms, do not use our websites.</p>
-        
+
        <h1>Intellectual Property Rights</h1>
 
        <p>Our websites are protected by U.S. copyright laws and no portion of the sites may be reproduced or distributed without the permission of the applicable copyright owner. We maintain ownership rights in our trade names and other trademarks and service marks. Marks of third parties belong to their rightful owners.</p>
@@ -213,18 +213,18 @@ end
       render 'home/show'
     end
 
-  
+
   def guides
 
     @classes = 'home profile guides'
-    
+
     if params[:state] == 'top'
       @limit = 25
       guides = User.top_25
       @guides = [ ['Prez', guides] ]
       @title = 'Top 25 Voter Guides'
       @config = { :state => 'guides', :states => guides.map{|u| u.name }  }.to_json
-      
+
     elsif params[:state]
       if params[:state].length == 2
         state = Choice.states[ Choice.stateAbvs.index(params[:state] ) ].gsub(' ','_')
@@ -234,7 +234,7 @@ end
         stateAbv = Choice.stateAbvs[ Choice.states.index(params[:state].capitalize ) ]
       end
 
-      @limit = params[:limit] || 100 
+      @limit = params[:limit] || 100
       guides = User.by_state( stateAbv ,@limit )
       @guides = [ [stateAbv , guides ] ]
 
@@ -244,7 +244,7 @@ end
         @config = { :state => 'guides',  :stateName => state, :states => guides.map{|u| u.name } }.to_json
         @title = 'Top Voter Guides In '+state.capitalize
       end
-      
+
     else
       @limit = 10
       @guides = User.by_state
@@ -252,34 +252,29 @@ end
       @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] } }.to_json
     end
   end
-  
-  
+
+
   def sitemap
-    states = Choice.states
     stateAbvs = Choice.stateAbvs
     newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at
     newwest_feedback = Feedback.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['approved = ?',false] ).first.updated_at
 
-    
     @urls = [
         { :priority => '0.3', :url => ENV['BASE']+'/about', :updated => '2012-10-05'},
         { :priority => '0.3', :url => ENV['BASE']+'/guides', :updated => newwest_user > newwest_feedback ? newwest_user.to_date : newwest_feedback.to_date  }
       ]
     (1..50).map{ |i| feedback = Feedback.joins(:choice).where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first; @urls.push( { :priority => '0.4', :url => ENV['BASE']+'/guides/'+states[i].capitalize, :updated => feedback.updated_at.to_date } ) unless feedback.nil? }
-    @urls += (1..50).map{ |i| { :priority => '0.4', :url => ENV['BASE']+'/'+stateAbvs[i], :updated => Choice.where('geography LIKE ?',stateAbvs[i]+'%').order('updated_at DESC').limit(1).first.updated_at.to_date } }
 
-    @urls += User.active.map do |user| 
+    @urls += User.active.map do |user|
       updated = user.updated_at > user.feedback.most_recent.updated_at ? user.updated_at : user.feedback.order('updated_at DESC').limit(1).first.updated_at
       { :priority => '0.8', :url => ENV['BASE']+'/'+user.profile.gsub('/','') , :updated => updated.to_date  }
     end
 
-    @urls += Choice.all.map{ |c| { :priority => '1.0', :url => ENV['BASE']+'/'+c.to_url, :updated => c.updated_at.to_date } } 
-    
     if params[:format] == 'json'
-      render :json => @urls.count 
+      render :json => @urls.count
     else
       render :template => 'home/sitemap'
     end
-  end  
+  end
 
 end

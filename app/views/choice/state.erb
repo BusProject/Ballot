@@ -5,11 +5,11 @@
 	</div>
 
 	<% @grouped = @choices.group_by(&:contest_type) %>
-	
+
 	<%- if @choices.length == 50 %>
 		<a rel="next" style="float: right; margin-top: 20px;" class="clean-no-script" href="<%=  request.fullpath.split('?page=')[0]+'?page='+( ( params[:page] || 0 ).to_i + 50 ).to_s %>" >Next Page</a>
 	<% end %>
-	
+
 	<%- if params[:page] %>
 			<a rel="prev"  style="float: left; margin-top: 20px;" class="clean-no-script" href="<%=  request.fullpath.split('?page=')[0]+'?page='+( ( params[:page] || 0 ).to_i - 50 ).to_s %>" >Prev Page</a>
 	<% end -%>
@@ -18,7 +18,7 @@
 <%- if @choices.length == 50 %>
 <link rel="next" href="<%=  request.fullpath.split('?page=')[0]+'?page='+( ( params[:page] || 0 ).to_i + 50 ).to_s %>" >
 <% end %>
-<%- if params[:page] %> 
+<%- if params[:page] %>
 <link rel="prev" href="<%=  request.fullpath.split('?page=')[0]+'?page='+( ( params[:page] || 0 ).to_i - 50 ).to_s %>" >
 <script type="text/javascript" charset="utf-8"> document.location = document.location.toString().split('?')[0] </script>
 <% end -%>
@@ -41,7 +41,7 @@
 				<% end %>
 			<% end %>
 			<h1 class="sectionheading" style="display:none;" data-bind="visible: $data.contests().length < 1"><%= t('site.loading ')%></h1>
-			
+
 			<!-- ko foreach: $data.contests.fresh -->
 				<div class="row " data-bind="template: { name: $data.type == 'Ballot_Statewide' ? 'measure' : 'candidate' }"></div>
 			<!-- /ko -->
@@ -64,7 +64,7 @@
 	<%=  render 'choice/candidate/summary' %>
 </script>
 <script type="text/javascript" charset="utf-8">
-	$(document).ready( function() { 
+	$(document).ready( function() {
 		var page = 1
 		setTimeout( function() { getMore( yourLocation.choices().length ) }, 500 )
 		yourLocation.fetch(false)
@@ -84,5 +84,5 @@
 			}
 		}
 	})
-	
+
 </script>
