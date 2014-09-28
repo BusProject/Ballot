@@ -2,32 +2,13 @@ class HomeController < ApplicationController
   def index
 
     @classes = 'home '
-    cookename = 'new_'+Rails.application.class.to_s.split("::").first+'_visitor'
-    # if current_user.nil? && !cookies[cookename] && params['q'].nil? && params[:iframe].nil?
-    # 
-    #   cookies[cookename] = {
-    #     :value => true,
-    #     :expires => 2.weeks.from_now
-    #   }      
-    #   @config = { :state => 'splash' }.to_json
-    #   @classes += 'splash'
-    # 
-    #   render :template => 'home/splash'
-    # else
-      
+
       address = params['q'] || params['address']
-      
+
       if address.nil?
         remember = true
         if current_user
           address = current_user.address unless current_user.address.nil? || current_user.address.empty?
-          if match = current_user.match
-            match.data += District.geography_match( match.data, match.latlng )
-            @choices = Choice.find_by_districts( match.data ).each{ |c| c.prep current_user }
-            latlng = match.latlng
-            state = match.data.select{ |d| d.length == 2 }.first
-            google = { :address_components => [ { :short_name => state, :types => ["administrative_area_level_1"] }  ] }
-          end
         else
           address = cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache']
         end
@@ -36,68 +17,17 @@ class HomeController < ApplicationController
       end
       address = address || ''
       latlng = latlng || nil
-      
-      @config = { :address => address.gsub('+',' '), :latlng => latlng, :google => google, :remember => remember }.to_json 
+
+      @config = { :address => address.gsub('+',' '), :latlng => latlng, :remember => remember }.to_json
 
       @choices_json = @choices.to_json( Choice.to_json_conditions )
-      
+
       @classes = 'home front'
-      
-      render :template => 'home/index' 
+
+      render :template => 'home/index'
     # end
   end
 
-  def stats
-    @classes = 'home admin'
-    @config = { :state => 'page' }.to_json
-    
-    if params[:format] == 'json'
-      render :json => { :users => User.all.count, :matches => Match.all.count }
-    elsif params[:format] == 'txt'
-      render :inline => ['users: ',User.all.count.to_s,', matches: ',Match.all.count.to_s].join('')
-    else
-    
-      @users = User.all.map do |user|
-        votes = user.feedback.count
-        comments = user.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.count
-        popularity = user.feedback.map { |f| f.cached_votes_total }.sum
-      
-      
-        friends = !user.fb_friends.nil? ? user.fb_friends.split(',').count : 0
-        pages = !user.pages.nil?
-        profile = user.profile != '/'+user.to_url
-        header = user.header.to_s.index("/headers/original/missing.png").nil?
-      
-        { 
-          :last_sign_in => user.last_sign_in_at, 
-          :sign_in_count => user.sign_in_count, 
-          :popularity => popularity,
-          :created_at => user.created_at,
-          :friends => friends,
-          :votes => votes,
-          :comments => comments,
-          :pages => pages,
-          :profile => profile,
-          :header => header
-        }
-      end
-    
-      @matches = Match.all.map{ |m| m.data.select{ |d| d.length == 2 }.first  }
-      @states = Choice.states
-      @states.shift
-      @stateAbvs = Choice.stateAbvs
-      @stateAbvs.shift
-      @matchStates = []
-      n = 0
-      @stateAbvs.each do |state|
-        count = @matches.select{ |match| match == state }.count
-        @matchStates.push( { :count => count, :state => @states[n] } ) unless count == 0
-        n+=1
-      end
-    end
-
-  end
-  
   def about
     @classes = 'home msg'
     @config = { :state => 'page' }.to_json
@@ -155,50 +85,6 @@ EOF
     render :json => results
   end
 
-
-    def api
-       @classes = 'home msg'
-       @config = { :state => 'page' }.to_json
-       if I18n.locale == :en
-              @title = 'API'
-              @content = <<EOF
-              <h1>TheBallot.org's API</h1>
-              <p>Get some of this data hot off the griddle. We provide two main APIs, Lookups and States. Check em out.</p>
-              <p>There's no API KEY or rate limit or any of that crap(at least right now - no guarantees if you take us down). Just dig right in!</p>
-              <p>Questions should be directed at Scott <a href="mailto:scott@busfederation.com">scott@busfederation.com</a> or <a href="http://twitter.com/mojowen" target="_blank">@mojowen</a>.
-              <h2>Lookups</h2>
-              <p>Lookup is the query that's performed on the front page - it's powered by <a href="https://developers.google.com/maps/documentation/geocoding/" target="_blank">Google's Geolocation services</a> and <a href="http://cicero.azavea.com/" target="_blank">Cicero</a></p>
-              <p>To perform a lookup you either need to pass either a LatLng or an Address - which I'll then geocode using Google and then use to Query Cicero</p>
-              <p>For address lookups - use the <em>a</em> parameter, like so: <br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC">http://theballot.org/lookup?a=1600 Pennsylvania Ave Washington DC</a>.
-              <p>For LatLng lookups - use the <em>l</em> parameter with lat then lng - attached by a comma, like so:<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/lookup?l=41.923%2C-87.710">http://theballot.org/lookup?l=41.923%2C-87.710</a>.
-              <br />
-              <br />
-              <h2>States</h2>
-              <p>State data can be retrieved really easily - it's all available via JSON using the following query, in this case for Oregon:<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json" target="_blank">http://theballot.org/OR.json</a></p>
-              <p>Results are paginated 50 at a time - pass ?page=50 to get the next fifty:<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json?page=50" target="_blank">http://theballot.org/OR.json?page=50</a>,<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://theballot.org/OR.json?page=100" target="_blank">http://theballot.org/OR.json?page=100</a>, <br />
-                etc...</p>
-              <br />
-              <br />
-              <h2>JSONP / Request Type</h2>
-              <p>Yup we can do that - just pass the function's name in the parameter <em>callback</em></p>
-              <p>All requests are GET requests</p>
-              <br />
-              <br />
-
-              <h2>Data Models</h2>
-              <p>Here's the JSON data you'll get back with both of these queries - returned as an array. Both Ballot Measures and Candidates will be intermixed</p>
-              <script src="https://gist.github.com/3961783.js"> </script>
-              
-EOF
-    end
-    render 'home/show'
-    
-  end
     def privacy
        @classes = 'home msg'
        @config = { :state => 'page' }.to_json

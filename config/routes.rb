@@ -48,7 +48,6 @@ Ballot::Application.routes.draw do
 
   root :to => "home#index"
   match '/about' => "home#about"
-  match '/api' => "home#api"
   match '/about/privacy' => "home#privacy", :as => 'privacy'
   match '/about/terms' => "home#tos", :as => 'terms'
   match '/stats' => "home#stats"
@@ -66,7 +65,7 @@ Ballot::Application.routes.draw do
   match '/friends' => 'choice#friends'
   match '/guides/top' =>  'home#guides', :as => 'top_guides'
 
-  match '/lookup' => 'choice#index'
+  match '/lookup' => 'choice#index' #, :via => :post
   match '/lookup/:id/more' => 'choice#more'
 
   match '/feedback/save' => 'feedback#update', :via => :post, :as => 'save_feedback'

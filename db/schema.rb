@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140927010158) do
+ActiveRecord::Schema.define(:version => 20140927051218) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
@@ -31,18 +31,19 @@ ActiveRecord::Schema.define(:version => 20140927010158) do
 
   create_table "choices", :force => true do |t|
     t.string   "contest"
-    t.integer  "order"
-    t.boolean  "commentable",       :default => false
+    t.boolean  "commentable",        :default => false
     t.string   "geography"
     t.text     "description"
     t.string   "contest_type"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-    t.integer  "votes",             :default => 1
-    t.integer  "electionballot_id"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.integer  "votes",              :default => 1
+    t.integer  "external_id"
+    t.binary   "fiscal_impact"
+    t.binary   "description_source"
   end
 
-  add_index "choices", ["geography", "contest", "electionballot_id"], :name => "index_choices_on_geography_and_contest_and_electionballot_id", :unique => true
+  add_index "choices", ["external_id"], :name => "index_choices_on_external_id"
 
   create_table "feedback", :force => true do |t|
     t.integer  "user_id"
@@ -86,22 +87,21 @@ ActiveRecord::Schema.define(:version => 20140927010158) do
 
   create_table "options", :force => true do |t|
     t.integer  "choice_id"
-    t.integer  "position"
     t.string   "photo"
     t.text     "blurb"
     t.string   "name"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "twitter"
     t.string   "facebook"
     t.string   "website"
-    t.string   "blurb_source"
     t.string   "party"
-    t.boolean  "incumbant",    :default => false
-    t.string   "vip_id"
+    t.integer  "external_id"
+    t.boolean  "incumbent",   :default => false
   end
 
   add_index "options", ["choice_id"], :name => "index_options_on_choice_id"
+  add_index "options", ["external_id"], :name => "index_options_on_external_id"
   add_index "options", ["name"], :name => "index_options_on_name"
 
   create_table "user_options", :force => true do |t|

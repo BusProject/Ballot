@@ -144,58 +144,8 @@ class ChoiceController < ApplicationController
   end
 
   def index
-
-    cicero = Cicero
-    districts = nil
-
-    if params[:a]
-      # If passed an address, uses 'a' to query using Google's geocoding
-      bloop =JSON::parse(RestClient.get 'http://maps.googleapis.com/maps/api/geocode/json?address='+params[:a]+'&sensor=false' )
-      if result = bloop['results'][0]
-        address = ['Prez']
-        address.push( result['address_components'].reject{ |a| a['types'].index("locality").nil? }.first['long_name'] )
-        state = result['address_components'].reject{ |a| a['types'].index("administrative_area_level_1").nil? }.first['short_name']
-        address.push( state )
-        address.push( result['address_components'].reject{ |a| a['types'].index("administrative_area_level_2").nil? }.first['long_name'] + ( state != 'LA' ? ' County' : ' Parish') )
-        l = [result['geometry']['location']['lat'].to_s,result['geometry']['location']['lng'].to_s].join(',')
-        districts = cicero.find( l, address )
-      end
-    else
-      # Uses Google to retrieve the Address components if they're not posted or incomplete
-      if params[:address].nil? || params[:address].select{ |d| d.index('undefined') ||  d.index('false') }.length > 0
-        bloop =JSON::parse(RestClient.get 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+params[:l]+'&sensor=true' )
-        if result = bloop['results'][0]
-          address = ['Prez']
-          address.push( result['address_components'].reject{ |a| a['types'].index("locality").nil? }.first['long_name'] )
-          state = result['address_components'].reject{ |a| a['types'].index("administrative_area_level_1").nil? }.first['short_name']
-          address.push( state )
-          county = result['address_components'].reject{ |a| a['types'].index("administrative_area_level_2").nil? }.first
-          address.push( county['long_name'] + ( state != 'LA' ? ' County' : ' Parish') ) unless county.nil?
-        end
-      else
-        address = params[:address]
-      end
-      districts = params['q'].nil? ? cicero.find(params['l'], address ) : params['q'].split('|')
-    end
-
-
-    districts += District.geography_match( districts, params['l'])
-
-    unless districts.nil?
-      @choices = Choice.find_by_districts( districts ).each{ |c| c.prep current_user }
-    end
-
-    if !params[:address_text].nil? && !params[:address_text].empty?
-      if current_user
-        current_user.address = params[:address_text]
-        current_user.match = cicero.match
-        current_user.save
-      else
-        cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache'] = params[:address_text]
-      end
-    end
-
-    render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
+    @choices = Choice.find_by_address( params[:a] || params[:address] ).each{ |c| c.prep current_user }
+    render :json => @choices.to_json( Choice.to_json_conditions )
   end
 
   def more

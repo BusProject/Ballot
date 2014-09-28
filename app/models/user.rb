@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
     :image, :location, :name, :url, :first_name, :last_name, :feedback,
     :admin, :authentication_token, :guide_name, :fb, :profile,
     :fb_friends, :description, :alerts, :pages, :profile,
-    :primary, :secondary, :bg, :header, :match, :address
+    :primary, :secondary, :bg, :header, :address
 
   acts_as_voter
 

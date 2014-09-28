@@ -1,8 +1,10 @@
 class Choice < ActiveRecord::Base
-  attr_accessible :contest, :geography, :contest_type, :commentable, :description, :order, :options, :options_attributes, :votes
+  attr_accessible :contest, :geography, :contest_type, :commentable, :description, :options, :options_attributes, :votes, :description_source
   validates_presence_of :contest, :geography
 
-  has_many :options, :dependent => :destroy, :order => 'position DESC'
+  validates_uniqueness_of :external_id, :allow_nil => true
+
+  has_many :options, :dependent => :destroy
   has_many :feedback, :conditions => ['"feedback"."approved" =? ', true] do
     def votes current_user=nil
       user_id = id = current_user.nil? ? 0 : current_user.id
@@ -13,8 +15,9 @@ class Choice < ActiveRecord::Base
       all(:limit => nil, :conditions => 'length(comment) > 1', :select => 'DISTINCT("user_id" )',  :conditions => ['user_id != ?',user_id] ).count
     end
   end
+
   has_many :users, :through => :feedback
-  accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbant'] == '0' && false  }
+  accepts_nested_attributes_for :options, :reject_if => proc { |attrs| attrs['incumbent'] == '0' && false  }
 
 
   def to_url
@@ -45,6 +48,9 @@ class Choice < ActiveRecord::Base
   end
   def self.stateAbvs
     return ["Prez","AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC"]
+  end
+  def self.contest_type_order
+    ['Federal','State','Local','Ballot_State', 'Ballot_Local','User_Candidate','User_Ballot']
   end
 
   def geographyNice( stateOnly=true)
@@ -79,11 +85,13 @@ class Choice < ActiveRecord::Base
 
 
   def self.find_by_state(state,limit=50,offset=0)
-    return self.all(
+
+    pollvault_data = digest_pollvault $pollvault.retrieve_by_state(state)
+
+    return pollvault_data || self.all(
       :conditions => ['geography LIKE ?', state+'%'],
       :select => 'choices.*',
       :include => [:options => [:feedback]],
-      :order => "contest_type IN('Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot' ) ASC",
       :limit => limit,
       :offset => offset
     )
@@ -91,8 +99,8 @@ class Choice < ActiveRecord::Base
   def self.types_by_state(state)
     return self.all(
       :conditions => ['geography LIKE ?', state+'%'],
-      :select => 'DISTINCT( choices.contest_type) ',
-    ).sort_by{|c| ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( c.contest_type) }.map{ |c| c.contest_type }
+      :select => 'DISTINCT( choices.contest_type ) ',
+    ).sort_by{|c| [contest_type_order].index( c.contest_type) }.map{ |c| c.contest_type }
   end
 
   def self.find_office(geography,contest)
@@ -104,12 +112,17 @@ class Choice < ActiveRecord::Base
     ).first
   end
 
-  def self.find_by_districts(districts)
-    return self.all(
-      :select => ' choices.* ',
+  def self.find_by_address(address)
+
+    raw = $pollvault.retrieve_by_address(address)
+    pollvault_results = digest_pollvault raw
+
+    raw['districts'].each{ |d| d = raw['state'] if d.empty? }.uniq!
+
+    return pollvault_results || all(
+      :select => 'choices.* ',
       :include => [:options],
-      :conditions => ['geography IN(?)',districts ],
-      :order => "contest_type IN('Federal','State','County','Other','Ballot_Statewide') DESC, geography"
+      :conditions => ['geography IN(?)', raw['districts']],
     )
   end
 
@@ -138,8 +151,8 @@ class Choice < ActiveRecord::Base
           self[:description] = self.options.map{ |o| o.name }.to_sentence
         end
 
-        if self.options.select{ |o| o.incumbant? }.length > 0
-          option[:option_type] = option.incumbant? ? 'Incumbant' : 'Challenger'
+        if self.options.select{ |o| o.incumbent? }.length > 0
+          option[:option_type] = option.incumbent? ? 'Incumbent' : 'Challenger'
         else
           option[:option_type] = 'Open Seat'
         end
@@ -176,5 +189,64 @@ class Choice < ActiveRecord::Base
     return feedback
   end
 
+  def self.digest_pollvault data
+    return nil if ! data || data['old']
+
+    choices = []
+
+    data['contests'].each do |contest|
+      choice = Choice.find_or_initialize_by_external_id(contest['id'])
+
+      choice.contest = contest['name']
+      choice.contest_type = contest['electoral_district']['type'].capitalize
+      choice.geography = contest['electoral_district']['name']
+
+      contest['candidates'].each do |candidate|
+
+        option = Option.find_or_initialize_by_external_id(candidate['id'])
+
+        option.name = [candidate['first_name'],candidate['last_name']].join(" ")
+        option.photo = candidate['img_lg_url']
+        option.party = candidate['party']
+        option.incumbent = candidate['incumbent']
+
+        option.facebook = candidate['facebook_url']
+        option.website = candidate['website_url']
+        option.twitter = candidate['twitter_url']
+
+
+        option.blurb = candidate['bio2']
+
+        choice.options.push( option )
+      end
+
+      choice.save()
+      choices << choice
+    end
+    data['questions'].each do |question|
+      choice = Choice.find_or_initialize_by_external_id(question['id'])
+
+      choice.contest = question['long_name']
+      choice.contest_type = "Ballot_#{question['electoral_district']['type'].capitalize}"
+      choice.geography = question['electoral_district']['name']
+
+      choice.description = question['summary']
+      choice.description_source = question['source_url']
+      choice.fiscal_impact = question['fiscal_impact']
+
+      option = choice.options.find{ |o| o.name == 'Yes' } || Option.new
+      option.name = 'Yes'
+      choice.options.push( option )
+
+      option = choice.options.find{ |o| o.name == 'No' } ||  Option.new
+      option.name = "No"
+      choice.options.push( option )
+
+      choice.save()
+      choices << choice
+    end
+
+    return choices
+  end
 
 end

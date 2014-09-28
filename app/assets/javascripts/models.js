@@ -155,7 +155,7 @@ function Option(data,choice) {
     }
 
 
-    this.incumbant = data.incumbant
+    this.incumbent = data.incumbent
     this.twitter = data.twitter
     this.facebook = data.facebook
     this.website = data.website

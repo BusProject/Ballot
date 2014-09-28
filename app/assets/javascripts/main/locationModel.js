@@ -283,12 +283,10 @@ function locationModel(data) {
 			address = state ? ['Prez',(state+yourLocation.address.city()), state, (state+yourLocation.address.county()+( state != 'LA' ? ' County' : ' Parish' ) ) ] : []
 
 		// Doing the openState call, will probably want to build this into something else
-		$.getJSON(
+		$.post(
 			inits.root+'lookup',
 			{
-				l: yourLocation.lat()+','+yourLocation.lng(),
-				address: address,
-				address_text: yourLocation.remember() ? yourLocation.address() : ''
+				address: yourLocation.remember() ? yourLocation.address() : ''
 			},
 			function(data) {
 				if( data != null && data.constructor == Array ) {
