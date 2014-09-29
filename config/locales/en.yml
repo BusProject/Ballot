@@ -316,6 +316,7 @@ en:
       block_update_failure: 'The block could not be updated.'
       block_delete_flash: 'The block was deleted.'
       block_title: 'Block Title'
+      block_order: 'Order'
       block_content: 'Comments'
       block_state: 'State'
       block_contest: 'Contest'
