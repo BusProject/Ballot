@@ -270,6 +270,7 @@ function Grouping(keys,title,url,template,locationModel,description) {
   grouping.url = url
   grouping.template = template
   grouping.description = description
+  grouping.anchor = keys.join('_')
   grouping.className = title != 'Ballot Measures' ? 'candidates' : 'ballot-measures'
   grouping.className += ' ballot-category clearfix'
   grouping.active = ko.computed(function() {

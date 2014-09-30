@@ -25,8 +25,8 @@
 <% end %>
 
 	<% @types.each do |type| %>
-		<% n = ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( type ) %>
-		<div id="<%= type == 'Ballot_Statewide' ? 'Ballot_Measures' : type.index('User').nil? ? type : type.gsub('_','_Created_')+'s'  %>" data-bind="with: sections()[<%= n %>]">
+		<% n = Choice.contest_type_order.index( type ) %>
+		<div id="<%= type.index('User').nil? ? type : type.gsub('_','_Created_')+'s'  %>" data-bind="with: sections()[<%= n %>]">
 
 			<div class="category-heading" >
 				<h2 ><%= type.gsub('_',' ') %></h2>
@@ -73,7 +73,7 @@
 			if( choicesLength == page * 50 ) {
 				yourLocation.fetch(false)
 				page += 1
-				var url = document.location.toString().split('?')[0]
+				var url = document.location.toString().split('#')[0].split('?')[0]
 					url = url[ url.length -1 ] == '/' ? url.slice(0, url.length -1) : url
 				$.getJSON( url+'.json', { page: choicesLength }, function(response) {
 					ko.utils.arrayPushAll(yourLocation.choices, response.map( function(el) { return Choice(el) }) )

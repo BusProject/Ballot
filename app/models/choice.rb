@@ -52,6 +52,9 @@ class Choice < ActiveRecord::Base
   def self.contest_type_order
     ['Federal','State','Local','Ballot_State', 'Ballot_Local','User_Candidate','User_Ballot']
   end
+  def self.contest_type_order_string
+    "'"+self.contest_type_order.join("','")+"'"
+  end
 
   def geographyNice( stateOnly=true)
 
@@ -70,8 +73,6 @@ class Choice < ActiveRecord::Base
 
     geography = 'State Legislative District' if @states[index] == 'Nebraska' && geography == 'State Senate District' # Nebraska only has one legislative chamber
 
-
-
     district = self.geography.slice(4,self.geography.length) if geography != self.geography.slice(2,self.geography.length)
     district = district.to_i.ordinalize if !district.nil? && district.to_i.to_s == district.gsub('0','')
 
@@ -87,11 +88,13 @@ class Choice < ActiveRecord::Base
   def self.find_by_state(state,limit=50,offset=0)
 
     pollvault_data = digest_pollvault $pollvault.retrieve_by_state(state)
+    pollvault_data = pollvault_data.slice(offset.to_i, limit.to_i) if pollvault_data
 
     return pollvault_data || self.all(
       :conditions => ['geography LIKE ?', state+'%'],
       :select => 'choices.*',
       :include => [:options => [:feedback]],
+      :order => "contest_type IN(#{contest_type_order_string}) ASC",
       :limit => limit,
       :offset => offset
     )
@@ -117,11 +120,12 @@ class Choice < ActiveRecord::Base
     raw = $pollvault.retrieve_by_address(address)
     pollvault_results = digest_pollvault raw
 
-    raw['districts'].each{ |d| d = raw['state'] if d.empty? }.uniq!
+    raw['districts'].each{ |d| d = raw['state']+d }.uniq!
 
     return pollvault_results || all(
       :select => 'choices.* ',
       :include => [:options],
+      :order => 'contest_type IN(#{"\'"+contest_type_order.join("\',\'")+"\'"}) ASC',
       :conditions => ['geography IN(?)', raw['districts']],
     )
   end
@@ -193,13 +197,14 @@ class Choice < ActiveRecord::Base
     return nil if ! data || data['old']
 
     choices = []
+    state = data['state']
 
     data['contests'].each do |contest|
       choice = Choice.find_or_initialize_by_external_id(contest['id'])
 
       choice.contest = contest['name']
       choice.contest_type = contest['electoral_district']['type'].capitalize
-      choice.geography = contest['electoral_district']['name']
+      choice.geography = data['state']+contest['electoral_district']['name']
 
       contest['candidates'].each do |candidate|
 
@@ -228,7 +233,7 @@ class Choice < ActiveRecord::Base
 
       choice.contest = question['long_name']
       choice.contest_type = "Ballot_#{question['electoral_district']['type'].capitalize}"
-      choice.geography = question['electoral_district']['name']
+      choice.geography = data['state']+question['electoral_district']['name']
 
       choice.description = question['summary']
       choice.description_source = question['source_url']
@@ -246,7 +251,7 @@ class Choice < ActiveRecord::Base
       choices << choice
     end
 
-    return choices
+    return choices.sort_by{|c| [contest_type_order].index( c.contest_type) }
   end
 
 end
