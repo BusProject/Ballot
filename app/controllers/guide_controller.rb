@@ -15,6 +15,7 @@ class GuideController < ApplicationController
     end
     @user = current_user
     @blocks = Block.where(:guide_id => @guide.id)
+    #@blocks = @blocks.order(:order)
     @choices = Choice.all()
     @options = Option.all()
     @writeins = UserOption.all()

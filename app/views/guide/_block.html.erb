@@ -6,11 +6,18 @@
     return obj
   end
 
+  def zero_if_blank(obj)
+    if obj.nil? || !obj
+      return 0
+    end
+    return obj
+  end
+
   def false_if_blank_quote(obj)
     if obj.nil? || !obj
       return false
     end
-    return ('"' + obj.gsub('"', '\"') + '"').html_safe
+    return ('"' + obj.to_s.gsub('"', '\"') + '"').html_safe
   end
 %>
 
@@ -23,6 +30,7 @@
     blocks[<%= block.id %>]['option_id'] = <%= false_if_blank(block.option_id) %>;
     blocks[<%= block.id %>]['user_option_id'] = <%= false_if_blank(block.user_option_id) %>;
     blocks[<%= block.id %>]['title'] = <%= false_if_blank_quote(block.title) %>;
+    blocks[<%= block.id %>]['order'] = <%= zero_if_blank(block.order) %>;
     blocks[<%= block.id %>]['content'] = <%= false_if_blank_quote(block.content) %>;
     blocks[<%= block.id %>]['order'] = <%= false_if_blank_quote(block.order) %>;
     blocks[<%= block.id %>]['full_size'] = <%= false_if_blank(block.full_size) %>;
@@ -40,52 +48,58 @@
     user_option_ids[writein.id] = writein.name
     contests_writeins[writein.id] = contests[writein.choice_id]
   end
-%>
 
-<% @blocks.each do |block|
-  halfwidth = ''
-  if !block.full_size.nil? and !block.full_size
-    halfwidth = ' half'
+  blocks = Hash.new
+  @blocks.each do |block|
+    blocks[block.order.to_s + '.' + block.id.to_s] = block
   end
+  blocks = blocks.sort
 
-  if block.option_id.nil? and !block.user_option_id.nil?
-    contest_name = contests_writeins[block.user_option_id]
-    #contest_name = block.user_option_id
-    subtitle = user_option_ids[block.user_option_id]
-    #subtitle = block.user_option_id
-  elsif !block.option_id.nil?
-    contest_name = contests[contests_options[block.option_id]]
-    #contest_name = block.option_id
-    subtitle = options_hash[block.option_id]
-    #subtitle = block.option_id
-  elsif !block.title.nil?
-    contest_name = block.title.html_safe
-    subtitle = false
-  end %>
+  @blocks.each do |block|
+    halfwidth = ''
+    if !block.full_size.nil? and !block.full_size
+      halfwidth = ' half'
+    end
 
-  <div class="ballot-section<%= halfwidth %>">
-    <div class="sectionheading">
-      <h1 style="background: #D37A3C; padding: 10px;"><%= contest_name %></h1><br>
-      <% if subtitle %>
-        <h2 class="writein_name"><%= subtitle %></h2><br>
-      <% end %>
+    if block.option_id.nil? and !block.user_option_id.nil?
+      contest_name = contests_writeins[block.user_option_id]
+      #contest_name = block.user_option_id
+      subtitle = user_option_ids[block.user_option_id]
+      #subtitle = block.user_option_id
+    elsif !block.option_id.nil?
+      contest_name = contests[contests_options[block.option_id]]
+      #contest_name = block.option_id
+      subtitle = options_hash[block.option_id]
+      #subtitle = block.option_id
+    elsif !block.title.nil?
+      contest_name = block.title.html_safe
+      subtitle = false
+    end
+    %>
 
-      <% if !block.content.nil? %>
-        <div style="color: #ffffff; text-align: left; padding: 0 40px;"><%= block.content.html_safe %></div>
-      <% end %>
+    <div class="ballot-section<%= halfwidth %>">
+      <div class="sectionheading">
+        <h1 style="background: #D37A3C; padding: 10px;"><%= contest_name %></h1><br>
+        <% if subtitle %>
+          <h2 class="writein_name"><%= subtitle %></h2><br>
+        <% end %>
 
-      <% if controls %>
-        <p style="font-size: 12px;">
-          <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> |
-          <% if !block.full_size.nil? and !block.full_size %>
-            <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %> |
-          <% else %>
-            <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> |
-          <% end %>
-          <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
-        </p>
-      <% end %>
+        <% if !block.content.nil? %>
+          <div style="color: #ffffff; text-align: left; padding: 0 40px;"><%= block.content.html_safe %></div>
+        <% end %>
 
+        <% if controls %>
+          <p style="font-size: 12px;">
+            <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
+            <% if !block.full_size.nil? and !block.full_size %>
+              <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %> | 
+            <% else %>
+              <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
+            <% end %>
+            <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
+          </p>
+        <% end %>
+
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>

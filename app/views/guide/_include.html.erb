@@ -14,6 +14,7 @@
       #guide input[type="checkbox"] {width: auto !important;}
       #guide label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
       #guide input[type="submit"] {margin: 0px auto !important;}
+      #guide .order input {position: relative; left: 7px; display: block; width: 40px;}
       #guide select {margin-left: 7px;}
       #guide .mce-tinymce {margin-top: 10px;}
       #guide .comments {width: 90%; margin: 0px auto;}
@@ -56,6 +57,7 @@
   function reset() {
     jQuery('select[name="state"]').val(0);
     jQuery('input[name="title"]').val('');
+    jQuery('input[name="order"]').val('');
     reset_writein();
     enable_type();
     disable_basics();
@@ -89,6 +91,8 @@
   function disable_basics() {
     jQuery('.title').hide();
     jQuery('.title input').attr('disabled', 'disabled');
+    jQuery('.order').hide();
+    jQuery('.order input').attr('disabled', 'disabled');
     jQuery('.states').hide();
     jQuery('.states select').attr('disabled', 'disabled');
     jQuery('.comments').hide();
@@ -199,6 +203,9 @@
   }
 
   function enable_basics() {
+    jQuery('.order').show();
+    jQuery('.order input').removeAttr('disabled');
+    jQuery('.submit').show();
     jQuery('.comments').show();
     jQuery('.comments input').removeAttr('disabled');
     jQuery('.submit').show();
