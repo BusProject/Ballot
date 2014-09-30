@@ -1,6 +1,6 @@
 class Option < ActiveRecord::Base
   belongs_to :choice
-  attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbent, :feedback
+  attr_accessible :blurb, :name, :photo, :position, :website, :twitter, :facebook, :party, :incumbent, :feedback, :stop_sync
 
   validates_uniqueness_of :external_id, :allow_nil => true
   validates :name , presence: true

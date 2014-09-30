@@ -1,5 +1,5 @@
 class Choice < ActiveRecord::Base
-  attr_accessible :contest, :geography, :contest_type, :commentable, :description, :options, :options_attributes, :votes, :description_source
+  attr_accessible :contest, :geography, :contest_type, :commentable, :description, :options, :options_attributes, :votes, :description_source, :stop_sync
   validates_presence_of :contest, :geography
 
   validates_uniqueness_of :external_id, :allow_nil => true
@@ -210,22 +210,24 @@ class Choice < ActiveRecord::Base
 
         option = Option.find_or_initialize_by_external_id(candidate['id'])
 
-        option.name = [candidate['first_name'],candidate['last_name']].join(" ")
-        option.photo = candidate['img_lg_url']
-        option.party = candidate['party']
-        option.incumbent = candidate['incumbent']
+        unless option.stop_sync
+          option.name = [candidate['first_name'],candidate['last_name']].join(" ")
+          option.photo = candidate['img_lg_url']
+          option.party = candidate['party_code']
+          option.incumbent = candidate['incumbent']
 
-        option.facebook = candidate['facebook_url']
-        option.website = candidate['website_url']
-        option.twitter = candidate['twitter_url']
+          option.facebook = candidate['facebook_url']
+          option.website = candidate['website_url']
+          option.twitter = candidate['twitter_url']
 
 
-        option.blurb = candidate['bio2']
+          option.blurb = candidate['bio2'].encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "").force_encoding('UTF-8')
+        end
 
         choice.options.push( option )
       end
 
-      choice.save()
+      choice.save() unless choice.stop_sync
       choices << choice
     end
     data['questions'].each do |question|
@@ -235,9 +237,9 @@ class Choice < ActiveRecord::Base
       choice.contest_type = "Ballot_#{question['electoral_district']['type'].capitalize}"
       choice.geography = data['state']+question['electoral_district']['name']
 
-      choice.description = question['summary']
+      choice.description = question['summary'].encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "").force_encoding('UTF-8')
       choice.description_source = question['source_url']
-      choice.fiscal_impact = question['fiscal_impact']
+      choice.fiscal_impact = question['fiscal_impact'].encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "").force_encoding('UTF-8')
 
       option = choice.options.find{ |o| o.name == 'Yes' } || Option.new
       option.name = 'Yes'
@@ -247,7 +249,7 @@ class Choice < ActiveRecord::Base
       option.name = "No"
       choice.options.push( option )
 
-      choice.save()
+      choice.save() unless choice.stop_sync
       choices << choice
     end
 

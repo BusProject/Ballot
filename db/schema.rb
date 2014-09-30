@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140927051218) do
+ActiveRecord::Schema.define(:version => 20140930192105) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(:version => 20140927051218) do
     t.integer  "user_option_id"
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "order"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "order",          :default => 0, :null => false
     t.boolean  "full_size"
   end
 
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20140927051218) do
     t.integer  "external_id"
     t.binary   "fiscal_impact"
     t.binary   "description_source"
+    t.boolean  "stop_sync",          :default => false
   end
 
   add_index "choices", ["external_id"], :name => "index_choices_on_external_id"
@@ -98,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20140927051218) do
     t.string   "party"
     t.integer  "external_id"
     t.boolean  "incumbent",   :default => false
+    t.boolean  "stop_sync",   :default => false
   end
 
   add_index "options", ["choice_id"], :name => "index_options_on_choice_id"
