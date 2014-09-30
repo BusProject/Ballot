@@ -7,7 +7,7 @@ class GuideController < ApplicationController
   def show
     @guide = Guide.find_by_slug( params[:id].downcase )
     @classes = 'home'
-    raise ActionController::RoutingError.new('Could not find that guide') if @guide.nil? 
+    raise ActionController::RoutingError.new('Could not find that guide') if @guide.nil?
 
     if !@guide.publish and @guide.user_id != current_user.id
       flash[:notice] = t('guide.not_published')

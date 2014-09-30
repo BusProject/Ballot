@@ -17,12 +17,12 @@
 			<p><%= t("guides.finest")%></p>
 		<% end -%>
 	</div>
-	
+
 	<% @guides.each do |stateAbv,guides| %>
 
 	<% guides = guides.group_by{ |g| g }.map{ |u| u[0][:rating] = u[1].map{ |r| r.feedback.rating }.sum; u[0] }.sort_by{ |u| -u.rating.to_i }.slice(0, @limit ) %>
 
-		
+
 	<div class="state-guides">
 		<div id="<%=  @states [ @stateAbvs.index( stateAbv )  ].gsub(' ','_') %>">
 			<%- if @guides.count != 1 %>
