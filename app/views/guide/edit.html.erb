@@ -40,7 +40,10 @@
           </div>
           <div class="states">
             <%= label_tag(:state, t('guide.block_state')) %>
-            <div class="input"><%= select_tag 'state' %></div>
+            <div class="input">
+              <%= select_tag 'state', options_for_select(Array(1..51).map{ |i| [Choice.states[i],Choice.stateAbvs[i]] } ) %>
+              <span style="display:none" class="loading">Loading...</span>
+            </div>
           </div>
           <div class="contest_select">
             <%= label_tag(:contest_id, t('guide.block_contest')) %>

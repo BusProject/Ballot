@@ -26,8 +26,6 @@ class GuideController < ApplicationController
     @classes = 'home'
     @user = current_user
     @blocks = Block.where(:guide_id => params[:id])
-    @choices = Choice.all()
-    @options = Option.all()
     @writeins = UserOption.all()
   end
 

@@ -66,10 +66,10 @@ class ChoiceController < ApplicationController
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil?
 
-    choices = params[:past] ? @user.choices.past :  @user.choices.future
+    choices = @user.choices
     more = ! params[:past] && !@user.choices.empty?
 
-    @choices = choices.uniq.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
+    @choices = choices.uniq.sort_by{ |choice| [ Choice.contest_type_order.index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
 
     if !current_user.nil? && current_user != @user
       @recommended = true
@@ -96,16 +96,24 @@ class ChoiceController < ApplicationController
 
   def state
 
-    @choices = Choice.find_by_state(params[:state], 50, params[:page] || 0 )
+    if request.method == 'POST'
+      @choices = Choice.find_by_state(params[:state], 500, 0 )
+    else
+      @choices = Choice.find_by_state(params[:state], 50, params[:page] || 0 )
+    end
 
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil?
 
     @choices = @choices.each{ |c| c.prep current_user }
 
     if params[:format] == 'json'
-      render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
+      if request.method == 'POST'
+        render :json => @choices.to_json( :only => [:contest, :id, :contest_type], :include => {:options => { :only => [ :name, :id]  } } )
+      else
+        render :json => @choices.to_json( Choice.to_json_conditions )
+      end
     else
-      @types = Choice.types_by_state( params[:state])
+      @types = Choice.types_by_state( params[:state] )
 
       @states = Choice.states
       @stateAbvs = Choice.stateAbvs

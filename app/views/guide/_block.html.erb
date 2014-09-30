@@ -29,36 +29,8 @@
   <% end %>
 
   contests = {};
-  <% contests = Hash.new %>
-  <% @choices.each do |contest| %>
-    <% contests[contest.id] = contest.contest %>
-    contests[<%= contest.id %>] = {};
-    contests[<%= contest.id %>]['id'] = <%= contest.id %>;
-    <% begin %>
-      <% if !contest.contest_type.nil? and contest.contest_type == 'Ballot_Statewide' %>
-        contests[<%= contest.id %>]['type'] = 'measure';
-      <% else %>
-        contests[<%= contest.id %>]['type'] = 'contest';
-      <% end %>
-    <% rescue Exception %> //trying to figure out what the fuck Heroku doesn't like
-      <%= contest.to_yaml %>
-    <% end %>
-    contests[<%= contest.id %>]['title'] = <%= false_if_blank_quote(contest.contest) %>;
-    contests[<%= contest.id %>]['state'] = <%= false_if_blank_quote(contest.geography[0,2]) %>;
-  <% end %>
 
   options = {};
-  <% options_hash = Hash.new %>
-  <% contests_options = Hash.new %>
-  <% @options.each do |option| %>
-    <% options_hash[option.id] = option.name %>
-    <% contests_options[option.id] = option.choice_id %>
-    options[<%= option.id %>] = {};
-    options[<%= option.id %>]['id'] = <%= option.id %>;
-    options[<%= option.id %>]['contest_id'] = <%= false_if_blank(option.choice_id) %>;
-    options[<%= option.id %>]['name'] = <%= false_if_blank_quote(option.name) %>;
-    options[<%= option.id %>]['blurb'] = <%= false_if_blank_quote(option.blurb) %>;
-  <% end %>
 </script>
 
 <%
