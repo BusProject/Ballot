@@ -14,6 +14,8 @@ function Choice(data,args) {
     this.contest = data.contest,
     this.type = data.contest_type
     this.description = data.description
+    this.fiscal_impact = data.fiscal_impact
+    this.description_source = data.description_source
     this.geography = data.geography
     this.nice_geography = data.nice_geography
     this.commentable = true

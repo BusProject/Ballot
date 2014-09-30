@@ -63,14 +63,10 @@
 
     if block.option_id.nil? and !block.user_option_id.nil?
       contest_name = contests_writeins[block.user_option_id]
-      #contest_name = block.user_option_id
       subtitle = user_option_ids[block.user_option_id]
-      #subtitle = block.user_option_id
     elsif !block.option_id.nil?
-      contest_name = contests[contests_options[block.option_id]]
-      #contest_name = block.option_id
-      subtitle = options_hash[block.option_id]
-      #subtitle = block.option_id
+      contest_name = block.option.choice.contest
+      subtitle = block.option.name
     elsif !block.title.nil?
       contest_name = block.title.html_safe
       subtitle = false

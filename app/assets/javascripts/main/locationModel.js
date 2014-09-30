@@ -146,7 +146,7 @@ function locationModel(data) {
 			geocoded = this.geocoded(),
 			geocoded_address = this.geocoded.address
 
-		if( address.length > 0 && !geocoded && address != geocoded_address() ) { // If address is located and not previously geocoded
+		if( address.length > 0 ) { // If address is located and not previously geocoded
 			geocoder.geocode( {address: address}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					var first = results[0].geometry.location
@@ -232,10 +232,10 @@ function locationModel(data) {
 				LA:  'Find your Polling Place by looking up your precinct<br />at the <a href="https://voterportal.sos.la.gov/voter.aspx" target="_blank">Lousiana Secretary of State<a/>.'
 				}
 
-		if( geolocated && state && fetch() && empty != lat+','+lng && this.address() != '' ) {
+		if( geolocated && state && fetch() && this.address() != '' ) {
 			fetch(false)
 
-			if( choices().length < 1 ) this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
+			if( choices().length < 1 ) this.getBallotChoices(choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
 			else fetch(true) // Not needed - used with the Lookup callback
 
 			// if( typeof noGoogle[ state ] == 'undefined' )  'whoops';// pollingPlace(
@@ -278,15 +278,12 @@ function locationModel(data) {
 	}, this)
 
 
-	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for
-		var state = yourLocation.address.state(),
-			address = state ? ['Prez',(state+yourLocation.address.city()), state, (state+yourLocation.address.county()+( state != 'LA' ? ' County' : ' Parish' ) ) ] : []
+	this.getBallotChoices = function(array,callback) { // Useful function for
 
-		// Doing the openState call, will probably want to build this into something else
 		$.post(
 			inits.root+'lookup',
 			{
-				address: yourLocation.remember() ? yourLocation.address() : ''
+				address: yourLocation.address(),
 			},
 			function(data) {
 				if( data != null && data.constructor == Array ) {

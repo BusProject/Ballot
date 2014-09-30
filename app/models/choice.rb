@@ -120,12 +120,12 @@ class Choice < ActiveRecord::Base
     raw = $pollvault.retrieve_by_address(address)
     pollvault_results = digest_pollvault raw
 
-    raw['districts'].each{ |d| d = raw['state']+d }.uniq!
+    raw['districts'].map!{ |d| raw['state']+d }
 
     return pollvault_results || all(
       :select => 'choices.* ',
       :include => [:options],
-      :order => 'contest_type IN(#{"\'"+contest_type_order.join("\',\'")+"\'"}) ASC',
+      :order => "contest_type IN(#{"\'"+contest_type_order.join("\',\'")+"\'"}) ASC",
       :conditions => ['geography IN(?)', raw['districts']],
     )
   end

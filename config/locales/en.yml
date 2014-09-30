@@ -189,6 +189,7 @@ en:
         next: 'Next Measure'
         open: 'Learn More and Comment'
         full_text: 'View full text '
+        read_more: 'Read More'
         yes: "I'm Voting Yes"
         no: "I'm Voting No"
         comment: 'What do you think?'

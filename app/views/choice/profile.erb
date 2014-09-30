@@ -5,7 +5,7 @@
 	<div id="profile" data-bind="with: current_user  " class="ballot-section">
                       <% if !is_mobile_device? %>
                               <!-- Primary Color -->
-                              <style type="text/css" data-bind="text: ko.toJS( primary ) != null && ko.toJS( primary ) != '' ? 
+                              <style type="text/css" data-bind="text: ko.toJS( primary ) != null && ko.toJS( primary ) != '' ?
                               '.sectionheading h1 { color:'+ ko.toJS( primary )+' !important;}'
                               : ''
                               ">.sectionheading h1 { color: <%= @user.primary %>!important;}
@@ -23,7 +23,7 @@
                               <% end -%>
                               </style>
                               <!-- BG Color -->
-                              <style type="text/css" data-bind="text: ko.toJS( bg ) != null && ko.toJS( bg ) != '' ? 
+                              <style type="text/css" data-bind="text: ko.toJS( bg ) != null && ko.toJS( bg ) != '' ?
                               'body { background:'+ko.toJS( bg )+' !important; background-image: none; }'
                               : ''
                               ">body { background:  <%= @user.bg %> !important; background-image: none; }
@@ -67,14 +67,14 @@
 				</div>
 			</div>
 
-	
-			
+
+
 
 			<script type="text/javascript">
 				current_user.guide_name = ko.observable(current_user.guide_name )
 				current_user.description = ko.observable(current_user.description)
 
-				var _tmp = current_user.profile.replace('/','') 
+				var _tmp = current_user.profile.replace('/','')
 
 				current_user.profile = ko.observable( current_user.profile.replace('/','') != current_user.url.replace('/','') ? current_user.profile.replace('/','') : '')
 				current_user.profile.store = ko.observable( _tmp )
@@ -112,9 +112,9 @@
 				current_user.primary = ko.observable( '<%= @user.primary %>')
 				current_user.secondary = ko.observable( '<%= @user.secondary %>')
 				current_user.bg = ko.observable( '<%= @user.bg %>')
-				
+
 				current_user.edit = ko.observable(false)
-				current_user.open = function() { 
+				current_user.open = function() {
 					current_user.edit(true);
 					current_user.__guide_name = current_user.guide_name();
 					current_user.__description = current_user.description();
@@ -122,7 +122,7 @@
 					current_user.__primary = current_user.primary()
 					current_user.__secondary = current_user.secondary()
 					current_user.__bg = current_user.bg()
-					
+
 					$('input.primary').colorpicker().on('changeColor', function(ev){
 					  current_user.primary( ev.color.toHex() );
 					}).on('hide',function() {
@@ -159,16 +159,16 @@
 					current_user.bg( current_user.__bg );
 					current_user.__bg = null;
 				}
-				current_user.save = function() { 
+				current_user.save = function() {
 					var profile = current_user.profile().replace(/\//g,'') != current_user.url ? current_user.profile().replace(/\//g,'') : ''
-					
+
 					if( !current_user.profile.available() && profile != current_user.profile.store() &&  profile != '' ) {
 						return false
 						$('input.profile').focus()
 					}
 					current_user.profile.store( current_user.profile() );
 					current_user.profile.available(null);
-					
+
 
 					current_user.edit(false);
 					current_user.__guide_name = null;
@@ -176,7 +176,7 @@
 					current_user.__bg = null;
 					current_user.__primary = null;
 					current_user.__secondary = null;
-					$.post( inits.root+'users/update', { description:  current_user.description(), guide_name:  current_user.guide_name(), primary:  current_user.primary(), secondary:  current_user.secondary(), bg:  current_user.bg(), profile:  profile }, function(r) { 
+					$.post( inits.root+'users/update', { description:  current_user.description(), guide_name:  current_user.guide_name(), primary:  current_user.primary(), secondary:  current_user.secondary(), bg:  current_user.bg(), profile:  profile }, function(r) {
 						if( r.success && '/'+current_user.profile() != document.location.pathname ) {
 							var stateObj = {};
 							if( profile == '' ) {
@@ -196,14 +196,14 @@
 					if( title != null && title.trim().length > 0 )document.title = 'The Ballot | '+title
 				},current_user)
 
-				$(document).ready( function() { 
-					ko.applyBindings( current_user, document.getElementById("profile")); 
+				$(document).ready( function() {
+					ko.applyBindings( current_user, document.getElementById("profile"));
 					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>'); $(this).parent().after('<em>Problem loading your header. Should be back soon. If this persists - reupload.</em>') });
 					$('#profile_search').betterAutocomplete( '/search?filter=offices', function( event, ui ) { document.location = ui.item.url }, 2,  'top-search')
 				}).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
 					$('.edit_user .loading').hide()
 					// Only when it's remotipart. There's probably a better way to do this but I can't figure it out now
-					if( typeof ajaxOptions.data != 'undefined' && typeof ajaxOptions.data[2] != 'undefined' && ajaxOptions.data[2].name == "remotipart_submitted" && XMLHttpRequest.readyState == 4) { 
+					if( typeof ajaxOptions.data != 'undefined' && typeof ajaxOptions.data[2] != 'undefined' && ajaxOptions.data[2].name == "remotipart_submitted" && XMLHttpRequest.readyState == 4) {
 						var data = JSON.parse(XMLHttpRequest.responseText)
 						if( data.success ) {
 							current_user.header( data.header )
@@ -226,7 +226,7 @@
 			<script type="text/javascript" charset="utf-8">
 				$(document).ready( function() {
 					current_user = inits.user
-					ko.applyBindings( current_user, document.getElementById("profile")); 
+					ko.applyBindings( current_user, document.getElementById("profile"));
 					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>') });
 				})
 			</script>
@@ -236,12 +236,12 @@
 				<% else %>
 					<span class="link helpful" onclick="
 						$(this).removeClass('link').text('Sweet - thanks')
-						$.post( document.location.toString(), {access_token: current_user.auth_token},function(response){}) 
+						$.post( document.location.toString(), {access_token: current_user.auth_token},function(response){})
 					"><i class="icon-heart"></i> <%= t('profile.recommend') %></span>
 				<% end %>
-				<span class="divide">|</span> 
+				<span class="divide">|</span>
 				<span class="link flag" onclick="$(this).hide().next().show()"><i class="icon-flag"></i> <%= t('profile.flag')%></span>
-				<p style="display: none;" class="flag"><%= t('site.flag_prompt') %> <span class="link" onclick=" 
+				<p style="display: none;" class="flag"><%= t('site.flag_prompt') %> <span class="link" onclick="
 					$(this).parent().text('Flagged - thanks');
 					yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.featured().id+'/flag',function(response){}) } )
 				"><%= t('site.yes') %></span> </p>
@@ -267,16 +267,16 @@
                   <%= guide.name %>
               <% end %>
                 <p style="font-size: 12px;">
-                  <%= link_to t('guide.show'), guide_show_path({:id => guide.slug}) %> 
+                  <%= link_to t('guide.show'), guide_show_path({:id => guide.slug}) %>
                   <% if current_user == @user %>
                     | <%= link_to t('guide.edit'), guide_edit_path(guide) %>
-                    | <%= link_to t('guide.delete'), guide_delete_path(guide), :method => :post, :confirm => t('guide.delete_confirm') %> 
+                    | <%= link_to t('guide.delete'), guide_delete_path(guide), :method => :post, :confirm => t('guide.delete_confirm') %>
                   <% end %>
                 </p>
             </div>
             <br><br>
           <% end %>
-          <br><br><%= link_to(t("guide.add"), guide_create_path, :class => 'button', :method => :post) %> 
+          <br><br><%= link_to(t("guide.add"), guide_create_path, :class => 'button', :method => :post) %>
         </div>
 
 <!-- /ko -->

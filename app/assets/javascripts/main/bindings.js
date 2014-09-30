@@ -121,7 +121,6 @@ $(document).on('click touchend','#find-ballot .cancel',function(e) { // binding 
 	else $(this).parents('.ballot-category').next('.ballot-category:first').find('button.open:first').click()
 })
 .on('click ','button.submit',function(e){
-  alert('thisshit');
 	e.preventDefault()
 	var $this = $(this), $parent = $this.parents('.yourFeedback')
 	if( current_user.id == 'unauthenticated' ) {
@@ -369,7 +368,7 @@ ko.bindingHandlers.betterText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 		var bindings =  allBindingsAccessor(),
 			bind = bindings['betterText']
-		element.innerHTML = ko.toJS( bind ).replace(/\n/g,'<br /><br />')
+		element.innerHTML = (ko.toJS( bind ) || '').replace(/\n/g,'<br /><br />')
     }
 };
 

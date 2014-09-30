@@ -32,7 +32,7 @@
 		<div itemscope itemprop="itemListElement" itemtype="http://data-vocabulary.org/Person" class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" data-bind="css: {chooseable: $data.featured().length < votes && current_user.id != 'unauthenticated' }">
 			<!-- ko foreach: $data.options -->
 				<div class="<%= 'chosen confirmed' if you == option %> option " data-bind="css:{ chosen: $parent.chosen() == $data, confirmed: $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 }" >
-
+					<img src="<%= option.photo %>" data-bind="src: $data.photo">
 					<% if is_mobile_device? %>
 						<input class="mobile-checkbox" type="checkbox" data-bind="checked: $parent.chosen() == $data || $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0, disable: ! $parent.featured().length < $parent.votes ">
 					<% end %>

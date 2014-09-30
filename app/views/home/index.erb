@@ -4,16 +4,16 @@
 			<h1 class="sectionheading"><%= t("front.look_ballot")%></h1>
 
 		<div id="enter-address">
-		
+
 			<div>
 				<input mnkeypress="$('.place-holder').hide()" data-bind="value: address" spellcheck="false" type="text" class="find-ballot" placeholder="<%= t('front.address_placeholder') %>">
 				<!--[if IE]><label onclick="$('.find-ballot').focus()" unselectable="on" class="place-holder" style="display: none;" data-bind="visible: address() != null && address().length == 0"><%= t('front.address_placeholder') %></label><![endif]-->
 				<a href="#" class="cancel find-ballot-submit"><%= t('site.submit')%></a>
 			</div>
 			<span class="remember link " data-bind="click: function( $data ) {  var member = $data.remember(); $data.remember( !member ); }, css: { on: remember }"  ><%= t('front.save_address') %></span>
-		
+
 		</div><!-- enter address -->
-			
+
 		<div id="map"  data-bind="css: { noGuides: true || guides().length < 1 && geolocated() }">
 			<img data-bind="attr: { 'src' : map }, css: { located: geolocated() }" >
 			<!-- <div style="display:none" class="top-guides" data-bind=" visible: geolocated() ">
@@ -34,7 +34,7 @@
 
 	</div><!-- find-ballot -->
 
-	
+
 	<div id="read-ballot" style="display:none"  class="ballot-section" data-bind="visible: choices.notEmpty() " >
 		<h1 class="sectionheading"><%= t('front.on_ballot') %></h1>
 
@@ -47,7 +47,7 @@
 				<div class="candidates" data-bind="template: { name: $data.template, foreach: $data.contests }"></div>
 			</div>
 		<!-- /ko -->
-		
+
 	</div><!-- read-ballot -->
 	<h1 class="sectionheading" style="display:none; clear: both;" data-bind="visible: !fetch() "><%= t('site.loading') %></h1>
 	<div id="more-coming" style="display:none;" class="ballot-section" data-bind="visible: geolocated() && fetch()" >
@@ -60,7 +60,7 @@
 			<a href="<%= user_add_choice_path('candidate') %>"><button ><%= t('add_form.add_candidate')%></button></a>
 			<a href="<%= user_add_choice_path('measure') %>"><button ><%= t('add_form.add_measure')%></button></a><br /><br /><br />
 		</div>
-		
+
 		<!-- <h1><%= t('front.more')%></h1>
 		<br />
 		<p><%= t('front.more_text')%><span data-bind="text: address.state() ? ' <%= t('site.for') %> '+yourLocation.constructor.prototype.states[ yourLocation.constructor.prototype.abvs.indexOf( address.state() ) ]  : '' "></span>.</p>
@@ -73,7 +73,7 @@
                                   <a href=""><button ><%= t('top.login')%></button></a><br /><br /><br />
 				</a>
 			<% else %>
-				<button style="display:none;" class="alerts" 
+				<button style="display:none;" class="alerts"
 					data-bind="visible: (current_user.alerts == null ? '' : current_user.alerts).search( address.state() ) === -1"
 					onclick="$(this).hide().next().show(); current_user.alerts += yourLocation.address.state()+','; $.post(inits.root+'users/update',{alerts: yourLocation.address.state() } ); ">Update Me When There's More Data</button>
 				<strong style="display:none;" data-bind="visible: current_user.alerts != null && current_user.alerts.search( address.state() ) !== -1 ">You'll get an email when there's more data</strong>

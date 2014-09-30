@@ -49,7 +49,5 @@ module Ballot
     config.app_generators.stylesheet_engine :less
 
     config.i18n.enforce_available_locales = true
-
-
   end
 end
