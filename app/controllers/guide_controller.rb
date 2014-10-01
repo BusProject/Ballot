@@ -14,8 +14,7 @@ class GuideController < ApplicationController
       redirect_to :back
     end
     @user = current_user
-    @blocks = Block.where(:guide_id => @guide.id)
-    #@blocks = @blocks.order(:order)
+    @blocks = Block.where(:guide_id => @guide.id).order('"order"')
     @choices = Choice.all()
     @options = Option.all()
     @writeins = UserOption.all()
@@ -27,7 +26,7 @@ class GuideController < ApplicationController
     @guide = Guide.find(params[:id])
     @classes = 'home'
     @user = current_user
-    @blocks = Block.where(:guide_id => params[:id])
+    @blocks = Block.where(:guide_id => params[:id]).order('"order"')
     @writeins = UserOption.all()
     @config = {:state => 'off'}.to_json
     render :template => 'guide/edit.html'

@@ -1,60 +1,4 @@
 <%
-  def false_if_blank(obj)
-    if obj.nil? || !obj
-      return false
-    end
-    return obj
-  end
-
-  def zero_if_blank(obj)
-    if obj.nil? || !obj
-      return 0
-    end
-    return obj
-  end
-
-  def false_if_blank_quote(obj)
-    if obj.nil? || !obj
-      return false
-    end
-    return ('"' + obj.to_s.gsub('"', '\"') + '"').html_safe
-  end
-%>
-
-<script>
-  blocks = {};
-  <% @blocks.each do |block| %>
-    blocks[<%= block.id %>] = {};
-    blocks[<%= block.id %>]['id'] = <%= block.id %>;
-    blocks[<%= block.id %>]['guide_id'] = <%= false_if_blank(block.guide_id) %>;
-    blocks[<%= block.id %>]['option_id'] = <%= false_if_blank(block.option_id) %>;
-    blocks[<%= block.id %>]['user_option_id'] = <%= false_if_blank(block.user_option_id) %>;
-    blocks[<%= block.id %>]['title'] = <%= false_if_blank_quote(block.title) %>;
-    blocks[<%= block.id %>]['order'] = <%= zero_if_blank(block.order) %>;
-    blocks[<%= block.id %>]['content'] = <%= false_if_blank_quote(block.content) %>;
-    blocks[<%= block.id %>]['order'] = <%= false_if_blank_quote(block.order) %>;
-    blocks[<%= block.id %>]['full_size'] = <%= false_if_blank(block.full_size) %>;
-  <% end %>
-
-  contests = {};
-
-  options = {};
-</script>
-
-<%
-  user_option_ids = Hash.new
-  contests_writeins = Hash.new
-  @writeins.each do |writein|
-    user_option_ids[writein.id] = writein.name
-    contests_writeins[writein.id] = contests[writein.choice_id]
-  end
-
-  blocks = Hash.new
-  @blocks.each do |block|
-    blocks[block.order.to_s + '.' + block.id.to_s] = block
-  end
-  blocks = blocks.sort
-
   @blocks.each do |block|
     halfwidth = ''
     if !block.full_size.nil? and !block.full_size
@@ -86,6 +30,7 @@
 
         <% if controls %>
           <p style="font-size: 12px;">
+            Order #<%= block.order %> | 
             <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
             <% if !block.full_size.nil? and !block.full_size %>
               <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %> | 
