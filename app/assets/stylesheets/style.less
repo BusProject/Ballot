@@ -9,15 +9,15 @@
 
 
 /********* Structure *********/
-body.home { 
-        background: #b2bfc8 image-url('new-bg.jpg') no-repeat fixed; 
-        -moz-background-size: cover; 
-        background-size: cover; 
+body.home {
+        background: #b2bfc8 image-url('new-bg.jpg') no-repeat fixed;
+        -moz-background-size: cover;
+        background-size: cover;
         background-position: 0 0;
 }
 
 
-#page { 
+#page {
         background-color:@bgGrey;
         /*background: transparent image-url('pageBG.png') top left repeat;*/
         border-right: 1px solid @darkGrey;
@@ -31,7 +31,7 @@ body.home {
         background-color:@bgGrey;
         color:white;
         width:960px;
-        
+
         hr {
                 width: 70%;
                 border: 1px dashed @accent;
@@ -45,13 +45,13 @@ body.home {
                 line-height:13px;
                 color:@darkGrey;
         }
-        
+
         a {
                 font-size:11px;
                 color:@accent;
                 &.state { margin-right:10px; }
         }
-        
+
 }
 
 .clearfix:after {
@@ -62,7 +62,7 @@ body.home {
         line-height: 0;
         height: 0;
 }
- 
+
 .clearfix {
         display: block;
 }
@@ -79,7 +79,7 @@ body.home {
 .ballot-section {
         width: 720px;
         margin: 40px auto 20px;
-        
+
         .sectionheading {
                 text-align:center;
                 padding:15px 0px;
@@ -92,7 +92,7 @@ body.home {
                 width:95%;
                 margin:0 auto;
                 position:relative;
-                
+
                         &:before {
                                 content:"\f0d7";
                                 font-family:"FontAwesome";
@@ -102,14 +102,14 @@ body.home {
                                 left: 50%;
                         }
                 p { color: white; }
-                
+
         }
-        
+
         .category-heading {
-                h2 { 
-                        color: @darkGrey; 
-                        width: 100%; 
-                        margin: 10px auto 0; 
+                h2 {
+                        color: @darkGrey;
+                        width: 100%;
+                        margin: 10px auto 0;
                         padding:10px 0px;
                         font-family:"Arvo";
                         .inset-text();
@@ -119,35 +119,35 @@ body.home {
                                 font-family:"FontAwesome";
                                 font-size:80%;
                         }
-                        
+
                         &:after {
                                 content: "\f005";
                                 margin-left: 4px;
                                 font-family:"FontAwesome";
                                 font-size:80%;
-                                
+
                         }
                 }
-                
-                p { 
+
+                p {
                         color: @darkGrey;
                 }
-                
+
                 text-align: center;
                 padding-bottom: 0px;
                 margin: 0 0 10px;
                 font-family:"Arvo";
                 border-radius:10px 10px 10px 10px;
-                
-                
+
+
         }
-        
+
 }
 
-#find-ballot { 
-        .stars { 
+#find-ballot {
+        .stars {
                 display:none;
-                .move-stars(100px); 
+                .move-stars(100px);
         }
         #enter-address {
                 .place-holder {
@@ -176,7 +176,7 @@ body.home {
                         .border-box;
                         .placeholder(@accent);
                         .inner-shadow();
-                        
+
                 }
                 a.find-ballot-submit {
                         .greenButton();
@@ -188,32 +188,32 @@ body.home {
                         position: relative;
                         top: -3px;
                 }
-                
+
                 .remember {
                         margin:0 0 20px 50px;
                         display:block;
                         text-align:left;
                         font-size:12px;
                         color:lighten(@darkGrey,20%);
-                        
+
                         &:before {
                                 content: "\f006  ";
                                 font-family:"FontAwesome";
-                                
+
                         }
-                        
+
                         &.on {
                                 color:@darkGrey;
                                 &:before  {
                                         content: "\f005  ";
                                         font-family:"FontAwesome";
-                                        
+
                                 }
                         }
-                         
+
                 }
-                
-                
+
+
         }
 
         #map {
@@ -245,19 +245,19 @@ body.home {
                         margin: 0 auto;
                         border:1px solid @accent;
                 }
-                
+
                 .top-guides {
                         h3 {
                                 text-align:left;
                         }
-                        
+
                         ol {
                                 text-align:left;
                                 list-style-type:decimal;
                                 li { line-height: 1.4em; }
                                 a {
-                                        
-                                }       
+
+                                }
                         }
                 }
                 .polling-place {
@@ -278,8 +278,8 @@ body.home {
                         .top-guides { display: none; }
                         img { float: none }
                 }
-        
-        
+
+
         }
 }
 
@@ -304,7 +304,7 @@ body.home {
                         .inset-text();
                         line-height: 1.2em;
                 }
-                hr { 
+                hr {
                         color: @darkGrey;
                         height:1px;
                         .box-shadow(0, 1px,1px,@grey);
@@ -327,40 +327,40 @@ body.home {
                         width:80%;
                         margin:0 auto;
                         line-height:20px;
-                }       
+                }
                 .matchup {
                         font-weight:600;
                         margin-top:10px;
-                        
-                        i { 
-                                display:inline-block; 
+
+                        i {
+                                display:inline-block;
                                 margin:0 10px 0 0;
                                 color: @grey;
                         }
-                        
+
                 }
                 .geography {
                         font-weight:600;
                         margin:6px 0 6px 0;
-                                        
-                        i { 
-                                display:inline-block; 
+
+                        i {
+                                display:inline-block;
                                 margin:0 10px 0 0;
                                 color: @grey;
                         }
-                        
+
                 }
                 .voted {
                         font-weight:300;
                         font-size:12px;
                         margin:20px 0 10px 0;
-                        
-                        i { 
-                                display:inline-block; 
+
+                        i {
+                                display:inline-block;
                                 margin:0 10px 0 0;
                                 color: @grey;
                         }
-                        
+
                 }
 
                 &.selected button.open {
@@ -383,11 +383,11 @@ body.home {
                         margin: -30px 0 0;
                         position: relative;
                         z-index: 1;
-                        &.lower { 
-                                display:none;                   
+                        &.lower {
+                                display:none;
                         }
                 }
-                
+
                 .body {
                         background: #E4E4E4;
                         margin: 10px auto;
@@ -402,8 +402,8 @@ body.home {
                                         .border-box;
                                         position: relative;
                                         color: @darkGrey;
-                                        .blurb { 
-                                                text-align: left; 
+                                        .blurb {
+                                                text-align: left;
                                                 font-weight:300;
                                                 line-height:20px;
                                         }
@@ -420,8 +420,10 @@ body.home {
                                         }
                                         img {
                                                 float:left;
-                                                margin: 0 4% 4% 0;
-                                                max-width: 36.6666667%;
+                                                max-height: 60px;
+                                                margin-right: 10px;
+                                                max-width: 60px;
+                                                border-radius: 60px;
                                         }
                                         .minicounter {
                                                         float: left;
@@ -447,7 +449,7 @@ body.home {
                                                         overflow: hidden;
                                                         height: 31px;
                                                         position: relative;
-                                                        font-size: 11px; 
+                                                        font-size: 11px;
                                                         line-height: 13px;
                                                         .ellipsisWrap();
                                                 }
@@ -522,14 +524,14 @@ body.home {
                                         text-align: left;
                                         text-transform: normal;
                                 }
-                                h2 { 
+                                h2 {
                                         font-size: 24px;
                                         margin: 10px 0 4px;
                                         text-transform: none;
                                         letter-spacing: 0;
                                 }
                                 p { color: @darkGrey;
-                                        font-weight:300; 
+                                        font-weight:300;
                                 }
                                 h1, h3 {
                                         text-align: center;
@@ -541,54 +543,43 @@ body.home {
                                         &.yes { color: @green; }
                                         &.no { color: @red; }
                                 }
-                                .head { 
-                                        display: block; 
-                                        margin: 20px auto 22px; 
+                                .head {
+                                        display: block;
+                                        margin: 20px auto 22px;
                                         .border-radius();
-                                        .head-image(); 
+                                        .head-image();
                                         height:90px;
-                                        
+
                                         &::after {
                                                 padding:10px 0;
                                         }
-                                        
-                                                
-                                }
-                                .meme {
-                                        display:block;
-                                        .orangeButton();
-                                        margin:10px auto;
-                                        min-width:145px;
-                                        
-                                        &::after {
-                                                content:'  \f03e';
-                                                font-family:"FontAwesome";
-                                        }
+
+
                                 }
                                 .next {
                                         display: block;
                                         margin:10px auto;
                                         .greyButton();
                                         min-width:145px;
-                                        
+
                                         &::after {
                                                 content:'   \f04e';
                                                 font-family:"FontAwesome";
-                                        }                       
-                                                
+                                        }
+
                                         &.last-child { display: none; }
                                 }
-                                .controls { 
+                                .controls {
                                         text-align:right;
-                                        
+
                                         span {
-                                                text-align: right !important; 
-                                                color: @grey; 
+                                                text-align: right !important;
+                                                color: @grey;
                                                 font-size: 10px;
-                                                
+
                                                 &:hover { color: white; }
-                                         }                      
-                                        
+                                         }
+
                                 }
 
                                 &.login {
@@ -603,19 +594,19 @@ body.home {
                                         p { margin: 10px 0; }
                                 }
                         }
-                        
+
                                         .commentTitle {
                                                 text-align: left;
                                                 margin: 0 15px 30px;
                                                 padding: 20px 0 40px;
-                                                
+
                                                 h2 {
                                                         font-size: 24px;
                                                         text-transform: none;
                                                         letter-spacing: 0;
                                                         float:left;
                                                 }
-                                                
+
                                                 select {
                                                         float: right;
                                                         width:200px;
@@ -633,10 +624,10 @@ body.home {
                                                         resize: none;
                                                         outline:none;
                                                         padding:10px;
-                                                        
-                                                                                                        
+
+
                                                 }
-                                                
+
                                                 .arrows {
                                                         float: right;
                                                         position: relative;
@@ -650,8 +641,8 @@ body.home {
                                                         border-radius:0px 3px 3px 0px;
                                                         border:1px solid @darkGreen;
                                                         .drop-shadow();
-                                                
-                                                        
+
+
                                         }
                                         }
 
@@ -662,7 +653,7 @@ body.home {
                                                         text-align: left;
                                                         clear: both;
                                                         a:hover { text-decoration: underline; }
-                                                        
+
                                                         strong {
                                                                 font-weight:600;
                                                         }
@@ -671,12 +662,12 @@ body.home {
                                                         float: left;
                                                         .head-image(50px);
                                                         margin: 10px 30px 0px 0;
-                                                        
+
                                                         img { .border-radius() !important; }
-                                                
+
                                                         &&::after { display:none; }
                                                 }
-                                                
+
                                                 .comment-bubble {
                                                         background-color:white;
                                                         padding:10px;
@@ -685,7 +676,7 @@ body.home {
                                                         margin-bottom:10px;
                                                         .border-radius();
                                                         .drop-shadow();
-                                                        
+
                                                                 &::before {
                                                                         content: '';
                                                                         float: left;
@@ -699,18 +690,18 @@ body.home {
                                                                         border-bottom:20px solid transparent;
                                                                         border-left:20px solid transparent;
                                                                 }
-                                                                
+
                                                                 &.yes {
                                                                         strong { color:@green; }
                                                                 }
-                                                                
+
                                                                 &.no {
                                                                         strong { color: @red; }
                                                                 }
-                                                        
+
                                                 }
-                                                
-                                                .message { 
+
+                                                .message {
                                                         height: auto;
                                                         vertical-align: top;
                                                         color: #464646;
@@ -719,7 +710,7 @@ body.home {
                                                         font-size:14px;
                                                         word-wrap: break-word;
                                                 }
-                                                .foot { 
+                                                .foot {
                                                         float: right;
                                                         text-align: right;
                                                         width: 100%;
@@ -727,7 +718,7 @@ body.home {
                                                         margin: 0px 0px 20px;
                                                         padding:0px 0px 10px;
                                                         color: @grey;
-                                                        .ask { 
+                                                        .ask {
                                                                 color: @grey;
                                                                 padding-right: 4px;
                                                                 width: 100%;
@@ -735,7 +726,7 @@ body.home {
                                                                 margin: 4px 0;
                                                                 text-align: right;
                                                         }
-                                                        a, .link { 
+                                                        a, .link {
                                                                 color: @brightOrange;
                                                                 &:hover { color: @darkOrange; }
                                                         }
@@ -775,7 +766,7 @@ body.home {
                                 font-size: 40px;
                                 color: @green;
                                 position: absolute;
-                        }                       
+                        }
                         .optionholder {
                                 max-height: @optionHeight*2.5;
                                 overflow-y: auto;
@@ -786,7 +777,7 @@ body.home {
                                                         .checkBox()
                                         }
                                         height: auto;
-                                        &.confirmed { 
+                                        &.confirmed {
                                                 cursor: default;
                                                 background-color: @green;
                                                 margin-top:10px;
@@ -800,9 +791,9 @@ body.home {
                                         width: 560px;
                                         .border-box();
                                         position: relative;
-                                        .bigger { 
+                                        .bigger {
                                             width: 250px;
-                                                font-size: 1em; 
+                                                font-size: 1em;
                                         }
                                         .smaller a {
                                                 &:link, &:hover, &:active, &:visited {
@@ -867,11 +858,11 @@ body.home {
                         .buttons { text-align: center }
                         .yourFeedback {
                                 border-top: none !important;
-                                h1 { 
+                                h1 {
                                         color: @green;
                                         font-size:24px;
-                                        width:100%; 
-                                                                        
+                                        width:100%;
+
                                         &::before {
                                                 content: '\f087   ';
                                                 font-family:'FontAwesome';
@@ -883,7 +874,7 @@ body.home {
                                         color:@darkGrey;
                                         text-align:left;
                                 }
-                                
+
                                 .comment-details {
                                         font-size:14px !important;
                                         color:@grey;
@@ -898,14 +889,14 @@ body.home {
                                         margin-top: 40px;
                                         padding: 0 0 100px 34px;
                                         float:left;
-                                        
-                                        h1 { 
+
+                                        h1 {
                                                 .inset-text();
                                                 text-align:center !important;
                                                 font-family:'Arvo', serif !important;
-                                                color: @red; 
+                                                color: @red;
                                                 font-size: 24px !important;
-                                                &.yes { color: @green; } 
+                                                &.yes { color: @green; }
                                         }
 
                                         &:first-child {
@@ -921,10 +912,10 @@ body.home {
                                                 color: @grey;
                                                 &::after { border-color: transparent transparent transparent white; }
                                         }
-                                        .faces { bottom: 30px; }
+                                        .faces { margin-top: 30px; }
                                 }
                                 .clearfix();
-                                
+
                         }
                         .full-text {
                                 color: @grey;
@@ -937,13 +928,13 @@ body.home {
                         }
 
                         .yourFeedback {
-                                
+
                                 span {
                                         font-size:16px;
                                         color:@darkGrey;
                                         text-align:left;
                                 }
-                                
+
                                 .toggle {
                                         .no-select();
                                         cursor: pointer;
@@ -998,25 +989,25 @@ body.home {
                                         &:hover { .cover { right: -2px; } }
                                 }
                                 .buttons {
-                                        button { 
+                                        button {
                                                 float: none;
                                                 margin: 0 auto !important;
-                                                display:block; 
+                                                display:block;
                                         }
                                 }
 
                                 h1 {
-                                        
+
                                         &.yes { color: @green; }
                                         &.no { color: @red; }
                                 }
-                                
+
                                 h3.comment-details {
                                         color:@grey !important;
                                         font-size:14px !important;
                                         text-align:center !important;
                                 }
-                                
+
                                 .comment-details {
                                         font-size:16px !important;
                                         font-weight:300;
@@ -1033,18 +1024,18 @@ body.home {
         .drop-shadow();
         width:66%;
         padding:10px;
-        
+
         p {
                 color:white;
         }
-        
+
         input#profile_search {
                 width: 400px;
                 margin: 20px 0;
                 font-size: 18px;
         }
-        
-        button { 
+
+        button {
                 .orangeButton();
                 font-size: 16px;
                 padding: 10px 20px;
@@ -1061,8 +1052,6 @@ body.home {
         }
 }
 
-/** Meme Styling **/
-@import 'less/meme.less';
 /** Splash Styling **/
 @import 'less/splash.less';
 /** Nonsplash Styling **/

@@ -6,7 +6,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
 //= require i18n
 //= require i18n/translations
 //= require knockout-latest.debug
@@ -57,7 +56,7 @@ window.onload = function() {
     submitFlag = true;
     return false;
   });
-  $('.lightbox').colorbox({height: '452px', width: '800px', scrolling: false, closeButton: false});
+  $('.lightbox').colorbox({height: '452px', width: '800px', scrolling: false, closeButton: false, onOpen: function() { $('#instructions-box').hide() }, onClose: function() { $('#instructions-box').Show() }});
 }
 
 function previewImportFile(e, type, submitFlag){

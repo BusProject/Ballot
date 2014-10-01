@@ -7,14 +7,14 @@
 
 <a data-bind="attr:{name:$data.contest+' '+$data.geography}"></a>
 
-<div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>" 
+<div class="candidate row <%= 'selected' unless choice.new_record? %> <%= 'commentable ' if choice.commentable? %>"
 	data-bind="css: { selected: $root.selected() == $data, complete: $data.you(), commentable: $data.commentable, multi: votes > 1 }"
 	itemscope itemtype="http://shema.org/ItemList" >
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div itemprop="description" class="matchup" data-bind="html: '<i class=icon-user></i> ' +$data.description "><%= choice.description %></div>
 	<div itemprop="address" class="geography" data-bind="html: '<i class=icon-map-marker></i> ' +$data.nice_geography "><%= choice[:nice_geography] %></div>
 	<div itemprop="" class="voted" data-bind="html: '<i class=icon-comments-alt></i> ' + I18n.t( 'site.voted', { count: $data.voted() })+ ' | ' +I18n.t('site.commented', { count: $data.commented() }) " >
-		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.group_by{ |f| f.user_id }.count } ) %> | <%= t('site.commented', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.group_by{ |f| f.user_id }.count } ) %> 
+		<i class=icon-comments-alt></i> <%= t('site.voted', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.group_by{ |f| f.user_id }.count } ) %> | <%= t('site.commented', { :count => choice.feedback.reject{ |f| f.comment.nil? || f.comment.empty? }.group_by{ |f| f.user_id }.count } ) %>
 	</div>
 
 	<meta itemprop="url" content="<%= choice.to_url%>" />
@@ -27,12 +27,12 @@
 		<% n = 0 %>
 		<meta itemprop="itemListOrder" content="Unordered" />
 		<meta itemprop="additionalType" content="http://data-vocabulary.org/Person" />
-	  
+
 		<% choice.options.sort_by{ |o| o.id == you.option_id ? -1 : 1 unless you.nil? }.each do |option| %>
 		<div itemscope itemprop="itemListElement" itemtype="http://data-vocabulary.org/Person" class="optionholder <%= 'clean-no-script' if n != 0 %> <%= 'chosen confirmed' if you == option %>" data-bind="css: {chooseable: $data.featured().length < votes && current_user.id != 'unauthenticated' }">
 			<!-- ko foreach: $data.options -->
 				<div class="<%= 'chosen confirmed' if you == option %> option " data-bind="css:{ chosen: $parent.chosen() == $data, confirmed: $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0 }" >
-					
+					<img src="<%= option.photo %>" data-bind="src: $data.photo">
 					<% if is_mobile_device? %>
 						<input class="mobile-checkbox" type="checkbox" data-bind="checked: $parent.chosen() == $data || $parent.featured().filter( function(el) { return el.option_id == $data.id } ).length > 0, disable: ! $parent.featured().length < $parent.votes ">
 					<% end %>
@@ -90,7 +90,7 @@
 					</select>
 					<div class="arrows">&#x25B2;<br />&#x25BC;</div>
 				</div>
-			
+
 				<ul data-bind="foreach: feedback.everyone" class="feedback">
 					<li data-bind="addClass: $data.type ">
 
@@ -136,4 +136,8 @@
 		<% end %>
 
 	</div>
+	<%- if !current_user.nil? && current_user.admin?  %>
+		<strong>Admin Only</strong>
+		<a href="<% choice_edit_path(choice.id) if !choice.id.nil? %>" target="_blank" data-bind="href: '/admin/choice/'+$data.id">Edit Contest</a>
+	<% end -%>
 </div>

@@ -7,7 +7,7 @@ class GuideController < ApplicationController
   def show
     @guide = Guide.find_by_slug( params[:id].downcase )
     @classes = 'home'
-    raise ActionController::RoutingError.new('Could not find that guide') if @guide.nil? 
+    raise ActionController::RoutingError.new('Could not find that guide') if @guide.nil?
 
     if !@guide.publish and @guide.user_id != current_user.id
       flash[:notice] = t('guide.not_published')
@@ -19,6 +19,7 @@ class GuideController < ApplicationController
     @choices = Choice.all()
     @options = Option.all()
     @writeins = UserOption.all()
+    render :template => 'guide/show.html'
   end
 
   # GET /guides/1/edit
@@ -27,10 +28,9 @@ class GuideController < ApplicationController
     @classes = 'home'
     @user = current_user
     @blocks = Block.where(:guide_id => params[:id])
-    #@blocks = @blocks.order(:order)
-    @choices = Choice.all()
-    @options = Option.all()
     @writeins = UserOption.all()
+    @config = {:state => 'off'}.to_json
+    render :template => 'guide/edit.html'
   end
 
   # POST /guides

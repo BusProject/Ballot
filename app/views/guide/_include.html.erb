@@ -13,8 +13,8 @@
       #guide input[type="text"], #guide select, #guide textarea {width: 60%; font-size: 16px; display: inline-block; margin: 0px 0px 10px 0px; border-radius: 4px; background-clip: padding-box; padding: 5px; outline: none; box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25); border: 1px solid #c2c2b5; color: #5b5b5b;}
       #guide input[type="checkbox"] {width: auto !important;}
       #guide label {display: inline-block; float: left; text-align: right; margin-right: 30px; width: 33%; color: #ffffff;}
-      #guide input[type="submit"] {margin: 0px auto !important;} 
-      #guide .order input {position: relative; left: 7px; display: block; width: 40px;} 
+      #guide input[type="submit"] {margin: 0px auto !important;}
+      #guide .order input {position: relative; left: 7px; display: block; width: 40px;}
       #guide select {margin-left: 7px;}
       #guide .mce-tinymce {margin-top: 10px;}
       #guide .comments {width: 90%; margin: 0px auto;}
@@ -61,7 +61,7 @@
     reset_writein();
     enable_type();
     disable_basics();
-    disable_options(); 
+    disable_options();
     disable_contests();
     disable_measures();
     disable_blurbs();
@@ -146,32 +146,40 @@
   }
 
   function enable_contest(state) {
-    jQuery('select[name="contest_id"]').html('').append('<option value=0><%= t("guide.select_contest") %></option>');      
-    contest_keys = get_keys(contests);
-    contest_options = [];
+    if( typeof contests[state] == 'undefined' ) {
+      $.post(inits.root+state+'.json', function(response) {
+          contests[state] = contests[state] || []
+          contests[state] = contests[state].concat(response)
+          enable_contest(state)
+        })
+      $('.loading').show()
+    } else {
+      $('.loading').hide()
+      jQuery('select[name="contest_id"]').html('').append('<option value=0><%= t("guide.select_contest") %></option>');
 
-    for(i = 0; i < contest_keys.length; i++) {
-      if((contests[contest_keys[i]]['state'] == state) && (contests[contest_keys[i]]['type'] == typename)) contest_options.push(contests[contest_keys[i]]);
-    }
-    for(i = 0; i < contest_options.length; i++) {
-      jQuery('select[name="contest_id"]').append('<option value="' + contest_options[i]['id'] + '">' + contest_options[i]['title'] + '</option>');
-    }
+      var match = typename === 'contest' ? 1 : 2
+      for(i = 0; i < contests[state].length; i++) {
+        var contest = contests[state][i]
+        if( contest.contest_type.toLowerCase().split('ballot').length === match ) {
+          jQuery('select[name="contest_id"]').append('<option value="' + contest['id'] + '">' + contest['contest'] + '</option>');
+        }
+      }
 
-    jQuery('.contest_select').show();
-    jQuery('select[name="contest_id"]').removeAttr('disabled');
+      jQuery('.contest_select').show();
+      jQuery('select[name="contest_id"]').removeAttr('disabled');
+    }
   }
 
 
   function enable_option(contest_id) {
     jQuery('select[name="option_id"]').html('').append('<option value=0><%= t("guide.select_option") %></option>');;
-    option_keys = get_keys(options);
-    options_options = [];
 
-    for(i = 0; i < option_keys.length; i++) {
-      if(options[option_keys[i]]['contest_id'] == contest_id) options_options.push(options[option_keys[i]]);
-    }
-    for(i = 0; i < options_options.length; i++) {
-      jQuery('select[name="option_id"]').append('<option value="' + options_options[i]['id'] + '">' + options_options[i]['name'] + '</option>');
+    var options = contests[$('#state').val()].filter( function(el) { return el.id == parseInt(contest_id) })[0].options
+    var options_options = []
+
+    for(i = 0; i < options.length; i++) {
+      jQuery('select[name="option_id"]').append('<option value="' + options[i]['id'] + '">' + options[i]['name'] + '</option>');
+      options_options.push(options[i])
     }
 
     jQuery('.option_select').show();
@@ -180,21 +188,11 @@
     if (typename == 'contest') {
       writein_control();
     } else if (typename == 'measure') {
-      enable_blurb(options_options);
+      // enable_blurb(options_options);
     }
   }
 
   function enable_state() {
-    jQuery('select[name="state"]').html('').append('<option value=0><%= t("guide.select_state") %></option>');      
-    contest_keys = get_keys(contests);
-    states = [];
-    for(i = 0; i < contest_keys.length; i++) {
-      if((!is_included(states, contests[contest_keys[i]]['state'])) && (contests[contest_keys[i]]['type'] == typename)) states.push(contests[contest_keys[i]]['state']);
-    }
-    states.sort();
-    for(i = 0; i < states.length; i++) {
-      jQuery('.states select').append('<option value="' + states[i] + '">' + states[i] + '</option>');
-    }
     jQuery('.states').show();
     jQuery('.states select').removeAttr('disabled');
   }

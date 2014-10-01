@@ -68,9 +68,7 @@
     $('#find_choice').betterAutocomplete(
       "<%= admin_find_path ('choice') %>",
       function( event, ui ) {
-        $.get( ui.item.edit_url, function(response) {
-          $('.choice_form').html(response)
-        })
+        document.location = ui.item.edit_url
       }
     )
   })
@@ -112,7 +110,7 @@
 <h2>Admins</h2>
 <ul class="users admin">
   <%- @admins.each do |user| %>
-    <li><%= link_to image_tag(user.image), profile_path(user)  %>
+    <li><%= link_to image_tag(user.image || asset_path('alincoln.gif'), :style => 'height: 40px' ), profile_path(user)  %>
       <%= link_to user.name, profile_path(user), :class => 'profile' %><br />
       <%= link_to user.email, 'mailto:'+user.email, :class => 'email' %>
     </li>

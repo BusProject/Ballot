@@ -18,7 +18,7 @@ function locationModel(data) {
 	this.top.better = ko.computed( function() {
 		return this.top()-window.innerHeight
 	},this)
-	
+
 
 	var empty = '', __state = ''
 
@@ -26,7 +26,7 @@ function locationModel(data) {
 	var choices = data.choices || []
 	this.choices = ko.observableArray( choices.map( function(el) { return Choice(el) } ) )
 	this.sections = ko.observableArray([])
-	this.choices.ordered = ko.computed( function() { 
+	this.choices.ordered = ko.computed( function() {
 		var sections = this.sections(), choices = []
 		for (var i=0; i < sections.length; i++) {
 			var contest = sections[i].contests()
@@ -41,13 +41,13 @@ function locationModel(data) {
 
 	// Guides
 	this.guides = ko.observableArray([])
-	
+
 
 
 	// The menu
 	this.nearby = ko.computed(function() {
-		var top = this.top(), 
-			choices = this.choices.ordered(), 
+		var top = this.top(),
+			choices = this.choices.ordered(),
 			items = choices.map(function(el) { return el.contest+' '+el.geography })
 
 		if( items.length < 1 ) return ''
@@ -59,7 +59,7 @@ function locationModel(data) {
 			start = start < 0 ? 0 : start
 
 		for (var i=  start; i < items.length; i++) {
-			var elemTop = $( 'a[name="'+items[i]+'"]'), 
+			var elemTop = $( 'a[name="'+items[i]+'"]'),
 				extra = selected == choices[i] ? elemTop.next('.row').height() : 0
 			if( elemTop.length > 0 && top < elemTop.offset().top + extra ) {
 				return choices[i];
@@ -70,22 +70,22 @@ function locationModel(data) {
 
 	this.choices.notEmpty = ko.computed(function() { return this.choices().length > 0 },this)
 
-	this.round = function(number,decimal) { // Useful 
+	this.round = function(number,decimal) { // Useful
 		if( typeof decimal == 'undefined' ) decimal = 2
 		return Math.round(number*Math.pow(10,decimal))/Math.pow(10,decimal)
 	}
 
-	this.latlng.filtered = ko.computed( function() { // Have noticed the Google lat/long variables have shifted. These comptued variables are meant to always accurartely the correct lat / longs 
-		var latlng = []; 
-		for( var i in this.latlng() ) { 
+	this.latlng.filtered = ko.computed( function() { // Have noticed the Google lat/long variables have shifted. These comptued variables are meant to always accurartely the correct lat / longs
+		var latlng = [];
+		for( var i in this.latlng() ) {
 			if( typeof this.latlng()[i] == 'number' ) latlng.push(this.latlng()[i] )
 		}
 		return latlng.sort()
 	},this)
-	this.lat = ko.computed( function() { // Lat from LatLng.fitlered 
+	this.lat = ko.computed( function() { // Lat from LatLng.fitlered
 		return this.latlng.filtered()[1]
 	},this);
-	this.lng = ko.computed( function() { // Lng from LatLng.filtered 
+	this.lng = ko.computed( function() { // Lng from LatLng.filtered
 		return this.latlng.filtered()[0]
 	},this);
 	this.geolocated = ko.computed( function() { // TRUE when lat/lng are set
@@ -93,45 +93,45 @@ function locationModel(data) {
 	}, this)
 
 	// Useful for saving dirty ballot data
-	this.address.city = ko.computed( function() { 
+	this.address.city = ko.computed( function() {
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
-		for( var i = 0; i < components.length; i ++ ) { 
+		for( var i = 0; i < components.length; i ++ ) {
 			if( components[i].types[0] == 'locality' ) return components[i].long_name
-		} 
+		}
 	}, this)
-	this.address.state = ko.computed( function() { 
+	this.address.state = ko.computed( function() {
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
-		for( var i = 0; i < components.length; i ++ ) { 
+		for( var i = 0; i < components.length; i ++ ) {
 			if( components[i].types[0] == "administrative_area_level_1" ) return components[i].short_name.toUpperCase()
-		} 
+		}
 	}, this)
-	this.address.county = ko.computed( function() { 
+	this.address.county = ko.computed( function() {
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
-		for( var i = 0; i < components.length; i ++ ) { 
+		for( var i = 0; i < components.length; i ++ ) {
 			if( components[i].types[0] == "administrative_area_level_2" ) return components[i].long_name
-		} 
+		}
 	}, this)
-	this.address.route = ko.computed( function() { 
+	this.address.route = ko.computed( function() {
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
-		for( var i = 0; i < components.length; i ++ ) { 
+		for( var i = 0; i < components.length; i ++ ) {
 			if( components[i].types[0] == "route" ) return components[i].long_name
-		} 
+		}
 	}, this)
-	this.address.neighborhood = ko.computed( function() { 
+	this.address.neighborhood = ko.computed( function() {
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
-		for( var i = 0; i < components.length; i ++ ) { 
+		for( var i = 0; i < components.length; i ++ ) {
 			if( components[i].types[0] == "neighborhood" ) return components[i].long_name
-		} 
+		}
 	}, this)
-	this.address.street_number = ko.computed( function() { 
+	this.address.street_number = ko.computed( function() {
 		var g = this.googleLocation(), components = g.address_components
 		if( typeof components == 'undefined' ) return false
-		for( var i = 0; i < components.length; i ++ ) { 
+		for( var i = 0; i < components.length; i ++ ) {
 			if( components[i].types[0] == "street_number" ) return components[i].long_name
 		}
 	}, this)
@@ -146,8 +146,8 @@ function locationModel(data) {
 			geocoded = this.geocoded(),
 			geocoded_address = this.geocoded.address
 
-		if( address.length > 0 && !geocoded && address != geocoded_address() ) { // If address is located and not previously geocoded
-			geocoder.geocode( {address: address}, function(results, status) { 
+		if( address.length > 0 ) { // If address is located and not previously geocoded
+			geocoder.geocode( {address: address}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					var first = results[0].geometry.location
 					googleLocation(results[0])
@@ -174,14 +174,14 @@ function locationModel(data) {
 
 	this.map.confirm = ko.computed( function() {
 		ko.toJS(this.map)
-		if( this.geocoded() ) { 
+		if( this.geocoded() ) {
 			$('.confirmation').fadeIn('fast')
 		}
 	},this)
 
 	function pollingPlace(address, callback) {
 		var key = 'AIzaSyAnFJvCCJnJtv86xVD-NXoneJ5OhYWGAjQ'
-		$.ajax({ 
+		$.ajax({
 			url: 'https://www.googleapis.com/civicinfo/us_v1/voterinfo/4000/lookup?key='+key+'&officialOnly=false',
 			type: 'POST',
 			contentType: 'application/json',
@@ -210,10 +210,10 @@ function locationModel(data) {
 					locale.startDate ? 'on '+locale.startDate : '' ,
 					locale.endDate ? 'till '+locale.endDate : ''
 					].join(' ').trim()
-			locales.push( { 
-				name: locale.address.locationName, 
+			locales.push( {
+				name: locale.address.locationName,
 				address: address,
-				hours: hours, 
+				hours: hours,
 				directions: directions });
 			}
 	    return locales;
@@ -227,24 +227,24 @@ function locationModel(data) {
 			state = this.address.state(),
 			fetch = this.fetch,
 			pollingLocation = this.pollingLocation,
-			noGoogle = { 
+			noGoogle = {
 				// OR:  'Oregon votes by mail - <a href="http://ballotdrop.org/#'+this.address()+'" target="_blank">find Ballot Drop sites here</a>.<br /><br />If you haven\'t received your ballot yet - and are registered - <a href="http://oregonvotes.org/" target="_blank">contact the Secretary of State for a new ballot<a/>.'
 				LA:  'Find your Polling Place by looking up your precinct<br />at the <a href="https://voterportal.sos.la.gov/voter.aspx" target="_blank">Lousiana Secretary of State<a/>.'
 				}
 
-		if( geolocated && state && fetch() && empty != lat+','+lng && this.address() != '' ) {
+		if( geolocated && state && fetch() && this.address() != '' ) {
 			fetch(false)
 
-			if( choices().length < 1 ) this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
+			if( choices().length < 1 ) this.getBallotChoices(choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
 			else fetch(true) // Not needed - used with the Lookup callback
 
-			if( typeof noGoogle[ state ] == 'undefined' )  'whoops';// pollingPlace(
+			// if( typeof noGoogle[ state ] == 'undefined' )  'whoops';// pollingPlace(
 			// 				this.address(),
 			// 				function(response) {
 			// 					var early = processLocations( response.earlyVoteSites ), earlyHTML = ''
 			// 					if( early.length > 0 ) {
 			// 						earlyHTML = '<a onclick="$(this).hide().next(\'ul\').show().nextAll(\'a.link:first\').show(); return false" href="#" class="link">Click to see Early Vote Locations</a><ul style="display:none;">'
-			// 						earlyHTML += early.map( function(location) { 
+			// 						earlyHTML += early.map( function(location) {
 			// 							return [ '<li><strong>'+location.name,
 			// 								'</strong> at <a href="',
 			// 								location.directions,'" target="_blank">',
@@ -256,8 +256,8 @@ function locationModel(data) {
 			// 							}).join('')
 			// 						earlyHTML += '</ul>'
 			// 					}
-			// 					pollingLocation( 
-			// 						processLocations( response.pollingLocations ).map( function(location) { 
+			// 					pollingLocation(
+			// 						processLocations( response.pollingLocations ).map( function(location) {
 			// 							return [ '<strong>Your Polling Place:</strong>',
 			// 								location.name,
 			// 								'at <a href="',
@@ -271,26 +271,21 @@ function locationModel(data) {
 			// 					)
 			// 				}
 			// 			);
-			else {
-				pollingLocation( '<strong>How To Vote:</strong> '+noGoogle[ state ] )
-			}
+			// else {
+			// 	pollingLocation( '<strong>How To Vote:</strong> '+noGoogle[ state ] )
+			// }
 		}
 	}, this)
 
 
-	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for 
-		var state = yourLocation.address.state(), 
-			address = state ? ['Prez',(state+yourLocation.address.city()), state, (state+yourLocation.address.county()+( state != 'LA' ? ' County' : ' Parish' ) ) ] : []
+	this.getBallotChoices = function(array,callback) { // Useful function for
 
-		// Doing the openState call, will probably want to build this into something else
-		$.getJSON(
+		$.post(
 			inits.root+'lookup',
 			{
-				l: yourLocation.lat()+','+yourLocation.lng(),
-				address: address,
-				address_text: yourLocation.remember() ? yourLocation.address() : ''
+				address: yourLocation.address(),
 			},
-			function(data) { 
+			function(data) {
 				if( data != null && data.constructor == Array ) {
 					for( var i=0 ; i < data.length; i++) {
 						array.push( Choice(data[i]) )
@@ -300,13 +295,13 @@ function locationModel(data) {
 				callback()
 			})
 	}
-	this.getGuides = function(state,guides ) { // Useful function for 
+	this.getGuides = function(state,guides ) { // Useful function for
 		$.getJSON(
 			inits.root+'guides/'+state+'.json?limit=5',
-			function(data) { 
+			function(data) {
 				if( data != null && data.constructor == Array ) {
-					if( data.length > 0 ) guides(data) 
-				} 
+					if( data.length > 0 ) guides(data)
+				}
 			})
 	}
 
@@ -315,44 +310,44 @@ function locationModel(data) {
 	// 	var geolocated = this.geolocated(),
 	// 		state = this.address.state(),
 	// 		guides = this.guides
-	// 		
+	//
 	// 	if( geolocated && state != __state ) {
 	// 		this.getGuides(state,guides,__state);
 	// 		__state = state
-	// 	} 
+	// 	}
 	// },this)
-	
-	
+
+
 	// More menu shite
 	this.menuItems = []
-	
-	var ballotMeasures = Grouping(['Ballot_Statewide'],I18n.t('types.ballot_measures.title'),'Ballot Measures','measure',this, I18n.t('types.ballot_measures.text')  ),
+
+	var ballotStateMeasures = Grouping(['Ballot_State'],I18n.t('types.ballot_state_measures.title'),'State Ballot Measures','measure',this, I18n.t('types.ballot_state_measures.text')  ),
+		ballotLocalMeasures = Grouping(['Ballot_Local'],I18n.t('types.ballot_local_measures.title'),'Local Ballot Measures','measure',this, I18n.t('types.ballot_local_measures.text') ),
 		federalCandidates = Grouping(['Federal'],I18n.t('types.federal.title'),'Federal','candidate',this, I18n.t('types.federal.text') ),
 		stateCandidates = Grouping(['State'],I18n.t('types.state.title'),'State','candidate',this,I18n.t('types.state.text')),
-		countyCandidates = Grouping(['County'],I18n.t('types.county.title'),'County','candidate',this,I18n.t('types.county.text') ),
-		otherCandidates = Grouping(['Other'],I18n.t('types.other.title'),'Other','candidate',this,I18n.t('types.other.text') )
+		localCandidates = Grouping(['Local'],I18n.t('types.local.title'),'Local','candidate',this,I18n.t('types.local.text') ),
 		userCandidate = Grouping(['User_Candidate'],I18n.t('types.user_candidates.title'),'User Created Candidates','candidate',this,I18n.t('types.user_candidates.text'))
 		userBallotMeasures = Grouping(['User_Ballot'],I18n.t('types.user_measures.title'),'User Created Ballots','measure',this,I18n.t('types.user_measures.text'))
-	
+
 
 	if( this.state == 'front' ) {
 
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
-		this.sections.push( countyCandidates)
-		this.sections.push( otherCandidates)
-		this.sections.push( ballotMeasures)
+		this.sections.push( localCandidates)
+		this.sections.push( ballotStateMeasures)
+		this.sections.push( ballotLocalMeasures)
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you().length > 0 },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
-		
+
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
 			owner = current_user.id == 'unauthenticated' ? I18n.t('menu.share') : I18n.t('menu.the_ballot'),
 			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: current_user.name, thing: I18n.t("site.voter_guide_page") } ),
 			msg = current_user.id == 'unauthenticated' ? undefined : I18n.t('menu.share_message'),
 			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">'+I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide Page'})+'</a>'
-			
-		this.menuItems.push( 
+
+		this.menuItems.push(
 			MenuItem('#find-ballot',I18n.t('menu.find'),'<p>'+I18n.t('menu.find_text')+'</p>'),
 			MenuItem('#read-ballot',I18n.t('menu.read'),"<p>"+I18n.t('menu.read_text')+'</p><p>'+I18n.t('menu.read_text_2')+"</p>"+layout,null, this),
 			MenuItem(null,'Share Your List of Voter Guides',null,'<div class="container share-container">'+owner+'<br>'+makeShare(url,name)+extra)
@@ -362,19 +357,19 @@ function locationModel(data) {
 
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
-		this.sections.push( countyCandidates )
-		this.sections.push( otherCandidates)
-		this.sections.push( ballotMeasures)
+		this.sections.push( localCandidates)
+		this.sections.push( ballotStateMeasures)
+		this.sections.push( ballotLocalMeasures)
 		this.sections.push( userCandidate )
 		this.sections.push( userBallotMeasures )
 
 
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.anchor }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you().length > 0 },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --><li style="font-weight: normal; margin: 10px; font-size: 10px;" data-bind="visible: !yourLocation.fetch() "><em>'+I18n.t('site.loading')+'</em></li></ul>'
-		
+
 		var url = document.location.toString().split('?')[0], name = inits.title
-		this.menuItems.push( 
+		this.menuItems.push(
 			MenuItem(inits.root,I18n.t('menu.find'),null),
 			MenuItem('#read-ballot',I18n.t('menu.read'), layout ,null, this),
 			MenuItem(null,I18n.t('menu.this_page'),null,'<div class="container share-container">'+I18n.t('menu.this_page')+'<br>'+makeShare(url,name)+'</div>')
@@ -383,7 +378,7 @@ function locationModel(data) {
 	if( this.state == 'single' ) {
 		var url = document.location.toString().split('?')[0]
 		this.selected( this.choices()[0] )
-		this.menuItems.push( 
+		this.menuItems.push(
 			MenuItem(inits.root,I18n.t('menu.find')),
 			MenuItem(current_user.url, I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'})),
 			MenuItem(null,I18n.t('menu.this_page'),null,'<div class="container share-container">'+I18n.t('menu.this_page')+'<br>'+makeShare(url,name)+'</div>')
@@ -391,8 +386,8 @@ function locationModel(data) {
 	}
 	if( this.state == 'guides' ) {
 		var url = document.location.toString().split('?')[0]
-		
-		this.menuItems.push( 
+
+		this.menuItems.push(
 			MenuItem(inits.root, I18n.t('menu.find')),
 			MenuItem('#read-ballot', inits.stateName ?  I18n.t('menu.guides_in', {state: inits.stateName}) : I18n.t('menu.state_guides') ,'<ul style="margin: 20px 0; max-height: 300px; overflow-y: scroll;">'+inits.states.map( function(el) { return '<li><a href="#'+el.replace(/ /g,'_')+'">'+el+'</a></li>' }).join("\n")+'</ul>',null),
 			MenuItem(null,I18n.t('menu.this_page'),null,'<div class="container share-container">'+I18n.t('menu.this_page')+'<br>'+makeShare(url,name)+'</div>')
@@ -402,9 +397,9 @@ function locationModel(data) {
 
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
-		this.sections.push( countyCandidates )
-		this.sections.push( otherCandidates)
-		this.sections.push( ballotMeasures)
+		this.sections.push( localCandidates)
+		this.sections.push( ballotStateMeasures)
+		this.sections.push( ballotLocalMeasures)
 		this.sections.push( userCandidate )
 		this.sections.push( userBallotMeasures )
 
@@ -412,12 +407,12 @@ function locationModel(data) {
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you().length > 0 },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 
-		
-		var url = document.location.host+inits.user.profile, 
-			name = inits.user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: inits.user.name, thing: I18n.t("site.voter_guide_page") } ), 
+
+		var url = document.location.host+inits.user.profile,
+			name = inits.user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: inits.user.name, thing: I18n.t("site.voter_guide_page") } ),
 			pronoun = inits.user.id == current_user.id ? I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'}) : inits.user.first_name != '' ? I18n.t('i18n_toolbox.possessive',{owner: inits.user.first_name,thing: 'Voter Guide' } ) : I18n.t('i18n_toolbox.possessive',{owner: inits.user.last_name,thing: 'Voter Guide' } )
 
-		this.menuItems.push( 
+		this.menuItems.push(
 			MenuItem(inits.root, I18n.t('menu.find')),
 			MenuItem('#',pronoun,layout),
 			inits.more ? MenuItem(document.location.toString()+'/all','Old Endorsements') : null,
@@ -435,7 +430,7 @@ function locationModel(data) {
 		if( top < 10 ) return items[0].id
 		else return items[ items.length - 1].id
 	},this)
-	
+
 
 }
 
