@@ -7,11 +7,13 @@ class PollVault
 	def initialize endpoint=nil, api_key=nil, cache=true
 		@cache = cache ? {} : nil
 		@endpoint = endpoint || 'http://pollvault.org'
-		@api_key = api_key || 'bleepbloop'
+		@api_key = api_key
 	end
 
 
 	def get target, params={}
+		return nil unless @api_key
+
 		url = URI.join(@endpoint, 'api/', 'voter/', target).to_s
 		query_hash = cache_get(url, params)
 
