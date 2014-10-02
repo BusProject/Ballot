@@ -33,4 +33,8 @@ Deploying to Heroku
 
 1. Heroku doesn't like LESS - so it's best if you compile things locally before pushing things. I've created a deploy script that will: create and switch to a new git branched called `compiled`, remove old assets and compile the assets, commit these newly created assets, push master to remote branch heroku.
 
-2. To run type `bundle exec rake deploy`
+2. install the heroku binarys (these can be found at the heroku website)
+
+3. add the heroku remote repo to your app with the following command `git heroku git:remote -a the-ballot` 
+
+4. To run type `bundle exec rake deploy`

@@ -21,7 +21,6 @@
 		</h3>
 		<%- if user == current_user %>
 			<div class="controls">
-				<button class="meme"><%= t('site.badge' ) %></button>
 				<button class="next"><%= t('candidates.next') %></button>
 				<span class="remove edit link"  ><%= t('site.edit') %></span>
 					<span >&nbsp;|&nbsp;</span>
@@ -53,7 +52,7 @@
 <%- if current_user.nil? && current_user == user %>
 	<div class="yourFeedback login">
 		<%= raw @how %>
-		<p>You must be logged in through Facebook to use this feature</p>
-		<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook)  %>
+		<p>You must be logged in to use this feature</p>
+                <a href=""><button ><%= t('top.login')%></button></a>
 	</div>
 <% end -%>

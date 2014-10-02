@@ -3,57 +3,57 @@
 <!-- ko stopBinding: true -->
 
 	<div id="profile" data-bind="with: current_user  " class="ballot-section">
-			<% if !is_mobile_device? %>
-				<!-- Primary Color -->
-				<style type="text/css" data-bind="text: ko.toJS( primary ) != null && ko.toJS( primary ) != '' ? 
-				'.sectionheading h1 { color:'+ ko.toJS( primary )+' !important;}'
-				: ''
-				">.sectionheading h1 { color: <%= @user.primary %>!important;}
-				</style>
-				<!-- Secondary Color -->
-				<style type="text/css" data-bind="text: ko.toJS( secondary ) != null && ko.toJS( secondary ) != '' ? 
-				'h1.title::before, .optionholder.your-option .option:first-child { color:'+ko.toJS( secondary )+' !important;}'+
-				'.ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: '+ko.toJS( secondary )+'!important; }'+
-				'h1.no, h1.yes { color: #5B5B5B !important; }'
-				: ''
-				">h1.title::before, .optionholder.your-option .option:first-child { color: <%= @user.secondary %> !important;}
-				.ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: <%= @user.secondary %> !important; }
-				<%- if !@user.secondary.nil? && !@user.secondary.empty? %>
-				h1.no, h1.yes { color: #5B5B5B !important; }
-				<% end -%>
-				</style>
-				<!-- BG Color -->
-				<style type="text/css" data-bind="text: ko.toJS( bg ) != null && ko.toJS( bg ) != '' ? 
-				'body { background:'+ko.toJS( bg )+' !important; background-image: none; }'
-				: ''
-				">body { background:  <%= @user.bg %> !important; background-image: none; }
-				</style>
-			<% end %>
-			<%- if current_user == @user %>
+                      <% if !is_mobile_device? %>
+                              <!-- Primary Color -->
+                              <style type="text/css" data-bind="text: ko.toJS( primary ) != null && ko.toJS( primary ) != '' ?
+                              '.sectionheading h1 { color:'+ ko.toJS( primary )+' !important;}'
+                              : ''
+                              ">.sectionheading h1 { color: <%= @user.primary %>!important;}
+                              </style>
+                              <!-- Secondary Color -->
+                              <style type="text/css" data-bind="text: ko.toJS( secondary ) != null && ko.toJS( secondary ) != '' ?
+                              'h1.title::before, .optionholder.your-option .option:first-child { color:'+ko.toJS( secondary )+' !important;}'+
+                              '.ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: '+ko.toJS( secondary )+'!important; }'+
+                              'h1.no, h1.yes { color: #5B5B5B !important; }'
+                              : ''
+                              ">h1.title::before, .optionholder.your-option .option:first-child { color: <%= @user.secondary %> !important;}
+                              .ballot-section .sectionheading, .ballot-section .category-heading, .account { border-color: <%= @user.secondary %> !important; }
+                              <%- if !@user.secondary.nil? && !@user.secondary.empty? %>
+                              h1.no, h1.yes { color: #5B5B5B !important; }
+                              <% end -%>
+                              </style>
+                              <!-- BG Color -->
+                              <style type="text/css" data-bind="text: ko.toJS( bg ) != null && ko.toJS( bg ) != '' ?
+                              'body { background:'+ko.toJS( bg )+' !important; background-image: none; }'
+                              : ''
+                              ">body { background:  <%= @user.bg %> !important; background-image: none; }
+                              </style>
+                      <% end %>
+                      <%- if current_user == @user %>
 			<%= javascript_include_tag 'jquery.remotipart' %>
 			<%= javascript_include_tag 'other/bootstrap-colorpicker.js' %>
 			<%= stylesheet_link_tag 'other/colorpicker.css' %>
 
 			<div id="edit-profile">
-				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }"><i class="icon-cog"></i> <%= t("profile.customize")%></span></a>
+				<a data-bind="visible: !edit() " class="link"><span data-bind="click: function() {open() }"><i class="icon-cog"></i> <%= t("profile.customize_page")%></span></a>
 				<div style="display: none" class="editor" data-bind="visible: edit ">
-					<h3><i class="icon-cog"></i> <%= t("profile.customize")%> <i class="icon-cog"></i></h3>
+					<h3><i class="icon-cog"></i> <%= t("profile.customize_page")%> <i class="icon-cog"></i></h3>
 					<p style="text-align:center; margin-bottom:20px"><i class="icon-link"></i> &nbsp <a data-bind="text: '<%= ENV['BASE'] %>/'+profile.store(), attr: { href: '<%= ENV['BASE'] %>/'+profile.store()} "></a></p>
-					<p class="label"><%= t("profile.title")%></p> <input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="Name Your Voter Guide">
-					<p class="label"><%= t("profile.description")%></p> <textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="Write something about your voter guide"></textarea>
+                                        <p class="label"><%= t("profile.title")%></p> <input data-bind="value: guide_name, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.name_page") %>">
+                                        <p class="label"><%= t("profile.description")%></p> <textarea data-bind="value: description, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.write_about_page") %>"></textarea>
 
-					<p class="label"><%= t("profile.url")%></p> http://theballot.org/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="Your New URL"  >
+                                        <p class="label"><%= t("profile.url")%></p> http://theballot.org/profile/<input class="edit-profile url" style="display: inline" data-bind="value: profile, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.new_url") %>"  >
 					<span class="url-searching" data-bind="visible: profile.checking() "><i class="icon-search"></i> <%= t('site.searching') %> </span><span class="url-available" data-bind="visible: profile.available() && !profile.checking() "><i class="icon-ok-sign"></i> <%= t("site.available")%> </span><span class="url-taken" data-bind="visible: !profile.checking() && !profile.available() && profile.available() != null "><i class="icon-exclamation-sign"></i> <%= t("site.taken")%> </span>
 					<br />
 
-					<p class="label"><%= t("profile.primary")%></p><input class="primary" data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="Primary color"  >
-					<p class="label"><%= t("profile.secondary")%></p><input class="secondary" data-bind="value: secondary, style: {color: secondary() }, valueUpdate: 'afterkeydown'" placeholder="Secondary color"  >
-					<p class="label"><%= t("profile.background")%></p><input class="bg" data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="Background color"  >
+                                        <p class="label"><%= t("profile.primary_set")%></p><input class="primary" data-bind="value: primary, style: { color: primary() }, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.primary")%>"  >
+                                        <p class="label"><%= t("profile.secondary_set")%></p><input class="secondary" data-bind="value: secondary, style: {color: secondary() }, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.secondary")%>"  >
+                                        <p class="label"><%= t("profile.background_set")%></p><input class="bg" data-bind="value: bg, style: {color: bg() }, valueUpdate: 'afterkeydown'" placeholder="<%= t("profile.background")%>"  >
 
 					<p class="label" style="margin-top:30px;"><%= t("profile.header")%></p><div id="image-upload"><%= form_for @user, :url => user_update_path, :method => :POST, :html => { :multipart => true }, :remote => true, :format => :json do |form| %>
 						<%= form.file_field :header %><span class="loading" ><i class="icon-copy"></i> <%= t("site.saving")%> </span><span class="success"><i class="icon-ok-sign"></i> <%= t("site.saved")%> </span><span class="error" ><i class="icon-exclamation-sign"></i> <%= t("site.error")%> </span>
 						<p class="small-label"><%= t("profile.headerreq")%></p>
-						<%= form.submit 'Upload' %>
+						<%= form.submit t("profile.upload") %>
 						<span class="link" data-bind="click: function() { removeHeader() }, visible:  typeof header() != 'undefined' && header() != null && header() != '/headers/header/missing.png'"><% t('profile.remove_header')%></span>
 					<% end %>
 					</div>
@@ -67,14 +67,14 @@
 				</div>
 			</div>
 
-	
-			
+
+
 
 			<script type="text/javascript">
 				current_user.guide_name = ko.observable(current_user.guide_name )
 				current_user.description = ko.observable(current_user.description)
 
-				var _tmp = current_user.profile.replace('/','') 
+				var _tmp = current_user.profile.replace('/','')
 
 				current_user.profile = ko.observable( current_user.profile.replace('/','') != current_user.url.replace('/','') ? current_user.profile.replace('/','') : '')
 				current_user.profile.store = ko.observable( _tmp )
@@ -112,9 +112,9 @@
 				current_user.primary = ko.observable( '<%= @user.primary %>')
 				current_user.secondary = ko.observable( '<%= @user.secondary %>')
 				current_user.bg = ko.observable( '<%= @user.bg %>')
-				
+
 				current_user.edit = ko.observable(false)
-				current_user.open = function() { 
+				current_user.open = function() {
 					current_user.edit(true);
 					current_user.__guide_name = current_user.guide_name();
 					current_user.__description = current_user.description();
@@ -122,7 +122,7 @@
 					current_user.__primary = current_user.primary()
 					current_user.__secondary = current_user.secondary()
 					current_user.__bg = current_user.bg()
-					
+
 					$('input.primary').colorpicker().on('changeColor', function(ev){
 					  current_user.primary( ev.color.toHex() );
 					}).on('hide',function() {
@@ -159,16 +159,16 @@
 					current_user.bg( current_user.__bg );
 					current_user.__bg = null;
 				}
-				current_user.save = function() { 
+				current_user.save = function() {
 					var profile = current_user.profile().replace(/\//g,'') != current_user.url ? current_user.profile().replace(/\//g,'') : ''
-					
+
 					if( !current_user.profile.available() && profile != current_user.profile.store() &&  profile != '' ) {
 						return false
 						$('input.profile').focus()
 					}
 					current_user.profile.store( current_user.profile() );
 					current_user.profile.available(null);
-					
+
 
 					current_user.edit(false);
 					current_user.__guide_name = null;
@@ -176,7 +176,7 @@
 					current_user.__bg = null;
 					current_user.__primary = null;
 					current_user.__secondary = null;
-					$.post( inits.root+'users/update', { description:  current_user.description(), guide_name:  current_user.guide_name(), primary:  current_user.primary(), secondary:  current_user.secondary(), bg:  current_user.bg(), profile:  profile }, function(r) { 
+					$.post( inits.root+'users/update', { description:  current_user.description(), guide_name:  current_user.guide_name(), primary:  current_user.primary(), secondary:  current_user.secondary(), bg:  current_user.bg(), profile:  profile }, function(r) {
 						if( r.success && '/'+current_user.profile() != document.location.pathname ) {
 							var stateObj = {};
 							if( profile == '' ) {
@@ -196,14 +196,14 @@
 					if( title != null && title.trim().length > 0 )document.title = 'The Ballot | '+title
 				},current_user)
 
-				$(document).ready( function() { 
-					ko.applyBindings( current_user, document.getElementById("profile")); 
+				$(document).ready( function() {
+					ko.applyBindings( current_user, document.getElementById("profile"));
 					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>'); $(this).parent().after('<em>Problem loading your header. Should be back soon. If this persists - reupload.</em>') });
 					$('#profile_search').betterAutocomplete( '/search?filter=offices', function( event, ui ) { document.location = ui.item.url }, 2,  'top-search')
 				}).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
 					$('.edit_user .loading').hide()
 					// Only when it's remotipart. There's probably a better way to do this but I can't figure it out now
-					if( typeof ajaxOptions.data != 'undefined' && typeof ajaxOptions.data[2] != 'undefined' && ajaxOptions.data[2].name == "remotipart_submitted" && XMLHttpRequest.readyState == 4) { 
+					if( typeof ajaxOptions.data != 'undefined' && typeof ajaxOptions.data[2] != 'undefined' && ajaxOptions.data[2].name == "remotipart_submitted" && XMLHttpRequest.readyState == 4) {
 						var data = JSON.parse(XMLHttpRequest.responseText)
 						if( data.success ) {
 							current_user.header( data.header )
@@ -226,22 +226,22 @@
 			<script type="text/javascript" charset="utf-8">
 				$(document).ready( function() {
 					current_user = inits.user
-					ko.applyBindings( current_user, document.getElementById("profile")); 
+					ko.applyBindings( current_user, document.getElementById("profile"));
 					$('#logo img').error( function() { $(this).attr('src','<%=asset_path( 'theballot.png' )%>') });
 				})
 			</script>
 			<%- unless current_user.nil? %>
 				<% if @recommended %>
-					<span class="helpful"><i class="icon-heart"></i> <%= t('site.you_recommend') %> <%= @user.guide_name || t('i18n_toolbox.possessive', {:owner => @user.name, :thing => t('site.voter_guide') } )%></span>
+					<span class="helpful"><i class="icon-heart"></i> <%= t('site.you_recommend') %> <%= @user.guide_name || t('i18n_toolbox.possessive', {:owner => @user.name, :thing => t("site.voter_guide_page") } )%></span>
 				<% else %>
 					<span class="link helpful" onclick="
 						$(this).removeClass('link').text('Sweet - thanks')
-						$.post( document.location.toString(), {access_token: current_user.auth_token},function(response){}) 
+						$.post( document.location.toString(), {access_token: current_user.auth_token},function(response){})
 					"><i class="icon-heart"></i> <%= t('profile.recommend') %></span>
 				<% end %>
-				<span class="divide">|</span> 
+				<span class="divide">|</span>
 				<span class="link flag" onclick="$(this).hide().next().show()"><i class="icon-flag"></i> <%= t('profile.flag')%></span>
-				<p style="display: none;" class="flag"><%= t('site.flag_prompt') %> <span class="link" onclick=" 
+				<p style="display: none;" class="flag"><%= t('site.flag_prompt') %> <span class="link" onclick="
 					$(this).parent().text('Flagged - thanks');
 					yourLocation.choices().map( function(el) { $.post(inits.root+'feedback/'+el.featured().id+'/flag',function(response){}) } )
 				"><%= t('site.yes') %></span> </p>
@@ -250,12 +250,34 @@
 			<% end -%>
 		<% end -%>
 
-		<div class="sectionheading"><h1 data-bind="visible: true,text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : I18n.t('i18n_toolbox.possessive',{ owner: inits.user.name, thing: I18n.t('site.voter_guide') } ) "><%= @user.guide_name || t('i18n_toolbox.possessive', {:owner => @user.name, :thing => t('site.voter_guide') } )%></h1>
+                <div class="sectionheading"><h1 data-bind="visible: true,text: ko.toJS(guide_name) != null && ko.toJS(guide_name) != '' ? ko.toJS(guide_name) : I18n.t('i18n_toolbox.possessive',{ owner: inits.user.name, thing: I18n.t("site.voter_guide_page") } ) "><%= @user.guide_name || t('i18n_toolbox.possessive', {:owner => @user.name, :thing => t("site.voter_guide_page") } )%></h1>
 			<p class="description" data-bind=" betterText: description, visible: description"><%= @user.description %></p>
 		<p style="font-size:12px;"><%= t("profile.powered")%></p>
 		</div>
 
 	</div>
+
+        <div id="guides" class="ballot-section">
+          <% @guides.each do |guide| %>
+            <div class="sectionheading">
+              <% if guide.name.nil? and (guide.name != '') %>
+                <%= t('guide.guide_no') %>
+                <%= guide.id %>
+              <% else %>
+                  <%= guide.name %>
+              <% end %>
+                <p style="font-size: 12px;">
+                  <%= link_to t('guide.show'), guide_show_path({:id => guide.slug}) %>
+                  <% if current_user == @user %>
+                    | <%= link_to t('guide.edit'), guide_edit_path(guide) %>
+                    | <%= link_to t('guide.delete'), guide_delete_path(guide), :method => :post, :confirm => t('guide.delete_confirm') %>
+                  <% end %>
+                </p>
+            </div>
+            <br><br>
+          <% end %>
+          <br><br><%= link_to(t("guide.add"), guide_create_path, :class => 'button', :method => :post) %>
+        </div>
 
 <!-- /ko -->
 
@@ -294,7 +316,7 @@
 		<a href="<%= @user.profile %>" style="margin-top: 100px; display: block">
 			<div id="more-coming"  class="ballot-section"  >
 				<h1>Click to see all of </h1>
-				<p><%= @user.guide_name || t('i18n_toolbox.possessive', {:owner => @user.name, :thing => t('site.voter_guide') } ) %></p>
+				<p><%= @user.guide_name || t('i18n_toolbox.possessive', {:owner => @user.name, :thing => t("site.voter_guide_page") } ) %></p>
 			</div>
 		</a>
 	<% end -%>
@@ -302,8 +324,6 @@
 	<% if @choices.length == 0 && @user != current_user %>
 		<p></p>
 		<p><%= @user.first_name %> <%= t("profile.nofeedback")%></p>
-		<p><em><%= t("profile.redirect")%></em></p>
-		<script type="text/javascript"> ( function() { setTimeout( function() { document.location = '<%= root_path %>'; }, 2012);} )()</script>
 	<% end %>
 </div>
 </div>

@@ -1,3 +1,6 @@
+@import "vars.less";
+@import "mixins.less";
+
 // Mobile stylesheet, served to mobile devices using mobile_fu plugin
 
 body.mobile {
@@ -13,10 +16,10 @@ body.mobile {
       max-width: none;
     }
 
-    &.home { 
-      background: #dbe8b8 image-url('iOS/bg_2x.jpg') no-repeat fixed; 
-      -moz-background-size: 100% auto; 
-      background-size: 100% auto; 
+    &.home {
+      background: #dbe8b8 image-url('iOS/bg_2x.jpg') no-repeat fixed;
+      -moz-background-size: 100% auto;
+      background-size: 100% auto;
       background-position: 0 0;
     }
 
@@ -204,7 +207,7 @@ body.mobile {
             &:before {
               display: block;
               font-size: 32px;
-              font-family:'FontAwesome'; 
+              font-family:'FontAwesome';
             }
           }
           &#mobile_home_link {
@@ -365,7 +368,7 @@ body.mobile {
               }
             }
           }
-      
+
           .commentTitle {
             margin: 1px 0 0;
             padding: 0;
@@ -379,7 +382,7 @@ body.mobile {
             }
             select, div.arrows { display: none; }
           }
-      
+
           ul.feedback {
             background-color: #bdbdbd;
             .head {
@@ -398,7 +401,7 @@ body.mobile {
             }
             .foot { margin-bottom: 0; }
           }
-      
+
           .yourFeedback {
             margin: 0;
             background-color: #d9d9d9;
@@ -497,7 +500,7 @@ body.mobile {
     }
 
     &.profile #more-coming { display: none; }
-    #more-coming { 
+    #more-coming {
         width: 80%; padding: 10px; margin: 0 auto; min-width: 400px;
         a button { display: none }
     }
@@ -651,4 +654,7 @@ body.mobile {
       min-width: 320px;
       padding: 10px;
     }
+}
+@media (max-width: 1050px) {
+  .account .left-nav ul li.guide { display: none; }
 }

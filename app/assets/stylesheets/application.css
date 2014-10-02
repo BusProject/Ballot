@@ -7,4 +7,5 @@
  *= require style.css
  *= require no-script.css
  *= require social.css.erb
+ *= require jquery-ui.css
 */

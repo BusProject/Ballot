@@ -1,5 +1,6 @@
-source 'https://rubygems.org'
-ruby "1.9.3"
+source 'http://rubygems.org'
+ruby '1.9.3'
+
 
 gem 'rails', '3.2.11'
 
@@ -31,7 +32,6 @@ gem "paperclip", "~> 3.0"
 gem 'aws-sdk', '~> 1.3.4'
 gem 'remotipart', '~> 1.0'
 
-gem 'rmagick'
 gem 'fb_graph'
 
 gem 'therubyracer'
@@ -39,8 +39,6 @@ gem 'therubyracer'
 gem 'acts_as_votable'
 
 gem 'mobile-fu'
-
-gem 'georuby'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -51,7 +49,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'nokogiri'
+gem 'nokogiri', '~>1.6.3.1'
 gem 'taps'
 
 # To use ActiveModel has_secure_password
@@ -74,15 +72,5 @@ end
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-#group :test do
-  # Pretty printed test output
-  #gem 'turn', :require => false
-#end
 
-gem "rspec-rails", :group => [:test, :development]
-
-group :test, :development do
-  gem "factory_girl_rails"
-  gem "guard-rspec"
-  gem "growl"
-end
+gem 'newrelic_rpm'

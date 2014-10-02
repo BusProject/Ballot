@@ -3,7 +3,7 @@
 	<div class="yourFeedback login">
 		<h2><% t('add_form.missing_header ')%></h2>
 		<p><%= t('site.login')%></p>
-		<%= link_to (image_tag 'fb-login.png'), omniauth_authorize_path('user', :facebook)  %>
+                <a href=""><button ><%= t('top.login')%></button></a>  
 	</div>
 <% else %>
 	<%= render :partial => ['choice',params[:type],'newForm'].join('/') %>

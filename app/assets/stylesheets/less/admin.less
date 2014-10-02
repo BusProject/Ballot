@@ -1,58 +1,342 @@
-@import 'less/mixins.less';
-@import 'less/vars.less';
-
-body.admin {
-	#main { width: 600px; margin: 0 auto;
-		h1, h2 { color: @darkOrange; margin: 1em 0; }
-		h1 { font-size: 4em; }
-		p, h2 { text-align: left }
-		#instructions { display: none }
-		ul {
-			&.flagged { list-style: disc; li { margin-left: 30px } }
-			text-align: left;
-			width: 400px;
-			li {
-				margin: 30px 0;
-				img {  width: 50px; height: 50px; float: left; margin: -10px 8px 8px }
-				.side { 
-					float: right; 
-					margin-top: -30px; 
-					color: red; 
-					font-size: 12px; 
-					&:hover, a:hover { &:after { color: grey; margin-left: 80px; text-decoration: none !important; position: absolute; }}
-					&.unban &:hover { &:after { content: 'You Sure? Will restore all of their comments'; }}
-					a.rescue:hover { &:after { content: 'You Sure? Will approve the comment and clear all of it\'s flags'; }}
-					a.unapprove:hover { &:after { content: 'You Sure? Will unapprove the comment'; }}
-					a.remove_feedback:hover { &:after { content: 'You Sure? Will permenently delete the comment'; }}
-				}
-			}
-		}
-		input {
-			font-size: 1.1em;
-			width: 500px;
-		}
-		div.choice_form {
-			width: 470px;
-			min-height: 500px;
-			padding: 20px 30px;
-			font-size: 10px;
-			input { width: 240px; }
-			.option {
-				border: 1px solid @darkGreen;
-				padding: 20px;
-				margin: 10px 0;
-				.border-radius(5px);
-			}
-		}
-	}
-	#main .stats {
-		width: 600px;
-		text-align: center;
-		margin: 0 20px;
-		p {
-			text-align: center;
-			margin: 3px 0;
-		}
-		.admin { color: @red; margin: 0 0 -30px; float: left; }
-	}
+/* Used for position stars for large titles */
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+body.add form#new_choice .oops input,
+body.add form#new_choice .oops textarea {
+  border: 1px solid red;
+}
+body.add form#new_choice .oops h3,
+body.add form#new_choice .oops label,
+body.add form#new_choice .oops h4 {
+  color: #b13b38;
+}
+body.add .yourFeedback h1 {
+  margin: 20px 0;
+}
+body.add .yourFeedback p {
+  margin: 40px 0;
+}
+.add-warning {
+  width: 80%;
+  margin: 20px auto;
+  background-color: #d37a3c;
+  padding: 10px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+}
+.add-warning p {
+  margin: 0 0 10px;
+  color: white;
+  text-align: left;
+}
+.add-warning:before {
+  content: "\f0d8";
+  font-family: "FontAwesome";
+  color: #d37a3c;
+  position: absolute;
+  top: -19px;
+  left: 348px;
+  font-size: 35px;
+}
+.add-warning a {
+  color: white;
+  text-decoration: underline;
+}
+.add-warning a:hover {
+  color: white;
+  color: #5b5b5b;
+}
+.add-contest {
+  text-align: left;
+  color: white;
+  width: 90%;
+  background-color: #ababab;
+  padding: 15px 30px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  *zoom: 1;
+}
+.add-contest:before,
+.add-contest:after {
+  display: table;
+  content: "";
+}
+.add-contest:after {
+  clear: both;
+}
+.add-contest h1 {
+  text-align: center;
+  margin: 10px 0 20px;
+}
+.add-contest h3 {
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+}
+.add-contest .link {
+  color: white;
+}
+.add-contest .link:hover {
+  color: white;
+  text-decoration: underline;
+}
+.add-contest .add-submit {
+  border: 1px solid #5e5e5e;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 10px;
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(255, 255, 255, 0.4) 0 1px 0;
+  background-color: #919191;
+  background: -webkit-gradient(linear, left top, left bottom, from(#919191), to(#848484));
+  background: -webkit-linear-gradient(top, #919191, #848484);
+  background: -moz-linear-gradient(top, #919191, #848484);
+  background: -ms-linear-gradient(top, #919191, #848484);
+  background: -o-linear-gradient(top, #919191, #848484);
+  text-shadow: 0px 1px 1px #787878;
+  margin: 20px auto;
+  display: block;
+  width: 27%;
+}
+.add-contest .add-submit:hover {
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+}
+.add-contest .add-submit:active {
+  box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+}
+.add-contest .add-submit:disabled {
+  -webkit-opacity: 0.5;
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+  color: #919191;
+  cursor: default;
+}
+.add-contest .add-submit:disabled:hover {
+  background-color: #666666;
+  background: -webkit-gradient(linear, left top, left bottom, from(#666666), to(#4b4b4b));
+  background: -webkit-linear-gradient(top, #666666, #4b4b4b);
+  background: -moz-linear-gradient(top, #666666, #4b4b4b);
+  background: -ms-linear-gradient(top, #666666, #4b4b4b);
+  background: -o-linear-gradient(top, #666666, #4b4b4b);
+}
+.add-contest .add-submit:active {
+  color: white;
+}
+.add-contest .add-final-submit {
+  width: 80%;
+  border-top: 2px dotted #c4c4c4;
+  padding: 10px 0 0;
+  margin: 0 auto;
+}
+.add-contest .add-final-submit input {
+  width: auto;
+  margin: 0 auto;
+  border: 1px solid #8a4b1f;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 10px;
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(255, 255, 255, 0.4) 0 1px 0;
+  background-color: #d37a3c;
+  background: -webkit-gradient(linear, left top, left bottom, from(#d37a3c), to(#c86d2d));
+  background: -webkit-linear-gradient(top, #d37a3c, #c86d2d);
+  background: -moz-linear-gradient(top, #d37a3c, #c86d2d);
+  background: -ms-linear-gradient(top, #d37a3c, #c86d2d);
+  background: -o-linear-gradient(top, #d37a3c, #c86d2d);
+  text-shadow: 0px 1px 1px #b36229;
+  display: block;
+}
+.add-contest .add-final-submit input:hover {
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+}
+.add-contest .add-final-submit input:active {
+  box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+}
+.add-contest .add-final-submit input:disabled {
+  -webkit-opacity: 0.3;
+  -moz-opacity: 0.3;
+  opacity: 0.3;
+  cursor: default;
+}
+.add-contest .office-info {
+  background-color: #c4c4c4;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  width: 80%;
+  *zoom: 1;
+  margin: 0 10% 20px;
+  padding: 10px;
+}
+.add-contest .office-info:before,
+.add-contest .office-info:after {
+  display: table;
+  content: "";
+}
+.add-contest .office-info:after {
+  clear: both;
+}
+.add-contest .add-option {
+  border-bottom: 2px dotted #c4c4c4;
+  *zoom: 1;
+  display: block;
+  padding: 0 0 10px;
+  width: 80%;
+  margin: 0 10% 20px;
+}
+.add-contest .add-option:before,
+.add-contest .add-option:after {
+  display: table;
+  content: "";
+}
+.add-contest .add-option:after {
+  clear: both;
+}
+.add-contest .delete {
+  float: right;
+}
+.add-contest label {
+  display: inline-block;
+  float: left;
+  text-align: right;
+  margin-right: 30px;
+  width: 33%;
+  color: white;
+}
+.add-contest .small-label {
+  font-size: 12px;
+  text-align: left;
+}
+.add-contest input,
+.add-contest textarea {
+  width: 50%;
+  font-size: 16px;
+  display: inline-block;
+  margin: 0px 0px 10px 0px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 5px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0px 4px 0 rgba(0, 0, 0, 0.25);
+  outline: none;
+  border: 1px solid #c2c2b5;
+  color: #5b5b5b;
+}
+.add-contest .option {
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+  background-color: #c4c4c4;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.add-contest .option label {
+  width: 50%;
+}
+.add-contest .option input,
+.add-contest .option textarea {
+  width: 40%;
+}
+.add-contest .yes {
+  border: 1px solid #8eb237;
+}
+.add-contest .yes h3 {
+  color: #8eb237;
+}
+.add-contest .no {
+  border: 1px solid #b13b38;
+}
+.add-contest .no h3 {
+  color: #b13b38;
+}
+body.edit_choice {
+  hr, .discard_button, .top_buttons { display: none }
+  .ballot .candidate { display: none;}
+  .candidate {
+    img { max-width:60px; max-height:60px;}
+    .ballot { display: none;}
+  }
+  form {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    input, textarea, .delete_option, select { float: right; clear: right; }
+    textarea { width: 300px }
+    label { float: left }
+    p { clear: both; }
+    h1,h2,h3,h4,p { line-height: 1.3em; }
+    .option {
+      padding: 25px 0;
+      margin: 25px 0;
+      border-bottom: 2px dotted @grey;
+      .clearfix()
+    }
+    a { text-decoration: underline; }
+    h2 { clear: both; padding: 25px 0 50px; }
+    .info {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+  }
 }

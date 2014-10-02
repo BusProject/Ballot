@@ -8,11 +8,27 @@ Ballot::Application.routes.draw do
   match '/users/cancel' => 'user#cancel', :as => 'user_cancel'
   match '/users/update' => 'user#update', :as => 'user_update', :via => :post
   match '/users/pages' => 'user#access_pages', :as => 'user_pages'
+  match '/users/login' => 'user#login', :as => 'user_login'
+  match '/users/forgot_password' => 'user#forgot_password', :as => 'user_forgot_password'
+  match '/users/signup' => 'user#signup', :as => 'user_signup', :as => 'user_signup', :via => :post
+  match '/users/signin' => 'user#signin', :as => 'user_signin', :as => 'user_signin', :via => :post
   match '/users/pages/:fb' => 'user#page_session', :as => 'user_page_session_create'
   match '/users/auth/:provider/callback' => 'authentications#create'
 
   match '/users/add/:type' => 'choice#new', :via => :get, :type => /candidate|measure/ , :as => 'user_add_choice'
   match '/users/add' => 'choice#create', :via => :post, :as => 'user_create_choice'
+
+  match '/guide/create' => 'guide#create', :as => 'guide_create', :via => :post
+  match '/guide/:id/edit' => 'guide#edit', :as => 'guide_edit'
+  match '/guide/:id/update' => 'guide#update', :as => 'guide_update', :via => :post
+  match '/guide/:id/delete' => 'guide#destroy', :as => 'guide_delete', :via => :post
+  match '/block/new' => 'block#new', :as => 'block_new'
+  match '/block/create' => 'block#create', :as => 'block_create', :via => :post
+  match '/block/:id/half' => 'block#half', :as => 'block_half', :via => :post
+  match '/block/:id/edit' => 'block#edit', :as => 'block_edit'
+  match '/block/:id/update' => 'block#update', :as => 'block_update', :via => :post
+  match '/block/:id/delete' => 'block#destroy', :as => 'block_delete', :via => :post
+
 
   scope '/admin' do
     match '' => 'admin#index', :as => 'admin'
@@ -26,19 +42,14 @@ Ballot::Application.routes.draw do
     match '/option/:id/delete' => 'admin#option_delete', :as => 'option_delete', :via => :post
     match '/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
 
-    scope '/districts' do
-      match '' => 'districts#index', :as => 'districts'
-      match '/add' => 'districts#new', :via => :get
-      match '/add' => 'districts#create', :via => :post
-    end
+    match '/import/candidates' => 'admin#import_candidates', :as => 'import_candidates'
+    match '/import/measures' => 'admin#import_measures', :as => 'import_measures'
+
   end
-
-
 
 
   root :to => "home#index"
   match '/about' => "home#about"
-  match '/api' => "home#api"
   match '/about/privacy' => "home#privacy", :as => 'privacy'
   match '/about/terms' => "home#tos", :as => 'terms'
   match '/stats' => "home#stats"
@@ -56,8 +67,7 @@ Ballot::Application.routes.draw do
   match '/friends' => 'choice#friends'
   match '/guides/top' =>  'home#guides', :as => 'top_guides'
 
-
-  match '/lookup' => 'choice#index'
+  match '/lookup' => 'choice#index' #, :via => :post
   match '/lookup/:id/more' => 'choice#more'
 
   match '/feedback/save' => 'feedback#update', :via => :post, :as => 'save_feedback'
@@ -66,20 +76,13 @@ Ballot::Application.routes.draw do
   match '/feedback/:id/:flavor' => 'feedback#vote', :via => :post, :as => 'rate_feedback'
   match '/feedback/:id' => 'feedback#show', :as => 'show_feedback'
 
-  match '/m/:id/new' => 'meme#new', :via => :get, :as => 'meme_new'
-  match '/m/:id/new' => 'meme#update', :via => :post, :as => 'meme_create'
-  match '/m/:id/preview' => 'meme#preview', :via => :post, :as => 'meme_preview'
-  match '/m/:id/fb' => 'meme#fb', :via => :get, :as => 'meme_fb_image'
-  match '/m/:id' => 'meme#show', :via => :get, :as => 'meme_show_image'
-  match '/m/:id' => 'meme#destroy', :via => :post, :as => 'meme_show_image'
-
   match '/:state' => 'choice#state', :state =>/AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC/ , :as => 'state'
 
-  match '/:id' => 'choice#profile', :as => 'profile', :via => :get
-  match '/:id/past' => 'choice#profile', :as => 'profile_all', :via => :get, :past => true
-  match '/:id' => 'feedback#recommend', :as => 'recommend', :via => :post
+  match '/profile/:profile' => 'choice#profile', :as => 'profile', :via => :get
+  match '/profile/:profile' => 'feedback#recommend', :as => 'recommend', :via => :post
 
   match '/:geography/:contest' => 'choice#show', :contest =>/[^\/]+/ , :as => 'contest'
 
+  match '/:id' => 'guide#show', :as => 'guide_show'
 
 end

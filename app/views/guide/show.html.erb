@@ -1,0 +1,22 @@
+<%= render 'include', :locals => {:blocks => @blocks, :choices => @choices, :options => @options, :writeins => @writeins} %>
+
+<div id="guide">
+  <h1>
+  <% if @guide.name.nil? %>
+    <%= t('guide.guide_no') %>
+    <%= @guide.id %>
+  <% else %>
+    <%= @guide.name %>
+  <% end %>
+  </h1>
+
+  <div id="sortable">
+    <%= render 'block', :controls => false %>
+
+    <div style="clear: both; float: none;"></div>
+  </div>
+
+  <div style="clear: both; float: none;"></div>
+
+  <%= link_to t("site.back"), :back, :class => 'button' %>
+</div>

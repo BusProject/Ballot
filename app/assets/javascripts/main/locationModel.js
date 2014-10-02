@@ -146,7 +146,7 @@ function locationModel(data) {
 			geocoded = this.geocoded(),
 			geocoded_address = this.geocoded.address
 
-		if( address.length > 0 && !geocoded && address != geocoded_address() ) { // If address is located and not previously geocoded
+		if( address.length > 0 ) { // If address is located and not previously geocoded
 			geocoder.geocode( {address: address}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					var first = results[0].geometry.location
@@ -232,13 +232,13 @@ function locationModel(data) {
 				LA:  'Find your Polling Place by looking up your precinct<br />at the <a href="https://voterportal.sos.la.gov/voter.aspx" target="_blank">Lousiana Secretary of State<a/>.'
 				}
 
-		if( geolocated && state && fetch() && empty != lat+','+lng && this.address() != '' ) {
+		if( geolocated && state && fetch() && this.address() != '' ) {
 			fetch(false)
 
-			if( choices().length < 1 ) this.getBallotChoices(lat,lng,choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
+			if( choices().length < 1 ) this.getBallotChoices(choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
 			else fetch(true) // Not needed - used with the Lookup callback
 
-			if( typeof noGoogle[ state ] == 'undefined' )  'whoops';// pollingPlace(
+			// if( typeof noGoogle[ state ] == 'undefined' )  'whoops';// pollingPlace(
 			// 				this.address(),
 			// 				function(response) {
 			// 					var early = processLocations( response.earlyVoteSites ), earlyHTML = ''
@@ -271,24 +271,19 @@ function locationModel(data) {
 			// 					)
 			// 				}
 			// 			);
-			else {
-				pollingLocation( '<strong>How To Vote:</strong> '+noGoogle[ state ] )
-			}
+			// else {
+			// 	pollingLocation( '<strong>How To Vote:</strong> '+noGoogle[ state ] )
+			// }
 		}
 	}, this)
 
 
-	this.getBallotChoices = function(lat,lng,array,callback) { // Useful function for
-		var state = yourLocation.address.state(),
-			address = state ? ['Prez',(state+yourLocation.address.city()), state, (state+yourLocation.address.county()+( state != 'LA' ? ' County' : ' Parish' ) ) ] : []
+	this.getBallotChoices = function(array,callback) { // Useful function for
 
-		// Doing the openState call, will probably want to build this into something else
-		$.getJSON(
+		$.post(
 			inits.root+'lookup',
 			{
-				l: yourLocation.lat()+','+yourLocation.lng(),
-				address: address,
-				address_text: yourLocation.remember() ? yourLocation.address() : ''
+				address: yourLocation.address(),
 			},
 			function(data) {
 				if( data != null && data.constructor == Array ) {
@@ -326,11 +321,11 @@ function locationModel(data) {
 	// More menu shite
 	this.menuItems = []
 
-	var ballotMeasures = Grouping(['Ballot_Statewide'],I18n.t('types.ballot_measures.title'),'Ballot Measures','measure',this, I18n.t('types.ballot_measures.text')  ),
+	var ballotStateMeasures = Grouping(['Ballot_State'],I18n.t('types.ballot_state_measures.title'),'State Ballot Measures','measure',this, I18n.t('types.ballot_state_measures.text')  ),
+		ballotLocalMeasures = Grouping(['Ballot_Local'],I18n.t('types.ballot_local_measures.title'),'Local Ballot Measures','measure',this, I18n.t('types.ballot_local_measures.text') ),
 		federalCandidates = Grouping(['Federal'],I18n.t('types.federal.title'),'Federal','candidate',this, I18n.t('types.federal.text') ),
 		stateCandidates = Grouping(['State'],I18n.t('types.state.title'),'State','candidate',this,I18n.t('types.state.text')),
-		countyCandidates = Grouping(['County'],I18n.t('types.county.title'),'County','candidate',this,I18n.t('types.county.text') ),
-		otherCandidates = Grouping(['Other'],I18n.t('types.other.title'),'Other','candidate',this,I18n.t('types.other.text') )
+		localCandidates = Grouping(['Local'],I18n.t('types.local.title'),'Local','candidate',this,I18n.t('types.local.text') ),
 		userCandidate = Grouping(['User_Candidate'],I18n.t('types.user_candidates.title'),'User Created Candidates','candidate',this,I18n.t('types.user_candidates.text'))
 		userBallotMeasures = Grouping(['User_Ballot'],I18n.t('types.user_measures.title'),'User Created Ballots','measure',this,I18n.t('types.user_measures.text'))
 
@@ -339,37 +334,37 @@ function locationModel(data) {
 
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
-		this.sections.push( countyCandidates)
-		this.sections.push( otherCandidates)
-		this.sections.push( ballotMeasures)
+		this.sections.push( localCandidates)
+		this.sections.push( ballotStateMeasures)
+		this.sections.push( ballotLocalMeasures)
 		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.url }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you().length > 0 },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --></ul>'
 
 		var url = current_user.id == 'unauthenticated' ? document.location.host : document.location.host+current_user.url,
 			owner = current_user.id == 'unauthenticated' ? I18n.t('menu.share') : I18n.t('menu.the_ballot'),
-			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: current_user.name, thing: I18n.t("site.voter_guide") } ),
+			name = current_user.id == 'unauthenticated' ? undefined : current_user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: current_user.name, thing: I18n.t("site.voter_guide_page") } ),
 			msg = current_user.id == 'unauthenticated' ? undefined : I18n.t('menu.share_message'),
-			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">'+I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'})+'</a>'
+			extra = current_user.id == 'unauthenticated' ? '' : '<a style="text-align: center" href="http://'+url+'" class="small">'+I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide Page'})+'</a>'
 
 		this.menuItems.push(
 			MenuItem('#find-ballot',I18n.t('menu.find'),'<p>'+I18n.t('menu.find_text')+'</p>'),
 			MenuItem('#read-ballot',I18n.t('menu.read'),"<p>"+I18n.t('menu.read_text')+'</p><p>'+I18n.t('menu.read_text_2')+"</p>"+layout,null, this),
-			MenuItem(null,'Share Your Guide',null,'<div class="container share-container">'+owner+'<br>'+makeShare(url,name)+extra)
+			MenuItem(null,'Share Your List of Voter Guides',null,'<div class="container share-container">'+owner+'<br>'+makeShare(url,name)+extra)
 		)
 	}
 	if( this.state == 'state' ) {
 
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
-		this.sections.push( countyCandidates )
-		this.sections.push( otherCandidates)
-		this.sections.push( ballotMeasures)
+		this.sections.push( localCandidates)
+		this.sections.push( ballotStateMeasures)
+		this.sections.push( ballotLocalMeasures)
 		this.sections.push( userCandidate )
 		this.sections.push( userBallotMeasures )
 
 
-		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.title }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
+		layout = '<ul><!-- ko foreach: yourLocation.sections --><li><a class="fix-link" data-bind="text: $data.title, attr: {href: \'#\'+$data.anchor }, visible: $data.contests().length > 0"></a></li><li ><ul style="display: none" data-bind="visible: $data.active, foreach: $data.contests"><li>'
 		layout += '<a class="fixed-link" data-bind="css:{active: yourLocation.nearby() == $data, done: $data.you().length > 0 },attr: { href: \'#!\'+$data.contest+\' \'+$data.geography},text: $data.contest"></a>'
 		layout += '</li></ul></li><!-- /ko --><li style="font-weight: normal; margin: 10px; font-size: 10px;" data-bind="visible: !yourLocation.fetch() "><em>'+I18n.t('site.loading')+'</em></li></ul>'
 
@@ -402,9 +397,9 @@ function locationModel(data) {
 
 		this.sections.push( federalCandidates)
 		this.sections.push( stateCandidates)
-		this.sections.push( countyCandidates )
-		this.sections.push( otherCandidates)
-		this.sections.push( ballotMeasures)
+		this.sections.push( localCandidates)
+		this.sections.push( ballotStateMeasures)
+		this.sections.push( ballotLocalMeasures)
 		this.sections.push( userCandidate )
 		this.sections.push( userBallotMeasures )
 
@@ -414,7 +409,7 @@ function locationModel(data) {
 
 
 		var url = document.location.host+inits.user.profile,
-			name = inits.user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: inits.user.name, thing: I18n.t("site.voter_guide") } ),
+			name = inits.user.guide_name || I18n.t('i18n_toolbox.possessive',{owner: inits.user.name, thing: I18n.t("site.voter_guide_page") } ),
 			pronoun = inits.user.id == current_user.id ? I18n.t('i18n_toolbox.possessive_you',{thing: 'Voter Guide'}) : inits.user.first_name != '' ? I18n.t('i18n_toolbox.possessive',{owner: inits.user.first_name,thing: 'Voter Guide' } ) : I18n.t('i18n_toolbox.possessive',{owner: inits.user.last_name,thing: 'Voter Guide' } )
 
 		this.menuItems.push(

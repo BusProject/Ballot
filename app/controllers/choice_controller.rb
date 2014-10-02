@@ -24,7 +24,6 @@ class ChoiceController < ApplicationController
           :contest => params[:choice][:contest],
           :geography => geography,
           :votes => params[:choice][:votes].to_i,
-          :electionballot => Electionballot.find(params[:choice][:electionballot_id] ),
           :contest_type => params[:choice][:contest_type],
           :options_attributes => params[:choice][:options_attributes]
         )
@@ -35,7 +34,6 @@ class ChoiceController < ApplicationController
           :description => params[:choice][:description],
           :geography => geography,
           :contest_type => params[:choice][:contest_type],
-          :electionballot => Electionballot.find(params[:choice][:electionballot_id] ),
           :options_attributes => params[:choice][:options_attributes]
         )
       end
@@ -60,19 +58,29 @@ class ChoiceController < ApplicationController
 
   def profile
 
+<<<<<<< HEAD
     if params[:id].to_i(16).to_s(16) == params[:id]
       @user = User.find_by_id( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
+=======
+    if params[:profile].to_i(16).to_s(16) == params[:profile]
+      @user = User.find_by_id( params[:profile].to_i(16).to_s(10).to_i(2).to_s(10) )
+>>>>>>> pollvault-integration
     else
-      @user = User.find_by_profile( params[:id] )
+      @user = User.find_by_profile( params[:profile] )
     end
-
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil?
 
+<<<<<<< HEAD
+    raise ActionController::RoutingError.new('Could not find that user') if @user.nil?
+
     choices = params[:past] ? @user.choices.past :  @user.choices.future
+=======
+    choices = @user.choices
+>>>>>>> pollvault-integration
     more = ! params[:past] && !@user.choices.empty?
 
-    @choices = choices.uniq.sort_by{ |choice| [ ['Federal','State','County','Other','Ballot_Statewide','User_Candidate','User_Ballot'].index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
+    @choices = choices.uniq.sort_by{ |choice| [ Choice.contest_type_order.index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
 
     # if !current_user.nil? && current_user != @user
     #   @recommended = true
@@ -80,31 +88,49 @@ class ChoiceController < ApplicationController
     # end
 
     @classes = 'profile home'
-    @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+'\'s Voter Guide'
+    @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+"'s Voter Guide"
     @type = 'Voter Guide'
     @message = !@user.description.nil? && !@user.guide_name.strip.empty? ? @user.description : 'A Voter Guide by '+@user.first_name+', powered by The Ballot.'
-    @image = @user.memes.last.nil? ? nil : ENV['BASE']+meme_show_image_path( @user.memes.last.id )+'.png'
+
+    @guides = Guide.where(:user_id => @user.id)
 
     result = {:state => 'profile', :user => @user.to_public(false), :more => more }
 
     @config = result.to_json
     @choices_json = @choices.to_json( Choice.to_json_conditions )
 
-    @type = ENV['FACEBOOK_NAMESPACE']+':voter_guide'
+    @type = '';
+    if !@user.fb.nil?
+      #@type = ENV['FACEBOOK_NAMESPACE']+':voter_guide'
+    end
   end
 
   def state
+<<<<<<< HEAD
 
     @choices = Choice.find_by_state(params[:state], 50, params[:page] || 0 )
 
+=======
+
+    if request.method == 'POST'
+      @choices = Choice.find_by_state(params[:state], 500, 0 )
+    else
+      @choices = Choice.find_by_state(params[:state], 50, params[:page] || 0 )
+    end
+
+>>>>>>> pollvault-integration
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil?
 
     @choices = @choices.each{ |c| c.prep current_user }
 
     if params[:format] == 'json'
-      render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
+      if request.method == 'POST'
+        render :json => @choices.to_json( :only => [:contest, :id, :contest_type], :include => {:options => { :only => [ :name, :id]  } } )
+      else
+        render :json => @choices.to_json( Choice.to_json_conditions )
+      end
     else
-      @types = Choice.types_by_state( params[:state])
+      @types = Choice.types_by_state( params[:state] )
 
       @states = Choice.states
       @stateAbvs = Choice.stateAbvs
@@ -143,6 +169,7 @@ class ChoiceController < ApplicationController
   end
 
   def index
+<<<<<<< HEAD
 
     cicero = Cicero
     districts = nil
@@ -195,6 +222,10 @@ class ChoiceController < ApplicationController
     end
 
     render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
+=======
+    @choices = Choice.find_by_address( params[:a] || params[:address] ).each{ |c| c.prep current_user }
+    render :json => @choices.to_json( Choice.to_json_conditions )
+>>>>>>> pollvault-integration
   end
 
   def more

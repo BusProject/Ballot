@@ -1,0 +1,87 @@
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>tinymce.init({selector:'.tinymce', menubar: false, plugins: ['link', 'image', 'code'], toolbar: ["undo redo | bold italic underline strikethrough | link image | alignleft aligncenter alignright | code"], valid_children: "+body[style]"});</script>
+
+<div id="guide">
+  <h1><%= t("guide.editing") %>
+  <% if @guide.name.nil? %>
+    <%= t('guide.guide_no') %>
+    <%= @guide.id %>
+  <% else %>
+    <%= @guide.name %>
+  <% end %>
+  </h1>
+
+  <div id="profile">
+    <div id="edit-profile">
+        <%= render 'form' %>
+      </div>
+    </div>
+    <div>
+      <%= render 'block', :controls => true %>
+      <div style="clear: both; float: none;"></div>
+    </div>
+
+    <div class="ballot-section">
+      <div class="sectionheading">
+        <h1 style="background: #D37A3C; padding: 10px;" class=""><%= t('guide.block_add'); %></h1><br>
+        <ul>
+          <li><h2><%= link_to(t('guide.block_measure'), "javascript:type('measure');", :class => 'swap') %></h2></li>
+          <li><h2><%= link_to(t('guide.block_contest'), "javascript:type('contest');", :class => 'swap') %></h2></li>
+          <li><h2><%= link_to(t('guide.block_html'), "javascript:type('html');", :class => 'swap') %></h2></li>
+        </ul>
+
+        <div id="contest">
+        <%= form_tag(block_create_path, :method => :post) do %>
+          <%= hidden_field_tag(:guide_id, @guide.id) %>
+          <%= hidden_field_tag(:full_size, true) %>
+          <div class="title">
+            <%= label_tag(:title, t('guide.block_title')) %>
+            <%= text_field_tag(:title) %>
+          </div>
+          <div class="order">
+            <%= label_tag(:order, t('guide.block_order')) %>
+            <%= text_field_tag(:order) %>
+          </div>
+          <div class="states">
+            <%= label_tag(:state, t('guide.block_state')) %>
+            <div class="input">
+              <%= select_tag 'state', options_for_select(Array(1..51).map{ |i| [Choice.states[i],Choice.stateAbvs[i]] } ) %>
+              <span style="display:none" class="loading">Loading...</span>
+            </div>
+          </div>
+          <div class="contest_select">
+            <%= label_tag(:contest_id, t('guide.block_contest')) %>
+            <div class="input">
+              <%= select_tag 'contest_id' %>
+            </div>
+          </div>
+          <div class="option_select">
+            <%= label_tag(:option_id, t('guide.block_option')) %>
+            <div class="input"><%= select_tag 'option_id' %></div>
+            <div style="margin-bottom: 10px; float: right;"><div id="blurb"></div></div>
+            <div class="writein" style="clear: both; font-size: 12px;"><%= link_to(t('guide.writein'), 'javascript:writein();') %> </div>
+            </div>
+          <div class="custom_option">
+            <%= label_tag(:custom_name, t('guide.writein_name')) %>
+            <div class="input" style="margin-left: 7px;"><%= text_field_tag(:custom_name) %></div><br>
+          </div>
+          <div class="comments">
+            <p align="center"><%= t('guide.block_content') %></p>
+            <%= text_area_tag :content, '', :class => 'tinymce' %>
+          </div>
+          <div style="clear: both; float: none;"></div>
+          <div id="image-upload" class="submit">
+            <%= link_to(t('guide.block_new_type'), "javascript:reset();") %><br>
+            <%= submit_tag(t('site.submit')) %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div style="clear: both; float: none;"></div>
+
+    <%= link_to t("site.back"), :back, :class => 'button' %>
+</div>
+
+<%= render 'include', :locals => {:blocks => @blocks, :choices => @choices, :options => @options, :writeins => @writeins} %>
