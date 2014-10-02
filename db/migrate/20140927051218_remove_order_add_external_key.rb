@@ -2,8 +2,8 @@ class RemoveOrderAddExternalKey < ActiveRecord::Migration
   def change
 
     add_column :choices, :external_id, :integer
-    add_column :choices, :fiscal_impact, :blob
-    add_column :choices, :description_source, :blob
+    add_column :choices, :fiscal_impact, :text
+    add_column :choices, :description_source, :text
 
     add_column :options, :external_id, :integer
     add_column :options, :incumbent, :boolean, :default => false
