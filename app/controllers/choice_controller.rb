@@ -38,7 +38,7 @@ class ChoiceController < ApplicationController
         )
       end
       if @choice.save
-        redirect_to contest_path( @choice.geography, @choice.contest.gsub(' ','_'))
+        redirect_to contest_path( @choice.geography.gsub(' ','_'), @choice.contest.gsub(' ','_'))
       else
         redirect_to user_add_choice_path, :error => @choice.errors
       end
@@ -134,7 +134,7 @@ class ChoiceController < ApplicationController
   end
 
   def show
-    @choice = Choice.find_office(params[:geography],params[:contest].gsub('_',' '))
+    @choice = Choice.find_office(params[:geography].gsub('_',' '),params[:contest].gsub('_',' '))
 
     raise ActionController::RoutingError.new('Could not find '+params[:contest].gsub('_',' ') ) if @choice.nil?
 

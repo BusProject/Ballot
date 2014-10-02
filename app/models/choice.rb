@@ -20,7 +20,7 @@ class Choice < ActiveRecord::Base
 
 
   def to_url
-    return self.geography+'/'+self.contest.gsub(' ','_') unless self.geography.nil? || self.contest.nil?
+    return self.geography.gsub(' ','_')+'/'+self.contest.gsub(' ','_') unless self.geography.nil? || self.contest.nil?
     return ''
   end
 
