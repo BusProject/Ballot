@@ -58,26 +58,15 @@ class ChoiceController < ApplicationController
 
   def profile
 
-<<<<<<< HEAD
-    if params[:id].to_i(16).to_s(16) == params[:id]
-      @user = User.find_by_id( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
-=======
     if params[:profile].to_i(16).to_s(16) == params[:profile]
       @user = User.find_by_id( params[:profile].to_i(16).to_s(10).to_i(2).to_s(10) )
->>>>>>> pollvault-integration
     else
       @user = User.find_by_profile( params[:profile] )
     end
 
     raise ActionController::RoutingError.new('Could not find that user') if @user.nil?
 
-<<<<<<< HEAD
-    raise ActionController::RoutingError.new('Could not find that user') if @user.nil?
-
-    choices = params[:past] ? @user.choices.past :  @user.choices.future
-=======
     choices = @user.choices
->>>>>>> pollvault-integration
     more = ! params[:past] && !@user.choices.empty?
 
     @choices = choices.uniq.sort_by{ |choice| [ Choice.contest_type_order.index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
@@ -106,19 +95,12 @@ class ChoiceController < ApplicationController
   end
 
   def state
-<<<<<<< HEAD
-
-    @choices = Choice.find_by_state(params[:state], 50, params[:page] || 0 )
-
-=======
-
     if request.method == 'POST'
       @choices = Choice.find_by_state(params[:state], 500, 0 )
     else
       @choices = Choice.find_by_state(params[:state], 50, params[:page] || 0 )
     end
 
->>>>>>> pollvault-integration
     raise ActionController::RoutingError.new('Could not find that state') if @choices.nil?
 
     @choices = @choices.each{ |c| c.prep current_user }
@@ -169,63 +151,8 @@ class ChoiceController < ApplicationController
   end
 
   def index
-<<<<<<< HEAD
-
-    cicero = Cicero
-    districts = nil
-
-    if params[:a]
-      # If passed an address, uses 'a' to query using Google's geocoding
-      bloop =JSON::parse(RestClient.get 'http://maps.googleapis.com/maps/api/geocode/json?address='+params[:a]+'&sensor=false' )
-      if result = bloop['results'][0]
-        address = ['Prez']
-        address.push( result['address_components'].reject{ |a| a['types'].index("locality").nil? }.first['long_name'] )
-        state = result['address_components'].reject{ |a| a['types'].index("administrative_area_level_1").nil? }.first['short_name']
-        address.push( state )
-        address.push( result['address_components'].reject{ |a| a['types'].index("administrative_area_level_2").nil? }.first['long_name'] + ( state != 'LA' ? ' County' : ' Parish') )
-        l = [result['geometry']['location']['lat'].to_s,result['geometry']['location']['lng'].to_s].join(',')
-        districts = cicero.find( l, address )
-      end
-    else
-      # Uses Google to retrieve the Address components if they're not posted or incomplete
-      if params[:address].nil? || params[:address].select{ |d| d.index('undefined') ||  d.index('false') }.length > 0
-        bloop =JSON::parse(RestClient.get 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+params[:l]+'&sensor=true' )
-        if result = bloop['results'][0]
-          address = ['Prez']
-          address.push( result['address_components'].reject{ |a| a['types'].index("locality").nil? }.first['long_name'] )
-          state = result['address_components'].reject{ |a| a['types'].index("administrative_area_level_1").nil? }.first['short_name']
-          address.push( state )
-          county = result['address_components'].reject{ |a| a['types'].index("administrative_area_level_2").nil? }.first
-          address.push( county['long_name'] + ( state != 'LA' ? ' County' : ' Parish') ) unless county.nil?
-        end
-      else
-        address = params[:address]
-      end
-      districts = params['q'].nil? ? cicero.find(params['l'], address ) : params['q'].split('|')
-    end
-
-
-    districts += District.geography_match( districts, params['l'])
-
-    unless districts.nil?
-      @choices = Choice.find_by_districts( districts ).each{ |c| c.prep current_user }
-    end
-
-    if !params[:address_text].nil? && !params[:address_text].empty?
-      if current_user
-        current_user.address = params[:address_text]
-        current_user.match = cicero.match
-        current_user.save
-      else
-        cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache'] = params[:address_text]
-      end
-    end
-
-    render :json => @choices.to_json( Choice.to_json_conditions ), :callback => params['callback']
-=======
     @choices = Choice.find_by_address( params[:a] || params[:address] ).each{ |c| c.prep current_user }
     render :json => @choices.to_json( Choice.to_json_conditions )
->>>>>>> pollvault-integration
   end
 
   def more
