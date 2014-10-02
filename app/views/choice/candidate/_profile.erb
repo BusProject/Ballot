@@ -37,11 +37,11 @@
 			<div class="profile-comment <%= 'clean-no-script' if index > 0 %>" >
 					<h2 class="profile-text" style="<%= 'display:none;' unless !yourfeedback.nil? && !yourfeedback.comment.nil? && yourfeedback.comment.length > 0 %>"
 						data-bind=" visible: $data.comment != null && $data.comment.length > 0">
-						<%= t('site.i_say')%> 
+						<%= t('site.i_say')%>
 						<!-- ko text: $parent.votes > 1 ? I18n.t('candidates.in_support_of', { candidate: $data.option_name }) : '' --><%= t('candidates.in_support_of', { :candidate => yourfeedback.option.name }) if choice.votes > 1 %><!-- /ko -->
 					</h2>
 
-					<p 
+					<p
 						style="<%= 'display: none' unless !yourfeedback.nil? & !yourfeedback.comment.nil? && yourfeedback.comment.length > 0 %>"
 						data-bind="betterText: $data.comment, visible: $data.comment != null && $data.comment.length > 0 "
 					>
@@ -49,7 +49,7 @@
 							<%= '"'+yourfeedback.comment+'"' %>
 						<% end -%>
 					</p>
-					<div 
+					<div
 						<%= raw 'style="display: none;"' if yourfeedback.comment.nil?  || yourfeedback.comment.empty?  %> class="head"
 						data-bind="addClass: $data.type, visible: $data.comment != null && $data.comment.length > 1 "
 					>
@@ -58,8 +58,7 @@
 			</div>
 			<%- if user == current_user %>
 				<div class="controls <%= 'clean-no-script' if index > 0 %>" >
-					<strong style="display:none;" data-bind="visible: $parent.votes > 1, text: I18n.t('candidates.vote',{count: $index() +1 })"></strong>
-					<span class="link meme"><i class="icon-picture"></i> <%= t('site.badge ')%></span> | <span class="remove link" > <%= t('site.remove ')%></span> | 
+					<strong style="display:none;" data-bind="visible: $parent.votes > 1, text: I18n.t('candidates.vote',{count: $index() +1 })"></strong>&nbsp;|&nbsp;
 					<!-- Here's a link to the single page - just move this around -->
 					<a href="<%= choice.to_url %>" class="full" data-bind="attr: { href: '/'+$parent.geography+'/'+$parent.contest.replace(/ /g,'_') }" ><%= t('site.edit ')%></a>
 				</div>
@@ -73,9 +72,9 @@
 	<%- if user != current_user || current_user.nil? %>
 		<div class="controls">
 			<a href="<%= choice.to_url %>" class="link"><i class="icon-comments-alt"></i> <%= t('site.join') %></a>
-		</div>	
+		</div>
 	<% end -%>
-		
+
 
 
 </div>

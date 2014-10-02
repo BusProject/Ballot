@@ -7,7 +7,6 @@
 		<label> <%= t('candidates.office_name' )%></label><%= form.text_field :contest, { :class => 'required' } %>	<br/>
 		<label><%= t('site.state' )%></label> <%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %><br />
 		<label><%= t('candidates.votes') %></label> <%= form.select :votes, ['1','2','3','4']  %><em style="font-size: 10px; margin-left: 10px; color: white"><%= t('candidates.votes_more') %></em>
-		<label>Election</label> <%= form.select :electionballot_id, Electionballot.all( :conditions => ['date > ?',Date.today], :joins => [:electionday], :order => 'date DESC' ).map{ |c| [ [c.name,'-',c.electionday.date].join(' '), c.id ] } %>		
 	</div>
 
 	<!-- ko stopBinding: true -->
