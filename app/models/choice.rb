@@ -192,8 +192,11 @@ class Choice < ActiveRecord::Base
     return feedback
   end
 
+  def self.sync_state
+    stateAbvs[1,51].each{ |state| find_by_state(state) rescue puts "#{state} failed" }
+  end
   def self.digest_pollvault data
-    return nil if ! data || data['old']
+    return nil if ! data || data['no_data']
 
     choices = []
     state = data['state']

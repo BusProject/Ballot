@@ -20,10 +20,15 @@ class PollVault
 		params['hash'] = query_hash if query_hash && @cache
 		params['api'] = @api_key
 
-		data = JSON.parse(RestClient.get url, {:params => params})
+		begin
+			data = JSON.parse(RestClient.get url, {:params => params}) rescue {}
+		rescue Exception => e
+			$stderr.puts "POLLVAULT ERROR #{e.message}"
+			data = {'failed' => true}
+		end
 
-		data['old'] = query_hash == data['hash']
-		cache_set url, params, data['hash'] unless data['old']
+		data['no_data'] = query_hash == data['hash'] || data['failed']
+		cache_set url, params, data['hash'] unless data['no_data']
 
 		data
 	end
