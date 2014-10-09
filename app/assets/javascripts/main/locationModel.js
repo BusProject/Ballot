@@ -397,7 +397,7 @@ function locationModel(data) {
 		var url = document.location.toString().split('?')[0]
 
 		this.menuItems.push(
-			MenuItem(null,I18n.t('menu.this_guide'),null,'<div class="container share-container">'+I18n.t('menu.this_page')+'<br>'+makeShare(url,name)+'</div>')
+			MenuItem(null,I18n.t('menu.this_guide'),null,'<div class="container share-container">'+I18n.t('menu.this_guide')+'<br>'+makeShare(url,name)+'</div>')
 		)
 	}
 	if( this.state == 'profile' ) {
