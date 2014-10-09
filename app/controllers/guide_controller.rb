@@ -18,6 +18,7 @@ class GuideController < ApplicationController
     @choices = Choice.all()
     @options = Option.all()
     @writeins = UserOption.all()
+    @config = {:state => 'personalguide'}.to_json
     render :template => 'guide/show.html'
   end
 
@@ -28,7 +29,7 @@ class GuideController < ApplicationController
     @user = current_user
     @blocks = Block.where(:guide_id => params[:id]).order('"order"')
     @writeins = UserOption.all()
-    @config = {:state => 'off'}.to_json
+    @config = {:state => 'personalguide'}.to_json
     render :template => 'guide/edit.html'
   end
 
