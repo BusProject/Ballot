@@ -6,6 +6,11 @@ class GuideController < ApplicationController
   # guide_id and user_id are mixed up.
   def show
     @guide = Guide.find_by_slug( params[:id].downcase )
+    name = @guide.name
+    if name.nil? or name.empty?
+      name = 'Guide #' + @guide.id.to_s
+    end
+
     @classes = 'home'
     raise ActionController::RoutingError.new('Could not find that guide') if @guide.nil?
 
@@ -14,22 +19,29 @@ class GuideController < ApplicationController
       redirect_to :back
     end
     @user = current_user
-    @blocks = Block.where(:guide_id => @guide.id)
-    #@blocks = @blocks.order(:order)
+    @blocks = Block.where(:guide_id => @guide.id).order('"order"')
     @choices = Choice.all()
     @options = Option.all()
     @writeins = UserOption.all()
+    @title = name
+    @config = {:state => 'personalguide'}.to_json
     render :template => 'guide/show.html'
   end
 
   # GET /guides/1/edit
   def edit
     @guide = Guide.find(params[:id])
+    name = @guide.name
+    if name.nil? or name.empty?
+      name = 'Guide #' + @guide.id.to_s
+    end
+
     @classes = 'home'
     @user = current_user
-    @blocks = Block.where(:guide_id => params[:id])
+    @blocks = Block.where(:guide_id => params[:id]).order('"order"')
     @writeins = UserOption.all()
-    @config = {:state => 'off'}.to_json
+    @title = t('guide.editing') + ' ' + name
+    @config = {:state => 'personalguide'}.to_json
     render :template => 'guide/edit.html'
   end
 
