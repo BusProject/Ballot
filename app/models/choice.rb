@@ -119,7 +119,7 @@ class Choice < ActiveRecord::Base
     raw = $pollvault.retrieve_by_address(address)
     pollvault_results = digest_pollvault raw
 
-    raw['districts'].map!{ |d| raw['state']+d }
+    (raw['districts'] || [] ).map!{ |d| raw['state']+d }
 
     return pollvault_results || all(
       :select => 'choices.* ',
