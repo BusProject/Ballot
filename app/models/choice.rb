@@ -245,11 +245,11 @@ class Choice < ActiveRecord::Base
 
       option = choice.options.find{ |o| o.name == 'Yes' } || Option.new
       option.name = 'Yes'
-      choice.options.push( option )
+      choice.options.push( option ) if option.new_record?
 
       option = choice.options.find{ |o| o.name == 'No' } ||  Option.new
       option.name = "No"
-      choice.options.push( option )
+      choice.options.push( option ) if option.new_record?
 
       choice.save() unless choice.stop_sync
       choices << choice
