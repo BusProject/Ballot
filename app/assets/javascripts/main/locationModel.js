@@ -232,10 +232,16 @@ function locationModel(data) {
 				LA:  'Find your Polling Place by looking up your precinct<br />at the <a href="https://voterportal.sos.la.gov/voter.aspx" target="_blank">Lousiana Secretary of State<a/>.'
 				}
 
-		if( geolocated && state && fetch() && this.address() != '' ) {
+		if( geolocated && state && fetch() && empty != [yourLocation.lat(),yourLocation.lng()].join(',') ) {
 			fetch(false)
 
-			if( choices().length < 1 ) this.getBallotChoices(choices,function() {   setTimeout( function() { fetch(true); $('.candidate.row:last .next').text( I18n.t('measures.next') ).bind('click touchend',function() { $('.ballot-measures button.open:first').click() });  },100) })
+			if( choices().length < 1 ) this.getBallotChoices(choices,function() {
+				setTimeout( function() {
+					fetch(true);
+					$('.candidate.row:last .next').text(I18n.t('measures.next')).bind('click touchend', function() {
+						$('.ballot-measures button.open:first').click()
+					});
+			},100) })
 			else fetch(true) // Not needed - used with the Lookup callback
 
 			// if( typeof noGoogle[ state ] == 'undefined' )  'whoops';// pollingPlace(
@@ -280,18 +286,19 @@ function locationModel(data) {
 
 	this.getBallotChoices = function(array,callback) { // Useful function for
 
+
+		params = { latlng: [this.lat(),this.lng()].join(',') }
+
 		$.post(
 			inits.root+'lookup',
-			{
-				address: yourLocation.address(),
-			},
+			params,
 			function(data) {
 				if( data != null && data.constructor == Array ) {
 					for( var i=0 ; i < data.length; i++) {
 						array.push( Choice(data[i]) )
 					}
 				}
-				empty = yourLocation.lat()+','+yourLocation.lng();
+				empty = [yourLocation.lat(),yourLocation.lng()].join(',');
 				callback()
 			})
 	}

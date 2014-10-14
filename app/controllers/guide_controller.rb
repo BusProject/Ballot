@@ -19,9 +19,7 @@ class GuideController < ApplicationController
       redirect_to :back
     end
     @user = current_user
-    @blocks = Block.where(:guide_id => @guide.id).order('"order"')
-    @choices = Choice.all()
-    @options = Option.all()
+    @blocks = Block.where(:guide_id => @guide.id).order('"blocks.order"')
     @writeins = UserOption.all()
     @title = name
     @config = {:state => 'personalguide'}.to_json

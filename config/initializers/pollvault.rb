@@ -51,6 +51,9 @@ class PollVault
 	def retrieve_by_address address
 		get "search/", {"address" => address}
 	end
+	def retrieve_by_latlng latlng
+		get "search/", {"latlng" => latlng}
+	end
 end
 
 $pollvault = PollVault.new ENV['POLLVAULT_URL'], ENV['POLLVAULT_API']

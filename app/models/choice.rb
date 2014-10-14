@@ -88,8 +88,7 @@ class Choice < ActiveRecord::Base
 
     pollvault_data = digest_pollvault $pollvault.retrieve_by_state(state)
     pollvault_data = pollvault_data.slice(offset.to_i, limit.to_i) if pollvault_data
-
-    return pollvault_data || self.all(
+    choices = pollvault_data || self.all(
       :conditions => ['geography LIKE ?', state+'%'],
       :select => 'choices.*',
       :include => [:options => [:feedback]],
@@ -97,6 +96,8 @@ class Choice < ActiveRecord::Base
       :limit => limit,
       :offset => offset
     )
+    Match.new( :query => state, :match_type => 'state', :state => state ).save()
+    choices
   end
   def self.types_by_state(state)
     return self.all(
@@ -115,8 +116,18 @@ class Choice < ActiveRecord::Base
   end
 
   def self.find_by_address(address)
-
     raw = $pollvault.retrieve_by_address(address)
+    choices = location_query_pollvault raw
+    Match.new( :query => address, :match_type => 'address', :state => raw['state'] ).save()
+    return choices
+  end
+  def self.find_by_latlng(latlng)
+    raw = $pollvault.retrieve_by_latlng(latlng)
+    choices = location_query_pollvault raw
+    Match.new( :query => latlng, :match_type => 'latlng', :state => raw['state'] ).save()
+    return choices
+  end
+  def self.location_query_pollvault raw
     pollvault_results = digest_pollvault raw
 
     (raw['districts'] || [] ).map!{ |d| raw['state']+d }

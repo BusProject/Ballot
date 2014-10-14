@@ -151,8 +151,12 @@ class ChoiceController < ApplicationController
   end
 
   def index
-    @choices = Choice.find_by_address( params[:a] || params[:address] ).each{ |c| c.prep current_user }
-    render :json => @choices.to_json( Choice.to_json_conditions )
+    if params[:latlng]
+      @choices = Choice.find_by_latlng( params[:latlng] )
+    else
+      @choices = Choice.find_by_address( params[:a] || params[:address] )
+    end
+    render :json => @choices.each{ |c| c.prep current_user }.to_json( Choice.to_json_conditions )
   end
 
   def more

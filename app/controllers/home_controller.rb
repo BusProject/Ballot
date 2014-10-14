@@ -60,6 +60,22 @@ EOF
     render 'home/show'
   end
 
+ def stats
+    @classes = 'home admin'
+    @config = { :state => 'page' }.to_json
+
+    @matches = Match.all.map(&:state)
+    @states = Choice.states.slice(1,51)
+    @stateAbvs = Choice.stateAbvs.slice(1,51)
+    @matchStates = []
+    n = 0
+    @stateAbvs.each do |state|
+      count = @matches.select{ |match| match == state }.count
+      @matchStates.push( { :count => count, :state => @states[n], :stateabv => state } ) if count > 0
+      n+=1
+    end
+
+  end
 
   def search
     prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'

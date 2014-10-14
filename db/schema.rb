@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140930192105) do
+ActiveRecord::Schema.define(:version => 20141014154152) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
@@ -78,13 +78,12 @@ ActiveRecord::Schema.define(:version => 20140930192105) do
   add_index "guides", ["user_id"], :name => "index_guides_on_user_id"
 
   create_table "matches", :force => true do |t|
-    t.string   "latlng"
-    t.text     "data"
+    t.string   "query"
+    t.string   "state"
+    t.string   "match_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "matches", ["latlng"], :name => "index_matches_on_latlng", :unique => true
 
   create_table "options", :force => true do |t|
     t.integer  "choice_id"
