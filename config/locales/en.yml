@@ -203,6 +203,8 @@ en:
         name: 'Ballot Measure Name'
         link: 'Link to Full Text'
         description: 'Description'
+        description_source: 'Description Source'
+        fiscal_impact: 'Fiscal Impact'
         affirmative: 'Affirmative Vote'
         affirmative_name: 'What is an affirmative vote called?'
         yeses: 'yes,support,affirm,for,maintained,approved,approve'

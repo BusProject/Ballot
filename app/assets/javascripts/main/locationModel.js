@@ -445,7 +445,6 @@ function locationModel(data) {
 		else return items[ items.length - 1].id
 	},this)
 
-
 }
 
 
