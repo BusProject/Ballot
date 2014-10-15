@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141014154152) do
+ActiveRecord::Schema.define(:version => 20141015152632) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "guide_id"
@@ -19,9 +19,8 @@ ActiveRecord::Schema.define(:version => 20141014154152) do
     t.integer  "user_option_id"
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.integer  "order",          :default => 0, :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.boolean  "full_size"
   end
 

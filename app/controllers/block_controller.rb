@@ -14,7 +14,7 @@ class BlockController < ApplicationController
     else
       @block.guide_id = params[:guide_id]
       if params[:option_id].nil? and !params[:custom_name].nil?
-        @writein = UserOption.new 
+        @writein = UserOption.new
         @writein.name = params[:custom_name]
         @writein.choice_id = params[:contest_id]
         @writein.user_id = current_user.id
@@ -24,7 +24,6 @@ class BlockController < ApplicationController
         @block.option_id = params[:option_id]
       end
       @block.title = params[:title]
-      @block.order = params[:order]
       @block.content = params[:content]
       if @block.save
         flash[:notice] = t('guide.block_creation_success')
@@ -38,7 +37,7 @@ class BlockController < ApplicationController
   def update
     @block = Block.find(params[:id])
 
-    if @block.update_attributes(:title => params[:title], :order => params[:order].to_i, :content => params[:content])
+    if @block.update_attributes(:title => params[:title], :content => params[:content])
       flash[:notice] = t('guide.block_update_success')
     else
       flash[:notice] = t('guide.block_update_failure')

@@ -30,7 +30,6 @@
 
         <% if controls %>
           <p style="font-size: 12px;">
-            Order #<%= block.order %> | 
             <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
             <% if !block.full_size.nil? and !block.full_size %>
               <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %> | 
