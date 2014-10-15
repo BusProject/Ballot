@@ -19,7 +19,7 @@ class GuideController < ApplicationController
       redirect_to :back
     end
     @user = current_user
-    @blocks = Block.where(:guide_id => @guide.id)
+    @blocks = Block.where(:guide_id => @guide.id).order('block_order')
     @writeins = UserOption.all()
     @title = name
     @config = {:state => 'personalguide'}.to_json
@@ -36,7 +36,7 @@ class GuideController < ApplicationController
 
     @classes = 'home'
     @user = current_user
-    @blocks = Block.where(:guide_id => params[:id])
+    @blocks = Block.where(:guide_id => params[:id]).order('block_order')
     @writeins = UserOption.all()
     @title = t('guide.editing') + ' ' + name
     @config = {:state => 'personalguide'}.to_json
@@ -66,7 +66,7 @@ class GuideController < ApplicationController
     else
       @guide = Guide.find(params[:id])
 
-      if @guide.update_attributes(:slug => params[:slug], :name => params[:name], :publish => params[:publish])
+      if @guide.update_attributes(:slug => params[:slug], :block_order => params[:block_order].to_i,, :name => params[:name], :publish => params[:publish])
         flash[:notice] = t('guide.update_success')
       else
         flash[:notice] = t('guide.update_failure')

@@ -1,7 +1,8 @@
 <%= form_tag(block_update_path, method: 'post') do %>
   <%= label_tag(:title, t('guide.block_title')) %>
   <%= text_field_tag(:title, @block.title) %><br>
-  <%= text_field_tag(:order, @block.order) %><br>
+  <%= label_tag(:order, t('guide.block_order')) %>
+  <%= text_field_tag(:order, @block.block_order) %><br>
   <%= label_tag(:content, t('guide.block_content')) %>
   <br>
   <%= text_area_tag(:content, @block.content, :class => 'tinymce') %><br>
