@@ -30,11 +30,12 @@
 
         <% if controls %>
           <p style="font-size: 12px;">
-            <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
+            Order #<%= block.block_order %>&nbsp;|&nbsp;
+            <%= link_to(t('guide.block_edit'), block_edit_path(block)) %>&nbsp;|&nbsp;
             <% if !block.full_size.nil? and !block.full_size %>
-              <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %> | 
+              <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %>&nbsp;|&nbsp;
             <% else %>
-              <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %> | 
+              <%= link_to(t('guide.block_half'), block_half_path(block), :method => :post) %>&nbsp;|&nbsp;
             <% end %>
             <%= link_to(t('guide.block_delete'), block_delete_path(block), :method => :post, :confirm => t('guide.delete_confirm')) %>
           </p>
