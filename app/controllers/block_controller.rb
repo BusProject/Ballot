@@ -24,7 +24,7 @@ class BlockController < ApplicationController
         @block.option_id = params[:option_id]
       end
       @block.title = params[:title]
-      @block.block_order = params[:block_order]
+      @block.block_order = params[:block_order] || 0
       @block.content = params[:content]
       if @block.save
         flash[:notice] = t('guide.block_creation_success')
