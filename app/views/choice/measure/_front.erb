@@ -12,9 +12,9 @@
 
 	<hr><h1 itemprop="name" class="title" data-bind="text: $data.contest"><%= choice.contest %></h1><hr>
 	<div itemprop="description" class="explanation" data-bind="betterText: $data.description, elastic: true"><%= choice.description %></div>
-	<a target="_blank" href="<%= t('choice.description_source') %>" data-bind="href: $data.description_source" ><%= t('measures.read_more')%> <i class="icon-external-link"></i></a>
+	<a target="_blank" href="<%= choice.description_source %>" data-bind="href: $data.description_source" ><%= t('measures.read_more')%> <i class="icon-external-link"></i></a>
 	<div data-bind="visible: $data.fiscal_impact">
-		<strong>Fiscal Impact:</strong>
+		<strong><%= t('measure.fiscal_impact') %>:</strong>
 		<div data-bind="betterText: $data.fiscal_impact"><%= t('choice.fiscal_impact') %></div>
 	</div>
 
@@ -137,7 +137,7 @@
 
 
 	</div>
-	<%- if !current_user.nil? && current_user.admin?  %>
+	<%- if !current_user.nil? && current_user.admin? && ! is_mobile_device? %>
 		<strong>Admin Only</strong>
 		<a href="<% choice_edit_path(choice.id) if !choice.id.nil? %>" target="_blank" data-bind="href: '/admin/choice/'+$data.id">Edit Measure</a>
 	<% end -%>

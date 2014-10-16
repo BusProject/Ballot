@@ -7,21 +7,28 @@ class PollVault
 	def initialize endpoint=nil, api_key=nil, cache=true
 		@cache = cache ? {} : nil
 		@endpoint = endpoint || 'http://pollvault.org'
-		@api_key = api_key || 'bleepbloop'
+		@api_key = api_key
 	end
 
 
 	def get target, params={}
+		return nil unless @api_key
+
 		url = URI.join(@endpoint, 'api/', 'voter/', target).to_s
 		query_hash = cache_get(url, params)
 
 		params['hash'] = query_hash if query_hash && @cache
 		params['api'] = @api_key
 
-		data = JSON.parse(RestClient.get url, {:params => params})
+		begin
+			data = JSON.parse(RestClient.get url, {:params => params}) rescue {}
+		rescue Exception => e
+			$stderr.puts "POLLVAULT ERROR #{e.message}"
+			data = {'failed' => true}
+		end
 
-		data['old'] = query_hash == data['hash']
-		cache_set url, params, data['hash'] unless data['old']
+		data['no_data'] = query_hash == data['hash'] || data['failed']
+		cache_set url, params, data['hash'] unless data['no_data']
 
 		data
 	end
@@ -43,6 +50,9 @@ class PollVault
 	end
 	def retrieve_by_address address
 		get "search/", {"address" => address}
+	end
+	def retrieve_by_latlng latlng
+		get "search/", {"latlng" => latlng}
 	end
 end
 

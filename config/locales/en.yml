@@ -26,6 +26,7 @@ en:
         loading: 'Loading...'
         for: 'for'
         you_recommend: "You've recommended"
+
         tagline: 'Your Social Voting Guide'
 
         # Objects in the uguide: 'Voter Guide'
@@ -119,6 +120,7 @@ en:
     # Top Bar
     top:
         start: 'Get Started'
+
         sign_in: 'Sign In/Sign Up'
         about: 'About'
         news: 'News'
@@ -201,6 +203,8 @@ en:
         name: 'Ballot Measure Name'
         link: 'Link to Full Text'
         description: 'Description'
+        description_source: 'Description Source'
+        fiscal_impact: 'Fiscal Impact'
         affirmative: 'Affirmative Vote'
         affirmative_name: 'What is an affirmative vote called?'
         yeses: 'yes,support,affirm,for,maintained,approved,approve'
@@ -345,18 +349,6 @@ en:
         missing: 'Is something missing?'
         confirm: 'Are you sure you want to create this?'
 
-    # used in memes
-    badge:
-        title: 'TheBallot.org Badge Creator'
-        two_title: 'Step 2: Choose a Background'
-        two_text: 'Express yourself. Choose a background image for your comment so people notice it on their feed.'
-        three: 'Step 3: Share Your Image'
-        one:
-            title: 'Step 1: Choose Your Text'
-            text: 'What do you want to say on your image? If your comment is too long you can edit it so it fits better.'
-            remaining: 'Characters Remaining:'
-            too_many: 'Too Many'
-
     friends:
         heading: "Here's What Your Friends Are Up To"
         explain: "Here are what your friends are up to on The Ballot"
@@ -367,4 +359,3 @@ en:
             one: "One other person agrees it's %{attribute}"
             zero: "Only you think it's %{attribute}"
             other: "%{count} other people agree it's %{attribute}"
-

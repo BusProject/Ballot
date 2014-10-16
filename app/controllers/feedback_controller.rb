@@ -16,7 +16,7 @@ class FeedbackController < ApplicationController
           if feedback.save
             sucess = success && true
             successes.push({:obj => feedback.id, :updated_at => feedback.updated_at })
-            
+
             type = feedback.choice.contest.index('Ballot').nil? ? 'candidate' : 'measure'
             url = ENV['BASE']+show_feedback_path( feedback.id )
           else
@@ -29,7 +29,7 @@ class FeedbackController < ApplicationController
       else
         @json = {'success'=>false, 'message'=>'You must sign in to save feedback'}
       end
-      
+
       render :json => @json, :callback => params['callback']
   end
 
@@ -44,17 +44,16 @@ class FeedbackController < ApplicationController
 
   def recommend
     unless current_user.nil?
-      
+
       if params[:id].to_i(16).to_s(16) == params[:id]
         @user = User.find_by_id( params[:id].to_i(16).to_s(10).to_i(2).to_s(10) )
       else
         @user = User.find_by_profile( params[:id] )
       end
-      
       @user.feedback.each do |feedback|
         current_user.likes feedback
       end
-      
+
       response = RestClient.post( 'https://graph.facebook.com/me/the-ballot:recommend', { :access_token => params[:access_token], :voter_guide => ENV['BASE']+@user.profile } ){|response, request, result| response } if params[:access_token]
     else
       {:you => '#fail'}
@@ -80,25 +79,25 @@ class FeedbackController < ApplicationController
       render :json => {:success => false, :callback  => params['callback'] }
     end
   end
-  
+
   def show
     @feedback = Feedback.find( params[:id] )
     @user = @feedback.user
-    
-    raise ActionController::RoutingError.new('Could not find that feedback') if @feedback.nil? 
-    
+
+    raise ActionController::RoutingError.new('Could not find that feedback') if @feedback.nil?
+
     @choices = [ @feedback.choice ].each{ |c| c.prep current_user; c.addUserFeedback @feedback.user }
-    
+
     if !current_user.nil? && current_user != @feedback.user
       @recommended = current_user.voted_for?( @feedback )
     end
-    
+
     @classes = 'profile home'
-    
+
     @message = @feedback.comment
-    
+
     unless params[:guide]
-      if @choices[0].contest_type.index('Ballot').nil? 
+      if @choices[0].contest_type.index('Ballot').nil?
         @title = 'Vote '+@feedback.option.name+' for '+@choices.first.contest
         type ='candidate'
         @message = I18n.t('site.voted', { :count => @choices.first.feedback.votes } )+', '+I18n.t('site.commented', { :count => @choices.first.feedback.comments } ) if @message.nil? || @message.empty?
@@ -115,16 +114,9 @@ class FeedbackController < ApplicationController
       type = 'comment'
       @voter_guide_reference = ENV['BASE']+@user.profile
     end
-    
-    @meme = @feedback.memes.last
-    if @meme.nil?
-      @meme = @feedback.memes.new( :quote => '', :theme => 'new/'+( 1+rand(4) ).to_s+'.jpg' )
-      @meme.save
-    end
-    @image =  ENV['BASE']+meme_show_image_path( @meme.id )+'.png'
-    
+
     result = {:state => 'profile', :user => @user.to_public(false) }
-    
+
     @config = result.to_json
     @single = true
 
@@ -138,16 +130,16 @@ class FeedbackController < ApplicationController
 
     feedback = Feedback.find( params[:id] )
     flag = feedback.flag
-    
+
     params[:flavor] = 'flag'
 
     if flag.nil?
       render :json => {:success => false, :message => ''  }, :callback  => params['callback']
     else
-    
+
       flag = flag.split(',')
-        
-        
+
+
       if user_signed_in? && current_user.commentable?
         if current_user.id == feedback.user_id
           render :json => {:success => false, :message => '' }, :callback  => params['callback']

@@ -38,7 +38,7 @@ class ChoiceController < ApplicationController
         )
       end
       if @choice.save
-        redirect_to contest_path( @choice.geography, @choice.contest.gsub(' ','_'))
+        redirect_to contest_path( @choice.geography.gsub(' ','_'), @choice.contest.gsub(' ','_'))
       else
         redirect_to user_add_choice_path, :error => @choice.errors
       end
@@ -71,10 +71,10 @@ class ChoiceController < ApplicationController
 
     @choices = choices.uniq.sort_by{ |choice| [ Choice.contest_type_order.index( choice.contest_type), choice.geography, choice.geography.slice(-3).to_i ]  }.each{ |c| c.prep current_user; c.addUserFeedback @user }
 
-    if !current_user.nil? && current_user != @user
-      @recommended = true
-      @user.feedback.each{ |f|  @recommended = @recommended & current_user.voted_for?(f) }
-    end
+    # if !current_user.nil? && current_user != @user
+    #   @recommended = true
+    #   @user.feedback.each{ |f|  @recommended = @recommended && current_user.voted_for?(f) }
+    # end
 
     @classes = 'profile home'
     @title = !@user.guide_name.nil? && !@user.guide_name.strip.empty? ? @user.guide_name : @user.name+"'s Voter Guide"
@@ -95,7 +95,6 @@ class ChoiceController < ApplicationController
   end
 
   def state
-
     if request.method == 'POST'
       @choices = Choice.find_by_state(params[:state], 500, 0 )
     else
@@ -135,7 +134,7 @@ class ChoiceController < ApplicationController
   end
 
   def show
-    @choice = Choice.find_office(params[:geography],params[:contest].gsub('_',' '))
+    @choice = Choice.find_office(params[:geography].gsub('_',' '),params[:contest].gsub('_',' '))
 
     raise ActionController::RoutingError.new('Could not find '+params[:contest].gsub('_',' ') ) if @choice.nil?
 
@@ -152,8 +151,12 @@ class ChoiceController < ApplicationController
   end
 
   def index
-    @choices = Choice.find_by_address( params[:a] || params[:address] ).each{ |c| c.prep current_user }
-    render :json => @choices.to_json( Choice.to_json_conditions )
+    if params[:latlng]
+      @choices = Choice.find_by_latlng( params[:latlng] )
+    else
+      @choices = Choice.find_by_address( params[:a] || params[:address] )
+    end
+    render :json => @choices.each{ |c| c.prep current_user }.to_json( Choice.to_json_conditions )
   end
 
   def more

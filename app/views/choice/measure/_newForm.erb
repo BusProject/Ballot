@@ -15,10 +15,7 @@
 	<div>
 		<label><%= t('site.state')%></label> <%= form.select :geography, Choice.states.reject{|c| c == 'The United States of America'}  %>
 	</div>
-	<div>
-		<label>Election</label> <%= form.select :electionballot_id, Electionballot.all( :conditions => ['date > ?',Date.today], :joins => [:electionday], :order => 'date DESC' ).map{ |c| [ [c.name,'-',c.electionday.date].join(' '), c.id ] } %>
-	</div>
-	
+
 
 	<div id="options">
 			<div class="option yes">

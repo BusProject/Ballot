@@ -29,5 +29,4 @@ describe User do
       user.banned = true
       user.save.should == true
     end
-    
 end

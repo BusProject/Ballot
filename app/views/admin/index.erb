@@ -87,14 +87,6 @@
     $('#find_choice').val('')
     e.preventDefault();
   })
-  .on('click','.delete_option, .delete_choice',function(e) {
-    $this = $(this)
-    if( confirm('Are you Sure?') ) {
-      if( $this.hasClass('delete_choice') ) $.post( $this.attr('href'), function(r) { $this.parent('li').remove(); } )
-      else $.post( $this.attr('href'), function(r) { $this.parents('.option').remove(); } )
-      e.preventDefault()
-    }
-  })
   .on('click','.delete_choice_and_resassign',function(e) {
     $this = $(this)
     url = prompt('The URL of the choice this should be linked to')

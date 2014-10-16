@@ -136,7 +136,7 @@
 		<% end %>
 
 	</div>
-	<%- if !current_user.nil? && current_user.admin?  %>
+	<%- if !current_user.nil? && current_user.admin? && ! is_mobile_device? %>
 		<strong>Admin Only</strong>
 		<a href="<% choice_edit_path(choice.id) if !choice.id.nil? %>" target="_blank" data-bind="href: '/admin/choice/'+$data.id">Edit Contest</a>
 	<% end -%>

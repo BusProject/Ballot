@@ -14,17 +14,8 @@
 
 		</div><!-- enter address -->
 
-		<div id="map"  data-bind="css: { noGuides: true || guides().length < 1 && geolocated() }">
+		<div id="map" >
 			<img data-bind="attr: { 'src' : map }, css: { located: geolocated() }" >
-			<!-- <div style="display:none" class="top-guides" data-bind=" visible: geolocated() ">
-				<h3>Voter Guides Near You</h3>
-				<ol data-bind="foreach:guides">
-					<li>
-						<a data-bind="attr:{href: profile}, text: ( guide_name || name+'\'s Voter Guide' ).capitalize() "></a>
-					</li>
-				</ol>
-				<em data-bind="visible: guides().length < 0">Loading...</em>
-			</div> -->
 			<div class="polling-place" data-bind="html: pollingLocation"></div>
 			<div style="display:none;" class="confirmation" >
 				<%= t("front.confirm") %><br />

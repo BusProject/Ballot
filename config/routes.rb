@@ -41,10 +41,12 @@ Ballot::Application.routes.draw do
     match '/choice/:id/delete' => 'admin#choice_delete', :as => 'choice_delete', :via => :post
     match '/option/:id/delete' => 'admin#option_delete', :as => 'option_delete', :via => :post
     match '/feedback/:id' => 'admin#feedback', :as => 'approval_feedback' #, :via => :post
+
     match '/import/candidates' => 'admin#import_candidates', :as => 'import_candidates'
     match '/import/measures' => 'admin#import_measures', :as => 'import_measures'
 
   end
+
 
   root :to => "home#index"
   match '/about' => "home#about"

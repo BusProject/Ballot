@@ -1,7 +1,6 @@
 class Choice < ActiveRecord::Base
   attr_accessible :contest, :geography, :contest_type, :commentable, :description, :options, :options_attributes, :votes, :description_source, :stop_sync
   validates_presence_of :contest, :geography
-
   validates_uniqueness_of :external_id, :allow_nil => true
 
   has_many :options, :dependent => :destroy
@@ -21,7 +20,7 @@ class Choice < ActiveRecord::Base
 
 
   def to_url
-    return self.geography+'/'+self.contest.gsub(' ','_') unless self.geography.nil? || self.contest.nil?
+    return self.geography.gsub(' ','_')+'/'+self.contest.gsub(' ','_') unless self.geography.nil? || self.contest.nil?
     return ''
   end
 
@@ -89,8 +88,7 @@ class Choice < ActiveRecord::Base
 
     pollvault_data = digest_pollvault $pollvault.retrieve_by_state(state)
     pollvault_data = pollvault_data.slice(offset.to_i, limit.to_i) if pollvault_data
-
-    return pollvault_data || self.all(
+    choices = pollvault_data || self.all(
       :conditions => ['geography LIKE ?', state+'%'],
       :select => 'choices.*',
       :include => [:options => [:feedback]],
@@ -98,6 +96,8 @@ class Choice < ActiveRecord::Base
       :limit => limit,
       :offset => offset
     )
+    Match.new( :query => state, :match_type => 'state', :state => state ).save()
+    choices
   end
   def self.types_by_state(state)
     return self.all(
@@ -116,11 +116,21 @@ class Choice < ActiveRecord::Base
   end
 
   def self.find_by_address(address)
-
     raw = $pollvault.retrieve_by_address(address)
+    choices = location_query_pollvault raw
+    Match.new( :query => address, :match_type => 'address', :state => raw['state'] ).save()
+    return choices
+  end
+  def self.find_by_latlng(latlng)
+    raw = $pollvault.retrieve_by_latlng(latlng)
+    choices = location_query_pollvault raw
+    Match.new( :query => latlng, :match_type => 'latlng', :state => raw['state'] ).save()
+    return choices
+  end
+  def self.location_query_pollvault raw
     pollvault_results = digest_pollvault raw
 
-    raw['districts'].map!{ |d| raw['state']+d }
+    (raw['districts'] || [] ).map!{ |d| raw['state']+d }
 
     return pollvault_results || all(
       :select => 'choices.* ',
@@ -193,8 +203,11 @@ class Choice < ActiveRecord::Base
     return feedback
   end
 
+  def self.sync_state
+    stateAbvs[1,51].each{ |state| find_by_state(state) rescue puts "#{state} failed" }
+  end
   def self.digest_pollvault data
-    return nil if ! data || data['old']
+    return nil if ! data || data['no_data']
 
     choices = []
     state = data['state']
@@ -243,11 +256,11 @@ class Choice < ActiveRecord::Base
 
       option = choice.options.find{ |o| o.name == 'Yes' } || Option.new
       option.name = 'Yes'
-      choice.options.push( option )
+      choice.options.push( option ) if option.new_record?
 
       option = choice.options.find{ |o| o.name == 'No' } ||  Option.new
       option.name = "No"
-      choice.options.push( option )
+      choice.options.push( option ) if option.new_record?
 
       choice.save() unless choice.stop_sync
       choices << choice
