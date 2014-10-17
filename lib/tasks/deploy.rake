@@ -4,6 +4,7 @@ task :deploy do
   begin
     blue ">>>> Checking out compiled"
     system 'git stash'
+    sh "git push origin master"
     sh "git checkout -B #{comiled_branch}"
 
     blue '>>>> Precompiling Assets'
