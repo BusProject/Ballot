@@ -146,6 +146,8 @@
   }
 
   function enable_contest(state) {
+    if( typeof contests == 'undefined' ) contests = {};
+
     if( typeof contests[state] == 'undefined' ) {
       $.post(inits.root+state+'.json', function(response) {
           contests[state] = contests[state] || []
