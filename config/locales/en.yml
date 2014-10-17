@@ -120,7 +120,7 @@ en:
     # Top Bar
     top:
         start: 'Get Started'
-
+        login: 'Log In'
         sign_in: 'Sign In/Sign Up'
         about: 'About'
         news: 'News'
