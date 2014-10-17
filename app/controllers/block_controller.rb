@@ -38,7 +38,7 @@ class BlockController < ApplicationController
   def update
     @block = Block.find(params[:id])
 
-    if @block.update_attributes(:title => params[:title], :block_order => params[:block_order].to_i, :content => params[:content])
+    if @block.update_attributes(:title => params[:title], :block_order => params[:block_order].to_i, :content => params[:content], :geography => params[:state])
       flash[:notice] = t('guide.block_update_success')
     else
       flash[:notice] = t('guide.block_update_failure')

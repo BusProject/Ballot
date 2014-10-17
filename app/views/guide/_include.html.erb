@@ -72,9 +72,7 @@
 
     disable_type();
     enable_basics();
-    if (typename != 'html') {
-      enable_state();
-    } else {
+    if (typename == 'html') {
       enable_title();
     }
   }
@@ -146,29 +144,32 @@
   }
 
   function enable_contest(state) {
-    if( typeof contests == 'undefined' ) contests = {};
+    if(typename != 'html') { 
+      if( typeof contests == 'undefined' ) contests = {};
 
-    if( typeof contests[state] == 'undefined' ) {
-      $.post(inits.root+state+'.json', function(response) {
-          contests[state] = contests[state] || []
-          contests[state] = contests[state].concat(response)
-          enable_contest(state)
-        })
-      $('.loading').show()
-    } else {
-      $('.loading').hide()
-      jQuery('select[name="contest_id"]').html('').append('<option value=0><%= t("guide.select_contest") %></option>');
+      if( typeof contests[state] == 'undefined' ) {
+        $.post(inits.root+state+'.json', function(response) {
+            contests[state] = contests[state] || []
+            contests[state] = contests[state].concat(response)
+            enable_contest(state)
+          })
+        $('.loading').show()
+      } else {
+        $('.loading').hide()
+        jQuery('select[name="contest_id"]').html('').append('<option value=0><%= t("guide.select_contest") %></option>');
 
-      var match = typename === 'contest' ? 1 : 2
-      for(i = 0; i < contests[state].length; i++) {
-        var contest = contests[state][i]
-        if( contest.contest_type.toLowerCase().split('ballot').length === match ) {
-          jQuery('select[name="contest_id"]').append('<option value="' + contest['id'] + '">' + contest['contest'] + '</option>');
+        var match = typename === 'contest' ? 1 : 2
+        for(i = 0; i < contests[state].length; i++) {
+          var contest = contests[state][i]
+          if( contest.contest_type.toLowerCase().split('ballot').length === match ) {
+            jQuery('select[name="contest_id"]').append('<option value="' + contest['id'] + '">' + contest['contest'] + '</option>');
+          }
         }
-      }
 
-      jQuery('.contest_select').show();
-      jQuery('select[name="contest_id"]').removeAttr('disabled');
+        jQuery('.contest_select').show();
+        jQuery('select[name="contest_id"]').removeAttr('disabled');
+      }
+      enable_state();
     }
   }
 
@@ -211,6 +212,7 @@
     jQuery('.comments').show();
     jQuery('.comments input').removeAttr('disabled');
     jQuery('.submit').show();
+    enable_state();
   }
 
   function submit_toggle() {
