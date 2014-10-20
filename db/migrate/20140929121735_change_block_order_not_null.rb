@@ -1,5 +1,5 @@
 class ChangeBlockOrderNotNull < ActiveRecord::Migration
   def change
-    change_column :blocks, :order, :integer, :default => 0, :null => false
+    change_column_null :blocks, :order, false, default = 0 
   end
 end

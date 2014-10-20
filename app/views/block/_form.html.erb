@@ -11,7 +11,7 @@
   <%= label_tag(:block_order, t('guide.block_order')) %>
   <%= text_field_tag(:block_order, @block.block_order) %><br>
   <%= label_tag(:state, t('guide.block_state')) %>
-  <%= select_tag 'state', options_for_select(Array(1..51).map{ |i| [Choice.states[i],Choice.stateAbvs[i]] }, @block.geography) %>
+  <%= select_tag 'state', options_for_select(Array(1..51).map{ |i| [Choice.states[i],Choice.stateAbvs[i]] }, geography) %>
   <%= label_tag(:content, t('guide.block_content')) %>
   <br>
   <%= text_area_tag(:content, @block.content, :class => 'tinymce') %><br>
