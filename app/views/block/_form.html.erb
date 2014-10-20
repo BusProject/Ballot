@@ -10,8 +10,11 @@
   <%= text_field_tag(:title, @block.title) %><br>
   <%= label_tag(:block_order, t('guide.block_order')) %>
   <%= text_field_tag(:block_order, @block.block_order) %><br>
+<<<<<<< Updated upstream
   <%= label_tag(:state, t('guide.block_state')) %>
   <%= select_tag 'state', options_for_select(Array(1..51).map{ |i| [Choice.states[i],Choice.stateAbvs[i]] }, geography) %>
+=======
+>>>>>>> Stashed changes
   <%= label_tag(:content, t('guide.block_content')) %>
   <br>
   <%= text_area_tag(:content, @block.content, :class => 'tinymce') %><br>
