@@ -30,13 +30,8 @@
 
         <% if controls %>
           <p style="font-size: 12px;">
-<<<<<<< Updated upstream
             Order #<%= block.block_order %>&nbsp;|&nbsp;
             <%= link_to(t('guide.block_edit'), block_edit_path(block)) %>&nbsp;|&nbsp;
-=======
-            Order #<%= block.block_order %> | 
-            <%= link_to(t('guide.block_edit'), block_edit_path(block)) %> | 
->>>>>>> Stashed changes
             <% if !block.full_size.nil? and !block.full_size %>
               <%= link_to(t('guide.block_expand'), block_half_path(block), :method => :post) %>&nbsp;|&nbsp;
             <% else %>

@@ -24,7 +24,11 @@ class BlockController < ApplicationController
         @block.option_id = params[:option_id]
       end
       @block.title = params[:title]
+<<<<<<< Updated upstream
       @block.block_order = params[:block_order] || 0
+=======
+      @block.block_order = params[:block_order]
+>>>>>>> Stashed changes
       @block.content = params[:content]
       if @block.save
         flash[:notice] = t('guide.block_creation_success')
@@ -38,7 +42,11 @@ class BlockController < ApplicationController
   def update
     @block = Block.find(params[:id])
 
+<<<<<<< Updated upstream
     if @block.update_attributes(:title => params[:title], :block_order => params[:block_order].to_i, :content => params[:content], :geography => params[:state])
+=======
+    if @block.update_attributes(:title => params[:title], :block_order => params[:block_order].to_i, :content => params[:content])
+>>>>>>> Stashed changes
       flash[:notice] = t('guide.block_update_success')
     else
       flash[:notice] = t('guide.block_update_failure')

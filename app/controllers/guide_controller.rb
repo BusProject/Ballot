@@ -19,7 +19,13 @@ class GuideController < ApplicationController
       redirect_to :back
     end
     @user = current_user
+<<<<<<< Updated upstream
     @blocks = Block.where(:guide_id => @guide.id).order('block_order')
+=======
+    @blocks = Block.where(:guide_id => @guide.id).order('"block_order"')
+    @choices = Choice.all()
+    @options = Option.all()
+>>>>>>> Stashed changes
     @writeins = UserOption.all()
     @title = name
     @config = {:state => 'personalguide'}.to_json
@@ -36,7 +42,11 @@ class GuideController < ApplicationController
 
     @classes = 'home'
     @user = current_user
+<<<<<<< Updated upstream
     @blocks = Block.where(:guide_id => params[:id]).order('block_order')
+=======
+    @blocks = Block.where(:guide_id => params[:id]).order('"block_order"')
+>>>>>>> Stashed changes
     @writeins = UserOption.all()
     @title = t('guide.editing') + ' ' + name
     @config = {:state => 'personalguide'}.to_json
