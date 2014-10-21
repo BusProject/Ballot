@@ -1,8 +1,8 @@
 <% 
   geography = nil 
-  #if !@block.geography.nil?
-  #  geography = @block.geography
-  #end
+  if defined? @block.geography
+    geography = @block.geography
+  end
 %>
 
 <%= form_tag(block_update_path, method: 'post') do %>
