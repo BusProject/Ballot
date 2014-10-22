@@ -66,7 +66,7 @@ class GuideController < ApplicationController
     else
       @guide = Guide.find(params[:id])
 
-      if @guide.update_attributes(:slug => params[:slug], :name => params[:name], :publish => params[:publish], :geography => params[:state])
+      if @guide.update_attributes(:slug => params[:slug], :name => params[:name], :publish => params[:publish])
         flash[:notice] = t('guide.update_success')
       else
         flash[:notice] = t('guide.update_failure')

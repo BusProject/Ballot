@@ -26,6 +26,7 @@ class BlockController < ApplicationController
       @block.title = params[:title]
       @block.block_order = params[:block_order] || 0
       @block.content = params[:content]
+      @block.geography = params[:state]
       if @block.save
         flash[:notice] = t('guide.block_creation_success')
       end
