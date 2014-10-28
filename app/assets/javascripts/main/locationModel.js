@@ -182,10 +182,10 @@ function locationModel(data) {
 	function pollingPlace(address, callback) {
 		var key = 'AIzaSyAnFJvCCJnJtv86xVD-NXoneJ5OhYWGAjQ'
 		$.ajax({
-			url: 'https://www.googleapis.com/civicinfo/us_v1/voterinfo/4000/lookup?key='+key+'&officialOnly=false',
-			type: 'POST',
-			contentType: 'application/json',
-			data: '{ "address": "'+address+'" }',
+			url: 'https://www.googleapis.com/civicinfo/v2/voterinfo',
+			type:'GET',
+	        dataType: 'JSONP',
+			data: { address: address, election_id: 4100, key: key },
 			success: function(response) { callback(response) }
 		})
 	}
@@ -228,11 +228,11 @@ function locationModel(data) {
 			fetch = this.fetch,
 			pollingLocation = this.pollingLocation,
 			noGoogle = {
-				// OR:  'Oregon votes by mail - <a href="http://ballotdrop.org/#'+this.address()+'" target="_blank">find Ballot Drop sites here</a>.<br /><br />If you haven\'t received your ballot yet - and are registered - <a href="http://oregonvotes.org/" target="_blank">contact the Secretary of State for a new ballot<a/>.'
-				LA:  'Find your Polling Place by looking up your precinct<br />at the <a href="https://voterportal.sos.la.gov/voter.aspx" target="_blank">Lousiana Secretary of State<a/>.'
+				OR:  'Oregon votes by mail - <a href="http://ballotdrop.org/#'+this.address()+'" target="_blank">find Ballot Drop sites here</a>.<br /><br />If you haven\'t received your ballot yet - and are registered - <a href="http://oregonvotes.org/" target="_blank">contact the Secretary of State for a new ballot<a/>.'
+				// LA:  'Find your Polling Place by looking up your precinct<br />at the <a href="https://voterportal.sos.la.gov/voter.aspx" target="_blank">Lousiana Secretary of State<a/>.'
 				}
 
-		if( geolocated && state && fetch() && empty != [yourLocation.lat(),yourLocation.lng()].join(',') ) {
+		if( geolocated && state && fetch() && empty != [yourLocation.lat(),yourLocation.lng()].join(',') && this.address().length > 0 ) {
 			fetch(false)
 
 			if( choices().length < 1 ) this.getBallotChoices(choices,function() {
@@ -244,42 +244,43 @@ function locationModel(data) {
 			},100) })
 			else fetch(true) // Not needed - used with the Lookup callback
 
-			// if( typeof noGoogle[ state ] == 'undefined' )  'whoops';// pollingPlace(
-			// 				this.address(),
-			// 				function(response) {
-			// 					var early = processLocations( response.earlyVoteSites ), earlyHTML = ''
-			// 					if( early.length > 0 ) {
-			// 						earlyHTML = '<a onclick="$(this).hide().next(\'ul\').show().nextAll(\'a.link:first\').show(); return false" href="#" class="link">Click to see Early Vote Locations</a><ul style="display:none;">'
-			// 						earlyHTML += early.map( function(location) {
-			// 							return [ '<li><strong>'+location.name,
-			// 								'</strong> at <a href="',
-			// 								location.directions,'" target="_blank">',
-			// 								location.address,
-			// 								'</a>',
-			// 								location.hours,
-			// 								'</li>'
-			// 								].join(' ')
-			// 							}).join('')
-			// 						earlyHTML += '</ul>'
-			// 					}
-			// 					pollingLocation(
-			// 						processLocations( response.pollingLocations ).map( function(location) {
-			// 							return [ '<strong>Your Polling Place:</strong>',
-			// 								location.name,
-			// 								'at <a href="',
-			// 								location.directions,'" target="_blank">',
-			// 								location.address,
-			// 								'</a> ',
-			// 								location.hours,
-			// 								'<br /><br />'
-			// 								].join(' ')
-			// 						}).join(' ') + earlyHTML+'<a style="display:none;" class="link" onclick="$(this).hide().prev(\'ul\').hide().prevAll(\'a.link:first\').show(); return false" href="#" class="click">Hide All</a>'
-			// 					)
-			// 				}
-			// 			);
-			// else {
-			// 	pollingLocation( '<strong>How To Vote:</strong> '+noGoogle[ state ] )
-			// }
+			if( typeof noGoogle[ state ] == 'undefined' ) {
+					pollingPlace(
+							this.address(),
+							function(response) {
+								var early = processLocations( response.earlyVoteSites ), earlyHTML = ''
+								if( early.length > 0 ) {
+									earlyHTML = '<a onclick="$(this).hide().next(\'ul\').show().nextAll(\'a.link:first\').show(); return false" href="#" class="link">Click to see Early Vote Locations</a><ul style="display:none;">'
+									earlyHTML += early.map( function(location) {
+										return [ '<li><strong>'+location.name,
+											'</strong> at <a href="',
+											location.directions,'" target="_blank">',
+											location.address,
+											'</a>',
+											location.hours,
+											'</li>'
+											].join(' ')
+										}).join('')
+									earlyHTML += '</ul>'
+								}
+								pollingLocation(
+									processLocations( response.pollingLocations ).map( function(location) {
+										return [ '<strong>Your Polling Place:</strong>',
+											location.name,
+											'at <a href="',
+											location.directions,'" target="_blank">',
+											location.address,
+											'</a> ',
+											location.hours,
+											'<br /><br />'
+											].join(' ')
+									}).join(' ') + earlyHTML+'<a style="display:none;" class="link" onclick="$(this).hide().prev(\'ul\').hide().prevAll(\'a.link:first\').show(); return false" href="#" class="click">Hide All</a>'
+								)
+							}
+						);
+			} else {
+				pollingLocation( '<strong>How To Vote:</strong> '+noGoogle[ state ] )
+			}
 		}
 	}, this)
 
