@@ -66,4 +66,10 @@ class BlockController < ApplicationController
     @block.save
     redirect_to :back
   end
+
+  def state
+    guides = Guide.find_all_by_geography( params[:state] )
+    render :json => guides.map{ |g| { :user => g.user.name, :name => g.name, :url => guide_show_path(g.slug) } }
+  end
+
 end

@@ -229,47 +229,6 @@ end
       render 'home/show'
     end
 
-
-  def guides
-
-    @classes = 'home profile guides'
-
-    if params[:state] == 'top'
-      @limit = 25
-      guides = User.top_25
-      @guides = [ ['Prez', guides] ]
-      @title = 'Top 25 Voter Guides'
-      @config = { :state => 'guides', :states => guides.map{|u| u.name }  }.to_json
-
-    elsif params[:state]
-      if params[:state].length == 2
-        state = Choice.states[ Choice.stateAbvs.index(params[:state] ) ].gsub(' ','_')
-        stateAbv = params[:state]
-      else
-        state =  params[:state].capitalize.gsub(' ','_')
-        stateAbv = Choice.stateAbvs[ Choice.states.index(params[:state].capitalize ) ]
-      end
-
-      @limit = params[:limit] || 100
-      guides = User.by_state( stateAbv ,@limit )
-      @guides = [ [stateAbv , guides ] ]
-
-      if params[:format] == 'json'
-         render :json => guides.map{ |u| u.to_public(false) }
-      else
-        @config = { :state => 'guides',  :stateName => state, :states => guides.map{|u| u.name } }.to_json
-        @title = 'Top Voter Guides In '+state.capitalize
-      end
-
-    else
-      @limit = 10
-      @guides = User.by_state
-      @title = 'Top Voter Guides Around the Country'
-      @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] } }.to_json
-    end
-  end
-
-
   def sitemap
     stateAbvs = Choice.stateAbvs
     newwest_user = User.all( :order => 'updated_at DESC', :limit => 1, :conditions => ['banned = ? AND deactivated = ?',false,false] ).first.updated_at

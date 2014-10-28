@@ -59,10 +59,7 @@ Ballot::Application.routes.draw do
   match '/source' => redirect('https://github.com/BusProject/Ballot')
   match '/sitemap' => 'home#sitemap', :as => 'sitemap'
 
-  match '/guides' => 'home#guides', :as => 'guides'
-  match '/guides/list' => 'home#guides'
-  match '/guides/:state' => 'home#guides', :as => 'state_guides'
-  match '/guides/by_state/:state' => redirect( '/guides/%{state}' )
+  match '/block/:state' => 'block#state', :as => 'state_guides'
 
   match '/friends' => 'choice#friends'
   match '/guides/top' =>  'home#guides', :as => 'top_guides'

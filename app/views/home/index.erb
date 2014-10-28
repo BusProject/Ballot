@@ -14,13 +14,13 @@
 
 		</div><!-- enter address -->
 
-		<div id="map"  data-bind="css: { noGuides: true || guides().length < 1 && geolocated() }">
+		<div id="map"  data-bind="css: { noGuides: guides().length < 1 && geolocated() }">
 			<img data-bind="attr: { 'src' : map }, css: { located: geolocated() }" >
 			<div style="display:none" class="top-guides" data-bind=" visible: geolocated() ">
 				<h3>Voter Guides Near You</h3>
 				<ol data-bind="foreach:guides">
 					<li>
-						<a data-bind="attr:{href: profile}, text: ( guide_name || name+'\'s Voter Guide' ).capitalize() "></a>
+						<a data-bind="attr:{href: url}, text: ( name || user+'\'s Voter Guide' ).capitalize() "></a>
 					</li>
 				</ol>
 				<em data-bind="visible: guides().length < 0">Loading...</em>

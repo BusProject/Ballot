@@ -305,7 +305,7 @@ function locationModel(data) {
 	}
 	this.getGuides = function(state,guides ) { // Useful function for
 		$.getJSON(
-			inits.root+'guides/'+state+'.json?limit=5',
+			inits.root+'block/'+state,
 			function(data) {
 				if( data != null && data.constructor == Array ) {
 					if( data.length > 0 ) guides(data)
@@ -313,17 +313,16 @@ function locationModel(data) {
 			})
 	}
 
-	// Disabling for now
-	// this.grabChoices = ko.computed( function() { // Retrieve guides
-	// 	var geolocated = this.geolocated(),
-	// 		state = this.address.state(),
-	// 		guides = this.guides
-	//
-	// 	if( geolocated && state != __state ) {
-	// 		this.getGuides(state,guides,__state);
-	// 		__state = state
-	// 	}
-	// },this)
+
+	this.grabChoices = ko.computed( function() { // Retrieve guides
+		var geolocated = this.geolocated(),
+			state = this.address.state(),
+			guides = this.guides
+		if( geolocated && state != __state ) {
+			this.getGuides(state,guides,__state);
+			__state = state
+		}
+	},this)
 
 
 	// More menu shite
