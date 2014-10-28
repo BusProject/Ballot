@@ -8,7 +8,7 @@ class Guide < ActiveRecord::Base
 	self.find(
 		:all,
 		:joins => :blocks,
-		:conditions => ["blocks.geography is ?", state],
+		:conditions => ["blocks.geography = ?", state],
 		:limit => 5,
 	)
   end
