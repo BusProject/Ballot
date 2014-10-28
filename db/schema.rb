@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(:version => 20141017135252) do
 
   create_table "choices", :force => true do |t|
     t.string   "contest"
-    t.integer  "order"
     t.boolean  "commentable",        :default => false
     t.string   "geography"
     t.text     "description"
@@ -40,15 +39,13 @@ ActiveRecord::Schema.define(:version => 20141017135252) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.integer  "votes",              :default => 1
-    t.integer  "electionballot_id"
     t.integer  "external_id"
-    t.text     "fiscal_impact"
-    t.text     "description_source"
+    t.binary   "fiscal_impact"
+    t.binary   "description_source"
     t.boolean  "stop_sync",          :default => false
   end
 
   add_index "choices", ["external_id"], :name => "index_choices_on_external_id"
-  add_index "choices", ["geography", "contest", "electionballot_id"], :name => "index_choices_on_geography_and_contest_and_electionballot_id", :unique => true
 
   create_table "feedback", :force => true do |t|
     t.integer  "user_id"
@@ -91,22 +88,18 @@ ActiveRecord::Schema.define(:version => 20141017135252) do
 
   create_table "options", :force => true do |t|
     t.integer  "choice_id"
-    t.integer  "position"
     t.string   "photo"
     t.text     "blurb"
     t.string   "name"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "twitter"
     t.string   "facebook"
     t.string   "website"
-    t.string   "blurb_source"
     t.string   "party"
-    t.boolean  "incumbant",    :default => false
-    t.string   "vip_id"
     t.integer  "external_id"
-    t.boolean  "incumbent",    :default => false
-    t.boolean  "stop_sync",    :default => false
+    t.boolean  "incumbent",   :default => false
+    t.boolean  "stop_sync",   :default => false
   end
 
   add_index "options", ["choice_id"], :name => "index_options_on_choice_id"
