@@ -48,7 +48,6 @@
     <!--[if lt IE 7]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
-  <%=  render 'devise/account' %>
 
   <div id="container">
     <div id="page">
@@ -63,7 +62,7 @@
         <%- if !@user.nil? && !@user.header.nil? && @user.header.url(:header) != '/headers/header/missing.png' %>
           <%= link_to image_tag( @user.header.url(:header) ), root_path, :id => 'logo' %>
         <% else %>
-          <%= link_to image_tag( asset_path( 'theballot.png' ) ), root_path, :id => 'logo' %>
+          <%= link_to image_tag( asset_path( 'logo.jpg' ) ), root_path, :id => 'logo' %>
         <% end %>
       </div> <!-- header -->
 
@@ -109,7 +108,7 @@
         <% n += 1 %>
       <% end %>
       <p style="font-size: 9px; margin-top: 20px;">
-        <p>TheBallot.org is brought to you by the <a href="http://theleague.com" target='_blank'>League of Young Voters</a>, New Era Colorado, <a href="http://forwardmontana.org" target='_blank'>Forward Montana</a>, and the <a href="http://busproject.org" target='_blank'>Bus Project</a>.</p>
+        <p>November4th.org is brought to you by the <a href="http://youngvoter.org/" target='_blank'>The League of Young Voters Education Fund</a>, <a href="http://neweracolorado.org" target="_blank">New Era Civic Fund</a>, <a href="http://forwardmontanafoundation.org" target='_blank'>Forward Montana Foundation</a>, and the <a href="http://busfoundation.org" target='_blank'>Bus Foundation</a>.</p>
         <%= link_to 'Terms of Service', terms_path %>
         |&nbsp;&nbsp;
         <%= link_to 'Privacy Policy', privacy_path %>&nbsp;

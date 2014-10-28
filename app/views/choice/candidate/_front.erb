@@ -43,101 +43,11 @@
 					<p class="bigger"><span itemprop="affiliation" data-bind="text: $data.party"><%= option.party %></span> <!-- | <span data-bind="text: $data.type"><%= option.option_type unless choice.new_record? %></span>--></p>
 					<p class="smaller"><a target="_blank" data-bind="href: $data.twitter " href="<%= option.twitter %>" ><span><%= t('candidates.twitter' ) %></span></a><a target="_blank" data-bind="href: $data.facebook " href="<%= option.facebook %>" ><span><%= t('candidates.facebook' ) %></span></a><a itemprop="url" data-bind="href: $data.website " href="<%= option.website %>" target="_blank" ><span><%= t('candidates.website' ) %></span></a></p>
 
-					<% if choice.new_record? || choice.commentable? || true %>
-						<div class="faces" data-bind="css: { lessHeads: $data.support() < 3 }">
-							<div class="minicounter" >
-								<div data-bind="html: I18n.t('site.support', { count: $data.support() })+'<br />'+$data.name ">
-									<%= t('site.support', { :count => option[:support]} ) %><br /><%= option.name %>
-								</div>
-							</div>
-							<!-- ko foreach: $data.faces.show -->
-								<a target="_blank" class="hide-no-script" data-bind="attr: {href: $data.url }">
-									<img class="face miniimage" data-bind="src: $data.image, attr: { alt: $data.name }">
-								</a>
-							<!-- /ko -->
-							<% unless option.new_record? %>
-								<% option.faces.each do |face| %>
-									<a target="_blank" class="clean-no-script" href="<%= face[:url] %>">
-										<img class="face miniimage" alt="<%= face[:name] %>" src="<%= face[:image] %>">
-									</a>
-								<% end %>
-							<% end %>
-						</div>
-					<% end %>
 				</div>
 			<!-- /ko -->
 		</div>
 		<% n+=1 %>
 		<% end %>
-		<% if choice.new_record? || choice.commentable || true %>
-			<hr class="button lower middle">
-
-			<%- if current_user != user || !current_user.nil? %>
-				<%= render 'choice/candidate/feedback', :choice => choice, :user => user, :feedback => you %>
-			<%- end %>
-
-			<%- if user.nil? %>
-				<% # hiding all of this if a featured user is set - i.e. we're looking at a profile  %>
-				<div class="commentTitle" data-bind="visible: feedback.realLength() > 0  ">
-					<h2>What Others Are Saying</h2>
-					<select data-bind="value: $data.mode, options: $data.sortOptions, optionsValue: 'value', optionsText: 'label'">
-						<option value="normal"><%= t('site.sort_by')%></option>
-						<option value="best"><%= t('site.most_helpful')%></option>
-						<option value="friends"><%= t('site.friends')%></option>
-						<%- choice.options.each do |option| %>
-							<option value="<%= option.name %>" ><%= t('site.supporting',{:candidate => option.name}) %></option>
-						<% end -%>
-					</select>
-					<div class="arrows">&#x25B2;<br />&#x25BC;</div>
-				</div>
-
-				<ul data-bind="foreach: feedback.everyone" class="feedback">
-					<li data-bind="addClass: $data.type ">
-
-						<div class="head" data-bind="addClass: $data.type ">
-							<a data-bind="attr: {href: $data.url }" >
-								<img class="face" data-bind="src: $data.image, attr: { alt: $data.name }" >
-							</a>
-						</div>
-						<div class="comment-bubble">
-							<strong data-bind="text: $data.name+ ' Supports '+$data.option_name+':'"></strong>
-							<div class="message" data-bind="betterText: $data.comment"></div>
-						</div>
-						<div class="foot">
-								<a data-bind="text: $data.name, attr: {href: $data.url }"></a>&nbsp;|&nbsp;<span data-bind="text: $data.time"></span>
-							<br />
-								<%- if !current_user.nil? && current_user.commentable? %>
-									<div class="ask">
-										<%= t('site.helpful')%>
-										<span class="helpful link" ><Yes><%= t('site.yes')%></span>
-											&nbsp;|&nbsp;
-										<span class="not link"><%= t('site.no')%></span>
-											&nbsp;|&nbsp;
-										<span class="flag link"><%= t('site.flag')%></span>
-									</div>
-								<% end -%>
-						</div>
-
-					</li>
-				</ul>
-				<%- if current_user.nil?  %>
-					<%= render 'choice/candidate/feedback' , :choice => choice,  :feedback => current_user.nil? ? nil : choice.options.map{ |o| o.new_record? ?  o.feedback : o.feedbacks }.flatten.select{ |f| f.user_id == current_user.id }.first %>
-				<% end -%>
-			<% end -%>
-
-			<div class="footer" >
-				<a href="<%= choice.to_url %>" class="full" data-bind="visible: !$data.all() && $data.comments > 3, attr: { href: '/'+$data.geography+'/'+$data.contest.replace(/ /g,'_') }"><%= t('site.read_all') %></a>
-				<a href="#" class="full get-more" data-bind="visible: $data.all() && $data.feedback.more() "><%= t('site.load_more')%></a>
-			</div>
-
-			<hr class="button lower">
-
-
-		<% end %>
 
 	</div>
-	<%- if !current_user.nil? && current_user.admin? && ! is_mobile_device? %>
-		<strong>Admin Only</strong>
-		<a href="<% choice_edit_path(choice.id) if !choice.id.nil? %>" target="_blank" data-bind="href: '/admin/choice/'+$data.id">Edit Contest</a>
-	<% end -%>
 </div>

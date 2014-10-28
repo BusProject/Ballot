@@ -1,9 +1,9 @@
-@import "vars.less";
-@import "mixins.less";
-
 // Mobile stylesheet, served to mobile devices using mobile_fu plugin
 
 body.mobile {
+    .meme, #instructions-box, .top-guides, #edit-profile, #header em {
+      display: none !important;
+    }
 
     #container, #page, #header, #main, #find-ballot, .ballot-section, #enter-address, #enter-address div, #map, #read-ballot, #read-ballot .row, .category-heading, #footer {
       width: 100%;
@@ -13,10 +13,10 @@ body.mobile {
       max-width: none;
     }
 
-    &.home {
-      background: #dbe8b8 image-url('iOS/bg_2x.jpg') no-repeat fixed;
-      -moz-background-size: 100% auto;
-      background-size: 100% auto;
+    &.home { 
+      background: lighten(#667eac,30%);
+      -moz-background-size: 100% auto; 
+      background-size: 100% auto; 
       background-position: 0 0;
     }
 
@@ -183,8 +183,8 @@ body.mobile {
       height: 72px;
       border-bottom: 1px solid @grey;
       img {
-        width: 200px !important;
-        margin-top: 14px;
+          height: 73px;
+          margin-top: 0;
       }
       #mobile_nav {
         li {
@@ -193,6 +193,7 @@ body.mobile {
           top: 0;
           height: 70px;
           text-align: center;
+          background-color: @bgGrey;
           a {
             display: block;
             width: 47px;
@@ -204,7 +205,7 @@ body.mobile {
             &:before {
               display: block;
               font-size: 32px;
-              font-family:'FontAwesome';
+              font-family:'FontAwesome'; 
             }
           }
           &#mobile_home_link {
@@ -222,7 +223,7 @@ body.mobile {
             border-left: 1px solid @grey;
             a {
               &:before {
-                color: @green;
+                color: @accent;
                 content: '\f00b';
               }
             }
@@ -263,7 +264,6 @@ body.mobile {
           overflow: hidden;
           color: transparent;
           text-shadow:none;
-          margin-bottom: -25px;
           &:before {
             content: "Go";
             text-indent: 0;
@@ -366,7 +366,7 @@ body.mobile {
               }
             }
           }
-
+      
           .commentTitle {
             margin: 1px 0 0;
             padding: 0;
@@ -380,7 +380,7 @@ body.mobile {
             }
             select, div.arrows { display: none; }
           }
-
+      
           ul.feedback {
             background-color: #bdbdbd;
             .head {
@@ -399,7 +399,7 @@ body.mobile {
             }
             .foot { margin-bottom: 0; }
           }
-
+      
           .yourFeedback {
             margin: 0;
             background-color: #d9d9d9;
@@ -444,6 +444,7 @@ body.mobile {
                 text-shadow: 0px 1px 1px darken(@accent,10%);
               }
             }
+            button.meme { display: none; }
           }
         }
         &.candidate.row .body {
@@ -469,6 +470,11 @@ body.mobile {
           }
           .yourFeedback {
             span.Open { text-align: center; display: block; }
+            button{
+                &::before { content: ''; }
+                width: 220px;
+                color: white;
+            }
           }
         }
         &.measure .body {
@@ -497,7 +503,7 @@ body.mobile {
     }
 
     &.profile #more-coming { display: none; }
-    #more-coming {
+    #more-coming { 
         width: 80%; padding: 10px; margin: 0 auto; min-width: 400px;
         a button { display: none }
     }
@@ -651,7 +657,4 @@ body.mobile {
       min-width: 320px;
       padding: 10px;
     }
-}
-@media (max-width: 1050px) {
-  .account .left-nav ul li.guide { display: none; }
 }

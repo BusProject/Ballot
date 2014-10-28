@@ -10,16 +10,13 @@
 
 /********* Structure *********/
 body.home {
-        background: #b2bfc8 image-url('new-bg.jpg') no-repeat fixed;
-        -moz-background-size: cover;
-        background-size: cover;
-        background-position: 0 0;
+        background: #b2bfc8 image-url('novbackground.jpg') no-repeat fixed;
+        background-position: top center;
 }
 
 
 #page {
         background-color:@bgGrey;
-        /*background: transparent image-url('pageBG.png') top left repeat;*/
         border-right: 1px solid @darkGrey;
         border-left:1px solid @darkGrey;
         border-bottom:none;
@@ -157,7 +154,7 @@ body.home {
                         text-align: left;
                         .no-select();
                         pointer-events: none;
-                        color: #8eb636;
+                        color: @accent;
                 }
                 .find-ballot, .place-holder {
                         font-family:'Open Sans', serif;
@@ -765,20 +762,7 @@ body.home {
                                 overflow-y: auto;
                                 .option {
                                         padding: 20px 20px 20px 50px;
-                                        &.chosen::before, &.confirmed::before {
-                                                        content: "\2713";
-                                                        .checkBox()
-                                        }
                                         height: auto;
-                                        &.confirmed {
-                                                cursor: default;
-                                                background-color: @green;
-                                                margin-top:10px;
-                                                &::before {
-                                                        content: "\2713";
-                                                        color: white;
-                                                }
-                                        }
                                         min-height: @optionHeight;
                                         margin: 0 auto;
                                         width: 560px;

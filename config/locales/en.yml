@@ -106,7 +106,7 @@ en:
         find: 'Find Your Ballot'
         find_text: 'Enter your voting address to look up what will appear on your ballot.'
         read: 'Read Your Ballot'
-        read_text: 'Get the lowdown on everything on your ballot for the November 6th Election.'
+        read_text: 'Get the lowdown on everything on your ballot for the November 4th Election.'
         read_text_2: 'Read what others have to say about the important races in your state and share your own views.'
         share: 'Share Your Ballot'
         share_message: 'Check out my voter guide on The Ballot'
@@ -138,8 +138,8 @@ en:
     user:
         sign_up: 'Sign Up'
         sign_in: 'Sign In'
-        sign_in_blurb: 'Sign in with your TheBallot.org account'
-        sign_up_blurb: 'New to TheBallot.org?'
+        sign_in_blurb: 'Sign in with your November4th.org account'
+        sign_up_blurb: 'New to November4th.org?'
         email: 'Email'
         password: 'Password'
         confirm_password: 'Repeat password'
@@ -150,7 +150,7 @@ en:
         no_such_email: 'This email address does not exist in our records.'
         password_sent: 'Your new password has been sent to the email address provided.'
         or: 'or'
-        new: 'New to TheBallot.org?'
+        new: 'New to November4th.org?'
         register: 'Register to Vote'
         bad_login: 'You have entered an incorrect username and/or password.'
         first_name: 'First name'
@@ -159,7 +159,7 @@ en:
     # used on the single pages and main page
     candidates:
         next: 'Next Candidate'
-        open: 'Learn More and Comment'
+        open: 'Learn More'
         twitter: 'Twitter'
         facebook: 'Facebook'
         website: 'Website'
@@ -237,7 +237,7 @@ en:
     splash:
         welcome1: "Welcome to Your"
         welcome2: "100% Social Voter Guide"
-        instructions: "How to use TheBallot.org"
+        instructions: "How to use November4th.org"
         research1: "Research:"
         research2: "Look up which measures and candidates will be on your ballot this election."
         discuss1: "Discuss:"
@@ -281,7 +281,7 @@ en:
         do_reactivate: "Reactivate your account"
         upload: "Upload"
         banned: "Your account has been banned - all of your comments and votes are hidden"
-        powered: "Powered by TheBallot.org"
+        powered: "Powered by November4th.org"
         add: "Add More"
         addsearch: "Search by office or candidate name to find other candidates or ballot measures to endorse"
         missing: "Is Something Missing?"

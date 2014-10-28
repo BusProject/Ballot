@@ -3,29 +3,35 @@ class HomeController < ApplicationController
 
     @classes = 'home '
 
-      address = params['q'] || params['address']
+    address = params['q'] || params['address']
 
-      if address.nil?
-        remember = true
-        if current_user
-          address = current_user.address unless current_user.address.nil? || current_user.address.empty?
-        else
-          address = cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache']
+    if address.nil?
+      remember = true
+      if current_user
+        address = current_user.address unless current_user.address.nil? || current_user.address.empty?
+        if match = current_user.match
+          @choices = Choice.find_by_districts( match.data ).each{ |c| c.prep current_user }
+          latlng = match.latlng
+          state = match.data.select{ |d| d.length == 2 }.first
+          google = { :address_components => [ { :short_name => state, :types => ["administrative_area_level_1"] }  ] }
         end
       else
-        remember = false
+        address = cookies[Rails.application.class.to_s.split("::")[0]+'_address_cache']
       end
-      address = address || ''
-      latlng = latlng || nil
+    else
+      remember = false
+    end
+    address = address || ''
+    latlng = latlng || nil
 
-      @config = { :address => address.gsub('+',' '), :latlng => latlng, :remember => remember }.to_json
+    @config = { :address => address.gsub('+',' '), :latlng => latlng, :google => google, :remember => remember }.to_json
 
-      @choices_json = @choices.to_json( Choice.to_json_conditions )
+    @choices_json = @choices.to_json( Choice.to_json_conditions )
 
-      @classes = 'home front'
+    @classes = 'home front'
 
-      render :template => 'home/index'
-    # end
+    render :template => 'home/index'
+
   end
 
   def about
@@ -34,14 +40,14 @@ class HomeController < ApplicationController
     if I18n.locale == :en
     @title = 'About'
     @content = <<EOF
-         <h1>About TheBallot.org</h1>
-         <p>TheBallot.org is the 100% social voter guide brought to you by the <a href='http://www.theleague.com/splash'>League of Young Voters</a>, New Era Colorado, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
-         <p>Some cool stuff about TheBallot.org:</p>
+         <h1>About november4th.org</h1>
+         <p>november4th.org is the 100% social voter guide brought to you by the <a href='http://www.Youngvoter.org'>League of Young Voters</a>, <a href='http://www.neweracolorado.org'>New Era Colorado</a>, <a href='http://forwardmontana.org'>Forward Montana</a>, and the <a href='http://busproject.org'>Bus Project</a>.</p>
+         <p>Some cool stuff about november4th.org:</p>
          <ul>
           <li>This is a crowdsourced voter guide. The content and order in which it appears is determined by the wisdom of the masses, not by political powerbrokers.</li>
           <li>This is open-source software. Our commitment to crowdsourcing doesn't stop with ballot measures. We've built this software open source so that others can modify and improve it. Want to check it out? <a href='http://github.com/busproject/ballot' target='_blank'>Here's our GitHub repo</a> - fork away! Want to help? Let us know.</li>
           <li>We're also utilizing and supporting the Voter Information Project so that other similar projects can piece together the relevant and accurate ballot information for free.</li>
-          <li>For the latest updates on new features, please <a class="link" target='_blank' href="http://theballot.tumblr.com/">visit our Tumblr</a>.</li>
+          <!--<li>For the latest updates on new features, please <a class="link" target='_blank' href="http://theballot.tumblr.com/">visit our Tumblr</a>.</li>-->
          </ul>
          <a class='about-button' href='/'>Find Your Ballot</a>
 
@@ -60,22 +66,6 @@ EOF
     render 'home/show'
   end
 
- def stats
-    @classes = 'home admin'
-    @config = { :state => 'page' }.to_json
-
-    @matches = Match.all.map(&:state)
-    @states = Choice.states.slice(1,51)
-    @stateAbvs = Choice.stateAbvs.slice(1,51)
-    @matchStates = []
-    n = 0
-    @stateAbvs.each do |state|
-      count = @matches.select{ |match| match == state }.count
-      @matchStates.push( { :count => count, :state => @states[n], :stateabv => state } ) if count > 0
-      n+=1
-    end
-
-  end
 
   def search
     prepped = '%'+params[:term].split(' ').map{ |word| word.downcase }.join(' ')+'%'
@@ -101,6 +91,8 @@ EOF
     render :json => results
   end
 
+
+
     def privacy
        @classes = 'home msg'
        @config = { :state => 'page' }.to_json
@@ -108,12 +100,12 @@ if I18n.locale == :en
        @title = 'Prviacy Policy'
        @content = <<EOF
        <h1>Privacy Policy</h1>
-       <p>The League of Young Voters and The Bus Federation (collectively, "we" or "us") are committed to preserving your privacy and safeguarding the personal and/or sensitive information you provide to us via any of our websites. This commitment is demonstrated by the terms of this Privacy Policy.</p>
+       <p>The League of Young Voters Education Fund and The Bus Federation Civic Fund (collectively, "we" or "us") are committed to preserving your privacy and safeguarding the personal and/or sensitive information you provide to us via any of our websites. This commitment is demonstrated by the terms of this Privacy Policy.</p>
        <p>We reserve the right to modify this Privacy Policy from time to time. The date of the latest revision will be listed at the bottom of the Policy. We encourage you to check this page each time you visit one of our websites so that you will know if the Policy has changed since you last visited the site. Your use of our websites indicates your acceptance to be bound by the terms of the Privacy Policy in effect as of the date of your use. If you do not agree to be bound by the terms of the Privacy Policy, do not use our websites.</p>
 
        <h1>Our Collection of Personal information</h1>
 
-       <p>We do not collect personally identifiable information about individual users unless a user voluntarily provides such information to us, either directly or by agreeing to the terms and conditions if logging onto one of our sites through Facebook. We store any information that you provide, such as your name, mailing address or email address, using secure servers. We may share your information with third party vendors who use your information for the sole purpose of fulfilling your request (e.g., charging your donation). Each of our vendors has agreed to keep your information confidential from disclosure to others. We may also share your information between ourselves (in other words, between the League of Young Voters and The Bus Federation). We may share anonymized information with independent researchers to better understand how people use this site. In addition, we will cooperate with law enforcement, which may include disclosing some of your personal information if necessary. We will never sell any of your personal information to any third party. And we will never post any of your personal information online without your consent.</p>
+       <p>We do not collect personally identifiable information about individual users unless a user voluntarily provides such information to us, either directly or by agreeing to the terms and conditions if logging onto one of our sites through Facebook. We store any information that you provide, such as your name, mailing address or email address, using secure servers. We may share your information with third party vendors who use your information for the sole purpose of fulfilling your request (e.g., charging your donation). Each of our vendors has agreed to keep your information confidential from disclosure to others. We may also share your information between ourselves (in other words, between The League of Young Voters Education Fund or The Bus Federation Civic Fund). We may share anonymized information with independent researchers to better understand how people use this site. In addition, we will cooperate with law enforcement, which may include disclosing some of your personal information if necessary. We will never sell any of your personal information to any third party. And we will never post any of your personal information online without your consent.</p>
 
        <h1>Use of Cookies</h1>
 
@@ -121,7 +113,7 @@ if I18n.locale == :en
 
        <h1>Protecting Children's Privacy</h1>
 
-       <p>We are concerned about the safety and privacy of children online. Therefore, we do not and will not knowingly contact or collect personal information from children under 13. It remains possible, however, that we may receive information given to us by or pertaining to children under 13. If we are notified of this, we will promptly delete the information from our servers. If you want to notify us of our receipt of information by or about any child under 13, please email us at <a href="mailto: info@theballot.org">info@theballot.org</a>.</p>
+       <p>We are concerned about the safety and privacy of children online. Therefore, we do not and will not knowingly contact or collect personal information from children under 13. It remains possible, however, that we may receive information given to us by or pertaining to children under 13. If we are notified of this, we will promptly delete the information from our servers. If you want to notify us of our receipt of information by or about any child under 13, please email us at <a href="mailto: info@november4th.org">info@november4th.org</a>.</p>
 
        <h1>Security</h1>
 
@@ -130,7 +122,7 @@ if I18n.locale == :en
 
        <h1>Emails</h1>
 
-       <p>You may sign up to receive email communications from us. These emails provide information that we think will be of interest to you, for example, information about new features or content on our sites, or calls for action on certain issues. If you provide us with your email address through some other action on one of our websites, we may add you to your email distribution list. You can always "opt out" of receiving our online communications by following the unsubscribe directions on any of the emails, or by sending us an email at <a href="mailto:info@theballot.org">info@theballot.org</a> asking that we delete you from our email list.</p>
+       <p>You may sign up to receive email communications from us. These emails provide information that we think will be of interest to you, for example, information about new features or content on our sites, or calls for action on certain issues. If you provide us with your email address through some other action on one of our websites, we may add you to your email distribution list. You can always "opt out" of receiving our online communications by following the unsubscribe directions on any of the emails, or by sending us an email at <a href="mailto:info@november4th.org">info@november4th.org</a> asking that we delete you from our email list.</p>
 
        <p>Please recognize that emails are not secure against interception. Therefore, please do not send us sensitive or personal information via email.</p>
 
@@ -142,11 +134,11 @@ if I18n.locale == :en
 
        <p>If you have any questions about this Privacy Policy or any of our websites, please contact us at:</p>
 
-       <p>League of Young Voters<br />
+       <p>The League of Young Voters Education Fund<br />
        540 President Street, 3rd Floor<br />
        Brooklyn, NY 11215<br />
        (347) 464-8683<br />
-       <a href="mailto:info@theballot.org">info@theballot.org</a></p>
+       <a href="mailto:info@november4th.org">info@november4th.org</a></p>
 
 
        <p>Last updated: October 5th, 2012</p>
@@ -163,7 +155,7 @@ if I18n.locale == :en
        @content = <<EOF
        <h1>Terms of Use</h1>
 
-       <p>Your use of any of the websites owned and operated by the League of Young Voters or The Bus Federation (collectively, "we" or "us") is governed by these Terms of Use. We may modify these Terms of Use from time to time, so we encourage you to check this page each time you revisit one of our websites. The date of the latest revision will be listed below so you will know if the terms have changed since you last accessed the site. Your use of our websites indicates your acceptance to be bound by the provisions of the Terms of Use in effect as of the date of your use. If you do not accept these terms, do not use our websites.</p>
+       <p>Your use of any of the websites owned and operated by The League of Young Voters Education Fund or The Bus Federation Civic Fund (collectively, "we" or "us") is governed by these Terms of Use. We may modify these Terms of Use from time to time, so we encourage you to check this page each time you revisit one of our websites. The date of the latest revision will be listed below so you will know if the terms have changed since you last accessed the site. Your use of our websites indicates your acceptance to be bound by the provisions of the Terms of Use in effect as of the date of your use. If you do not accept these terms, do not use our websites.</p>
 
        <h1>Intellectual Property Rights</h1>
 
@@ -171,13 +163,13 @@ if I18n.locale == :en
 
        <h1>Restrictions on Your Use of the Site</h1>
 
-       <p>You may not use any of our websites (a) in violation of any applicable law or regulation, (b) in a manner that will infringe the copyright, trademark, trade secret or other intellectual property rights of others, (c) in a manner that will violate the privacy, publicity or other personal rights of others or reveal confidential information without permission, or (d) in a manner that is profane, defamatory, violent, obscene, threatening, abusive, hateful, inflammatory or otherwise objectionable under common standards of decency.</p>
+       <p>You may not use any of our websites (a) in violation of any applicable law or regulation, (b) in a manner that will infringe the copyright, trademark, trade secret or other intellectual property rights of others, (c) in a manner that will violate the privacy, publicity or other personal rights of others or reveal confidential information without permission, (d) in a manner that is profane, defamatory, violent, obscene, threatening, abusive, hateful, inflammatory or otherwise objectionable under common standards of decency, or (e) to comment on political candidates or parties.</p>
 
        <p>You also are prohibited from violating or attempting to violate the security of any of our websites, including, without limitation, the following activities: (a) attempting to probe, scan or test the vulnerability of a system or network or to breach security or authentication measures without proper authorization; (b) attempting to interfere with communication to any user, host or network, including, without limitation, via means of submitting a virus to the website, overloading, "flooding," "spamming," "mailbombing" or "crashing"; or (c) solicitation or advertisement. Violations of system or network security may result in civil or criminal liability. We will investigate occurrences that may involve such violations and may involve, and cooperate with, law enforcement authorities in prosecuting users who are involved in such violations.</p>
 
        <h1>Use of Comments</h1>
 
-       <p>Users who log onto our websites through Facebook will be able to post comments on some of our sites. By posting any comments, you agree that these comments may be used by us for any purpose in any form without any additional permission from you and without any consideration apart from your participation on the website. By providing a comment to one of our sites, you are: (a) giving us a worldwide, non-exclusive right to use your name and/or user name, as well as any additional information you may have provided, in any material prepared by or for us in any form or media, now known or hereafter devised, in all languages throughout the world; (b) giving us a worldwide, non-exclusive, royalty-free, sublicenseable and transferable license to use, reproduce, distribute, prepare derivative works of and display your comments on our websites and in connection with other activities in any form or media, now known or hereafter devised, in all languages throughout the world; (c) agreeing and representing that you have not submitted material that (i) violates copyright, trademark, trade secret, or other intellectual property rights of others; (ii) violates the privacy, publicity or other personal rights of others; (iii) reveals confidential information; or (iv) is profane, defamatory, violent, obscene, threatening, abusive, hateful, inflammatory or otherwise objectionable under standards of common decency; (d) representing and warranting that you own or have the necessary licenses, rights, consents and permissions to use and authorize us to use all patent, trademark, trade-secret, copyright or other proprietary rights in and to any and all comments in the manner contemplated by these Terms of Use. We reserve the right not to post comments and to remove comments without prior notice, in our sole discretion.</p>
+       <p>Users who log onto our websites through Facebook will be able to post comments on some of our sites. By posting any comments, you agree that these comments may be used by us for any purpose in any form without any additional permission from you and without any consideration apart from your participation on the website. By providing a comment to one of our sites, you are: (a) giving us a worldwide, non-exclusive right to use your name and/or user name, as well as any additional information you may have provided, in any material prepared by or for us in any form or media, now known or hereafter devised, in all languages throughout the world; (b) giving us a worldwide, non-exclusive, royalty-free, sublicenseable and transferable license to use, reproduce, distribute, prepare derivative works of and display your comments on our websites and in connection with other activities in any form or media, now known or hereafter devised, in all languages throughout the world; (c) agreeing and representing that you have not submitted material that (i) violates copyright, trademark, trade secret, or other intellectual property rights of others; (ii) violates the privacy, publicity or other personal rights of others; (iii) reveals confidential information; (iv) is profane, defamatory, violent, obscene, threatening, abusive, hateful, inflammatory or otherwise objectionable under standards of common decency; or (v) comments on political candidates or parties; (d) representing and warranting that you own or have the necessary licenses, rights, consents and permissions to use and authorize us to use all patent, trademark, trade-secret, copyright or other proprietary rights in and to any and all comments in the manner contemplated by these Terms of Use. We reserve the right not to post comments and to remove comments without prior notice, in our sole discretion.</p>
 
        <h1>Reservation of Rights</h1>
 
@@ -189,7 +181,7 @@ if I18n.locale == :en
 
        <h1>Indemnity</h1>
 
-       <p>You agree to defend, indemnify and hold harmless the League of Young Voters and The Bus Federation, their parents, subsidiaries and affiliated organizations, and the officers, directors, employees, members, shareholders, partners, licensees and agents of each of these, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt and expenses (including but not limited to attorney's fees) arising from your use of any of our websites in violation of any term of these Terms of Use.</p>
+       <p>You agree to defend, indemnify and hold harmless The League of Young Voters Education Fund or The Bus Federation Civic Fund, their parents, subsidiaries and affiliated organizations, and the officers, directors, employees, members, shareholders, partners, licensees and agents of each of these, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt and expenses (including but not limited to attorney's fees) arising from your use of any of our websites in violation of any term of these Terms of Use.</p>
 
        <h1>Claims of Copyright Infringement</h1>
 
@@ -205,7 +197,7 @@ if I18n.locale == :en
 
        <p>Please address your letter as follows:</p>
 
-       <p>League of Young Voters
+       <p>The League of Young Voters Education Fund
        540 President Street, 3rd Floor<br />
        Brooklyn, NY 11215</p>
 
@@ -215,59 +207,20 @@ if I18n.locale == :en
 
        <p>If you have any questions about this Privacy Policy or any of our websites, please contact us at:</p>
 
-       <p>League of Young Voters<br />
+       <p>The League of Young Voters Education Fund<br />
        540 President Street, 3rd Floor<br />
        Brooklyn, NY 11215<br />
        (347) 464-8683<br />
-       <a href="mailto:info@theballot.org">info@theballot.org</a></p>
+       <a href="mailto:info@november4th.org">info@november4th.org</a></p>
 
 
-       <p>Last updated: October 5th, 2012</p>
+       <p>Last updated: October 9th, 2012</p>
 
 EOF
 end
       render 'home/show'
     end
 
-
-  def guides
-
-    @classes = 'home profile guides'
-
-    if params[:state] == 'top'
-      @limit = 25
-      guides = User.top_25
-      @guides = [ ['Prez', guides] ]
-      @title = 'Top 25 Voter Guides'
-      @config = { :state => 'guides', :states => guides.map{|u| u.name }  }.to_json
-
-    elsif params[:state]
-      if params[:state].length == 2
-        state = Choice.states[ Choice.stateAbvs.index(params[:state] ) ].gsub(' ','_')
-        stateAbv = params[:state]
-      else
-        state =  params[:state].capitalize.gsub(' ','_')
-        stateAbv = Choice.stateAbvs[ Choice.states.index(params[:state].capitalize ) ]
-      end
-
-      @limit = params[:limit] || 100
-      guides = User.by_state( stateAbv ,@limit )
-      @guides = [ [stateAbv , guides ] ]
-
-      if params[:format] == 'json'
-         render :json => guides.map{ |u| u.to_public(false) }
-      else
-        @config = { :state => 'guides',  :stateName => state, :states => guides.map{|u| u.name } }.to_json
-        @title = 'Top Voter Guides In '+state.capitalize
-      end
-
-    else
-      @limit = 10
-      @guides = User.by_state
-      @title = 'Top Voter Guides Around the Country'
-      @config = { :state => 'guides', :states => @guides.map { |k,v| Choice.states[Choice.stateAbvs.index(k)] } }.to_json
-    end
-  end
 
 
   def sitemap

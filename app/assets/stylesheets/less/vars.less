@@ -2,7 +2,7 @@
 @lightGreen: #99C337;
 
 @brightOrange: #bf4e00;
-@orange: #D37A3C;
+@orange: darken(red,10%);
 @darkOrange: #9e5320;
 
 @grey: #919191;
@@ -13,9 +13,13 @@
 @bgGreen: #98B84A;
 @bgGrey:#f0f0ed;
 
+
+@novRed: #424592;
+
 @sideGrey: @darkGrey;
 @badge: @darkerGrey;
-@accent: @green;
+
+@accent: @novRed;
 
 .greenButton() {
 	background-color: @accent;
@@ -39,7 +43,6 @@
 		&:active {
 			box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,.5);
 		}
-		
 }
 
 .greyButton() {
