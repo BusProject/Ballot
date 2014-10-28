@@ -1,6 +1,7 @@
-task :deploy do
+task :deploy, [:remote] do |t, args|
   branch_to_push = `git rev-parse --abbrev-ref HEAD`
   comiled_branch = "compiled_#{Time.now.to_i}"
+  remote = args[:remote] || "heroku"
   begin
     blue ">>>> Checking out compiled"
     system 'git stash'
@@ -17,7 +18,7 @@ task :deploy do
     sh "git commit -am 'Precompiling assets'"
 
     blue '>>>> Pushing to Heroku'
-    sh "git push -f heroku #{comiled_branch}:master"
+    sh "git push -f #{remote} #{comiled_branch}:master"
   rescue Exception => e
     red "!!!! Something went wrong"
     red e.message
