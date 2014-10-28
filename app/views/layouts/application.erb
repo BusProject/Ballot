@@ -21,8 +21,10 @@
 
 
   <script type="text/javascript">
-  var inits = <%= raw @config || '{}' %>
+  var current_user = <%= raw current_user.nil? ? { :id => 'unauthenticated'}.to_json : current_user.to_public %>,
+    inits = <%= raw @config || '{}' %>
 
+  current_user.url = "<%= current_user.nil? ? root_path.split('?')[0] : profile_path( current_user.to_url )  %>"
   inits.root = "<%= root_path.split('?')[0] %>";
   inits.default_url = [ <%= raw params[:iframe].nil? ? '' : '"iframe='+params[:iframe].to_s+'", ' %> ];
   <% if is_mobile_device? %>
