@@ -204,7 +204,7 @@ function locationModel(data) {
 					locale.address.state,
 					locale.address.zip
 				].join(' '),
-				directions = 'https://maps.google.com/maps?q=from:'+yourLocation.address()+' to:'+address,
+				directions = 'https://maps.google.com/maps/dir/'+yourLocation.address()+'/'+address,
 				hours = [
 					locale.pollingHours ? 'From: '+locale.pollingHours : '',
 					locale.startDate ? 'on '+locale.startDate : '' ,
