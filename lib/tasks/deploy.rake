@@ -5,7 +5,7 @@ task :deploy, [:remote] do |t, args|
   begin
     blue ">>>> Checking out compiled"
     system 'git stash'
-    sh "git push origin master"
+    sh "git push origin #{branch_to_push}"
     sh "git checkout -B #{comiled_branch}"
 
     blue '>>>> Precompiling Assets'
