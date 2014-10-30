@@ -25,7 +25,8 @@
         <% end %>
 
         <% if !block.content.nil? %>
-          <div style="color: #ffffff; text-align: left; padding: 0 40px;"><%= block.content.html_safe %></div>
+          <div class="blockblurb"
+            ><%= block.content.html_safe %></div>
         <% end %>
 
         <% if controls %>
