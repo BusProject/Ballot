@@ -41,6 +41,11 @@
 
   <link rel="shortcut icon" href="<%= asset_path 'favicon.jpg'%>" />
 
+  <% if !is_mobile_device? %>
+    <%= render :partial => 'home/iframe' if params[:iframe] %>
+    <%= javascript_include_tag asset_path( "other/iframe.js" ) if params[:iframe] %>
+  <% end %>
+
   <%= yield :head %>
 
 </head>
