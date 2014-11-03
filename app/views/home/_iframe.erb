@@ -2,7 +2,7 @@
 <style type="text/css" media="screen">
 	<% if iframe  > 700 %>
 		body.home { background: none }
-		body, #container, #page, #footer {
+		body, #container, #page, #footer, #header {
 			max-width: <%= iframe  %>px;
 			min-width: <%= iframe  %>px;
 			width: <%= iframe  %>px;
@@ -24,7 +24,7 @@
 	<% else %>
 		#instructions-box { display: none }
 		body.home { background: none }
-		body, #container, #page, #footer {
+		body, #container, #page, #footer, #header {
 			max-width: <%= iframe  %>px;
 			min-width: <%= iframe  %>px;
 			width: <%= iframe  %>px;
@@ -48,5 +48,5 @@
 	#container { padding-top: 0; }
 	#page { border: none }
 	#instructions-box.top { top: 150px; }
-	
+
 </style>
