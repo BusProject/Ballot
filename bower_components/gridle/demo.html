@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8" />
+
+	<link href="css/grid.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+	<!--[if lte IE 9]>
+		<script src="js/respond.js"></script>
+	<!-- <![endif]-->
+
+	<title>Gridle - Demo</title>
+
+	<script src="js/gridle.min.js"></script>
+	<script src="js/jquery.js"></script>
+	<script>
+
+		// init gridle
+		Gridle.init({
+			debug : true,
+			// cssPath : 'css/grid.css'
+		});
+
+		// listen for update in gridle js :
+		Gridle.on('update', function(e, updatedStates, activeStates, unactiveStates) {
+			console.log('gridle update', updatedStates, activeStates, unactiveStates);
+			if (Gridle.isActive('mobile')) console.log('Mobile State Active');
+		});
+
+		// states switch :
+		jQuery(function($) {
+			$('#medias li').click(function(e) {
+				e.preventDefault();
+				$('#medias li').removeClass('active');
+				$('html').attr('class','').addClass($(this).data('class'));
+				$(this).addClass('active');
+			})
+		});
+
+	</script>
+
+</head>
+<body>
+
+	<ul id="medias">
+		<li data-class="">Default</li>
+		<li data-class="tablet">Tablet</li>
+		<li data-class="mobile">Mobile</li>
+		<li data-class="print">Print</li>
+		<li data-class="ipad-landscape">iPad landscape</li>
+	</ul>
+
+	<div class="container gridle-debug">
+
+		<div class="parent">
+
+			<div class="grid-3 grid-mobile-12 grid-ipad-landscape-12 hide-print">Logo</div>
+			<div class="grid-5 grid-mobile-12 grid-ipad-landscape-12 hide-print">Search</div>
+			<div class="grid-4 grid-mobile-12 hide-ipad-landscape hide-mobile hide-print">Login</div>
+
+			<div class="grid-12 hide-print debug-color-1">Primary navigation</div>
+
+		</div>
+
+
+		<div class="grid-12 parent">
+
+			<div class="grid-8 grid-tablet-12 grid-mobile-12 debug-color-3">
+				<div class="content" style="height:242px;">
+					Slideshow content
+				</div>
+			</div>
+
+			<div class="grid-4 grid-tablet-4 grid-mobile-12 debug-color-2">
+				<div class="content" style="height:30px;">
+					Slideshow menu 1
+				</div>
+			</div>
+			<div class="grid-4 grid-tablet-4 grid-mobile-12 debug-color-2">
+				<div class="content" style="height:30px;">
+					Slideshow menu 2
+				</div>
+			</div>
+			<div class="grid-4 grid-tablet-4 grid-mobile-12 debug-color-2">
+				<div class="content" style="height:30px;">
+					Slideshow menu 3
+				</div>
+			</div>
+
+		</div>
+
+		<div class="grid-12 debug-color-1">Breadcrumb</div>
+
+		<div class="grid-4 grid-ipad-landscape-6 grid-tablet-6 grid-mobile-12 push-tablet-6">
+			<div class="content" style="height:100px;">
+				Highlight 1
+			</div>
+		</div>
+		
+		<div class="grid-4 grid-ipad-landscape-6 grid-tablet-6 grid-mobile-12 pull-tablet-6">
+			<div class="content" style="height:100px;">
+				Highlight 2
+			</div>
+		</div>
+		<div class="grid-4 grid-ipad-landscape-12 grid-tablet-12 grid-mobile-12 grid-tablet-clear">
+			<div class="content" style="height:100px;">
+				Highlight 3
+			</div>
+		</div>
+
+		<div class="grid-6 grid-mobile-12 debug-color-3">
+			<div class="content" style="height:100px">
+				Custom box 1
+			</div>
+		</div>
+		<div class="grid-6 grid-mobile-12 debug-color-3">
+			<div class="content" style="height:100px">
+				Custom box 2
+			</div>
+		</div>
+
+		<div class="parent vertical-align-middle">
+	
+			<div class="grid-4 grid-tablet-6 grid-mobile-12 parent clear-each-2">
+				
+				<div class="grid-6 debug-color-6">
+					I have not the same height of my neighbours
+					<br />
+					And it's me the reason
+					<br />
+					...
+				</div>
+				<div class="grid-6">
+					I have not the same height of my neighbours
+				</div>
+				<div class="grid-6">
+					I have not the same height of my neighbours
+				</div>
+				<div class="grid-6 debug-color-6">
+					I have not the same height of my neighbours
+					<br />
+					And it's me the reason
+					<br />
+					...
+				</div>
+
+			</div>
+
+			<div class="grid-4 grid-tablet-6 grid-mobile-12">
+				<div class="content">
+					I'm a content that has different height of my neighbours... <br />
+				</div>	
+			</div>
+
+			<div class="grid-4 grid-tablet-12 grid-mobile-12">
+				<div class="content">
+					I'm a content that has different height of my neighbours... <br />
+					I'm a content that has different height of my neighbours... <br />
+					I'm a content that has different height of my neighbours... <br />
+					I'm a content that has different height of my neighbours... <br />
+					I'm a content that has different height of my neighbours... <br />
+					I'm a content that has different height of my neighbours... <br />
+				</div>	
+			</div>
+
+		</div>
+
+		<div class="parent">
+			<div class="grid-2 prefix-1 suffix-2">
+				I have a suffix of 2 and a prefix of 1
+			</div>
+			<div class="grid-2 suffix-3">
+				I have a suffix of 3
+			</div>
+			<div class="grid-2">
+				I have nothing	
+			</div>
+		</div>
+
+		<div class="grid-1on5 grid-ipad-landscape-6 grid-tablet-6 grid-mobile-12 grid-tablet-clear debug-color-4">
+			<div class="content" style="height:100px;">
+				1 on 5 (special column)
+			</div>
+		</div>
+		<div class="grid-1on5 grid-ipad-landscape-6 grid-tablet-6 grid-mobile-12 grid-tablet-clear debug-color-4">
+			<div class="content" style="height:100px;">
+				1 on 5 (special column)
+			</div>
+		</div>
+		<div class="grid-1on5 grid-ipad-landscape-12 grid-tablet-4 grid-mobile-12 grid-tablet-clear debug-color-4">
+			<div class="content" style="height:100px;">
+				1 on 5 (special column)
+			</div>
+		</div>
+		<div class="grid-1on5 grid-ipad-landscape-6 grid-tablet-4 grid-mobile-12 grid-tablet-clear debug-color-4">
+			<div class="content" style="height:100px;">
+				1 on 5 (special column)
+			</div>
+		</div>
+		<div class="grid-1on5 grid-ipad-landscape-6 grid-tablet-4 grid-mobile-12 grid-tablet-clear debug-color-4">
+			<div class="content" style="height:100px;">
+				1 on 5 (special column)
+			</div>
+		</div>
+
+		<div class="grid-12 hide-print">Footer</div>
+
+	</div>
+
+</body>
+</html>
