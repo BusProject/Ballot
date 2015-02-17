@@ -1,4 +1,5 @@
 require 'json'
+require 'erb'
 
 def _mayor_data
     mayors = JSON::parse(File.read('./mayors.json'))

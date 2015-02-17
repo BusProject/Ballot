@@ -22,14 +22,14 @@
       <p>City’s CEO. Proposes the budget, appoints and supervises City officials. In charge of emergency management, and is the bottom line on City laws.</p>
       <% @mayors.each do |mayor| %>
         <div class="candidate">
-          <h2><%= mayor[:name] %></h2>
+          <h2><%= mayor["name"] %></h2>
           <div class="bio">
-            <div class="img" style="background-image: url(<%= mayor[:photo] %>);" ></div>
+            <div class="img" style="background-image: url(<%= mayor["photo"] %>);" ></div>
           </div>
           <div class="endorsements">
             <h4>Endorsed By:</h4>
             <ul >
-              <% mayor[:endorsements].each do |endorsement| %>
+              <% mayor["endorsements"].each do |endorsement| %>
                 <li><%= endorsement %></li>
               <% end %>
             </ul>
@@ -44,7 +44,7 @@
             <th></th>
             <% @mayors.each do |mayor| %>
               <th>
-                <div class="img" style="background-image: url(<%= mayor[:photo] %>);" ></div>
+                <div class="img" style="background-image: url(<%= mayor["photo"] %>);" ></div>
               </th>
             <% end %>
           </tr>
@@ -54,7 +54,7 @@
             <tr>
               <td class="question"><%= question %></td>
                 <% @mayors.each do |mayor| %>
-                  <td><%= mayor[question.downcase.to_sym] %></td>
+                  <td><%= mayor[question.downcase] %></td>
                 <% end %>
             </tr>
           <% end %>

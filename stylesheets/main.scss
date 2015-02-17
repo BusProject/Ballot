@@ -54,7 +54,7 @@ body {
     }
     .section {
         padding: 50px 0;
-        @include gridle(12);
+        @include gridle(11);
         @include gridle_centered();
     }
 }
@@ -97,9 +97,9 @@ body {
     @include gridle(6);
     @include gridle(10, tablet);
     @include gridle_centered(tablet);
-    @include gridle_clear(2);
 
-    .bio, .endorsements { @include gridle(6); }
+    .bio  { @include gridle(5); }
+    .endorsements { @include gridle(7); }
     .img {
         border-radius: 120px;
         height: 120px;

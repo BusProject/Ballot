@@ -1231,7 +1231,7 @@ body {
     direction: ltr;
     padding-left: 20px;
     padding-right: 20px;
-    width: 100%;
+    width: 91.66667%;
     display: block !important;
     float: none !important;
     margin-left: auto !important;
@@ -1304,8 +1304,7 @@ body {
   direction: ltr;
   padding-left: 20px;
   padding-right: 20px;
-  width: 50%;
-  clear: 2; }
+  width: 50%; }
   @media screen and (max-width: 480px) {
     .candidate {
       padding-left: 5px;
@@ -1324,18 +1323,32 @@ body {
       margin-left: auto !important;
       margin-right: auto !important;
       clear: both !important; } }
-  .candidate .bio, .candidate .endorsements {
+  .candidate .bio {
     float: left;
     direction: ltr;
     padding-left: 20px;
     padding-right: 20px;
-    width: 50%; }
+    width: 41.66667%; }
     @media screen and (max-width: 480px) {
-      .candidate .bio, .candidate .endorsements {
+      .candidate .bio {
         padding-left: 5px;
         padding-right: 5px; } }
     @media screen and (max-width: 720px) {
-      .candidate .bio, .candidate .endorsements {
+      .candidate .bio {
+        padding-left: 10px;
+        padding-right: 10px; } }
+  .candidate .endorsements {
+    float: left;
+    direction: ltr;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 58.33333%; }
+    @media screen and (max-width: 480px) {
+      .candidate .endorsements {
+        padding-left: 5px;
+        padding-right: 5px; } }
+    @media screen and (max-width: 720px) {
+      .candidate .endorsements {
         padding-left: 10px;
         padding-right: 10px; } }
   .candidate .img {
