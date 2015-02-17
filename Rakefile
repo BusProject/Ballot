@@ -16,7 +16,7 @@ task :mayors do
             if k == "photo"
                 markdown.last.push("![](#{v})")
             else
-                markdown.last.push(v)
+                markdown.last.push(v.respond_to?('join') ? v.join(',') : v)
             end
         end
     end
