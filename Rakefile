@@ -1,5 +1,31 @@
 load 'controller.rb'
 
+task :mayors do
+    mayors, _ = _mayor_data
+
+    markdown = [[]]
+
+    mayors.first.keys.each do |key|
+        markdown.first.push(key.to_s.capitalize)
+    end
+
+    markdown.push(Array.new(mayors.first.keys.length,'---'))
+    mayors.each do |mayor|
+        markdown.push([])
+        mayor.each do |k,v|
+            if k == "photo"
+                markdown.last.push("![](#{v})")
+            else
+                markdown.last.push(v)
+            end
+        end
+    end
+
+    File.open('mayors.md','w') do |fl|
+        fl.write(markdown.map{ |r| "|#{r.join('|')}|" }.join("\n"))
+    end
+end
+
 task :erb, :paths do |t,args|
     """
     Rebuild HTML pages.
