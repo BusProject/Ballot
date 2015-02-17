@@ -200,6 +200,10 @@ h2 {
   font-size: 1.5em;
   font-weight: 300; }
 
+h3 {
+  color: #d81b59;
+  text-transform: uppercase; }
+
 h4, h5 {
   font-weight: bold; }
 
@@ -1265,21 +1269,25 @@ body {
     .issues {
       padding-left: 10px;
       padding-right: 10px; } }
-  .issues th .img {
+  @media screen and (max-width: 720px) {
+    .issues {
+      overflow-y: scroll; } }
+  .issues table th .img {
     width: 50px;
     height: 50px;
     border-radius: 50px;
     background: transparent top center no-repeat;
     background-size: cover;
     margin-left: 10px; }
-  .issues tr:nth-child(even) td {
+  .issues table tr:nth-child(even) td {
     background: #99ddec; }
-  .issues td:first-child {
+  .issues table td:first-child {
     text-align: left;
     font-weight: bold;
     padding-left: 10px;
-    padding-right: 0; }
-  .issues td {
+    padding-right: 0;
+    min-width: 200px; }
+  .issues table td {
     padding: 20px;
     text-align: center; }
 
@@ -1296,7 +1304,8 @@ body {
   direction: ltr;
   padding-left: 20px;
   padding-right: 20px;
-  width: 50%; }
+  width: 50%;
+  clear: 2; }
   @media screen and (max-width: 480px) {
     .candidate {
       padding-left: 5px;
@@ -1416,9 +1425,6 @@ body {
     @media screen and (max-width: 720px) {
       .measure .choice, .measure .endorsements {
         width: 83.33333%; } }
-  .measure h3 {
-    color: #d81b59;
-    text-transform: uppercase; }
   .measure h4 {
     color: #26aac6; }
   .measure h2 span, .measure h4 span, .measure h5 span {

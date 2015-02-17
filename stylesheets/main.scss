@@ -15,6 +15,7 @@ h1 {
     text-shadow: $second-emphasis -1px 1px 1px;
 }
 h2 { color: lighten($second-emphasis, 20%); font-size: 1.5em; font-weight: 300; }
+h3 { color: $emphasis; text-transform: uppercase; }
 h4, h5 { font-weight: bold; }
 h1, h2, h3, h4, p { margin-bottom: 0.75em; }
 ul {
@@ -62,24 +63,28 @@ body {
     @include gridle(10);
     @include gridle_centered();
     padding: 30px 0;
-    th .img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50px;
-        background: transparent top center no-repeat;
-        background-size: cover;
-        margin-left: 10px;
-    }
-    tr:nth-child(even) td { background: lighten($background, 30%); }
-    td:first-child {
-        text-align: left;
-        font-weight: bold;
-        padding-left: 10px;
-        padding-right: 0;
-    }
-    td {
-        padding: 20px;
-        text-align: center;
+    @include gridle_state(tablet) {  overflow-y: scroll; }
+    table {
+        th .img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            background: transparent top center no-repeat;
+            background-size: cover;
+            margin-left: 10px;
+        }
+        tr:nth-child(even) td { background: lighten($background, 30%); }
+        td:first-child {
+            text-align: left;
+            font-weight: bold;
+            padding-left: 10px;
+            padding-right: 0;
+            min-width: 200px;
+        }
+        td {
+            padding: 20px;
+            text-align: center;
+        }
     }
 }
 
@@ -92,6 +97,7 @@ body {
     @include gridle(6);
     @include gridle(10, tablet);
     @include gridle_centered(tablet);
+    @include gridle_clear(2);
 
     .bio, .endorsements { @include gridle(6); }
     .img {
@@ -118,8 +124,6 @@ body {
         }
         @include gridle(10, tablet);
     }
-
-    h3 { color: $emphasis; text-transform: uppercase; }
     h4 { color: $second-emphasis; }
     h2, h4, h5 { span { text-transform: uppercase; }}
     span.fa {
