@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Elected Representative School Board",
+    "description" : "Advises lawmakers as to whether Chicagoans want the Chicago Public Schools to have an elected, representative school board.",
+    "choices": {
+      "yes": {
+        "explanation": "Lawmakers would know that Chicagoans support an elected, representative school board, which could replace the current system of a mayoral-appointed school board.",
+        "endorsements": ["Chicago Teachers Union", "the City Council Progressive Reform Caucus", "United Working Families", "Grassroots Education Movement"]
+      },
+      "no": {
+        "explanation": "Lawmakers would know that Chicagoans oppose an Elected School Board; they prefer that the Mayor appoint the school board.",
+        "endorsements": ["Governor Bruce Rauner", "Mayor Rahm Emanuel", "Crain’s Chicago Business"]
+      }
+    },
+    "recommendation": "yes"
+  },
+  {
+    "title": "Paid Leave For Emergencies",
+    "description" : "Advises lawmakers about whether Chicagoans want to require employers in Chicago to provide employees with paid leave for personal or public emergencies.",
+    "choices": {
+      "yes": {
+        "explanation": "The City Council would know that Chicagoans support requiring employers to provide employees with paid leave for personal or family issues, incidents of domestic or sexual violence, or school/building closures due to public health emergencies.",
+        "endorsements": ["Chicago Foundation for Women", "Planned Parenthood of Illinois", "Jobs with Justice", "Mujeres Latinas en Acción"]
+      },
+      "no": {
+        "explanation": "The City Council would know that Chicagoans oppose requiring employers to provide employees with paid leave for personal or family issues, an incident of domestic or sexual violence, or school/building closures due to public health emergencies.",
+        "endorsements": ["National Restaurant Association", "Chicagoland Chamber of Commerce", "Illinois Review"]
+      }
+    },
+    "recommendation": "yes"
+  },
+  {
+    "title": "Domestic Violence Treatment And Employment",
+    "description" : "Advises lawmakers as to whether Chicagoans think City employees convicted of domestic violence should be required to attend a treatment session to keep their jobs.",
+    "choices": {
+      "yes": {
+        "explanation": "Lawmakers would know that Chicagoans think City of Chicago employees convicted of a domestic violence offense during employment should be referred to a treatment service and required to attend at least one session as a condition of continued employment.",
+        "endorsements": []
+      },
+      "no": {
+        "explanation": "Lawmakers would know that Chicagoans do not think City of Chicago employees should be required to attend treatment sessions if convicted of domestic violence.",
+        "endorsements": []
+      }
+    },
+    "recommendation": "yes"
+  },
+  {
+    "title": "Campaign Funding",
+    "description" : "Advises lawmakers as to whether Chicagoans want to reduce the influence of big money in politics by allowing campaigns to be funded with smaller individual donations and limited public funds.",
+    "choices": {
+      "yes": {
+        "explanation": "Lawmakers would know that Chicagoans support reducing big money in politics through a voluntary system in which small donations to candidates are matched with public funds, thereby increasing the importance of smaller donations from voters and enabling more candidates to compete with those who are financially backed by large special interests.",
+        "endorsements": ["Action Now","Asian-Americans Advancing Justice","Common Cause Illinois"]
+      },
+      "no": {
+        "explanation": "Lawmakers would know that Chicagoans do not want an alternative to the current system that allows big money and powerful special interests extra influence over politicians who must rely on big donors.",
+        "endorsements": ["Cato Institute"]
+      }
+    },
+    "recommendation": "yes"
+  }
+]

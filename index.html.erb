@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Chicago Voter Guide</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+  <link rel="shortcut icon" href="http://chicagovotes.com/wp-content/uploads/2012/07/ChiVminicon.jpg" type="image/x-icon" />
+
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title-top">2015 Chicago City Election</h1>
+      <h1 class="title-bottom">Voter Guide</h1>
+      <h2>Be Sure to Vote by Tuesday, February 24th</h2>
+      <p>Your ballot is secret, and your choices are 100% yours. But hopefully this independent, locally-prepared guide helps you make an informed decision.</p>
+    </div>
+    <div class="mayor section">
+      <h1>Mayor of Chicago</h1>
+      <% @mayors.each do |mayor| %>
+        <div class="candidate">
+          <h2><%= mayor[:name] %></h2>
+          <div class="bio">
+            <div class="img" style="background-image: url(<%= mayor[:photo] %>);" ></div>
+          </div>
+          <div class="endorsements">
+            <h4>Endorsed By:</h4>
+            <ul >
+              <% mayor[:endorsements].each do |endorsement| %>
+                <li><%= endorsement %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+      <h1>Where They Stand</h1>
+      <table class="issues">
+      <thead>
+        <tr>
+          <th></th>
+          <% @mayors.each do |mayor| %>
+            <th>
+              <div class="img" style="background-image: url(<%= mayor[:photo] %>);" ></div>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @questions.each do |question| %>
+          <tr>
+            <td class="question"><%= question %></td>
+              <% @mayors.each do |mayor| %>
+                <td><%= mayor[question.downcase.to_sym] %></td>
+              <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+      </table>
+    </div>
+    <div class="measures section">
+      <h1>Ballot Measures</h1>
+      <% @measures.each do |measure| %>
+        <div class="measure">
+            <h2><%= measure['title'] %></h2>
+            <h3>What it does</h3>
+            <p><%= measure['description'] %></p>
+            <% measure['choices'].each do |choice, info| %>
+              <div class="grid-12">
+                <div class="thumb">
+                  <span class="fa fa-thumbs-<%= choice == "yes" ? "up" : "down" %>"></span>
+                </div>
+                <div class="choice">
+                  <h4>A <span class="yay-or-nay"><%= choice %></span> Vote Means...</h4>
+                  <p><%= info['explanation'] %></p>
+                </div>
+                <% unless info['endorsements'].empty? %>
+                  <div class="endorsements">
+                    <h5>Who says <span class="yay-or-nay"><%= choice %></span></h5>
+                    <ul>
+                      <% info['endorsements'].each do |endorsement| %>
+                        <li><%= endorsement %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+            <h2 class="recommendation">
+              Recommended:
+              <span class="fa fa-thumbs-<%= measure['recommendation'] == "yes" ? "up" : "down" %>"></span>
+              <span class="yay-or-nay"><%= measure['recommendation'] %></span>
+            </h2>
+        </div>
+      <% end %>
+      <p class="grid-8 centered grid-tablet-12">* Note, these ballot measures are non-binding, advisory referenda</p>
+    </div>
+    <div class="aldermanic section"></div>
+  </div>
+
+  <script type="text/javascript" src="http://media.apps.chicagotribune.com/ward-redistricting-2012/new_wards.json"></script>
+  <script type="text/javascript" src="http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v1.3.0/turf.min.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript" src="./javascripts/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+// import gridle
+@import "../bower_components/gridle/sass/gridle/gridle";
+
+// setting up the grid
+@include gridle_setup( (
+    context : 12,
+    gutter-width : 40px,
+    // etc...
+));
+
+// make the use of media queries really easy
+@include gridle_register_state (mobile , (
+    max-width : 480px,
+    gutter-width : 10px,
+    vertical_align : top
+));
+@include gridle_register_state (tablet , (
+    max-width : 720px,
+    gutter-width : 20px,
+    vertical_align : top
+));

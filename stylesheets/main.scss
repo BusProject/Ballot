@@ -1,0 +1,142 @@
+
+@import 'settings';
+@import 'variables';
+@import 'reset';
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700,300);
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css');
+
+// Type
+h1 {
+    color: $emphasis;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: $second-emphasis -1px 1px 1px;
+}
+h2 { color: lighten($second-emphasis, 20%); font-size: 1.5em; font-weight: 300; }
+h4, h5 { font-weight: bold; }
+h1, h2, h3, h4, p { margin-bottom: 0.75em; }
+ul {
+    list-style: disc;
+    margin: 10px 0 0 20px;
+}
+li { line-height: 1.1em; }
+
+// Containers
+@include gridle_generate_classes ();
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0 auto;
+  background: $background url('http://chicagovotes.com/wp-content/themes/Jolokia/images/wrap.png');
+  padding: 30px 0;
+}
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: 4px;
+    padding: 50px 0;
+    color: $type;
+    background: white;
+    .header {
+        @include gridle(8);
+        @include gridle(10, 'mobile');
+        @include gridle_centered();
+        h1, h2, p { text-align: center; }
+        h1.title-bottom {
+            font-size: 150px;
+            margin-bottom: 20px;
+            text-shadow: $second-emphasis -2px 2px 2px;
+            @include gridle_state(tablet) { font-size: 80px; }
+        }
+    }
+    .section {
+        padding: 50px 0;
+        @include gridle(12);
+        @include gridle_centered();
+    }
+}
+.mayor .endorsements { padding-top: 10px; }
+.issues {
+    @include gridle(10);
+    @include gridle_centered();
+    padding: 30px 0;
+    th .img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        background: transparent top center no-repeat;
+        background-size: cover;
+        margin-left: 10px;
+    }
+    tr:nth-child(even) td { background: lighten($background, 30%); }
+    td:first-child {
+        text-align: left;
+        font-weight: bold;
+        padding-left: 10px;
+        padding-right: 0;
+    }
+    td {
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+.candidate, .measure {
+    padding: 20px 0;
+    @include gridle_state(tablet) { padding: 50px 0; }
+    h2 { text-align: center; }
+}
+.candidate {
+    @include gridle(6);
+    @include gridle(10, tablet);
+    @include gridle_centered(tablet);
+
+    .bio, .endorsements { @include gridle(6); }
+    .img {
+        border-radius: 120px;
+        height: 120px;
+        margin: 0 auto;
+        width: 120px;
+        background: transparent top center no-repeat;
+        background-size: cover;
+    }
+}
+.measure {
+    @include gridle_push(1);
+    @include gridle(10);
+    .thumb { @include gridle(1); }
+    .choice { @include gridle(6); }
+    .endorsements {
+        @include gridle(5);
+        @include gridle_push(1, tablet);
+    }
+    .choice, .endorsements {
+        @include gridle_state(tablet) {
+            padding: 10px 0;
+        }
+        @include gridle(10, tablet);
+    }
+
+    h3 { color: $emphasis; text-transform: uppercase; }
+    h4 { color: $second-emphasis; }
+    h2, h4, h5 { span { text-transform: uppercase; }}
+    span.fa {
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        margin: 10px 0 0 -30px;
+        background: $third-emphasis;
+        text-align: center;
+        font-size: 30px;
+        color: white;
+        &:before { line-height: 50px; }
+    }
+    .recommendation {
+        text-align: left;
+        span.fa { margin: 0; }
+        span.yay-or-nay { color: $emphasis; }
+    }
+}
+
