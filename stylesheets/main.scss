@@ -22,7 +22,17 @@ ul {
     list-style: disc;
     margin: 10px 0 0 20px;
 }
-li { line-height: 1.1em; }
+p, li { line-height: 1.5em; }
+a {
+    &:hover, &:active {
+        text-decoration: underline;
+        color: lighter($emphasis, 10%);
+    }
+    &, &:visited {
+        color: darken($emphasis, 10%);;
+        text-decoration: none;
+    }
+}
 
 // Containers
 @include gridle_generate_classes ();
@@ -30,7 +40,7 @@ li { line-height: 1.1em; }
 body {
   font-family: 'Open Sans', sans-serif;
   margin: 0 auto;
-  background: $background url('http://chicagovotes.com/wp-content/themes/Jolokia/images/wrap.png');
+  background: $background url('/images/wrap.png');
   padding: 30px 0;
 }
 .container {
@@ -58,7 +68,12 @@ body {
         @include gridle_centered();
     }
 }
-.mayor .endorsements { padding-top: 10px; }
+.about {
+    @include gridle(9);
+    @include gridle_centered();
+    h3 { text-align: center; padding: 20px 0; }
+    img.grid-3 { padding-top: 20px; }
+}
 .issues {
     @include gridle(10);
     @include gridle_centered();
@@ -97,14 +112,23 @@ body {
     @include gridle(6);
     @include gridle(10, tablet);
     @include gridle_centered(tablet);
+    min-height: 240px;
 
-    .bio  { @include gridle(5); }
-    .endorsements { @include gridle(7); }
+    a {
+        font-size: 10px;
+        @include gridle(12);
+        @include gridle_centered();
+        margin: 4px auto;
+        padding: 0 0 0 22px;
+    }
+
+    .bio  { @include gridle(4); }
+    .endorsements { @include gridle(8); padding-top: 10px;}
     .img {
-        border-radius: 120px;
-        height: 120px;
+        border-radius: 100px;
+        height: 100px;
         margin: 0 auto;
-        width: 120px;
+        width: 100px;
         background: transparent top center no-repeat;
         background-size: cover;
     }
@@ -112,8 +136,9 @@ body {
 .measure {
     @include gridle_push(1);
     @include gridle(10);
+    .choice { margin: 30px 0; @include gridle(12); }
     .thumb { @include gridle(1); }
-    .choice { @include gridle(6); }
+    .explanation { @include gridle(6); }
     .endorsements {
         @include gridle(5);
         @include gridle_push(1, tablet);

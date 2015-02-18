@@ -26,7 +26,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-.grid-0, .grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9, .grid-10, .grid-11, .grid-12, .grid-mobile-0, .grid-mobile-1, .grid-mobile-2, .grid-mobile-3, .grid-mobile-4, .grid-mobile-5, .grid-mobile-6, .grid-mobile-7, .grid-mobile-8, .grid-mobile-9, .grid-mobile-10, .grid-mobile-11, .grid-mobile-12, .grid-tablet-0, .grid-tablet-1, .grid-tablet-2, .grid-tablet-3, .grid-tablet-4, .grid-tablet-5, .grid-tablet-6, .grid-tablet-7, .grid-tablet-8, .grid-tablet-9, .grid-tablet-10, .grid-tablet-11, .grid-tablet-12, .container .header, .container .section, .issues, .candidate, .candidate .bio, .candidate .endorsements, .measure, .measure .thumb, .measure .choice, .measure .endorsements {
+.grid-0, .grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9, .grid-10, .grid-11, .grid-12, .grid-mobile-0, .grid-mobile-1, .grid-mobile-2, .grid-mobile-3, .grid-mobile-4, .grid-mobile-5, .grid-mobile-6, .grid-mobile-7, .grid-mobile-8, .grid-mobile-9, .grid-mobile-10, .grid-mobile-11, .grid-mobile-12, .grid-tablet-0, .grid-tablet-1, .grid-tablet-2, .grid-tablet-3, .grid-tablet-4, .grid-tablet-5, .grid-tablet-6, .grid-tablet-7, .grid-tablet-8, .grid-tablet-9, .grid-tablet-10, .grid-tablet-11, .grid-tablet-12, .container .header, .container .section, .about, .issues, .candidate, .candidate a, .candidate .bio, .candidate .endorsements, .measure, .measure .choice, .measure .thumb, .measure .explanation, .measure .endorsements {
   display: inline-block;
   min-height: 1px;
   -webkit-box-sizing: border-box;
@@ -214,8 +214,15 @@ ul {
   list-style: disc;
   margin: 10px 0 0 20px; }
 
-li {
-  line-height: 1.1em; }
+p, li {
+  line-height: 1.5em; }
+
+a:hover, a:active {
+  text-decoration: underline;
+  color: lighter(#d81b59, 10%); }
+a, a:visited {
+  color: #ab1546;
+  text-decoration: none; }
 
 @media screen and (max-width: 400px) {
   @-ms-viewport {
@@ -1184,7 +1191,7 @@ li {
 body {
   font-family: 'Open Sans', sans-serif;
   margin: 0 auto;
-  background: #26aac6 url("http://chicagovotes.com/wp-content/themes/Jolokia/images/wrap.png");
+  background: #26aac6 url("/images/wrap.png");
   padding: 30px 0; }
 
 .container {
@@ -1246,8 +1253,30 @@ body {
         padding-left: 10px;
         padding-right: 10px; } }
 
-.mayor .endorsements {
-  padding-top: 10px; }
+.about {
+  float: left;
+  direction: ltr;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 75%;
+  display: block !important;
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  clear: both !important; }
+  @media screen and (max-width: 480px) {
+    .about {
+      padding-left: 5px;
+      padding-right: 5px; } }
+  @media screen and (max-width: 720px) {
+    .about {
+      padding-left: 10px;
+      padding-right: 10px; } }
+  .about h3 {
+    text-align: center;
+    padding: 20px 0; }
+  .about img.grid-3 {
+    padding-top: 20px; }
 
 .issues {
   float: left;
@@ -1304,7 +1333,8 @@ body {
   direction: ltr;
   padding-left: 20px;
   padding-right: 20px;
-  width: 50%; }
+  width: 50%;
+  min-height: 240px; }
   @media screen and (max-width: 480px) {
     .candidate {
       padding-left: 5px;
@@ -1323,12 +1353,34 @@ body {
       margin-left: auto !important;
       margin-right: auto !important;
       clear: both !important; } }
+  .candidate a {
+    font-size: 10px;
+    float: left;
+    direction: ltr;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    display: block !important;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    clear: both !important;
+    margin: 4px auto;
+    padding: 0 0 0 22px; }
+    @media screen and (max-width: 480px) {
+      .candidate a {
+        padding-left: 5px;
+        padding-right: 5px; } }
+    @media screen and (max-width: 720px) {
+      .candidate a {
+        padding-left: 10px;
+        padding-right: 10px; } }
   .candidate .bio {
     float: left;
     direction: ltr;
     padding-left: 20px;
     padding-right: 20px;
-    width: 41.66667%; }
+    width: 33.33333%; }
     @media screen and (max-width: 480px) {
       .candidate .bio {
         padding-left: 5px;
@@ -1342,7 +1394,8 @@ body {
     direction: ltr;
     padding-left: 20px;
     padding-right: 20px;
-    width: 58.33333%; }
+    width: 66.66667%;
+    padding-top: 10px; }
     @media screen and (max-width: 480px) {
       .candidate .endorsements {
         padding-left: 5px;
@@ -1352,10 +1405,10 @@ body {
         padding-left: 10px;
         padding-right: 10px; } }
   .candidate .img {
-    border-radius: 120px;
-    height: 120px;
+    border-radius: 100px;
+    height: 100px;
     margin: 0 auto;
-    width: 120px;
+    width: 100px;
     background: transparent top center no-repeat;
     background-size: cover; }
 
@@ -1374,6 +1427,21 @@ body {
     .measure {
       padding-left: 10px;
       padding-right: 10px; } }
+  .measure .choice {
+    margin: 30px 0;
+    float: left;
+    direction: ltr;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%; }
+    @media screen and (max-width: 480px) {
+      .measure .choice {
+        padding-left: 5px;
+        padding-right: 5px; } }
+    @media screen and (max-width: 720px) {
+      .measure .choice {
+        padding-left: 10px;
+        padding-right: 10px; } }
   .measure .thumb {
     float: left;
     direction: ltr;
@@ -1388,18 +1456,18 @@ body {
       .measure .thumb {
         padding-left: 10px;
         padding-right: 10px; } }
-  .measure .choice {
+  .measure .explanation {
     float: left;
     direction: ltr;
     padding-left: 20px;
     padding-right: 20px;
     width: 50%; }
     @media screen and (max-width: 480px) {
-      .measure .choice {
+      .measure .explanation {
         padding-left: 5px;
         padding-right: 5px; } }
     @media screen and (max-width: 720px) {
-      .measure .choice {
+      .measure .explanation {
         padding-left: 10px;
         padding-right: 10px; } }
   .measure .endorsements {
