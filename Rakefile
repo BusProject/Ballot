@@ -1,4 +1,13 @@
+require 'webrick'
+
 load 'controller.rb'
+
+task :serve do
+    port = ARGV[1] || 8080
+    server = WEBrick::HTTPServer.new(:Port => port, :DocumentRoot => Dir.pwd)
+    trap('INT') { server.shutdown }
+    server.start
+end
 
 task :mayors do
     mayors, _ = _mayor_data
