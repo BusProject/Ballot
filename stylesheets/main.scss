@@ -36,6 +36,23 @@ a {
     }
 }
 
+// Mixins
+@mixin clear() {
+    &:after, &:before {
+        content: "";
+        clear: both;
+        display: block;
+    }
+}
+
+@mixin frame($size) {
+    width: $size;
+    height: $size;
+    border-radius: 100%;
+    background: transparent top center no-repeat;
+    background-size: cover;
+}
+
 // Containers
 @include gridle_generate_classes ();
 
@@ -57,30 +74,29 @@ body {
         h1, h2, p { text-align: center; }
         h1{
             text-shadow: white -1px 1px 2px;
+            @include gridle_state(mobile) { font-size: 1.4em; }
             &.big {
                 text-shadow: white -2px 2px 2px;
                 font-size: 150px;
                 margin-bottom: 20px;
                 @include gridle_state(tablet) { font-size: 80px; }
+                @include gridle_state(mobile) { font-size: 60px; }
             }
         }
     }
     .section {
-        @include gridle(12);
+        @include gridle(11);
         @include gridle_centered();
         padding: 50px 0;
         margin: 50px 0;
         border-radius: 4px;
         background: white;
         .inner {
-            @include gridle(12, 'tablet mobile');
             @include gridle(11);
+            @include gridle(12, tablet);
+            @include gridle_no_gutter(tablet);
             @include gridle_centered();
-            &:after, &:before {
-                content: "";
-                clear: both;
-                display: block;
-            }
+            @include clear();
         }
     }
 }
@@ -89,6 +105,9 @@ body {
     @include gridle_centered();
     h2, h3 { text-align: center; padding: 20px 0; }
     img.grid-3 { padding-top: 20px; }
+    @include gridle_state(mobile) {
+        img { width: 100%; }
+    }
 }
 .issues {
     @include gridle(10);
@@ -97,11 +116,7 @@ body {
     @include gridle_state(tablet) {  overflow-y: scroll; }
     table {
         th .img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50px;
-            background: transparent top center no-repeat;
-            background-size: cover;
+            @include frame(60px);
             margin-left: 10px;
         }
         tr:nth-child(even) td { background: lighten($background, 30%); }
@@ -122,8 +137,10 @@ body {
 
 .candidate, .measure {
     padding: 20px 0;
-    @include gridle_state(tablet) { padding: 50px 0; }
     h2 { text-align: center; }
+    @include gridle_state(tablet) {
+        padding: 30px 0;
+    }
 }
 .candidate {
     @include gridle(10, tablet);
@@ -131,52 +148,64 @@ body {
     @include gridle_centered(tablet);
     min-height: 240px;
 
-    a {
-        font-size: 10px;
-        @include gridle(12);
-        @include gridle_centered();
-        margin: 4px auto;
-        padding: 0 0 0 30%;
-    }
 
-    .bio  {
-        @include gridle(10, 'mobile tablet');
+    .social {
+        text-align: left;
+        @include gridle(8);
+        @include gridle_float (right);
+
+        @include gridle_state(mobile) { text-align: center; padding-left: 0;}
+
+        @include gridle_centered(tablet);
+        padding-left: 0;
+        padding-right: 0;
+
+        a {
+            font-size: 10px;
+            margin: 4px auto;
+        }
+    }
+    .bio, .endorsements {
+        padding-left: 0; padding-right: 0;
+    }
+    .bio {
+        @include gridle(12, mobile);
         @include gridle(5);
     }
     .endorsements {
-        @include gridle(10, 'mobile tablet');
+        @include gridle_centered(mobile);
+        @include gridle(12, mobile);
         @include gridle(7);
         padding-top: 10px;
-
-        @include gridle_state('tablet mobile') {
-            & > *, & { padding-left: 0; padding-right: 0; }
-        }
     }
     .img {
-        $size: 100px;
-        height: $size;
-        width: $size;
-        border-radius: 100%;
+        @include frame(100px);
         margin: 0 auto;
-        background: transparent top center no-repeat;
-        background-size: cover;
     }
 }
 .measure {
-    @include gridle_push(1);
     @include gridle(10);
+    @include gridle(12, tablet);
+
     .choice { margin: 30px 0; @include gridle(12); }
-    .thumb { @include gridle(1); }
-    .explanation { @include gridle(6); }
+    .thumb {
+        @include gridle(1);
+        @include gridle_centered(mobile);
+        @include gridle_state(mobile) { padding-bottom: 20px; }
+    }
+    .explanation {
+        @include gridle(6);
+        @include gridle(11, tablet);
+        @include gridle(12, mobile);
+        @include gridle_push(1, tablet);
+        @include gridle_push(0, mobile);
+    }
     .endorsements {
         @include gridle(5);
-        @include gridle_push(1, tablet);
-    }
-    .choice, .endorsements {
-        @include gridle_state(tablet) {
-            padding: 10px 0;
-        }
         @include gridle(10, tablet);
+        @include gridle_push(2, tablet);
+        @include gridle_push(0, mobile);
+        @include gridle(12, mobile);
     }
     h4 { color: $second-emphasis; }
     h2, h4, h5 { span { text-transform: uppercase; }}
@@ -195,5 +224,72 @@ body {
         text-align: left;
         span.fa { margin: 0; }
         span.yay-or-nay { color: $emphasis; }
+        @include gridle_state(mobile) {
+            text-align: center;
+            span {
+                display: block;
+                margin: 30px auto !important;
+            }
+        }
     }
+}
+#search_form {
+    @include gridle_centered();
+    @include gridle(10);
+    @include gridle(12, mobile);
+
+    input {
+        @include gridle(8);
+        @include gridle(12, mobile);
+    }
+    button {
+        @include gridle_push(1);
+        @include gridle(3);
+        @include gridle(12, mobile);
+        @include gridle_push(0, mobile);
+        @include gridle_centered(mobile);
+        color: $emphasis;
+    }
+    @include clear();
+    margin-bottom: 30px;
+}
+#alderperson_list {
+    .alderperson {
+        @include gridle(4);
+        @include gridle(6, tablet);
+        @include gridle(10, mobile);
+        text-align: center;
+        div.img {
+            @include frame(60px);
+            min-height: 60px;
+            margin: 0 auto;
+            display: block;
+        }
+        min-height: 160px;
+
+        a {
+            font-size: 12px;
+            padding: 0 4px;
+            &:before { margin-right: 2px; }
+        }
+    }
+    h3 { text-align: center; }
+    @include clear();
+}
+.map_container {
+    margin: 50px 0 0;
+
+    @include gridle(10);
+    @include gridle_centered();
+
+    @include clear();
+}
+#map_canvas {
+
+    width: 100%;
+    margin: 30px auto;
+    display: none;
+
+    height: 400px;
+    @include gridle_state(tablet) { height: 300px; }
 }

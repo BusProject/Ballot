@@ -13,7 +13,7 @@
 .parent, .parent-mobile, .parent-tablet {
   zoom: 1; }
 
-.push-0, .push-1, .push-2, .push-3, .push-4, .push-5, .push-6, .push-7, .push-8, .push-9, .push-10, .push-11, .push-12, .push-mobile-0, .push-mobile-1, .push-mobile-2, .push-mobile-3, .push-mobile-4, .push-mobile-5, .push-mobile-6, .push-mobile-7, .push-mobile-8, .push-mobile-9, .push-mobile-10, .push-mobile-11, .push-mobile-12, .push-tablet-0, .push-tablet-1, .push-tablet-2, .push-tablet-3, .push-tablet-4, .push-tablet-5, .push-tablet-6, .push-tablet-7, .push-tablet-8, .push-tablet-9, .push-tablet-10, .push-tablet-11, .push-tablet-12, .pull-0, .pull-1, .pull-2, .pull-3, .pull-4, .pull-5, .pull-6, .pull-7, .pull-8, .pull-9, .pull-10, .pull-11, .pull-12, .pull-mobile-0, .pull-mobile-1, .pull-mobile-2, .pull-mobile-3, .pull-mobile-4, .pull-mobile-5, .pull-mobile-6, .pull-mobile-7, .pull-mobile-8, .pull-mobile-9, .pull-mobile-10, .pull-mobile-11, .pull-mobile-12, .pull-tablet-0, .pull-tablet-1, .pull-tablet-2, .pull-tablet-3, .pull-tablet-4, .pull-tablet-5, .pull-tablet-6, .pull-tablet-7, .pull-tablet-8, .pull-tablet-9, .pull-tablet-10, .pull-tablet-11, .pull-tablet-12, .measure, .measure .endorsements {
+.push-0, .push-1, .push-2, .push-3, .push-4, .push-5, .push-6, .push-7, .push-8, .push-9, .push-10, .push-11, .push-12, .push-mobile-0, .push-mobile-1, .push-mobile-2, .push-mobile-3, .push-mobile-4, .push-mobile-5, .push-mobile-6, .push-mobile-7, .push-mobile-8, .push-mobile-9, .push-mobile-10, .push-mobile-11, .push-mobile-12, .push-tablet-0, .push-tablet-1, .push-tablet-2, .push-tablet-3, .push-tablet-4, .push-tablet-5, .push-tablet-6, .push-tablet-7, .push-tablet-8, .push-tablet-9, .push-tablet-10, .push-tablet-11, .push-tablet-12, .pull-0, .pull-1, .pull-2, .pull-3, .pull-4, .pull-5, .pull-6, .pull-7, .pull-8, .pull-9, .pull-10, .pull-11, .pull-12, .pull-mobile-0, .pull-mobile-1, .pull-mobile-2, .pull-mobile-3, .pull-mobile-4, .pull-mobile-5, .pull-mobile-6, .pull-mobile-7, .pull-mobile-8, .pull-mobile-9, .pull-mobile-10, .pull-mobile-11, .pull-mobile-12, .pull-tablet-0, .pull-tablet-1, .pull-tablet-2, .pull-tablet-3, .pull-tablet-4, .pull-tablet-5, .pull-tablet-6, .pull-tablet-7, .pull-tablet-8, .pull-tablet-9, .pull-tablet-10, .pull-tablet-11, .pull-tablet-12, .measure .explanation, .measure .endorsements, #search_form button {
   position: relative; }
 
 .container {
@@ -26,7 +26,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-.grid-0, .grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9, .grid-10, .grid-11, .grid-12, .grid-mobile-0, .grid-mobile-1, .grid-mobile-2, .grid-mobile-3, .grid-mobile-4, .grid-mobile-5, .grid-mobile-6, .grid-mobile-7, .grid-mobile-8, .grid-mobile-9, .grid-mobile-10, .grid-mobile-11, .grid-mobile-12, .grid-tablet-0, .grid-tablet-1, .grid-tablet-2, .grid-tablet-3, .grid-tablet-4, .grid-tablet-5, .grid-tablet-6, .grid-tablet-7, .grid-tablet-8, .grid-tablet-9, .grid-tablet-10, .grid-tablet-11, .grid-tablet-12, .container .header, .container .section, .container .section .inner, .about, .issues, .candidate, .candidate a, .candidate .bio, .candidate .endorsements, .measure, .measure .choice, .measure .thumb, .measure .explanation, .measure .endorsements {
+.grid-0, .grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9, .grid-10, .grid-11, .grid-12, .grid-mobile-0, .grid-mobile-1, .grid-mobile-2, .grid-mobile-3, .grid-mobile-4, .grid-mobile-5, .grid-mobile-6, .grid-mobile-7, .grid-mobile-8, .grid-mobile-9, .grid-mobile-10, .grid-mobile-11, .grid-mobile-12, .grid-tablet-0, .grid-tablet-1, .grid-tablet-2, .grid-tablet-3, .grid-tablet-4, .grid-tablet-5, .grid-tablet-6, .grid-tablet-7, .grid-tablet-8, .grid-tablet-9, .grid-tablet-10, .grid-tablet-11, .grid-tablet-12, .container .header, .container .section, .container .section .inner, .about, .issues, .candidate, .candidate .social, .candidate .bio, .candidate .endorsements, .measure, .measure .choice, .measure .thumb, .measure .explanation, .measure .endorsements, #search_form, #search_form input, #search_form button, #alderperson_list .alderperson, .map_container {
   display: inline-block;
   min-height: 1px;
   -webkit-box-sizing: border-box;
@@ -1231,6 +1231,9 @@ body {
       text-align: center; }
     .container .header h1 {
       text-shadow: white -1px 1px 2px; }
+      @media screen and (max-width: 480px) {
+        .container .header h1 {
+          font-size: 1.4em; } }
       .container .header h1.big {
         text-shadow: white -2px 2px 2px;
         font-size: 150px;
@@ -1238,12 +1241,15 @@ body {
         @media screen and (max-width: 720px) {
           .container .header h1.big {
             font-size: 80px; } }
+        @media screen and (max-width: 480px) {
+          .container .header h1.big {
+            font-size: 60px; } }
   .container .section {
     float: left;
     direction: ltr;
     padding-left: 20px;
     padding-right: 20px;
-    width: 100%;
+    width: 91.66667%;
     display: block !important;
     float: none !important;
     margin-left: auto !important;
@@ -1266,8 +1272,8 @@ body {
       direction: ltr;
       padding-left: 20px;
       padding-right: 20px;
-      width: 100%;
       width: 91.66667%;
+      padding-tablet: 0;
       display: block !important;
       float: none !important;
       margin-left: auto !important;
@@ -1281,6 +1287,9 @@ body {
         .container .section .inner {
           padding-left: 10px;
           padding-right: 10px; } }
+      @media screen and (max-width: 720px) {
+        .container .section .inner {
+          width: 100%; } }
       .container .section .inner:after, .container .section .inner:before {
         content: "";
         clear: both;
@@ -1310,6 +1319,9 @@ body {
     padding: 20px 0; }
   .about img.grid-3 {
     padding-top: 20px; }
+  @media screen and (max-width: 480px) {
+    .about img {
+      width: 100%; } }
 
 .issues {
   float: left;
@@ -1335,9 +1347,9 @@ body {
     .issues {
       overflow-y: scroll; } }
   .issues table th .img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
     background: transparent top center no-repeat;
     background-size: cover;
     margin-left: 10px; }
@@ -1356,11 +1368,11 @@ body {
 
 .candidate, .measure {
   padding: 20px 0; }
-  @media screen and (max-width: 720px) {
-    .candidate, .measure {
-      padding: 50px 0; } }
   .candidate h2, .measure h2 {
     text-align: center; }
+  @media screen and (max-width: 720px) {
+    .candidate, .measure {
+      padding: 30px 0; } }
 
 .candidate {
   float: left;
@@ -1387,34 +1399,46 @@ body {
       margin-left: auto !important;
       margin-right: auto !important;
       clear: both !important; } }
-  .candidate a {
-    font-size: 10px;
+  .candidate .social {
+    text-align: left;
     float: left;
     direction: ltr;
     padding-left: 20px;
     padding-right: 20px;
-    width: 100%;
-    display: block !important;
-    float: none !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    clear: both !important;
-    margin: 4px auto;
-    padding: 0 0 0 30%; }
+    width: 66.66667%;
+    float: right;
+    padding-left: 0;
+    padding-right: 0; }
     @media screen and (max-width: 480px) {
-      .candidate a {
+      .candidate .social {
         padding-left: 5px;
         padding-right: 5px; } }
     @media screen and (max-width: 720px) {
-      .candidate a {
+      .candidate .social {
         padding-left: 10px;
         padding-right: 10px; } }
+    @media screen and (max-width: 480px) {
+      .candidate .social {
+        text-align: center;
+        padding-left: 0; } }
+    @media screen and (max-width: 720px) {
+      .candidate .social {
+        display: block !important;
+        float: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        clear: both !important; } }
+    .candidate .social a {
+      font-size: 10px;
+      margin: 4px auto; }
+  .candidate .bio, .candidate .endorsements {
+    padding-left: 0;
+    padding-right: 0; }
   .candidate .bio {
     float: left;
     direction: ltr;
     padding-left: 20px;
     padding-right: 20px;
-    width: 83.33333%;
     width: 41.66667%; }
     @media screen and (max-width: 480px) {
       .candidate .bio {
@@ -1424,14 +1448,23 @@ body {
       .candidate .bio {
         padding-left: 10px;
         padding-right: 10px; } }
+    @media screen and (max-width: 480px) {
+      .candidate .bio {
+        width: 100%; } }
   .candidate .endorsements {
     float: left;
     direction: ltr;
     padding-left: 20px;
     padding-right: 20px;
-    width: 83.33333%;
     width: 58.33333%;
     padding-top: 10px; }
+    @media screen and (max-width: 480px) {
+      .candidate .endorsements {
+        display: block !important;
+        float: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        clear: both !important; } }
     @media screen and (max-width: 480px) {
       .candidate .endorsements {
         padding-left: 5px;
@@ -1440,19 +1473,18 @@ body {
       .candidate .endorsements {
         padding-left: 10px;
         padding-right: 10px; } }
-    .candidate .endorsements > *, .candidate .endorsements {
-      padding-left: 0;
-      padding-right: 0; }
+    @media screen and (max-width: 480px) {
+      .candidate .endorsements {
+        width: 100%; } }
   .candidate .img {
-    height: 100px;
     width: 100px;
+    height: 100px;
     border-radius: 100%;
-    margin: 0 auto;
     background: transparent top center no-repeat;
-    background-size: cover; }
+    background-size: cover;
+    margin: 0 auto; }
 
 .measure {
-  left: 8.33333%;
   float: left;
   direction: ltr;
   padding-left: 20px;
@@ -1466,6 +1498,9 @@ body {
     .measure {
       padding-left: 10px;
       padding-right: 10px; } }
+  @media screen and (max-width: 720px) {
+    .measure {
+      width: 100%; } }
   .measure .choice {
     margin: 30px 0;
     float: left;
@@ -1495,6 +1530,16 @@ body {
       .measure .thumb {
         padding-left: 10px;
         padding-right: 10px; } }
+    @media screen and (max-width: 480px) {
+      .measure .thumb {
+        display: block !important;
+        float: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        clear: both !important; } }
+    @media screen and (max-width: 480px) {
+      .measure .thumb {
+        padding-bottom: 20px; } }
   .measure .explanation {
     float: left;
     direction: ltr;
@@ -1509,6 +1554,18 @@ body {
       .measure .explanation {
         padding-left: 10px;
         padding-right: 10px; } }
+    @media screen and (max-width: 720px) {
+      .measure .explanation {
+        width: 91.66667%; } }
+    @media screen and (max-width: 480px) {
+      .measure .explanation {
+        width: 100%; } }
+    @media screen and (max-width: 720px) {
+      .measure .explanation {
+        left: 8.33333%; } }
+    @media screen and (max-width: 480px) {
+      .measure .explanation {
+        left: 0%; } }
   .measure .endorsements {
     float: left;
     direction: ltr;
@@ -1525,26 +1582,16 @@ body {
         padding-right: 10px; } }
     @media screen and (max-width: 720px) {
       .measure .endorsements {
-        left: 8.33333%; } }
-  .measure .choice, .measure .endorsements {
-    float: left;
-    direction: ltr;
-    padding-left: 20px;
-    padding-right: 20px; }
-    @media screen and (max-width: 720px) {
-      .measure .choice, .measure .endorsements {
-        padding: 10px 0; } }
-    @media screen and (max-width: 480px) {
-      .measure .choice, .measure .endorsements {
-        padding-left: 5px;
-        padding-right: 5px; } }
-    @media screen and (max-width: 720px) {
-      .measure .choice, .measure .endorsements {
-        padding-left: 10px;
-        padding-right: 10px; } }
-    @media screen and (max-width: 720px) {
-      .measure .choice, .measure .endorsements {
         width: 83.33333%; } }
+    @media screen and (max-width: 720px) {
+      .measure .endorsements {
+        left: 16.66667%; } }
+    @media screen and (max-width: 480px) {
+      .measure .endorsements {
+        left: 0%; } }
+    @media screen and (max-width: 480px) {
+      .measure .endorsements {
+        width: 100%; } }
   .measure h4 {
     color: #26aac6; }
   .measure h2 span, .measure h4 span, .measure h5 span {
@@ -1566,3 +1613,160 @@ body {
       margin: 0; }
     .measure .recommendation span.yay-or-nay {
       color: #d81b59; }
+    @media screen and (max-width: 480px) {
+      .measure .recommendation {
+        text-align: center; }
+        .measure .recommendation span {
+          display: block;
+          margin: 30px auto !important; } }
+
+#search_form {
+  display: block !important;
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  clear: both !important;
+  float: left;
+  direction: ltr;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 83.33333%;
+  margin-bottom: 30px; }
+  @media screen and (max-width: 480px) {
+    #search_form {
+      padding-left: 5px;
+      padding-right: 5px; } }
+  @media screen and (max-width: 720px) {
+    #search_form {
+      padding-left: 10px;
+      padding-right: 10px; } }
+  @media screen and (max-width: 480px) {
+    #search_form {
+      width: 100%; } }
+  #search_form input {
+    float: left;
+    direction: ltr;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 66.66667%; }
+    @media screen and (max-width: 480px) {
+      #search_form input {
+        padding-left: 5px;
+        padding-right: 5px; } }
+    @media screen and (max-width: 720px) {
+      #search_form input {
+        padding-left: 10px;
+        padding-right: 10px; } }
+    @media screen and (max-width: 480px) {
+      #search_form input {
+        width: 100%; } }
+  #search_form button {
+    left: 8.33333%;
+    float: left;
+    direction: ltr;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 25%;
+    color: #d81b59; }
+    @media screen and (max-width: 480px) {
+      #search_form button {
+        padding-left: 5px;
+        padding-right: 5px; } }
+    @media screen and (max-width: 720px) {
+      #search_form button {
+        padding-left: 10px;
+        padding-right: 10px; } }
+    @media screen and (max-width: 480px) {
+      #search_form button {
+        width: 100%; } }
+    @media screen and (max-width: 480px) {
+      #search_form button {
+        left: 0%; } }
+    @media screen and (max-width: 480px) {
+      #search_form button {
+        display: block !important;
+        float: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        clear: both !important; } }
+  #search_form:after, #search_form:before {
+    content: "";
+    clear: both;
+    display: block; }
+
+#alderperson_list .alderperson {
+  float: left;
+  direction: ltr;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 33.33333%;
+  text-align: center;
+  min-height: 160px; }
+  @media screen and (max-width: 480px) {
+    #alderperson_list .alderperson {
+      padding-left: 5px;
+      padding-right: 5px; } }
+  @media screen and (max-width: 720px) {
+    #alderperson_list .alderperson {
+      padding-left: 10px;
+      padding-right: 10px; } }
+  @media screen and (max-width: 720px) {
+    #alderperson_list .alderperson {
+      width: 50%; } }
+  @media screen and (max-width: 480px) {
+    #alderperson_list .alderperson {
+      width: 83.33333%; } }
+  #alderperson_list .alderperson div.img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background: transparent top center no-repeat;
+    background-size: cover;
+    min-height: 60px;
+    margin: 0 auto;
+    display: block; }
+  #alderperson_list .alderperson a {
+    font-size: 12px;
+    padding: 0 4px; }
+    #alderperson_list .alderperson a:before {
+      margin-right: 2px; }
+#alderperson_list h3 {
+  text-align: center; }
+#alderperson_list:after, #alderperson_list:before {
+  content: "";
+  clear: both;
+  display: block; }
+
+.map_container {
+  margin: 50px 0 0;
+  float: left;
+  direction: ltr;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 83.33333%;
+  display: block !important;
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  clear: both !important; }
+  @media screen and (max-width: 480px) {
+    .map_container {
+      padding-left: 5px;
+      padding-right: 5px; } }
+  @media screen and (max-width: 720px) {
+    .map_container {
+      padding-left: 10px;
+      padding-right: 10px; } }
+  .map_container:after, .map_container:before {
+    content: "";
+    clear: both;
+    display: block; }
+
+#map_canvas {
+  width: 100%;
+  margin: 30px auto;
+  display: none;
+  height: 400px; }
+  @media screen and (max-width: 720px) {
+    #map_canvas {
+      height: 300px; } }

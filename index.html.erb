@@ -50,15 +50,17 @@
             <h2><%= mayor["name"] %></h2>
             <div class="bio">
               <div class="img" style="background-image: url(<%= mayor["photo"] %>);" ></div>
-              <a target="_blank" class="fa fa-link" href="<%= mayor['website'] %>">
-                Website
-              </a>
-              <a target="_blank" class="fa fa-facebook-square" href="<%= mayor['facebook'] %>">
-              Facebook
-              </a>
-              <a target="_blank" class="fa fa-twitter-square" href="<%= mayor['twitter'] %>">
-                Twitter
-              </a>
+              <div class="social">
+                <a target="_blank" class="fa fa-link" href="<%= mayor['website'] %>">
+                  Website
+                </a>
+                <a target="_blank" class="fa fa-facebook-square" href="<%= mayor['facebook'] %>">
+                Facebook
+                </a>
+                <a target="_blank" class="fa fa-twitter-square" href="<%= mayor['twitter'] %>">
+                  Twitter
+                </a>
+              </div>
             </div>
             <div class="endorsements">
               <h4>Endorsed By:</h4>
@@ -70,8 +72,8 @@
             </div>
           </div>
         <% end %>
+        <h3>Where They Stand</h3>
         <div class="issues">
-          <h3>Where They Stand</h3>
           <table>
           <thead>
             <tr>
@@ -138,14 +140,22 @@
     </div>
     <div class="aldermanic section">
       <div class="inner">
-        <h2>Aldermanic Elections</h2>
+        <h1>Aldermanic Elections</h1>
+        <form id="search_form" class="grid-8 centered">
+          <input placeholder="Enter Your Address" type="text" name="address">
+          <button type="submit">Find Ward</button>
+        </form>
+        <div id="alderperson_list"></div>
+        <div class="map_container">
+          <div id="map_canvas"></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <script type="text/javascript" src="http://media.apps.chicagotribune.com/ward-redistricting-2012/new_wards.json"></script>
-  <script type="text/javascript" src="http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v1.3.0/turf.min.js"></script>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript" src="/javascripts/turf.min.js"></script>
+  <script type="text/javascript" src="/javascripts/tinyxhr.js"></script>
   <script type="text/javascript" src="/javascripts/main.js"></script>
 
   <script>

@@ -1,3 +1,4 @@
+require 'csv'
 require 'webrick'
 
 load 'controller.rb'
@@ -32,6 +33,17 @@ task :mayors do
 
     File.open('mayors.md','w') do |fl|
         fl.write(markdown.map{ |r| "|#{r.join('|')}|" }.join("\n"))
+    end
+end
+
+task :alderpeople do
+    alderpeople = []
+    CSV.foreach("data/alderpeople.csv",
+                :headers => true) do |row|
+         alderpeople.push Hash[row.headers.map(&:downcase).zip(row.fields.map)]
+    end
+    File.open('data/alderpeople.json','w') do |fl|
+        fl.write(alderpeople.to_json)
     end
 end
 

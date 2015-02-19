@@ -3,7 +3,7 @@ guard 'rake', :task => 'erb' do
 end
 
 guard 'rake', :task => 'all' do
-    watch(%r{controller.rb|Rakefile})
+    watch(%r{controller.rb|Rakefile|data/*.json})
 end
 
 guard 'sass', :input => 'stylesheets', :compass => true

@@ -61,15 +61,17 @@
             <h2>Bob Fioretti</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/fioretti.jpg);" ></div>
-              <a target="_blank" class="fa fa-link" href="http://bobfioretti.com/">
-                Website
-              </a>
-              <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/alderman.fioretti">
-              Facebook
-              </a>
-              <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/Fioretti2ndWard">
-                Twitter
-              </a>
+              <div class="social">
+                <a target="_blank" class="fa fa-link" href="http://bobfioretti.com/">
+                  Website
+                </a>
+                <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/alderman.fioretti">
+                Facebook
+                </a>
+                <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/Fioretti2ndWard">
+                  Twitter
+                </a>
+              </div>
             </div>
             <div class="endorsements">
               <h4>Endorsed By:</h4>
@@ -89,15 +91,17 @@
             <h2>Jesus “Chuy” Garcia</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/garcia.jpg);" ></div>
-              <a target="_blank" class="fa fa-link" href="http://www.chicagoforchuy.com/">
-                Website
-              </a>
-              <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/GarciaForChicago">
-              Facebook
-              </a>
-              <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/garcia4chicago">
-                Twitter
-              </a>
+              <div class="social">
+                <a target="_blank" class="fa fa-link" href="http://www.chicagoforchuy.com/">
+                  Website
+                </a>
+                <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/GarciaForChicago">
+                Facebook
+                </a>
+                <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/garcia4chicago">
+                  Twitter
+                </a>
+              </div>
             </div>
             <div class="endorsements">
               <h4>Endorsed By:</h4>
@@ -117,15 +121,17 @@
             <h2>Rahm Emanuel</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/emanuel.jpg);" ></div>
-              <a target="_blank" class="fa fa-link" href="http://www.chicagotogether.org/">
-                Website
-              </a>
-              <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/rahmemanuel">
-              Facebook
-              </a>
-              <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/rahmemanuel">
-                Twitter
-              </a>
+              <div class="social">
+                <a target="_blank" class="fa fa-link" href="http://www.chicagotogether.org/">
+                  Website
+                </a>
+                <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/rahmemanuel">
+                Facebook
+                </a>
+                <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/rahmemanuel">
+                  Twitter
+                </a>
+              </div>
             </div>
             <div class="endorsements">
               <h4>Endorsed By:</h4>
@@ -145,15 +151,17 @@
             <h2>William “Dock“ Walls</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/walls.jpg);" ></div>
-              <a target="_blank" class="fa fa-link" href="http://wallsformayor.com/">
-                Website
-              </a>
-              <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/williamdock.walls">
-              Facebook
-              </a>
-              <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/dockwalls">
-                Twitter
-              </a>
+              <div class="social">
+                <a target="_blank" class="fa fa-link" href="http://wallsformayor.com/">
+                  Website
+                </a>
+                <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/williamdock.walls">
+                Facebook
+                </a>
+                <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/dockwalls">
+                  Twitter
+                </a>
+              </div>
             </div>
             <div class="endorsements">
               <h4>Endorsed By:</h4>
@@ -169,15 +177,17 @@
             <h2>Willie Wilson</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/wilson.jpg);" ></div>
-              <a target="_blank" class="fa fa-link" href="http://www.electwilliewilson.com">
-                Website
-              </a>
-              <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/Electwillie">
-              Facebook
-              </a>
-              <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/electwillie">
-                Twitter
-              </a>
+              <div class="social">
+                <a target="_blank" class="fa fa-link" href="http://www.electwilliewilson.com">
+                  Website
+                </a>
+                <a target="_blank" class="fa fa-facebook-square" href="https://www.facebook.com/Electwillie">
+                Facebook
+                </a>
+                <a target="_blank" class="fa fa-twitter-square" href="http://twitter.com/electwillie">
+                  Twitter
+                </a>
+              </div>
             </div>
             <div class="endorsements">
               <h4>Endorsed By:</h4>
@@ -193,8 +203,8 @@
             </div>
           </div>
         
+        <h3>Where They Stand</h3>
         <div class="issues">
-          <h3>Where They Stand</h3>
           <table>
           <thead>
             <tr>
@@ -527,14 +537,22 @@
     </div>
     <div class="aldermanic section">
       <div class="inner">
-        <h2>Aldermanic Elections</h2>
+        <h1>Aldermanic Elections</h1>
+        <form id="search_form" class="grid-8 centered">
+          <input placeholder="Enter Your Address" type="text" name="address">
+          <button type="submit">Find Ward</button>
+        </form>
+        <div id="alderperson_list"></div>
+        <div class="map_container">
+          <div id="map_canvas"></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <script type="text/javascript" src="http://media.apps.chicagotribune.com/ward-redistricting-2012/new_wards.json"></script>
-  <script type="text/javascript" src="http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v1.3.0/turf.min.js"></script>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript" src="/javascripts/turf.min.js"></script>
+  <script type="text/javascript" src="/javascripts/tinyxhr.js"></script>
   <script type="text/javascript" src="/javascripts/main.js"></script>
 
   <script>
