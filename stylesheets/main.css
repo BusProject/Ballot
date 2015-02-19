@@ -1319,9 +1319,15 @@ body {
     padding: 20px 0; }
   .about img.grid-3 {
     padding-top: 20px; }
+  .about .show-mobile {
+    display: none; }
   @media screen and (max-width: 480px) {
     .about img {
-      width: 100%; } }
+      width: 100%; }
+    .about .show-mobile {
+      display: block; }
+    .about img.grid-3 {
+      width: 50%; } }
 
 .issues {
   float: left;

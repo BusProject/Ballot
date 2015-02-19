@@ -105,8 +105,11 @@ body {
     @include gridle_centered();
     h2, h3 { text-align: center; padding: 20px 0; }
     img.grid-3 { padding-top: 20px; }
+    .show-mobile { display: none; }
     @include gridle_state(mobile) {
         img { width: 100%; }
+        .show-mobile { display: block; }
+        img.grid-3 { width: 50%; }
     }
 }
 .issues {
