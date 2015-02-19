@@ -28,7 +28,6 @@
         }
         new_map([lng, lat]);
     }
-
     function new_map(center) {
         map_canvas.style.display = 'block';
         var map = new google.maps.Map(map_canvas, {
@@ -46,7 +45,6 @@
         });
         return map;
     }
-
     function mapIt(ward, center, home) {
         var map = new_map(center);
 
@@ -64,8 +62,6 @@
         });
         return map;
     }
-
-
     function searchSubmit() {
         map_canvas.innerHTML = "";
 
@@ -79,11 +75,19 @@
                     lat = parse.split(',')[0],
                     lng = parse.split(',')[1]
                 setUp(lat, lng)
+                for( var i = 0; i < results[0].address_components.length; i++) {
+                    if( results[0].address_components[i].types[0] == 'postal_code' ) {
+                        log_zip(results[0].address_components[i].long_name);
+                        break;
+                    }
+                }
             }
         });
         return false;
     }
-
+    function log_zip(zip) {
+        try { ga('send', 'event', 'zip', 'lookup'); } catch(e) { }
+    }
     function renderAlerpeople(ward) {
         alderperson_list.innerHTML = '<h3>Candidates for Ward '+ward+'</h3>';
 
