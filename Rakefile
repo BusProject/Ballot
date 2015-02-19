@@ -59,5 +59,5 @@ task :all do
     """
     Rebuild all the HTML pages.
     """
-    Rake::Task["erb"].invoke(Dir.glob("*.erb"))
+    Rake::Task["erb"].invoke(Dir.glob("*.html.erb"))
 end
