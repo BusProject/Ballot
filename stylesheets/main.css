@@ -1343,25 +1343,29 @@ body {
     .issues {
       padding-left: 10px;
       padding-right: 10px; } }
+  .issues:after, .issues:before {
+    content: "";
+    clear: both;
+    display: block; }
   @media screen and (max-width: 720px) {
-    .issues {
+    .issues .scroll {
       overflow-y: scroll; } }
-  .issues table th .img {
-    width: 60px;
-    height: 60px;
+  .issues .scroll table th .img {
+    width: 40px;
+    height: 40px;
     border-radius: 100%;
     background: transparent top center no-repeat;
     background-size: cover;
     margin-left: 10px; }
-  .issues table tr:nth-child(even) td {
+  .issues .scroll table tr:nth-child(even) td {
     background: #99ddec; }
-  .issues table td:first-child {
+  .issues .scroll table td:first-child {
     text-align: left;
     font-weight: bold;
     padding-left: 10px;
     padding-right: 0;
     min-width: 200px; }
-  .issues table td {
+  .issues .scroll table td {
     line-height: 1.4em;
     padding: 20px;
     text-align: center; }
@@ -1380,7 +1384,7 @@ body {
   padding-left: 20px;
   padding-right: 20px;
   width: 50%;
-  min-height: 240px; }
+  min-height: 320px; }
   @media screen and (max-width: 480px) {
     .candidate {
       padding-left: 5px;

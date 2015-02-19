@@ -72,30 +72,32 @@
             </div>
           </div>
         <% end %>
-        <h3>Where They Stand</h3>
         <div class="issues">
-          <table>
-          <thead>
-            <tr>
-              <th></th>
-              <% @mayors.each do |mayor| %>
-                <th>
-                  <div class="img" style="background-image: url(<%= mayor["photo"] %>);" ></div>
-                </th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <% @questions.each do |question| %>
+          <h3>Where They Stand</h3>
+          <div class="scroll">
+            <table>
+            <thead>
               <tr>
-                <td class="question"><%= question %></td>
-                  <% @mayors.each do |mayor| %>
-                    <td><%= mayor[question.downcase] %></td>
-                  <% end %>
+                <th></th>
+                <% @mayors.each do |mayor| %>
+                  <th>
+                    <div class="img" style="background-image: url(<%= mayor["photo"] %>);" ></div>
+                  </th>
+                <% end %>
               </tr>
-            <% end %>
-          </tbody>
-          </table>
+            </thead>
+            <tbody>
+              <% @questions.each do |question| %>
+                <tr>
+                  <td class="question"><%= question %></td>
+                    <% @mayors.each do |mayor| %>
+                      <td><%= mayor[question.downcase] %></td>
+                    <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
