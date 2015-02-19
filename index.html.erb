@@ -11,132 +11,151 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1 class="title-top">2015 Chicago City Election</h1>
-      <h1 class="title-bottom">Voter Guide</h1>
-      <h2>Be Sure to Vote by Tuesday, February 24th</h2>
-      <p>Your ballot is secret, and your choices are 100% yours. But hopefully this independent, locally-prepared guide helps you make an informed decision.</p>
+      <h1>2015 Chicago City Election</h1>
+      <h1 class="big">Voter Guide</h1>
+      <h1>Vote by Tuesday, February 24th</h1>
     </div>
     <div class="section">
-      <div class="about">
-        <h1>How Do I Vote?</h1>
+      <div class="inner">
+        <div class="about">
+          <h1>How Do I Vote?</h1>
 
-        <h3>What You’ve Gotta Bring</h3>
-        <p>
-          To avoid issues on Election Day, or if you are a first time voter, we recommend you bring some identification: Illinois driver’s license/state ID, utility bill, bank statement, or current college ID card.
-        </p>
-        <p>
-          If you are not already registered to vote, you may use Grace Period Voter Registration at early voting sites Feb. 9-21. Go to <a target="_blank" href="http://chicagoelections.com">chicagoelections.com</a> to find a location near you.
-        </p>
+          <h3>What You’ve Gotta Bring</h3>
+          <p>
+            To avoid issues on Election Day, or if you are a first time voter, we recommend you bring some identification: Illinois driver’s license/state ID, utility bill, bank statement, or current college ID card.
+          </p>
+          <p>
+            If you are not already registered to vote, you may use Grace Period Voter Registration at early voting sites Feb. 9-21. Go to <a target="_blank" href="http://chicagoelections.com">chicagoelections.com</a> to find a location near you.
+          </p>
 
-        <h3>When & Where You’ve Gotta Go</h3>
-        <p>Early voting is Feb. 9-21, and Election Day is Feb. 24. To find polling locations for Election Day or early voting go to <a target="_blank" href="http://chicagoelections.com">chicagoelections.com</a></p>
+          <h3>When & Where You’ve Gotta Go</h3>
+          <p>Early voting is Feb. 9-21, and Election Day is Feb. 24. To find polling locations for Election Day or early voting go to <a target="_blank" href="http://chicagoelections.com">chicagoelections.com</a></p>
 
-        <h3>Brought to you by</h3>
-
-        <a target="_blank" href="www.aldertrack.com"><img class="grid-3" src="/images/aldertrack.png"></a>
-        <a target="_blank" href="http://chicagovotes.org"><img class="grid-6" src="/images/chicagovotes.png"></a>
-        <img class="grid-3" src="/images/ballotready.png">
+          <h3>Brought to you by</h3>
+          <div class="grid-12 clear">
+            <a target="_blank" href="www.aldertrack.com"><img class="grid-3" src="/images/aldertrack.png"></a>
+            <a target="_blank" href="http://chicagovotes.org"><img class="grid-6" src="/images/chicagovotes.png"></a>
+            <img class="grid-3" src="/images/ballotready.png">
+          </div>
+        </div>
       </div>
     </div>
     <div class="mayor section">
-      <h1>Mayor of Chicago</h1>
-      <h3>What they do</h3>
-      <p>City’s CEO. Proposes the budget, appoints and supervises City officials. In charge of emergency management, and is the bottom line on City laws.</p>
-      <% @mayors.each do |mayor| %>
-        <div class="candidate">
-          <h2><%= mayor["name"] %></h2>
-          <div class="bio">
-            <div class="img" style="background-image: url(<%= mayor["photo"] %>);" ></div>
-            <a target="_blank" class="fa fa-link" href="<%= mayor['website'] %>">
-              Website
-            </a>
-            <a target="_blank" class="fa fa-facebook-square" href="<%= mayor['facebook'] %>">
-            Facebook
-            </a>
-            <a target="_blank" class="fa fa-twitter-square" href="<%= mayor['twitter'] %>">
-              Twitter
-            </a>
-          </div>
-          <div class="endorsements">
-            <h4>Endorsed By:</h4>
-            <ul >
-              <% mayor["endorsements"].each do |endorsement| %>
-                <li><%= endorsement %></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      <% end %>
-      <div class="issues">
-        <h3>Where They Stand</h3>
-        <table>
-        <thead>
-          <tr>
-            <th></th>
-            <% @mayors.each do |mayor| %>
-              <th>
-                <div class="img" style="background-image: url(<%= mayor["photo"] %>);" ></div>
-              </th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% @questions.each do |question| %>
-            <tr>
-              <td class="question"><%= question %></td>
-                <% @mayors.each do |mayor| %>
-                  <td><%= mayor[question.downcase] %></td>
+      <div class="inner">
+        <h1>Mayor of Chicago</h1>
+        <h3>What they do</h3>
+        <p>City’s CEO. Proposes the budget, appoints and supervises City officials. In charge of emergency management, and is the bottom line on City laws.</p>
+        <% @mayors.each do |mayor| %>
+          <div class="candidate">
+            <h2><%= mayor["name"] %></h2>
+            <div class="bio">
+              <div class="img" style="background-image: url(<%= mayor["photo"] %>);" ></div>
+              <a target="_blank" class="fa fa-link" href="<%= mayor['website'] %>">
+                Website
+              </a>
+              <a target="_blank" class="fa fa-facebook-square" href="<%= mayor['facebook'] %>">
+              Facebook
+              </a>
+              <a target="_blank" class="fa fa-twitter-square" href="<%= mayor['twitter'] %>">
+                Twitter
+              </a>
+            </div>
+            <div class="endorsements">
+              <h4>Endorsed By:</h4>
+              <ul >
+                <% mayor["endorsements"].each do |endorsement| %>
+                  <li><%= endorsement %></li>
                 <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+        <div class="issues">
+          <h3>Where They Stand</h3>
+          <table>
+          <thead>
+            <tr>
+              <th></th>
+              <% @mayors.each do |mayor| %>
+                <th>
+                  <div class="img" style="background-image: url(<%= mayor["photo"] %>);" ></div>
+                </th>
+              <% end %>
             </tr>
-          <% end %>
-        </tbody>
-        </table>
+          </thead>
+          <tbody>
+            <% @questions.each do |question| %>
+              <tr>
+                <td class="question"><%= question %></td>
+                  <% @mayors.each do |mayor| %>
+                    <td><%= mayor[question.downcase] %></td>
+                  <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div class="measures section">
-      <h1>Ballot Measures</h1>
-      <% @measures.each do |measure| %>
-        <div class="measure">
-            <h2><%= measure['title'] %></h2>
-            <h3>What it does</h3>
-            <p><%= measure['description'] %></p>
-            <% measure['choices'].each do |choice, info| %>
-              <div class="choice">
-                <div class="thumb">
-                  <span class="fa fa-thumbs-<%= choice == "yes" ? "up" : "down" %>"></span>
-                </div>
-                <div class="explanation">
-                  <h4>A <span class="yay-or-nay"><%= choice %></span> Vote Means...</h4>
-                  <p><%= info['explanation'] %></p>
-                </div>
-                <% unless info['endorsements'].empty? %>
-                  <div class="endorsements">
-                    <h5>Who says <span class="yay-or-nay"><%= choice %></span></h5>
-                    <ul>
-                      <% info['endorsements'].each do |endorsement| %>
-                        <li><%= endorsement %></li>
-                      <% end %>
-                    </ul>
+      <div class="inner">
+        <h1>Ballot Measures</h1>
+        <% @measures.each do |measure| %>
+          <div class="measure">
+              <h2><%= measure['title'] %></h2>
+              <h3>What it does</h3>
+              <p><%= measure['description'] %></p>
+              <% measure['choices'].each do |choice, info| %>
+                <div class="choice">
+                  <div class="thumb">
+                    <span class="fa fa-thumbs-<%= choice == "yes" ? "up" : "down" %>"></span>
                   </div>
-                <% end %>
-              </div>
-            <% end %>
-            <h2 class="recommendation">
-              Recommended:
-              <span class="fa fa-thumbs-<%= measure['recommendation'] == "yes" ? "up" : "down" %>"></span>
-              <span class="yay-or-nay"><%= measure['recommendation'] %></span>
-            </h2>
-        </div>
-      <% end %>
-      <p class="grid-8 centered grid-tablet-12">* Note, these ballot measures are non-binding, advisory referenda</p>
+                  <div class="explanation">
+                    <h4>A <span class="yay-or-nay"><%= choice %></span> Vote Means...</h4>
+                    <p><%= info['explanation'] %></p>
+                  </div>
+                  <% unless info['endorsements'].empty? %>
+                    <div class="endorsements">
+                      <h5>Who says <span class="yay-or-nay"><%= choice %></span></h5>
+                      <ul>
+                        <% info['endorsements'].each do |endorsement| %>
+                          <li><%= endorsement %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+              <h2 class="recommendation">
+                Recommended:
+                <span class="fa fa-thumbs-<%= measure['recommendation'] == "yes" ? "up" : "down" %>"></span>
+                <span class="yay-or-nay"><%= measure['recommendation'] %></span>
+              </h2>
+          </div>
+        <% end %>
+        <p class="grid-8 centered grid-tablet-12">* Note, these ballot measures are non-binding, advisory referenda</p>
+      </div>
     </div>
-    <div class="aldermanic section"></div>
+    <div class="aldermanic section">
+      <div class="inner">
+      </div>
+    </div>
   </div>
 
   <script type="text/javascript" src="http://media.apps.chicagotribune.com/ward-redistricting-2012/new_wards.json"></script>
   <script type="text/javascript" src="http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v1.3.0/turf.min.js"></script>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
-  <script type="text/javascript" src="./javascripts/main.js"></script>
+  <script type="text/javascript" src="/javascripts/main.js"></script>
 
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-59932015-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
 </body>
 </html>

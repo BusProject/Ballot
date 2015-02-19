@@ -21,6 +21,8 @@ h1, h2, h3, h4, p { margin-bottom: 0.75em; }
 ul {
     list-style: disc;
     margin: 10px 0 0 20px;
+    @include gridle_state(tablet) { margin: 10px 0 0 10px; }
+    @include gridle_state(mobile) { margin: 10px 0 0 5px; }
 }
 p, li { line-height: 1.5em; }
 a {
@@ -46,32 +48,46 @@ body {
 .container {
     max-width: 960px;
     margin: 0 auto;
-    border-radius: 4px;
     padding: 50px 0;
     color: $type;
-    background: white;
     .header {
         @include gridle(8);
         @include gridle(10, 'mobile');
         @include gridle_centered();
         h1, h2, p { text-align: center; }
-        h1.title-bottom {
-            font-size: 150px;
-            margin-bottom: 20px;
-            text-shadow: $second-emphasis -2px 2px 2px;
-            @include gridle_state(tablet) { font-size: 80px; }
+        h1{
+            text-shadow: white -1px 1px 2px;
+            &.big {
+                text-shadow: white -2px 2px 2px;
+                font-size: 150px;
+                margin-bottom: 20px;
+                @include gridle_state(tablet) { font-size: 80px; }
+            }
         }
     }
     .section {
-        padding: 50px 0;
-        @include gridle(11);
+        @include gridle(12);
         @include gridle_centered();
+        padding: 50px 0;
+        margin: 50px 0;
+        border-radius: 4px;
+        background: white;
+        .inner {
+            @include gridle(12, 'tablet mobile');
+            @include gridle(11);
+            @include gridle_centered();
+            &:after, &:before {
+                content: "";
+                clear: both;
+                display: block;
+            }
+        }
     }
 }
 .about {
-    @include gridle(9);
+    @include gridle(11);
     @include gridle_centered();
-    h3 { text-align: center; padding: 20px 0; }
+    h2, h3 { text-align: center; padding: 20px 0; }
     img.grid-3 { padding-top: 20px; }
 }
 .issues {
@@ -97,6 +113,7 @@ body {
             min-width: 200px;
         }
         td {
+            line-height: 1.4em;
             padding: 20px;
             text-align: center;
         }
@@ -109,8 +126,8 @@ body {
     h2 { text-align: center; }
 }
 .candidate {
-    @include gridle(6);
     @include gridle(10, tablet);
+    @include gridle(6);
     @include gridle_centered(tablet);
     min-height: 240px;
 
@@ -119,16 +136,28 @@ body {
         @include gridle(12);
         @include gridle_centered();
         margin: 4px auto;
-        padding: 0 0 0 22px;
+        padding: 0 0 0 30%;
     }
 
-    .bio  { @include gridle(4); }
-    .endorsements { @include gridle(8); padding-top: 10px;}
+    .bio  {
+        @include gridle(10, 'mobile tablet');
+        @include gridle(5);
+    }
+    .endorsements {
+        @include gridle(10, 'mobile tablet');
+        @include gridle(7);
+        padding-top: 10px;
+
+        @include gridle_state('tablet mobile') {
+            & > *, & { padding-left: 0; padding-right: 0; }
+        }
+    }
     .img {
-        border-radius: 100px;
-        height: 100px;
+        $size: 100px;
+        height: $size;
+        width: $size;
+        border-radius: 100%;
         margin: 0 auto;
-        width: 100px;
         background: transparent top center no-repeat;
         background-size: cover;
     }
@@ -168,4 +197,3 @@ body {
         span.yay-or-nay { color: $emphasis; }
     }
 }
-
