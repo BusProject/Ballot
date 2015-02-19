@@ -50,6 +50,7 @@ alderpeople.reject{ |p| p['photo'].nil? }.each do |person|
     person['photo'] = photo ? photo : nil
 end
 
+# I've expired these
 client = Twitter::REST::Client.new do |config|
   config.consumer_key        = "EGYNtJkjYbESmbUPGBHZCA"
   config.consumer_secret     = "TXlCXQfIYu2aLiUgo2GfmAj78DNt6JVQmxjhOM"
