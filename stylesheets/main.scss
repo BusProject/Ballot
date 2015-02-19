@@ -187,8 +187,7 @@ body {
     }
 }
 .measure {
-    @include gridle(10);
-    @include gridle(12, tablet);
+    @include gridle(12);
 
     .choice { margin: 30px 0; @include gridle(12); }
     .thumb {

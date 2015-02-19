@@ -1493,7 +1493,7 @@ body {
   direction: ltr;
   padding-left: 20px;
   padding-right: 20px;
-  width: 83.33333%; }
+  width: 100%; }
   @media screen and (max-width: 480px) {
     .measure {
       padding-left: 5px;
@@ -1502,9 +1502,6 @@ body {
     .measure {
       padding-left: 10px;
       padding-right: 10px; } }
-  @media screen and (max-width: 720px) {
-    .measure {
-      width: 100%; } }
   .measure .choice {
     margin: 30px 0;
     float: left;
