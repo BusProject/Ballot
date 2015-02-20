@@ -1604,6 +1604,9 @@ body {
     @media screen and (max-width: 480px) {
       .measure .endorsements {
         width: 100%; } }
+    @media screen and (max-width: 480px) {
+      .measure .endorsements {
+        margin-bottom: 40px; } }
   .measure h4 {
     color: #26aac6; }
   .measure h2 span, .measure h4 span, .measure h5 span {

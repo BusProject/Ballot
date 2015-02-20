@@ -212,6 +212,7 @@ body {
         @include gridle_push(2, tablet);
         @include gridle_push(0, mobile);
         @include gridle(12, mobile);
+        @include gridle_state(mobile) { margin-bottom: 40px; }
     }
     h4 { color: $second-emphasis; }
     h2, h4, h5 { span { text-transform: uppercase; }}
