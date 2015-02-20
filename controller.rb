@@ -74,7 +74,9 @@ class Controller
             'title' => "Vote #{measure['choice']} for #{measure['title']}",
             'description' => ("I'm supporting #{measure['choice']} on "
                               "#{measure['title']} Chicago - and so is "+
-                              "#{measure['endorsements'].join(', ')}"),
+                              "#{measure['endorsements'].join(', ')}. A "+
+                              "#{measure['choice']} Vote means: "+
+                              "#{measure['explanation']}"),
         })
     end
     def alderman alderman
