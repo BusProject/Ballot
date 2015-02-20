@@ -183,9 +183,17 @@
         twitter.className = "fa fa-twitter"
         tumblr.className = "fa fa-tumblr"
 
-        facebook.onclick = function() { this.className += ' clicked' }
-        twitter.onclick = function() { this.className += ' clicked' }
-        tumblr.onclick = function() { this.className += ' clicked' }
+        facebook.onclick = function() {
+            log_share('facebook', office, name)
+            this.className += ' clicked'}
+        twitter.onclick = function() {
+            log_share('twitter', office, name)
+            this.className += ' clicked'
+        }
+        tumblr.onclick = function() {
+            log_share('tumblr', office, name)
+            this.className += ' clicked'
+        }
 
         message = ["Vote",name,"for",office].join(' ')
         link = "http://www.chicagovoterguide.org"+link
@@ -226,6 +234,9 @@
         }
 
         document.body.appendChild(cover)
+
+        log_endorse(office, name)
+
         function endorsementWidgetclose() {
             parent.style.position = null
             parent.style.zIndex = null
@@ -274,7 +285,13 @@
         return false;
     }
     function log_zip(zip) {
-        try { ga('send', 'event', 'zip', 'lookup'); } catch(e) { }
+        try { ga('send', 'event', 'lookup', zip); } catch(e) { }
+    }
+    function log_endorse(type, thing) {
+        try { ga('send', 'event', 'endorse', type, thing); } catch(e) { }
+    }
+    function log_share(method, type, thing) {
+        try { ga('send', 'event', "share_"+method, type, thing); } catch(e) { }
     }
     function when_ready(runn_func) {
         if( wards && alderpeople ) {
