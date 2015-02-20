@@ -79,7 +79,7 @@
                 <% end %>
               </ul>
             </div>
-            <button type="button" class="vote_for" data-name="<%= mayor["name"] %>" data-link="/sharing/mayor/<%= mayor["name"].downcase.gsub(' ','-').gsub(/[^a-zA-Z0-9\-]/,'') %>" data-office="Mayor of Chicago" onclick="endorsementWidget(this)">endorse</button>
+            <a class="vote_for" data-name="<%= mayor["name"] %>" data-link="/sharing/mayor/<%= mayor["name"].downcase.gsub(' ','-').gsub(/[^a-zA-Z0-9\-]/,'') %>" data-office="Mayor of Chicago" onclick="endorsementWidget(this)">endorse</a>
           </div>
         <% end %>
         <div class="issues">
@@ -138,7 +138,7 @@
                       </ul>
                     </div>
                   <% end %>
-                  <button type="button" class="vote_for" data-name="<%= choice.upcase %>" data-link="/sharing/measure/<%= choice+'-'+measure['title'].downcase.gsub(' ','-').gsub(/[^a-zA-Z0-9\-]/,'') %>" data-office="<%= measure['title'] %>" onclick="endorsementWidget(this)">endorse</button>
+                  <a type="button" class="vote_for" data-name="<%= choice.upcase %>" data-link="/sharing/measure/<%= choice+'-'+measure['title'].downcase.gsub(' ','-').gsub(/[^a-zA-Z0-9\-]/,'') %>" data-office="<%= measure['title'] %>" onclick="endorsementWidget(this)">endorse</a>
                 </div>
               <% end %>
               <h2 class="recommendation">

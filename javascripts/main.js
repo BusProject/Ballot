@@ -88,7 +88,7 @@
     function renderAlderPerson(alderperson) {
         var container = document.createElement('div'),
             img = document.createElement('div'),
-            endorsement_button = document.createElement('button'),
+            endorsement_button = document.createElement('a'),
             title = document.createElement('h2'),
             incumbent = document.createElement('h4'),
             generic_link = document.createElement('a'),
@@ -243,7 +243,8 @@
             parent.style.backgound = null
             parent.style.borderRadius = null
             parent.className = parent.className.replace(' now_voting_for','')
-            button.innerText = 'endorse'
+            button.className += ' fa checked fa-check-circle-o'
+            button.innerText = 'endorsed'
             button.onclick = function() { endorsementWidget(this) }
 
             parent.removeChild(outers)

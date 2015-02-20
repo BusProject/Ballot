@@ -315,12 +315,12 @@ body {
     z-index: 10;
     opacity: 0.8;
 }
-button.vote_for {
+a.vote_for {
     position: absolute;
     bottom: -10px;
     left: 50%;
-    width: 80px;
-    margin-left: -40px;
+    width: 84px;
+    margin-left: -42px;
     text-transform: uppercase;
     color: $color-no;
     cursor: pointer;
@@ -332,6 +332,16 @@ button.vote_for {
     border: none;
     outline: none;
     box-sizing: border-box;
+    font-size: 10px;
+    text-align: center;
+    &.checked {
+        &.fa { font-family: 'Open Sans', sans-serif; }
+        &:before {
+            font: normal normal normal 12px/1 FontAwesome;
+            margin-left: -4px;
+            margin-right: 4px;
+        }
+    }
 }
 .now_voting_for {
     $border_radius: 30px;
@@ -340,7 +350,7 @@ button.vote_for {
     position: relative;
     z-index: 11;
     background: #fff;
-    button.vote_for { z-index: 13; opacity: 0.7; }
+    a.vote_for { z-index: 13; opacity: 0.7; }
 
     .outers {
         border-radius: $border_radius;
