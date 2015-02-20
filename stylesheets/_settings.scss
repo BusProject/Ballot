@@ -1,5 +1,5 @@
 // import gridle
-@import "../bower_components/gridle/sass/gridle/gridle";
+@import "gridle/gridle";
 
 // setting up the grid
 @include gridle_setup( (

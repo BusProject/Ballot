@@ -1,3 +1,5 @@
+require "gridle"
+
 guard 'rake', :task => 'erb' do
     watch(%r{^.+.html.erb$})
 end
