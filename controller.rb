@@ -54,7 +54,7 @@ class Controller
         @anchor = mayor["name"].downcase.gsub(' ','-').gsub(/[^a-zA-Z0-9\-]/,'')
         @filename = "mayor/#{@anchor}"
         @meta_partial = set_meta({
-            'url' => "#{base}/#{@filename}",
+            'url' => "#{base}/sharing/#{@filename}",
             'image' => "#{base}#{mayor['photo']}",
             'title' => "Vote for #{mayor['name']} for Mayor of Chicago",
             'description' => ("I'm supporting #{mayor['name']} for Mayor of "+
@@ -69,7 +69,7 @@ class Controller
                     .gsub(/[^a-zA-Z0-9\-]/,''))
         @filename = "measure/#{measure['choice']}-#{@anchor}"
         @meta_partial = set_meta({
-            'url' => "#{base}/#{@filename}",
+            'url' => "#{base}/sharing/#{@filename}",
             'image' => "#{base}/images/#{measure['choice']}.png",
             'title' => "Vote #{measure['choice']} for #{measure['title']}",
             'description' => ("I'm supporting #{measure['choice']} on "
@@ -87,7 +87,7 @@ class Controller
         @filename = "alderman/#{alderman['ward']}-#{link}"
 
         @meta_partial = set_meta({
-            'url' => "#{base}/#{@filename}",
+            'url' => "#{base}/sharing/#{@filename}",
             'image' => "#{base}#{alderman['photo']}",
             'title' => "Vote #{name} for #{office}",
             'description' => "Vote #{name} for #{office} - and you should too",
