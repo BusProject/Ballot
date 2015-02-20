@@ -7,16 +7,16 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
   <link rel="shortcut icon" href="/images/ChiVminicon.jpg" type="image/x-icon" />
   <meta property="og:title" content="2015 Chicago Voter Guide" />
-  <meta property="og:url" content="http://www.chicagovoterguide.org/" />
+  <meta property="og:url" content="/" />
   <meta property="og:description" content="Vote by Tuesday, Feb 24th in the Chicago City Election. Check out our voter guide to see who and what will be on your ballot." />
-  <meta property="og:image" content="http://www.chicagovoterguide.org/images/sharable.png" />
+  <meta property="og:image" content="/images/sharable.png" />
   <meta property="og:type" content="website" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@chicagovotes">
   <meta name="twitter:title" content="2015 Chicago Voter Guide" />
   <meta name="twitter:description" content="Vote by Tuesday, Feb 24th in the Chicago City Election. Check out our voter guide to see who and what will be on your ballot." />
-  <meta name="twitter:image:src" content="http://www.chicagovoterguide.org/images/sharable.png" />
+  <meta name="twitter:image:src" content="/images/sharable.png" />
 
 </head>
 <body>
@@ -49,6 +49,11 @@
             <a class="show-mobile" target="_blank" href="www.aldertrack.com"><img class="grid-3" src="/images/aldertrack.png"></a>
             <img class="grid-3" style="margin-top: 3px;" src="/images/ballotready.png">
           </div>
+          <h3 class="clear gutter-top">Stay in Touch</h3>
+          <form action="https://docs.google.com/forms/d/1IhSu_Hq1gJqKuYINunJMa7YzncWiMr_fzwp1FOMxTEg/formResponse" method="POST" id="ss-form" target="_blank" class="grid-10 centered">
+            <input type="email" name="entry.28880630" class="grid-8" id="entry_28880630"  placeholder="Your Email" >
+            <input type="submit"  name="submit" value="Submit" id="ss-submit" class="grid-3 push-1">
+          </form>
         </div>
       </div>
     </div>
@@ -58,7 +63,7 @@
         <h3>What they do</h3>
         <p>City’s CEO. Proposes the budget, appoints and supervises City officials. In charge of emergency management, and is the bottom line on City laws.</p>
         
-          <div class="candidate">
+          <div class="candidate" id="!bob-fioretti">
             <h2>Bob Fioretti</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/fioretti.jpg);" ></div>
@@ -86,9 +91,10 @@
                 
               </ul>
             </div>
+            <button type="button" class="vote_for" data-name="Bob Fioretti" data-link="/sharing/mayor/bob-fioretti" data-office="Mayor of Chicago" onclick="endorsementWidget(this)">endorse</button>
           </div>
         
-          <div class="candidate">
+          <div class="candidate" id="!jesus-chuy-garcia">
             <h2>Jesus “Chuy” Garcia</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/garcia.jpg);" ></div>
@@ -116,9 +122,10 @@
                 
               </ul>
             </div>
+            <button type="button" class="vote_for" data-name="Jesus “Chuy” Garcia" data-link="/sharing/mayor/jesus-chuy-garcia" data-office="Mayor of Chicago" onclick="endorsementWidget(this)">endorse</button>
           </div>
         
-          <div class="candidate">
+          <div class="candidate" id="!rahm-emanuel">
             <h2>Rahm Emanuel</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/emanuel.jpg);" ></div>
@@ -146,9 +153,10 @@
                 
               </ul>
             </div>
+            <button type="button" class="vote_for" data-name="Rahm Emanuel" data-link="/sharing/mayor/rahm-emanuel" data-office="Mayor of Chicago" onclick="endorsementWidget(this)">endorse</button>
           </div>
         
-          <div class="candidate">
+          <div class="candidate" id="!william-dock-walls">
             <h2>William “Dock“ Walls</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/walls.jpg);" ></div>
@@ -172,9 +180,10 @@
                 
               </ul>
             </div>
+            <button type="button" class="vote_for" data-name="William “Dock“ Walls" data-link="/sharing/mayor/william-dock-walls" data-office="Mayor of Chicago" onclick="endorsementWidget(this)">endorse</button>
           </div>
         
-          <div class="candidate">
+          <div class="candidate" id="!willie-wilson">
             <h2>Willie Wilson</h2>
             <div class="bio">
               <div class="img" style="background-image: url(/images/mayors/wilson.jpg);" ></div>
@@ -202,6 +211,7 @@
                 
               </ul>
             </div>
+            <button type="button" class="vote_for" data-name="Willie Wilson" data-link="/sharing/mayor/willie-wilson" data-office="Mayor of Chicago" onclick="endorsementWidget(this)">endorse</button>
           </div>
         
         <div class="issues">
@@ -321,14 +331,14 @@
       <div class="inner">
         <h1>Ballot Measures</h1>
         
-          <div class="measure">
+          <div class="measure" id="!elected-representative-school-board">
               <h2>Elected Representative School Board</h2>
               <h3>What it does</h3>
               <p>Advises lawmakers as to whether Chicagoans want the Chicago Public Schools to have an elected, representative school board.</p>
               
                 <div class="choice">
                   <div class="thumb">
-                    <span class="fa fa-thumbs-up"></span>
+                    <span class="fa yes fa-thumbs-up"></span>
                   </div>
                   <div class="explanation">
                     <h4>A <span class="yay-or-nay">yes</span> Vote Means...</h4>
@@ -350,11 +360,12 @@
                       </ul>
                     </div>
                   
+                  <button type="button" class="vote_for" data-name="YES" data-link="/sharing/measure/yes-elected-representative-school-board" data-office="Elected Representative School Board" onclick="endorsementWidget(this)">endorse</button>
                 </div>
               
                 <div class="choice">
                   <div class="thumb">
-                    <span class="fa fa-thumbs-down"></span>
+                    <span class="fa no fa-thumbs-down"></span>
                   </div>
                   <div class="explanation">
                     <h4>A <span class="yay-or-nay">no</span> Vote Means...</h4>
@@ -374,23 +385,24 @@
                       </ul>
                     </div>
                   
+                  <button type="button" class="vote_for" data-name="NO" data-link="/sharing/measure/no-elected-representative-school-board" data-office="Elected Representative School Board" onclick="endorsementWidget(this)">endorse</button>
                 </div>
               
               <h2 class="recommendation">
                 Recommended:
-                <span class="fa fa-thumbs-up"></span>
-                <span class="yay-or-nay">yes</span>
+                <span class="fa yes  fa-thumbs-up"></span>
+                <span class="yay-or-nay yes">yes</span>
               </h2>
           </div>
         
-          <div class="measure">
+          <div class="measure" id="!paid-leave-for-emergencies">
               <h2>Paid Leave For Emergencies</h2>
               <h3>What it does</h3>
               <p>Advises lawmakers about whether Chicagoans want to require employers in Chicago to provide employees with paid leave for personal or public emergencies.</p>
               
                 <div class="choice">
                   <div class="thumb">
-                    <span class="fa fa-thumbs-up"></span>
+                    <span class="fa yes fa-thumbs-up"></span>
                   </div>
                   <div class="explanation">
                     <h4>A <span class="yay-or-nay">yes</span> Vote Means...</h4>
@@ -412,11 +424,12 @@
                       </ul>
                     </div>
                   
+                  <button type="button" class="vote_for" data-name="YES" data-link="/sharing/measure/yes-paid-leave-for-emergencies" data-office="Paid Leave For Emergencies" onclick="endorsementWidget(this)">endorse</button>
                 </div>
               
                 <div class="choice">
                   <div class="thumb">
-                    <span class="fa fa-thumbs-down"></span>
+                    <span class="fa no fa-thumbs-down"></span>
                   </div>
                   <div class="explanation">
                     <h4>A <span class="yay-or-nay">no</span> Vote Means...</h4>
@@ -436,57 +449,60 @@
                       </ul>
                     </div>
                   
+                  <button type="button" class="vote_for" data-name="NO" data-link="/sharing/measure/no-paid-leave-for-emergencies" data-office="Paid Leave For Emergencies" onclick="endorsementWidget(this)">endorse</button>
                 </div>
               
               <h2 class="recommendation">
                 Recommended:
-                <span class="fa fa-thumbs-up"></span>
-                <span class="yay-or-nay">yes</span>
+                <span class="fa yes  fa-thumbs-up"></span>
+                <span class="yay-or-nay yes">yes</span>
               </h2>
           </div>
         
-          <div class="measure">
+          <div class="measure" id="!domestic-violence-treatment-and-employment">
               <h2>Domestic Violence Treatment And Employment</h2>
               <h3>What it does</h3>
               <p>Advises lawmakers as to whether Chicagoans think City employees convicted of domestic violence should be required to attend a treatment session to keep their jobs.</p>
               
                 <div class="choice">
                   <div class="thumb">
-                    <span class="fa fa-thumbs-up"></span>
+                    <span class="fa yes fa-thumbs-up"></span>
                   </div>
                   <div class="explanation">
                     <h4>A <span class="yay-or-nay">yes</span> Vote Means...</h4>
                     <p>Lawmakers would know that Chicagoans think City of Chicago employees convicted of a domestic violence offense during employment should be referred to a treatment service and required to attend at least one session as a condition of continued employment.</p>
                   </div>
                   
+                  <button type="button" class="vote_for" data-name="YES" data-link="/sharing/measure/yes-domestic-violence-treatment-and-employment" data-office="Domestic Violence Treatment And Employment" onclick="endorsementWidget(this)">endorse</button>
                 </div>
               
                 <div class="choice">
                   <div class="thumb">
-                    <span class="fa fa-thumbs-down"></span>
+                    <span class="fa no fa-thumbs-down"></span>
                   </div>
                   <div class="explanation">
                     <h4>A <span class="yay-or-nay">no</span> Vote Means...</h4>
                     <p>Lawmakers would know that Chicagoans do not think City of Chicago employees should be required to attend treatment sessions if convicted of domestic violence.</p>
                   </div>
                   
+                  <button type="button" class="vote_for" data-name="NO" data-link="/sharing/measure/no-domestic-violence-treatment-and-employment" data-office="Domestic Violence Treatment And Employment" onclick="endorsementWidget(this)">endorse</button>
                 </div>
               
               <h2 class="recommendation">
                 Recommended:
-                <span class="fa fa-thumbs-up"></span>
-                <span class="yay-or-nay">yes</span>
+                <span class="fa yes  fa-thumbs-up"></span>
+                <span class="yay-or-nay yes">yes</span>
               </h2>
           </div>
         
-          <div class="measure">
+          <div class="measure" id="!campaign-funding">
               <h2>Campaign Funding</h2>
               <h3>What it does</h3>
               <p>Advises lawmakers as to whether Chicagoans want to reduce the influence of big money in politics by allowing campaigns to be funded with smaller individual donations and limited public funds.</p>
               
                 <div class="choice">
                   <div class="thumb">
-                    <span class="fa fa-thumbs-up"></span>
+                    <span class="fa yes fa-thumbs-up"></span>
                   </div>
                   <div class="explanation">
                     <h4>A <span class="yay-or-nay">yes</span> Vote Means...</h4>
@@ -506,11 +522,12 @@
                       </ul>
                     </div>
                   
+                  <button type="button" class="vote_for" data-name="YES" data-link="/sharing/measure/yes-campaign-funding" data-office="Campaign Funding" onclick="endorsementWidget(this)">endorse</button>
                 </div>
               
                 <div class="choice">
                   <div class="thumb">
-                    <span class="fa fa-thumbs-down"></span>
+                    <span class="fa no fa-thumbs-down"></span>
                   </div>
                   <div class="explanation">
                     <h4>A <span class="yay-or-nay">no</span> Vote Means...</h4>
@@ -526,12 +543,13 @@
                       </ul>
                     </div>
                   
+                  <button type="button" class="vote_for" data-name="NO" data-link="/sharing/measure/no-campaign-funding" data-office="Campaign Funding" onclick="endorsementWidget(this)">endorse</button>
                 </div>
               
               <h2 class="recommendation">
                 Recommended:
-                <span class="fa fa-thumbs-up"></span>
-                <span class="yay-or-nay">yes</span>
+                <span class="fa yes  fa-thumbs-up"></span>
+                <span class="yay-or-nay yes">yes</span>
               </h2>
           </div>
         
@@ -540,7 +558,8 @@
     </div>
     <div class="aldermanic section">
       <div class="inner">
-        <h1>Aldermanic Elections</h1>
+        <h1>Alderman</h1>
+        <p>Aldermen are legislators and members of the City Council who serve a four year term to represent the residents of an area of the city known as a ward. By custom, an alderman is a source of information and intermediary on behalf of their constituency about city functions and services within the ward.</p>
         <form id="search_form" class="grid-8 centered">
           <input placeholder="Enter Your Address" type="text" name="address">
           <button type="submit">Find Ward</button>
@@ -549,6 +568,7 @@
         <div class="map_container">
           <div id="map_canvas"></div>
         </div>
+        <p>Something not right? <a href="mailto:info@chicagovoterguide.org">Get in touch</a></p>
       </div>
     </div>
   </div>

@@ -1,4 +1,5 @@
 require 'csv'
+require 'json'
 require 'webrick'
 
 load 'controller.rb'
@@ -11,7 +12,7 @@ task :serve do
 end
 
 task :mayors do
-    mayors, _ = _mayor_data
+    mayors, _ = mayor_data
 
     markdown = [[]]
 
@@ -72,4 +73,34 @@ task :all do
     Rebuild all the HTML pages.
     """
     Rake::Task["erb"].invoke(Dir.glob("*.html.erb"))
+end
+
+task :build do
+    measures = measures_data().map do |measure|
+        measure['choices'].map do |choice,value|
+            value['choice'] = choice
+            value['title'] = measure['title']
+            value['description'] = measure['description']
+            value
+        end
+    end
+    mayors, _ = mayor_data()
+
+    build = {
+        'mayor' => mayors,
+        'measure' => measures.flatten(1),
+        'alderman' => JSON::parse(File.read('data/alderpeople.json'))
+    }
+
+    build.each do |type, the_list|
+        the_list.each do |item|
+            controller = Controller.new()
+            controller.send(type, item)
+            puts "Rewriting #{controller.filename}"
+            File.open("sharing/#{controller.filename}.html", 'w') do |fl|
+                fl.write(controller.render('sharing.erb'))
+            end
+
+        end
+    end
 end

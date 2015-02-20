@@ -4,10 +4,14 @@ $blue: #26aac6;
 $grey-blue: #7091a3;
 $pink: #d81b59;
 $yellow: #fab815;
+$green: #2f8f44;
 
 $emphasis: $pink;
 $second-emphasis: $blue;
 $third-emphasis: $yellow;
+$fourth-emphasis: $green;
 
 $background: $blue;
 $type: $grey-blue;
+$color-no: darken($pink, 20%);
+$color-yes: $green;

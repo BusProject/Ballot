@@ -1,5 +1,5 @@
 guard 'rake', :task => 'erb' do
-    watch(%r{^.+.erb$})
+    watch(%r{^.+.html.erb$})
 end
 
 guard 'rake', :task => 'all' do
