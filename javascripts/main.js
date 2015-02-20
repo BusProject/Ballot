@@ -176,12 +176,12 @@
         generic_link.setAttribute('target','_blank')
         generic_link.onclick = function() { this.className += ' clicked' }
 
-        var twitter = generic_link.cloneNode(),
-            facebook = generic_link.cloneNode(),
+        var facebook = generic_link.cloneNode(),
+            twitter = generic_link.cloneNode(),
             tumblr = generic_link.cloneNode()
 
-        twitter.className = "fa fa-facebook"
-        facebook.className = "fa fa-twitter"
+        facebook.className = "fa fa-facebook"
+        twitter.className = "fa fa-twitter"
         tumblr.className = "fa fa-tumblr"
 
         message = ["Vote",name,"for",office].join(' ')
