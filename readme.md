@@ -21,6 +21,8 @@ guard
 
 This is a simple HTML application that's compiled using JSON data and ERB templates. Templates are rendered with a controller class found in [`controller.rb`](https://github.com/BusProject/Ballot/blob/gh-pages/controller.rb) that sets template variables.
 
+The site also `SASS` for styles and [Gridle](http://gridle.org) for responsiveness.
+
 # Other Commands
 
 There are a few other rake commands that might be helpful:
