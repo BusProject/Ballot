@@ -174,7 +174,6 @@
         cover.onclick = endorsementWidgetclose
 
         generic_link.setAttribute('target','_blank')
-        generic_link.onclick = function() { this.className += ' clicked' }
 
         var facebook = generic_link.cloneNode(),
             twitter = generic_link.cloneNode(),
@@ -183,6 +182,10 @@
         facebook.className = "fa fa-facebook"
         twitter.className = "fa fa-twitter"
         tumblr.className = "fa fa-tumblr"
+
+        facebook.onclick = function() { this.className += ' clicked' }
+        twitter.onclick = function() { this.className += ' clicked' }
+        tumblr.onclick = function() { this.className += ' clicked' }
 
         message = ["Vote",name,"for",office].join(' ')
         link = "http://www.chicagovoterguide.org"+link
