@@ -19,7 +19,6 @@ def _get_ordinal n
 end
 
 class Controller
-    base = "http://www.chicagovoterguide.org"
 
     def set_meta meta_data=nil
         meta_data ||= {}
@@ -30,13 +29,13 @@ class Controller
 
         default_title = '2015 Chicago Voter Guide'
 
-        default_image = 'images/sharable.png'
+        default_image = 'http://www.chicagovoterguide.org/images/sharable.png'
 
         @meta = {
             "title" => meta_data['title'] || default_title,
             "description" => meta_data['description'] || default_description,
-            "image" => ("#{@base}/#{meta_data['image'] || default_image}"),
-            "url" => ("#{@base}/#{meta_data['url'] || ''}")
+            "image" => ("#{meta_data['image'] || default_image}"),
+            "url" => ("#{meta_data['url'] || 'http://www.chicagovoterguide.org'}")
         }
         render('_meta.erb')
     end
@@ -50,11 +49,13 @@ class Controller
         @measures = measures_data
     end
     def mayor mayor
+        base = "http://www.chicagovoterguide.org"
+
         @anchor = mayor["name"].downcase.gsub(' ','-').gsub(/[^a-zA-Z0-9\-]/,'')
         @filename = "mayor/#{@anchor}"
         @meta_partial = set_meta({
-            'url' => "#{@base}/#{@filename}",
-            'image' => "#{@base}#{mayor['photo']}",
+            'url' => "#{base}/#{@filename}",
+            'image' => "#{base}#{mayor['photo']}",
             'title' => "Vote for #{mayor['name']} for Mayor of Chicago",
             'description' => ("I'm supporting #{mayor['name']} for Mayor of "+
                               "Chicago - and so is "+
@@ -62,12 +63,14 @@ class Controller
         })
     end
     def measure measure
+        base = "http://www.chicagovoterguide.org"
+
         @anchor =  (measure['title'].downcase.gsub(' ','-')
                     .gsub(/[^a-zA-Z0-9\-]/,''))
         @filename = "measure/#{measure['choice']}-#{@anchor}"
         @meta_partial = set_meta({
-            'url' => "#{@base}/#{@filename}",
-            'image' => "#{@base}/images/#{measure['choice']}.png",
+            'url' => "#{base}/#{@filename}",
+            'image' => "#{base}/images/#{measure['choice']}.png",
             'title' => "Vote #{measure['choice']} for #{measure['title']}",
             'description' => ("I'm supporting #{measure['choice']} on "
                               "#{measure['title']} Chicago - and so is "+
@@ -75,6 +78,8 @@ class Controller
         })
     end
     def alderman alderman
+        base = "http://www.chicagovoterguide.org"
+
         name = [alderman['first'], alderman['last']].join(' ')
         link = name.downcase.gsub(' ','-').gsub(/[^a-zA-Z0-9\-]/,'')
         office = "#{_get_ordinal(alderman['ward'])} Ward Alderman"
@@ -82,8 +87,8 @@ class Controller
         @filename = "alderman/#{alderman['ward']}-#{link}"
 
         @meta_partial = set_meta({
-            'url' => "#{@base}/#{@filename}",
-            'image' => "#{@base}#{alderman['photo']}",
+            'url' => "#{base}/#{@filename}",
+            'image' => "#{base}#{alderman['photo']}",
             'title' => "Vote #{name} for #{office}",
             'description' => "Vote #{name} for #{office} - and you should too",
         })
