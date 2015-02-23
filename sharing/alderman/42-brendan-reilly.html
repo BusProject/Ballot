@@ -17,8 +17,14 @@
 </head>
 <script type="text/javascript">
     (function() {
-        var anchor = "@42"
-        document.location = "http://www.chicagovoterguide.org#!"+anchor;
+        var anchor = "@42",
+            redirect = [
+                "http://www.chicagovoterguide.org?",
+                document.location.search,
+                "#!",
+                anchor
+            ]
+        document.location = redirect.join('');
     })();
 </script>
 <body>

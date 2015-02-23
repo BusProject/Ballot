@@ -17,8 +17,14 @@
 </head>
 <script type="text/javascript">
     (function() {
-        var anchor = "william-dock-walls"
-        document.location = "http://www.chicagovoterguide.org#!"+anchor;
+        var anchor = "william-dock-walls",
+            redirect = [
+                "http://www.chicagovoterguide.org?",
+                document.location.search,
+                "#!",
+                anchor
+            ]
+        document.location = redirect.join('');
     })();
 </script>
 <body>

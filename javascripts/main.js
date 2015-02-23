@@ -196,19 +196,28 @@
         }
 
         message = ["Vote",name,"for",office].join(' ')
-        link = "http://www.chicagovoterguide.org"+link
 
+        track = name.toLowerCase().replace(/\s/g,'-')
+        if( ['yes','no'].indexOf(track) !== -1 ) {
+            track +=  '-'+office.toLowerCase().replace(/\s/g,'-')
+        }
+
+        link = "http://www.chicagovoterguide.org"+link
+        link += '?utm_source=endorse'
+        link += '&utm_campaign='+track
+
+        var facebook_link = escape(link+'&utm_medium=facebook')
         facebook.setAttribute('href',
-            "https://www.facebook.com/sharer/sharer.php?u="+link)
-        tweet_params = ["text="+message,
-                        "url="+link,
+            "https://www.facebook.com/sharer/sharer.php?u="+facebook_link)
+        var tweet_params = ["text="+message,
+                        "url="+escape(link+'&utm_medium=twitter'),
                         "hashtags=#chivote2015",
                         "related=chicagovotes"].join('&')
         twitter.setAttribute('href',
             "https://twitter.com/intent/tweet?"+tweet_params)
 
-        tumblr_params = ["v=3",
-                        "u="+link,
+        var tumblr_params = ["v=3",
+                        "u="+escape(link+'&utm_medium=tumblr'),
                         "t="+message,
                         "s="].join('&')
         tumblr.setAttribute('href',
