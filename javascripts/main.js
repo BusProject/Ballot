@@ -341,6 +341,17 @@
                 }
             }
         }
+
+        var search = document.location.search.split(/\&|\?/)
+
+        for (var i = 0; i < search.length; i++) {
+            var key = search[i].split('=')[0].toLowerCase(),
+                val = search[i].split('=')[1]
+            if( key == 'address' ) {
+                search_form.address.value = val.replace(/\+/g,' ')
+                searchSubmit.apply(search_form)
+            }
+        };
     }
 
 })()
