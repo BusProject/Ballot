@@ -59,3 +59,31 @@ function tinyxhr(url,data,callback,method,contenttype,timeout) {
 	}
 
 }
+
+function JSONP(url,data,callback,request_callback) {
+    var d = document,
+      s = d.createElement('script'),
+      callback_name = '___'+( new Date ).getTime(),
+      callback_function_name = callback_name+'_callback';
+
+    var request_callback = request_callback || 'callback';
+    data[request_callback] = callback_function_name;
+
+    window[ callback_function_name ] = function(result) {
+      window[ callback_name ].parentElement.removeChild( window[ callback_name ] );
+      window[ callback_function_name ] = null;
+      callback(result);
+    };
+
+    s.type = "text/javascript";
+    s.id = callback_name;
+    s.src = url+"?"+serialize(data);
+    d.head.appendChild( s );
+
+    function serialize(data) {
+      if( typeof data == 'string' ) return data;
+      var serialized = '';
+      for( var i in data ) serialized += escape(i) + '=' + escape( data[i])+'&';
+      return serialized;
+    }
+  }

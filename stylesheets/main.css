@@ -1782,15 +1782,14 @@ body {
     content: "";
     clear: both;
     display: block; }
-
-#map_canvas {
-  width: 100%;
-  margin: 30px auto;
-  display: none;
-  height: 400px; }
-  @media screen and (max-width: 720px) {
-    #map_canvas {
-      height: 300px; } }
+  .map_container .map {
+    width: 100%;
+    margin: 30px auto;
+    display: none;
+    height: 400px; }
+    @media screen and (max-width: 720px) {
+      .map_container .map {
+        height: 300px; } }
 
 #the_cover {
   position: fixed;

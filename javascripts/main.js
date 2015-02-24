@@ -2,9 +2,30 @@
     var geocoder = new google.maps.Geocoder(),
         wards = false,
         alderpeople = false,
+        polling_locations = false,
         callback = false
 
     /** Mapping **/
+    function locate(lat, lng) {
+        findPollingPlace(lat, lng)
+        findWard(lat, lng)
+    }
+    function findPollingPlace(lat, lng) {
+        newMap(polling_map_canvas, [lat, lng]);
+        JSONP(
+            "http://boundaries.tribapps.com/1.0/boundary/",
+            {
+                "contains": [lat, lng].join(','),
+                "sets": "voter-precincts",
+                "format": "jsonp"
+            },
+            function(data) {
+                if( data.objects.length > 0 ) {
+                    mapPollingPlace([lng, lat], data.objects[0])
+                }
+            }
+        )
+    }
     function findWard(lat, lng) {
         var point = {
             "type": "Feature",
@@ -22,7 +43,7 @@
                 }
             };
             if (turf.inside(point, the_ward)) {
-                mapIt(the_ward, wards[i].centroid, [lng, lat]);
+                mapWard(the_ward, wards[i].centroid, [lng, lat]);
                 renderAlerpeople(i);
                 return wards[i];
             }
@@ -37,28 +58,28 @@
                         "coordinates": wards[ward].simple_shape[0]
                 }
             };
-        mapIt(the_ward, wards[ward].centroid, wards[ward].centroid);
+        mapWard(the_ward, wards[ward].centroid, wards[ward].centroid);
         renderAlerpeople(ward);
     }
-    function new_map(center) {
-        map_canvas.style.display = 'block';
-        var map = new google.maps.Map(map_canvas, {
+    function newMap(container, center) {
+        container.style.display = 'block';
+        var map = new google.maps.Map(container, {
             zoom: 12,
             center: new google.maps.LatLng(center[1], center[0]),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false,
-            overviewMapControl: false,
-            streetViewControl: false,
-            zoomControl: false,
-            panControl: false,
-            mapTypeControl: false,
-            scaleControl: false,
+            // scrollwheel: false,
+            // overviewMapControl: false,
+            // streetViewControl: false,
+            // zoomControl: false,
+            // panControl: false,
+            // mapTypeControl: false,
+            // scaleControl: false,
             draggable: true
         });
         return map;
     }
-    function mapIt(ward, center, home) {
-        var map = new_map(center);
+    function mapWard(ward, center, home) {
+        var map = newMap(map_canvas, center);
 
         new google.maps.Marker({
             position: new google.maps.LatLng(home[1], home[0]),
@@ -71,6 +92,48 @@
             "fillColor": "red",
             "fillOpacity": 0.1,
             "strokeColor": "red"
+        });
+        return map;
+    }
+    function mapPollingPlace(center, ward_shape) {
+        var map = newMap(polling_map_canvas, center),
+            polling_location = false
+
+        for (var i = polling_locations.length - 1; i >= 0; i--) {
+            if( polling_locations[i].ward == ward_shape.metadata.WARD &&
+                polling_locations[i].precinct == ward_shape.metadata.PRECINCT)
+            {
+                polling_location = polling_locations[i]
+                break;
+            }
+        };
+        debugger;
+
+
+        new google.maps.Marker({
+            position: new google.maps.LatLng(center[1], center[0]),
+            map: map})
+
+        new google.maps.Marker({
+            position: new google.maps.LatLng(
+                polling_location.latlng[0],
+                polling_location.latlng[1]),
+            map: map
+        })
+
+        map.data.addGeoJson({
+            "type": "Feature",
+                "geometry": {
+                "type": "Polygon",
+                    "coordinates": ward_shape.simple_shape.coordinates[0]
+            }
+        });
+        map.data.setStyle({
+            "strokeWeight": 1,
+            "color": "red",
+            "fillColor": "red",
+            "fillOpacity": 0.1,
+            "strokeColor": "blue"
         });
         return map;
     }
@@ -276,22 +339,26 @@
             address += ' IL'
         }
 
-        geocoder.geocode({
-            address: address
-        }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var parse = results[0].geometry.location.toString().replace(/\(|\)/g, '')
-                    lat = parse.split(',')[0],
-                    lng = parse.split(',')[1]
-                when_ready(function() { findWard(lat, lng) })
-                for( var i = 0; i < results[0].address_components.length; i++) {
-                    if( results[0].address_components[i].types[0] == 'postal_code' ) {
-                        log_zip(results[0].address_components[i].long_name);
-                        break;
+        geocoder.geocode(
+            { address: address},
+            function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var parse = results[0].geometry.location
+                                .toString().replace(/\(|\)/g, '').split(','),
+                        lat = parse[0],
+                        lng = parse[1]
+
+                    when_ready(function() { locate(lat, lng) })
+
+                    for( var i = 0; i < results[0].address_components.length; i++) {
+                        if( results[0].address_components[i].types[0] == 'postal_code' ) {
+                            log_zip(results[0].address_components[i].long_name);
+                            break;
+                        }
                     }
                 }
             }
-        });
+        );
         return false;
     }
     function log_zip(zip) {
@@ -304,7 +371,7 @@
         try { ga('send', 'event', "share_"+method, type, thing); } catch(e) { }
     }
     function when_ready(runn_func) {
-        if( wards && alderpeople ) {
+        if( wards && alderpeople && polling_locations) {
             if( callback ) {
                 return callback()
             } else if( typeof runn_func != 'undefined' ) {
@@ -322,11 +389,14 @@
 
     document.body.onload = function() {
         search_form.onsubmit = searchSubmit;
+        pollingplace_form.onsubmit = searchSubmit;
 
-        tinyGET('/data/wards.json',{},
+        tinyGET('/data/wards.json', {},
             function(data) { wards = data; when_ready(); });
-        tinyGET('/data/alderpeople.json',{},
+        tinyGET('/data/alderpeople.json', {},
             function(data) { alderpeople = data; when_ready(); });
+        tinyGET('/data/locations.json', {},
+            function(data) { polling_locations = data; when_ready(); });
 
         if( document.location.hash.length > 0 ) {
             if( document.location.hash[1] != '!' ) {

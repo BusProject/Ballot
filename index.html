@@ -40,7 +40,15 @@
           </p>
 
           <h3>When & Where You’ve Gotta Go</h3>
-          <p>Early voting is Feb. 9-21, and Election Day is Feb. 24. To find polling locations for Election Day or early voting go to <a target="_blank" href="http://chicagoelections.com">chicagoelections.com</a></p>
+          <p>Find your polling place here:</p>
+          <div class="map_container">
+            <div class="map" id="polling_map_canvas"></div>
+          </div>
+          <form id="pollingplace_form" class="grid-8 centered">
+            <input placeholder="Enter Your Address" type="text" name="address">
+            <button type="submit">Find Ward</button>
+          </form>
+          <p>For more information go to <a target="_blank" href="http://chicagoelections.com">chicagoelections.com</a></p>
 
           <h3>Brought to you by</h3>
           <div class="grid-12 clear">
@@ -569,7 +577,7 @@
         </form>
         <div id="alderperson_list"></div>
         <div class="map_container">
-          <div id="map_canvas"></div>
+          <div class="map" id="map_canvas"></div>
         </div>
         <p>Something not right? <a href="mailto:info@chicagovoterguide.org">Get in touch</a></p>
       </div>
