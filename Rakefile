@@ -46,6 +46,7 @@ task :alderpeople do
     File.open('data/alderpeople.json','w') do |fl|
         fl.write(alderpeople.to_json)
     end
+    Rake::Task["all"]
 end
 
 task :erb, :paths do |t,args|
@@ -73,9 +74,10 @@ task :all do
     Rebuild all the HTML pages.
     """
     Rake::Task["erb"].invoke(Dir.glob("*.html.erb"))
+    Rake::Task["sharing"].invoke()
 end
 
-task :build do
+task :sharing do
     measures = measures_data().map do |measure|
         measure['choices'].map do |choice,value|
             value['choice'] = choice
