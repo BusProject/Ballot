@@ -1,0 +1,2029 @@
+1 1 Yates School 1826 N Francisco Av
+1 2 Iglesia De Dios 1859 N Spaulding Av
+1 3 Wells Community Academy 936 N Ashland Av
+1 4 Commercial Park 1845 W Rice St
+1 5 LaSalle II Magnet School 1148 N Honore St
+1 6 The Ogden Intrnl School/Chicago 1250 W Erie St
+1 7 Haas Park 2402 N Washtenaw Av
+1 8 Wicker Park Senior Housing 2020 W Schiller St
+1 9 Campbell Terrace Apartments 2061 N Campbell Av
+1 10 LaSalle II Magnet School 1148 N Honore St
+1 11 Wicker Pk Fieldhouse 1425 N Damen Av
+1 12 Ukranian Village Cultural Ctr 2247 W Chicago Av
+1 13 Chicago Police Station 2150 N California Av
+1 14 De Diego Community Academy 1313 N Claremont Av
+1 15 St Mark Parish 1048 N Campbell Av
+1 16 Goethe School 2236 N Rockwell St
+1 17 Iglesia Mision Del Valle 1847 N Kedzie Av
+1 18 St Mark Parish 1048 N Campbell Av
+1 19 Sacramento Elderly Apartments 2451 N Sacramento Av
+1 20 Evangelical Baptist Ch 3008 W Cortland St
+1 21 LaSalle II Magnet School 1148 N Honore St
+1 22 Wright College 1645 N California Av
+1 23 Salem Christian School 2018 N Richmond St
+1 24 Erie Elementary Charter School 1405 N Washtenaw Av
+1 25 Erie Elementary Charter School 1405 N Washtenaw Av
+1 26 Funston School 2010 N Central Park Av
+1 27 North & Talman Elderly Apartments 1600 N Talman Av
+1 28 Lathrop Elderly Housing 2717 N Leavitt St
+1 29 St John United Church Of Christ 2448 W Moffat St
+1 30 Moos School 1711 N California Av
+1 31 North & Talman Elderly Apartments 1600 N Talman Av
+1 32 Ukranian Village Cultural Ctr 2247 W Chicago Av
+1 33 Talcott School 1840 W Ohio St
+1 34 Chicago Police Station 2150 N California Av
+1 35 Goldblatts Building 1615 W Chicago Av
+1 36 Goldblatts Building 1615 W Chicago Av
+1 37 James Otis School 525 N Armour St
+1 38 The Linden House 2315 W Le Moyne St
+1 39 Talcott School 1840 W Ohio St
+1 40 Eckhart Apartments 838 N Noble St
+1 41 Haas Park 2402 N Washtenaw Av
+1 42 Windy City Field House 2367 W Logan Bv
+1 43 Campbell Terrace Apartments 2061 N Campbell Av
+1 44 Yates School 1826 N Francisco Av
+2 1 St Stanislaus School 1255 N Noble St
+2 2 200 Delaware Condo 200 E Delaware Pl
+2 3 Happy Village 1059 N Wolcott Av
+2 4 Columbus School 1003 N Leavitt St
+2 5 Northwestern Settlement Assoc 1400 W Augusta Bv
+2 6 Pulaski Park 1419 W Blackhawk St
+2 7 First Bethlehem Luth Ch 1649 W Lemoyne St
+2 8 First Bethlehem Luth Ch 1649 W Lemoyne St
+2 9 Marcellos Restaurant 645 W North Av
+2 10 Lake Shore Pk 808 N Lake Shore Dr
+2 11 Northwestern Worcester House 244 E Pearson St
+2 12 North Orchard Pl 1600 N Orchard St
+2 13 200 Delaware Condo 200 E Delaware Pl
+2 14 Columbus School 1003 N Leavitt St
+2 15 Sabin School 2216 W Hirsch St
+2 16 Sabin School 2216 W Hirsch St
+2 17 St Nicholas Cathedral 2238 W Rice St
+2 18 Lake Shore Pk 808 N Lake Shore Dr
+2 19 175 Delaware Pl Condo 175 E Delaware Pl
+2 20 The Salvation Army 2270 N Clybourn Av
+2 21 Columbus School 1003 N Leavitt St
+2 22 St Josaphat Church 2311 N Southport Av
+2 23 The Drake Hotel 140 E Walton Pl
+2 24 Ivy Apartments 2437 N Southport Av
+2 25 Wicker Pk Fieldhouse 1425 N Damen Av
+2 26 The Salvation Army 2270 N Clybourn Av
+2 27 Warren Barr Pavillion 66 W Oak St
+2 28 1st St Pauls Evan Luth Ch 1301 N LaSalle Dr
+2 29 Lake Shore Dr Synagogue 70 E Elm St
+2 30 The Moody Church 1630 N Clark St
+2 31 The Moody Church 1630 N Clark St
+2 32 Lawson Y M C A 30 W Chicago Av
+2 33 James/Kilmer Condo Assoc 1560 N Sandburg Terr
+2 34 40 Cedar Condo Assoc 40 E Cedar St
+2 35 1st St Pauls Evan Luth Ch 1301 N LaSalle Dr
+2 36 Eliot House Condominium 1255 N Sandburg Terr
+2 37 Sandburg Village 1460 N Sandburg Terr
+2 38 State Tower Condo Assoc 1230 N State Pkwy
+2 39 Morningside North Apts 170 W Oak St
+2 40 One Superior Place 1 W Superior St
+2 41 Access Living 115 W Chicago Av
+2 42 Eleven-Eleven Apts 1111 N Dearborn St
+2 43 Chicago Sinai Congregation 15 W Delaware Pl
+2 44 Americana Towers 1640 N Wells St
+2 45 Lawson Y M C A 30 W Chicago Av
+2 46 St Michael Church 1711 N Cleveland Av
+3 1 Margaret Ford Manor 4500 S Wabash Av
+3 2 Stewart Phase 1 400 E 41 St
+3 3 Hillard Towers Apartments 54 W Cermak Rd
+3 4 Mollison School 4415 S Ml King Dr
+3 5 Fuller Park 331 W 45 St
+3 6 Prairie District Lofts Condo Assoc 1727 S Indiana Av
+3 7 Lincoln Perry Sr Bldg 3245 S Prairie Av
+3 8 Burke School 5356 S M L King Jr Dr
+3 9 Mollison School 4415 S Ml King Dr
+3 10 Fuller Park 331 W 45 St
+3 11 Mt Pisgah Missionary Bapt Ch 4622 S M L King Dr
+3 12 Paul G Stewart Phase 3 401 E Bowen Av
+3 13 Chicago Police Station 1718 S State St
+3 14 18th & Wabash Corporation 1801 S Wabash Av
+3 15 Deliverance Manor Apartments 4201 S Wabash Av
+3 16 Ace Tech Charter High School 5410 S State St
+3 17 2101 S Michigan Av Apts 2101 S Michigan Av
+3 18 Dearborn Homes 2731 S Dearborn St
+3 19 Prairie District Lofts Condo Assoc 1727 S Indiana Av
+3 20 Cal Met Village 4101 S Calumet Av
+3 21 Lake Vista Apartments 1440 S Indiana Av
+3 22 Old St Marys Church 1500 S Michigan Av
+3 23 The Pershing 3845 S State St
+3 24 Willa Rawls Manor Apts 4120 S Indiana Av
+3 25 Soka Gakkai International USA 1455 S Wabash Av
+3 26 South Loop School 1212 S Plymouth Ct
+3 27 Prairie District Lofts Condo Assoc 1727 S Indiana Av
+3 28 Princeton Center 4250 S Princeton Av
+3 29 T E Brown Apts 3601 S Wells St
+3 30 Luther Terrace 4747 S King Dr
+3 31 Liberty Baptist Church 4849 S M L King Jr Dr
+3 32 Sky Fifty Five Apts 1251 S Michigan Av
+3 33 Old St Marys Church 1500 S Michigan Av
+3 34 Old St Marys Church 1500 S Michigan Av
+3 35 Apostolic Faith Church 3823 S Indiana
+3 36 Sherwood Park 5701 S Shields Av
+3 37 Liberty Baptist Church 4849 S M L King Jr Dr
+3 38 Pioneer Village 340 E 38 St
+3 39 Soka Gakkai International USA 1455 S Wabash Av
+3 40 Long Grove House 2001 S Michigan Av
+3 41 Lincoln Perry Sr Bldg 3245 S Prairie Av
+4 1 Hyde Park Club 5480 S Kenwood Av
+4 2 1130 S Michigan Apts 1130 S Michigan Av
+4 3 Mary Jane Richardson Apts 4930 S Langley
+4 4 Lake Parc Apts 3939 S Lake Park Av
+4 5 Kennicott Park 4434 S Lake Park Av
+4 6 Cambridge Manor Apts 2631 S Indiana Av
+4 7 Vivian Gordon Harsh Apartments 4227 S Oakenwald Av
+4 8 North Washington Park Manor 550 E 50 Pl
+4 9 Harper Square Co-Operative 4850 S Lake Park Av
+4 10 Kennicott Park 4434 S Lake Park Av
+4 11 Donoghue School 707 E 37 St
+4 12 Mary Jane Richardson Apts 4930 S Langley
+4 13 Jones College Prep 606 S State St
+4 14 South Commons Phase 1 Condo 2921 S Michigan Av
+4 15 Alpha Towers 936 E 47 St
+4 16 1130 S Michigan Apts 1130 S Michigan Av
+4 17 Grace Episcopal Church 637 S Dearborn St
+4 18 Judge Slater Apartments 740 E 43 St
+4 19 Lawless Garden Apartments 3510 S Rhodes Av
+4 20 Dearborn Station 47 W Polk St
+4 21 Jones College Prep 606 S State St
+4 22 Shoesmith School 1330 E 50 St
+4 23 Shoesmith School 1330 E 50 St
+4 24 Shoesmith School 1330 E 50 St
+4 25 Michigan Ave Lofts 910 S Michigan Av
+4 26 Washington Park Apartments 4949 S Cottage Grove
+4 27 United Church Of Hyde Park 1448 E 53 St
+4 28 Prairie Shores Apts 2901 S M L King Dr
+4 29 Judge Slater Apartments 740 E 43 St
+4 30 Donoghue School 707 E 37 St
+4 31 Newport Condo Assoc 4800 S Chicago Beach Dr
+4 32 North Eastern University 700 E Oakwood
+4 33 Drexel Square Apts 810 E Hyde Park Bv
+4 34 Martin L King High School 4445 S Drexel Av
+4 35 Lake Meadows Condominium 601 E 32 St
+4 36 Martin L King Library 3436 S M L King Dr
+4 37 South Loop School 1212 S Plymouth Ct
+4 38 Lake Meadows Apt 401 E 32 St
+5 1 OKeefe School 6940 S Merrill Av
+5 2 Revere School 1010 E 72 St
+5 3 Augustana Lutheran Ch 5500 S Woodlawn Av
+5 4 Kozminski Cmty Academy 936 E 54 St
+5 5 Island Terrace Apartments 6430 S Stony Island Av
+5 6 St Philip Neri School 2110 E 72 St
+5 7 Regents Park Apartments 5050 S Lake Shore Dr
+5 8 Ray School 5631 S Kimbark Av
+5 9 Church Of Latter Day Saints 5200 S University Av
+5 10 Parkside School 6938 S East End Av
+5 11 Carolan Apts 5480 S Cornell Av
+5 12 St Paul Evangelical Luth Church 7621 S Dorchester Av
+5 13 Woodlawn Cmty School 6657 S Kimbark Av
+5 14 St Philip Neri School 2110 E 72 St
+5 15 Hyde Park West Apartments 5325 S Cottage Grove
+5 16 Wadsworth Stem School 6650 S Ellis Av
+5 17 The Parkways 6720 S East End Av
+5 18 Catholic Theological Union 5401 S Cornell Av
+5 19 Pioneer Co - Op 5429 S Dorchester Av
+5 20 Congregation Rodfei Zedek 5200 S Hyde Park Bv
+5 21 Kozminski Cmty Academy 936 E 54 St
+5 22 Regents Park Apartments 5050 S Lake Shore Dr
+5 23 Catholic Theological Union 5401 S Cornell Av
+5 24 Treasure Island Foods 1526 E 55 St
+5 25 The Parkways 6720 S East End Av
+5 26 Shorewind Towers 2373 E 70 St
+5 27 Ray School 5631 S Kimbark Av
+5 28 ABJ Community Svcs 1818 E 71 St
+5 29 Senior Suites Of South Shore 2355 E 67 St
+5 30 South Shore Fine Arts Acdy 1415 E 70 St
+5 31 OKeefe School 6940 S Merrill Av
+5 32 Senior Suites Of South Shore 2355 E 67 St
+5 33 Park Shore East Assoc 6250 S Harper Av
+5 34 The Cloisters 5801 S Dorchester Av
+5 35 1700 E 56th St Condo Assoc 1700 E 56 St
+5 36 Cyril Apts 7150 S Cyril Av
+5 37 Montgomery Place 5550 S South Shore Dr
+5 38 OKeefe School 6940 S Merrill Av
+5 39 University Park Condo 1450 E 55 Pl
+5 40 OKeefe School 6940 S Merrill Av
+5 41 1700 E 56th St Condo Assoc 1700 E 56 St
+6 1 Crerar Presbyterian Church 8100 S Calumet Av
+6 2 Whitney Young Library 7901 S King Dr
+6 3 Pirie School 650 E 85 St
+6 4 Lafayette Plaza House 50 W 71 St
+6 5 St Paul MB Church 6954 S Union Av
+6 6 Salem Lutheran Church 318 E 74 St
+6 7 Park Manor School 7037 S Rhodes Av
+6 8 Carter Temple Church 7841 S Wabash Av
+6 9 Brownell School 6741 S Michigan Av
+6 10 Hamilton Park 513 W 72 St
+6 11 7th Day Adventist Acdy 7008 S Michigan Av
+6 12 Hamilton Park 513 W 72 St
+6 13 St Mark Lutheran Church 655 E 88 St
+6 14 Israel Methodist Cmty Church 7614 S Cottage Grove
+6 15 Paul Robeson High School 6835 S Normal Av
+6 16 Macedonia Tabernacle Ch 109 E 75 St
+6 17 Harvard School 7525 S Harvard Av
+6 18 Alden Wentworth Nrsng Hm 201 W 69 St
+6 19 Pleasant Green MB Church 7545 S Vincennes Av
+6 20 Harvard School 7525 S Harvard Av
+6 21 Wentworth School 7007 S Loomis St
+6 22 Cleveland Tabernacle Ch 7119 S Racine Av
+6 23 Bond School 7050 S May St
+6 24 Bass School 1140 W 66 St
+6 25 St Paul MB Church 6954 S Union Av
+6 26 Salvation Army 945 W 69 St
+6 27 Salvation Army 945 W 69 St
+6 28 Robert Lawrence Senior Housing 655 W 65 St
+6 29 Neil School 8555 S Michigan Av
+6 30 Park Manor Christian Church 600 E 73 St
+6 31 Pirie School 650 E 85 St
+6 32 Deneen School 7240 S Wabash Av
+6 33 Salem Lutheran Church 318 E 74 St
+6 34 Chatham Fields Lutheran Church 8050 S St Lawrence Av
+6 35 Ruggles School 7831 S Prairie Av
+6 36 Dixon School 8306 S St Lawrence Av
+6 37 Neil School 8555 S Michigan Av
+6 38 Dixon School 8306 S St Lawrence Av
+6 39 Tanner School 7350 S Evans Av
+6 40 Park Manor Christian Church 600 E 73 St
+6 41 Carter Temple Church 7841 S Wabash Av
+6 42 Chatham Fields Lutheran Church 8050 S St Lawrence Av
+6 43 St Dorothy School 7740 S Eberhart Av
+6 44 Whitney Young Library 7901 S King Dr
+6 45 Dixon School 8306 S St Lawrence Av
+6 46 St Dorothy School 7740 S Eberhart Av
+6 47 Wentworth Haven Homes 7147 S Wentworth Av
+6 48 St Columbanus Church 329 E 71 St
+7 1 South Shore Bible Bapt Church 7159 S Cornell Av
+7 2 Woodhull Park 7340 S East End Av
+7 3 South Shore United Methodist Ch 7350 S Jeffery Bv
+7 4 South Shore Community Church 7401 S Yates Bv
+7 5 South Shore Library 2505 E 73 St
+7 6 Black School 7133 S Coles Av
+7 7 South Shore Community Church 7401 S Yates Bv
+7 8 Coles Supportive Living Ctr 7419 S Exchange Av
+7 9 Lake Terrace Condo Assoc 7337 S South Shore Dr
+7 10 CYC Rebecca Crown Cmty Ctr 7601 S Phillips Av
+7 11 CYC Rebecca Crown Cmty Ctr 7601 S Phillips Av
+7 12 Windsor Park Lutheran Church 7600 S Saginaw Av
+7 13 Excel Academy/ South Shore 7530 S South Shore Dr
+7 14 Senior Suite Of Rainbow Beach 2804 E 77 Pl
+7 15 Calvary Baptist Church 2309 E 80 St
+7 16 Bradwell School 7736 S Burnham Av
+7 17 Bradwell School 7736 S Burnham Av
+7 18 Senior Suite Of Rainbow Beach 2804 E 77 Pl
+7 19 New Nazareth M B Church 7933 S Yates Bv
+7 20 St Michael The Archangel 8231 S South Shore Dr
+7 21 St Michael The Archangel 8231 S South Shore Dr
+7 22 St Michael The Archangel 8231 S South Shore Dr
+7 23 Gospel Way Convenant Church 8152 S Saginaw Av
+7 24 Gospel Way Convenant Church 8152 S Saginaw Av
+7 25 Russell Square Park 3045 E 83 St
+7 26 Coles School 8440 S Phillips Av
+7 27 Coles School 8440 S Phillips Av
+7 28 St Mary Magdalene 8435 S Saginaw Av
+7 29 Coles School 8440 S Phillips Av
+7 30 St Mary Magdalene 8435 S Saginaw Av
+7 31 Bowen Cps 2710 E 89 St
+7 32 The Connection Cmty Church 9100 S Merrill Av
+7 33 Hoyne School 8905 S Crandon Av
+7 34 Compassion Baptist Church 2650 E 95 St
+7 35 Compassion Baptist Church 2650 E 95 St
+7 36 Warren School 9239 S Jeffery Bv
+7 37 Trinty Hospital 2320 E 93 St
+7 38 Burnham School 9928 S Crandon Av
+7 39 Warren School 9239 S Jeffery Bv
+7 40 Church Of The Living God 2159 E 95 St
+7 41 Burnham School 9928 S Crandon Av
+7 42 Burnham School 9928 S Crandon Av
+7 43 Jeffery Manor Library 2401 E 100 St
+7 44 Trumball Park 2400 E 105 St
+7 45 Trumball Park 2400 E 105 St
+7 46 Mahalia Jackson Apts 9177 S South Chicago
+8 1 The Upper Room Ministries 1400 E 72 St
+8 2 The Upper Room Ministries 1400 E 72 St
+8 3 Vernon Park Church 9011 S Stony Island Av
+8 4 Jesse Owens Park 8800 S Clyde Av
+8 5 Black School 9101 S Euclid Av
+8 6 Avalon Park Cmty Church 8100 S Dante Av
+8 7 Calvary Baptist Church 2309 E 80 St
+8 8 Vernon Park Church 9011 S Stony Island Av
+8 9 Our Lady Of Peace Catholic Ch 2010 E 79 St
+8 10 Avalon Park 1215 E 83 St
+8 11 Haven Towers 7947 S South Chicago
+8 12 St Ailbe Church 9047 S Harper Av
+8 13 Chgo Department On Aging 1767 E 79 St
+8 14 South Central Cmty Ctr 1021 E 83 St
+8 15 Burnside School 650 E 91 Pl
+8 16 Grand Crossing Pk 7655 S Ingleside Av
+8 17 Chicago Vocational Career Academy 2100 E 87 St
+8 18 Residence - Nedra De Savieu 8029 S Drexel Av
+8 19 Vernon Park Church 9011 S Stony Island Av
+8 20 So Shore International College Prep 1955 E 75 St
+8 21 So Shore International College Prep 1955 E 75 St
+8 22 Schmid School 9755 S Greenwood Av
+8 23 Harold Washington School 9130 S University Av
+8 24 St Thomas Lutheran Church 8008 S Jeffery Bv
+8 25 New Bethlehem #4 MB Church 8850 S Cottage Grove
+8 26 St Mark Manor 840 E 76 St
+8 27 Warren School 9239 S Jeffery Bv
+8 28 Our Lady Of Peace Catholic Ch 2010 E 79 St
+8 29 Avalon Park Cmty Church 8100 S Dante Av
+8 30 Faith Tabernacle Church 8201 S Stony Island Av
+8 31 New Bethlehem #4 MB Church 8850 S Cottage Grove
+8 32 London Towne House 901 E 100 Pl
+8 33 St Ailbe Faith Apts 1244 E 93 St
+8 34 Schmid School 9755 S Greenwood Av
+8 35 Mc Dowell School 1419 E 89 St
+8 36 Greater Mt Pleasant MB Church 2100 E 83 St
+8 37 St Felicitas Church 1512 E 84 St
+8 38 Harold Washington School 9130 S University Av
+8 39 London Towne House 901 E 100 Pl
+8 40 St Stephens Lutheran Ch 8500 S Maryland Av
+8 41 Arthur Robert Ashe Jr School 8505 S Ingleside Av
+8 42 Woodhull Park 7340 S East End Av
+8 43 Grand Crossing Pk 7655 S Ingleside Av
+8 44 The Montclare Senior Residence 1200 E 78 St
+8 45 Maryland Ave Baptist Church 8058 S Maryland Av
+8 46 Coles School 8440 S Phillips Av
+8 47 Schmid School 9755 S Greenwood Av
+8 48 Avalon Park 1215 E 83 St
+8 49 Southlawn Untd Methodist Church 8605 S Cregier Av
+8 50 Southlawn Untd Methodist Church 8605 S Cregier Av
+8 51 Caldwell School 8546 S Cregier Av
+8 52 St Felicitas Church 1512 E 84 St
+8 53 Calvary Baptist Church 2012 E 83 St
+8 54 Residence - Nedra De Savieu 8029 S Drexel Av
+8 55 The Montclare Senior Residence 1200 E 78 St
+8 56 Mc Dowell School 1419 E 89 St
+9 1 Corliss Early College Stem 821 E 103 St
+9 2 Damascus Baptist Church 10014 S Michigan Av
+9 3 Aldridge School 630 E 131 St
+9 4 Jesse Owens Community Academy 12302 S State St
+9 5 Victory Centre/Roseland 10450 S Michigan Av
+9 6 Brown Academy 12607 S Union Av
+9 7 Roseland Manor 11717 S State St
+9 8 Corliss Early College Stem 821 E 103 St
+9 9 Church Of The Living Water 10701 S Vernon Av
+9 10 Prayer Of Faith Intl Ministries 144 W 103 St
+9 11 Chicago Fire Station 11958 S State St
+9 12 Tuley Park 501 E 90 Pl
+9 13 Pullman Presbyterian Church 550 E 103 St
+9 14 St John De LaSalle Church 10206 S Vernon Av
+9 15 Aldridge School 630 E 131 St
+9 16 Jesse Owens Community Academy 12302 S State St
+9 17 Rosehaven Manor 10220 S Michigan Av
+9 18 Greater Canaan M B Church 35 W 119 St
+9 19 Brown Academy 12607 S Union Av
+9 20 Smith Park 9912 S Princeton Av
+9 21 Fernwood Untd Methodist Church 10057 S Wallace St
+9 22 Cullen School 10650 S Eberhart Av
+9 23 Tuley Park 501 E 90 Pl
+9 24 Wesley United Methodist Church 201 E 95 St
+9 25 Tuley Park 501 E 90 Pl
+9 26 Dubois School 330 E 133 St
+9 27 Loving Spirit M B Church 424 W 103 St
+9 28 St Anthony Chapel 214 E Kensington Av
+9 29 Victory Centre/Roseland 10450 S Michigan Av
+9 30 Bread Of Life C O G I C 10237 S State St
+9 31 New Pasadena M B Church 11300 S Indiana Av
+9 32 Cullen School 10650 S Eberhart Av
+9 33 Aldridge School 630 E 131 St
+9 34 Neighborhood Housing Services 11001 S Michigan Av
+9 35 Bennett School 10115 S Prairie Av
+9 36 Tuley Park 501 E 90 Pl
+9 37 Historic Pullman Foundation 11141 S Cottage Grove
+9 38 True Vine/Holiness Ch 400 E 111 St
+9 39 West Pullman Park 401 W 123 St
+9 40 Cullen School 10650 S Eberhart Av
+9 41 Jesse Owens School 12450 S State St
+9 42 Harlan High School 9652 S Michigan Av
+9 43 Palmer Park 201 E 111 St
+9 44 Jesse Owens School 12450 S State St
+9 45 Jesse Owens Community Academy 12302 S State St
+9 46 New Day Ministries International 11300 S M L King Dr
+9 47 Gillespie School 9301 S State St
+9 48 Tuley Park 501 E 90 Pl
+9 49 McDade School 8801 S Indiana Av
+9 50 Gillespie School 9301 S State St
+9 51 Wesley United Methodist Church 201 E 95 St
+10 1 Villla Guadalupe Senior Services 3201 E 91 St
+10 2 St Columba Catholic Church 13323 S Green Bay
+10 3 South East Sportsmen Club 13139 S Avenue M
+10 4 Sullivan Elementary School 8331 S Mackinaw
+10 5 Clay School 13231 S Burley
+10 6 Sacred Heart School 2926 E 96 St
+10 7 Vets Memorial Park 2820 E 98 St
+10 8 Thorp School 8914 S Buffalo Av
+10 9 Grissom School 12810 S Escanaba Av
+10 10 Trinity Council Knights Of Columbus 11207 S Ewing
+10 11 Addams School 10810 S Avenue H
+10 12 Trinity Council Knights Of Columbus 11207 S Ewing
+10 13 Orville Bright School 10740 S Calhoun Av
+10 14 Rowan Park 11546 S Avenue L
+10 15 Bradley Park 9729 S Yates Bv
+10 16 Clay School 13231 S Burley
+10 17 Mann Park 2949 E 131 St
+10 18 Arnold Mireles Academy 9000 S Exchange
+10 19 St Simeon Church 3737 E 114 St
+10 20 East Side Vodak Library 3710 E 106 St
+10 21 Vets Memorial Park 2820 E 98 St
+10 22 Calumet Park 9801 S Avenue G
+10 23 Trinity Council Knights Of Columbus 11207 S Ewing
+10 24 Grissom School 12810 S Escanaba Av
+10 25 Sacred Heart School 2926 E 96 St
+10 26 Calumet Park 9801 S Avenue G
+10 27 Ninos Heros School 8344 S Commercial Av
+10 28 Addams School 10810 S Avenue H
+10 29 Mathew Gallistell Language Acdmy 10347 S Ewing Av
+10 30 Mathew Gallistell Language Acdmy 10347 S Ewing Av
+10 31 Mathew Gallistell Language Acdmy 10347 S Ewing Av
+10 32 Addams School 10810 S Avenue H
+10 33 Wolfe Park 3325 E 108 St
+10 34 Arnold Mireles Academy 9000 S Exchange
+10 35 St Simeon Church 3737 E 114 St
+10 36 South Chicago Library 9055 S Houston Av
+11 2 Providence Of God Church 717 W 18 St
+11 3 Walsh Elementary School 2031 S Peoria St
+11 4 Mc Guane Park 2901 S Poplar Av
+11 5 Chicago Police Station 3120 S Halsted St
+11 6 Chicago Fire Station 1360 S Blue Island Av
+11 7 UIC Physical Education Bldg 901 W Roosevelt Rd
+11 8 Bosley Playground Park 3044 S Bonfield St
+11 9 Boiler Makers Union Local 1 2941 S Archer Av
+11 10 Saint Joseph Mens Club 2724 S Union Av
+11 11 Wilson Community Center 3225 S Racine Av
+11 12 St Gabriel School 4500 S Wallace St
+11 13 Graham School Annex 745 W 45 St
+11 14 Long Life Apartments 344 W 28 Pl
+11 15 Senior Suites Of Bridgeport 2825 S Halsted St
+11 16 Spred Center 2956 S Lowe Av
+11 17 Wilson Park 1122 W 34 Pl
+11 18 Healy School 3010 S Parnell Av
+11 19 Daley Library 3400 S Halsted St
+11 20 Healy School 3010 S Parnell Av
+11 21 Hamburg Athletic Association 3523 S Emerald Av
+11 22 First Trinity Cmty Center 643 W 31 St
+11 23 Armour Square Park 3309 S Shields Av
+11 24 Nativity Of Our Lord 653 W 37 St
+11 25 Donovan Park 3620 S Lituanica Av
+11 26 Valentine Boys & Girls Club 3400 S Emerald Av
+11 27 Sheridan School 533 W 27 St
+11 28 Tilden Community Academy 4747 S Union Av
+11 29 Mc Clellan School 3527 S Wallace St
+11 30 Ricobenes 252 W 26 St
+11 31 Taylor Lauridsen Park 704 W 42 St
+11 32 Armour Square Park 3309 S Shields Av
+11 33 Providence Of God Church 717 W 18 St
+11 34 Armour Square Apts 3146 S Wentworth Av
+11 35 Armour Square Apartments 3250 S Wentworth Av
+11 36 Santa Lucia 3022 S Wells St
+11 37 Appleville Condos 501 W 24 Pl
+11 38 Providence Of God Church 717 W 18 St
+12 2 Burroughs School 3542 S Washtenaw Av
+12 3 St Maurice Church 3619 S Hoyne Av
+12 4 Green School 3525 S Honore St
+12 5 Mc Kinley Park Branch 1915 W 35 St
+12 6 Arca De Salvacion Church 2615 W 35 St
+12 7 Hammond Elementary School 2819 W 21 Pl
+12 8 Hoyne Park 3417 S Hamilton Av
+12 9 The Truth That Sets You Free Church 3334 S Paulina St
+12 10 Hammond Elementary School 2819 W 21 Pl
+12 11 Calmeca Academy 3456 W 38 St
+12 12 Davis School Annex 3050 W 39 Pl
+12 13 New Life Community Church 4155 S Rockwell St
+12 14 Little Village Branch Library 2311 S Kedzie Av
+12 15 Life Storage 3245 W 30 St
+12 16 Kanoon Magnet School 2233 S Kedzie Av
+12 17 UNO Charter School 2744 W Pershing Rd
+12 18 General Wood Boys & Girls Club 2950 W 25 St
+12 19 St Peter And Paul Church 3745 S Paulina St
+12 20 St Pancratius 2930 W 40 Pl
+12 21 McKinley Park 2210 W Pershing Rd
+12 22 Spry School 2400 S Marshall Bv
+12 23 Our Lady Of Good Counsel 3528 S Hermitage Av
+13 2 Hale School 6140 S Melvina Av
+13 3 Peck School 3826 W 58 St
+13 4 Clearing Branch Library 6423 W 63 Pl
+13 5 Su Nueva Laundromat 4314 W Marquette Rd
+13 6 Chicago Fire Station 5559 S Narragansett Av
+13 7 Pasteur Park 4334 W 58 St
+13 8 St Symphorosa Sharp Center 5940 W 62 St
+13 9 St Mary Star Of Sea School 6424 S Kenneth Av
+13 10 Valley Forge Park 7001 W 59 St
+13 11 Hale School 6140 S Melvina Av
+13 12 Pasteur School 5825 S Kostner Av
+13 13 Fleming School 4918 W 64 St
+13 14 Calvary Lutheran Church 6149 S Kenneth Av
+13 15 Hancock High School 4034 W 56 St
+13 16 Good Shepherd Luth Church 4200 W 62 St
+13 17 Minuteman Park 5940 S Central Av
+13 18 Hale Park District 6258 W 62 St
+13 19 Queen Of Universe School 7130 S Hamlin Av
+13 20 Hale Park District 6258 W 62 St
+13 21 Valley Forge Park 7001 W 59 St
+13 22 Kinzie School 5625 S Mobile Av
+13 23 Calvary Lutheran Church 6149 S Kenneth Av
+13 24 St Turibius Church 5646 S Karlov Av
+13 25 St Marys Parish Center 4626 W 63 St
+13 26 Centro Cristiano Midway Church 5830 W 63 St
+13 27 Lawler Park 5210 W 64 St
+13 28 Harris Bank 6400 S Pulaski Rd
+13 29 St Mary Star Of Sea School 6424 S Kenneth Av
+13 30 Iglesia Torre Fuerte De Alabanza Adoracion 6545 S Hamlin Av
+13 31 Dore School 6108 S Natoma Av
+13 32 Kinzie School 5625 S Mobile Av
+13 33 Kinzie School 5625 S Mobile Av
+13 34 Iglesia Santa Cruz 6545 S Springfield Av
+13 35 Lee School 6448 S Tripp Av
+13 36 St Marys Parish Center 4626 W 63 St
+13 37 Autumn Green At Midway Village 6700 S Keating Av
+13 38 Dore School 6108 S Natoma Av
+13 39 Westlawn Park 4233 W 65 St
+13 40 Christian Fellowship Church 4220 W 59 St
+13 41 Hurley School 3849 W 69 Pl
+13 42 Garfield Ridge Baptist Ch 5520 S Narragansett Av
+13 43 Grimes School 5450 W 64 Pl
+13 44 Residence 3858 W 68 St
+13 45 Resurrection United Methodist Church 5717 W 63 Pl
+13 46 Lawn Lane Bowl 6750 S Pulaski Rd
+13 47 Iglesia Bautista Misionera 6715 S Hamlin Av
+13 48 Good Shepherd Presbyterian Ch 5550 S Merrimac Av
+14 2 Chicago Fire Station 4034 W 47 St
+14 3 St Gall 5501 S Sawyer Av
+14 4 St Jane De Chantal 5157 S Mc Vicker Av
+14 5 St Gall 5516 S Kedzie Av
+14 6 Sawyer School 5248 S Sawyer Av
+14 7 St Richard Parish Center 5030 S Kostner Av
+14 8 St Richard Parish Center 5030 S Kostner Av
+14 9 Gloria Dei Lutheran School 5259 S Major Av
+14 10 Car Outlet 4517 S Archer Av
+14 11 Chgo Ghanaian S D A Church 5258 S Christiana Av
+14 12 St Richard Parish Center 5030 S Kostner Av
+14 13 Polish Highlanders 4808 S Archer Av
+14 14 Nightingale School 5250 S Rockwell St
+14 15 Chgo Ghanaian S D A Church 5258 S Christiana Av
+14 16 USW Local 17 Decorators Union 4570 S Archer Av
+14 17 Christopher School 5042 S Artesian Av
+14 18 Empty Store Front 5326 S Archer Av
+14 19 St Simon Parish 5135 S California Av
+14 20 Back/Yards Neighborhood Council 3256 W 47 St
+14 21 Delias Beauty Salon 2810 W 55 St
+14 22 Guides Sport Bar 5544 S Archer Av
+14 23 Rhine VFW Post 2729 5858 S Archer Av
+14 24 St Jane De Chantal 5157 S Mc Vicker Av
+14 25 La Fuente Banquet Hall 2514 W 51 St
+14 26 Internet Cafe 5311 S Kedzie Av
+14 27 St BrUNO School 4839 S Harding Av
+14 28 Edwards School 4815 S Karlov Av
+14 29 Body Of Christ MBC 2410 W 53 St
+14 30 Evangelical Luth Ch/Dr Martin Luther 5344 S Francisco Av
+14 31 Carnitas Don Rafa Restaurant 4617 S Kedzie Av
+15 2 Lindblom Math & Science Acdy 6130 S Wolcott Av
+15 3 Henderson School 5650 S Wolcott Av
+15 4 National Guard Of Lithuania Exile 2417 W 43 St
+15 5 Holy Cross / IHM Convent 4541 S Wood St
+15 6 UNO Brighton Park Campus 4420 S Fairfield Av
+15 7 Church Of The Living God 1738 W Marquette Rd
+15 8 Shields Middle School 2611 W 48 St
+15 9 National Guard Of Lithuania Exile 2417 W 43 St
+15 10 Brighton Pk Branch Library 4314 S Archer Av
+15 11 Five Holy Martyrs 4327 S Richmond St
+15 12 UNO Marquez School 2916 W 47 St
+15 13 St Michael Social Center 1936 W 48 St
+15 14 Cornell Park 1809 W 50 St
+15 15 Daley Elementary School 5024 S Wolcott Av
+15 16 Gage Park High School 5630 S Rockwell St
+15 17 Hermitage Park 5839 S Wood St
+15 18 West Englewood Library 1745 W 63 St
+15 19 Senior Suites Of New City 4845 S Western Av
+15 20 Lindblom Math & Science Acdy 6130 S Wolcott Av
+15 21 Henderson School 5650 S Wolcott Av
+15 22 Greater Mt Avery Intnl Ministries 6638 S Ashland Av
+15 23 Henderson School 5650 S Wolcott Av
+15 24 Bread Of Life Missionary Baptist Ch 1924 W 63 St
+16 2 Basil Charter School 1816 W Garfield Bv
+16 3 Lindblom Park 6054 S Damen Av
+16 4 Kingdom Chevrolet 6603 S Western Av
+16 5 Chicago Fire Station 5955 S Ashland Av
+16 6 Kingdom Chevrolet 6603 S Western Av
+16 7 Gage Park 2411 W 55 St
+16 8 Basil Charter School 1816 W Garfield Bv
+16 9 Chicago Police Station 1438 W 63 St
+16 10 First St Peter MB Church Of Chicago 5524 S Ashland Av
+16 11 United Steel Workers 2154 5744 S Western Av
+16 12 Basil Charter School 1816 W Garfield Bv
+16 13 Fairfield Academy 6201 S Fairfield Av
+16 14 Anna R Langford Cmty Academy 6010 S Throop St
+16 15 Holmes Elementary School 955 W Garfield Bv
+16 16 West Englewood U M Ch 2000 W 68 St
+16 17 Fairfield Academy 6201 S Fairfield Av
+16 18 Churchview Slc 2626 W 63 St
+16 19 Morrill School 6011 S Rockwell St
+16 20 Moran Park 5727 S Racine Av
+16 21 Morrill School 6011 S Rockwell St
+16 22 Fairfield Academy 6201 S Fairfield Av
+16 23 United Steel Workers 2154 5744 S Western Av
+16 24 OToole School 6550 S Seeley Av
+16 25 Nicholson School 6066 S Peoria St
+16 26 Moran Park 5727 S Racine Av
+16 27 Bethel Lutheran Church 6201 S Sangamon St
+16 28 Greencastle Of Englewood 6344 S Peoria St
+16 29 Miles Davis Magnet Acdy 6740 S Paulina St
+16 30 Bass School 1140 W 66 St
+16 31 Hope Presbyterian Church 1354 W 61 St
+16 32 Fairfield Academy 6201 S Fairfield Av
+16 33 Revival Tabernacle 6415 S Ashland Av
+16 34 Chicago Police Station 1438 W 63 St
+16 35 Southwest Regional Ctr 6117 S Kedzie Av
+16 36 Holy Rock M B Church 5854 S Morgan St
+17 2 Oglesby School 7641 S Peoria St
+17 3 Abundant Life M B Church 2300 W 69 St
+17 4 Joplin School 7931 S Honore St
+17 5 Back To God Church 7326 S Racine Av
+17 6 Marquette School 6550 S Richmond St
+17 7 Marquette School 6550 S Richmond St
+17 8 Sams Auto Sales 6815 S Western Av
+17 9 Oglesby School 7641 S Peoria St
+17 10 Chicago Police Station 7808 S Halsted St
+17 11 Murray Park 1743 W 73 St
+17 12 Beth Shalom 6601 S Kedzie Av
+17 13 Wheeler House 1450 W 69 St
+17 14 Lawn Terrace Apartments 3214 W 63 Pl
+17 15 Mt Hermon Church 7848 S Normal Av
+17 16 Marquette School 6550 S Richmond St
+17 17 McKay School 6901 S Fairfield Av
+17 18 CICS Ralph Ellison 1834 W 80 St
+17 19 Ogden Park 6500 S Racine Av
+17 20 CICS Ralph Ellison 1834 W 80 St
+17 21 Commonwealth Community Church 140 W 81 St
+17 22 Continental Plaza Apartments 1330 W 76 St
+17 23 Rose Of Light M B Church 1302 W 74 St
+17 24 St Sabina Elders Apartments 1222 W 79 St
+17 25 Nativity B V M School 6820 S Washtenaw Av
+17 26 The Rock Of Love Church 7628 S Ashland Av
+17 27 Zion Hill Bapt Church 1460 W 78 St
+17 28 Stagg School 7424 S Morgan St
+17 29 Continental Plaza Apartments 1330 W 76 St
+17 30 Marquette Park 6734 S Kedzie Av
+17 31 St Benedict The African West 7033 S Honore St
+17 32 Murray Park 1743 W 73 St
+17 33 Randolph School 7316 S Hoyne Av
+17 34 Southside Occupational Academy 7342 S Hoyne Av
+17 35 Wheeler House 1450 W 69 St
+17 36 Chicago Fire Station 2240 W 69 St
+17 37 Randolph School 7316 S Hoyne Av
+17 38 Ark Of Love Apostolic Ch Of God 1655 W 79 St
+17 39 Westcott School 409 W 80 St
+17 40 Murray Park 1743 W 73 St
+17 41 Barton School 7650 S Wolcott Av
+18 2 Chicago Fire Station 7659 S Pulaski Rd
+18 3 St Peter Lutheran Church 8550 S Kedvale Av
+18 4 Rosenwald School 2601 W 80 St
+18 5 The Victory Missionary Baptist Church 7106 S Rockwell St
+18 6 St Peter Lutheran Church 8550 S Kedvale Av
+18 7 Bluebird Lanes 3900 W Columbus Av
+18 8 New Foundation Of Hope Inc 8148 S Kedzie Av
+18 9 Hayes Park 2936 W 85 St
+18 10 Wrightwood Ashburn Branch 8530 S Kedzie Av
+18 11 Bogan Park Field House 3939 W 81 St
+18 12 Senior Suites Of Marquette Village 7430 S Rockwell St
+18 13 Ashburn Baptist Church 3647 W 83 St
+18 14 Rosenwald School 2601 W 80 St
+18 15 Executive Building 7601 S Kostner
+18 16 Carroll School 2929 W 83 St
+18 17 Dawes Elementary School 3810 W 81 Pl
+18 18 Liberty Temple 2247 W 79 St
+18 19 Dawes Park 8040 S Damen Av
+18 20 Second Mt Vernon Annex 2101 W 79 St
+18 21 Owen Scholastic Academy 8247 S Christiana Av
+18 22 Wrightwood Senior Apt 2815 W 79 St
+18 23 Ashburn Baptist Church 3647 W 83 St
+18 24 Scottsdale Park 4637 W 83 St
+18 25 St Bede The Venerable 4400 W 83 St
+18 26 Carroll School 2929 W 83 St
+18 27 Marquette Park 6734 S Kedzie Av
+18 28 Durkin Park Elementary 8445 S Kolin Av
+18 29 Ashburn United Methodist Church 3801 W 83 Pl
+18 30 Stevenson School 8010 S Kostner Av
+18 31 Lionel Hampton School 3434 W 77 St
+18 32 Greater Walters Ame Zion Church 8422 S Damen Av
+18 33 South Chicago Dodge 7340 S Western Av
+18 34 Hayes Park 2936 W 85 St
+18 35 Carroll School 2929 W 83 St
+18 36 Bluebird Lanes 3900 W Columbus Av
+18 37 Hayes Park 2936 W 85 St
+18 38 First Church Of Love And Faith 2140 W 79 St
+18 39 Marquette Park 6734 S Kedzie Av
+18 40 Scottsdale Branch Library 4101 W 79 St
+18 41 Most Worshipful St James Grand Lodge 8220 S Western Av
+18 42 Monument Of Faith Church 2750 W Columbus Av
+18 43 Chase Bank 4730 W 79 St
+18 44 Durkin Park Elementary 8445 S Kolin Av
+18 45 Hapkido School 3722 W 79 St
+18 46 Stevenson Middle School 4350 W 79 St
+18 47 Monument Of Faith Church 2750 W Columbus Av
+18 48 Western Avenue Nissan 2442 W Columbus Av
+18 49 Western Avenue Nissan 2442 W Columbus Av
+18 50 Lithuanian Human Services 2715 W 71 St
+19 2 Sutherland School 10015 S Leavitt St
+19 3 Crosswinds Church 10835 S Pulaski Rd
+19 4 Crosswinds Church 10835 S Pulaski Rd
+19 5 Bethlehem Evan Luth Church 9401 S Oakley Av
+19 6 Keller Regional Gifted Ctr 3020 W 108 St
+19 7 Kennedy Park District 11320 S Western Av
+19 8 Mc Kiernan Park 10714 S Sawyer Av
+19 9 Saint Xavier University Shannon Center 3700 W 103 St
+19 10 Kellogg School 9241 S Leavitt St
+19 11 Mt Greenwood Park 3721 W 111 St
+19 12 Murphys Windows 10359 S Pulaski Rd
+19 13 Chicago Fire Station Engine 121 1724 W 95 St
+19 14 Smith Village 2320 W 113 Pl
+19 15 Cassell School 11314 S Spaulding Av
+19 16 Crosswinds Church 10835 S Pulaski Rd
+19 17 St Cajetan School 2447 W 112 St
+19 18 Kellogg School 9241 S Leavitt St
+19 19 Trinity United Methodist Church 9848 S Winchester Av
+19 20 Beverly Woods Restaurant 11532 S Western Av
+19 21 Mt Greenwood Park 3721 W 111 St
+19 22 Sutherland School 10015 S Leavitt St
+19 23 Chgo Friends Meeting Church 10749 S Artesian Av
+19 24 Mt Greenwood Lutheran Ch 10901 S Trumbull Av
+19 25 Trinity United Methodist Church 9848 S Winchester Av
+19 26 Saint Barnabas School 10121 S Longwood Dr
+19 27 Bethany Union Church 1750 W 103 St
+19 28 Barnard School 10354 S Charles St
+19 29 Keller Regional Gifted Ctr 3020 W 108 St
+19 30 Mt Greenwood Elementary 10841 S Homan Av
+19 31 Morgan Park Baptist Church 11024 S Bell Av
+19 32 Kennedy Park District 11320 S Western Av
+19 33 Mt Greenwood Elementary 10841 S Homan Av
+19 34 Donnellan Funeral Home 10525 S Western Av
+19 35 Original Pancake House 10437 S Western Av
+19 36 Bethany Union Church 1750 W 103 St
+19 37 Barnard School 10354 S Charles St
+19 38 Bethany Union Church 1750 W 103 St
+19 39 Chgo H S For Agricultural Science 3857 W 111 St
+19 40 Morgan Park Baptist Church 11024 S Bell Av
+19 41 Cassell School 11314 S Spaulding Av
+19 42 Beacon Therapeutic School 10650 S Longwood Dr
+19 43 Chicago Police Station 1900 W Monterey Av
+19 44 Mt Greenwood Lutheran Ch 10901 S Trumbull Av
+19 45 St John Fisher Church 10235 S Fairfield Av
+19 46 Chgo Friends Meeting Church 10749 S Artesian Av
+19 47 Beverly Woods Restaurant 11532 S Western Av
+19 48 Chicago Police Station 1900 W Monterey Av
+19 49 Beverly Woods Restaurant 11532 S Western Av
+19 50 St Cajetan School 2447 W 112 St
+19 51 Munroe Park 2617 W 105 St
+19 52 Keller Regional Gifted Ctr 3020 W 108 St
+19 53 Beverly Bank And Trust Company 10258 S Western Av
+19 54 Mount Greenwood Library 11010 S Kedzie Av
+19 55 Crosswinds Church 10835 S Pulaski Rd
+19 56 Bethlehem Evan Luth Church 9401 S Oakley Av
+19 57 Ridge Park 9625 S Longwood Dr
+20 2 Love Cathedral Cmty Church 5112 S Halsted St
+20 3 Langley Ave Church 710 E 62 St
+20 4 Sherman School 1000 W 52 St
+20 5 Bessie Coleman Library 731 E 63 St
+20 6 Hope School 5515 S Lowe Av
+20 7 Washington Scene Apts 6001 S Vernon Av
+20 8 Ada S McKinley Apts 661 E 69 St
+20 9 Kenneth Campbell Apartments 6360 S Minerva Av
+20 10 Chicago Fire Station 432 E Marquette Rd
+20 11 Washington Park 55th Pl L.P. 333 E 55 Pl
+20 12 Greater Metropolitian MB Church 5856 S Wabash Av
+20 13 Robert Lawrence Senior Housing 655 W 65 St
+20 14 Midway Plaisance Senior Apt 731 E 60 St
+20 15 Hamline School 4747 S Bishop St
+20 16 Trinity Oaks Senior Housing 6225 S Drexel Av
+20 17 Richards Academy H S 5030 S Bishop St
+20 18 Emmett L Till School 6543 S Champlain Av
+20 19 Washington Scene Apts 6001 S Vernon Av
+20 20 Cesar Chavez School 4747 S Marshfield Av
+20 21 Sherman Park 1301 W 52 St
+20 22 Kenneth Campbell Apartments 6360 S Minerva Av
+20 23 St Edmunds Village 6253 S Michigan Av
+20 24 The Christway MB Church 1210 E 62 St
+20 25 Sherman School 1000 W 52 St
+20 26 The Christway MB Church 1210 E 62 St
+20 27 Urban Prep/Team Englewood 6201 S Stewart Av
+20 28 Brownell School 6741 S Michigan Av
+20 29 Vivian Carter Apts 6401 S Yale
+20 30 Sherwood Park 5701 S Shields Av
+20 31 Good Shepherd Tower 55 E Garfield Bv
+20 32 West Haven Homes 850 W Garfield Bv
+20 33 Bessie Coleman Library 731 E 63 St
+20 34 The Christway MB Church 1210 E 62 St
+20 35 New Beginnings Church 6620 S M L King Jr Dr
+20 36 Kelly Branch-CPL 6151 S Normal Av
+20 37 Chicago Fire Station 21 W 59 St
+20 38 Love Cathedral Cmty Church 5112 S Halsted St
+20 39 Urban Prep/Team Englewood 6201 S Stewart Av
+21 2 Stone Terrace 8440 S Parnell Av
+21 3 Christian Youth M B Church 8801 S Hermitage Av
+21 4 Westcott School 409 W 80 St
+21 5 Kipling School 9351 S Lowe Av
+21 6 Lenas Beauty College 1140 W 87 St
+21 7 Emmanuel Baptist Church 8301 S Damen Av
+21 8 Shiloah Baptist Church 9211 S Justine St
+21 9 Foster Park School 8530 S Wood St
+21 10 Fort Dearborn 9025 S Throop St
+21 11 Ryder School 8716 S Wallace St
+21 12 Ryder School 8716 S Wallace St
+21 13 Foster Park 1440 W 84 St
+21 14 Stratford Christian Center Church 9152 S Ashland Av
+21 15 O Hallaren Park 8335 S Honore St
+21 16 Christian Youth M B Church 8801 S Hermitage Av
+21 17 Gresham School Of Excellence 8510 S Green St
+21 18 Shiloah Baptist Church 9211 S Justine St
+21 19 Brainerd Park 1246 W 92 St
+21 20 Traveling Zion P B Church 8444 S Racine Av
+21 21 Trinity/Nations Dlvrnc Ministries 9600 S Vincennes Av
+21 22 Brainerd Park 1246 W 92 St
+21 23 St Thaddeus Church 9550 S Harvard Av
+21 24 Kipling School 9351 S Lowe Av
+21 25 St Thaddeus Church 9550 S Harvard Av
+21 26 Trinity United Baptist Church 8048 S Ashland Av
+21 27 St Thaddeus Church 9550 S Harvard Av
+21 28 Holiness Is The Way Church 8210 S Racine Av
+21 29 Foster Park School 8530 S Wood St
+21 30 Cook School 8150 S Bishop St
+21 31 West Chatham Park 8223 S Princeton Av
+21 32 Greater Mt Vernon Baptist Church 8700 S Laflin St
+21 33 Traveling Zion P B Church 8444 S Racine Av
+21 34 Gresham School Of Excellence 8510 S Green St
+21 35 Robichaux Park 9247 S Eggleston Av
+21 36 Brainerd Senior Ctr 8915 S Loomis St
+21 37 Southpoint Nursing & Rehab Ctr 1010 W 95 St
+21 38 Resurrection Luthern Church 9349 S Wentworth Av
+21 39 Drew School 9300 S Princeton Av
+21 40 Robichaux Park 9247 S Eggleston Av
+21 41 Oakdale Park 965 W 95 St
+21 42 Brainerd Park 1246 W 92 St
+21 43 Perspectives Charter School 8131 S May St
+21 44 Ryder School 8716 S Wallace St
+21 45 Resurrection Luthern Church 9349 S Wentworth Av
+21 46 New Covenant Coptic Temple 9306 S Halsted St
+21 47 Cook School 8150 S Bishop St
+21 48 Foster Park 1440 W 84 St
+21 49 Wendell Green School 1150 W 96 St
+21 50 Brainerd Library 1350 W 89 St
+21 51 Faith Evangelical Church 8300 S Sangamon St
+21 52 Foster Park 1440 W 84 St
+21 53 Simeon Career Academy 8147 S Vincennes Av
+21 54 New Pisgah Haven Homes 8005 S Racine Av
+22 2 Vittum Park 5010 W 50 St
+22 3 Dominguez School 3000 S Lawndale Av
+22 4 Second Federal Bank 3960 W 26 St
+22 5 Piotrowski Park 4247 W 31 St
+22 6 Cokery School 2510 S Kildare Av
+22 7 Dominguez School 3000 S Lawndale Av
+22 8 Vittum Park 5010 W 50 St
+22 9 St Agnes Church 2658 S Central Park Av
+22 10 Gary School 3740 W 31 St
+22 11 Church Of God 3048 S Central Park Av
+22 12 Parliament Builder Inc 4455 S Knox Av
+22 13 Cardenas School 2345 S Millard Av
+22 14 Cardenas School 2345 S Millard Av
+22 15 Francisco 1 Madero School 3202 W 28 St
+22 16 Piotrowski Park 4247 W 31 St
+22 17 Epiphany Parish 2524 S Keeler Av
+22 18 Cardenas School 2345 S Millard Av
+22 19 Shedd Park 3660 W 23 St
+22 20 Piotrowski Park 4247 W 31 St
+22 21 Empty Store Front 4339 W Cermak Rd
+22 22 Farragut High School 2345 S Christiana Av
+22 23 Leclaire Park 5120 W 44 St
+22 24 Whitney School 2815 S Komensky Av
+22 25 St Agnes Church 2658 S Central Park Av
+23 2 Clearing Branch Library 6423 W 63 Pl
+23 3 St Daniel Prophet Ch 5340 S Nashville Av
+23 4 Risen Savior Assembly Of God 6059 S Archer Av
+23 5 Taqueria Los Comales #12 6035 S Pulaski Rd
+23 6 Strohacker Park 4347 W 54 St
+23 7 Chicago Fire Station 3637 W 59 St
+23 8 St Camillus Hall 5450 S Lockwood Av
+23 9 Chicago Ward Yard 3720 W 55 St
+23 10 American Legion Clearing Post 600 4352 W 63 St
+23 11 Royalty East Banquet Hall 3810 W 63 St
+23 12 Adam Furniture 6815 W Archer Av
+23 13 Tonti Elementary School 5815 S Homan Av
+23 14 Garfield Branch Library 6348 S Archer Av
+23 15 Senior Suites Of Gage Park 3244 W 59 St
+23 16 Byrne School 5329 S Oak Park Av
+23 17 Chicago Lawn Branch Library 6120 S Kedzie Av
+23 18 St Rene Church 6340 S New England Av
+23 19 Eberhart School 3430 W 65 Pl
+23 20 Chicago Police Station 3420 W 63 St
+23 21 Byrne School 5329 S Oak Park Av
+23 22 Soukal Floral Greenhouse 5336 S Mason Av
+23 23 Clearing Branch Library 6423 W 63 Pl
+23 24 UNO Soccer Academy H S 5025 S St Louis Av
+23 25 Archer Heights Branch 5055 S Archer Av
+23 26 New Life Community Church 5101 S Keeler Av
+23 27 Croatian American Radio Club 7036 S Archer Av
+23 28 St Rene Church 6340 S New England Av
+23 29 Chicago Ward Yard 5556 S Central Av
+23 30 West Lawn Branch Library 4020 W 63 St
+23 31 Chicago Lawn United Methodist Ch 3500 W 63 Pl
+23 32 Royalty East Banquet Hall 3810 W 63 St
+23 33 Los Pequenos Angelitos Day Care 3711 W 55 St
+23 34 Maranatha Assembly Of God Ch 3542 W 59 St
+23 35 St Rene Church 6340 S New England Av
+23 36 Gary Rubin MD Opthamologist 7001 W Archer
+23 37 St Daniel Prophet Ch 5340 S Nashville Av
+23 38 T C F Bank 6141 S Archer Av
+23 39 Las Islas Marias Restaurant 5401 S Pulaski Rd
+24 2 Anton Dvorak School 3615 W 16 St
+24 3 Crown Academy 2128 S St Louis Av
+24 4 John Gregory School 3715 W Polk St
+24 5 Sunshine M B Church 3654 W Roosevelt Rd
+24 6 Anton Dvorak School 3615 W 16 St
+24 7 St Roman Church 2651 W 23 St
+24 8 Franklin Park Fieldhouse 4320 W 15 St
+24 9 Crown Academy 2128 S St Louis Av
+24 10 Douglas Park Baptist Church 1838 S Kedzie Av
+24 11 C E Hughes School 4247 W 15 St
+24 12 Kipp Ascend Primary School 1440 S Christiana Av
+24 13 Kipp Ascend Primary School 1440 S Christiana Av
+24 14 Greater Rose Hill Baptist Church 3137 W Roosevelt Rd
+24 15 William Penn School 1616 S Avers Av
+24 16 St Roman Church 2651 W 23 St
+24 17 Webster School 4055 W Arthington St
+24 18 Faith Community Church 3456 W Flournoy St
+24 19 Sumner School 4320 W Fifth Av
+24 20 Webster School 4055 W Arthington St
+24 21 Lawndale Academy 3500 W Douglas Bv
+24 22 United Baptist Church 4220 W Roosevelt Rd
+24 23 Johnson Child Parent Center 1504 S Albany Av
+24 24 Herzl School 3711 W Douglas Bv
+24 25 Franklin Park Fieldhouse 4320 W 15 St
+24 26 Roosevelt Tower # 1 3440 W Roosevelt Rd
+24 27 Chicago Police Station 3151 W Harrison St
+24 28 Clair House Senior Apartments 1350 S Harding Av
+24 29 Greater St Paul Ame Church 4236 W Cermak Rd
+24 30 Greater Hope Fellowship Church 3844 W Roosevelt Rd
+24 31 Lawndale Christian Health Ctr 3860 W Ogden Av
+24 32 Sumner School 4320 W Fifth Av
+24 33 Legacy Charter School 4217 W 18 St
+24 34 Anton Dvorak School 3615 W 16 St
+24 35 Fredrick Douglass Library 3353 W 13 St
+24 36 Lawndale Christian Health Ctr 3860 W Ogden Av
+24 37 First Baptist Institutional Church 4220 W 18 St
+24 38 Douglas Park Baptist Church 1838 S Kedzie Av
+24 39 Albany Terrace Apartments 3030 W 21 Pl
+24 40 Chicago Police Station 3151 W Harrison St
+24 41 Austin Corinthian Church 823 S Cicero Av
+25 2 Rudy Lozano Branch Library 1805 S Loomis St
+25 3 Merit School Of Music 38 S Peoria St
+25 4 B J Wright Courts Apartments 1354 S Morgan St
+25 5 Ruiz School 2410 S Leavitt St
+25 6 Haines School 247 W 23 Pl
+25 7 Rudy Lozano Branch Library 1805 S Loomis St
+25 8 Pickard School 2301 W 21 Pl
+25 9 St Anns Church 1840 S Leavitt St
+25 10 Merit School Of Music 38 S Peoria St
+25 11 Harrison Park 1824 S Wood St
+25 12 Jungman School 1746 S Miller St
+25 13 Cooper School 1624 W 19 St
+25 14 C A S L Senior Housing 2108 S Princeton Av
+25 15 Cristo Rey Jesuit High School 1852 W 22 Pl
+25 16 Haymarket/McDermott 943 W Washington Bv
+25 17 Las Amer Racine Apartments 1611 S Racine Av
+25 18 Chinatown Elderly Apartments 300 W 23 St
+25 19 Cooper School 1624 W 19 St
+25 20 Fosco Pk Fieldhouse 1312 S Racine Av
+25 21 River City Condo 800 S Wells St
+25 22 Chicago Fire Station 1915 S Damen Av
+25 23 Dvorak Park 1119 W Cullerton St
+25 24 Pilsen Academy 1420 W 17 St
+25 25 Sheridan Park 910 S Aberdeen St
+25 26 Ruiz School 2410 S Leavitt St
+25 27 Holiday Inn Hotel/Suites 506 W Harrison St
+25 28 Perez Jr School 1241 W 19 St
+25 29 George Collins Senior Apartments 1401 S Blue Island Av
+25 30 Mujeres Latinas En Accion 2124 W 21 Pl
+25 31 Haymarket/McDermott 943 W Washington Bv
+25 32 Everett School 3419 S Bell Av
+26 2 Spaulding Ave Church Of God 1132 N Spaulding Av
+26 3 Chopin School 2450 W Rice St
+26 4 Rim City & Vip 4253 W Grand Av
+26 5 Hispanic Housing Sites 1402 N Kedzie Av
+26 6 Iglesia Evangelica Misionera 1515 N Homan Av
+26 7 St Augustine College 3255 W Armitage Av
+26 8 McAuliffe Elementary 1841 N Springfield Av
+26 9 Pablo Casals School 3501 W Potomac Av
+26 10 Association House Of Chicago 1116 N Kedzie Av
+26 11 Eddies Hall 3634 W North Av
+26 12 Iglesia Evangelica Misionera 1515 N Homan Av
+26 13 North Pulaski Library 4300 W North Av
+26 14 Stowe School 3444 W Wabansia Av
+26 15 The Salvation Army ARC 4052 W Grand Av
+26 16 New Mt Moriah Baptist Church 1501 N Harding Av
+26 17 Smith Park 2526 W Grand Av
+26 18 Maternity BVM Church 1537 N Lawndale Av
+26 19 West Park Academy 1425 N Tripp Av
+26 20 Christian Fellowship Flock 2435 W Division St
+26 21 Chi-Arts School 2714 W Augusta Bv
+26 22 Seed Of Abraham Church 1651 N Karlov Av
+26 23 Mozart Park 2036 N Avers Av
+26 24 Armitage Commons Apartments 3720 W Armitage Av
+26 25 Las Moradas Apts 1307 N California Av
+26 26 Las Moradas Apts 1307 N California Av
+26 27 Plaza Taino 1111 N Francisco Av
+26 28 Ellen Mitchell School 2233 W Ohio St
+26 29 Gateway Foundation 1706 N Kedzie Av
+26 30 Humboldt Park Library 1605 N Troy St
+26 31 Cameron School 1234 N Monticello Av
+26 32 Ellen Mitchell School 2233 W Ohio St
+26 33 Northwest Scattered Sites 925 N California Av
+26 34 Palmer Square Apartments 3212 W Dickens Av
+26 35 Puerto Rico United 2606 W Division St
+26 36 Ukrainian Orthdx Patronage Ch 904 N Washtenaw Av
+26 37 St Augustine College 3255 W Armitage Av
+26 38 Bloomingdale Apartments 1745 N Keystone Av
+26 39 Chopin School 2450 W Rice St
+26 40 The Carpenters House 1651 N Kedzie Av
+26 41 Pablo Casals School 3501 W Potomac Av
+26 42 Humboldt Park Library 1605 N Troy St
+26 43 First Congregational Church 1305 N Hamlin Av
+26 44 New Mt Moriah Baptist Church 1501 N Harding Av
+26 45 Apostolic Assembly 1326 N Hamlin Av
+26 46 Smith Park 2526 W Grand Av
+26 47 Sabor Latino 3808 W North Av
+26 48 J Discount Pharmacy 1344 N Western Av
+26 49 Segundo Ruiz Belvis Cultural Ctr 4046 W Armitage Av
+27 2 Academy Square Apartments 318 S Throop St
+27 3 Sr Suites/West Humboldt Park 3656 W Huron St
+27 4 Cather School 2908 W Washington Bv
+27 5 Polaris Charter School 620 N Sawyer Av
+27 6 Skinner North School 640 W Scott St
+27 7 1 St Apostolic Assembly 1401 W Superior St
+27 8 Interfaith House 3456 W Franklin Bv
+27 9 Franklin Fine Arts Ctr 225 W Evergreen Av
+27 10 Patrick Sullivan Senior Apartments 1633 W Madison St
+27 11 Salvation Army Adult Rehab 506 N Desplaines St
+27 12 Carling Hotel 1512 N LaSalle St
+27 13 Noble Square Cooperative 1165 N Milwaukee Av
+27 14 Landmark Baptist Church 2700 W Wilcox St
+27 15 Ward School 646 N Lawndale Av
+27 16 Haymarket/McDermott 943 W Washington Bv
+27 17 Grant Campus 145 S Campbell Av
+27 18 Oakley Square 2334 W Van Buren St
+27 19 Rowe Clark Math And Science Acdy 3645 W Chicago Av
+27 20 Marshall Field Garden Apartments 1428 N Sedgwick St
+27 21 Domain Condo Association 900 N Kingsbury St
+27 22 Ward School 646 N Lawndale Av
+27 23 Elizabeth Davis Apartments 440 N Drake Av
+27 24 Youth Center COGIC 3679 W Grand Av
+27 25 Dett School 2131 W Monroe St
+27 26 Matthew Manor/Ozanam Village 251 N Albany Av
+27 27 West Haven Park Apartments 1939 W Lake St
+27 28 Atrium Village 300 W Hill St
+27 29 Youth Center COGIC 3679 W Grand Av
+27 30 Landmark Baptist Church 2700 W Wilcox St
+27 31 Morton Sch Of Excellence 431 N Troy St
+27 32 St Leonard Ministries 2120 W Warren Bv
+27 33 Union Park Field House 1501 W Randolph St
+27 34 Sr Suites/West Humboldt Park 3656 W Huron St
+27 35 City Church Chicago 777 N Green St
+27 36 Heritage Woods Of Chgo 2800 W Fulton St
+27 37 Flannery Homes 1507 N Clybourn Av
+27 38 LaSalle Division Apartments 116 W Elm St
+27 39 Revival Fellowship C O G I C 2810 W Washington Bv
+27 40 Northwest Tower Apts 1170 W Erie St
+27 41 West Point Plaza 300 S Damen Av
+27 42 North Park Tower 300 W North Av
+27 43 Suder Montessori Mgnt School 2022 W Washington Bv
+27 44 Polaris Charter School 620 N Sawyer Av
+27 45 Haymarket/McDermott 943 W Washington Bv
+27 46 Catherine Cook School 240 W Schiller St
+27 47 Evergreen Tower 1333 N Cleveland Av
+27 48 Jenner Academy Of Arts 1119 N Cleveland Av
+27 49 Cather School 2908 W Washington Bv
+27 50 Midwest Terrace Apartments 150 S Campbell Av
+28 2 Joshua M B Church 3255 W Carroll Av
+28 3 Faraday School 3250 W Monroe St
+28 4 Stem Academy 1522 W Fillmore St
+28 5 William Jones Apartments 1447 S Ashland Av
+28 6 Van Buren Place 1504 W Van Buren St
+28 7 St Michaels M B Church 4106 W Monroe St
+28 8 Van Buren Place 1504 W Van Buren St
+28 9 St Michaels M B Church 4106 W Monroe St
+28 10 Stem Academy 1522 W Fillmore St
+28 11 Washington Irving School 749 S Oakley Bv
+28 12 Truth & Deliverance Church 3 S Laramie Av
+28 13 Greencastle Of Garfield I Apartments 3811 W Washington Bv
+28 14 Mt Sinai Church 310 N Laramie Av
+28 15 Garfield Senior Apartments 3700 W Congress Pkwy
+28 16 Greater St John M B Church 310 S Kostner Av
+28 17 Melody Stem Sch/Delano Campus 3937 W Wilcox St
+28 18 Circle Park Apartments 1111 S Ashland Av
+28 19 Mayors People/Disabilities 2102 W Ogden Av
+28 20 Ike Sims Apartments 3333 W Maypole Av
+28 21 Chance Ministries 305 N Cicero Av
+28 22 Al Raby High School 3545 W Fulton St
+28 23 The Church Of Christ 4400 W Maypole Av
+28 24 George W Tilton School 223 N Keeler Av
+28 25 Peoples Church Of The Harvest 3570 W Fifth Av
+28 26 St Michaels M B Church 4106 W Monroe St
+28 27 Andrew Jackson School 1340 W Harrison St
+28 28 Andrew Jackson School 1340 W Harrison St
+28 29 Love & Faith M B Church 512 S Washtenaw Av
+28 30 Jlm Abundant Life Cmty Center 2622 W Jackson Bv
+28 31 Jackson Square Nursing Home 5130 W Jackson Bv
+28 32 Jimmie G Restaurant 307 S Kedzie Av
+28 33 The Church Of Christ 4400 W Maypole Av
+28 34 Thomas Chalmers School 2745 W Roosevelt Rd
+28 35 Kellman Corporate Community Sch 3030 W Arthington St
+28 36 King David Missionary Baptist Ch 3322 W Gladys Av
+28 37 Melody Stem Sch/Delano Campus 3937 W Wilcox St
+28 38 Mercy Seat M B Church 4656 W Erie St
+28 39 Community Fellowship M B Church 4817 W Madison St
+28 40 Westside Learning Center 4624 W Madison St
+28 41 Mt Sinai Church 310 N Laramie Av
+28 42 Spencer Technology Academy 214 N Lavergne Av
+28 43 Spencer Technology Academy 214 N Lavergne Av
+28 44 Hefferan School 4409 W Wilcox St
+28 45 Patrick Sullivan Senior Apartments 1633 W Madison St
+28 46 Washington Irving School 749 S Oakley Bv
+29 2 Austin Senior Satellite Center 5071 W Congress Pkwy
+29 3 The Greater Way MB Church 5442 W Harrison St
+29 4 Young School 1434 N Parkside Av
+29 5 Milton Brunson School 932 N Central Av
+29 6 Michele Clark Magnet H S 5101 W Harrison St
+29 7 Lovett School 6333 W Bloomingdale Av
+29 8 Oscar De Priest School 139 S Parkside Av
+29 9 Sayre School 1850 N Newland Av
+29 10 Sayre School 1850 N Newland Av
+29 11 Ellington School 243 N Parkside Av
+29 12 Lovett School 6333 W Bloomingdale Av
+29 13 New Inspirational Mb Ch 5825 W Division St
+29 14 Friendship Baptist Church 5200 W Jackson Bv
+29 15 Amundsen Pk 6200 W Bloomingdale Av
+29 16 Oscar De Priest School 139 S Parkside Av
+29 17 Amundsen Pk 6200 W Bloomingdale Av
+29 18 Burnham Apartments 325 N Austin Bv
+29 19 Columbus Park Refectory 5701 W Jackson Bv
+29 20 Mayfield Care Center 5905 W Washington Bv
+29 21 Ellington School 243 N Parkside Av
+29 22 Clark School 1045 S Monitor Av
+29 23 Praying Hands Cmty Center 7185 W Bloomingdale Av
+29 24 Galewood Park Field House 5729 W Bloomingdale Av
+29 25 West Side Health Authority 5852 W North Av
+29 26 Crestwood Apartments 525 N Austin
+29 27 Milton Brunson School 932 N Central Av
+29 28 Prince Of Peace M B Church 5450 W Van Buren St
+29 29 Dever School 3436 N Osceola Av
+29 30 Montclare Senior Residence 6650 W Belden Av
+29 31 Bethesda Retirement Center 2833 N Nordica Av
+29 32 Dever School 3436 N Osceola Av
+29 33 Lorraine Hansberry Apartments 5670 W Lake St
+29 34 Clark School 1045 S Monitor Av
+29 35 Mt Olive MB Church 5729 W Chicago Av
+29 36 Amundsen Pk 6200 W Bloomingdale Av
+29 37 St Paul Lutheran School 846 N Menard Av
+29 38 Iglesia Hesed 7017 W Grand Av
+29 39 Bethesda Retirement Center 2833 N Nordica Av
+29 40 True Vine Church 5936 W Division St
+29 41 Young School 1434 N Parkside Av
+29 42 Columbus Park 500 S Central Av
+29 43 Galewood Community Ch 1776 N Narragansett Av
+29 44 Sankofa Cultural Arts Center 5820 W Chicago Av
+30 2 St Ferdinand Convent 5936 W Barry Av
+30 3 Reilly School 3650 W School St
+30 4 Chopin Park 3420 N Long Av
+30 5 Alliance Polish Heritage Ctr 5835 W Diversey Av
+30 6 St James Parish 2430 N Mango Av
+30 7 Scammon School 4201 W Henderson St
+30 8 St Wenceslaus Church 3425 N Lawndale Av
+30 9 St Ladislaus School 3330 N Lockwood Av
+30 10 Alliance Polish Heritage Ctr 5835 W Diversey Av
+30 11 Riis Park 6100 W Fullerton Av
+30 12 Alliance Polish Heritage Ctr 5835 W Diversey Av
+30 13 Lyon School 2941 N McVicker Av
+30 14 Fresh Market Place 2644 N Central Av
+30 15 Empty Store Front 3807 N Pulaski Rd
+30 16 Lyon School 2941 N McVicker Av
+30 17 Mathers Cafe 3235 N Central Av
+30 18 St Hyacinth School 2845 N Lawndale Av
+30 19 Alegre Restaurant 5406 W Fullerton Av
+30 20 St Bartholomew Church 4950 W Addison St
+30 21 Belmont Assembly Of God Church 6050 W Belmont Av
+30 22 Reilly School 3650 W School St
+30 23 Federico Garcia Lorca 3231 N Springfield Av
+30 24 St Hyacinth School 2845 N Lawndale Av
+30 25 Chicago Dept On Aging 3160 N Milwaukee Av
+30 26 Kilbourn Park 3501 N Kilbourn Av
+30 27 Kilbourn Park 3501 N Kilbourn Av
+30 28 City Works Sports Lounge 3456 N Pulaski Rd
+30 29 Riis Park 6100 W Fullerton Av
+30 30 Lyon School 2941 N McVicker Av
+30 31 Kilbourn Park 3501 N Kilbourn Av
+30 32 St Wenceslaus Church 3425 N Lawndale Av
+31 2 Grace Lutheran Church 2725 N Laramie Av
+31 3 St Peters United Church Of Christ 2805 N Linder Av
+31 4 Our Lady Of Grace Church 2446 N Ridgeway Av
+31 5 John Barry Elementary School 2828 N Kilbourn Av
+31 6 Belmont Place Apartments 4645 W Belmont Av
+31 7 Kosciuszko Park 2732 N Avers Av
+31 8 Foreman High School 3235 N Le Claire Av
+31 9 Chicago Fire Station 4911 W Belmont Av
+31 10 4K Diversey Partners LLC 4000 W Diversey Av
+31 11 St Bartholomew Church 4950 W Addison St
+31 12 First Class Barber Shop 3424 N Cicero Av
+31 13 Kelvyn Park 4438 W Wrightwood Av
+31 14 Portage Cragin Library 5108 W Belmont Av
+31 15 New Life Family Center 2910 N Central Av
+31 16 Infant Welfare Society 3600 W Fullerton Av
+31 17 New Life Covenant Northwest 5110 W Diversey Av
+31 18 Bethesda Church 4538 W Fullerton Av
+31 19 North West Community Church 5318 W Diversey Av
+31 20 Schubert School 2727 N Long Av
+31 21 St Genevieve Church 4834 W Montana St
+31 22 Iglesia Bautista Kildare Ave 4248 W Belden Av
+31 23 St Joseph Village Of Chicago 4021 W Belmont Av
+31 24 John Barry Elementary School 2828 N Kilbourn Av
+31 25 North West Community Church 5318 W Diversey Av
+31 26 Ken-Well Park 2945 N Kenosha Av
+31 27 M & K Electronics Inc 2848 N Cicero Av
+31 28 Cragin Park 2611 N Lockwood Av
+31 29 Senior Suites Kelvyn Park 2715 N Cicero Av
+31 30 Nutrition Club 2955 N Cicero Av
+31 31 Iglesia Cristiana De La Familia 3053 N Linder Av
+31 32 Embajadores De Cristo 2524 N Laramie Av
+31 33 Portage Cragin Library 5108 W Belmont Av
+31 34 Foreman High School 3235 N Le Claire Av
+31 35 Falconer School 3020 N Lamon Av
+31 36 St Joseph Village Of Chicago 4021 W Belmont Av
+31 37 Lamon Baptist Church 2551 N Lamon Av
+31 38 New Life 316 Nuevavida 5120 W Fullerton Av
+31 39 U-Haul 4100 W Fullerton Av
+31 40 Kosciuszko Park 2732 N Avers Av
+31 41 Iglesia De Dios Pentecostal Ch 4400 W Montana St
+32 2 Bucktown-Wicker Pk Library 1701 N Milwaukee Av
+32 3 St John Berchman 2517 W Logan Bv
+32 4 Chicago Fire Station 1901 N Damen Av
+32 5 Pulaski School Annex Building 2230 W McLean Av
+32 6 Bucktown-Wicker Pk Library 1701 N Milwaukee Av
+32 7 Christ Apostolic Ch Of America 3142 N Racine Av
+32 8 Saint Luke Church 1500 W Belmont Av
+32 9 Chicago Fire Station 2214 W Barry Av
+32 10 Saint Luke Church 1500 W Belmont Av
+32 11 Logan Sq Library 3030 W Fullerton
+32 12 Boys/Girls Club Of Chicago 2211 N Sawyer Av
+32 13 Wrightwood Park 2534 N Greenview Av
+32 14 Logan Sq Library 3030 W Fullerton
+32 15 Jahn School 3149 N Wolcott Av
+32 16 Holstein Pk 2200 N Oakley Av
+32 17 St Lukes Lutheran Church 2649 N Francisco Av
+32 18 Wrightwood Park 2534 N Greenview Av
+32 19 Sierra Auto Inc 2352 W Belmont Av
+32 20 Darwin School 3116 W Belden Av
+32 21 Christian Fellowship Free Church 3425 N Damen Av
+32 22 St Sylvester School 3027 W Palmer St
+32 23 Saint Luke Church 1500 W Belmont Av
+32 24 Hamlin Park 3035 N Hoyne Av
+32 25 Christian Fellowship Free Church 3425 N Damen Av
+32 26 St Lukes Lutheran Church 2649 N Francisco Av
+32 27 Prescott School 1632 W Wrightwood Av
+32 28 St Lukes Lutheran Church 2649 N Francisco Av
+32 29 Holstein Pk 2200 N Oakley Av
+32 30 Burley School 1630 W Barry Av
+32 31 Chicago Fire Station 1901 N Damen Av
+32 32 Bucktown-Wicker Pk Library 1701 N Milwaukee Av
+32 33 Walsh Apartments 1734 N Paulina St
+32 34 Covenant Presbyterian Church 2022 W Dickens Av
+32 35 Burr School 1621 W Wabansia Av
+32 36 Club Lucky 1824 W Wabansia Av
+32 37 St Hedwig Convent 2219 N Hamilton Av
+32 38 Alcott College Prep West Campus 2957 N Hoyne Av
+32 39 Wrightwood Park 2534 N Greenview Av
+32 40 Burley School 1630 W Barry Av
+32 41 Jahn School 3149 N Wolcott Av
+32 42 Hamlin Park 3035 N Hoyne Av
+32 43 Brentano School 2723 N Fairfield Av
+33 2 Hibbard School 3244 W Ainslie St
+33 3 First Vietnamese United Methodist Church 3100 W Wilson Av
+33 4 Linne School 3221 N Sacramento Av
+33 5 Ceviche Peruvian Resturant 2554 W Diversey Av
+33 6 Grover Cleveland School 3121 W Byron St
+33 7 Albany Park Cmty Ctr 3401 W Ainslie St
+33 8 First Vietnamese United Methodist Church 3100 W Wilson Av
+33 9 Brands Pk 3259 N Elston Av
+33 10 West Byron Place 2815 W Byron St
+33 11 Celestial Church Of Christ 4100 N Troy St
+33 12 Grover Cleveland School 3121 W Byron St
+33 13 Carlos Fuentes Charter School 2845 W Barry Av
+33 14 Carlos Fuentes Charter School 2845 W Barry Av
+33 15 Maries Golden Cue 3241 W Montrose Av
+33 16 Immaculate Heart Of Mary 3820 N Spaulding Av
+33 17 Briskus Bistro 4100 N Kedzie Av
+33 18 Hanul Family Alliance 5008 N Kedzie Av
+33 19 Ceviche Peruvian Resturant 2554 W Diversey Av
+33 20 Our Lady Of Mercy Church 4432 N Troy
+33 21 Bateman School 4221 N Sacramento Av
+33 22 De Paul College Prep 3633 N California Av
+33 23 Bateman School 4221 N Sacramento Av
+33 24 Horner Park 2741 W Montrose Av
+33 25 Horner Park 2741 W Montrose Av
+33 26 Logan Avondale Post 2978 3009 N Kedzie Av
+33 27 Roosevelt High School 3436 W Wilson Av
+33 28 Logan Avondale Post 2978 3009 N Kedzie Av
+34 2 Greater Mt Eagle MB Church 10856 S Halsted St
+34 3 Metcalfe School 12339 S Normal Av
+34 4 Solomons Universal Temple Of Peace 412 W 107 St
+34 5 Higgins School 11710 S Morgan St
+34 6 New Crtn Binding/Loosing Ministry 12900 S Halsted St
+34 7 Maple Park Missionary Bapt Church 11759 S Ashland Av
+34 8 Mt Joy Baptist Church 11339 S May St
+34 9 Greater Canaan Mb Ch Adm Building 36 W 119 St
+34 10 Salvation Army Ray/Joan Kroc Corp 1250 W 119 St
+34 11 Alex Haley Academy 11411 S Eggleston Av
+34 12 Garvey School 10309 S Morgan St
+34 13 Shoop School 1460 W 112 St
+34 14 Major Charles L Hunt VFW Post 344 W 119 St
+34 15 St James Ministries 11750 S Lowe Av
+34 16 West Pullman Park 401 W 123 St
+34 17 Apostolic Pentecostal Church 11401 S Vincennes Av
+34 18 Christian Missionary Baptist Church 132 W 104 St
+34 19 Apostolic Pentecostal Church 11401 S Vincennes Av
+34 20 Messiah Baptist Ch 10400 S Halsted St
+34 21 Mt Vernon School 10540 S Morgan St
+34 22 Solomons Universal Temple Of Peace 412 W 107 St
+34 23 Fenger High School 11220 S Wallace St
+34 24 Fernwood Park 10436 S Wallace St
+34 25 Prayer/Faith Outreach Ministries 944 W 103 St
+34 26 Brown Academy 12607 S Union Av
+34 27 The Holland Home 240 W 107 Pl
+34 28 Wentworth Commons Apartments 11045 S Wentworth Av
+34 29 Ada Park 11250 S Ada St
+34 30 Dunne Technology Academy 10845 S Union Av
+34 31 Hancock House 12045 S Emerald Av
+34 32 Ada Park 11250 S Ada St
+34 33 St James Ministries 11750 S Lowe Av
+34 34 Fernwood School 10041 S Union Av
+34 35 Julian High School 10330 S Elizabeth St
+34 36 Allen Metropolitan Church 10946 S Lowe Av
+34 37 Agape Community Ctr 342 W 111 St
+34 38 Corner Stone Presbyterian Church 11200 S State St
+34 39 Wentworth Commons Apartments 11045 S Wentworth Av
+34 40 White Park 1120 W 122 St
+34 41 Alex Haley Academy 11411 S Eggleston Av
+34 42 Sheldon Heights Church 11325 S Halsted St
+34 43 Sheldon Heights Church 11325 S Halsted St
+34 44 Prayer/Faith Outreach Ministries 944 W 103 St
+34 45 Washington Heights Sr Suites 848 W 103 St
+34 46 Euclid Park 9800 S Parnell Av
+34 47 Foundation College Prep 1233 W 109 Pl
+34 48 Mt Vernon School 10540 S Morgan St
+34 49 Wacker School 9746 S Morgan St
+34 50 West Pullman Park 401 W 123 St
+34 51 White Park 1120 W 122 St
+34 52 Wacker School 9746 S Morgan St
+34 53 Alex Haley Academy 11411 S Eggleston Av
+35 2 Christopher House 3255 W Altgeld St
+35 3 Mozart School 2200 N Hamlin Av
+35 4 Murphy School 3539 W Grace St
+35 5 Logandale Middle Annex Sch 3212 W George St
+35 6 Hairpin Art Ctr 2800 N Milwaukee Av
+35 7 Latin Amer Motorcycle Assoc 3519 W Fullerton Av
+35 8 Latin Amer Motorcycle Assoc 3519 W Fullerton Av
+35 9 Haugan School 4540 N Hamlin Av
+35 10 Christopher House 3255 W Altgeld St
+35 11 Hairpin Art Ctr 2800 N Milwaukee Av
+35 12 Nixon School 2121 N Keeler
+35 13 Pritzker College Prep 1833 N Kedvale Av
+35 14 Levee Hall 4035 W Fullerton Av
+35 15 Monroe School 3651 W Schubert Av
+35 16 Iglesia De Jesucisto 1847 N Kildare Av
+35 17 Diversey Square Apts 3305 W Diversey Av
+35 18 Nixon School 2121 N Keeler
+35 19 Nixon School 2121 N Keeler
+35 20 Tabor Evangelical Luth Church 3542 W Sunnyside Av
+35 21 Mozart School 2200 N Hamlin Av
+35 22 Jensen Park 4650 N Lawndale Av
+35 23 Independence Library 3548 W Irving Pk Rd
+35 24 Avondale Park 3516 W School St
+35 25 Logan Square Apts 2600 N Kedzie Av
+35 26 Murphy School 3539 W Grace St
+35 27 Henry School 4250 N St Louis Av
+35 28 Monroe School 3651 W Schubert Av
+35 29 Aspira Haugan School 3729 W Leland Av
+35 30 Jensen Park 4650 N Lawndale Av
+35 31 Henry School 4250 N St Louis Av
+36 2 Parkview Villa Banquets 6155 W Fullerton Av
+36 3 Mcgrath City Honda 6720 W Grand Av
+36 4 Chicago Fire Station 2323 N Natchez Av
+36 5 Senior Suites Of Belmont 6045 W Grand Av
+36 6 Iglesia Evangelica Emanuel 5018 W Armitage Av
+36 7 Schorsch Vlg Improvement Assn 6940 W Belmont Av
+36 8 Lloyd School 2103 N Lamon Av
+36 9 Blackhawk Park 2318 N Lavergne Av
+36 10 West Belmont Library 3104 N Narragansett Av
+36 11 Hermosa Park 2240 N Kilbourn Av
+36 12 North Grand High School 4338 W Wabansia Av
+36 13 Hermosa Park 2240 N Kilbourn Av
+36 14 Messiah Lutheran Church 6201 W Patterson Av
+36 15 Messiah Lutheran Church 6201 W Patterson Av
+36 16 Liberty Christian Church 5447 W Addison St
+36 17 Reinberg School 3425 N Major Av
+36 18 Chicago Academy 3400 N Austin Av
+36 19 Locke School 2845 N Newcastle Av
+36 20 Reinberg School 3425 N Major Av
+36 21 Math & Science Academy 2231 N Central Av
+36 22 Northwest Middle School 5252 W Palmer St
+36 23 Senior Suites Of Belmont 6045 W Grand Av
+36 24 Steinmetz School 3030 N Mobile Av
+36 25 St Stanislaus Church 2318 N Lorel Av
+36 26 West Belmont Library 3104 N Narragansett Av
+36 27 Montclare United Church Of Christ 6935 W Medill Av
+36 28 Islamic Cmty Center 6501 W Belmont Av
+36 29 Bell Park 3020 N Oak Park Av
+36 30 Namaste United Ch Of Christ 6337 W Cornelia Av
+37 2 Chgo Northside New Hope Ch 4255 W Division St
+37 3 Orr Campus 730 N Pulaski Rd
+37 4 Brian Piccolo School 1040 N Keeler Av
+37 5 Hamlett Isom Cme Church 5446 W Division St
+37 6 Taylor Funeral Home 5348 W North Av
+37 7 Brian Piccolo School 1040 N Keeler Av
+37 8 Brian Piccolo School 1040 N Keeler Av
+37 9 Howe School 720 N Lorel
+37 10 El Mexico Moderno Ball Room 1645 N Cicero Av
+37 11 New Galilee Baptist Church 431 N Laramie Av
+37 12 Sweet Relief 4249 W Division St
+37 13 Orr Campus 730 N Pulaski Rd
+37 14 Bethel Small Business Ctr 1150 N Lamon Av
+37 15 John Hay Cmty Academy 1018 N Laramie Av
+37 16 Heritage Intl Christian Church 5320 W North Av
+37 17 Howe School 720 N Lorel
+37 18 New Greater True Light MBC 5401 W Chicago Av
+37 19 Sweet Relief 4247 W Division St
+37 20 Ronald McNair School 4820 W Walton St
+37 21 Augusta Play Ground 4431 W Augusta Bv
+37 22 El Mexico Moderno Ball Room 1645 N Cicero Av
+37 23 Bethel Deliverance Church 5330 W Division St
+37 24 Heritage Intl Christian Church 5320 W North Av
+37 25 John Hay Cmty Academy 1018 N Laramie Av
+37 26 Rock Of Salvation Church 5350 W Bloomingdale Av
+37 27 West Chicago Library 4856 W Chicago Av
+37 28 Brian Piccolo School 1040 N Keeler Av
+37 29 Hamlett Isom Cme Church 5446 W Division St
+37 30 Henry Nash School 4837 W Erie St
+37 31 Lafollette Park 1333 N Laramie Av
+37 32 New Genesis AOG Bapt Church 1400 N Laramie Av
+37 33 Bethel Small Business Ctr 1150 N Lamon Av
+37 34 Apac/Cath Charities WIC Ctr 5125 W Chicago Av
+37 35 New Greater True Light MBC 5401 W Chicago Av
+37 36 Apac/Cath Charities WIC Ctr 5125 W Chicago Av
+37 37 Plaza Arms 501 N Central Av
+37 38 New Genesis AOG Bapt Church 1400 N Laramie Av
+37 39 New Galilee Baptist Church 431 N Laramie Av
+37 40 Lafollette Park 1333 N Laramie Av
+37 41 Heritage Intl Christian Church 5320 W North Av
+38 2 Our Lady Mother Of The Church 8701 W Leland Av
+38 3 Chicago Fire Station 3918 N Harlem Av
+38 4 Shabbona Park 6935 W Addison St
+38 5 Our Saviour Luth Church 3457 N Neva Av
+38 6 Dever School 3436 N Osceola Av
+38 7 Hiawatha Park 8029 W Forest Preserve Dr
+38 8 United In Faith Luth Church 6525 W Irving Pk Rd
+38 9 St Francis Borgia Church 8025 W Addison St
+38 10 Martin Luther Lutheran Church 6850 W Addison St
+38 11 New Life Community Church 5700 W Berteau Av
+38 12 Our Lady Mother Of The Church 8701 W Leland Av
+38 13 Dunning Public Library 7455 W Cornelia Av
+38 14 Dunham Park 4638 N Melvina Av
+38 15 Smyser School 4310 N Melvina Av
+38 16 Martin Luther Lutheran Church 6850 W Addison St
+38 17 Canty School 3740 N Panama Av
+38 18 Dunham Park 4638 N Melvina Av
+38 19 Wright College 4300 N Narragansett Av
+38 20 Canty School 3740 N Panama Av
+38 21 Merrimac Park 6343 W Irving Park Rd
+38 22 Hungarian Baptist Church 5757 W Windsor Av
+38 23 Chicago Fire Station 5758 W Grace St
+38 24 Hiawatha Park 8029 W Forest Preserve Dr
+38 25 Dunham Park 4638 N Melvina Av
+38 26 Merrimac Park 6343 W Irving Park Rd
+38 27 St Francis Borgia Church 8025 W Addison St
+38 28 Canty School 3740 N Panama Av
+38 29 Dever School 3436 N Osceola Av
+38 30 Hiawatha Park 8029 W Forest Preserve Dr
+38 31 St Mary Romanian Ch 4225 N Central Av
+38 32 St Mary Romanian Ch 4225 N Central Av
+38 33 St John Rila Orth Church 5944 W Cullom
+38 34 Chgo Fil-Am 7th Day Adventist 3920 N Central Av
+38 35 Mike Anderson Cheverolet 5301 W Irving Park Rd
+38 36 St John Rila Orth Church 5944 W Cullom
+38 37 Merrimac Park 6343 W Irving Park Rd
+38 38 Bridge School 3800 N New England Av
+38 39 Thorp School 6024 W Warwick Av
+38 40 New Life Community Church 5700 W Berteau Av
+38 41 Portage Park School 5330 W Berteau Av
+39 2 Senate Apartments 5801 N Pulaski Rd
+39 3 Korean Martyrs Catholic Church 4115 N Kedvale Av
+39 4 Sauganash Park 5861 N Kostner Av
+39 5 Palmer School 5051 N Kenneth Av
+39 6 Chicago Police Station 4650 N Pulaski Rd
+39 7 Mayfair Library 4400 W Lawrence Av
+39 8 Salvation Army 5020 N Pulaski Rd
+39 9 Sokol Community Ctr 4855 N Elston Av
+39 10 Eugene Park 5100 N Ridgeway Av
+39 11 Sokol Community Ctr 4855 N Elston Av
+39 12 Volta School 4950 N Avers Av
+39 13 Hollywood Park 3312 W Thorndale Av
+39 14 Mayfair Park 4550 W Sunnyside Av
+39 15 Sauganash School 6040 N Kilpatrick
+39 16 Peterson School 5510 N Christiana Av
+39 17 Mayfair Park 4550 W Sunnyside Av
+39 18 Hollywood Park 3312 W Thorndale Av
+39 19 St Edward Church 4457 N Lowell Av
+39 20 Indian Park 6010 W Matson Av
+39 21 Rosedale Park 6312 W Rosedale Av
+39 22 Peterson School 5510 N Christiana Av
+39 23 Collettis 5707 N Central Av
+39 24 Collettis 5707 N Central Av
+39 25 Korean Martyrs Catholic Church 4115 N Kedvale Av
+39 26 Mayfair Plaza Corp 4001 W Devon Av
+39 27 Forest Preserve Dist CC 6100 N Central Av
+39 28 Chgo Latvian Cmty Ctr 4146 N Elston Av
+39 29 Fairmont Care Ctr 5061 N Pulaski Rd
+39 30 North Pk Covenant Church 5250 N Christiana Av
+39 31 Chicago Police Station 4650 N Pulaski Rd
+39 32 Solomon School 6206 N Hamlin Av
+39 33 Albany Park Cmty Ctr 5101 N Kimball Av
+39 34 Salvation Army 4056 N Pulaski Rd
+39 35 North Pk Covenant Church 5250 N Christiana Av
+39 36 Solomon School 6206 N Hamlin Av
+39 37 Sauganash Park 5861 N Kostner Av
+39 38 Gompers Park 4222 W Foster Av
+39 39 Brynford Bible Church 5700 N Pulaski Rd
+39 40 Sauganash Park 5861 N Kostner Av
+39 41 1st Cong Of Forest Glen 5400 N Lawler Av
+39 42 Sauganash School 6040 N Kilpatrick
+39 43 1st Cong Of Forest Glen 5400 N Lawler Av
+39 44 Edgebrook Library 5331 W Devon Av
+39 45 Edgebrook Library 5331 W Devon Av
+40 2 Mather High School 5835 N Lincoln Av
+40 3 St Demetrios Greek Orthodox Ch 2728 W Carmen Av
+40 4 Assyrian Ntnl Council Of Il 2450 W Peterson Av
+40 5 St Demetrios Greek Orthodox Ch 2728 W Carmen Av
+40 6 Gross Park 2708 W Lawrence Av
+40 7 St Matthias School 4910 N Claremont Av
+40 8 Cambodian Association Of Illinois 2831 W Lawrence Av
+40 9 G & A Sr Residence/Ravenswood 1818 W Peterson Av
+40 10 Green Briar Park 2650 W Peterson Av
+40 11 Chappell Elementary 2135 W Foster Av
+40 12 Gateway To Learning 4925 N Lincoln Av
+40 13 Amundsen High School 5110 N Damen Av
+40 14 Budlong School 2701 W Foster Av
+40 15 Napleton Northwestern Chrysler 5950 N Western Av
+40 16 Amundsen High School 5110 N Damen Av
+40 17 River Park 5100 N Francisco Av
+40 18 Emmerson Park 1820 W Granville Av
+40 19 St Philip Lutheran Sch 2500 W Bryn Mawr Av
+40 20 Continental Care Ctr 5336 N Western Av
+40 21 Chicago Fire Station 2322 W Foster Av
+40 22 Peterson Plaza Apartments 5969 N Ravenswood Av
+40 23 Let Them Eat Chocolate 5306 N Damen Av
+40 24 Budlong Woods Library 5630 N Lincoln
+40 25 Ebenezer Lutheran Ch 1650 W Foster Av
+40 26 Edgewater Historical Society 5358 N Ashland Av
+40 27 Schneider Apartments 1750 W Peterson Av
+40 28 Chicago Police Station 6464 N Clark St
+40 29 Mather High School 5835 N Lincoln Av
+40 30 Jamieson School 5650 N Mozart St
+40 31 Ebenezer Lutheran Ch 1650 W Foster Av
+40 32 Tempel Steel Co 5440 N Wolcott Av
+40 33 St Gregory The Great Parish 5545 N Paulina St
+40 34 Jamieson School 5650 N Mozart St
+40 35 Misericordia Home 2001 W Devon Av
+40 36 Peterson Plaza Apartments 5969 N Ravenswood Av
+40 37 Pressure Inc 6318 N Clark St
+40 38 D A N K Haus 4740 N Western Av
+40 39 Napleton Northwestern Chrysler 5950 N Western Av
+41 2 Stock School 7507 W Birchwood Av
+41 3 Saint Monica Parish 5115 N Mont Clare Av
+41 4 Brooks Park 7100 N Harlem Av
+41 5 Edison Park Lutheran Ch 6626 N Oliphant Av
+41 6 Wildwood School 6950 N Hiawatha Av
+41 7 Edison Park Lutheran Ch 6626 N Oliphant Av
+41 8 Edison Park Lutheran Ch 6626 N Oliphant Av
+41 9 Edgebrook School 6525 N Hiawatha Av
+41 10 Brooks Park 7100 N Harlem Av
+41 11 Windy City Cmty Ch 6131 N Newark Av
+41 12 Saint Monica Parish 5115 N Mont Clare Av
+41 13 St Eugene Church 5220 N Canfield Av
+41 14 Wildwood School 6950 N Hiawatha Av
+41 15 Olympia Park 6566 N Avondale Av
+41 16 Windy City Cmty Ch 6131 N Newark Av
+41 17 Norwood Crossing 6016 N Nina
+41 18 Immaculate Conception School 7263 W Talcott Av
+41 19 Edgebrook School 6525 N Hiawatha Av
+41 20 Resurrection Retirement Ctr 7262 W Peterson Av
+41 21 Onahan School 6600 W Raven St
+41 22 Roden Library 6083 N Northwest
+41 23 St Eugene Church 5220 N Canfield Av
+41 24 Garvey School 5225 N Oak Park Av
+41 25 St Joseph Ukranian Church 5000 N Cumberland Av
+41 26 Norwood Lutheran Church 5917 N Nina Av
+41 27 St Joseph Ukranian Church 5000 N Cumberland Av
+41 28 Pavillion Apts 5441 N East River Rd
+41 29 Pavillion Apts 5441 N East River Rd
+41 30 Garvey School 5225 N Oak Park Av
+41 31 Resurrection Retirement Ctr 7262 W Peterson Av
+41 32 Caldwell Woods 6358 W Devon Av
+41 33 Oriole Park 5430 N Olcott Av
+41 34 Oriole Park 5430 N Olcott Av
+41 35 Onahan School 6600 W Raven St
+41 36 Oriole Pk School 5424 N Oketo Av
+41 37 Olympia Park 6566 N Avondale Av
+41 38 Garvey School 5225 N Oak Park Av
+41 39 Wildwood School 6950 N Hiawatha Av
+41 40 Stock School 7507 W Birchwood Av
+41 41 Immaculate Conception School 7263 W Talcott Av
+41 42 St Juliana School 7400 W Touhy Av
+41 43 Immaculate Conception School 7263 W Talcott Av
+41 44 St Juliana School 7400 W Touhy Av
+41 45 Oriole Pk School 5424 N Oketo Av
+41 46 Norwood Lutheran Church 5917 N Nina Av
+41 47 Park Community Church 6155 W Touhy Av
+42 2 Northwestern Memorial Hospital 541 N Fairbanks Ct
+42 3 Local #134 I B E W 600 W Washington Bv
+42 4 500 N Lake Shore Dr 500 N Lake Shore Dr
+42 5 Domain Condo Association 900 N Kingsbury St
+42 6 400 Condo Association 400 E Randolph St
+42 7 420 E Ohio Apartments 420 E Ohio St
+42 8 680 Lake Res Condo Assoc 680 N Lake Shore Dr
+42 9 La Quinta Inn & Suites 1 S Franklin St
+42 10 Harold Washington College 30 E Lake St
+42 11 Lake Point Tower 505 N Lake Shore Dr
+42 12 Local #134 I B E W 600 W Washington Bv
+42 13 155 Harbor Condo Assoc 155 N Harbor Dr
+42 14 Assumption Church 323 W Illinois St
+42 15 Rezas Restaurant 432 W Ontario St
+42 16 Park Alexandria Condo 125 S Jefferson St
+42 17 Kingsbury Plaza 520 N Kingsbury St
+42 18 Left Bank At K Station 300 N Canal St
+42 19 Maguire Hall 1 E Pearson St
+42 20 33 West Ontario Millennium Condo 33 W Ontario St
+42 21 Local #134 I B E W 600 W Washington Bv
+42 22 55 East Erie Condo Assoc 55 E Erie St
+42 23 Access Living 115 W Chicago Av
+42 24 1000 Condo Assoc 1000 N Lake Shore Pz
+42 25 River Plz Homeowners Assoc 405 N Wabash Av
+42 26 Residence/River East Cond0 512 N McClurg Ct
+42 27 Marina Towers Condo 300 N State St
+42 28 North Harbor Tower 175 N Harbor Dr
+42 29 303 E Wacker 303 E Wacker Dr
+42 30 The Buckingham 360 E Randolph St
+42 31 Vacant Store Front 339 E Grand Av
+42 32 400 N LaSalle Condo 400 N LaSalle St
+42 33 Spertus Institute 610 S Michigan Av
+42 34 Fourth Presbyterian Ch 880 N Michigan Av
+42 35 535 Condo Assoc 535 N Michigan Av
+42 36 Local #134 I B E W 600 W Washington Bv
+42 37 Rezas Restaurant 432 W Ontario St
+42 38 Rezas Restaurant 432 W Ontario St
+42 39 Hotel Felix 111 W Huron St
+42 40 303 E Wacker 303 E Wacker Dr
+42 41 Local #134 I B E W 600 W Washington Bv
+42 42 Harold Washington College 30 E Lake St
+43 2 New Life Community Church 1110 W Lill Av
+43 3 Lincoln Park High School 2001 N Orchard St
+43 4 Old Town Triangle Assoc 1763 N North Park Av
+43 5 Newberry School 700 W Willow St
+43 6 St George Grk Othodox Church 2701 N Sheffield Av
+43 7 Dickens & Burling Apts 2111 N Halsted St
+43 8 Margaret Day Blake Apartments 2140 N Clark St
+43 9 Elizabeth/Larrabee Apartments 1845 N Larrabee St
+43 10 Adams Park 1919 N Seminary Av
+43 11 Lincoln Park High School 2001 N Orchard St
+43 12 345 Fullerton Parkway Condominium 345 W Fullerton Pkwy
+43 13 Commonwealth Apartments 2757 N Pine Grove Av
+43 14 LaSalle School 1734 N Orleans St
+43 15 Lincoln Pk Tower Condo 1960 N Lincoln Pk West
+43 16 Lincoln Pk Br Library 1150 W Fullerton Av
+43 17 Francis Parker School 2233 N Clark St
+43 18 Wayne Wright Amer Lg 1052 1258 W Wrightwood Av
+43 19 Old Town Triangle Assoc 1763 N North Park Av
+43 20 Cenacle Convent 513 W Fullerton Pkwy
+43 21 Alcott School 2625 N Orchard St
+43 22 Alcott School 2625 N Orchard St
+43 23 Newberry School 700 W Willow St
+43 24 Margaret Day Blake Apartments 2140 N Clark St
+43 25 Lakeview Condo Assoc 2626 N Lakeview Av
+43 26 2400 Lakeview Condo 2400 N Lakeview Av
+43 27 444 St James Apartments 444 W St James Pl
+43 28 Draper & Kramer 1360 N Lake Shore Dr
+43 29 Cenacle Convent 513 W Fullerton Pkwy
+43 30 Oscar Mayer School 2250 N Clifton Av
+43 31 Edith Spurlock Sampson Apartments 2720 N Sheffield Av
+43 32 Belden Stratford Apartments 2300 N Lincoln Pk West
+43 33 Chicago History Museum 1601 N Clark St
+43 34 2650 Lakeview Condo 2650 N Lakeview Av
+43 35 One East Scott Condo Assoc 1 E Scott St
+43 36 Sunrise Assisted Living/Lincoln Pk 2710 N Clark St
+43 37 Church Of Our Saviour 530 W Fullerton Av
+43 38 Chicago History Museum 1601 N Clark St
+43 39 Lincoln Pk Br Library 1150 W Fullerton Av
+43 40 Alcott School 2625 N Orchard St
+43 41 De Paul Athletic Traning Ctr 2323 N Sheffield Av
+43 42 Sunrise Assisted Living/Lincoln Pk 2710 N Clark St
+43 43 The Junior League Of Chicago 1447 N Astor St
+43 44 Francis Parker School 2233 N Clark St
+43 45 Elizabeth/Larrabee Apartments 1845 N Larrabee St
+43 46 Chicago Fire Station 2714 N Halsted St
+44 2 Greenview Place 1501 W Melrose St
+44 3 3150 Condo Assoc 3150 N Lake Shore Dr
+44 4 The Hallmark 2960 N Lake Shore Dr
+44 5 Alden Lincoln Pk Nursing Hm 504 W Wellington Av
+44 6 Second Unitarian Church 656 W Barry Av
+44 7 2800 Lake Shore Condo Assoc 2800 N Lake Shore Dr
+44 8 Wirtz Realty Corp 2970 N Sheridan Rd
+44 9 Sheil Park 3505 N Southport
+44 10 Hawthorne School 3319 N Clifton Av
+44 11 Sheil Park 3505 N Southport
+44 12 Temple Sholom 3480 N Lake Shore Dr
+44 13 Hawthorne School 3319 N Clifton Av
+44 14 Advocate Il Masonic MD Ctr 814 W Nelson St
+44 15 Broadway United Methodist Church 3338 N Broadway
+44 16 Blaine School 1420 W Grace St
+44 17 The Kenwood Of Lakeview 3121 N Sheridan Rd
+44 18 Second Unitarian Church 656 W Barry Av
+44 19 Nettelhorst School 3252 N Broadway
+44 20 Advocate Il Masonic MD Ctr 814 W Nelson St
+44 21 John Merlo Library 644 W Belmont Av
+44 22 Hawthorne House 3450 N Lake Shore Dr
+44 23 Britton Budd Apartments 501 W Surf St
+44 24 Commonwealth Plaza Apartments 340 W Diversey Pkwy
+44 25 Blaine School 1420 W Grace St
+44 26 Chicago Police Station 850 W Addison St
+44 27 Agassiz School 2851 N Seminary Av
+44 28 Belmont Towers 510 W Belmont Av
+44 29 Agassiz School 2851 N Seminary Av
+44 30 Sheil Park 3505 N Southport
+44 31 G-Man 3740 N Clark St
+44 32 G-Man 3740 N Clark St
+44 33 Broadway United Methodist Church 3338 N Broadway
+44 34 Hattie Callner Apartments 855 W Aldine Av
+44 35 The Kenwood Of Lakeview 3121 N Sheridan Rd
+44 36 Chicago Police Station 850 W Addison St
+44 37 Nettelhorst School 3252 N Broadway
+44 38 Hawthorne School 3319 N Clifton Av
+44 39 Hawthorne School 3319 N Clifton Av
+44 40 Agassiz School 2851 N Seminary Av
+44 41 Britton Budd Apartments 501 W Surf St
+45 2 Thurgood Marshall School 3900 N Lawndale Av
+45 3 Independence Park 3945 N Springfield Av
+45 4 Disney II Magnet School 3815 N Kedvale
+45 5 Disney II Magnet School 3815 N Kedvale
+45 6 Mid City Nissan 4444 W Irving Park Rd
+45 7 Mid City Nissan 4444 W Irving Park Rd
+45 8 Christ Our Saviour Church 3807 N Lavergne Av
+45 9 Gray School 3730 N Laramie Av
+45 10 Gray School 3730 N Laramie Av
+45 11 Faith United Church Of Christ 5051 W Belle Plaine Av
+45 12 St John Lutheran Church 4939 W Montrose Av
+45 13 Faith United Church Of Christ 5051 W Belle Plaine Av
+45 14 St John Lutheran Church 4939 W Montrose Av
+45 15 Wilson Park 4630 N Milwaukee Av
+45 16 Jefferson Park Library 5363 W Lawrence Av
+45 17 Wilson Park 4630 N Milwaukee Av
+45 18 Prussing School 4650 N Menard Av
+45 19 Jefferson Park 4822 N Long
+45 20 Jefferson Park 4822 N Long
+45 21 St Constance School 5864 W Ainslie St
+45 22 St Constance School 5864 W Ainslie St
+45 23 Northwest Fellowship Ch 6125 W Foster Av
+45 24 Northwest Fellowship Ch 6125 W Foster Av
+45 25 Northwest Fellowship Ch 6125 W Foster Av
+45 26 Northwest Fellowship Ch 6125 W Foster Av
+45 27 Beard School 6445 W Strong St
+45 28 St Constance School 5864 W Ainslie St
+45 29 St Constance School 5864 W Ainslie St
+45 30 Eden United Evangelical Luth Ch 5051 W Gunnison St
+45 31 Eden United Evangelical Luth Ch 5051 W Gunnison St
+45 32 Beaubien School 5025 N Laramie Av
+45 33 Beaubien School 5025 N Laramie Av
+45 34 Chicago Police Station 5151 N Milwaukee Av
+45 35 Saint Cornelius Church 5430 W Foster Av
+45 36 Saint Cornelius Church 5430 W Foster Av
+45 37 Farnsworth School 5414 N Linder Av
+45 38 Farnsworth School 5414 N Linder Av
+45 39 Farnsworth School 5414 N Linder Av
+45 40 Senior Suites 5400 N Northwest
+45 41 Elston Av United Methodist Church 5850 N Elston Av
+45 42 Hitch School 5625 N McVicker Av
+45 43 Hitch School 5625 N McVicker Av
+45 44 Rosedale Park 6312 W Rosedale Av
+45 45 North Shore Spanish Church 5158 N Nagle Av
+45 46 North Shore Spanish Church 5158 N Nagle Av
+45 47 Beard School 6445 W Strong St
+45 48 Beard School 6445 W Strong St
+46 2 Truman College 1145 W Wilson Av
+46 3 Grace St Towers 635 W Grace St
+46 4 Preston Bradley Center 941 W Lawrence Av
+46 5 Gill Park 833 W Sheridan Rd
+46 6 United Winthrop Towers 4848 N Winthrop Av
+46 7 Imperial Towers Condo 4250 N Marine Dr
+46 8 Eastwood Tower 4640 N Sheridan Rd
+46 9 Uptown Branch Library 929 W Buena Av
+46 10 Lakeview East Cooperative 707 W Waveland Av
+46 11 Sherway Tower Apts 4225 N Sheridan Rd
+46 12 Courtenay Language Arts Ctr 4420 N Beacon St
+46 13 Brenemann School 4251 N Clarendon Av
+46 14 Lakeview Tower Apartments 4550 N Clarendon Av
+46 15 Uptown Branch Library 929 W Buena Av
+46 16 Bezazian Library 1226 W Ainslie St
+46 17 3950 N Lake Shore Dr 3950 N Lake Shore Dr
+46 18 Park Place Tower Condo 655 W Irving Park Rd
+46 19 3600 Lake Shore Condo Assoc 3600 N Lake Shore Dr
+46 20 Truman College 1145 W Wilson Av
+46 21 Preston Bradley Center 941 W Lawrence Av
+46 22 Ella Flagg Young Apartments 4645 N Sheridan Rd
+46 23 Uplift Community High School 900 W Wilson Av
+46 24 Lake Park Plaza Condo 3930 N Pine Grove Av
+46 25 Truman College 1145 W Wilson Av
+46 26 Clarendon Park 4501 N Clarendon Av
+46 27 Ruth Shriman House 4040 N Sheridan Rd
+46 28 3900 Lake Shore Condo 3900 N Lake Shore Dr
+46 29 The Carlton At The Lake Inc 725 W Montrose Av
+46 30 Lakeview East Cooperative 707 W Waveland Av
+46 31 Temple Sholom 3480 N Lake Shore Dr
+46 32 Ella Flagg Young Apartments 4645 N Sheridan Rd
+46 33 Temple Sholom 3480 N Lake Shore Dr
+46 34 Ruth Shriman House 4040 N Sheridan Rd
+46 35 820 Belle Plaine Apts 820 W Belle Plaine Av
+46 36 3550 Lake Shore Condo 3550 N Lake Shore Dr
+46 37 McCutcheon School 4865 N Sheridan Rd
+46 38 Gill Park Cooperative 810 W Grace St
+46 39 New York Private Residences 3660 N Lake Shore Dr
+46 40 Alden Lakeland 820 W Lawrence Av
+47 2 Concordia Lutheran Ch 3855 N Seeley Av
+47 3 The Martha Washington Apts 2324 W Irving Park Rd
+47 4 Addison St Congregational Church 2132 W Addison St
+47 5 Philadelphia Romanian Church 1713 W Sunnyside Av
+47 6 Hamilton School 1650 W Cornelia Av
+47 7 Bell School 3730 N Oakley Av
+47 8 Coonley School 4046 N Leavitt St
+47 9 Lincoln Belmont Library 1659 W Melrose St
+47 10 Ravenswood Untd Church 2050 W Pensacola Av
+47 11 Lincoln Belmont Library 1659 W Melrose St
+47 12 Silvies 1900 W Irving Park Rd
+47 13 Waters School 4540 N Campbell Av
+47 14 Welles Park 2333 W Sunnyside Av
+47 15 St Augustine College 1333 W Argyle St
+47 16 Queen Of Angels Church 4412 N Western Av
+47 17 Revere Park 2509 W Irving Park Rd
+47 18 Lake View High School 4015 N Ashland Av
+47 19 St Augustine College 1333 W Argyle St
+47 20 Berry Memorial Untd Methodist Ch 4754 N Leavitt St
+47 21 Queen Of Angels Church 4412 N Western Av
+47 22 Conrad Sulzer Library 4455 N Lincoln Av
+47 23 Winwood Apartments 1406 W Winona St
+47 24 Lake View High School 4015 N Ashland Av
+47 25 Resurrection Covenant Church 3901 N Marshfield Av
+47 26 Chicago Dept On Aging 2019 W Lawrence Av
+47 27 Chicago Fire Station 3801 N Damen Av
+47 28 Ravenswood Untd Church 2050 W Pensacola Av
+47 29 Chicago Fire Station 3801 N Damen Av
+47 30 Bethany Methodist Home 4950 N Ashland Av
+47 31 Chase Park 4701 N Ashland Av
+47 32 Bethany Methodist Home 4950 N Ashland Av
+47 33 Resurrection Covenant Church 3901 N Marshfield Av
+47 34 American Indian Center 1630 W Wilson Av
+47 35 St Benedict Parish 3919 N Bell Av
+47 36 McPherson School 4728 N Wolcott Av
+47 37 Pilgrim Lutheran Church 4300 N Winchester Av
+47 38 Chicago Dept On Aging 2019 W Lawrence Av
+47 39 Ravenswood Elem School 4332 N Paulina St
+47 40 Luther Memorial Church 2500 W Wilson Av
+47 41 German School Of Chicago 1447 W Montrose Av
+47 42 Welles Park 2333 W Sunnyside Av
+47 43 Resurrection Covenant Church 3901 N Marshfield Av
+47 44 Clark & Irving Park Sr Housing 3940 N Clark St
+47 45 Conrad Sulzer Library 4455 N Lincoln Av
+47 46 Bell School 3730 N Oakley Av
+47 47 Audubon School 3500 N Hoyne Av
+47 48 Silent Cooperative 2500 W Belmont Av
+48 2 The North Shore Bapt Church 5244 N Lakewood Av
+48 3 Edgewater Presbyterian Church 1020 W Bryn Mawr Av
+48 4 Marine Drive Condo 5040 N Marine Dr
+48 5 Edgewater Beach Apartments 5555 N Sheridan Rd
+48 6 Pines Of Edgewater 5439 N Kenmore Av
+48 7 Peirce School 1423 W Bryn Mawr Av
+48 8 Emanuel Congregation 5959 N Sheridan Rd
+48 9 Park Towers Condo 5419 N Sheridan Rd
+48 10 Swedish American Museum 5211 N Clark St
+48 11 The North Shore Bapt Church 5244 N Lakewood Av
+48 12 Pines Of Edgewater Apartments 5220 N Kenmore Av
+48 13 Granville Beach Condo 6171 N Sheridan Rd
+48 14 5445 Edgewater Plz Condo 5445 N Sheridan Rd
+48 15 Berger Park 6205 N Sheridan Rd
+48 16 Fisher Apartments 5821 N Broadway
+48 17 Castleman Apartments 4945 N Sheridan Rd
+48 18 Hollywood House 5700 N Sheridan Rd
+48 19 St Ita Hall Jubilee 5500 N Broadway
+48 20 Stephen K Hayt Elementary Sch 1530 W Granville Av
+48 21 The Kenmore Apartments 5040 N Kenmore Av
+48 22 Malibu East Condo 6033 N Sheridan Rd
+48 23 The Admiral At The Lake 929 W Foster Av
+48 24 Margate Park 4921 N Marine Dr
+48 25 Granville Methodist Church 1307 W Granville Av
+48 26 Hollywood House 5700 N Sheridan Rd
+48 27 Sovereign 1040 W Granville Av
+48 28 Kenmore Plaza/Habitat Co 5225 N Kenmore Av
+48 29 Breakers At Edgewater Beach 5333 N Sheridan Rd
+48 30 Edgewater Branch Library 6000 N Broadway
+48 31 Swift School 5900 N Winthrop Av
+48 32 Metropolis Coffee Co 1039 W Granville Av
+48 33 Malibu Condo 6007 N Sheridan Rd
+48 34 Granville Methodist Church 1307 W Granville Av
+48 35 White Chapel Apts LLC 4910 N Sheridan Rd
+48 36 Edgewater Plaza Condo 5455 N Sheridan Rd
+48 37 Peirce School 1423 W Bryn Mawr Av
+48 38 Immanuel Evangelical Luth Church 1500 W Elmdale Av
+48 39 Hollywood Towers 5701 N Sheridan Rd
+48 40 Edgewater Branch Library 6000 N Broadway
+48 41 Church Of Atonement Episcopal 5749 N Kenmore Av
+48 42 Senn Metro Academy 5900 N Glenwood Av
+48 43 Edgewater Presbyterian Church 1020 W Bryn Mawr Av
+48 44 Peirce School 1423 W Bryn Mawr Av
+48 45 Granville Methodist Church 1307 W Granville Av
+48 46 Shoreline Towers Condo 6301 N Sheridan Rd
+49 2 St Ignatius Church 6559 N Glenwood Av
+49 3 Ethiopian Cmty Assoc Of Chicago 1730 W Greenleaf Av
+49 4 Sullivan High School 6631 N Bosworth Av
+49 5 James Sneider Apartments 7450 N Rogers Av
+49 6 Gale School 1619 W Jonquil
+49 7 Centennial Forum/Student Union 1125 W Loyola Av
+49 8 St Margaret Mary Center 7341 N Claremont Av
+49 9 Leonas Restaurant 6935 N Sheridan Rd
+49 10 Rogers Pk Library 6907 N Clark St
+49 11 Touhy Park 7348 N Paulina St
+49 12 St Ignatius Church 6559 N Glenwood Av
+49 13 Paschen Park 1932 W Lunt Av
+49 14 Lake Shore Healthcare & Rehab 7200 N Sheridan Rd
+49 15 Pottawatomie Park 7340 N Rogers Av
+49 16 Alden Village North 7464 N Sheridan Rd
+49 17 Caroline Hedger Apts 6400 N Sheridan Rd
+49 18 Kilmer School 6700 N Greenview Av
+49 19 Jordan Community School 7414 N Wolcott Av
+49 20 Field School 7019 N Ashland Av
+49 21 Kizin Creole Restaurant 2311 W Howard St
+49 22 Holy Apostolic Catholic Assyr Ch 7201 N Ashland Av
+49 23 United Church Of Rogers Park 1545 W Morse Av
+49 24 UNO Rogers Park 7416 N Ridge Bv
+49 25 The Seville Apartments 1263 W Pratt Av
+49 26 Morningside Ct Apartments 1250 W Morse Av
+49 27 Loyola Park 1230 W Greenleaf Av
+49 28 Living Water Community Church 6808 N Ashland Av
+49 29 Loyola Park 1230 W Greenleaf Av
+49 30 Chalet Living And Rehab 7350 N Sheridan Rd
+49 31 Gale School 1619 W Jonquil
+49 32 Willy White Community Center 1610 W Howard St
+49 33 Pottawatomie Park 7340 N Rogers Av
+50 2 Lubavitch Chabad Of Illinois 2833 W Howard St
+50 3 Lubavitch Chabad Of Illinois 2833 W Howard St
+50 4 Philip Rogers School 7345 N Washtenaw Av
+50 5 Bernard Horwich Jewish Center 3003 W Touhy Av
+50 6 Glencrest Nursing Ctr 2451 W Touhy Av
+50 7 George Armstrong School 2110 W Greenleaf Av
+50 8 St Margaret Mary Center 7341 N Claremont Av
+50 9 Philip Rogers School 7345 N Washtenaw Av
+50 10 Croatian Cultural Center 2845 W Devon Av
+50 11 Ida Crown Jewish Academy 2828 W Pratt Av
+50 12 Winston Tower #3 Condo 7061 N Kedzie Av
+50 13 Warren Park 6601 N Western Av
+50 14 Winston Tower #2 Condo 6833 N Kedzie Av
+50 15 West Ridge Untd Methodist Church 2301 W Lunt Av
+50 16 Winston Tower #5 Condo 7141 N Kedzie Av
+50 17 Clinton School 6131 N California Av
+50 18 Pk Plaza Retirement Ctr 6840 N Sacramento Av
+50 19 Northtown Branch Library 6435 N California Av
+50 20 Boone School 6710 N Washtenaw Av
+50 21 Boone School 6710 N Washtenaw Av
+50 22 Croatian Cultural Center 2845 W Devon Av
+50 23 International Social Club 3109 W Devon Av
+50 24 Cong Kehilath Jacob Beth Samuel 3701 W Devon Av
+50 25 Pirchei Center 3540 W Peterson Av
+50 26 West Ridge Senior Apts 6142 N California Av
+50 27 Winston Tower #1 6933 N Kedzie Av
+50 28 Daniel Hudson Burnham Apts 1930 W Loyola Av
+50 29 Clinton School 6131 N California Av
+50 30 Warren Park 6601 N Western Av
+50 31 Warren Park 6601 N Western Av
+50 32 Stone Scholastic Academy 6239 N Leavitt St
+50 33 Congregation Ezras Israel 7001 N California Av
+50 34 Congregation Ezras Israel 7001 N California Av
+50 35 George Armstrong School 2110 W Greenleaf Av
+50 36 Boone School 6710 N Washtenaw Av
+50 37 West Ridge Untd Methodist Church 2301 W Lunt Av
+50 38 Winston Tower #4 Condo 7033 N Kedzie Av
+50 39 International Social Club 3109 W Devon Av
+50 40 Congregation Beth Itzchok 6716 N Whipple St
